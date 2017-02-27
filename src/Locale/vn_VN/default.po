@@ -1,0 +1,44 @@
+msgid "Username"
+msgstr "Tên nhân viên"
+
+msgid "New Category"
+msgstr "Danh mục mới"
+
+msgid "Product Name"
+msgstr "Tên sản phẩm"
+
+msgid "Category"
+msgstr "Danh mục"
+
+msgid "Retail Price"
+msgstr "Giá bán"
+
+msgid "Supply Price"
+msgstr "Giá vốn"
+
+msgid "Wholesale price"
+msgstr "Giá sỉ"
+
+msgid "Stock Level"
+msgstr "Tồn Kho"
+
+msgid "Order"
+msgstr "Đặt Hàng"
+
+msgid "Infomations"
+msgstr "Thông tin"
+
+msgid "Stock range"
+msgstr "Định mức tồn"
+
+msgid "Descriptions"
+msgstr "Mô tả"
+
+msgid "Order Note"
+msgstr "Ghi chú đặt hàng "
+
+msgid "History"
+msgstr "Lịch sử"
+
+msgid "Quantity"
+msgstr "Số lượng"

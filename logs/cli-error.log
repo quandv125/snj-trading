@@ -1,0 +1,188 @@
+2016-12-08 14:32:10 Error: [Cake\Core\Exception\MissingPluginException] Plugin Acl could not be found.
+Exception Attributes: array (
+  'plugin' => 'Acl',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\config\bootstrap.php(226): Cake\Core\Plugin::load('Acl', Array)
+#1 D:\xampp\htdocs\cquiz\bin\cake.php(32): include('D:\\xampp\\htdocs...')
+#2 {main}
+
+
+2016-12-08 14:34:49 Error: [Cake\Core\Exception\MissingPluginException] Plugin Acl could not be found.
+Exception Attributes: array (
+  'plugin' => 'Acl',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\config\bootstrap.php(226): Cake\Core\Plugin::load('Acl', Array)
+#1 D:\xampp\htdocs\cquiz\bin\cake.php(32): include('D:\\xampp\\htdocs...')
+#2 {main}
+
+
+2016-12-08 14:35:12 Error: [Cake\Core\Exception\MissingPluginException] Plugin Acl could not be found.
+Exception Attributes: array (
+  'plugin' => 'Acl',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\config\bootstrap.php(226): Cake\Core\Plugin::load('Acl', Array)
+#1 D:\xampp\htdocs\cquiz\bin\cake.php(32): include('D:\\xampp\\htdocs...')
+#2 {main}
+
+
+2016-12-08 14:35:39 Error: [Cake\Core\Exception\MissingPluginException] Plugin Acl could not be found.
+Exception Attributes: array (
+  'plugin' => 'Acl',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\config\bootstrap.php(226): Cake\Core\Plugin::load('Acl', Array)
+#1 D:\xampp\htdocs\cquiz\bin\cake.php(32): include('D:\\xampp\\htdocs...')
+#2 {main}
+
+
+2016-12-08 14:36:36 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AclExtras.AclExtras" could not be found.
+Exception Attributes: array (
+  'class' => 'AclExtras.AclExtras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AclExtras.AclEx...')
+#1 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2016-12-08 14:36:45 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Acl.AclExtras" could not be found.
+Exception Attributes: array (
+  'class' => 'Acl.AclExtras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('acl_extras')
+#1 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2016-12-08 14:45:24 Warning: Warning (512): DbAcl::check() - Failed ARO node lookup in permissions check. Node references:
+Aro: aco
+Aco: aro in [D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\Model\Table\PermissionsTable.php, line 77]
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Acl\Model\Table\PermissionsTable::check() - ROOT\vendor\cakephp\acl\src\Model\Table\PermissionsTable.php, line 77
+Acl\Adapter\DbAcl::check() - ROOT\vendor\cakephp\acl\src\Adapter\DbAcl.php, line 80
+Acl\Controller\Component\AclComponent::check() - ROOT\vendor\cakephp\acl\src\Controller\Component\AclComponent.php, line 120
+Acl\Shell\AclShell::check() - ROOT\vendor\cakephp\acl\src\Shell\AclShell.php, line 260
+Cake\Console\Shell::runCommand() - CORE\src\Console\Shell.php, line 452
+Cake\Console\ShellDispatcher::_dispatch() - CORE\src\Console\ShellDispatcher.php, line 227
+Cake\Console\ShellDispatcher::dispatch() - CORE\src\Console\ShellDispatcher.php, line 182
+Cake\Console\ShellDispatcher::run() - CORE\src\Console\ShellDispatcher.php, line 128
+[main] - ROOT\bin\cake.php, line 34
+
+
+
+2016-12-08 22:21:52 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Schema" could not be found.
+Exception Attributes: array (
+  'class' => 'Schema',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('schema')
+#1 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2016-12-09 08:57:49 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AclExtras.AclExtras" could not be found.
+Exception Attributes: array (
+  'class' => 'AclExtras.AclExtras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AclExtras.AclEx...')
+#1 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2016-12-09 14:57:19 Error: [Cake\Database\Exception] SQLSTATE[42S02]: Base table or view not found: 1146 Table 'cquiz-master.suplliers' doesn't exist
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Database\Schema\Collection.php(97): Cake\Database\Schema\Collection->_reflect('Column', 'suplliers', Array, Object(Cake\Database\Schema\Table))
+#1 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Database\Schema\CachedCollection.php(63): Cake\Database\Schema\Collection->describe('suplliers', Array)
+#2 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\ORM\Table.php(440): Cake\Database\Schema\CachedCollection->describe('suplliers')
+#3 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\ORM\Table.php(518): Cake\ORM\Table->schema()
+#4 D:\xampp\htdocs\cquiz\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(210): Cake\ORM\Table->primaryKey()
+#5 D:\xampp\htdocs\cquiz\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(127): Bake\Shell\Task\ModelTask->getAssociations(Object(Cake\ORM\Table))
+#6 D:\xampp\htdocs\cquiz\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(110): Bake\Shell\Task\ModelTask->getTableContext(Object(Cake\ORM\Table), 'suplliers', 'Suplliers')
+#7 D:\xampp\htdocs\cquiz\vendor\cakephp\bake\src\Shell\Task\ModelTask.php(97): Bake\Shell\Task\ModelTask->bake('Suplliers')
+#8 [internal function]: Bake\Shell\Task\ModelTask->main('suplliers')
+#9 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\Shell.php(466): call_user_func_array(Array, Array)
+#10 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\Shell.php(459): Cake\Console\Shell->runCommand(Array, false, Array)
+#11 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#12 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#13 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#14 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#15 {main}
+
+
+2016-12-19 11:45:39 Error: [ParseError] syntax error, unexpected 'if' (T_IF), expecting ';' or '{'
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(389): ReflectionClass->__construct('App\\Controller\\...')
+#4 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(430): Acl\AclExtras->_getCallbacks('ProductsControl...', '', NULL)
+#5 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(320): Acl\AclExtras->_checkMethods('ProductsControl...', 'Products', Object(Acl\Model\Entity\Aco), '', NULL)
+#6 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(199): Acl\AclExtras->_updateControllers(Object(Acl\Model\Entity\Aco), Array)
+#7 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(165): Acl\AclExtras->_processControllers(Object(Acl\Model\Entity\Aco))
+#8 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(151): Acl\AclExtras->acoUpdate(Array)
+#9 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\Shell\AclExtrasShell.php(83): Acl\AclExtras->acoSync(Array)
+#10 [internal function]: Acl\Shell\AclExtrasShell->acoSync()
+#11 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\Shell.php(452): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-12-19 11:45:49 Error: [ParseError] syntax error, unexpected 'if' (T_IF), expecting ';' or '{'
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(389): ReflectionClass->__construct('App\\Controller\\...')
+#4 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(430): Acl\AclExtras->_getCallbacks('ProductsControl...', '', NULL)
+#5 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(320): Acl\AclExtras->_checkMethods('ProductsControl...', 'Products', Object(Acl\Model\Entity\Aco), '', NULL)
+#6 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(199): Acl\AclExtras->_updateControllers(Object(Acl\Model\Entity\Aco), Array)
+#7 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(165): Acl\AclExtras->_processControllers(Object(Acl\Model\Entity\Aco))
+#8 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(151): Acl\AclExtras->acoUpdate(Array)
+#9 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\Shell\AclExtrasShell.php(83): Acl\AclExtras->acoSync(Array)
+#10 [internal function]: Acl\Shell\AclExtrasShell->acoSync()
+#11 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\Shell.php(452): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2016-12-30 16:15:24 Error: [ParseError] syntax error, unexpected '}'
+Stack Trace:
+#0 D:\xampp\htdocs\cquiz\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(389): ReflectionClass->__construct('App\\Controller\\...')
+#4 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(430): Acl\AclExtras->_getCallbacks('StocksControlle...', '', NULL)
+#5 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(320): Acl\AclExtras->_checkMethods('StocksControlle...', 'Stocks', Object(Acl\Model\Entity\Aco), '', NULL)
+#6 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(199): Acl\AclExtras->_updateControllers(Object(Acl\Model\Entity\Aco), Array)
+#7 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(165): Acl\AclExtras->_processControllers(Object(Acl\Model\Entity\Aco))
+#8 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\AclExtras.php(151): Acl\AclExtras->acoUpdate(Array)
+#9 D:\xampp\htdocs\cquiz\vendor\cakephp\acl\src\Shell\AclExtrasShell.php(83): Acl\AclExtras->acoSync(Array)
+#10 [internal function]: Acl\Shell\AclExtrasShell->acoSync()
+#11 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\Shell.php(452): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 D:\xampp\htdocs\cquiz\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 D:\xampp\htdocs\cquiz\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+

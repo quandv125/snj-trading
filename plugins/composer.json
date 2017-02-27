@@ -1,0 +1,6 @@
+{
+    "require": {
+        "holt59/cakephp3-bootstrap3-helpers": "dev-master",
+        "burzum/cakephp-imagine-plugin": "2.*"
+    }
+}

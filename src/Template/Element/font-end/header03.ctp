@@ -56,7 +56,7 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6 ">
 	                <div class="category-dropdown hidden-category-dropdown">
-	                    <h2 class="title-category-dropdown"><span>Categories</span></h2>
+	                    <h2 class="title-category-dropdown"><span>Categories11111111</span></h2>
 	                    <div class="wrap-category-dropdown">
 	                        <ul class="list-category-dropdown">
 	                            <?= $this->element('font-end/Pages/vertical_menu'); ?>

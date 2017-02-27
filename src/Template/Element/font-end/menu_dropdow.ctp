@@ -4,7 +4,7 @@
             <h2 class="title-category-dropdown "><span>Categories</span></h2>
             <div class="wrap-category-dropdown wrap-category-dropdown-hover" style="border: 1px solid #e4e4e4; margin-left: 15px;">
                 <ul class="list-category-dropdown8">
-                     <?= $this->element('font-end/Pages/sub_menu',['categories' => $categories]); ?>
+                     <?= $this->element('font-end/Pages/vertical_menu',['categories' => $categories]); ?>
                 </ul>
                 <a class="expand-category-link8" href="#">All</a>
             </div>

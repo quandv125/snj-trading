@@ -82,7 +82,7 @@
 	<div class="wrap-item" data-pagination="true" data-autoplay="true" data-transition="fade" data-navigation="true" data-itemscustom="[[0,1]]">
 		<div class="item-slider">
 			<div class="banner-thumb">
-				<a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 570px;" class="img-responsive" alt="" /></a>
+				<a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
 				<h3>Samsung </h3>
@@ -90,14 +90,14 @@
 			</div>
 		</div>
 		<div class="item-slider">
-			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 570px;" class="img-responsive" alt="" /></a></div>
+			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a></div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
 				<h3>laptop </h3>
 				<h2>dell xps 501</h2>
 			</div>
 		</div>
 		<div class="item-slider">
-			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 570px;" class="img-responsive" alt="" /></a></div>
+			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a></div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
 				<h3>Axon </h3>
 				<h2>black & beg</h2>

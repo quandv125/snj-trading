@@ -735,12 +735,14 @@ jQuery(window).on('load',function(){
 })(jQuery); // End of use strict
 
 jQuery(document).ready(function($){
-	$(function () {
-	    $(document).off('click.bs.tab.data-api', '[data-hover="tab"]');
-	    $(document).on('mouseenter.bs.tab.data-api', '[data-toggle="tab"], [data-hover="tab"]', function () {
-	      $(this).tab('show');
-	    });
-	  });
+
+	// Tab auto change
+	// $(function () {
+	// 	$(document).off('click.bs.tab.data-api', '[data-hover="tab"]');
+	// 	$(document).on('mouseenter.bs.tab.data-api', '[data-toggle="tab"], [data-hover="tab"]', function () {
+	// 		$(this).tab('show');
+	// 	});
+	// }); // End
 	$('.live-search-box').change(function(){
 		var key = jQuery(this).val();
 		// alert(key);

@@ -7,7 +7,7 @@ use Cake\Datasource\ConnectionManager;
 /**
  * Categories Controller
  *
- * @property \App\Model\Table\CategoriesTable $Categories
+ * @property \App\Model\Table\CategoriesTable $Categories123
  */
 class CategoriesController extends AppController
 {

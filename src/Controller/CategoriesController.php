@@ -7,7 +7,7 @@ use Cake\Datasource\ConnectionManager;
 /**
  * Categories Controller
  *
- * @property \App\Model\Table\CategoriesTable $CategoriesQuan
+ * @property \App\Model\Table\CategoriesTable $Categories
  */
 class CategoriesController extends AppController
 {
@@ -19,6 +19,7 @@ class CategoriesController extends AppController
      */
     public function index()
     {
+        //Test git
         // $this->paginate = [
         //     'contain' => ['ParentCategories']
         // ];

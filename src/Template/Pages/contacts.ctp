@@ -2,7 +2,7 @@
 		<div class="content-page">
 			<div class="container">
 				<div class="contact-map">
-					<?php echo $this->Html->image('images/pages/contact-map.jpg') ?>
+					<?php echo $this->Html->image('assets/contact-map.jpg') ?>
 				</div>
 				<!-- End Map -->
 				<div class="contact-info-page">

@@ -14,8 +14,6 @@
                             <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 1],['escape' => false]) ?>
                         </div>
                     </div>
-                    
-                   
                 </div>
             </div>
         </div>

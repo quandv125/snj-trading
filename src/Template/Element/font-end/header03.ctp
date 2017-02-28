@@ -5,17 +5,17 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-2 col-xs-12">
 					<div class="logo5">
-						<h1 class="hidden">Super Shop</h1>
+						
 						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-10 col-xs-12">
+				<div class="col-md-7 col-sm-10 col-xs-12">
 					<div class="smart-search search-form3 search-form5">
 						<?php echo $this->element('font-end/smart-search') ?>
 					</div>
 				</div>
 				
-				<div class="col-md-4 col-sm-12 col-xs-12">
+				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="wrap-cart-info3">
 						<ul class="top-info top-info3">
 							<li class="top-account has-child">

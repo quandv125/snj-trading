@@ -106,10 +106,10 @@
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="payment2 payment-method">
                          <label>PAYMENT METHOD</label>
-                            <a href="#"><?php echo $this->Html->image('images/home2/pay1.png') ?></a>
-                            <a href="#"><?php echo $this->Html->image('images/home2/pay2.png') ?></a>
-                            <a href="#"><?php echo $this->Html->image('images/home2/pay3.png') ?></a>
-                            <a href="#"><?php echo $this->Html->image('images/home2/pay4.png') ?></a>
+                            <a href="#"><?php echo $this->Html->image('assets/icon/pay1.png') ?></a>
+                            <a href="#"><?php echo $this->Html->image('assets/icon/pay2.png') ?></a>
+                            <a href="#"><?php echo $this->Html->image('assets/icon/pay3.png') ?></a>
+                            <a href="#"><?php echo $this->Html->image('assets/icon/pay4.png') ?></a>
                         </div>
                     </div>
                 </div>

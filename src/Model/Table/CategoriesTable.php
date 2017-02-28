@@ -54,7 +54,9 @@ class CategoriesTable extends Table
         $this->hasMany('Articles', [
             'foreignKey' => 'categorie_id'
         ]);
-
+        $this->hasMany('Products', [
+            'foreignKey' => 'categorie_id'
+        ]);
     }
 
     /**

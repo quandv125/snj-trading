@@ -97,6 +97,11 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         $Categorie  = TableRegistry::get('Categories');
         $list       = $Categorie->find('list')->where(['parent_id' => $id]);
+        // $list       = $Categorie->find('threaded')->contain([
+        //     'Products' => function ($q) {
+        //         return $q->autoFields(false)->select(['id','categorie_id']);
+        //     }
+        // ])->where(['parent_id' => $id])->toarray();
         $arr = array();
         foreach ($list as $key => $value) {
             $arr[] = $key;

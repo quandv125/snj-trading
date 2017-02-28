@@ -82,25 +82,41 @@
 	<div class="wrap-item" data-pagination="true" data-autoplay="true" data-transition="fade" data-navigation="true" data-itemscustom="[[0,1]]">
 		<div class="item-slider">
 			<div class="banner-thumb">
-				<a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a>
+				<a href="#">
+					<?php echo $this->Html->image('gallery/slide-2.jpg') ?>
+				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
-				<h3>Samsung </h3>
-				<h2>Galaxy S7 Edge</h2>
-			</div>
-		</div>
-		<div class="item-slider">
-			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a></div>
-			<div class="banner-info text-center animated" data-animated="bounceIn">
-				<h3>laptop </h3>
-				<h2>dell xps 501</h2>
+				<span class="title-gallery">Vision </span>
+				<br/><br/><br/>
+				<div class="clearfix"></div>
+				<span class="content-galley">Become a Global Service Provider. </span>
 			</div>
 		</div>
 		<div class="item-slider">
-			<div class="banner-thumb"><a href="#"><img src="img/images/home18/slide2.jpg" style="min-height: 560px;" class="img-responsive" alt="" /></a></div>
+			<div class="banner-thumb">
+				<a href="#">
+					<?php echo $this->Html->image('gallery/slide-3.jpg') ?>
+				</a>
+			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
-				<h3>Axon </h3>
-				<h2>black & beg</h2>
+				<span class="title-gallery">Equipment </span>
+				<br/><br/><br/>
+				<div class="clearfix"></div>
+				<span class="content-galley">We provide high quality products </span>
+			</div>
+		</div>
+		<div class="item-slider">
+			<div class="banner-thumb">
+				<a href="#">
+					<?php echo $this->Html->image('gallery/slide-4.jpg') ?>
+				</a>
+			</div>
+			<div class="banner-info text-center animated" data-animated="bounceIn">
+				<span class="title-gallery">Dependable </span>
+				<br/><br/><br/>
+				<div class="clearfix"></div>
+				<span class="content-galley">S&J Trading has served customers for 10 years. </span>
 			</div>
 		</div>
 	</div>

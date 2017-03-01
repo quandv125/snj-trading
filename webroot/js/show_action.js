@@ -81,10 +81,10 @@ jQuery(document).ready(function() {
 			var actived = jQuery(this).attr('actived');
 			if (actived == 1) {
 				jQuery(this).attr('actived',0).removeClass('btn-info').addClass('btn-primary').empty().append('<i class="fa fa-lock" aria-hidden="true"></i> Dective');
-				jQuery('.actived-product-'+id).html('Active');
+				jQuery('.actived-product-'+id).html('<span class="label label-primary">Active</span>');
 			} else {
 				jQuery(this).attr('actived',1).removeClass('btn-primary').addClass('btn-info').empty().append('<i class="fa fa-unlock" aria-hidden="true"></i> Active');
-				jQuery('.actived-product-'+id).html('Deactive');
+				jQuery('.actived-product-'+id).html('<span class="label label-danger">Deactive</span>');
 			}
 			jQuery.ajax({
 				url: '/products/deactive_product',

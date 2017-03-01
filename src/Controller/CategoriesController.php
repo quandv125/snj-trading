@@ -161,12 +161,14 @@ class CategoriesController extends AppController
     public function SearchCategories(){
         if ($this->request->is('Ajax')) {
             $this->autoRender = false;
-            pr($this->request->data);die();
-            $treeList = $this->Categories->find('treeList'); 
-            $categories = $this->Categories->find('threaded')->toarray();
+           
+            $conditions = ['name LIKE "%'.$this->request->data['keyword'].'%"'];
+            $categories = $this->Categories->find('threaded')->where($conditions);
+           
             $parentCategories = $this->Categories->ParentCategories->find('list', ['limit' => 200]);
-            $this->set(compact('categories','treeList','parentCategories'));
-            $this->set('_serialize', ['categories']);
+           
+            $this->set(compact('categories','parentCategories'));
+            $this->render('/Element/Categories/result_search');
         }
     }
 }

@@ -26,7 +26,7 @@
 							
 							<div class="tabs-share">
 								<div class="row">
-									<div class="col-md-6 col-sm-12 col-xs-12">
+									<!-- <div class="col-md-6 col-sm-12 col-xs-12">
 										<div class="single-post-tabs">
 											<label>Tags: </label>
 											<a href="#">Photos, </a>
@@ -35,8 +35,8 @@
 											<a href="#">Techonology,</a>
 											<a href="#">Iphone</a>
 										</div>
-									</div>
-									<div class="col-md-6 col-sm-12 col-xs-12">
+									</div> -->
+									<!-- <div class="col-md-6 col-sm-12 col-xs-12">
 										<div class="single-post-share">
 											<label>Share</label>
 											<a href="#"><i class="fa fa-facebook"></i></a>
@@ -45,7 +45,7 @@
 											<a href="#"><i class="fa fa-pinterest"></i></a>
 											<a href="#"><i class="fa fa-google-plus"></i></a>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 							

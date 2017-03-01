@@ -4,8 +4,8 @@
             <div class="panel info-box panel-white1">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter">107,200</p>
-                        <span class="info-box-title">User activity this month</span>
+                        <p class="counter"><?php echo $actived ?></p>
+                        <span class="info-box-title">Products Deactived</span>
                     </div>
                     <div class="info-box-icon">
                         <i class="icon-users"></i>
@@ -23,8 +23,8 @@
             <div class="panel info-box panel-white1">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter">340,230</p>
-                        <span class="info-box-title">Page views</span>
+                        <p class="counter"><?php echo $users; ?></p>
+                        <span class="info-box-title">Users</span>
                     </div>
                     <div class="info-box-icon">
                         <i class="icon-eye"></i>

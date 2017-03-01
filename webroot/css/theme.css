@@ -1186,14 +1186,14 @@ a:focus {
     padding: 20px;
 }
 .product-rating {
-    background: rgba(0, 0, 0, 0) url("../img/images/grid/bg-rate.png") repeat-x scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/assets/grid/bg-rate.png") repeat-x scroll 0 0;
     height: 14px;
     margin-top: 9px;
     position: relative;
     width: 70px;
 }
 .inner-rating {
-    background: rgba(0, 0, 0, 0) url("../img/images/grid/rate-star.png") repeat-x scroll 0 0;
+    background: rgba(0, 0, 0, 0) url("../img/assets/grid/rate-star.png") repeat-x scroll 0 0;
     height: 14px;
 }
 .product-rating  span {
@@ -2329,10 +2329,10 @@ a:focus {
 .widget.widget-vote a {
     color: #666;
 	padding-left:20px;
-	background:url("../img/images/grid/un-vote.png") no-repeat left center;
+	background:url("../img/assets/grid/un-vote.png") no-repeat left center;
 }
 .widget.widget-vote a.active{
-	background:url("../img/images/grid/vote.png") no-repeat left center;
+	background:url("../img/assets/grid/vote.png") no-repeat left center;
 }
 .widget.widget-vote li {
     margin-bottom: 10px;
@@ -2355,10 +2355,10 @@ a:focus {
     position: absolute;
     right: 0;
 	top:0;
-	background:url("../img/images/grid/sub.png") no-repeat center center;
+	background:url("../img/assets/grid/sub.png") no-repeat center center;
 }
 .widget.widget-filter .widget-title.active::after{
-	background:url("../img/images/grid/add.png") no-repeat center center;
+	background:url("../img/assets/grid/add.png") no-repeat center center;
 }
 
 .box-filter {
@@ -2375,11 +2375,11 @@ a:focus {
 .box-filter li a{
 	color: #666;
 	padding-left:20px;
-	background:url("../img/images/grid/un-check.jpg") no-repeat left center;
+	background:url("../img/assets/grid/un-check.jpg") no-repeat left center;
 	display: block;
 }
 .box-filter li a.active{
-	background:url("../img/images/grid/check.jpg") no-repeat left center;
+	background:url("../img/assets/grid/check.jpg") no-repeat left center;
 }
 .list-color-filter a {
     border: 1px solid #ccc;
@@ -2390,7 +2390,7 @@ a:focus {
     width: 22px;
 }
 .list-color-filter a.active{
-	background:url("../img/images/grid/check.jpg") no-repeat right bottom;
+	background:url("../img/assets/grid/check.jpg") no-repeat right bottom;
 }
 .list-color-filter a:hover{
 	border:1px solid #ED321E;
@@ -2589,13 +2589,13 @@ a:focus {
 	border-color:#fe9c00;
 }
 .shop-tab-select a.grid-tab{
-	background-image:url("../img/images/grid/grid.png");
+	background-image:url("../img/assets/grid/grid.png");
 }
 .shop-tab-select li.active a.grid-tab{
-	background-image:url("../img/images/grid/grid-at.png");
+	background-image:url("../img/assets/grid/grid-at.png");
 }
 .shop-tab-select a.list-tab{
-	background-image:url("../img/images/grid/list.png");
+	background-image:url("../img/assets/grid/list.png");
 }
 .sort-pagi-bar {
     float: right;
@@ -2986,7 +2986,7 @@ a:focus {
     margin-left: 10px;
 }
 .size-chart::before {
-    background: rgba(0, 0, 0, 0) url("../img/images/grid/icon-size.png") no-repeat scroll center center;
+    background: rgba(0, 0, 0, 0) url("../img/assets/grid/icon-size.png") no-repeat scroll center center;
     content: "";
     display: inline-block;
     height: 14px;
@@ -3024,7 +3024,7 @@ a:focus {
     top: 0;
     width: 100%;
 	content:"";
-	background:rgba(0,0,0,0) url(../img/images/home1/minus.png) no-repeat center center;
+	background:rgba(0,0,0,0) url(../img/assets/minus.png) no-repeat center center;
 }
 .info-qty .qty-up {
     border-left: 1px solid #e8e8e8;
@@ -3041,7 +3041,7 @@ a:focus {
     top: 0;
     width: 100%;
 	content:"";
-	background:rgba(0,0,0,0) url(../img/images/home1/plus.png) no-repeat center center;
+	background:rgba(0,0,0,0) url(../img/assets/plus.png) no-repeat center center;
 }
 .info-qty a:hover {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);

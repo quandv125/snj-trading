@@ -190,6 +190,9 @@ class ProductsTable extends Table
             'Categories' => function ($q) {
                 return $q->autoFields(false)->select(['id','name']);
             },
+            'Suppliers' => function ($q) {
+                return $q->autoFields(false)->select(['id','name']);
+            },
             'StockProducts' => function ($q) {
                     return $q->autoFields(false)->select(['StockProducts.id','StockProducts.quantity','StockProducts.discount','StockProducts.stock_id','StockProducts.product_id','Stocks.id','Stocks.code','Stocks.total_quantity','Stocks.total_price','Stocks.discount_stock','Stocks.final_price'])->innerJoinWith('Stocks');
             },

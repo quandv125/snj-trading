@@ -2,7 +2,7 @@
 		<div class="content-page">
 			<div class="container">
 				<div class="contact-map">
-					<?php echo $this->Html->image('assets/contact-map.jpg') ?>
+					<iframe src="https://www.google.com/maps/embed?pb=!1m21!1m12!1m3!1d8868.973654187237!2d106.70241176338895!3d20.833964615598653!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m6!3e0!4m0!4m3!3m2!1d20.834922!2d106.7007186!5e0!3m2!1sen!2s!4v1488339752452" width="1115" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
 				</div>
 				<!-- End Map -->
 				<div class="contact-info-page">

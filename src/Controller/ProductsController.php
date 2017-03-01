@@ -30,7 +30,7 @@ class ProductsController extends AppController
             return $this->redirect(['action' => 'suppliers']);
         }
         $products = $this->Products->getProductsSearch(null, null, null);  
-        pr($products->toarray());die();
+       
         $users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
         $this->infoPagi(null, 1);
         $this->set(compact('products','users'));

@@ -30,7 +30,6 @@
                                 <th class="text-center"><?php echo __('SKU/part no') ?></th>
                                 <th class="text-center"><?php echo __('Product Name') ?></th>
                                 <th class="text-center"><?php echo __('Retail Price') ?></th>
-                                <th class="text-center"><?php echo __('Supply Price') ?></th>
                                 <th class="text-center"><?php echo __('Quantity') ?></th>
                                 <th class="text-center"><?php echo __('Order') ?></th>
                             </tr>
@@ -40,17 +39,15 @@
                             <tr class="row-cz cursor-pointer">
                                 <td style="width: 1px;">
                                     <input tabindex="1" type="checkbox" class="icheck Checkbox" id="input-1">
-                                    <?//= $key+1; ?>
                                 </td>
                                 <td class="text-center"><?= PRODUCT.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
                                 <td class="text-center"><?= $product->product_name; ?></td>
                                 <td class="text-center"><?= number_format($product->retail_price, DECIMALS); ?></td>
-                                <td class="text-center"><?= number_format($product->supply_price, DECIMALS); ?></td>
                                 <td class="text-center"><?= $product->quantity; ?></td>
-                                <td class="text-center actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? "Active":"Deactive" ?> </td>
+                                <td class="text-center actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
                             </tr>
                             <tr class="row-cz-details hidden">
-                                <td colspan="7">
+                                <td colspan="6">
                                     <div role="tabpanel">
                                         <!-- Nav tabs -->
                                         <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -83,9 +80,7 @@
                                                                 <?= $this->Html->image($product->images[0]->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>200, 'data-zoom-image' => '../img/'.$product->images[0]->path]) ?>
                                                             </a><div class="divider5"></div>
                                                         </div>
-
                                                         <div class="col-lg-3 text-center">
-
                                                             <?php for ($i=1; $i < count($product->images); $i++):?>
                                                                 <a class="fancyboxs fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[$i]->path?>">
                                                                   
@@ -105,47 +100,36 @@
                                                                     <td><?= PRODUCT.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="bold"><?php echo __('actived')?></td>
-                                                                    <td class="actived-product-<?= $product->id?>">
-                                                                    <?= ($product->actived == PRODUCT_ACTIVE)? "Active":"Deactive" ?>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
                                                                     <td class="bold"><?php echo  __('Category')?></td>
                                                                     <td><?= $product->category->name?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="bold"><?= __('Stock range')?>:</td>
-                                                                    <td><?= $product->stock_min .'>'. $product->stock_max; ?></td>
+                                                                    <td class="bold"><?= __("Maker's Name")?>:</td>
+                                                                    <td><?= $product->supplier['name']; ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="bold"><?php echo __('Retail Price') ?>:</td>
-                                                                    <td><?= number_format($product->retail_price, DECIMALS); ?></td>
+                                                                    <td class="bold"><?php echo __('Serial No') ?>:</td>
+                                                                    <td><?= $product->serial_no ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="bold"><?php echo __('Wholesale price')?>:</td>
-                                                                    <td><?= number_format($product->wholesale_price, DECIMALS); ?></td>
+                                                                    <td class="bold"><?php echo __('Type Model')?>:</td>
+                                                                    <td><?= $product->typ_model ?></td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td class="bold"><?php echo __('Supply Price') ?>:</td>
-                                                                    <td><?= number_format($product->supply_price, DECIMALS); ?></td>
+                                                                    <td class="bold"><?php echo __('Origin') ?>:</td>
+                                                                    <td><?= $product->origin ?></td>
                                                                 </tr>
                                                             </table>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 proInfo">
                                                         <div class="description-products">
-                                                            <h5><?php echo __('Descriptions') ?></h5><div class="divider10"></div>
+                                                            <h5><?php echo __('Remark/Descriptions') ?></h5><div class="divider10"></div>
                                                             <div class="content-description">
                                                                 <?= $product->short_description; ?>
                                                             </div>
                                                         </div>
-                                                        <div class="order-note-products">
-                                                            <h5><?php echo __('Order Note') ?></h5><div class="divider10"></div>
-                                                            <div class="content-order-note">
-                                                                <?= $product->ordering_note; ?>
-                                                            </div>
-                                                        </div>
+                                                      
                                                     </div>
                                                     <div class="clearfix divider10"> </div>
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

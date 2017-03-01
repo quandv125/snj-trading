@@ -59,19 +59,6 @@
                         </div>
                     </div>
                    
-                    <div class="item">
-                        <div class="item-shop-slider">
-                            <div class="shop-slider-thumb">
-                                <a href="#"><?php echo $this->Html->image('images/grid/bn1.jpg') ?></a>
-                            </div>
-                            <div class="shop-slider-info">
-                                <h3>jewelry-bracelets</h3>
-                                <h2>exta 35% off </h2>
-                                <a href="#" class="shop-now">shop now</a>
-                            </div>
-                        </div>
-                    </div>
-                   
                 </div>
             </div>
             <!-- End Banner Slider -->
@@ -153,7 +140,7 @@
                         <ul class="product-list vertical highlight_list">
                             <?php foreach ($products as $key => $product): ?>
 
-                            <li>
+                            <li  data-search-term="supplier<?= $product->supplier['id'];?> active<?= $key?>">
                                 <div class="item-product">
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12 col-xs-12">
@@ -167,17 +154,32 @@
                                         <div class="col-md-8 col-sm-12 col-xs-12">
                                             <div class="product-info">
                                                 <h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </h3>
-                                               
+                                               <div class="info-category">
+                                                    <label><b>Maker's name:</b> </label> 
+                                                    <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'products',$product->supplier['id']])?></span>
+                                                </div>
                                                 <div class="info-category">
                                                     <label><b>Categories:</b> </label> 
                                                     <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'products',$product->category['id']])?></span>
                                                 </div>
-                                                <div class="product-code">
+                                                <div class="info-category">
                                                     <label><b>Part No: </b></label> 
-                                                        <span><?php echo str_pad($product->id, ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
+                                                    <span><?php echo $product->sku; ?></span>
                                                 </div>
-                                                <div class="product-stock">
+                                                <div class="info-category">
                                                     <label><b>Availability:</b> </label> <span>In stock</span>
+                                                </div>
+                                                <div class="info-category">
+                                                    <label>Serial No: </label> <span><?php echo $product->serial_no ?></span>
+                                                </div>
+                                                <div class="info-category">
+                                                    <label>Type Model: </label> <span><?php echo $product->type_model ?></span>
+                                                </div>
+                                                <div class="info-category">
+                                                    <label>Quantity: </label> <span><?php echo $product->quantity ?></span>
+                                                </div>
+                                                <div class="info-category">
+                                                    <label>Origin: </label> <span><?php echo $product->origin ?></span>
                                                 </div>
                                                 <div class="product-info-cart">
                                                     <span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
@@ -190,8 +192,8 @@
                                                     </div> -->
                                                 </div>
                                             </div>
-                                            <label><b>Description:</b> </label> <div class="clearfix"></div>
-                                            <p class="product-description"><?php echo $product->short_description; ?> </p>
+                                           <!--  <label><b>Remark:</b> </label> <div class="clearfix"></div>
+                                            <p class="product-description"><?= $product->short_description; ?> </p> -->
                                         </div>
                                     </div>
                                 </div>

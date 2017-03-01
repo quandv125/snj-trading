@@ -7,7 +7,6 @@
             <?php else: ?>
                  <div class="col-md-12 cat-mega-menu cat-mega-style1">
            <?php endif ?>
-            
                 <div class="row">
                     <?php foreach ($category->children as $key => $children): ?>
                         <div class="col-md-3 col-sm-3 clearfix" style=" margin-bottom: 20px;">
@@ -18,12 +17,10 @@
                                 </ul>
                             </div>
                         </div>
-
                         <?php if (in_array($key, [3,7,11,15,19,23,27])): ?>
                             <div class="clearfix"></div>
                         <?php endif ?>
                     <?php endforeach ?>
-                   
                 </div>
             </div> 
         <?php endif ?>

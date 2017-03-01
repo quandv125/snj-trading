@@ -44,22 +44,23 @@ class PagesController extends AppController
         if (empty($this->Auth->user())) {
             return $this->redirect(['controller'=>'Pages','action' => 'login']);
         }
+        $Product  = TableRegistry::get('Products');
+        $User  = TableRegistry::get('Users');
+        $actived = $Product->find()->where(['Products.actived' => false])->count();
+        $users = $User->find()->count();
         $path = func_get_args();
-
         $count = count($path);
         if (!$count) {
             return $this->redirect('/');
         }
         $page = $subpage = null;
-
         if (!empty($path[0])) {
             $page = $path[0];
         }
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage'));
-
+        $this->set(compact('page', 'subpage','actived','users'));
         try {
             $this->render(implode('/', $path));
         } catch (MissingTemplateException $e) {
@@ -87,7 +88,7 @@ class PagesController extends AppController
                 $conditions2 = ['Products.actived'=> PRODUCT_ACTIVE,'Products.sku LIKE' => '%'. $keyword .'%'];
             }
             $Supplier   = TableRegistry::get('Suppliers');
-            $suppliers  = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+            $suppliers  = $Supplier->find('list',['keyField' => 'id', 'valueField' => 'name' ]);
             $products   = $this->Pages->getInfoSearch($conditions, $conditions2);
             $this->set(compact('products','keyword','suppliers'));
         }
@@ -110,19 +111,17 @@ class PagesController extends AppController
         $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
         $products   = $this->Pages->getInfoProducts($conditions);
         $this->set(compact('categories','products','cat_list'));
-      
     }
 
     public function categories($id) {
         $this->viewBuilder()->layout('product');
-        $Categorie    = TableRegistry::get('Categories');
-        $Supplier    = TableRegistry::get('Suppliers');
+        $Categorie  = TableRegistry::get('Categories');
+        $Supplier   = TableRegistry::get('Suppliers');
         $conditions = ['Products.categorie_id ' => $id ];
         $products   = $this->Pages->getInfoProducts($conditions);
         $category = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
         $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
         $this->set(compact('products','category','suppliers'));
-      
     }
 
     public function products($id) {
@@ -144,11 +143,13 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         $this->set('username', $username);
     }
+
     public function check_user(){
         if (empty($this->Auth->user())) {
             return $this->redirect(['controller'=>'pages','action' => 'login']);
         }
     }
+
     public function accounts() {
         $this->check_user();
         $this->viewBuilder()->layout('product');

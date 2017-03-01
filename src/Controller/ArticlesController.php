@@ -14,7 +14,7 @@ class ArticlesController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null123
+     * @return \Cake\Network\Response|null
      */
     public function index()
     {

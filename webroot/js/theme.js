@@ -959,5 +959,41 @@ jQuery(document).ready(function($){
 				}
 			}
 		});
-	});
+	}); // End
+
+	// var delay = (function(){
+	// 	var timer = 0;
+	// 	return function(callback, ms){
+	// 		clearTimeout (timer);
+	// 		timer = setTimeout(callback, ms);
+	// 	};
+	// })();
+
+	// jQuery('input.smart-search').keyup(function() { 
+		
+	// 	var keyword = jQuery(this).val();
+
+	// 	delay(function(){
+	// 		jQuery.ajax({
+	// 			url: '/products/quick_search',
+	// 			type: 'POST',
+	// 			data: {keyword: keyword},
+	// 			dataType: 'html',
+	// 			cache: false,
+	// 			beforeSend: function(){
+	// 				jQuery("#loader").fadeIn();
+	// 				// jQuery('#slimtest1').empty();
+	// 				// jQuery('.result-search-stock').show();
+	// 			},
+	// 			success: function(response){
+	// 				jQuery("#loader").fadeOut();
+	// 				console.log(response);
+	// 				// jQuery('.result-search-stock').html(response);
+	// 				// jQuery.getScript('/js/show_action.js',function(){
+	// 				// 	stock_products();
+	// 				// });
+	// 			}
+	// 		}); // Ajax
+	// 	}, 500 );
+	// });
 });

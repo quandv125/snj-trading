@@ -575,11 +575,11 @@ jQuery( document ).ready(function() {
 	});
 
 	var delay = (function(){
-	  var timer = 0;
-	  return function(callback, ms){
-	    clearTimeout (timer);
-	    timer = setTimeout(callback, ms);
-	  };
+		var timer = 0;
+		return function(callback, ms){
+			clearTimeout (timer);
+			timer = setTimeout(callback, ms);
+		};
 	})();
 
 	jQuery('input[name="search-product-stock"]').keyup(function() { 

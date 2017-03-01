@@ -94,7 +94,7 @@
             <div class="copyright-social4">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <p class="copyrigh4">&copy;2017 <a href="#">SNJ Tradding Company</a></p>
+                        <p class="copyrigh4">&copy;2017 <a href="#">SNJ Trading Company</a></p>
                         <div class="policy4">
                             <label>Policies: </label>
                             <a href="#">Terms of use</a>

@@ -474,6 +474,15 @@ class ProductsController extends AppController
         }
     }
 
+    // public function QuickSearch() {
+    //     if ($this->request->is('ajax')) {
+    //         $this->autoRender = false;
+    //         $conditions = [ 'Products.product_name LIKE' => '%'. $this->request->data['keyword'] . '%'];
+    //         $products   = $this->Products->find()->select(['id','sku','product_name'])->where($conditions);
+            
+    //     }
+    // }
+
     public function sales() {
         $User       = TableRegistry::get('Users');
         $Customer   = TableRegistry::get('Customers');

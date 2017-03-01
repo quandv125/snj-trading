@@ -83,7 +83,7 @@
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/slide-2.jpg') ?>
+					<?php echo $this->Html->image('gallery/s1.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -96,7 +96,7 @@
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/slide-3.jpg') ?>
+					<?php echo $this->Html->image('gallery/s2.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -109,7 +109,7 @@
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/slide-4.jpg') ?>
+					<?php echo $this->Html->image('gallery/s4.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -119,5 +119,18 @@
 				<span class="content-galley">S&J Trading has served customers for 10 years. </span>
 			</div>
 		</div>
+		<!-- <div class="item-slider">
+			<div class="banner-thumb">
+				<a href="#">
+					<?php //echo $this->Html->image('gallery/s4.jpg') ?>
+				</a>
+			</div>
+			<div class="banner-info text-center animated" data-animated="bounceIn">
+				<span class="title-gallery">Equipment </span>
+				<br/><br/><br/>
+				<div class="clearfix"></div>
+				<span class="content-galley">We provide high quality products </span>
+			</div>
+		</div> -->
 	</div>
 </div>

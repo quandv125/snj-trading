@@ -7,19 +7,7 @@
         <div class="main-content-shop">
                <div class="banner-shop-slider">
                     <div class="wrap-item" data-navigation="true" data-pagination="false" data-itemscustom="[[0,1]]">
-                        <div class="item">
-                            <div class="item-shop-slider">
-                                <div class="shop-slider-thumb">
-                                    <a href="#"><?php echo $this->Html->image('assets/images/bn1.jpg') ?></a>
-                                </div>
-                                <div class="shop-slider-info">
-                                    <h3>jewelry-bracelets</h3>
-                                    <h2>exta 35% off </h2>
-                                    <a href="#" class="shop-now">shop now</a>
-                                </div>
-                            </div>
-                        </div>
-                       
+
                         <div class="item">
                             <div class="item-shop-slider">
                                 <div class="shop-slider-thumb">
@@ -46,31 +34,7 @@
                             </div>
                         </div>
                        
-                        <div class="item">
-                            <div class="item-shop-slider">
-                                <div class="shop-slider-thumb">
-                                    <a href="#"><?php echo $this->Html->image('assets/images/bn1.jpg') ?></a>
-                                </div>
-                                <div class="shop-slider-info">
-                                    <h3>jewelry-bracelets</h3>
-                                    <h2>exta 35% off </h2>
-                                    <a href="#" class="shop-now">shop now</a>
-                                </div>
-                            </div>
-                        </div>
                        
-                        <div class="item">
-                            <div class="item-shop-slider">
-                                <div class="shop-slider-thumb">
-                                    <a href="#"><?php echo $this->Html->image('images/grid/bn1.jpg') ?></a>
-                                </div>
-                                <div class="shop-slider-info">
-                                    <h3>jewelry-bracelets</h3>
-                                    <h2>exta 35% off </h2>
-                                    <a href="#" class="shop-now">shop now</a>
-                                </div>
-                            </div>
-                        </div>
                        
                     </div>
                 </div>
@@ -179,11 +143,11 @@
                                                 <h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </h3>
                                                <div class="info-category">
                                                     <label><b>Maker's name:</b> </label> 
-                                                    <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'products',$product->supplier['id']])?></span>
+                                                    <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'Categories',$product->supplier['id']])?></span>
                                                 </div>
                                                 <div class="info-category">
                                                     <label><b>Categories:</b> </label> 
-                                                    <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'products',$product->category['id']])?></span>
+                                                    <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'Categories',$product->category['id']])?></span>
                                                 </div>
                                                 <div class="info-category">
                                                     <label><b>Part No: </b></label> 

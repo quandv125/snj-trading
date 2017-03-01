@@ -90,7 +90,7 @@ class ArticlesController extends AppController
                 $this->Flash->error(__('The article could not be saved. Please, try again.'));
             }
         }
-        $categories = $this->Articles->Categories->find('list', ['limit' => 200]);
+        $categories = $this->Articles->Categories->find('list', ['limit' => 200])->where(['type' => HORIZONTAL ]);
         $this->set(compact('article', 'categories'));
         $this->set('_serialize', ['article']);
     }
@@ -136,10 +136,10 @@ class ArticlesController extends AppController
     public function articlecategory($id){
         $this->viewBuilder()->layout('product');
         $Categorie  = TableRegistry::get('Categories');
-        $articles = $this->Articles->find()->where(['categorie_id' => $id, ['type' => ARTICLE_SIGNLE]]);
+        $articles = $this->Articles->find()->where(['categorie_id' => $id, ['type' => ARTICLE_CATEGORIES]]);
         $list_articles = $Categorie->find()->contain([
             'Articles' => function ($q) {
-                return $q->autoFields(false)->select(['id','categorie_id'])->where(['type' => ARTICLE_SIGNLE]);
+                return $q->autoFields(false)->select(['id','categorie_id'])->where(['type' => ARTICLE_CATEGORIES]);
             }
         ])->where(['Categories.type' => HORIZONTAL]);
         $this->set(compact('articles','list_articles'));

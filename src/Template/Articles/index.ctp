@@ -50,7 +50,7 @@
                             <tr>
                                 <td><?= $article->title ?></td>
                                 <td><?= h($article->note) ?></td>
-                                <td><?= h($article->type) ?></td>
+                                <td><?= $this->MyHtml->_ArticleType($article->type);?></td>
                                 <td><?= $article->has('category') ? $this->Html->link($article->category->name, ['controller' => 'Categories', 'action' => 'view', $article->category->id]) : '' ?></td>
                                 <td><?= h($article->created) ?></td>
                                 <td><?= h($article->modified) ?></td>

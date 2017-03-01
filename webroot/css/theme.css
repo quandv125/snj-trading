@@ -14785,7 +14785,7 @@ ol.list-post-comment {
 .banner-slider21 .owl-pagination{
 	position:absolute;
 	left:0;
-	bottom:120px;
+	bottom:20px;
 	width:100%;
 }
 .banner-slider21{
@@ -14801,7 +14801,6 @@ ol.list-post-comment {
 .banner-slider21 .owl-pagination .owl-page.active span{
 	border:5px solid #ff695d;
 }
-
 .hot-deal5.hot-deal21 {
     background: #fff none repeat scroll 0 0;
     box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);

@@ -121,7 +121,6 @@ class ProductsController extends AppController
             $this->request->data['user_id'] = $this->Auth->user('id');
             $product = $this->Products->newEntity();
             $product = $this->Products->patchEntity($product, $this->request->data);
-            // pr($product);die();
             if ($Product->save($product)) {
                 $id = $product->id;
                 if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -145,19 +144,13 @@ class ProductsController extends AppController
             return $this->redirect(['controller'=>'Pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);
         }
         $this->viewBuilder()->layout('product');
-        $this->menu();
+       
         $categorie = $Categorie->find('treeList'); 
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
         $this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
     }
 
-    private function menu() {
-        $Categorie  = TableRegistry::get('Categories');
-        $categories = $Categorie->find('threaded')->where(['type' => 0]);
-        $categories2 = $Categorie->find('threaded')->where(['type' => 1]);
-        $this->set(compact('categories','categories2'));
-    }
     /**
      * Edit method
      *
@@ -240,7 +233,7 @@ class ProductsController extends AppController
             }
         }
         
-        $this->menu();
+       
         $categorie  = $Categorie->find('treeList'); 
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
@@ -338,8 +331,6 @@ class ProductsController extends AppController
             $this->autoRender = false;
             $str_rand   = $this->request->data['str_rand'];
             $conditions = $this->getConditions($this->request->data);
-            // pr($this->request->data);
-            // pr($conditions);die();
             $products   = $this->Products->getProductsSearch($conditions, null, null);  
             $this->infoPagi($conditions, $this->request->data['page']);
             $this->set(compact('products', 'str_rand'));
@@ -387,16 +378,13 @@ class ProductsController extends AppController
         $int_row = (int) ($total/LIMIT);
         if(($total/LIMIT) == $int_row) $num_page = $int_row;
             else $num_page = $int_row+1;
-        ////
         $categories = $this->Products->Categories->find('treeList', [ 'valuePath' => 'name', 'spacer' => ' __ ' ]);
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-        ////
         $this->set(compact('num_page','page','categories', 'outlets', 'suppliers'));
     }
 
     private function getConditions($data){
-       
             if (!empty($data['value'])) {
                 switch ($data['type']) {
                     case 'sku':
@@ -453,7 +441,6 @@ class ProductsController extends AppController
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $id = $this->request->data['id'];
-            // pr($this->request->data);
             $Products = TableRegistry::get('Products');
             $datasourceProduct = $Products->connection();
             try {
@@ -521,7 +508,6 @@ class ProductsController extends AppController
             } else {
                 $my_cart = $cart;
             }
-
             if (!in_array($this->request->data['id'], $my_cart)) {
                 $my_cart[$this->request->data['id']] = [$this->request->data['id'],$this->request->data['name'],$this->request->data['price'],$this->request->data['picture'],];
                 unset($my_cart[null]);
@@ -537,7 +523,6 @@ class ProductsController extends AppController
             $cart = $this->request->session()->read('Cart');
             unset($cart[$this->request->data['id']]);
             $this->request->session()->write('Cart', $cart);
-            
         }
     }
 

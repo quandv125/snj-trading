@@ -25,7 +25,7 @@
                     echo $this->Form->input('title');
                     echo $this->Form->input('categorie_id', ['label'=>'Categories','options' => $categories,"data-live-search" => "true",'class'=>'selectpicker live-search-box']);
                     echo $this->Form->textarea('content',['id'=>'editor1']);
-                    echo $this->Form->input('type', ['label'=>'Type','options' => [0 => 'Signle', 1 => 'Categories', 2 => 'Help', 3 => 'SNJ', 4 => 'My Account'],"data-live-search" => "true",'class'=>'selectpicker live-search-box']);
+                    echo $this->Form->input('type', ['label'=>'Type','options' => [ARTICLE_SIGNLE => 'Signle', ARTICLE_CATEGORIES => 'Categories', ARTICLE_HELP => 'Help', ARTICLE_SNJ => 'SNJ', ARTICLE_MYACCOUNT => 'My Account'],"data-live-search" => "true",'class'=>'selectpicker live-search-box']);
                     echo $this->Form->input('note');
                 ?>
                  <?= $this->Form->button(__('Submit')) ?>

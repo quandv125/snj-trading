@@ -42,6 +42,27 @@ class MyHtmlHelper extends HtmlHelper
         return $checked;
     }
 
+    public function _ArticleType($type) {
+        switch ($type) {
+            case ARTICLE_SIGNLE:
+                $name = 'Signle';
+                break;
+            case ARTICLE_CATEGORIES:
+                $name = 'Categories';
+                break;
+            case ARTICLE_HELP:
+                $name = 'Help';
+                break;
+            case ARTICLE_SNJ:
+                $name = 'S&J';
+                break;
+            default:
+                $name = 'My Account';
+                break;
+        }
+        return $name;
+    }
+
 }
 
 

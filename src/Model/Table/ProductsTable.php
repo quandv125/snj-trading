@@ -240,4 +240,19 @@ class ProductsTable extends Table
         $max_sku = $max_sku->sku+1;
         return $max_sku;
     }
+
+     public function getInfoSearch($conditions = null, $conditions2 = null) {
+        $Product    = TableRegistry::get('Products');
+        $products   = $Product->find()->contain([
+            'Images' => function($q){
+                return $q->select(['id','product_id','path','thumbnail']);
+            }])
+            ->select(['Products.id','Products.sku','Products.product_name'])
+            ->order(['Products.created' => 'DESC'])
+            ->Where([$conditions])
+            ->orWhere($conditions2);
+            
+        return $products;
+       
+    }
 }

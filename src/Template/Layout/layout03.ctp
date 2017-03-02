@@ -74,6 +74,7 @@
     'libs/jquery.themepunch.revolution',
     'libs/jquery.themepunch.plugins.min',
     // 'libs/less.min',
+    'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
     'theme',
     // 'custom',
 ]); ?>

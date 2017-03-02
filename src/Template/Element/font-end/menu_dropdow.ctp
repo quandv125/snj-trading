@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-7 col-sm-8 col-xs-9">
         <div class="smart-search search-form14">
-             <?php echo $this->element('font-end/smart-search') ?>
+             <?php echo $this->element('font-end/smart-search',['class'=>'smart-search-fixed']) ?>
         </div>
     </div>
     <div class="col-md-2 col-sm-2 hidden-xs">

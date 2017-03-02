@@ -474,20 +474,24 @@ class ProductsController extends AppController
         }
     }
 
-    // public function QuickSearch() {
-    //     if ($this->request->is('ajax')) {
-    //         $this->autoRender = false;
-    //         $conditions = [ 'Products.product_name LIKE' => '%'. $this->request->data['keyword'] . '%'];
-    //         $products   = $this->Products->find()->select(['id','sku','product_name'])->where($conditions);
-            
-    //     }
-    // }
+    public function QuickSearch() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $id = $this->request->data['id'];
+            $conditions = ['Products.actived'=> PRODUCT_ACTIVE,'Products.product_name LIKE' => '%'. $this->request->data['keyword'] .'%'];
+            $conditions2 = ['Products.actived'=> PRODUCT_ACTIVE,'Products.sku LIKE' => '%'. $this->request->data['keyword'] .'%'];
+            $products   = $this->Products->getInfoSearch($conditions, $conditions2);
+           
+            $this->set(compact('products', 'id'));
+            $this->render('/Element/Products/quick_search');
+        }
+    }
 
     public function sales() {
         $User       = TableRegistry::get('Users');
         $Customer   = TableRegistry::get('Customers');
         $users      = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
-        $customers = $Customer->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+        $customers  = $Customer->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
         $categories = $this->Products->Categories->find('treeList', [ 'valuePath' => 'name', 'spacer' => ' __ ' ]);
        
         if ($this->request->is('post')) {

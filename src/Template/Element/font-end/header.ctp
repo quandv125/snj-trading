@@ -58,7 +58,7 @@
             </div>
             <div class="col-md-6 col-sm-7 col-xs-12">
                 <div class="smart-search search-form14">
-                     <?php echo $this->element('font-end/smart-search') ?>
+                    <?php echo $this->element('font-end/smart-search',['class'=>'smart-search-fixed']) ?>
                 </div>
             </div>
             <div class="col-md-3 col-sm-2 col-xs-12">

@@ -13,9 +13,9 @@
 </div>
 <?php 
     echo $this->Form->create('search',['url'=>['controller'=>'pages','action'=>'search'],'class'=>'smart-search-form','type' => 'get']);
-    echo $this->Form->input('search',['placeholder'=>'Find Product, Part No, Code...','label' => false,'class' => 'smart-search']);
+    echo $this->Form->input('search',['placeholder'=>'Find Product, Part No, Code...','label' => false,'class' => $class]);
     echo $this->Form->input('type-search',['class'=>'type-search hidden','label' => false,'value'=> null]);
     echo $this->Form->input('',['type'=>'submit']);
     echo $this->Form->end();
 ?>
-
+<div class="col-md-9 col-sm-9 col-xs-9 quick-<?= $class?> hidden"></div>

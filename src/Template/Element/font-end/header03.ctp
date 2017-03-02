@@ -11,8 +11,9 @@
 				</div>
 				<div class="col-md-7 col-sm-10 col-xs-12">
 					<div class="smart-search search-form3 search-form5">
-						<?php echo $this->element('font-end/smart-search') ?>
+						<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
 					</div>
+					
 				</div>
 				
 				<div class="col-md-3 col-sm-12 col-xs-12">

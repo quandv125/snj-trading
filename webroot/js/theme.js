@@ -961,39 +961,59 @@ jQuery(document).ready(function($){
 		});
 	}); // End
 
-	// var delay = (function(){
-	// 	var timer = 0;
-	// 	return function(callback, ms){
-	// 		clearTimeout (timer);
-	// 		timer = setTimeout(callback, ms);
-	// 	};
-	// })();
+	var delay = (function(){
+		var timer = 0;
+		return function(callback, ms){
+			clearTimeout (timer);
+			timer = setTimeout(callback, ms);
+		};
+	})();
 
-	// jQuery('input.smart-search').keyup(function() { 
-		
-	// 	var keyword = jQuery(this).val();
+	jQuery('input.smart-search').keyup(function(e) { 
+		var keyword = jQuery(this).val();
+		delay(function(){
+			jQuery.ajax({
+				url: '/products/quick_search',
+				type: 'POST',
+				data: {keyword: keyword, id:'slimtest1'},
+				dataType: 'html',
+				cache: false,
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					jQuery('.quick-smart-search').toggleClass('hidden').html(response);
+					jQuery(window).click(function(e) {
+						jQuery('.quick-smart-search-fixed').addClass('hidden');
+						jQuery('.quick-smart-search').addClass('hidden');
+						jQuery('.type-search').forcus();
+					});
+				}
+			}); // Ajax
+		}, 300 );
+	});
+	
+	jQuery('input.smart-search-fixed').keyup(function(e) { 
+		var keyword = jQuery(this).val();
+		delay(function(){
+			jQuery.ajax({
+				url: '/products/quick_search',
+				type: 'POST',
+				data: {keyword: keyword, id:'slimtest2'},
+				dataType: 'html',
+				cache: false,
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					jQuery('.quick-smart-search-fixed').toggleClass('hidden').html(response);
+					jQuery(window).click(function(e) {
+						jQuery('.quick-smart-search-fixed').addClass('hidden');
+						jQuery('.quick-smart-search').addClass('hidden');
+						jQuery('.type-search').focus();
+					});
+				}
+			}); // Ajax
+		}, 300 );
+	});
+	
+	
 
-	// 	delay(function(){
-	// 		jQuery.ajax({
-	// 			url: '/products/quick_search',
-	// 			type: 'POST',
-	// 			data: {keyword: keyword},
-	// 			dataType: 'html',
-	// 			cache: false,
-	// 			beforeSend: function(){
-	// 				jQuery("#loader").fadeIn();
-	// 				// jQuery('#slimtest1').empty();
-	// 				// jQuery('.result-search-stock').show();
-	// 			},
-	// 			success: function(response){
-	// 				jQuery("#loader").fadeOut();
-	// 				console.log(response);
-	// 				// jQuery('.result-search-stock').html(response);
-	// 				// jQuery.getScript('/js/show_action.js',function(){
-	// 				// 	stock_products();
-	// 				// });
-	// 			}
-	// 		}); // Ajax
-	// 	}, 500 );
-	// });
-});
+}); // End document
+

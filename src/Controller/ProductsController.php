@@ -40,12 +40,11 @@ class ProductsController extends AppController
     public function suppliers() {
         $conditions = ['Products.user_id' => $this->Auth->user('id')];
         $products   = $this->Products->getProductsSearch($conditions, null, null);  
-        $User = TableRegistry::get('Users');
-        $users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
+        $User       = TableRegistry::get('Users');
+        $users      = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
         $this->infoPagi($conditions, 1);
         $this->set(compact('products','users'));
         $this->set('_serialize', ['products']);
-       
     }
     /**
      * View method
@@ -109,8 +108,8 @@ class ProductsController extends AppController
 
     public function SupplierAddProduct() {
         $Categorie  = TableRegistry::get('Categories');
-        $Image   = TableRegistry::get('Images');
-        $Product = TableRegistry::get('Products');
+        $Image      = TableRegistry::get('Images');
+        $Product    = TableRegistry::get('Products');
         if ($this->request->is('post')) {
 
             $this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
@@ -145,7 +144,7 @@ class ProductsController extends AppController
         }
         $this->viewBuilder()->layout('product');
        
-        $categorie = $Categorie->find('treeList'); 
+        $categorie  = $Categorie->find('treeList'); 
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
         $this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
@@ -206,12 +205,10 @@ class ProductsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
-           
             $OldID = $product->id;
             if ($this->Products->save($product)) {
                 $Image = TableRegistry::get('Images');
                 $id = $product->id;
-                
                 if (isset($this->request->data['files']) && !empty($this->request->data['files'][0]['name'])) {
                     for($i=0; $i<count($this->request->data['files'.$OldID]); $i++){
                         $path = rand(1,100000).'_'.$this->request->data['files'.$OldID][$i]['name'];
@@ -233,7 +230,6 @@ class ProductsController extends AppController
             }
         }
         
-       
         $categorie  = $Categorie->find('treeList'); 
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
@@ -242,7 +238,7 @@ class ProductsController extends AppController
         $this->set(compact('products','categorie', 'outlets', 'suppliers'));
     }
 
- public function SupplierDeleteProduct($id = null){
+    public function SupplierDeleteProduct($id = null){
         $this->viewBuilder()->layout('product');
         $this->request->allowMethod(['post', 'delete']);
         $product = $this->Products->get($id);

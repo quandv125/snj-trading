@@ -15300,3 +15300,18 @@ ul.menu-account-info li{
 .max-width-60{
     max-width: 60px;
 }
+#loader{
+    position: fixed;
+    top: 2.8%;
+    left: 65%;
+    width: 3%;
+    z-index: 999;
+}
+
+#loader2{
+    position: fixed;
+    top: 1.5%;
+    left: 74%;
+    width: 3%;
+    z-index: 999;
+}

@@ -978,31 +978,12 @@ jQuery(document).ready(function($){
 				data: {keyword: keyword, id:'slimtest1'},
 				dataType: 'html',
 				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
 					jQuery('.quick-smart-search').toggleClass('hidden').html(response);
-					jQuery(window).click(function(e) {
-						jQuery('.quick-smart-search-fixed').addClass('hidden');
-						jQuery('.quick-smart-search').addClass('hidden');
-						jQuery('.type-search').forcus();
-					});
-				}
-			}); // Ajax
-		}, 300 );
-	});
-	
-	jQuery('input.smart-search-fixed').keyup(function(e) { 
-		var keyword = jQuery(this).val();
-		delay(function(){
-			jQuery.ajax({
-				url: '/products/quick_search',
-				type: 'POST',
-				data: {keyword: keyword, id:'slimtest2'},
-				dataType: 'html',
-				cache: false,
-				success: function(response){
-					jQuery("#loader").fadeOut();
-					jQuery('.quick-smart-search-fixed').toggleClass('hidden').html(response);
 					jQuery(window).click(function(e) {
 						jQuery('.quick-smart-search-fixed').addClass('hidden');
 						jQuery('.quick-smart-search').addClass('hidden');
@@ -1011,6 +992,31 @@ jQuery(document).ready(function($){
 				}
 			}); // Ajax
 		}, 300 );
+	});
+	
+	jQuery('input.smart-search-fixed').keyup(function(e) { 
+		var keyword = jQuery(this).val();
+		// delay(function(){
+			jQuery.ajax({
+				url: '/products/quick_search',
+				type: 'POST',
+				data: {keyword: keyword, id:'slimtest2'},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader2").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader2").fadeOut();
+					jQuery('.quick-smart-search-fixed').toggleClass('hidden').html(response);
+					jQuery(window).click(function(e) {
+						jQuery('.quick-smart-search-fixed').addClass('hidden');
+						jQuery('.quick-smart-search').addClass('hidden');
+						jQuery('.type-search').focus();
+					});
+				}
+			}); // Ajax
+		// }, 300 );
 	});
 	
 	

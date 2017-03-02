@@ -63,7 +63,7 @@
 <div id="menufix">
      <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
 </div>
-   
+<?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?> 
 </body>
 </html>
  <?= $this->Html->script([

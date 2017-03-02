@@ -61,6 +61,8 @@
     <div id="menufix">
         <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
     </div>
+    <?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?>
+    <?php echo $this->Html->image('loader.gif',['id' => 'loader2', "style"=>"display: none;"]) ?>
 <?= $this->Html->script([
     'libs/jquery-3.1.1.min',
     'libs/bootstrap.min',

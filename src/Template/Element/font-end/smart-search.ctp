@@ -13,7 +13,7 @@
 </div>
 <?php 
     echo $this->Form->create('search',['url'=>['controller'=>'pages','action'=>'search'],'class'=>'smart-search-form','type' => 'get']);
-    echo $this->Form->input('search',['placeholder'=>'Find Product, Part No, Code...','label' => false,'class' => $class]);
+    echo $this->Form->input('search',['placeholder'=>'Find Product, Part No, Code...','label' => false,'class' => $class,"autocomplete"=>"off"]);
     echo $this->Form->input('type-search',['class'=>'type-search hidden','label' => false,'value'=> null]);
     echo $this->Form->input('',['type'=>'submit']);
     echo $this->Form->end();

@@ -1,9 +1,7 @@
 
 <div class="row">
     <div class="col-md-3 col-sm-4 col-xs-12">
-        <?php echo $this->element('font-end/sidebar-left') ?>
-       
-      
+          <?php echo $this->element('font-end/sidebar-left',['type' => 'categories']) ?>
     </div>
     <div class="col-md-9 col-sm-8 col-xs-12">
        <div class="main-content-shop">

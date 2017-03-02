@@ -991,12 +991,12 @@ jQuery(document).ready(function($){
 					});
 				}
 			}); // Ajax
-		}, 300 );
+		}, 500 );
 	});
 	
 	jQuery('input.smart-search-fixed').keyup(function(e) { 
 		var keyword = jQuery(this).val();
-		// delay(function(){
+		delay(function(){
 			jQuery.ajax({
 				url: '/products/quick_search',
 				type: 'POST',
@@ -1004,10 +1004,10 @@ jQuery(document).ready(function($){
 				dataType: 'html',
 				cache: false,
 				beforeSend: function(){
-					jQuery("#loader2").fadeIn();
+					jQuery(".loader2").fadeIn();
 				},
 				success: function(response){
-					jQuery("#loader2").fadeOut();
+					jQuery(".loader2").fadeOut();
 					jQuery('.quick-smart-search-fixed').toggleClass('hidden').html(response);
 					jQuery(window).click(function(e) {
 						jQuery('.quick-smart-search-fixed').addClass('hidden');
@@ -1016,7 +1016,7 @@ jQuery(document).ready(function($){
 					});
 				}
 			}); // Ajax
-		// }, 300 );
+		}, 500 );
 	});
 	
 	

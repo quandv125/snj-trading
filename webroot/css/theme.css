@@ -15308,7 +15308,7 @@ ul.menu-account-info li{
     z-index: 999;
 }
 
-#loader2{
+.loader2{
     position: fixed;
     top: 1.5%;
     left: 74%;

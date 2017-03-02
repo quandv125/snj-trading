@@ -20,19 +20,20 @@
             </ul>
         </div>
     </div>
-
-    <div class="sidebar-left sidebar-post">
-        <div class="widget widget-post-cat">
-            <h2 class="widget-title"><?php echo __('Categoties') ?></h2>
-            <ul>
-                 <?php foreach ($category as $key => $category1): ?>
-                    <li>
-                    <?php echo $this->Html->link($category1->name.'<span>('.count($category1->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$category1->id],['escape' => false]) ?>
-                    </li>
-                <?php endforeach ?>
-            </ul>
+    <?php if ($type == 'categories'): ?>
+        <div class="sidebar-left sidebar-post">
+            <div class="widget widget-post-cat">
+                <h2 class="widget-title"><?php echo __('Categoties') ?></h2>
+                <ul>
+                     <?php foreach ($category as $key => $category1): ?>
+                        <li>
+                        <?php echo $this->Html->link($category1->name.'<span>('.count($category1->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$category1->id],['escape' => false]) ?>
+                        </li>
+                    <?php endforeach ?>
+                </ul>
+            </div>
         </div>
-    </div>
+    <?php endif ?>
 
     <div class="divider25"></div>
   

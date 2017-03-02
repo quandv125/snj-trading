@@ -77,11 +77,12 @@ class ProductsController extends AppController
         if (empty($this->request->data['sku'])) {
            $this->request->data['sku'] = $this->Products->MaxSKU();
         }
-
+        $this->request->data['actived'] = true;
         $this->request->data['user_id'] = $this->Auth->user('id');
         $product = $this->Products->newEntity();
         if ($this->request->is('post')) {
             $product = $this->Products->patchEntity($product, $this->request->data);
+           
             if ($Product->save($product)) {
                 $id = $product->id;
                 if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -95,9 +96,15 @@ class ProductsController extends AppController
                             $images->path        = 'products/'.$path;
                             $images->thumbnail   = 'thumbnails/'.$thumbnail;
                             $Image->save($images);
+                            if ($i == 0) {
+                                $pic = 'products/'.$path;
+                                $thumb = 'thumbnails/'.$thumbnail;
+                            }
                         }
                     }
+                    $Product->updateAll(['picture' => $pic, 'thumbnail' => $thumb], ['id' => $id]);
                 }
+
                 $this->Flash->success(__('The product has been saved.'));
             } else {
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));
@@ -133,8 +140,13 @@ class ProductsController extends AppController
                             $images->path        = 'products/'.$path;
                             $images->thumbnail   = 'thumbnails/'.$thumbnail;
                             $Image->save($images);
+                            if ($i == 0) {
+                                $pic = 'products/'.$path;
+                                $thumb = 'thumbnails/'.$thumbnail;
+                            }
                         }
                     }
+                    $Product->updateAll(['picture' => $pic, 'thumbnail' => $thumb], ['id' => $id]);
                 }
                 $this->Flash->success(__('The product has been saved.'));
             } else {
@@ -165,6 +177,7 @@ class ProductsController extends AppController
         $this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
         $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
         $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+        $this->request->data['actived'] = true;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
             $OldID = $product->id;

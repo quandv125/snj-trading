@@ -89,7 +89,7 @@ class CategoriesController extends AppController
                 }
             }
             $category = $this->Categories->patchEntity($category, $this->request->data);
-            pr($this->request->data);die();
+            
             if ($this->Categories->save($category)) {
                 $this->Flash->success(__('The category has been saved.'));
                 return $this->redirect(['action' => 'index']);

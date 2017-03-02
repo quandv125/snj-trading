@@ -124,7 +124,19 @@ class PagesController extends AppController
                 return $q->autoFields(false)->select(['id','categorie_id','product_name']);
             },
         ])->where(['parent_id' => $parent_id, 'actived' => true]);
-       
+      
+        // $children = $Categorie
+        // ->find('children', ['for' => 2])
+        // ->find('threaded')
+        // ->select(['id','name','picture','parent_id','actived'])
+        // ->contain([
+        //     'Products' => function ($q) {
+        //         return $q->autoFields(false)->select(['id','categorie_id','product_name']);
+        //     },
+        // ])->toArray();
+
+        // pr($children);die();
+
         $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
         $this->set(compact('products','category','suppliers','parent_id'));
     }

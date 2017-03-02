@@ -2242,7 +2242,7 @@ a:focus {
 }
 .sidebar-shop .widget {
     border: 1px solid #e8e8e8;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 22px 20px;
 }
 .sidebar-shop .widget-title {
@@ -6823,7 +6823,7 @@ a:focus {
 }
 .sidebar-post .widget {
     border: 1px solid #e5e5e5;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 .title-widget-post {
     border-bottom: 1px solid #e5e5e5;
@@ -14329,7 +14329,7 @@ ol.list-post-comment {
     padding: 0;
 }
 .detail-info.detail-info-fullwidth {
-    margin-left: -15px;
+    margin-left: 0px;
     padding-left: 0;
 }
 .detail-gallery-fullwidth .mid p {

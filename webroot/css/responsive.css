@@ -1099,7 +1099,9 @@
     position: relative;
     max-width: 400px; 
 }*/
-
+.logo5 img{
+    width: 50%;
+}
 .adv-sidebar9 .sidebar-cat-childrent > li {
     border-bottom: 1px solid #e5e5e5;
 }

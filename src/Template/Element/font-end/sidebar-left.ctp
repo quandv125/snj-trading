@@ -2,14 +2,14 @@
 
     <div class="widget widget-filter">
         <div class="box-filter">
-            <h2 class="widget-title">Search</h2>
+            <h2 class="widget-title"><?php echo __('Search') ?></h2>
             <ul>
                 <li> 
                     <input id="search-highlight" class="form-control" name="search-highlight" placeholder="Keyword" type="text" data-list=".highlight_list" autocomplete="off">
                 </li>
                 <br/>
                 <li>
-                    Maker' Name
+                    <?php echo __("Maker' Name") ?>
                     <select class="live-search-box form-control">
                     <option value="all">All</option>
                     <?php foreach ($suppliers as $key => $supplier): ?>
@@ -20,7 +20,19 @@
             </ul>
         </div>
     </div>
-    
+
+    <div class="sidebar-left sidebar-post">
+        <div class="widget widget-post-cat">
+            <h2 class="widget-title"><?php echo __('Categoties') ?></h2>
+            <ul>
+                 <?php foreach ($category as $key => $category1): ?>
+                    <li>
+                    <?php echo $this->Html->link($category1->name.'<span>('.count($category1->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$category1->id],['escape' => false]) ?>
+                    </li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    </div>
 
     <div class="divider25"></div>
   

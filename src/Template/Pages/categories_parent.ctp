@@ -14,15 +14,15 @@
                             <li class="col-md-4 col-sm-6 col-xs-12">
                                 <div class="item-category">
                                     <div class="col-md-6 col-sm-6 zoom-image-thumb">
-                                            <?php echo $this->Html->link($this->Html->image($category->picture), ['controller'=>'Pages','action'=>'categories',$category->id], array('escape' => false)); ?>
+                                            <?php echo $this->Html->link($this->Html->image($category->picture), ['controller'=>'Pages','action'=>'categories', $id,$category->id], array('escape' => false)); ?>
                                         </div>
                                     <div class="col-md-6 col-sm-6">
                                         <div class="wapper-category">
                                             <div class="list-cat-mega-menu">
-                                                <h2 class="title-cat-mega-menu"> <?= $this->Html->link($category->name, ['controller'=>'Pages','action'=>'categories',$category->id]); ?></h2>
+                                                <h2 class="title-cat-mega-menu"> <?= $this->Html->link($category->name, ['controller'=>'Pages','action'=>'categories', $id,$category->id]); ?></h2>
                                                 <ul>
                                                     <?php foreach ($category->children as $key => $children): ?>
-                                                        <li><?= $this->Html->link($children->name, ['controller'=>'Pages','action'=>'categories',$children->id]); ?></li>
+                                                        <li><?= $this->Html->link($children->name, ['controller'=>'Pages','action'=>'categories', $id,$children->id]); ?></li>
                                                     <?php endforeach ?>
                                                     
                                                 </ul>

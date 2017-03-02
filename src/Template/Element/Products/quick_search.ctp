@@ -1,5 +1,4 @@
 <?php if (!empty($products->toarray())): ?>
-
 	<div class="table-responsive margin-top10" id="<?= $id?>" style="overflow-y:scroll; max-height:400px;" >
 		<table class="table table-striped cursor-pointer">
 			<?php foreach ($products as $key => $product): ?>
@@ -10,13 +9,15 @@
 					<td>
 						<?php echo $this->Html->link($product->sku,['controller' => 'Pages','action' => 'products',$product->id]) ; ?>
 					</td>
-					<td><?php echo $this->Html->link($product->product_name,['controller' => 'Pages','action' => 'products',$product->id]) ; ?></td>
+					<td>
+						<?php echo $this->Html->link($product->product_name,['controller' => 'Pages','action' => 'products',$product->id]) ; ?>
+					</td>
 				</tr>
 			<?php endforeach ?>
 		</table>
 	</div>
 <?php else: ?>
-    <div id="no-result">
+	<div id="no-result">
 		<div class="table-responsive" >
 			<table class="table table-striped">
 				<tr>
@@ -26,5 +27,5 @@
 				</tr>
 			</table>
 		</div>
-    </div>
+	</div>
 <?php endif; ?>

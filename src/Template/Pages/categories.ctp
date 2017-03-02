@@ -2,6 +2,8 @@
 <div class="row">
     <div class="col-md-3 col-sm-4 col-xs-12">
         <?php echo $this->element('font-end/sidebar-left') ?>
+       
+      
     </div>
     <div class="col-md-9 col-sm-8 col-xs-12">
        <div class="main-content-shop">
@@ -53,10 +55,11 @@
                             <li data-search-term="supplier<?= $product->supplier['id'];?> active<?= $key?>" class="col-md-3 col-sm-6 col-xs-12">
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a class="product-thumb-link" href="../../pages/products/<?= $product->id?>">
+                                        <a class="product-thumb-link" href="../../products/<?= $product->id?>">
                                             <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193]); ?>
                                             <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193]); ?>
                                         </a>
+
                                         <div class="product-info-cart">
                                             <div class="product-extra-link">
                                                 <a class="wishlist-link" href="#"><i class="fa fa-heart-o"></i></a>

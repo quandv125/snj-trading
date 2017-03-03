@@ -460,6 +460,8 @@ a:focus {
 	opacity:1;
 	visibility:visible;
     border: 1px solid #e4e4e4;
+    overflow-y:scroll; 
+    max-height:400px;
 }
 .content-mini-cart h2 {
     font-size: 14px;
@@ -467,7 +469,7 @@ a:focus {
 }
 .list-mini-cart-item li {
     border-bottom: 1px solid #e9e9e9;
-    display: table;
+    /*display: table;*/
     padding: 20px 0;
 }
 .mini-cart-edit {

@@ -15301,17 +15301,17 @@ ul.menu-account-info li{
     max-width: 60px;
 }
 #loader{
-    position: fixed;
-    top: 2.8%;
-    left: 65%;
-    width: 3%;
+    position: absolute;
+    top: -4%;
+    left: 86%;
+    width: 6%;
     z-index: 999;
 }
 
 .loader2{
-    position: fixed;
-    top: 1.5%;
-    left: 74%;
-    width: 3%;
+    position: absolute;
+    top: 2.5%;
+    left: 88%;
+    width: 5%;
     z-index: 999;
 }

@@ -18,4 +18,6 @@
     echo $this->Form->input('',['type'=>'submit']);
     echo $this->Form->end();
 ?>
+<?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?> 
+<?php echo $this->Html->image('loader.gif',['class' => 'loader2', "style"=>"display: none;"]) ?>
 <div class="col-md-9 col-sm-9 col-xs-9 quick-<?= $class?> hidden"></div>

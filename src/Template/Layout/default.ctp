@@ -142,7 +142,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
     'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
     // 'assets/js/pages/table-data',
-    'assets/plugins/autoNumeric/autoNumeric.js','libs/bootstrap-select',
+    'assets/plugins/autoNumeric/autoNumeric.js',
+    'libs/bootstrap-select',
     // End table
     'assets/plugins/summernote-master/summernote.min',
     'assets/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min',

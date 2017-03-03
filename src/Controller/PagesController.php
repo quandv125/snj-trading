@@ -94,23 +94,41 @@ class PagesController extends AppController
         }
     }
 
+    private function gettreelist($childrens, $id) {
+          $myarr = array($id => $id);
+        foreach ($childrens as $key => $children) {
+            $myarr[$children->id] = $children->id;
+            if (!empty($children->children)) {
+               foreach ($children->children as $key => $child) {
+                    $myarr[$child->id] = $child->id;
+               }
+            }
+        }
+        return $myarr;
+    }
+
     public function categoriesParent($id) {
         $this->viewBuilder()->layout('product');
         $Categorie  = TableRegistry::get('Categories');
-        $list       = $Categorie->find('list')->where(['parent_id' => $id]);
-        // $list       = $Categorie->find('threaded')->contain([
-        //     'Products' => function ($q) {
-        //         return $q->autoFields(false)->select(['id','categorie_id']);
-        //     }
-        // ])->where(['parent_id' => $id])->toarray();
-        $arr = array();
-        foreach ($list as $key => $value) {
-            $arr[] = $key;
-        }
-        $conditions = ['Products.categorie_id IN' => $arr ];
+        $Supplier   = TableRegistry::get('Suppliers');
+        $info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
         $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
-        $products   = $this->Pages->getInfoProducts($conditions);
-        $this->set(compact('categories','products','cat_list','id'));
+       
+        $arr = $this->gettreelist($cat_list, $id);
+        // $arr[$id] = $id;
+        
+        $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
+        // $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $this->gettreelist($cat_list) ]);
+       
+        $parent_id  = $id;
+        $category = $Categorie->find()->select(['id','name'])->contain([
+            'Products' => function ($q) {
+                return $q->autoFields(false)->select(['id','categorie_id','product_name']);
+            },
+        ])->where(['parent_id' => $parent_id, 'actived' => true]);
+
+        $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+        $this->set(compact('info','categories','products','cat_list','id','parent_id','suppliers','category'));
     }
 
     public function categories($parent_id, $id) {

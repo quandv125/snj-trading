@@ -5,7 +5,7 @@
             <h2 class="widget-title"><?php echo __('Search') ?></h2>
             <ul>
                 <li> 
-                    <input id="search-highlight" class="form-control" name="search-highlight" placeholder="Keyword" type="text" data-list=".highlight_list" autocomplete="off">
+                    <input id="search-highlight" class="form-control" name="search-highlight" placeholder="Products Name" type="text" data-list=".highlight_list" autocomplete="off">
                 </li>
                 <br/>
                 <li>

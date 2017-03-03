@@ -9437,3 +9437,1252 @@ Stack Trace:
 #13 {main}
 
 
+2017-03-03 08:57:27 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/assets/minus.png
+Referer URL: http://snj-trading.vn/css/theme.css
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:06:33 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\xampp\htdocs\snj-trading\src\Template\Element\font-end\sidebar-left.ctp, line 15]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - APP/Template\Element\font-end\sidebar-left.ctp, line 15
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::_renderElement() - CORE\src\View\View.php, line 1363
+Cake\View\View::element() - CORE\src\View\View.php, line 501
+include - APP/Template\Pages\categories_parent.ctp, line 57
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::render() - CORE\src\View\View.php, line 597
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 128
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 96
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 83
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 62
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 81
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 92
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:06:33 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\xampp\htdocs\snj-trading\src\Template\Element\font-end\sidebar-left.ctp, line 28]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - APP/Template\Element\font-end\sidebar-left.ctp, line 28
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::_renderElement() - CORE\src\View\View.php, line 1363
+Cake\View\View::element() - CORE\src\View\View.php, line 501
+include - APP/Template\Pages\categories_parent.ctp, line 57
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::render() - CORE\src\View\View.php, line 597
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 128
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 96
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 83
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 62
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 81
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 92
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:07:16 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\xampp\htdocs\snj-trading\src\Template\Element\font-end\sidebar-left.ctp, line 15]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - APP/Template\Element\font-end\sidebar-left.ctp, line 15
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::_renderElement() - CORE\src\View\View.php, line 1363
+Cake\View\View::element() - CORE\src\View\View.php, line 501
+include - APP/Template\Pages\categories_parent.ctp, line 59
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::render() - CORE\src\View\View.php, line 597
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 128
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 96
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 83
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 62
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 81
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 92
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:07:16 Warning: Warning (2): Invalid argument supplied for foreach() in [D:\xampp\htdocs\snj-trading\src\Template\Element\font-end\sidebar-left.ctp, line 28]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+include - APP/Template\Element\font-end\sidebar-left.ctp, line 28
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::_renderElement() - CORE\src\View\View.php, line 1363
+Cake\View\View::element() - CORE\src\View\View.php, line 501
+include - APP/Template\Pages\categories_parent.ctp, line 59
+Cake\View\View::_evaluate() - CORE\src\View\View.php, line 1014
+Cake\View\View::_render() - CORE\src\View\View.php, line 973
+Cake\View\View::render() - CORE\src\View\View.php, line 597
+Cake\Controller\Controller::render() - CORE\src\Controller\Controller.php, line 617
+Cake\Http\ActionDispatcher::_invoke() - CORE\src\Http\ActionDispatcher.php, line 128
+Cake\Http\ActionDispatcher::dispatch() - CORE\src\Http\ActionDispatcher.php, line 96
+Cake\Http\BaseApplication::__invoke() - CORE\src\Http\BaseApplication.php, line 83
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\RoutingMiddleware::__invoke() - CORE\src\Routing\Middleware\RoutingMiddleware.php, line 62
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Routing\Middleware\AssetMiddleware::__invoke() - CORE\src\Routing\Middleware\AssetMiddleware.php, line 88
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Error\Middleware\ErrorHandlerMiddleware::__invoke() - CORE\src\Error\Middleware\ErrorHandlerMiddleware.php, line 81
+Cake\Http\Runner::__invoke() - CORE\src\Http\Runner.php, line 65
+Cake\Http\Runner::run() - CORE\src\Http\Runner.php, line 51
+Cake\Http\Server::run() - CORE\src\Http\Server.php, line 92
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:08:15 Warning: Warning (512): Unable to emit headers. Headers sent in file=D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php line=753 in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:08:15 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 145]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 145
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:08:15 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 170]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 170
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:11:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-select.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:11:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-theme.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:11:02 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:12:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:12:04 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-select.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:12:05 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-theme.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 10:17:36 Error: [BadMethodCallException] Unknown finder method "tree"
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Table.php(967): Cake\ORM\Table->callFinder('tree', Object(Cake\ORM\Query), Array)
+#1 D:\xampp\htdocs\snj-trading\src\Controller\PagesController.php(102): Cake\ORM\Table->find('tree')
+#2 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#17 {main}
+
+
+2017-03-03 10:29:38 Error: [InvalidArgumentException] Cannot convert value to integer
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\TypeConverterTrait.php(37): Cake\Database\Type\IntegerType->toDatabase(Array, Object(Cake\Database\Driver\Mysql))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Statement\PDOStatement.php(70): Cake\Database\Statement\StatementDecorator->cast(Array, Object(Cake\Database\Type\IntegerType))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\ValueBinder.php(148): Cake\Database\Statement\PDOStatement->bindValue(':c5', Array, 'integer')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(275): Cake\Database\ValueBinder->attachTo(Object(Cake\Database\Statement\MysqlStatement))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(293): Cake\ORM\Query->all()
+#9 D:\xampp\htdocs\snj-trading\src\Controller\PagesController.php(133): Cake\ORM\Query->toArray()
+#10 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#24 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#25 {main}
+
+
+2017-03-03 10:32:15 Error: [Error] Call to a member function toarray() on array
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2017-03-03 10:32:23 Error: [Error] Call to a member function toarray() on array
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2017-03-03 10:34:07 Error: [ParseError] syntax error, unexpected '='
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Core\App.php(152): class_exists('App\\Controller\\...')
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Core\App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Pag...', 'App')
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(70): Cake\Core\App::className('Pages', 'Controller', 'Controller')
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#17 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#18 {main}
+
+
+2017-03-03 10:34:15 Error: [Cake\Database\Exception] Impossible to generate condition with empty list of values for field (Products.categorie_id)
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Expression\Comparison.php(162): Cake\Database\Expression\Comparison->_stringExpression(Object(Cake\Database\ValueBinder))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Expression\QueryExpression.php(524): Cake\Database\Expression\Comparison->sql(Object(Cake\Database\ValueBinder))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Expression\QueryExpression.php(524): Cake\Database\Expression\QueryExpression->sql(Object(Cake\Database\ValueBinder))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\QueryCompiler.php(132): Cake\Database\Expression\QueryExpression->sql(Object(Cake\Database\ValueBinder))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(256): Cake\Database\QueryCompiler->Cake\Database\{closure}(Object(Cake\Database\Expression\QueryExpression), 'where')
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\QueryCompiler.php(99): Cake\Database\Query->traverse(Object(Closure), Array)
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Driver.php(333): Cake\Database\QueryCompiler->compile(Object(Cake\ORM\Query), Object(Cake\Database\ValueBinder))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(262): Cake\Database\Driver->compileQuery(Object(Cake\ORM\Query), Object(Cake\Database\ValueBinder))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(227): Cake\Database\Connection->compileQuery(Object(Cake\ORM\Query), Object(Cake\Database\ValueBinder))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(937): Cake\Database\Query->sql(Object(Cake\Database\ValueBinder))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Driver\Mysql.php(136): Cake\ORM\Query->sql()
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(221): Cake\Database\Driver\Mysql->prepare(Object(Cake\ORM\Query))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(274): Cake\Database\Connection->prepare(Object(Cake\ORM\Query))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(132): Cake\ORM\Query->all()
+#18 D:\xampp\htdocs\snj-trading\src\Template\Pages\categories_parent.ctp(76): Cake\ORM\Query->getIterator()
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(1014): include('D:\\xampp\\htdocs...')
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(973): Cake\View\View->_evaluate('D:\\xampp\\htdocs...', Array)
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(597): Cake\View\View->_render('D:\\xampp\\htdocs...')
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#24 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#25 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#26 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#27 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#28 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#29 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#30 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#31 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#32 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#33 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#34 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#35 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#36 {main}
+
+
+2017-03-03 10:34:15 Warning: Warning (512): Unable to emit headers. Headers sent in file=D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php line=753 in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 48]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 48
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:34:15 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 145]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitStatusLine() - CORE\src\Http\ResponseEmitter.php, line 145
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 54
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:34:15 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Debugger.php:753) in [D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ResponseEmitter.php, line 170]
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Trace:
+Cake\Error\BaseErrorHandler::handleError() - CORE\src\Error\BaseErrorHandler.php, line 146
+header - [internal], line ??
+Cake\Http\ResponseEmitter::emitHeaders() - CORE\src\Http\ResponseEmitter.php, line 170
+Cake\Http\ResponseEmitter::emit() - CORE\src\Http\ResponseEmitter.php, line 55
+Cake\Http\Server::emit() - CORE\src\Http\Server.php, line 118
+[main] - ROOT\webroot\index.php, line 37
+
+
+
+2017-03-03 10:36:58 Error: [ParseError] syntax error, unexpected ')'
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Core\App.php(152): class_exists('App\\Controller\\...')
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Core\App.php(64): Cake\Core\App::_classExistsInBase('\\Controller\\Pag...', 'App')
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(70): Cake\Core\App::className('Pages', 'Controller', 'Controller')
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#17 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#18 {main}
+
+
+2017-03-03 10:37:40 Error: [Error] Call to a member function contain() on array
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2017-03-03 10:51:58 Error: [InvalidArgumentException] The 'for' key is required for find('path')
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 [internal function]: Cake\ORM\Behavior\TreeBehavior->findPath(Object(Cake\ORM\Query), Array)
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\BehaviorRegistry.php(260): call_user_func_array(Array, Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Table.php(1945): Cake\ORM\BehaviorRegistry->callFinder('path', Array)
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Table.php(967): Cake\ORM\Table->callFinder('path', Object(Cake\ORM\Query), Array)
+#4 D:\xampp\htdocs\snj-trading\src\Controller\PagesController.php(127): Cake\ORM\Table->find('path', Array)
+#5 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#20 {main}
+
+
+2017-03-03 10:58:27 Error: [InvalidArgumentException] Cannot convert value to string
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\TypeConverterTrait.php(37): Cake\Database\Type\StringType->toDatabase(Array, Object(Cake\Database\Driver\Mysql))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Statement\PDOStatement.php(70): Cake\Database\Statement\StatementDecorator->cast(Array, Object(Cake\Database\Type\StringType))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\ValueBinder.php(148): Cake\Database\Statement\PDOStatement->bindValue('c0', Array, 'string')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(275): Cake\Database\ValueBinder->attachTo(Object(Cake\Database\Statement\MysqlStatement))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(132): Cake\ORM\Query->all()
+#9 D:\xampp\htdocs\snj-trading\src\Template\Pages\categories_parent.ctp(76): Cake\ORM\Query->getIterator()
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(1014): include('D:\\xampp\\htdocs...')
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(973): Cake\View\View->_evaluate('D:\\xampp\\htdocs...', Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(597): Cake\View\View->_render('D:\\xampp\\htdocs...')
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#24 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#25 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#26 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#27 {main}
+
+
+2017-03-03 10:58:30 Error: [InvalidArgumentException] Cannot convert value to string
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\TypeConverterTrait.php(37): Cake\Database\Type\StringType->toDatabase(Array, Object(Cake\Database\Driver\Mysql))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Statement\PDOStatement.php(70): Cake\Database\Statement\StatementDecorator->cast(Array, Object(Cake\Database\Type\StringType))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\ValueBinder.php(148): Cake\Database\Statement\PDOStatement->bindValue('c0', Array, 'string')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(275): Cake\Database\ValueBinder->attachTo(Object(Cake\Database\Statement\MysqlStatement))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(132): Cake\ORM\Query->all()
+#9 D:\xampp\htdocs\snj-trading\src\Template\Pages\categories_parent.ctp(76): Cake\ORM\Query->getIterator()
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(1014): include('D:\\xampp\\htdocs...')
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(973): Cake\View\View->_evaluate('D:\\xampp\\htdocs...', Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(597): Cake\View\View->_render('D:\\xampp\\htdocs...')
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#24 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#25 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#26 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#27 {main}
+
+
+2017-03-03 10:58:41 Error: [InvalidArgumentException] Cannot convert value to string
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\TypeConverterTrait.php(37): Cake\Database\Type\StringType->toDatabase(Array, Object(Cake\Database\Driver\Mysql))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Statement\PDOStatement.php(70): Cake\Database\Statement\StatementDecorator->cast(Array, Object(Cake\Database\Type\StringType))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\ValueBinder.php(148): Cake\Database\Statement\PDOStatement->bindValue('c0', Array, 'string')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(275): Cake\Database\ValueBinder->attachTo(Object(Cake\Database\Statement\MysqlStatement))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(132): Cake\ORM\Query->all()
+#9 D:\xampp\htdocs\snj-trading\src\Template\Pages\categories_parent.ctp(76): Cake\ORM\Query->getIterator()
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(1014): include('D:\\xampp\\htdocs...')
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(973): Cake\View\View->_evaluate('D:\\xampp\\htdocs...', Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(597): Cake\View\View->_render('D:\\xampp\\htdocs...')
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#24 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#25 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#26 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#27 {main}
+
+
+2017-03-03 10:59:17 Error: [InvalidArgumentException] Cannot convert value to string
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\TypeConverterTrait.php(37): Cake\Database\Type\StringType->toDatabase(Array, Object(Cake\Database\Driver\Mysql))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Statement\PDOStatement.php(70): Cake\Database\Statement\StatementDecorator->cast(Array, Object(Cake\Database\Type\StringType))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\ValueBinder.php(148): Cake\Database\Statement\PDOStatement->bindValue('c0', Array, 'string')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Connection.php(275): Cake\Database\ValueBinder->attachTo(Object(Cake\Database\Statement\MysqlStatement))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Database\Query.php(189): Cake\Database\Connection->run(Object(Cake\ORM\Query))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(958): Cake\Database\Query->execute()
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(276): Cake\ORM\Query->_execute()
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\ORM\Query.php(906): Cake\ORM\Query->_all()
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Datasource\QueryTrait.php(132): Cake\ORM\Query->all()
+#9 D:\xampp\htdocs\snj-trading\src\Template\Pages\categories_parent.ctp(76): Cake\ORM\Query->getIterator()
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(1014): include('D:\\xampp\\htdocs...')
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(973): Cake\View\View->_evaluate('D:\\xampp\\htdocs...', Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\View\View.php(597): Cake\View\View->_render('D:\\xampp\\htdocs...')
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(617): Cake\View\View->render(NULL, NULL)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(128): Cake\Controller\Controller->render()
+#15 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#16 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#17 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#18 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#19 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#20 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#21 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#22 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#23 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#24 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#25 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#26 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#27 {main}
+
+
+2017-03-03 11:03:27 Error: [Error] Call to a member function toarray() on integer
+Request URL: /pages/categories-parent/2
+Referer URL: http://snj-trading.vn/pages/accounts
+Client IP: 127.0.0.1
+Stack Trace:
+#0 [internal function]: App\Controller\PagesController->categoriesParent('2')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Controller\Controller.php(435): call_user_func_array(Array, Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\PagesController))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#14 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#15 {main}
+
+
+2017-03-03 11:04:24 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Gen204 could not be found.
+Exception Attributes: array (
+  'class' => 'Gen204',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /gen204?invalidResponse=q=https%3A%2F%2Ftranslate.googleapis.com%2Ftranslate_a%2Fsingle%3Fclient%3Dgtx%26s,ql=173,r=,rl=0
+Referer URL: http://snj-trading.vn/pages/categories-parent/2
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:04:53 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Gen204 could not be found.
+Exception Attributes: array (
+  'class' => 'Gen204',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /gen204?invalidResponse=q=https%3A%2F%2Ftranslate.googleapis.com%2Ftranslate_a%2Fsingle%3Fclient%3Dgtx%26s,ql=173,r=,rl=0
+Referer URL: http://snj-trading.vn/pages/categories-parent/2
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:08:47 Error: [Cake\Controller\Exception\MissingActionException] Action ProductsController::61() could not be found, or is not accessible.
+Exception Attributes: array (
+  'controller' => 'ProductsController',
+  'action' => '61',
+  'prefix' => '',
+  'plugin' => NULL,
+)
+Request URL: /products/61
+Referer URL: http://snj-trading.vn/pages/categories-parent/2
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(122): Cake\Controller\Controller->invokeAction()
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(96): Cake\Http\ActionDispatcher->_invoke(Object(App\Controller\ProductsController))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:18:51 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/
+Referer URL: http://snj-trading.vn/pages/categories-parent/3
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:19:03 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/categories/150_78653_iw1.jpg
+Referer URL: http://snj-trading.vn/pages/categories-parent/7
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:19:38 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/categories/150_78653_iw1.jpg
+Referer URL: http://snj-trading.vn/pages/categories-parent/7
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:19:43 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/
+Referer URL: http://snj-trading.vn/pages/categories-parent/3
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:20:19 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/
+Referer URL: http://snj-trading.vn/pages/categories-parent/3
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(88): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:20:37 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Img could not be found.
+Exception Attributes: array (
+  'class' => 'Img',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /img/categories/150_78653_iw1.jpg
+Referer URL: http://snj-trading.vn/pages/categories-parent/7
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-theme.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:25 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-select.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-theme.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:23:49 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-select.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:25:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-theme.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:25:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap-select.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+
+2017-03-03 11:25:33 Error: [Cake\Routing\Exception\MissingControllerException] Controller class Css could not be found.
+Exception Attributes: array (
+  'class' => 'Css',
+  'plugin' => false,
+  'prefix' => false,
+  '_ext' => false,
+)
+Request URL: /css/libs/bootstrap.css.map
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ControllerFactory.php(72): Cake\Http\ControllerFactory->missingController(Object(Cake\Network\Request))
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\ActionDispatcher.php(93): Cake\Http\ControllerFactory->create(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\BaseApplication.php(83): Cake\Http\ActionDispatcher->dispatch(Object(Cake\Network\Request), Object(Cake\Network\Response))
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Http\BaseApplication->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\RoutingMiddleware.php(62): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\RoutingMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Routing\Middleware\AssetMiddleware.php(93): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Routing\Middleware\AssetMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Error\Middleware\ErrorHandlerMiddleware.php(81): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(65): Cake\Error\Middleware\ErrorHandlerMiddleware->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response), Object(Cake\Http\Runner))
+#10 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Runner.php(51): Cake\Http\Runner->__invoke(Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Http\Server.php(92): Cake\Http\Runner->run(Object(Cake\Http\MiddlewareQueue), Object(Zend\Diactoros\ServerRequest), Object(Zend\Diactoros\Response))
+#12 D:\xampp\htdocs\snj-trading\webroot\index.php(37): Cake\Http\Server->run()
+#13 {main}
+
+

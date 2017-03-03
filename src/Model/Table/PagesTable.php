@@ -155,10 +155,10 @@ class PagesTable extends Table
             'Images' => function($q){
                 return $q->select(['id','product_id','path','thumbnail']);
             }])
-            ->select(['Products.id','Products.sku','Products.product_name','Products.retail_price','Products.short_description'])
+            ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.retail_price','Products.short_description'])
             ->order(['Products.created' => 'DESC'])
-            ->Where([$conditions])
-            ->limit(10);
+            ->Where([$conditions]);
+            // ->limit(10);
         return $products;
     }
 
@@ -209,7 +209,7 @@ class PagesTable extends Table
             'Categories' => function ($q) {
                 return $q->autoFields(false)->select(['id','name']);
             },
-             'Suppliers' => function ($q) {
+            'Suppliers' => function ($q) {
                 return $q->autoFields(false)->select(['id','name']);
             },
             'Images' => function($q){

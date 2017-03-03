@@ -35,6 +35,21 @@
         </div>
     <?php endif ?>
 
+    <div class="sidebar-left sidebar-post">
+        <div class="widget widget-post-cat">
+             <?php foreach ($suppliers as $key => $supplier): ?>
+                <label class="custom-control custom-checkbox">
+                    <input type="checkbox" id="<?= $key?>" class="custom-control-input">
+                    <?php echo $supplier; ?>
+                </label>
+               <br/>
+            <?php endforeach ?>
+        </div>
+    </div>
+ 
+    
+   
+
     <div class="divider25"></div>
   
     <!-- <div class="widget widget-filter">

@@ -743,6 +743,25 @@ jQuery(document).ready(function($){
 	// 		$(this).tab('show');
 	// 	});
 	// }); // End
+	
+
+	jQuery('input.custom-control-input').click(function(){
+		var allow = new Array();
+		jQuery('.supplier-search').hide();
+		jQuery.each(jQuery('input.custom-control-input'), function(i, v) {
+			if (jQuery(this).is(':checked') == true) {
+				var id = jQuery(this).attr('id');
+				allow.push({'id':id});
+			}
+		});
+		allow.forEach(function(entry) {
+			jQuery('.supplier-search-'+entry.id).show();
+		});
+		if (allow.length == 0) {
+			jQuery('.supplier-search').show();
+		}
+	});
+
 	$('.live-search-box').change(function(){
 		var key = jQuery(this).val();
 		// alert(key);
@@ -930,7 +949,7 @@ jQuery(document).ready(function($){
             }, 'json');
         }
        );
-    }// End 
+	}// End 
 
 	jQuery('#btn-add-suppliers').click(function(){
 		var count = jQuery(this).attr('count');

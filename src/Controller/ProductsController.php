@@ -104,7 +104,6 @@ class ProductsController extends AppController
                     }
                     $Product->updateAll(['picture' => $pic, 'thumbnail' => $thumb], ['id' => $id]);
                 }
-
                 $this->Flash->success(__('The product has been saved.'));
             } else {
                 $this->Flash->error(__('The product could not be saved. Please, try again.'));

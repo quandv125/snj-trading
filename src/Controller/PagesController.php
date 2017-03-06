@@ -113,20 +113,14 @@ class PagesController extends AppController
         $Supplier   = TableRegistry::get('Suppliers');
         $info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
         $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
-       
         $arr = $this->gettreelist($cat_list, $id);
-        // $arr[$id] = $id;
-        
         $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
-        // $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $this->gettreelist($cat_list) ]);
-       
         $parent_id  = $id;
         $category = $Categorie->find()->select(['id','name'])->contain([
             'Products' => function ($q) {
                 return $q->autoFields(false)->select(['id','categorie_id','product_name']);
             },
         ])->where(['parent_id' => $parent_id, 'actived' => true]);
-
         $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
         $this->set(compact('info','categories','products','cat_list','id','parent_id','suppliers','category'));
     }

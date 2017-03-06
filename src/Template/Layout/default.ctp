@@ -77,6 +77,64 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'assets/plugins/offcanvasmenueffects/js/snap.svg-min',
     )); ?>
    
+    <?php echo $this->Html->script(array(
+        'assets/plugins/jquery/jquery-2.1.4.min',
+        'assets/plugins/jquery-ui/jquery-ui.min',
+        'assets/plugins/pace-master/pace.min',
+        'libs/ckeditor/ckeditor',
+        'assets/plugins/jquery-blockui/jquery.blockui',
+        'assets/plugins/bootstrap/js/bootstrap.min',
+        'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
+        'assets/plugins/switchery/switchery.min',
+        'assets/plugins/uniform/jquery.uniform.min',
+        // 'assets/plugins/offcanvasmenueffects/js/classie',
+        'assets/plugins/offcanvasmenueffects/js/main',
+        'assets/plugins/waves/waves.min',
+        'assets/plugins/3d-bold-navigation/js/main',
+        // 'assets/plugins/waypoints/jquery.waypoints.min',
+        'assets/plugins/jquery-counterup/jquery.counterup.min', // Menu
+        'assets/plugins/toastr/toastr.min',
+        // 'assets/plugins/flot/jquery.flot.min',
+        // 'assets/plugins/flot/jquery.flot.time.min',
+        // 'assets/plugins/flot/jquery.flot.symbol.min',
+        // 'assets/plugins/flot/jquery.flot.resize.min',
+        // 'assets/plugins/flot/jquery.flot.tooltip.min',
+        // 'assets/plugins/curvedlines/curvedLines',
+        'assets/plugins/metrojs/MetroJs.min',
+        // 'assets/plugins/chosen/chosen.jquery.min',
+        'assets/plugins/icheck/icheck.min',
+        // 'assets/plugins/select2/js/select2.min',
+        'assets/js/modern.min',
+        // 'assets/js/pages/form-select2',
+        // 'assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min',
+        // 'assets/plugins/jquery-validation/jquery.validate.min',
+        // 'assets/js/pages/form-wizard',
+        'assets/plugins/ion.rangeslider/js/ion-rangeSlider/ion.rangeSlider.min',
+        // Table
+        // 'assets/plugins/jquery-mockjax-master/jquery.mockjax',
+        // 'assets/plugins/moment/moment',
+        // 'assets/plugins/datatables/js/jquery.datatables.min',
+        // 'assets/plugins/x-editable/bootstrap3-editable/js/bootstrap-editable',
+        'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
+        'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
+        'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
+        // 'assets/js/pages/table-data',
+        'assets/plugins/autoNumeric/autoNumeric.js',
+        'libs/bootstrap-select',
+        // End table
+        'assets/plugins/summernote-master/summernote.min',
+        'assets/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min',
+        'assets/plugins/fancybox/jquery.fancybox',
+        'assets/plugins/fancybox/jquery.fancybox-thumbs',
+        'assets/js/pages/ui-sliders',
+        'assets/plugins/daterangepicker/daterangepicker',
+        'assets/plugins/livesearch/vendor/jquery.hideseek.min',
+        'assets/plugins/livesearch/initializers',
+        'custom'
+        // 'assets/js/pages/dashboard',
+        // 'handsontable_custom.js',
+        // 'assets/plugins/handsontable/handsontable.full'
+    )); ?>
 </head>
 <body class="page-horizontal-bar compact-menu ">
    
@@ -100,64 +158,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?php echo $this->element('nav-container'); ?>
 <?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?>
  
-<?php echo $this->Html->script(array(
-    'assets/plugins/jquery/jquery-2.1.4.min',
-    'assets/plugins/jquery-ui/jquery-ui.min',
-    'assets/plugins/pace-master/pace.min',
-    'libs/ckeditor/ckeditor',
-    'assets/plugins/jquery-blockui/jquery.blockui',
-    'assets/plugins/bootstrap/js/bootstrap.min',
-    'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
-    'assets/plugins/switchery/switchery.min',
-    'assets/plugins/uniform/jquery.uniform.min',
-    // 'assets/plugins/offcanvasmenueffects/js/classie',
-    'assets/plugins/offcanvasmenueffects/js/main',
-    'assets/plugins/waves/waves.min',
-    'assets/plugins/3d-bold-navigation/js/main',
-    // 'assets/plugins/waypoints/jquery.waypoints.min',
-    'assets/plugins/jquery-counterup/jquery.counterup.min', // Menu
-    'assets/plugins/toastr/toastr.min',
-    // 'assets/plugins/flot/jquery.flot.min',
-    // 'assets/plugins/flot/jquery.flot.time.min',
-    // 'assets/plugins/flot/jquery.flot.symbol.min',
-    // 'assets/plugins/flot/jquery.flot.resize.min',
-    // 'assets/plugins/flot/jquery.flot.tooltip.min',
-    // 'assets/plugins/curvedlines/curvedLines',
-    'assets/plugins/metrojs/MetroJs.min',
-    // 'assets/plugins/chosen/chosen.jquery.min',
-    'assets/plugins/icheck/icheck.min',
-    // 'assets/plugins/select2/js/select2.min',
-    'assets/js/modern.min',
-    // 'assets/js/pages/form-select2',
-    // 'assets/plugins/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min',
-    // 'assets/plugins/jquery-validation/jquery.validate.min',
-    // 'assets/js/pages/form-wizard',
-    'assets/plugins/ion.rangeslider/js/ion-rangeSlider/ion.rangeSlider.min',
-    // Table
-    // 'assets/plugins/jquery-mockjax-master/jquery.mockjax',
-    // 'assets/plugins/moment/moment',
-    // 'assets/plugins/datatables/js/jquery.datatables.min',
-    // 'assets/plugins/x-editable/bootstrap3-editable/js/bootstrap-editable',
-    'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
-    'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
-    'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
-    // 'assets/js/pages/table-data',
-    'assets/plugins/autoNumeric/autoNumeric.js',
-    'libs/bootstrap-select',
-    // End table
-    'assets/plugins/summernote-master/summernote.min',
-    'assets/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min',
-    'assets/plugins/fancybox/jquery.fancybox',
-    'assets/plugins/fancybox/jquery.fancybox-thumbs',
-    'assets/js/pages/ui-sliders',
-    'assets/plugins/daterangepicker/daterangepicker',
-    'assets/plugins/livesearch/vendor/jquery.hideseek.min',
-    'assets/plugins/livesearch/initializers',
-    'custom'
-    // 'assets/js/pages/dashboard',
-    // 'handsontable_custom.js',
-    // 'assets/plugins/handsontable/handsontable.full'
-)); ?>
 
 </body>
 </html>

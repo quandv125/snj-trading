@@ -35,18 +35,32 @@
         'responsive',
     ])?>
     <!-- <link rel="stylesheet/less" type="text/css" href="/css/styles.less"> -->
-   
+    <?= $this->Html->script([
+        'libs/jquery-3.1.1.min',
+        'libs/bootstrap.min',
+        // 'libs/jquery.fancybox',
+        'libs/jquery-ui',
+        'libs/owl.carousel',
+        // 'libs/TimeCircles',
+        // 'libs/jquery.countdown',
+        'libs/jquery.bxslider.min',
+        // 'libs/jquery.mCustomScrollbar.concat.min',
+        'libs/jquery.themepunch.revolution',
+        'libs/jquery.themepunch.plugins.min',
+        // 'libs/less.min',
+        'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
+        'theme',
+        // 'custom',
+    ]); ?>
 </head>
 <body>
     <div class="wrap">
         <div id="header">
             <?php echo $this->element('font-end/header03'); ?>
         </div>
-        
         <!-- End Header -->
         <div id="content">
             <div class="container">
-               
                 <?php echo $this->element('font-end/shipping'); ?>
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
@@ -63,24 +77,6 @@
     </div>
     <?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?>
     <?php echo $this->Html->image('loader.gif',['class' => 'loader2', "style"=>"display: none;"]) ?>
-<?= $this->Html->script([
-    'libs/jquery-3.1.1.min',
-    'libs/bootstrap.min',
-    // 'libs/jquery.fancybox',
-    'libs/jquery-ui',
-    'libs/owl.carousel',
-    // 'libs/TimeCircles',
-    // 'libs/jquery.countdown',
-    'libs/jquery.bxslider.min',
-    // 'libs/jquery.mCustomScrollbar.concat.min',
-    'libs/jquery.themepunch.revolution',
-    'libs/jquery.themepunch.plugins.min',
-    // 'libs/less.min',
-    'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
-    'theme',
-    // 'custom',
-]); ?>
-
 </body>
 </html>
 

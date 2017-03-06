@@ -34,6 +34,21 @@
         'theme',
         'responsive'
     ])?>
+    <?= $this->Html->script([
+        'libs/jquery-3.1.1.min',
+        'libs/bootstrap.min',
+        'libs/jquery.fancybox',
+        'libs/jquery-ui',
+        'libs/owl.carousel',
+        'libs/TimeCircles',
+        'libs/jquery.countdown',
+        'libs/jquery.bxslider.min',
+        'libs/jquery.mCustomScrollbar.concat.min',
+        'libs/jquery.themepunch.revolution',
+        'libs/jquery.themepunch.plugins.min',
+        'theme',
+        // 'custom',
+    ]); ?>
 </head>
 <body>
     <div class="wrap">
@@ -61,25 +76,8 @@
     <div id="menufix">
         <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
     </div>
-<?= $this->Html->script([
-    'libs/jquery-3.1.1.min',
-    'libs/bootstrap.min',
-    'libs/jquery.fancybox',
-    'libs/jquery-ui',
-    'libs/owl.carousel',
-    'libs/TimeCircles',
-    'libs/jquery.countdown',
-    'libs/jquery.bxslider.min',
-    'libs/jquery.mCustomScrollbar.concat.min',
-    'libs/jquery.themepunch.revolution',
-    'libs/jquery.themepunch.plugins.min',
-    'theme',
-    // 'custom',
-]); ?>
-<script type="text/javascript">
-   
-   
-</script>
+
+
 </body>
 </html>
 

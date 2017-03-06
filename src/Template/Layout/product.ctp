@@ -84,6 +84,10 @@
     </div>
     <!-- End Footer -->
 </div>
+ <div id="overlay">
+        <div id="progstat"></div>
+        <div id="progress"></div>
+    </div>
 <div id="menufix">
      <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
 </div>

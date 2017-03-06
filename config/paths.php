@@ -94,6 +94,7 @@ define('IMAGE', WWW_ROOT.'img'.DS);
 define('AVATARS', WWW_ROOT.'img'.DS.'avatars'.DS);
 
 define('THUMBNAILS', WWW_ROOT.'img'.DS.'thumbnails'.DS);
+define('ARTICLES', WWW_ROOT.'img'.DS.'articles'.DS);
 
 define('PRODUCTS', WWW_ROOT.'img'.DS.'products'.DS);
 define('CATEGORIES', WWW_ROOT.'img'.DS.'categories'.DS);

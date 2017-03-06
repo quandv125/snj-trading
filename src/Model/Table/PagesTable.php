@@ -123,25 +123,25 @@ class PagesTable extends Table
         // return $rules;
     }
 
-    public function query() {
-        $conn = ConnectionManager::get('default');
-        $query = $conn->execute('
-            SELECT Products.id, Products.product_name, Products.retail_price, Image.path, Image.thumbnail
+    // public function query() {
+    //     $conn = ConnectionManager::get('default');
+    //     $query = $conn->execute('
+    //         SELECT Products.id, Products.product_name, Products.retail_price, Image.path, Image.thumbnail
 
-            FROM Products
-            LEFT JOIN images AS Image ON Image.product_id = Products.id
-            -- Where Products.categorie_id = 1 
-            -- INNER JOIN images AS Image ON Image.product_id = Products.id
-            LIMIT 4
-            -- union
-            -- SELECT Products.id, Products.product_name, Products.categorie_id
-            -- FROM Products
-            -- Where Products.categorie_id = 4 
+    //         FROM Products
+    //         LEFT JOIN images AS Image ON Image.product_id = Products.id
+    //         -- Where Products.categorie_id = 1 
+    //         -- INNER JOIN images AS Image ON Image.product_id = Products.id
+    //         LIMIT 4
+    //         -- union
+    //         -- SELECT Products.id, Products.product_name, Products.categorie_id
+    //         -- FROM Products
+    //         -- Where Products.categorie_id = 4 
             
-        ');
-        $results = $query->fetchAll('assoc');
-        return $results;
-    }
+    //     ');
+    //     $results = $query->fetchAll('assoc');
+    //     return $results;
+    // }
     
     public function getInfoProducts($conditions = null) {
         $Product    = TableRegistry::get('Products');
@@ -157,8 +157,8 @@ class PagesTable extends Table
             }])
             ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.retail_price','Products.short_description'])
             ->order(['Products.created' => 'DESC'])
-            ->Where([$conditions]);
-            // ->limit(10);
+            ->Where([$conditions])
+            ->limit(LIMIT);
         return $products;
     }
 
@@ -219,7 +219,7 @@ class PagesTable extends Table
             ->order(['Products.created' => 'DESC'])
             ->Where([$conditions])
             ->orWhere($conditions2)
-            ->limit(10);
+            ->limit(LIMIT);
         return $products;
         // $test = $Product->find()->where(['Products.id' => 8])->orWhere(['Products.product_name' => 'note 3'])->orWhere(['Products.sku' => 5491]);
     }

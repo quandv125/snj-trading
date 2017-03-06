@@ -148,6 +148,7 @@ jQuery( document ).ready(function() {
 	}
 
 	jQuery("#imgInp, #ProductFile").change(function(){
+		jQuery("#listProductFile").empty();
 		ShowMyPictures(this);
 	});
 

@@ -17,10 +17,10 @@
 									<div class="post-format"><i class="fa fa-picture-o"></i></div>
 								</div>
 								<div class="zoom-image-thumb">
-									<?php if (empty($article->picture)): ?>
-										<?php echo $this->Html->image('images/photos/blog/1.jpg') ?>
+									<?php if (empty($article->thumbnails)): ?>
+										<?php echo $this->Html->image('assets/images/re1.png') ?>
 									<?php else: ?>
-										<?php echo $this->Html->image($article->picture) ?>
+										<?php echo $this->Html->image($article->thumbnails) ?>
 									<?php endif ?>
 								</div>
 							</div>

@@ -53,6 +53,18 @@ class ArticlesController extends AppController
     {
         $article = $this->Articles->newEntity();
         if ($this->request->is('post')) {
+            if (isset($this->request->data['pictures']) && !empty($this->request->data['pictures'])) {
+                $path = rand(1,100000).'_'.$this->request->data['pictures']['name'];
+                if(move_uploaded_file($this->request->data['pictures']['tmp_name'], ARTICLES.$path)){
+                    $thumbnail = $this->Custom->CreateNameThumb($this->request->data['pictures']['name']);
+                    $this->Custom->generate_thumbnail(ARTICLES.$path, $thumbnail, 250);
+                    $this->request->data['pictures']   = 'articles/'.$path;
+                    $this->request->data['thumbnails']   = 'thumbnails/'.$thumbnail;
+                }
+            } else {  
+                $this->request->data['pictures'] = null; 
+                $this->request->data['thumbnails'] = null;
+            }
             $article = $this->Articles->patchEntity($article, $this->request->data);
 
             if ($this->Articles->save($article)) {
@@ -80,11 +92,21 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => []
         ]);
+        // 
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
+                $path = rand(1,100000).'_'.$this->request->data['files']['name'];
+                if(move_uploaded_file($this->request->data['files']['tmp_name'], ARTICLES.$path)){
+                    $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files']['name']);
+                    $this->Custom->generate_thumbnail(ARTICLES.$path, $thumbnail, 250);
+                    $this->request->data['pictures']    = 'articles/'.$path;
+                    $this->request->data['thumbnails']  = 'thumbnails/'.$thumbnail;
+                }
+            }
             $article = $this->Articles->patchEntity($article, $this->request->data);
+            
             if ($this->Articles->save($article)) {
                 $this->Flash->success(__('The article has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The article could not be saved. Please, try again.'));

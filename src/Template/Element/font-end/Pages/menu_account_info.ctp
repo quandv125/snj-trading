@@ -10,9 +10,9 @@
 	<li><?php echo $this->Html->link(__("Invitations"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
 </ul>	
 
-<?php if ($this->request->params['action'] == 'productsOfSuppliers'): ?>
+<?php //if ($this->request->params['action'] == 'productsOfSuppliers'): ?>
 	
-
+<!-- 
 <div class="sidebar-shop sidebar-left">
 	<div class="widget widget-filter">
 		<div class="box-filter">
@@ -24,13 +24,13 @@
 				<br/>
 				<li>
 					<select class="live-search-box form-control">
-                    	<option value="all">All</option>
-                    	<option value="active1">Active</option>
-                    	<option value="active0">Deactive</option>
-                    </select>
+						<option value="all">All</option>
+						<option value="active1">Active</option>
+						<option value="active0">Deactive</option>
+					</select>
 				</li>
 			</ul>
 		</div>
 	</div>
 </div>
-<?php endif ?>
+<?php //endif ?> -->

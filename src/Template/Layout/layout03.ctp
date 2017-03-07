@@ -72,7 +72,7 @@
         </div>
         <!-- End Footer -->
     </div>
-    <div id="overlay">
+    <div id="overlay" class="loadbar">
         <div id="progstat"></div>
         <div id="progress"></div>
     </div>

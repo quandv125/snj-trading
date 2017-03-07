@@ -239,7 +239,7 @@
 					<div class="item" style="max-width: 195px;">
 						<div class="item-product">
 							<div class="product-thumb">
-								<a class="product-thumb-link" href="../../pages/products/<?= $cat->id?>">
+								<a class="product-thumb-link" href="<?php echo $this->Url->build(array('controller'=>'pages','action'=>'products',$cat->id)) ?>">
 									<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193])?>
 									<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193])?>
 									

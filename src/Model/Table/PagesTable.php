@@ -218,8 +218,8 @@ class PagesTable extends Table
             ->select(['Products.id','Products.sku','Products.product_name','Products.retail_price','Products.short_description'])
             ->order(['Products.created' => 'DESC'])
             ->Where([$conditions])
-            ->orWhere($conditions2)
-            ->limit(LIMIT);
+            ->orWhere($conditions2);
+            // ->limit(LIMIT);
         return $products;
         // $test = $Product->find()->where(['Products.id' => 8])->orWhere(['Products.product_name' => 'note 3'])->orWhere(['Products.sku' => 5491]);
     }

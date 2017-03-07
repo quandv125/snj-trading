@@ -222,7 +222,7 @@
                         	<li class="col-md-3 col-sm-6 col-xs-12">
                                 <div class="item-product">
                                     <div class="product-thumb">
-                                        <a class="product-thumb-link" href="../../pages/products/<?= $product->id?>">
+                                        <a class="product-thumb-link" href="<?php echo $this->Url->build(array('controller'=>'pages','action'=>'products', $product->id)) ?>">
                                             <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb','width'=> 193]); ?>
                                             <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb','width'=> 193]); ?>
                                         </a>
@@ -292,7 +292,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-sm-12 col-xs-12">
                                             <div class="product-thumb">
-                                                <a class="product-thumb-link" href="../../pages/products/<?= $product->id?>">
+                                                <a class="product-thumb-link" href="<?php echo $this->Url->build(array('controller'=>'pages','action'=>'products', $product->id)) ?>">
                                                     <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb']); ?>
                                             		<?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb']); ?>
                                                 </a>

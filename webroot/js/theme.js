@@ -25,6 +25,19 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
+	$('#datatable').DataTable( {
+    	// "iDisplayLength": 100,
+        columnDefs: [ {
+            targets: [ 0 ],
+            orderData: [ 0, 1 ]
+        }, {
+            targets: [ 1 ],
+            orderData: [ 1, 0 ]
+        }, {
+            targets: [ 4 ],
+            orderData: [ 4, 0 ]
+        } ]
+    } );
 	// 
 	$(".reload_captcha").click(function(e){
         e.preventDefault();
@@ -42,7 +55,6 @@ jQuery(document).ready(function(){
 	if ($("#editor2").length){
 		CKEDITOR.replace( 'editor2' );
 	}
-
 
 	jQuery('.products-show .click').click(function(){
 		jQuery(this).parent().next().toggleClass('hidden');
@@ -1042,36 +1054,47 @@ jQuery(document).ready(function($){
 
 }); // End document
 
-
+// Loader
 ;(function(){
-  function id(v){return document.getElementById(v); }
-  function loadbar() {
-    var ovrl = id("overlay"),
-        prog = id("progress"),
-        stat = id("progstat"),
-        img = document.images,
-        c = 0;
-        tot = img.length;
+	function id(v){
+		return document.getElementById(v); 
+	}
+	
+	function loadbar() {
 
-    function imgLoaded(){
-      c += 1;
-      var perc = ((100/tot*c) << 0) +"%";
-      prog.style.width = perc;
-      stat.innerHTML = "Loading "+ perc;
-      if(c===tot) return doneLoading();
-    }
-    function doneLoading(){
-      ovrl.style.opacity = 0;
-      setTimeout(function(){ 
-        ovrl.style.display = "none";
-      }, 1200);
-    }
-    for(var i=0; i<tot; i++) {
-      var tImg     = new Image();
-      tImg.onload  = imgLoaded;
-      tImg.onerror = imgLoaded;
-      tImg.src     = img[i].src;
-    }    
-  }
-  document.addEventListener('DOMContentLoaded', loadbar, false);
+		var ovrl = id("overlay"),
+			prog = id("progress"),
+			stat = id("progstat"),
+			img = document.images,
+			c = 0;
+			tot = img.length;
+
+	    function imgLoaded(){
+			if (document.getElementById('overlay')) {
+				c += 1;
+				var perc = ((100/tot*c) << 0) +"%";
+				prog.style.width = perc;
+				stat.innerHTML = "Loading "+ perc;
+				if(c===tot) return doneLoading();
+			}
+		}
+
+		function doneLoading(){
+			ovrl.style.opacity = 0;
+			setTimeout(function(){ 
+				ovrl.style.display = "none";
+			}, 1200);
+		}
+
+		for(var i=0; i<tot; i++) {
+			var tImg	= new Image();
+			tImg.onload  = imgLoaded;
+			tImg.onerror = imgLoaded;
+			tImg.src	= img[i].src;
+		}
+
+	}
+	document.addEventListener('DOMContentLoaded', loadbar, false);
 }());
+// End loader
+

@@ -34,6 +34,7 @@
          'assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new',
         // 'assets/plugins/summernote-master/summernote',
         'theme','libs/bootstrap-select',
+        'libs/jquery.dataTables.min',
         'responsive'
     ])?>
     <?= $this->Html->script([
@@ -59,6 +60,7 @@
         'libs/bootstrap-select',
         'libs/bootstrapvalidator.min',
         'libs/masonry.pkgd.min',
+        'libs/jquery.dataTables',
         'theme',
     ]); ?>
 </head>
@@ -67,7 +69,6 @@
     <div id="header">
         <?= $this->element('font-end/Pages/header') ?>
     </div>
-    <!-- End Header -->
     <div id="content">
         <div class="content-shop">
             <div class="container">
@@ -75,24 +76,20 @@
                 <?= $this->fetch('content') ?>
             </div>
         </div>
-        <!-- End Content Shop -->
     </div>
-    <!-- End Content -->
     <div id="footer">
-        <span id="back-to-top"><?php echo $this->Html->image('back-to-top.png') ?></span>
-        <?php echo $this->element('font-end/footer') ?>
+        <span id="back-to-top"><?= $this->Html->image('back-to-top.png') ?></span>
+        <?= $this->element('font-end/footer') ?>
     </div>
     <!-- End Footer -->
 </div>
- <div id="overlay">
-        <div id="progstat"></div>
-        <div id="progress"></div>
-    </div>
+<!-- <div id="overlay">
+    <div id="progstat"></div>
+    <div id="progress"></div>
+</div> -->
 <div id="menufix">
-     <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
+    <?= $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
 </div>
-
-
 </body>
 </html>
 

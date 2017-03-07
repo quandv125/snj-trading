@@ -4,7 +4,7 @@
         <li data-search-term="supplier<?= $product->supplier['id'];?> active<?= $key?>" class="supplier-search-<?= $product->supplier['id'];?> supplier-search col-md-3 col-sm-6 col-xs-12">
             <div class="item-product">
                 <div class="product-thumb">
-                    <a class="product-thumb-link" href="../products/<?= $product->id?>">
+                    <a class="product-thumb-link" href="<?= $this->Url->build(['controller'=>'pages','action'=>'products', $product->id]) ?>">
                     <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193]); ?>
                     <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193]); ?>
                     </a>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-4 col-sm-12 col-xs-12">
                         <div class="product-thumb">
-                            <a class="product-thumb-link" href="../pages/products/<?= $product->id?>">
+                            <a class="product-thumb-link" href="<?= $this->Url->build(['controller'=>'pages','action'=>'products', $product->id]) ?>">
                                 <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb']); ?>
                                 <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb']); ?>
                             </a>

@@ -118,7 +118,7 @@ define('CUSTOMER_VIP', 0);
 define('CUSTOMER_WHOLESALE', 1); // wholesale
 define('CUSTOMER_RETAIL', 2); // retail
 //## LIMIT ##//
-define('LIMIT', 10);
+define('LIMIT', 20);
 //## echo number_format($invoice->customers_paid, DECIMALS) ##/
 define('DECIMALS', 0); 
 

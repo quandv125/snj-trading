@@ -8,7 +8,7 @@
 
 
 
-<form class="well form-horizontal" action="../Users/edit/<?php echo $users->id ?>" method="post"  id="contact_form">
+<form class="well form-horizontal" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'edit', $users->id )) ?>" method="post"  id="contact_form">
     <fieldset>
     <h2 class="title-shop-page">
         <?php echo $this->Html->image('logo2.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'15%']) ?>

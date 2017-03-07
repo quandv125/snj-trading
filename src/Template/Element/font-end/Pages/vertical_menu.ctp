@@ -11,9 +11,9 @@
                     <?php foreach ($category->children as $key => $children): ?>
                         <div class="col-md-3 col-sm-3 clearfix" style=" margin-bottom: 20px;">
                             <div class="list-cat-mega-menu">
-                                <h2 class="title-cat-mega-menu"><?php echo $this->Html->link($children->name,[ 'controller' => 'Pages',  'action' => 'categories',$children->id]) ?></h2>
+                                <h2 class="title-cat-mega-menu"><?php echo $this->Html->link($children->name, [ 'controller' => 'Pages',  'action' => 'categories',$category->id ,$children->id]) ?></h2>
                                 <ul>
-                                    <?= $this->element('font-end/Pages/recursion_menu',['categories' => $children->children,'time' => 1]); ?>
+                                    <?= $this->element('font-end/Pages/recursion_menu',['categories' => $children->children,'parent_id' => $category->id,'time' => 1]); ?>
                                 </ul>
                             </div>
                         </div>

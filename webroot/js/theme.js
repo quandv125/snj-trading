@@ -25,19 +25,21 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
-	$('#datatable').DataTable( {
-    	// "iDisplayLength": 100,
-        columnDefs: [ {
-            targets: [ 0 ],
-            orderData: [ 0, 1 ]
-        }, {
-            targets: [ 1 ],
-            orderData: [ 1, 0 ]
-        }, {
-            targets: [ 4 ],
-            orderData: [ 4, 0 ]
-        } ]
-    } );
+	if ($("#datatable").length){
+		$('#datatable').DataTable( {
+	    	// "iDisplayLength": 100,
+	        columnDefs: [ {
+	            targets: [ 0 ],
+	            orderData: [ 0, 1 ]
+	        }, {
+	            targets: [ 1 ],
+	            orderData: [ 1, 0 ]
+	        }, {
+	            targets: [ 4 ],
+	            orderData: [ 4, 0 ]
+	        } ]
+	    } );
+    }
 	// 
 	$(".reload_captcha").click(function(e){
         e.preventDefault();

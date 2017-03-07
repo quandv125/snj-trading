@@ -199,7 +199,7 @@ class PagesController extends AppController
         $this->check_user();
         $this->viewBuilder()->layout('product');
         $conditions = ['Products.user_id' => $this->Auth->user('id') ];
-        $products   = $this->Pages->getProducts($conditions);
+        $products   = $this->Pages->getProducts($conditions, 100, NULL);
         $this->set(compact('products'));
     }
 

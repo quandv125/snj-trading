@@ -14,7 +14,7 @@
 							<?php endif ?>
 								
 								<h2><?php echo $articles->title; ?></h2>
-							<!-- 	<ul class="post-date-author">
+								<!-- <ul class="post-date-author">
 									<li><?php //echo $articles->created; ?></li>
 									<li>By: <a href="#">Admin</a></li>
 									<li><a href="#comment">03 Comment</a></li>

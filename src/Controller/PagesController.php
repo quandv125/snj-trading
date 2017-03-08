@@ -216,12 +216,12 @@ class PagesController extends AppController
         $this->check_user();
         $wishlist  = TableRegistry::get('Wishlists');
         $wishlists = $wishlist->find()
-            ->leftJoin('Products', 'Products.id = Wishlists.product_id')
-            ->leftJoin('Categories', 'Categories.id = Products.categorie_id')
-            ->leftJoin('Suppliers', 'Suppliers.id = Products.supplier_id')
-            ->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'Products.id','Products.sku','Products.supplier_id','Products.origin','Products.quantity','Products.type_model','Products.serial_no','Products.short_description','Categories.id','Categories.name','Products.product_name','Products.thumbnail', 'Suppliers.id','Suppliers.name'])
-            ->where(['Wishlists.user_id' => $this->Auth->user('id')])->toarray();
-            pr($wishlists);die();
+            ->leftJoin('products', 'products.id = Wishlists.product_id')
+            ->leftJoin('categories', 'categories.id = products.categorie_id')
+            ->leftJoin('suppliers', 'suppliers.id = products.supplier_id')
+            ->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'products.id','products.sku','products.supplier_id','products.origin','products.quantity','products.type_model','products.serial_no','products.short_description','categories.id','categories.name','products.product_name','products.thumbnail', 'suppliers.id','suppliers.name'])
+            ->where(['Wishlists.user_id' => $this->Auth->user('id')]);
+
        $this->set(compact('wishlists'));
     }
 }

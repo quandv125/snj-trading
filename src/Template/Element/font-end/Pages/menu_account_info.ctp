@@ -3,7 +3,7 @@
 	<li><?php echo $this->Html->link(__("Products"), ['controller'=>'pages','action' => 'ProductsOfSuppliers', $user_info['id']]);?></li>
 <!-- 	<li><?php echo $this->Html->link(__("Messages"), ['controller'=>'pages','action' => 'accounts']);?></li>
 	<li><?php echo $this->Html->link(__("Orders"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
-	<!-- <li><?php echo $this->Html->link(__("WishList"), ['controller'=>'pages','action' => 'wishlists']);?></li> -->
+	<li><?php echo $this->Html->link(__("WishList"), ['controller'=>'pages','action' => 'wishlists']);?></li>
 	<!--<li><?php echo $this->Html->link(__("Cancellations"), ['controller'=>'pages','action' => 'accounts']);?></li>
 	<li><?php echo $this->Html->link(__("Payment Methods"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
 	<!-- <li><?php echo $this->Html->link(__("Personal Information"), ['controller'=>'pages','action' => 'PersonalInformation']);?></li> -->

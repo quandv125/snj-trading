@@ -215,27 +215,13 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         $this->check_user();
         $wishlist  = TableRegistry::get('Wishlists');
-        
         $wishlists = $wishlist->find()
-            ->join([
-                'Products' => [
-                    'table' => 'Products',
-                    'type' => 'LEFT',
-                    'conditions' => 'Products.id = wishlists.product_id'
-                ],
-                'Categories' => [
-                    'table' => 'Categories',
-                    'type' => 'LEFT',
-                    'conditions' => 'Products.categorie_id = Categories.id'
-                ],
-                'Suppliers' => [
-                    'table' => 'Suppliers',
-                    'type' => 'LEFT',
-                    'conditions' => 'Products.supplier_id = Suppliers.id'
-                ],
-            ])
+            ->leftJoin('Products', 'Products.id = Wishlists.product_id')
+            ->leftJoin('Categories', 'Categories.id = Products.categorie_id')
+            ->leftJoin('Suppliers', 'Suppliers.id = Products.supplier_id')
             ->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'Products.id','Products.sku','Products.supplier_id','Products.origin','Products.quantity','Products.type_model','Products.serial_no','Products.short_description','Categories.id','Categories.name','Products.product_name','Products.thumbnail', 'Suppliers.id','Suppliers.name'])
-            ->where(['Wishlists.user_id' => $this->Auth->user('id')]);
+            ->where(['Wishlists.user_id' => $this->Auth->user('id')])->toarray();
+            pr($wishlists);die();
        $this->set(compact('wishlists'));
     }
 }

@@ -1,7 +1,9 @@
 <ul class="menu-account-info">
-	<li><?php echo $this->Html->link(__("Account Dashboard"), ['controller'=>'pages','action' => 'accounts']);?></li>
+	<li><?php echo $this->Html->link(__("Accounts"), ['controller'=>'pages','action' => 'accounts']);?></li>
 	<li><?php echo $this->Html->link(__("Products"), ['controller'=>'pages','action' => 'ProductsOfSuppliers', $user_info['id']]);?></li>
-	<!-- <li><?php echo $this->Html->link(__("Messages"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
+<!-- 	<li><?php echo $this->Html->link(__("Messages"), ['controller'=>'pages','action' => 'accounts']);?></li>
+	<li><?php echo $this->Html->link(__("Orders"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
+	<li><?php echo $this->Html->link(__("WishList"), ['controller'=>'pages','action' => 'wishlists']);?></li>
 	<!--<li><?php echo $this->Html->link(__("Cancellations"), ['controller'=>'pages','action' => 'accounts']);?></li>
 	<li><?php echo $this->Html->link(__("Payment Methods"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
 	<!-- <li><?php echo $this->Html->link(__("Personal Information"), ['controller'=>'pages','action' => 'PersonalInformation']);?></li> -->
@@ -10,7 +12,7 @@
 	<li><?php echo $this->Html->link(__("Invitations"), ['controller'=>'pages','action' => 'accounts']);?></li> -->
 </ul>	
 
-<?php //if ($this->request->params['action'] == 'productsOfSuppliers'): ?>
+<!-- <?php //if ($this->request->params['action'] == 'productsOfSuppliers'): ?> -->
 	
 <!-- 
 <div class="sidebar-shop sidebar-left">

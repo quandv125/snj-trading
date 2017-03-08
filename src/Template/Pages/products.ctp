@@ -41,10 +41,12 @@
 									<label>Part No: </label> <span><?php echo 'SP.'.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
 								</div>
 								<div class="attr-info">
-									<label>Categories: </label> <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span>
+									<label>Categories: </label> <span><?php echo $product->category['name']; ?></span>
+									<!-- <label>Categories: </label> <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
-									<label>Maker's Name: </label> <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span>
+									<label>Maker's Name: </label>  <span><?php echo $product->supplier['name']; ?></span>
+									<!-- <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
 									<label>Availability: </label> <span>In stock</span>

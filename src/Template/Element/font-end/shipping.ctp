@@ -6,12 +6,12 @@
                 <div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0, 1]]">
                     <div class="item">
                          <div class="zoom-image-thumb item-adv-simple">
-                            <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 1],['escape' => false]) ?>
+                            <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 2,1],['escape' => false]) ?>
                         </div>
                     </div>
                     <div class="item">
                          <div class="zoom-image-thumb item-adv-simple">
-                            <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 1],['escape' => false]) ?>
+                            <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 2,1],['escape' => false]) ?>
                         </div>
                     </div>
                 </div>
@@ -23,12 +23,12 @@
                     <div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0, 1]]">
                         <div class="item">
                              <div class="zoom-image-thumb item-adv-simple">
-                               <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 3],['escape' => false]) ?>
+                               <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 2,3],['escape' => false]) ?>
                             </div>
                         </div>
                         <div class="item">
                             <div class="zoom-image-thumb item-adv-simple">
-                                <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 3],['escape' => false]) ?>
+                                <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 2,3],['escape' => false]) ?>
                             </div>
                         </div>
                     </div>
@@ -38,10 +38,10 @@
             <div class="category-brand-slider">
                 <div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0, 1]]">
                     <div class="zoom-image-thumb item-adv-simple">
-                         <?php echo $this->Html->link($this->Html->image('gallery/ad4.png'),['controller' => 'Pages','action' => 'categories', 4],['escape' => false]) ?>
+                         <?php echo $this->Html->link($this->Html->image('gallery/ad4.png'),['controller' => 'Pages','action' => 'categories', 2,4],['escape' => false]) ?>
                     </div>
                     <div class="zoom-image-thumb item-adv-simple">
-                         <?php echo $this->Html->link($this->Html->image('gallery/ad4.png'),['controller' => 'Pages','action' => 'categories', 4],['escape' => false]) ?>
+                         <?php echo $this->Html->link($this->Html->image('gallery/ad4.png'),['controller' => 'Pages','action' => 'categories', 2,4],['escape' => false]) ?>
                     </div>
                 </div>
             </div>
@@ -50,10 +50,10 @@
             <div class="category-brand-slider">
                 <div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0, 1]]">
                     <div class="zoom-image-thumb item-adv-simple">
-                        <?php echo $this->Html->link($this->Html->image('gallery/ad2.png'),['controller' => 'Pages','action' => 'categories', 2],['escape' => false]) ?>
+                        <?php echo $this->Html->link($this->Html->image('gallery/ad2.png'),['controller' => 'Pages','action' => 'categories', 2,2],['escape' => false]) ?>
                     </div>
                     <div class="zoom-image-thumb item-adv-simple">
-                        <?php echo $this->Html->link($this->Html->image('gallery/ad2.png'),['controller' => 'Pages','action' => 'categories', 2],['escape' => false]) ?>
+                        <?php echo $this->Html->link($this->Html->image('gallery/ad2.png'),['controller' => 'Pages','action' => 'categories', 2,2],['escape' => false]) ?>
                     </div>
                 </div>
             </div>

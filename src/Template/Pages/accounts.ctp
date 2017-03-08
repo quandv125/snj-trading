@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-9 col-sm-8 col-xs-12 wapper-content">
        <div class="main-content-shop ">
-           <h4><?php echo $this->Html->link('Personal Information <i class="fa fa-edit"></i>',['controller' => 'pages','action' => 'PersonalInformation'],['escape' => false]) ?></h4>
+           <h4><?php echo $this->Html->link('Personal Information - Edit <i class="fa fa-edit"></i>',['controller' => 'pages','action' => 'PersonalInformation'],['escape' => false]) ?></h4>
     		<ul class="menu-account-info">
 				<li><span class="account-info"><?= __("Username");?> : </span><span class="font-weight-500"> <?php echo $users->username; ?></span></li>
                 <li><span class="account-info"><?= __("Password");?> : </span><span class="font-weight-500"> <?php echo $this->Html->link(__('Change Password <i class="fa fa-edit"></i>'), ['controller' =>'Users','action' => 'ChangePasswordUser'],['escape' => false]) ?></span></li>

@@ -149,7 +149,7 @@ class ArticlesController extends AppController
         $Categorie  = TableRegistry::get('Categories');
         $list_articles = $Categorie->find()->contain([
             'Articles' => function ($q) {
-                return $q->autoFields(false)->select(['id','categorie_id'])->where(['type' => ARTICLE_SIGNLE]);
+                return $q->autoFields(false)->select(['id','categorie_id'])->where(['type' => ARTICLE_CATEGORIES]);
             },
         ])->where(['Categories.type' => HORIZONTAL]);
         $this->set(compact('articles','list_articles'));

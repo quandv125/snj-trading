@@ -26,26 +26,26 @@ function animated(){
 //Document Ready
 jQuery(document).ready(function(){
 	if ($("#datatable").length){
-		$('#datatable').DataTable( {
-	    	// "iDisplayLength": 100,
-	        columnDefs: [ {
-	            targets: [ 0 ],
-	            orderData: [ 0, 1 ]
-	        }, {
-	            targets: [ 1 ],
-	            orderData: [ 1, 0 ]
-	        }, {
-	            targets: [ 4 ],
-	            orderData: [ 4, 0 ]
-	        } ]
-	    } );
-    }
+		$('#datatable').DataTable({
+			// "iDisplayLength": 100,
+			columnDefs: [ {
+				targets: [ 0 ],
+				orderData: [ 0, 1 ]
+			}, {
+				targets: [ 1 ],
+				orderData: [ 1, 0 ]
+			}, {
+				targets: [ 4 ],
+				orderData: [ 4, 0 ]
+			} ]
+		});
+	}
 	// 
 	$(".reload_captcha").click(function(e){
-        e.preventDefault();
-        console.log($(".captcha").attr("src"));
-        $(".captcha").attr("src", $(".captcha").attr("src"));
-    });
+		e.preventDefault();
+		console.log($(".captcha").attr("src"));
+		$(".captcha").attr("src", $(".captcha").attr("src"));
+	});
 	if ($(".onlydate").length){
 		jQuery('.onlydate').datetimepicker({ format: 'YYYY-MM-DD' });
 	}
@@ -63,11 +63,11 @@ jQuery(document).ready(function(){
 	});
 
 	$('#menu-fixed li').click(function(){
-        var id = $(this).attr('id');
-        var name = $(this).html();
-        $('#search-active2').html(name);
-        $('#type-search').val(id);
-    });
+		var id = $(this).attr('id');
+		var name = $(this).html();
+		$('#search-active2').html(name);
+		$('#type-search').val(id);
+	});
 	// Scroll show menu
 	$(window).scroll(function(){
 		if($(window).scrollTop() > 200)
@@ -745,11 +745,50 @@ jQuery(window).on('load',function(){
 	jQuery('.close-flash').click(function(){
 		jQuery(this).parent().parent().fadeOut();
 	});
+	
+
 
 })(jQuery); // End of use strict
 
 jQuery(document).ready(function($){
+	jQuery('.wishlist-link').click(function(){
+		var product_id = jQuery(this).attr('product_id');
+		jQuery.ajax({
+			url: '/products/add_wishlist',
+			type: 'POST',
+			data: {product_id: product_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				// jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				// jQuery("#loader").fadeOut();
+				alert(response);
+				console.log(response);
+			}
+		});
+	});
 
+	jQuery('.delete-wishlist').click(function(){
+		id = jQuery(this).attr('id');
+		jQuery.ajax({
+			url: '/products/delete_wishlist',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				// jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				// jQuery("#loader").fadeOut();
+				jQuery('#item-product-'+id).fadeOut();
+				jQuery('.item-product-'+id).fadeOut();
+				console.log(response);
+			}
+		});
+	});
 	// Tab auto change
 	// $(function () {
 	// 	$(document).off('click.bs.tab.data-api', '[data-hover="tab"]');

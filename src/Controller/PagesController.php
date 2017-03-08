@@ -210,4 +210,32 @@ class PagesController extends AppController
     public function contacts() {
         $this->viewBuilder()->layout('product');
     }
+
+    public function wishlists() {
+        $this->viewBuilder()->layout('product');
+        $this->check_user();
+        $wishlist  = TableRegistry::get('Wishlists');
+        
+        $wishlists = $wishlist->find()
+            ->join([
+                'Products' => [
+                    'table' => 'Products',
+                    'type' => 'LEFT',
+                    'conditions' => 'Products.id = wishlists.product_id'
+                ],
+                'Categories' => [
+                    'table' => 'Categories',
+                    'type' => 'LEFT',
+                    'conditions' => 'Products.categorie_id = Categories.id'
+                ],
+                'Suppliers' => [
+                    'table' => 'Suppliers',
+                    'type' => 'LEFT',
+                    'conditions' => 'Products.supplier_id = Suppliers.id'
+                ],
+            ])
+            ->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'Products.id','Products.sku','Products.supplier_id','Products.origin','Products.quantity','Products.type_model','Products.serial_no','Products.short_description','Categories.id','Categories.name','Products.product_name','Products.thumbnail', 'Suppliers.id','Suppliers.name'])
+            ->where(['Wishlists.user_id' => $this->Auth->user('id')]);
+       $this->set(compact('wishlists'));
+    }
 }

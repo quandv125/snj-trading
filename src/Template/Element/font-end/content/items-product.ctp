@@ -1,3 +1,37 @@
+<!-- <button type="button" class="btn btn-primary"  data-whatever="@mdo">Open modal</button>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Recipient:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="form-control-label">Message:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+
+
 <div role="tabpanel" class="tab-pane fade in active" id="product-grid">
     <ul class="row product-grid live-search-list vertical highlight_list" >
     <?php foreach ($products as $key => $product): ?>
@@ -10,9 +44,9 @@
                     </a>
                     <div class="product-info-cart">
                         <div class="product-extra-link">
-                            <a class="wishlist-link" href="#"><i class="fa fa-heart-o"></i></a>
-                            <a class="compare-link" href="#"><i class="fa fa-toggle-on"></i></a>
-                            <a class="quickview-link fancybox.ajax" href="quick-view.html"><i class="fa fa-search"></i></a>
+                            <span class="wishlist-link" product_id="<?= $product->id;?>" href="#"><i class="fa fa-heart-o"></i></span>
+                            <span class="compare-link" href="#"><i class="fa fa-toggle-on"></i></span>
+                            <span class="quickview-link1 fancybox.ajax" href="quick-view.html"><i class="fa fa-search"></i></span>
                         </div>
                         <span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
                             <i class="fa fa-shopping-cart"></i> Add to Cart

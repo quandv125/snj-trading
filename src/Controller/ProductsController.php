@@ -217,15 +217,14 @@ class ProductsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
-            $OldID = $product->id;
             if ($this->Products->save($product)) {
                 $Image = TableRegistry::get('Images');
                 $id = $product->id;
                 if (isset($this->request->data['files']) && !empty($this->request->data['files'][0]['name'])) {
-                    for($i=0; $i<count($this->request->data['files'.$OldID]); $i++){
-                        $path = rand(1,100000).'_'.$this->request->data['files'.$OldID][$i]['name'];
-                        if(move_uploaded_file($this->request->data['files'.$OldID][$i]['tmp_name'], PRODUCTS.$path)){
-                            $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$OldID][$i]['name']);
+                    for($i=0; $i<count($this->request->data['files']); $i++){
+                        $path = rand(1,100000).'_'.$this->request->data['files'][$i]['name'];
+                        if(move_uploaded_file($this->request->data['files'][$i]['tmp_name'], PRODUCTS.$path)){
+                            $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
                             $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, 180);
                             $images = $Image->newEntity();
                             $images->product_id  =  $id;
@@ -233,8 +232,15 @@ class ProductsController extends AppController
                             $images->thumbnail   = 'thumbnails/'.$thumbnail;
                             $Image->save($images);
                         }
+                        if ($i == 0) {
+                            $pic = 'products/'.$path;
+                            $thumb = 'thumbnails/'.$thumbnail;
+                            $this->Products->updateAll(['picture' => $pic, 'thumbnail' => $thumb], ['id' => $id]);
+                        }
                     }
+
                 }
+                
                 $this->Flash->success(__('The product has been saved.'));
                 return $this->redirect(['controller'=>'pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);
             } else {
@@ -547,4 +553,44 @@ class ProductsController extends AppController
         }
     }
 
+    public function AddWishlist()  {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $Wishlist = TableRegistry::get('Wishlists');
+            if (!empty($this->Auth->user('id'))) {
+                $exists  = $Wishlist->find()->select(['id'])->where(['product_id'=>$this->request->data['product_id'],'user_id'=>$this->Auth->user('id') ])->first();
+                if (empty($exists)) {
+                    $this->request->data['user_id'] = $this->Auth->user('id');
+                    $wishlist = $Wishlist->newEntity();
+                    $wishlist = $Wishlist->patchEntity($wishlist, $this->request->data);
+                    if ($Wishlist->save($wishlist)) {
+                        echo (__('The wishlist has been saved.'));
+                    } else {
+                        echo (__('The wishlist could not be saved. Please, try again.'));
+                    }
+                }
+            } else {
+                echo (__('you must login to continue.'));
+            }
+        }
+    }
+
+    public function DeleteWishlist()  {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $Wishlist = TableRegistry::get('Wishlists');
+            $datasourceWishlist = $Wishlist->connection();
+            try {
+                $datasourceWishlist->begin();
+                $id = $this->request->data['id'];
+                if ($Wishlist->exists(['id' => $id])) {
+                    $Wishlist->query()->delete()->where(['id' => $id])->execute();
+                }
+                $datasourceWishlist->commit();
+            } catch (Exception $e) {
+                $datasourceWishlist->rollback();
+                throw $e;
+            }
+        }
+    }
 }

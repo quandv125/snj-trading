@@ -118,7 +118,10 @@ class UsersController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
            
             $user = $this->Users->patchEntity($user, $this->request->data);
+           
+             
             if ($this->Users->save($user)) {
+                $this->request->session()->write('Auth.User.fullname', $user->fullname);
                 $this->Flash->success(__('The user has been saved.'));
                 if ($this->Auth->user('group_id') == CUSTOMERS) {
                      return $this->redirect(['controller' => 'Pages','action' => 'accounts']);
@@ -401,7 +404,7 @@ class UsersController extends AppController
         $this->viewBuilder()->layout('product');
         $this->menu();
         if ($this->request->is('post')) {
-            pr($this->request->data);die();
+          
             $captcha = $this->request->session()->read('captcha');
             if ($captcha != $this->request->data['captcha']) {
                $this->Flash->error1(__('captcha incorrect!'));
@@ -446,13 +449,14 @@ class UsersController extends AppController
     public function captcha() {
         $this->autoRender = false;
         $string = substr(str_shuffle(str_repeat('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', 5)), 0, 5);
+        // $string = substr(str_shuffle(str_repeat(rand(), 5)), 0, 5);
         $this->request->session()->write('captcha', $string);
-        $font = WWW_ROOT.'css/fonts'.DS.'Amethyst.ttf';
+        $font = WWW_ROOT.'css/fonts'.DS.'FreeSerif.ttf';
         $img = imagecreate(200, 50); // W H
         $white = imagecolorallocate($img, 255, 255, 255);
         $background = imagecolorallocate($img, 213, 31, 49);
         imagefilledrectangle($img, 0, 0, 200, 50, $background);
-        imagettftext($img, 20, 5, 40, 43, $white, $font, $string); // IMG, SIZE
+        imagettftext($img, 30, 5, 40, 43, $white, $font, $string); // IMG, SIZE
         imageline($img, 0, 0, 300, 70, $white);
         imageline($img, 0, 50, 200, 0, $white);
         $pixel_color = imagecolorallocate($img, 0, 0, 255);

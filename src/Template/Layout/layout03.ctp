@@ -17,9 +17,12 @@
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+
+    <?= $this->Html->script(['loader' ]); ?>
     <!-- CSS -->
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'>
+    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'> -->
     <?= $this->Html->css([
+        'libs/reset',
         'libs/font-awesome.min',
         'libs/font-linearicons',
         'libs/bootstrap',
@@ -45,8 +48,8 @@
         // 'libs/jquery.countdown',
         'libs/jquery.bxslider.min',
         // 'libs/jquery.mCustomScrollbar.concat.min',
-        'libs/jquery.themepunch.revolution',
-        'libs/jquery.themepunch.plugins.min',
+        // 'libs/jquery.themepunch.revolution',
+        // 'libs/jquery.themepunch.plugins.min',
         // 'libs/less.min',
         'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
         'theme',

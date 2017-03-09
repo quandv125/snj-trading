@@ -57,7 +57,7 @@
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6 ">
 	                <div class="category-dropdown hidden-category-dropdown">
-	                    <h2 class="title-category-dropdown"><span>Categories</span></h2>
+	                    <h2 class="title-category-dropdown"><span><?php echo __('Categories') ?></span></h2>
 	                    <div class="wrap-category-dropdown">
 	                        <ul class="list-category-dropdown">
 	                            <?= $this->element('font-end/Pages/vertical_menu'); ?>
@@ -120,18 +120,6 @@
 				<span class="content-galley">S&J Trading has served customers for 10 years. </span>
 			</div>
 		</div>
-		<!-- <div class="item-slider">
-			<div class="banner-thumb">
-				<a href="#">
-					<?php //echo $this->Html->image('gallery/s4.jpg') ?>
-				</a>
-			</div>
-			<div class="banner-info text-center animated" data-animated="bounceIn">
-				<span class="title-gallery">Equipment </span>
-				<br/><br/><br/>
-				<div class="clearfix"></div>
-				<span class="content-galley">We provide high quality products </span>
-			</div>
-		</div> -->
+		
 	</div>
 </div>

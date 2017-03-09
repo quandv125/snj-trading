@@ -10,6 +10,9 @@ msgstr "Tên sản phẩm"
 msgid "Category"
 msgstr "Danh mục"
 
+msgid "Categories"
+msgstr "Danh mục"
+
 msgid "Retail Price"
 msgstr "Giá bán"
 
@@ -42,3 +45,6 @@ msgstr "Lịch sử"
 
 msgid "Quantity"
 msgstr "Số lượng"
+
+msgid "Wishlists"
+msgstr "Danh sách yêu thích"

@@ -63,6 +63,14 @@ class MyHtmlHelper extends HtmlHelper
         return $name;
     }
 
+    public function _Cutstring($string, $max, $num) {
+        if (strlen($string) > $max) {
+            $str = substr($string,0, $num).'...';
+        } else {
+            $str = $string;
+        }
+        return $str;
+    }
 }
 
 

@@ -1,3 +1,5 @@
+
+
 jQuery( document ).ready(function() {
 	jQuery('.summernote').summernote({
 		height: 100,

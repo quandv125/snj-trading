@@ -132,7 +132,6 @@ class AppController extends Controller
     }
 
     public function beforeFilter(Event $event)  {
-     
         // if ($this->Auth->user('group_id') == ADMIN) {
             $this->Auth->allow();
         // }

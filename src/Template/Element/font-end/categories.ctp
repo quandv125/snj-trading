@@ -3,7 +3,7 @@
     <div class="col-md-3 col-sm-3 col-xs-12 hidden-sm hidden-xs">
         <div class="wrap-category-hover4">
             <div class="inner-category-hover4">
-                <h2 class="title-category-hover"><span>Categories</span></h2>
+                <h2 class="title-category-hover"><span><?php echo __('Categories') ?></span></h2>
                 <ul class="list-category-hover">
                     <?php foreach ($categories as $key => $category): ?>
 
@@ -92,63 +92,4 @@
             </div>
         </div>
     </div>
-
-
-   <!--  <div class="col-md-3 col-sm-4 col-xs-12">
-        <div class="hot-deals">
-            <h2><i class="fa fa-clock-o"></i> hot deals</h2>
-            <div class="hotdeals-slider slider-home4 simple-owl-slider">
-                <div class="wrap-item" data-navigation="true" data-autoplay="true" data-pagination="false" data-itemscustom="[[0,1]]">
-                    <div class="item">
-                        <ul class="list-product-hotdeal" style=" min-height: 450px;">
-                            <?php foreach ($products as $key => $product): ?>
-                                <?php if ($key == 3){break;} ?>
-                            <li>
-                                <?php if (!empty($product->images)): ?>
-                                <div class="zoom-image-thumb product-thumb">
-                                    <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb'])  ?>
-                                    <a class="addcart-link addcart-single" href="pages/products/<?= $product->id?>"><i class="fa fa-shopping-basket"></i></a>
-                                </div>
-                                 <?php endif ?>
-                                <div class="product-info">
-                                    <h3 class="title-product">
-                                        <?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
-                                    </h3>
-                                    <div class="info-price">
-                                        <span><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</span>
-                                        <del><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</del>
-                                    </div>
-                                    
-                                </div>
-                            </li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                    <div class="item">
-                        <ul class="list-product-hotdeal" style=" min-height: 450px;">
-                            <?php foreach ($products as $key => $product): ?>
-                                <?php if ($key == 3){break;} ?>
-                            <li>
-                                <?php if (!empty($product->images)): ?>
-                                <div class="zoom-image-thumb product-thumb">
-                                    <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb'])  ?>
-                                    <a class="addcart-link addcart-single" href="pages/products/<?= $product->id?>"><i class="fa fa-shopping-basket"></i></a>
-                                </div>
-                                <?php endif ?>
-                                <div class="product-info">
-                                    <h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?></h3>
-                                    <div class="info-price">
-                                        <span><?= number_format($product->retail_price, DECIMALS) ?> VNĐ </span>
-                                        <del><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</del>
-                                    </div>
-                                   
-                                </div>
-                            </li>
-                            <?php endforeach ?>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </div>  

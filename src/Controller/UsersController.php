@@ -157,7 +157,7 @@ class UsersController extends AppController
 
     public function login() {
         $this->viewBuilder()->layout('product');
-        $this->menu();
+        
        
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
@@ -402,7 +402,7 @@ class UsersController extends AppController
 
     public function register() {
         $this->viewBuilder()->layout('product');
-        $this->menu();
+        
         if ($this->request->is('post')) {
           
             $captcha = $this->request->session()->read('captcha');
@@ -454,15 +454,15 @@ class UsersController extends AppController
         $font = WWW_ROOT.'css/fonts'.DS.'FreeSerif.ttf';
         $img = imagecreate(200, 50); // W H
         $white = imagecolorallocate($img, 255, 255, 255);
-        $background = imagecolorallocate($img, 213, 31, 49);
+        $background = imagecolorallocate($img, 65, 150, 65);
         imagefilledrectangle($img, 0, 0, 200, 50, $background);
         imagettftext($img, 30, 5, 40, 43, $white, $font, $string); // IMG, SIZE
-        imageline($img, 0, 0, 300, 70, $white);
-        imageline($img, 0, 50, 200, 0, $white);
+        // imageline($img, 0, 0, 300, 70, $white);
+        // imageline($img, 0, 50, 200, 0, $white);
         $pixel_color = imagecolorallocate($img, 0, 0, 255);
-        for($i=0;$i<1000;$i++) {
-            imagesetpixel($img, rand()%200, rand()%50, $pixel_color);
-        }
+        // for($i=0;$i<1000;$i++) {
+        //     imagesetpixel($img, rand()%200, rand()%50, $pixel_color);
+        // }
         imagepng($img);
         $this->response->type("image/png");
         imagedestroy($img);
@@ -470,7 +470,7 @@ class UsersController extends AppController
 
     public function lostpassword() {
         $this->viewBuilder()->layout('product');
-        $this->menu();
+        
         if ($this->request->is([ 'post'])) {
             $captcha = $this->request->session()->read('captcha');
             if ($captcha != $this->request->data['captcha']) {
@@ -503,17 +503,11 @@ class UsersController extends AppController
             return $this->redirect(['controller'=>'pages','action' => 'login']);
         }
         $this->viewBuilder()->layout('product');
-        $this->menu();
+        
         $this->set(compact( 'id'));
     }
 
-    private function menu() {
-        $Categorie  = TableRegistry::get('Categories');
-        $categories = $Categorie->find('threaded')->where(['type' => 0]);
-        $categories2 = $Categorie->find('threaded')->where(['type' => 1]);
-        $this->set(compact('categories','categories2'));
-    }
-
+  
     public function activeacc($id, $code){
         $User = TableRegistry::get('Users');
         $exists = $this->Users->exists(['id' => $id,'code' => $code,'actived' => false]);
@@ -527,49 +521,45 @@ class UsersController extends AppController
        }
        return $this->redirect(['controller'=>'pages','action' => 'login', $users->username]);
     }
+
     public function check_user(){
         if (empty($this->Auth->user())) {
             return $this->redirect(['controller'=>'pages','action' => 'login']);
         }
     }
+
     public function ChangePasswordUser(){
         $this->check_user();
         $this->viewBuilder()->layout('product');
-        $this->menu();
+        
         if ($this->request->is('post')) {
-
             $captcha = $this->request->session()->read('captcha');
             if ($captcha != $this->request->data['captcha']) {
                 $this->Flash->error1(__('captcha incorrect!'));
             } else {
                 if ($this->request->data['password'] == $this->request->data['confirm_password']) {
-
                     $User = TableRegistry::get('Users');
                     $datasourceUser = $User->connection();
                     try {
                         $datasourceUser->begin();
-
                         $hasher = new DefaultPasswordHasher();
                         $password = $hasher->hash($this->request->data['password']);
                         $update = $this->Users->updateAll(['password' => $password], ['id' => $this->Auth->user('id')]);
-
                         if ($update) {
                             $this->Flash->success(__('The password change successfully.')); 
                         } else {
                             $this->Flash->error1(__('Error. Please, try again!'));
                         }
-
                         $datasourceUser->commit();
                     } catch (Exception $e) {
                         $datasourceUser->rollback();
                         throw $e;
                     }
-                    
                 } else {
                     $this->Flash->error1(__('Password incorrect!'));
                 }
             }
-             return $this->redirect(['controller'=>'pages','action' => 'login']);
+            return $this->redirect(['controller'=>'pages','action' => 'login']);
         }
     }
 

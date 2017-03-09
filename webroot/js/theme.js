@@ -46,6 +46,7 @@ jQuery(document).ready(function(){
 		console.log($(".captcha").attr("src"));
 		$(".captcha").attr("src", $(".captcha").attr("src"));
 	});
+
 	if ($(".onlydate").length){
 		jQuery('.onlydate').datetimepicker({ format: 'YYYY-MM-DD' });
 	}
@@ -62,11 +63,19 @@ jQuery(document).ready(function(){
 		jQuery(this).parent().next().toggleClass('hidden');
 	});
 
-	$('#menu-fixed li').click(function(){
-		var id = $(this).attr('id');
-		var name = $(this).html();
-		$('#search-active2').html(name);
-		$('#type-search').val(id);
+	
+
+	jQuery('.sub-menu-search li').click(function(){
+		var id = jQuery(this).attr('id');
+		var name = jQuery(this).html();
+		jQuery('.search-active').html(name);
+		jQuery('.type-search').val(id);
+		$('.search-active').html(name);
+		$('input[name="type-search"]').val(id);
+	});
+
+	$('.has-child').on('click',function(){
+		$('.sub-menu-toggle').slideToggle();
 	});
 	// Scroll show menu
 	$(window).scroll(function(){
@@ -688,16 +697,7 @@ jQuery(window).on('load',function(){
 	}
 });
 
-	jQuery('.sub-menu-search li').click(function(){
-		var id = jQuery(this).attr('id');
-		var name = jQuery(this).html();
-		jQuery('.search-active').html(name);
-		jQuery('.type-search').val(id);
-	});
-
-	$('.has-child').on('click',function(){
-		$('.sub-menu-toggle').slideToggle();
-	});
+	
 	
 	jQuery('.addcart-link').click(function(){
 		var qty 	= parseInt(jQuery('.total-mini-cart-item').html())+1;
@@ -1094,48 +1094,3 @@ jQuery(document).ready(function($){
 	
 
 }); // End document
-
-// Loader
-;(function(){
-	function id(v){
-		return document.getElementById(v); 
-	}
-	
-	function loadbar() {
-
-		var ovrl = id("overlay"),
-			prog = id("progress"),
-			stat = id("progstat"),
-			img = document.images,
-			c = 0;
-			tot = img.length;
-
-	    function imgLoaded(){
-			if (document.getElementById('overlay')) {
-				c += 1;
-				var perc = ((100/tot*c) << 0) +"%";
-				prog.style.width = perc;
-				stat.innerHTML = "Loading "+ perc;
-				if(c===tot) return doneLoading();
-			}
-		}
-
-		function doneLoading(){
-			ovrl.style.opacity = 0;
-			setTimeout(function(){ 
-				ovrl.style.display = "none";
-			}, 1200);
-		}
-
-		for(var i=0; i<tot; i++) {
-			var tImg	= new Image();
-			tImg.onload  = imgLoaded;
-			tImg.onerror = imgLoaded;
-			tImg.src	= img[i].src;
-		}
-
-	}
-	document.addEventListener('DOMContentLoaded', loadbar, false);
-}());
-// End loader
-

@@ -130,8 +130,8 @@ define('STOCK', 'SK.');
 define('PRODUCT', 'SP.');
 define('INVOICE', 'IN.');
 // EMAIL
-define('ROOT_CHANGE_PASSWORD', 'http://192.168.4.108/users/changepassword/');
-define('ROOT_ACTIVE_ACC', 'http://192.168.4.108/users/activeacc/');
+define('ROOT_CHANGE_PASSWORD', 'http://snj-trading.vn/users/changepassword/');
+define('ROOT_ACTIVE_ACC', 'http://snj-trading.vn/users/activeacc/');
 // TYPE CATEGORIES
 define('VERTICAL', 0);
 define('HORIZONTAL', 1);

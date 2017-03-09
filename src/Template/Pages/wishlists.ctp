@@ -8,19 +8,17 @@
     <div class="col-md-9 col-sm-8 col-xs-12 wapper-content">
        <div class="main-content-shop ">
            <div class="shop-tab-title">
-                    <h3><?php echo 'Wishlists' ?></h3>
+                    <h3><?php echo __('Wishlists') ?></h3>
                     <ul class="shop-tab-select">
                         <li class="active"><a href="#product-grid" class="grid-tab" data-toggle="tab"></a></li> 
                         <li><a href="#product-list" class="list-tab" data-toggle="tab"></a></li>
                     </ul>
                 </div>    
-                 <div class="tab-content">            
+                 <div class="tab-content"> 
                 <div role="tabpanel" class="tab-pane fade in active" id="product-grid">
                     <ul class="row product-grid live-search-list vertical highlight_list" >
                     <?php foreach ($wishlists as $key => $product): ?>
-                       
                         <li id="item-product-<?= $product->id?>" class="col-md-3 col-sm-6 col-xs-12">
-                           
                             <div class="item-product show-image ">
                              <span class="btn btn-danger delete-wishlist" id="<?= $product->id?>"><i class="fa fa-trash-o" aria-hidden="true"></i> </span>
                                 <div class="product-thumb">
@@ -31,7 +29,7 @@
                                     <div class="product-info-cart">
                                         <div class="product-extra-link">
                                             <span class="wishlist-link1" product_id="<?= $product->products['id'];?>" href="#">
-                                                <i class="fa fa-heart-o"></i>
+                                                <i class="fa fa-heart-o"></i> 
                                             </span>
                                             <span class="compare-link" href="#"><i class="fa fa-toggle-on"></i></span>
                                             <span class="quickview-link1 fancybox.ajax" href="quick-view.html"><i class="fa fa-search"></i></span>

@@ -90,7 +90,7 @@ class ProductsController extends AppController
                         $path = rand(1,100000).'_'.$this->request->data['files'][$i]['name'];
                         if(move_uploaded_file($this->request->data['files'][$i]['tmp_name'], PRODUCTS.$path)){
                             $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
-                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, 180);
+                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
                             $images = $Image->newEntity();
                             $images->product_id  =  $id;
                             $images->path        = 'products/'.$path;
@@ -117,15 +117,19 @@ class ProductsController extends AppController
         $Image      = TableRegistry::get('Images');
         $Product    = TableRegistry::get('Products');
         if ($this->request->is('post')) {
-
             $this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
-            $this->request->data['actived'] = 0;
+            if ($this->Auth->user('group_id') == ADMIN) {
+                $this->request->data['actived'] = true;
+            } else {
+                $this->request->data['actived'] = false;
+            }
             if (empty($this->request->data['sku'])) {
                $this->request->data['sku'] = $this->Products->MaxSKU();
             }
             $this->request->data['user_id'] = $this->Auth->user('id');
             $product = $this->Products->newEntity();
             $product = $this->Products->patchEntity($product, $this->request->data);
+           
             if ($Product->save($product)) {
                 $id = $product->id;
                 if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -133,9 +137,9 @@ class ProductsController extends AppController
                         $path = rand(1,100000).'_'.$this->request->data['files'][$i]['name'];
                         if(move_uploaded_file($this->request->data['files'][$i]['tmp_name'], PRODUCTS.$path)){
                             $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
-                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, 180);
+                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
                             $images = $Image->newEntity();
-                            $images->product_id  =  $id;
+                            $images->product_id  = $id;
                             $images->path        = 'products/'.$path;
                             $images->thumbnail   = 'thumbnails/'.$thumbnail;
                             $Image->save($images);
@@ -188,7 +192,7 @@ class ProductsController extends AppController
                     $path = rand(1,100000).'_'.$this->request->data['files'.$OldID][$i]['name'];
                     if(move_uploaded_file($this->request->data['files'.$OldID][$i]['tmp_name'], PRODUCTS.$path)){
                         $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$OldID][$i]['name']);
-                        $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, 180);
+                        $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
                         $images = $Image->newEntity();
                         $images->product_id  =  $id;
                         $images->path        = 'products/'.$path;
@@ -225,7 +229,7 @@ class ProductsController extends AppController
                         $path = rand(1,100000).'_'.$this->request->data['files'][$i]['name'];
                         if(move_uploaded_file($this->request->data['files'][$i]['tmp_name'], PRODUCTS.$path)){
                             $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
-                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, 180);
+                            $this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
                             $images = $Image->newEntity();
                             $images->product_id  =  $id;
                             $images->path        = 'products/'.$path;
@@ -240,7 +244,6 @@ class ProductsController extends AppController
                     }
 
                 }
-                
                 $this->Flash->success(__('The product has been saved.'));
                 return $this->redirect(['controller'=>'pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);
             } else {

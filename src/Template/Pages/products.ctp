@@ -17,7 +17,10 @@
 									<div class="carousel">
 										<ul>
 										<?php foreach ($product->images as $key => $image): ?>
-											<li><a href="#"><?php echo $this->Html->image($image['path'])?></a></li>
+											<?php if ($key <= 8	): ?>
+												<li><a href="#"><?php echo $this->Html->image($image['path'])?></a></li>
+											<?php endif ?>
+											
 										<?php endforeach ?>
 											
 										</ul>

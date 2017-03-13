@@ -94,9 +94,11 @@ define('IMAGE', WWW_ROOT.'img'.DS);
 define('AVATARS', WWW_ROOT.'img'.DS.'avatars'.DS);
 
 define('THUMBNAILS', WWW_ROOT.'img'.DS.'thumbnails'.DS);
+
 define('ARTICLES', WWW_ROOT.'img'.DS.'articles'.DS);
 
 define('PRODUCTS', WWW_ROOT.'img'.DS.'products'.DS);
+
 define('CATEGORIES', WWW_ROOT.'img'.DS.'categories'.DS);
 
 // TCPDF
@@ -109,6 +111,7 @@ define('ACO_CONTROLLER', '1');
 define('ADMIN', '1');
 define('CUSTOMERS', '4');
 define('SUPPLIERS', '3');
+
 // Product: Active - Deactive
 define('PRODUCT_ACTIVE', 1);
 define('PRODUCT_DEACTIVE', 0);
@@ -117,8 +120,10 @@ define('PRODUCT_DEACTIVE', 0);
 define('CUSTOMER_VIP', 0);
 define('CUSTOMER_WHOLESALE', 1); // wholesale
 define('CUSTOMER_RETAIL', 2); // retail
+
 //## LIMIT ##//
 define('LIMIT', 20);
+
 //## echo number_format($invoice->customers_paid, DECIMALS) ##/
 define('DECIMALS', 0); 
 
@@ -129,9 +134,11 @@ define('ZEROFILL', 5);
 define('STOCK', 'SK.');
 define('PRODUCT', 'SP.');
 define('INVOICE', 'IN.');
+
 // EMAIL
 define('ROOT_CHANGE_PASSWORD', 'http://snj-trading.vn/users/changepassword/');
 define('ROOT_ACTIVE_ACC', 'http://snj-trading.vn/users/activeacc/');
+
 // TYPE CATEGORIES
 define('VERTICAL', 0);
 define('HORIZONTAL', 1);
@@ -145,3 +152,6 @@ define('ARTICLE_CATEGORIES', 1);
 define('ARTICLE_HELP', 2);
 define('ARTICLE_SNJ', 3);
 define('ARTICLE_MYACCOUNT', 4);
+
+//
+define('SIZE180', 180);

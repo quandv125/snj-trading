@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> 
         <div class="col-md-5 col-sm-5 col-xs-12">
             <div class="zoom-image-thumb item-adv-simple item-adv-simple-slide ">
                 <div class="category-brand-slider">
@@ -25,7 +25,7 @@
                              <div class="zoom-image-thumb item-adv-simple">
                                <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 2,3],['escape' => false]) ?>
                             </div>
-                        </div>
+                        </div> 
                         <div class="item">
                             <div class="zoom-image-thumb item-adv-simple">
                                 <?php echo $this->Html->link($this->Html->image('gallery/ad3.png'),['controller' => 'Pages','action' => 'categories', 2,3],['escape' => false]) ?>
@@ -60,4 +60,3 @@
         </div>
     </div>
 </div>
-<!-- End List Adv -->

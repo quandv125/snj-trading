@@ -11,9 +11,9 @@
 										<th class="product-remove">#</th>
 										<th class="product-thumbnail">Picture</th>
 										<th class="product-name">Product</th>
-										<th class="product-price">Price</th>
+										
 										<th class="product-quantity">Quantity</th>
-										<th class="product-subtotal">Total</th>
+										<!-- <th class="product-subtotal">Total</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -26,14 +26,10 @@
 											<span class="remove-items" product_id="<?php echo $products[0] ?>"><i class="fa fa-times"></i></span>
 										</td>
 										<td class="product-thumbnail">
-											
 											<?php echo $this->Html->link($this->Html->image($products[3],['width'=>70]), ['controller'=>'pages','action'=>'products',$products[0]], array('escape' => false)); ?>
 										</td>
 										<td class="product-name">
 											<a href="#"><?php echo $products[1] ?> </a>					
-										</td>
-										<td class="product-price">
-											<span class="amount"><?php echo number_format( $products[2], DECIMALS)?></span>					
 										</td>
 										<td class="product-quantity">
 											<div class="info-qty">
@@ -42,9 +38,9 @@
 												<a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
 											</div>			
 										</td>
-										<td class="product-subtotal">
-											<span class="amount"><?php echo number_format( $products[2], DECIMALS)?></span>					
-										</td>
+										<!-- <td class="product-subtotal">
+											<span class="amount"><?php //echo number_format( $products[2], DECIMALS)?></span>					
+										</td> -->
 									</tr>
 								<?php endforeach ?>
 								<?php endif ?>

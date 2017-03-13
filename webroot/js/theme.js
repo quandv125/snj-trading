@@ -25,6 +25,8 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
+
+
 	if ($("#datatable").length){
 		$('#datatable').DataTable({
 			// "iDisplayLength": 100,
@@ -62,9 +64,7 @@ jQuery(document).ready(function(){
 	jQuery('.products-show .click').click(function(){
 		jQuery(this).parent().next().toggleClass('hidden');
 	});
-
 	
-
 	jQuery('.sub-menu-search li').click(function(){
 		var id = jQuery(this).attr('id');
 		var name = jQuery(this).html();
@@ -654,6 +654,56 @@ jQuery(document).ready(function(){
 		$( ".range-filter #amount" ).html( "<span>" + $( "#slider-range" ).slider( "values", 0 )+ "</span>" + " - " + "<span>" + $( "#slider-range" ).slider( "values", 1 ) + "</span>" );
 	}
 	//End Widget Shop
+
+	jQuery('.addcart-link').click(function(){
+		var qty 	= parseInt(jQuery('.total-mini-cart-item').html())+1;
+		var id 		= jQuery(this).attr('product_id');
+		var name 	= jQuery(this).attr('name');
+		var price 	= jQuery(this).attr('price');
+		var picture 	= jQuery(this).attr('picture');
+		// console.log(myproduct);
+		jQuery.ajax({
+			url: '/products/cart',
+			type: 'POST',
+			data: {id: id, name: name, price: price, picture: picture},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				jQuery('.total-mini-cart-item').html(qty);
+				console.log(response);
+			}
+		});
+	});
+
+	
+	jQuery('.remove-items').click(function(){
+		var id = jQuery(this).attr('product_id');
+		jQuery('.cart_item_'+id).fadeOut();
+		jQuery.ajax({
+			url: '/products/remove_items',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				
+				console.log(response);
+			}
+		});
+	});
+	jQuery('.close-flash').click(function(){
+		jQuery(this).parent().parent().fadeOut();
+	});
+	
+	
 });
 //Window Load
 jQuery(window).on('load',function(){ 
@@ -699,53 +749,8 @@ jQuery(window).on('load',function(){
 
 	
 	
-	jQuery('.addcart-link').click(function(){
-		var qty 	= parseInt(jQuery('.total-mini-cart-item').html())+1;
-		var id 		= jQuery(this).attr('product_id');
-		var name 	= jQuery(this).attr('name');
-		var price 	= jQuery(this).attr('price');
-		var picture 	= jQuery(this).attr('picture');
-		// console.log(myproduct);
-		jQuery.ajax({
-			url: '/products/cart',
-			type: 'POST',
-			data: {id: id, name: name, price: price, picture: picture},
-			dataType: 'html',
-			cache: false,
-			beforeSend: function(){
-				jQuery("#loader").fadeIn();
-			},
-			success: function(response){
-				jQuery("#loader").fadeOut();
-				jQuery('.total-mini-cart-item').html(qty);
-				console.log(response);
-			}
-		});
-	});
-
-	jQuery('.remove-items').click(function(){
-		var id = jQuery(this).attr('product_id');
-		jQuery('.cart_item_'+id).fadeOut();
-		jQuery.ajax({
-			url: '/products/remove_items',
-			type: 'POST',
-			data: {id: id},
-			dataType: 'html',
-			cache: false,
-			beforeSend: function(){
-				jQuery("#loader").fadeIn();
-			},
-			success: function(response){
-				jQuery("#loader").fadeOut();
-				
-				console.log(response);
-			}
-		});
-	});
-	jQuery('.close-flash').click(function(){
-		jQuery(this).parent().parent().fadeOut();
-	});
 	
+
 
 
 })(jQuery); // End of use strict

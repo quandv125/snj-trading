@@ -42,7 +42,7 @@
                                 </li>
                             </ul>
                     </li>
-                   <!--  <li class="top-currency has-child">
+                    <!-- <li class="top-currency has-child">
                         <a href="#" class="currency-selected">USD</a>
                         <ul class="sub-menu-top">
                             <li><a href="#"><span>€</span>EUR</a></li>
@@ -70,14 +70,12 @@
                         <?php echo $this->element('font-end/smart-search',['class'=>'smart-search']) ?>
                     </div>
                 </div>
-               
                 <div class="col-md-2 col-sm-3 col-xs-12 hidden-xs">
                     <?php echo $this->element('font-end/cart') ?>
                     <!-- End Mini Cart -->
                 </div>
             </div>
         </div>
-       
     </div>
     <div class="header-nav bg-orange">
         <div class="container">

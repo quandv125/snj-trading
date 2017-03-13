@@ -25,7 +25,54 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
+	jQuery('.addcart-link').click(function(){
+		var qty 	= parseInt(jQuery('.total-mini-cart-item').html())+1;
+		var id 		= jQuery(this).attr('product_id');
+		var name 	= jQuery(this).attr('name');
+		var price 	= jQuery(this).attr('price');
+		var picture 	= jQuery(this).attr('picture');
+		// console.log(myproduct);
+		jQuery.ajax({
+			url: '/products/cart',
+			type: 'POST',
+			data: {id: id, name: name, price: price, picture: picture},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				jQuery('.total-mini-cart-item').html(qty);
+				console.log(response);
+			}
+		});
+	});
 
+	
+	jQuery('.remove-items').click(function(){
+		var id = jQuery(this).attr('product_id');
+		jQuery('.cart_item_'+id).fadeOut();
+		jQuery.ajax({
+			url: '/products/remove_items',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				
+				console.log(response);
+			}
+		});
+	});
+	jQuery('.close-flash').click(function(){
+		jQuery(this).parent().parent().fadeOut();
+	});
+	
 
 	if ($("#datatable").length){
 		$('#datatable').DataTable({
@@ -655,53 +702,6 @@ jQuery(document).ready(function(){
 	}
 	//End Widget Shop
 
-	jQuery('.addcart-link').click(function(){
-		var qty 	= parseInt(jQuery('.total-mini-cart-item').html())+1;
-		var id 		= jQuery(this).attr('product_id');
-		var name 	= jQuery(this).attr('name');
-		var price 	= jQuery(this).attr('price');
-		var picture 	= jQuery(this).attr('picture');
-		// console.log(myproduct);
-		jQuery.ajax({
-			url: '/products/cart',
-			type: 'POST',
-			data: {id: id, name: name, price: price, picture: picture},
-			dataType: 'html',
-			cache: false,
-			beforeSend: function(){
-				jQuery("#loader").fadeIn();
-			},
-			success: function(response){
-				jQuery("#loader").fadeOut();
-				jQuery('.total-mini-cart-item').html(qty);
-				console.log(response);
-			}
-		});
-	});
-
-	
-	jQuery('.remove-items').click(function(){
-		var id = jQuery(this).attr('product_id');
-		jQuery('.cart_item_'+id).fadeOut();
-		jQuery.ajax({
-			url: '/products/remove_items',
-			type: 'POST',
-			data: {id: id},
-			dataType: 'html',
-			cache: false,
-			beforeSend: function(){
-				jQuery("#loader").fadeIn();
-			},
-			success: function(response){
-				jQuery("#loader").fadeOut();
-				
-				console.log(response);
-			}
-		});
-	});
-	jQuery('.close-flash').click(function(){
-		jQuery(this).parent().parent().fadeOut();
-	});
 	
 	
 });

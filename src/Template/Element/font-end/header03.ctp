@@ -3,7 +3,7 @@
 	<div class="header3 header5">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-2 col-xs-12">
+				<div class="col-md-2 col-sm-2 col-xs-6">
 					<div class="logo5">
 						
 						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
@@ -13,7 +13,6 @@
 					<div class="smart-search search-form3 search-form5">
 						<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
 					</div>
-					
 				</div>
 				
 				<div class="col-md-3 col-sm-12 col-xs-12">
@@ -26,23 +25,23 @@
 							<li class="top-language has-child">
 								<a class="language-selected" href="#">
 								    <?php 
-								        if ($this->request->session()->read('Config.language') == NULL) {
-								            echo $this->Html->image('flags/en.png',['class'=>"position-left"]);
-								        } else {
-								            echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
-								        } 
-								        echo ($this->request->session()->read('Config.language') == 'vn') ? '  ':'  ';
-								    ?>
+										if ($this->request->session()->read('Config.language') == NULL) {
+											echo $this->Html->image('flags/en.png',['class'=>"position-left"]);
+										} else {
+											echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
+										} 
+										echo ($this->request->session()->read('Config.language') == 'vn') ? '  ':'  ';
+									?>
 								</a>
 								<ul class="sub-menu-top">
-								   <li>
-								        <?= $this->Html->link($this->Html->image('flags/vn.png').' VietNam', ['action' => 'changeLang', 'vn'], ['escape' => false, 'class' => 'position-left']); ?>
-								    </li>
-								    <li>
-								        <?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
-								    </li>
+									<li>
+										<?= $this->Html->link($this->Html->image('flags/vn.png').' VietNam', ['action' => 'changeLang', 'vn'], ['escape' => false, 'class' => 'position-left']); ?>
+									</li>
+									<li>
+										<?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
+									</li>
 								</ul>
-		                    </li>
+							</li>
 						</ul>
 						<?php echo $this->element('font-end/cart') ?>
 					</div>
@@ -56,20 +55,20 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 col-sm-3 col-xs-6 ">
-	                <div class="category-dropdown hidden-category-dropdown">
-	                    <h2 class="title-category-dropdown"><span><?php echo __('Categories') ?></span></h2>
-	                    <div class="wrap-category-dropdown">
-	                        <ul class="list-category-dropdown">
-	                            <?= $this->element('font-end/Pages/vertical_menu'); ?>
-	                        </ul>
-	                        <a href="#" class="expand-category-link"></a>
-	                    </div>
-	                </div>
-	                <!-- End Category Dropdown -->
-	            </div>
-	            <div class="col-md-9 col-sm-9 col-xs-6">
+				    <div class="category-dropdown hidden-category-dropdown">
+				        <h2 class="title-category-dropdown"><span><?php echo __('Categories') ?></span></h2>
+				        <div class="wrap-category-dropdown">
+				            <ul class="list-category-dropdown">
+				                <?= $this->element('font-end/Pages/vertical_menu'); ?>
+				            </ul>
+				            <a href="#" class="expand-category-link"></a>
+				        </div>
+				    </div>
+				    <!-- End Category Dropdown -->
+				</div>
+				<div class="col-md-9 col-sm-9 col-xs-6">
 					<?= $this->element('font-end/Pages/horizontal_menu'); ?>
-	            </div>
+				</div>
 			</div>
 		</div>
 	</div>

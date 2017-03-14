@@ -51,7 +51,7 @@
     <!-- End Sub Header 2 -->
     <div class="header4">
         <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-12">
+            <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="logo4">
                     <?php echo $this->Html->image('logo.png',['width'=>'50%']) ?>
                 </div>

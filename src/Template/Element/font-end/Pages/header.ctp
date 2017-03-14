@@ -60,7 +60,7 @@
     <div class="container">
         <div class="header-main">
             <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-3 col-xs-6">
                     <div class="logo">
                         <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
                     </div>

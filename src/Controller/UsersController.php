@@ -8,19 +8,13 @@ use Cake\Datasource\ConnectionManager;
 use PHPExcel_IOFactory; 
 use Cake\Mailer\Email;
 use Cake\Auth\DefaultPasswordHasher;
-// use Cake\Mailer\Email;
+
 //** PDF **/
 require_once(ROOT.DS.'vendor'.DS.'TCPDF'.DS.'tcpdf.php');
 //** Excel **//
 require_once(ROOT.DS.'vendor'.DS.'PHPExcel'.DS.'Classes'.DS.'PHPExcel.php');
 require_once(ROOT.DS.'vendor'.DS.'PHPExcel'.DS.'Classes'.DS.'PHPExcel'.DS.'IOFactory.php');
 
-
-/**
- * Users Controller
- *
- * @property \App\Model\Table\UsersTable $Users
- */
 class UsersController extends AppController
 {
 
@@ -28,16 +22,8 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         $this->Auth->allow('login','logout');
     }
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
    
-    public function index()
-    {     
-        // $this->sendUserEmail('duongquan5491@gmail.com','Actice Accounts','hello');
+    public function index() {     
         $this->paginate = [
             'contain' => ['Groups']
         ];
@@ -47,16 +33,7 @@ class UsersController extends AppController
         $this->set('_serialize', ['users']);
     }
 
-    
-    /**
-     * View method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
+    public function view($id = null) {
         $user = $this->Users->get($id, [
             'contain' => ['Groups', 'Cashflows', 'Invoices', 'Logs', 'Stocks']
         ]);
@@ -64,15 +41,7 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
-    
-
-    public function add()
-    {
+    public function add() {
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             if (isset($this->request->data['avatars']['name']) && !empty($this->request->data['avatars']['name'])) {
@@ -102,15 +71,7 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
+    public function edit($id = null) {
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
@@ -136,15 +97,7 @@ class UsersController extends AppController
         $this->set('_serialize', ['user']);
     }
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id User id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
+    public function delete($id = null) {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -499,7 +452,7 @@ class UsersController extends AppController
             $this->Flash->success(__('The password change successfully.'));
             return $this->redirect(['controller'=>'pages','action' => 'login']);
         } elseif(!$exists){
-            $this->Flash->success(__('error!'));
+        
             return $this->redirect(['controller'=>'pages','action' => 'login']);
         }
         $this->viewBuilder()->layout('product');
@@ -507,7 +460,6 @@ class UsersController extends AppController
         $this->set(compact( 'id'));
     }
 
-  
     public function activeacc($id, $code){
         $User = TableRegistry::get('Users');
         $exists = $this->Users->exists(['id' => $id,'code' => $code,'actived' => false]);
@@ -531,7 +483,6 @@ class UsersController extends AppController
     public function ChangePasswordUser(){
         $this->check_user();
         $this->viewBuilder()->layout('product');
-        
         if ($this->request->is('post')) {
             $captcha = $this->request->session()->read('captcha');
             if ($captcha != $this->request->data['captcha']) {

@@ -17,33 +17,31 @@
 									</tr>
 								</thead>
 								<tbody>
-								<?php if (!empty($this->request->session()->read('Cart'))): ?>
-									
-								
-								<?php foreach ($this->request->session()->read('Cart') as $key => $products): ?>
-									<tr class="cart_item_<?php echo $products[0] ?>">
-										<td class="product-remove">
-											<span class="remove-items" product_id="<?php echo $products[0] ?>"><i class="fa fa-times"></i></span>
-										</td>
-										<td class="product-thumbnail">
-											<?php echo $this->Html->link($this->Html->image($products[3],['width'=>70]), ['controller'=>'pages','action'=>'products',$products[0]], array('escape' => false)); ?>
-										</td>
-										<td class="product-name">
-											<a href="#"><?php echo $products[1] ?> </a>					
-										</td>
-										<td class="product-quantity">
-											<div class="info-qty">
-												<a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
-												<span class="qty-val">1</span>
-												<a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
-											</div>			
-										</td>
-										<!-- <td class="product-subtotal">
-											<span class="amount"><?php //echo number_format( $products[2], DECIMALS)?></span>					
-										</td> -->
-									</tr>
-								<?php endforeach ?>
-								<?php endif ?>
+									<?php if (!empty($this->request->session()->read('Cart'))): ?>
+										<?php foreach ($this->request->session()->read('Cart') as $key => $products): ?>
+											<tr class="cart_item_<?php echo $products[0] ?>">
+												<td class="product-remove">
+													<span class="remove-items" product_id="<?php echo $products[0] ?>"><i class="fa fa-times"></i></span>
+												</td>
+												<td class="product-thumbnail">
+													<?php echo $this->Html->link($this->Html->image($products[3],['width'=>70]), ['controller'=>'pages','action'=>'products',$products[0]], array('escape' => false)); ?>
+												</td>
+												<td class="product-name">
+													<a href="#"><?php echo $products[1] ?> </a>
+												</td>
+												<td class="product-quantity">
+													<div class="info-qty">
+														<a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
+														<span class="qty-val">1</span>
+														<a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
+													</div>			
+												</td>
+												<!-- <td class="product-subtotal">
+													<span class="amount"><?php //echo number_format( $products[2], DECIMALS)?></span>
+												</td> -->
+											</tr>
+										<?php endforeach ?>
+									<?php endif ?>
 									
 									<tr>
 										<td class="actions" colspan="6">
@@ -53,7 +51,7 @@
 												<!-- <input type="submit" value="Apply Coupon" name="apply_coupon" class="button"> -->
 											</div>
 											
-											<!-- <input type="submit" value="Create Quotation" name="update_cart" class="button">			 -->
+											<input type="submit" value="Create Quotation" name="update_cart" class="button">
 										</td>
 									</tr>
 								</tbody>

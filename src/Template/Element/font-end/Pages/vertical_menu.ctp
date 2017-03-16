@@ -2,8 +2,8 @@
     <li class="<?php if (isset($category->children) && !empty($category->children)){echo 'has-cat-mega';} ?>">
         <?php echo $this->Html->link($category->name,[ 'controller' => 'Pages',  'action' => 'categories-parent',$category->id]) ?>
         <?php if (isset($category->children) && !empty($category->children)): ?>
-           <?php if (!empty($category->picture)): ?>
-                <div class="col-md-12 cat-mega-menu cat-mega-style1" style="background-image: url(/img/<?php echo $category->picture ?>);">
+           <?php if (!empty($category->thumbnails)): ?>
+                <div class="col-md-12 cat-mega-menu cat-mega-style1" style="background-image: url(/img/<?php echo $category->thumbnails ?>);">
             <?php else: ?>
                  <div class="col-md-12 cat-mega-menu cat-mega-style1">
            <?php endif ?>

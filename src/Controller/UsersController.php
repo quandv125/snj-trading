@@ -359,7 +359,7 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
           
             $captcha = $this->request->session()->read('captcha');
-            if ($captcha != $this->request->data['captcha']) {
+            if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
                $this->Flash->error1(__('captcha incorrect!'));
             } else {
                 $exists = $this->Users->exists(['email' => $this->request->data['email']]);
@@ -426,7 +426,7 @@ class UsersController extends AppController
         
         if ($this->request->is([ 'post'])) {
             $captcha = $this->request->session()->read('captcha');
-            if ($captcha != $this->request->data['captcha']) {
+            if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
                $this->Flash->error1(__('captcha incorrect!'));
             } else {
                 $users = $this->Users->find()->where(['email' => $this->request->data['email']])->first();
@@ -485,7 +485,7 @@ class UsersController extends AppController
         $this->viewBuilder()->layout('product');
         if ($this->request->is('post')) {
             $captcha = $this->request->session()->read('captcha');
-            if ($captcha != $this->request->data['captcha']) {
+            if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
                 $this->Flash->error1(__('captcha incorrect!'));
             } else {
                 if ($this->request->data['password'] == $this->request->data['confirm_password']) {

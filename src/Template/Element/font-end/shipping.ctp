@@ -10,7 +10,7 @@
                         </div>
                     </div>
                     <div class="item">
-                         <div class="zoom-image-thumb item-adv-simple">
+                        <div class="zoom-image-thumb item-adv-simple">
                             <?php echo $this->Html->link($this->Html->image('gallery/ad1.png'),['controller' => 'Pages','action' => 'categories', 2,1],['escape' => false]) ?>
                         </div>
                     </div>

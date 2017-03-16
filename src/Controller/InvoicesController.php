@@ -59,7 +59,7 @@ class InvoicesController extends AppController
             'limit' => LIMIT
         ];
         $invoices  = $this->paginate($this->Invoices);
-        $total     = $this->Invoices->find()->select(['final_price' => 'SUM(Invoices.total)','total_paid' => 'SUM(Invoices.customers_paid)'])->first();
+        $total     = $this->Invoices->find()->select(['final_price'=>'SUM(Invoices.total)','total_paid' => 'SUM(Invoices.customers_paid)'])->first();
         $users     = $this->Invoices->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username', 'limit' => 200]);
         $customers = $this->Invoices->Customers->find('list', ['limit' => 200]);
         $this->set(compact('invoices','users','customers','total'));

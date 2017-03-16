@@ -27,23 +27,23 @@
                         <?= $this->Form->input('retail_price',['class' => 'auto','placeholder' => 'USD','value'=>$products->retail_price]); ?>
                         
                         <?= $this->Form->input('categorie_id',[ 
-                                'label'=>"Categories/ Machinery's Name",
-                                'type'=>'select',
-                                'multiple'=>false,
-                                'options'=>$categorie,
-                                "class" => "selectpicker",
-                                "data-live-search" => "true",
-                                'default'=>$products->category['id']
+                                'label'     => "Categories/ Machinery's Name",
+                                'type'      => 'select',
+                                'multiple'  => false,
+                                'options'   => $categorie,
+                                "class"     =>  "selectpicker",
+                                "data-live-search"  =>  "true",
+                                'default'   => $products->category['id']
                                 // 'append' => [ $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]
                             ]
                         ); ?>
                         <?= $this->Form->input('supplier_id',[
-                                'label'=>"Suppliers/ Maker's Name",
-                                "class" => "supplier_id selectpicker",
+                                'label'     =>"Suppliers/ Maker's Name",
+                                "class"     => "supplier_id selectpicker",
                                 "data-live-search" => "true",
-                                'options'=>$suppliers,
-                                'default'=>$products->supplier['id'],
-                                'append' => [ $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
+                                'options'   =>$suppliers,
+                                'default'   =>$products->supplier['id'],
+                                'append'    => [ $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
                         ]); ?>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -67,13 +67,12 @@
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <?= $this->Form->input('stock_max',array('class'=>'stock_max','value'=>$products->stock_max)); ?>
-                        <?= $this->Form->input('unit',array('class' => 'unit','value'=>$products->unit)); ?>    
+                        <?= $this->Form->input('unit',array('class' => 'unit','value'=>$products->unit)); ?>
                     </div>
                     <div class="col-lg-12 col-md-6">
                         <label class="control-label" for="Description">Description</label>
                         <?= $this->Form->textarea('description',['id'=>'editor2','value'=>$products->description]);?>
                     </div>
-                    
                 </div>
                 <div role="tabpanel" class="tab-pane" id="messages"><br/>
                     <?= 
@@ -83,12 +82,13 @@
                             ]
                         ]); 
                     ?>
-                    <output id="listProductFile"></output>
+                    <output id="listProductFile">
+                        <?php foreach ($products->images as $key => $image): ?>
+                            <?php echo $this->Html->image($image->thumbnail,['style' => 'width: 100px;']) ?>
+                        <?php endforeach ?>
+                    </output>
                 </div>
-               
             </div>
-
-            
         </div>
         <?= $this->Form->button('Submit',array('class' => 'btn btn-success',"style"=>"margin-top: 10px;margin-left: 15px;")); ?>
             <?= $this->Form->end(); ?>

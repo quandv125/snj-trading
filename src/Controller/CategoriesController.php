@@ -85,7 +85,10 @@ class CategoriesController extends AppController
             if (!empty($this->request->data['files']['tmp_name'])) {
                 $filename = rand(1,100000).'_'.$this->request->data['files']['name'];
                 if(move_uploaded_file($this->request->data['files']['tmp_name'], CATEGORIES.$filename)){
-                    $this->request->data['picture'] = 'categories'.DS.$filename;
+                    $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files']['name']);
+                    $this->Custom->generate_thumbnail(CATEGORIES.$filename, $thumbnail, SIZE180);
+                    $this->request->data['thumbnails'] = 'thumbnails/'.$thumbnail;
+                    $this->request->data['picture'] = 'categories/'.$filename;
                 }
             }
             $category = $this->Categories->patchEntity($category, $this->request->data);
@@ -122,6 +125,9 @@ class CategoriesController extends AppController
             if (!empty($this->request->data['files'.$id]['tmp_name'])) {
                 $filename = rand(1,100000).'_'.$this->request->data['files'.$id]['name'];
                 if(move_uploaded_file($this->request->data['files'.$id]['tmp_name'], CATEGORIES.$filename)){
+                    $thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$id]['name']);
+                    $this->Custom->generate_thumbnail(CATEGORIES.$filename, $thumbnail, SIZE180);
+                    $this->request->data['thumbnails'] = 'thumbnails/'.$thumbnail;
                     $this->request->data['picture'] = 'categories/'.$filename;
                 }
             }

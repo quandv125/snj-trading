@@ -702,8 +702,8 @@ jQuery(document).ready(function(){
 	}
 	//End Widget Shop
 
-	
-	
+
+
 });
 //Window Load
 jQuery(window).on('load',function(){ 
@@ -857,8 +857,8 @@ jQuery(document).ready(function($){
             fullname: {
                 validators: {
                     stringLength: {
-                        min: 5,
-                        message: 'Please enter at least 5 characters'
+                        min: 4,
+                        message: 'Please enter at least 4 characters'
                     },
                         notEmpty: {
                         message: 'Please supply your full name'
@@ -868,8 +868,8 @@ jQuery(document).ready(function($){
             username: {
                 validators: {
                      stringLength: {
-                        min: 5,
-                        message: 'Please enter at least 5 characters'
+                        min: 4,
+                        message: 'Please enter at least 4 characters'
                     },
                     notEmpty: {
                         message: 'Please supply your username'
@@ -879,8 +879,8 @@ jQuery(document).ready(function($){
             password: {
                 validators: {
                      stringLength: {
-                        min: 5,
-                        message: 'Please enter at least 5 characters'
+                        min: 4,
+                        message: 'Please enter at least 4 characters'
                     },
                     notEmpty: {
                         message: 'Please supply your password'
@@ -890,8 +890,8 @@ jQuery(document).ready(function($){
             confirm_password: {
                 validators: {
                     stringLength: {
-                        min: 5,
-                        message: 'Please enter at least 5 characters'
+                        min: 4,
+                        message: 'Please enter at least 4 characters'
                     },
                     identical: {
 	                    field: 'password',

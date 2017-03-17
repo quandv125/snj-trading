@@ -3,9 +3,9 @@
 	<fieldset>
 
 	
-	<h2 class="title-shop-page">
-		<?php echo $this->Html->image('logo2.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'15%']) ?>
-	</h2>
+	<h4 class="title-shop-page">
+		<?php echo __('Register Account') ?>
+	</h4>
 
 	<div class="form-group">
 		<label class="col-md-4 control-label" >Username*</label> 
@@ -38,11 +38,11 @@
 	</div>
 	
 	<div class="form-group">
-	  <label class="col-md-4 control-label">Full Name*</label>  
+	  <label class="col-md-4 control-label">Company Name*</label>  
 	  <div class="col-md-4 inputGroupContainer">
 	  <div class="input-group">
 	  <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-	  <input  name="fullname" placeholder="Full Name" class="form-control"  type="text">
+	  <input  name="fullname" placeholder="Company Name" class="form-control"  type="text">
 	    </div>
 	  </div>
 	</div>
@@ -77,7 +77,7 @@
 	  </div>
 	</div>
 
-	
+<!-- 	
 	<div class="form-group">
 	    <label class="col-md-4 control-label">Group</label>
 	    <div class="col-md-4">
@@ -92,8 +92,8 @@
 	            </label>
 	        </div>
 	    </div>
-	</div>
-	<div class="form-group">
+	</div> -->
+	<!-- <div class="form-group">
 	  <label class="col-md-4 control-label">Description*</label>
 	    <div class="col-md-4 inputGroupContainer">
 	    <div class="input-group">
@@ -101,7 +101,7 @@
 	        	<textarea class="form-control" name="description" placeholder="Project Description"></textarea>
 	  </div>
 	  </div>
-	</div>
+	</div> -->
 	<div class="form-group">
 	  <label class="col-md-4 control-label"></label>
 	    <div class="col-md-4 inputGroupContainer">

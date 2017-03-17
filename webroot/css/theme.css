@@ -1176,7 +1176,7 @@ a:focus {
 	-moz-transform: translateY(0);
 }
 .title-product {
-    font-size: 14px;
+    font-size: 1em;
     font-weight: 700;
     margin: 0 0 8px;
     font-weight: 400!important;
@@ -1357,7 +1357,7 @@ a:focus {
 .product-list .product-info-cart {
     left: auto;
     right: 0;
-    top: 35px;
+    top: 27px;
     transform: translate(0px);
     -webkit-transform: translate(0px);
     width: 130px;

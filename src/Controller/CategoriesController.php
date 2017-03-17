@@ -38,7 +38,7 @@ class CategoriesController extends AppController
             } else {
                 echo('____'.$value->name.'<br/>');
             }
-            $this->recursion($value->children,  $time+1);
+            $this->recursion($value->children, $time+1);
         }
     }
     /**
@@ -121,7 +121,7 @@ class CategoriesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             if (empty($this->request->data['parent_id'])) {
                 $this->request->data['parent_id'] = 0;
-            }   
+            }
             if (!empty($this->request->data['files'.$id]['tmp_name'])) {
                 $filename = rand(1,100000).'_'.$this->request->data['files'.$id]['name'];
                 if(move_uploaded_file($this->request->data['files'.$id]['tmp_name'], CATEGORIES.$filename)){
@@ -167,12 +167,9 @@ class CategoriesController extends AppController
     public function SearchCategories(){
         if ($this->request->is('Ajax')) {
             $this->autoRender = false;
-           
             $conditions = ['name LIKE "%'.$this->request->data['keyword'].'%"'];
             $categories = $this->Categories->find('threaded')->where($conditions);
-           
             $parentCategories = $this->Categories->ParentCategories->find('list', ['limit' => 200]);
-           
             $this->set(compact('categories','parentCategories'));
             $this->render('/Element/Categories/result_search');
         }

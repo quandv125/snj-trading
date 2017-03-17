@@ -132,9 +132,9 @@ class AppController extends Controller
     }
 
     public function beforeFilter(Event $event)  {
-        if ($this->Auth->user('group_id') == ADMIN) {
+        // if ($this->Auth->user('group_id') == ADMIN) {
             $this->Auth->allow();
-        }
+        // }
         $language = $this->request->session()->read('Config.language');
         $this->Auth->allow(['index','display','logout','changeLang']); 
         $user_info = $this->Auth->user();
@@ -148,10 +148,10 @@ class AppController extends Controller
     }
 
     private function menu() {
-        $Categorie   = TableRegistry::get('Categories');
-        $Article     = TableRegistry::get('Articles');
-        $categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL])->order([ 'created' => 'ASC' ]);
-        $categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL])->limit(5)->order([ 'created' => 'ASC' ]);
+        $Categorie   = TableRegistry::get( 'Categories' );
+        $Article     = TableRegistry::get( 'Articles' );
+        $categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL ])->order([ 'created' => 'ASC' ]);
+        $categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL ])->limit( 5 )->order([ 'created' => 'ASC' ]);
         $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
         $snj         = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
         $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);

@@ -1,5 +1,5 @@
 
-<div role="tabpanel" class="tab-pane fade in active" id="product-grid">
+<div role="tabpanel" class="tab-pane fade " id="product-list">
     <ul class="row product-grid live-search-list vertical highlight_list" >
         <?php foreach ($products as $key => $product): ?>
             <li data-search-term="supplier<?= $product->supplier['id'];?> active<?= $key?>" class="supplier-search-<?= $product->supplier['id'];?> supplier-search col-md-3 col-sm-6 col-xs-12">
@@ -28,13 +28,14 @@
         <?php endforeach ?>
     </ul>
 </div>
-<div role="tabpanel" class="tab-pane fade" id="product-list">
+<div role="tabpanel" class="tab-pane fade in active" id="product-grid">
     <ul class="product-list vertical highlight_list">
         <?php foreach ($products as $key => $product): ?>
+
             <li data-search-term="supplier<?= $product->supplier['id'];?> active<?= $key?>" class="supplier-search-<?= $product->supplier['id'];?> supplier-search">
                 <div class="item-product">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="col-md-3 col-sm-12 col-xs-12">
                             <div class="product-thumb">
                                 <a class="product-thumb-link" href="<?= $this->Url->build(['controller'=>'pages','action'=>'products', $product->id]) ?>">
                                     <?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb']); ?>
@@ -42,36 +43,48 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-md-8 col-sm-12 col-xs-12">
+                        <div class="col-md-9 col-sm-12 col-xs-12">
                             <div class="product-info">
                                 <h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </h3>
-                               <div class="info-category">
-                                    <label><b>Maker's name:</b> </label> 
-                                    <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'Categories',$product->category['id']])?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label><b>Categories:</b> </label> 
-                                    <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'Categories',$product->category['id']])?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label><b>Part No: </b></label> 
-                                    <span><?php echo $product->sku; ?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label><b>Availability:</b> </label> <span>In stock</span>
-                                </div>
-                                <div class="info-category">
-                                    <label>Serial No: </label> <span><?php echo $product->serial_no ?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label>Type Model: </label> <span><?php echo $product->type_model ?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label>Quantity: </label> <span><?php echo $product->quantity ?></span>
-                                </div>
-                                <div class="info-category">
-                                    <label>Origin: </label> <span><?php echo $product->origin ?></span>
-                                </div>
+                                <table class="table table-hover" style=" max-width: 73%;">
+                                    <tbody>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Maker's name") ?>:</b></td>
+                                            <td><?= $product->supplier['name'] ?></td>
+                                        </tr>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Categories") ?>:</b></td>
+                                            <td><?= $product->category['name']?></td>
+                                        </tr>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Part No") ?>:</b></td>
+                                            <td><?= $product->sku; ?></td>
+                                        </tr>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Availability") ?>:</b></td>
+                                            <td>In stock</td>
+                                        </tr>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Serial No") ?>:</b></td>
+                                            <td><?= $product->serial_no ?></td>
+                                        </tr>
+                                        <tr class="info-category">
+                                            <td><b> <?php echo __("Type Model") ?>:</b></td>
+                                            <td><?= $product->type_model; ?></td>
+                                        </tr>
+                                         <tr class="info-category">
+                                            <td><b> <?php echo __("Quantity") ?>:</b></td>
+                                            <td><?= $product->quantity; ?></td>
+                                        </tr>
+                                         <tr class="info-category">
+                                            <td><b> <?php echo __("Origin") ?>:</b></td>
+                                            <td><?= $product->origin; ?></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                 <label><b> <?php echo __("Remark") ?>:</b> </label>
+                            <p class="product-description"><?= $product->short_description; ?> </p>
                                 <div class="product-info-cart">
                                     <span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
                                         <i class="fa fa-shopping-cart"></i> Add to Cart
@@ -79,8 +92,7 @@
                                    
                                 </div>
                             </div>
-                            <label><b>Remark:</b> </label> <div class="clearfix"></div>
-                            <p class="product-description"><?= $product->short_description; ?> </p>
+                           
                         </div>
                     </div>
                 </div>

@@ -185,7 +185,7 @@
 							</div>
 						</li>
 					</ul>
-				</div>
+				</div> 
 			</div>
 		</div>
 		<!-- End Main Detail -->
@@ -193,7 +193,7 @@
 			<div class="title-tab-detail">
 				<ul role="tablist">
 					<li class="active"><a href="#details" data-toggle="tab">Product Details </a></li>
-					<li><a href="#feedback" data-toggle="tab"> Seller Guarantees</a></li>
+					
 					<li><a href="#shipping" data-toggle="tab">Shipping & Payment</a></li>
 					
 				</ul>
@@ -205,13 +205,7 @@
 							<?= $product->description ?>
 						</div>
 					</div>
-					<div role="tabpanel" class="tab-pane" id="feedback">
-						<div class="inner-content-tab-detail">
-							<h2>Review</h2>
-							<p>Donec pede justo, fringilla vel, aliquet nec, vulpu tate eget. Sed quia consequuntur magni dolores. Id eges tas massa sem et elit. Donec pede justo, fringilla vel, aliquet nec, vulpu tate eget. Sed quia consequuntur magni dolores. Id eges tas massa sem et elit.</p>
-							<p>Qenean commodo ligula eget dolor. Aenean massa. Cumt sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla onsequat mas quis enim. Donec pede justo, fringilla vel, aliquet nec, vulpu tate eget. Sed quia consequuntur magni dolores. Id eges tas massa sem et elit. Viva mus semper cursus libero</p>
-						</div>
-					</div>
+					
 					<div role="tabpanel" class="tab-pane" id="shipping">
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Return Policy</span></div>

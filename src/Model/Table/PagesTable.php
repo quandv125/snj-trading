@@ -155,10 +155,11 @@ class PagesTable extends Table
             'Images' => function($q){
                 return $q->select(['id','product_id','path','thumbnail']);
             }])
-            ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.retail_price','Products.short_description'])
+            ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.retail_price','Products.short_description'])
             ->order(['Products.created' => 'DESC'])
             ->Where([$conditions])
-            ->limit(LIMIT);
+            ->limit(LIMIT)->toarray();
+         
         return $products;
     }
 
@@ -215,7 +216,7 @@ class PagesTable extends Table
             'Images' => function($q){
                 return $q->select(['id','product_id','path','thumbnail']);
             }])
-            ->select(['Products.id','Products.sku','Products.product_name','Products.retail_price','Products.short_description'])
+            ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.retail_price','Products.short_description'])
             ->order(['Products.created' => 'DESC'])
             ->Where([$conditions])
             ->orWhere($conditions2);

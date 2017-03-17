@@ -931,8 +931,8 @@ jQuery(document).ready(function($){
             address: {
                 validators: {
                     stringLength: {
-                        min: 10,
-                        message: 'Please enter at least 10 characters'
+                        min: 5,
+                        message: 'Please enter at least 5 characters'
                     },
                     notEmpty: {
                         message: 'Please supply your street address or Please enter at least 8 characters'

@@ -158,8 +158,9 @@ class ProductsController extends AppController
             return $this->redirect(['controller'=>'Pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);
         }
         $this->viewBuilder()->layout('product');
-       
-        $categorie  = $Categorie->find('treeList'); 
+        $arr = [2,3];
+        $categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
+      
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
         $this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
@@ -533,13 +534,16 @@ class ProductsController extends AppController
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $cart = $this->request->session()->read('Cart');
+
             if (!isset($cart)) {
                 $my_cart = array();
             } else {
                 $my_cart = $cart;
             }
+
             if (!in_array($this->request->data['id'], $my_cart)) {
-                $my_cart[$this->request->data['id']] = [$this->request->data['id'],$this->request->data['name'],$this->request->data['price'],$this->request->data['picture'],];
+                $products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null);  
+                $my_cart[$this->request->data['id']] = $products;
                 unset($my_cart[null]);
                 $this->request->session()->write('Cart', $my_cart);
             }            

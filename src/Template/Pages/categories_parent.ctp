@@ -49,8 +49,8 @@
                 <div class="shop-tab-title">
                     <h3><?php echo $info->name ?></h3>
                     <ul class="shop-tab-select">
-                        <li class="active"><a href="#product-grid" class="grid-tab" data-toggle="tab"></a></li> 
-                        <li><a href="#product-list" class="list-tab" data-toggle="tab"></a></li>
+                        <li class="active"><a href="#product-grid" class="list-tab" data-toggle="tab"></a></li> 
+                        <li><a href="#product-list" class="grid-tab" data-toggle="tab"></a></li>
                     </ul>
                 </div>
                 <div class="tab-content">

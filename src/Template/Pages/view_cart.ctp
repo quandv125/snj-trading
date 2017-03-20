@@ -1,4 +1,4 @@
-quan
+
 <div id="content">
 		<div class="content-page woocommerce">
 			<div class="container">

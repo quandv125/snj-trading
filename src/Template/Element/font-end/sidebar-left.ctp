@@ -17,19 +17,19 @@
                     <?php //endforeach ?>
                     </select>
                 </li> -->
-                <li> 
+               <!--  <li> 
                     <div class="sidebar-left sidebar-post">
                         <div class="widget widget-post-cat">
-                             <?php foreach ($suppliers as $key => $supplier): ?>
+                             <?php// foreach ($suppliers as $key => $supplier): ?>
                                 <label class="custom-control custom-checkbox">
                                     <input type="checkbox" id="<?= $key?>" class="custom-control-input">
-                                    <?php echo $supplier; ?>
+                                    <?php// echo $supplier; ?>
                                 </label>
                                <br/>
-                            <?php endforeach ?>
+                            <?php// endforeach ?>
                         </div>
                     </div>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

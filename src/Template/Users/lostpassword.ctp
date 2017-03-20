@@ -31,9 +31,9 @@
 <form class="well form-horizontal" action="lostpassword" method="post"  id="contact_form">
     <fieldset>
     
-    <h2 class="title-shop-page">
+   <!--  <h2 class="title-shop-page">
         <?php echo $this->Html->image('logo2.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'15%']) ?>
-    </h2>
+    </h2> -->
 
     <div class="form-group">
       <label class="col-md-4 control-label">E-Mail*</label>  

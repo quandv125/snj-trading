@@ -1,3 +1,4 @@
+
 <div id="content">
 		<div class="content-page woocommerce">
 			<div class="container">
@@ -8,15 +9,15 @@
 							<table cellspacing="0" class="shop_table cart table">
 								<thead>
 									<tr>
-										<th class="product-remove"><?php echo __('#'); ?></th>
-										<th class="product-thumbnail"><?php echo __('Picture'); ?></th>
-										<th class="product-name"><?php echo __('Name'); ?></th>
-										<th class="product-quantity"><?php echo __('Category'); ?></th>
-										<th class="product-subtotal"><?php echo __('Type Model'); ?></th>
-										<th class="product-thumbnail"><?php echo __('Serial No'); ?></th>
-										<th class="product-thumbnail"><?php echo __('Origin'); ?></th>
-										<th class="product-quantity"><?php echo __('Quantity'); ?></th>
-										<th class="product-subtotal"><?php echo __('Remark'); ?></th>
+										<th class="text-center product-remove"><?php echo __('#'); ?></th>
+										<th class="text-center product-thumbnail"><?php echo __('Picture'); ?></th>
+										<th class="text-center product-name" style="max-width: 100px;"><?php echo __('Name'); ?></th>
+										<th class="text-center product-quantity"><?php echo __('Category'); ?></th>
+										<th class="text-center product-subtotal"><?php echo __('Type Model'); ?></th>
+										<th class="text-center product-thumbnail"><?php echo __('Serial No'); ?></th>
+										<th class="text-center product-thumbnail"><?php echo __('Origin'); ?></th>
+										<th class="text-center product-quantity"><?php echo __('Quantity'); ?></th>
+										<th class="text-center product-subtotal"><?php echo __('Remark'); ?></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -24,37 +25,37 @@
 										<?php foreach ($this->request->session()->read('Cart') as $key => $products): ?>
 											
 											<tr class="cart_item_<?php echo $products->id ?>">
-												<td class="product-remove">
+												<td class="text-center product-remove">
 													<span class="remove-items" product_id="<?php echo $products->id ?>"><i class="fa fa-times"></i></span>
 												</td>
-												<td class="product-thumbnail"> <!-- Picture -->
+												<td class="text-center product-thumbnail"> <!-- Picture -->
 													<?= $this->Html->link($this->Html->image($products->thumbnail,['width'=>70]), ['controller'=>'pages','action'=>'products',$products->id], array('escape' => false)); ?>
 												</td>
-												<td class="product-name">
+												<td class="text-center product-name">
 													
 													<?= $this->Html->link($products->product_name, ['controller'=>'pages','action'=>'products', $products->id], array('escape' => false)); ?>
 												</td>
-												<td class="product-name">
+												<td class="text-center product-name">
 													<?= $products->category['name'] ?>
 												</td>
-												<td class="product-name">
+												<td class="text-center product-name">
 													<?= $products->type_model ?>
 												</td>
-												<td class="product-name">
+												<td class="text-center product-name">
 													<?= $products->serial_no ?>
 												</td>
-												<td class="product-name">
+												<td class="text-center product-name">
 													<?= $products->origin ?>
 												</td>
-												<td class="product-quantity">
+												<td class="text-center product-quantity">
 													<div class="info-qty">
 														<a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
 														<span class="qty-val">1</span>
 														<a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
 													</div>			
 												</td>
-												<td class="product-subtotal">
-													<span class="amount"><textarea class="form-control" rows="3" cols="3" id="comment"></textarea></span>
+												<td class="text-center product-subtotal">
+													<span class="amount"><textarea class="form-control" rows="2" cols="30" id="comment"></textarea></span>
 												</td>
 											</tr>
 										<?php endforeach ?>

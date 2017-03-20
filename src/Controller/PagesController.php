@@ -228,11 +228,11 @@ class PagesController extends AppController
         $orders = $Invoice->find()->contain([
            
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.quantity','Products.serial_no','Products.type_model','Products.origin','Products.product_name','Products.thumbnail','categories.id','categories.name',])
-                ->leftJoin('products', 'products.id = InvoiceProducts.product_id')
-                ->leftJoin('categories', 'categories.id = products.categorie_id');
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.quantity','Products.serial_no','Products.type_model','Products.origin','Products.product_name','Products.thumbnail','Categories.id','Categories.name',])
+                ->leftJoin('Products', 'Products.id = InvoiceProducts.product_id')
+                ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
             },
-        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['id' => $id])->order(['Invoices.created'=>'DESC'])->first();
+        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
         // pr($orders);die();
         $this->set(compact('orders'));
     }

@@ -52,14 +52,14 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="profile"><br/>
-                    <div class="col-lg-6 col-md-6">
+                   <!--  <div class="col-lg-6 col-md-6">
                         <?= $this->Form->input('stock_min',array('class' => 'stock_min','value' => '1')); ?>
                         <?= $this->Form->input('stock_level',array('class' => 'stock_level','value' => '1')); ?>
-                    </div>
-                    <div class="col-lg-6 col-md-6">
+                    </div> -->
+                   <!--  <div class="col-lg-6 col-md-6">
                         <?= $this->Form->input('stock_max',array('class'=>'stock_max')); ?>
                         <?= $this->Form->input('unit',array('class' => 'unit')); ?>    
-                    </div>
+                    </div> -->
                     <div class="col-lg-12 col-md-6">
                         <label class="control-label" for="Description">Description</label>
                         <?= $this->Form->textarea('description',['id'=>'editor2','class'=>'summernote']);?>

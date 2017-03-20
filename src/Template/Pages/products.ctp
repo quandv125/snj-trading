@@ -201,27 +201,27 @@
 			<div class="content-tab-detail">
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane active" id="details">
-						<div class="inner-content-tab-detail">
+						<!-- <div class="inner-content-tab-detail">
 							<?= $product->description ?>
-						</div>
+						</div> -->
 					</div>
 					
 					<div role="tabpanel" class="tab-pane" id="shipping">
-						<div class="table-content-tab-detail">
+						<!-- <div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Return Policy</span></div>
-							<div class="icon-table-detail"><?php echo $this->Html->image('assets/grid/rv1.png') ?></div>
+							<div class="icon-table-detail"><?php //echo $this->Html->image('assets/grid/rv1.png') ?></div>
 							<div class="info-table-detail">
 								<p>If the product you receive is not as described or low quality, the seller promises that you may return it before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe) and receive a full refund. The return shipping fee will be paid by you. Or, you can choose to keep the product and agree the refund amount directly with the seller.</p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Seller Service</span></div>
-							<div class="icon-table-detail"><?php echo $this->Html->image('assets/grid/rv2.png') ?></div>
+							<div class="icon-table-detail"><?php //echo $this->Html->image('assets/grid/rv2.png') ?></div>
 							<div class="info-table-detail">
 								<h3>On-time Delivery</h3>
 								<p>If you do not receive your purchase within 60 days, you can ask for a full refund before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe).</p>
 							</div>
-						</div>
+						</div> -->
 					</div>
 					
 				</div>

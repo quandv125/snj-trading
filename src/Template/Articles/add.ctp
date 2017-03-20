@@ -24,7 +24,8 @@
                 <?php
                     echo $this->Form->input('title');
                     echo $this->Form->input('categorie_id', ['label'=>'Categories','options' => $categories,"data-live-search" => "true",'class'=>'selectpicker live-search-box']);
-                    echo $this->Form->textarea('content',['id'=>'editor1']);
+                    echo $this->Form->label('Content');
+                    echo $this->Form->textarea('content',['class'=>'summernote']).'<br/>';
                     echo $this->Form->input('type', ['label'=>'Type','options' => [ARTICLE_SIGNLE => 'Signle', ARTICLE_CATEGORIES => 'Categories', ARTICLE_HELP => 'Help', ARTICLE_SNJ => 'SNJ', ARTICLE_MYACCOUNT => 'My Account'],"data-live-search" => "true",'class'=>'selectpicker live-search-box']);
                     echo $this->Form->input('note');
                     echo $this->Form->input('files',['type'=>'file', 'label' => 'Featured Image','id' => 'ProductFile', 'multiple']);

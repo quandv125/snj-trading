@@ -31,6 +31,7 @@
                                 <div class="col-lg-6 col-md-6">
                                     <?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'SKU/Part No','label' => 'SKU/Part No']); ?>
                                     <?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Name']); ?>
+                                    <?= $this->Form->input('retail_price',['class' => 'auto','placeholder' => 'USD']); ?>
                                     <?= $this->Form->input('categorie_id', ['label'=>__('Category'), 
                                         'class' => 'categorie_id js-states', 
                                         'id' => 'PCategorie_Id',
@@ -38,33 +39,24 @@
                                             $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
                                         ]);
                                     ?>
-                                   <!--  <?= $this->Form->input('outlet_id',['class' => 'outlet_id','id' => 'POutlet_Id','append' => [
-                                            $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalOutlet'])]]); ?> -->
+                                  
                                     <?= $this->Form->input('supplier_id',['class' => 'supplier_id','id' => 'PSupplier_Id','append' => [
                                             $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <label class="control-label" for="Status">Status</label>
-                                    <?= $this->Form->select('status',[1 => 'InStock', 2 => 'Order', 3 => 'OutStock']); ?>
-                                    <div class="divider15"></div>
-                                    <?= $this->Form->input('retail_price',['class' => 'auto retail_price','placeholder' => 'USD']); ?>
+                                    <?= $this->Form->input('serial_no',['class' => 'serial_no','placeholder' => 'Serial No']); ?>
+                                    <?= $this->Form->input('type_model',['class'=>'type_model','placeholder' => 'Type Model']); ?>
                                     <?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
                                     <?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
+                                    <?= $this->Form->input('unit',array('class' => 'unit','placeholder' => 'Unit')); ?>   
                                 </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab2">
-                                <div class="col-lg-6 col-md-6">
-                                    <?= $this->Form->input('stock_min',array('class' => 'stock_min','value' => '1')); ?>
-                                    <?= $this->Form->input('stock_level',array('class' => 'stock_level','value' => '1')); ?>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <?= $this->Form->input('stock_max',array('class'=>'stock_max')); ?>
-                                    <?= $this->Form->input('unit',array('class' => 'unit')); ?>    
-                                </div>
-                                <div class="col-lg-12 col-md-6">
+                                  <div class="col-lg-12 col-md-6">
                                     <label class="control-label" for="Short_Description">Short Description</label>
                                     <?= $this->Form->textarea('short_description',['class'=>'summernote']);?>
                                 </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab2">
+                                
                                 <div class="col-lg-12 col-md-6">
                                     <label class="control-label" for="Description">Description</label>
                                     <?= $this->Form->textarea('description',['class'=>'summernote']);?>

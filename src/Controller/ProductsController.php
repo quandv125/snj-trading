@@ -116,6 +116,7 @@ class ProductsController extends AppController
         $Categorie  = TableRegistry::get('Categories');
         $Image      = TableRegistry::get('Images');
         $Product    = TableRegistry::get('Products');
+        
         if ($this->request->is('post')) {
             $this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
             if ($this->Auth->user('group_id') == ADMIN) {
@@ -175,9 +176,7 @@ class ProductsController extends AppController
      */
     public function edit($id = null)
     {
-        $product = $this->Products->get($id, [
-            'contain' => []
-        ]);
+        $product = $this->Products->get($id, [ 'contain' => [] ]);
         $this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
         $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
         $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
@@ -252,7 +251,8 @@ class ProductsController extends AppController
             }
         }
         
-        $categorie  = $Categorie->find('treeList'); 
+        $arr = [2,3];
+        $categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
         $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
         $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
         $products   = $this->Products->OneProductsSearch(['Products.id'=>$id], null, null);  
@@ -600,4 +600,6 @@ class ProductsController extends AppController
             }
         }
     }
+
+   
 }

@@ -102,22 +102,22 @@ class InvoicesTable extends Table
         $validator
             ->decimal('total')
             ->requirePresence('total', 'create')
-            ->notEmpty('total');
+            ->allowEmpty('total');
 
         $validator
             ->decimal('customers_paid')
             ->requirePresence('customers_paid', 'create')
-            ->notEmpty('customers_paid');
+            ->allowEmpty('customers_paid');
 
         $validator
             ->decimal('money')
             ->requirePresence('money', 'create')
-            ->notEmpty('money');
+            ->allowEmpty('money');
 
         $validator
             ->decimal('return_money')
             ->requirePresence('return_money', 'create')
-            ->notEmpty('return_money');
+            ->allowEmpty('return_money');
 
         $validator
             ->integer('discount')
@@ -138,12 +138,12 @@ class InvoicesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
-        $rules->add($rules->existsIn(['outlet_id'], 'Outlets'));
-        $rules->add($rules->existsIn(['coupon_id'], 'Coupons'));
-        $rules->add($rules->existsIn(['payment_id'], 'Payments'));
-        $rules->add($rules->existsIn(['partner_delivery_id'], 'PartnerDeliverys'));
+        // $rules->add($rules->existsIn(['user_id'], 'Users'));
+        // $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        // $rules->add($rules->existsIn(['outlet_id'], 'Outlets'));
+        // $rules->add($rules->existsIn(['coupon_id'], 'Coupons'));
+        // $rules->add($rules->existsIn(['payment_id'], 'Payments'));
+        // $rules->add($rules->existsIn(['partner_delivery_id'], 'PartnerDeliverys'));
 
         return $rules;
     }

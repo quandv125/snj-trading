@@ -119,6 +119,7 @@ class CategoriesController extends AppController
         ]);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+
             if (empty($this->request->data['parent_id'])) {
                 $this->request->data['parent_id'] = 0;
             }
@@ -132,7 +133,30 @@ class CategoriesController extends AppController
                 }
             }
             $category = $this->Categories->patchEntity($category, $this->request->data);
+           
             if ($this->Categories->save($category)) {
+                $children = $this->Categories->find('children', ['for' => $category->id])->select(['id']);
+                if (!empty($children->toarray())) {
+                    if ($category->actived == true) {
+                        foreach ($children as $key => $descendant) {
+                            $this->Categories->updateAll(['actived' => true], ['id' => $descendant->id]);
+                        }
+                    } else {
+                        foreach ($children as $key => $descendant) {
+                            $this->Categories->updateAll(['actived' => false], ['id' => $descendant->id]);
+                        }
+                    }
+                    // Type
+                    if ($category->type == 0) {
+                        foreach ($children as $key => $descendant) {
+                            $this->Categories->updateAll(['type' => 0], ['id' => $descendant->id]);
+                        }
+                    } else {
+                        foreach ($children as $key => $descendant) {
+                            $this->Categories->updateAll(['type' => 1], ['id' => $descendant->id]);
+                        }
+                    }
+                }
                 $this->Flash->success(__('The category has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {

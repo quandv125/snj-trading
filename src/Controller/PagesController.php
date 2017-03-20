@@ -211,4 +211,29 @@ class PagesController extends AppController
 
        $this->set(compact('wishlists'));
     }
+
+    public function orders() {
+        $this->viewBuilder()->layout('product');
+        $this->check_user();
+        $Invoice  = TableRegistry::get('Invoices');
+        $orders = $Invoice->find()->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['user_id' => $this->Auth->user('id')])->order(['Invoices.created'=>'DESC']);
+       
+        $this->set(compact('orders'));
+    }
+
+    public function OrderDetails($id)    {
+        $this->viewBuilder()->layout('product');
+        $this->check_user();
+        $Invoice  = TableRegistry::get('Invoices');
+        $orders = $Invoice->find()->contain([
+           
+            'InvoiceProducts' => function ($q) {
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.quantity','Products.serial_no','Products.type_model','Products.origin','Products.product_name','Products.thumbnail','categories.id','categories.name',])
+                ->leftJoin('products', 'products.id = InvoiceProducts.product_id')
+                ->leftJoin('categories', 'categories.id = products.categorie_id');
+            },
+        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['id' => $id])->order(['Invoices.created'=>'DESC'])->first();
+        // pr($orders);die();
+        $this->set(compact('orders'));
+    }
 }

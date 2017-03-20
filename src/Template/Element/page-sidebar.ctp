@@ -24,7 +24,7 @@
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-home"></span><p>'.__('Home').'</p>',array('controller'=>'pages','action'=>'display','home'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <li>
-                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-gift"></span><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+                <?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i> <p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <li>
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-tasks"></span><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>

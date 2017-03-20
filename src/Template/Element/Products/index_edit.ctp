@@ -30,6 +30,7 @@
 
                                     <?= $this->Form->input('sku',['class'=>'sku','value' => $product->sku,'placeholder' => 'SKU/Part No','label' => 'SKU/Part No']); ?>
                                     <?= $this->Form->input('product_name',['class' => 'product_name','value' => $product->product_name,'placeholder' => 'Name']); ?>
+                                    <?= $this->Form->input('retail_price',['class' => 'auto','placeholder' => 'USD','value'=>$product->retail_price]); ?>
                                     <?= $this->Form->input('categorie_id', [
                                         'label'=>__('Category'), 
                                         'class' => 'categorie_id js-states', 
@@ -39,12 +40,7 @@
                                             $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalEC'.$product->id])]
                                         ]);
                                     ?>
-                                    <?= $this->Form->input('outlet_id',[
-                                        'class' => 'outlet_id',
-                                        'value' => $product->outlet_id,
-                                        'id' => 'POutlet_Id',
-                                        'append' => [
-                                            $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalEO'.$product->id])]]); ?>
+                                  
                                     <?= $this->Form->input('supplier_id',[
                                         'class' => 'supplier_id',
                                         'value' => $product->supplier_id,
@@ -53,27 +49,19 @@
                                             $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalES'.$product->id])]]); ?>
                                 </div>
                                 <div class="col-lg-6 col-md-6">
-                                    <label class="control-label" for="Status">Status</label>
-                                    <?= $this->Form->select('status',[1 => 'InStock', 2 => 'Order', 3 => 'OutStock']); ?>
-                                    <div class="divider15"></div>
-                                    <?= $this->Form->input('retail_price',['class' => 'auto retail_price','value' => $product->retail_price,'placeholder' => '$']); ?>
-                                    <?= $this->Form->input('wholesale_price',['class'=>'auto wholesale_price','value' => $product->wholesale_price,'placeholder' => '$']); ?>
-                                    <?= $this->Form->input('supply_price',['class' => 'auto supply_price','value' => $product->supply_price,'placeholder' => '$']); ?>
-                                </div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tabep2<?= $product->id;?>">
-                                <div class="col-lg-6 col-md-6">
-                                    <?= $this->Form->input('stock_min',array('class' => 'stock_min','value' => $product->stock_min,'value' => '1')); ?>
-                                    <?= $this->Form->input('stock_level',array('class' => 'stock_level','value' => $product->stock_level)); ?>
-                                </div>
-                                <div class="col-lg-6 col-md-6">
-                                    <?= $this->Form->input('stock_max',array('class'=>'stock_max','value' => $product->stock_max)); ?>
-                                    <?= $this->Form->input('unit',array('class' => 'unit','value' => $product->unit)); ?>    
+                                    <?= $this->Form->input('serial_no',['class' => 'serial_no','placeholder'=>'Serial No','value'=>$product->serial_no]); ?>
+                                    <?= $this->Form->input('type_model',['placeholder'=>'Type Model','value'=>$product->type_model]); ?>
+                                    <?= $this->Form->input('quantity',['class'=>'auto','placeholder' => 'Quantity','value'=>$product->quantity]); ?>
+                                    <?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin','value'=>$product->origin]); ?>
+                                    <?= $this->Form->input('unit',array('class' => 'unit','placeholder' => 'Unit','value'=>$product->unit)); ?>    
                                 </div>
                                 <div class="col-lg-12 col-md-6">
                                     <label class="control-label" for="Short_Description">Short Description</label>
-                                    <?= $this->Form->textarea('short_description',['value' => $product->short_description,'class'=>'summernote']);?>
+                                    <?= $this->Form->textarea('short_description',['value' => $product->short_description,'id'=>'editor1']);?>
                                 </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tabep2<?= $product->id;?>">
+                               
                                 <div class="col-lg-12 col-md-6">
                                     <label class="control-label" for="Description">Description</label>
                                     <?= $this->Form->textarea('description',['value' => $product->description,'class'=>'summernote']);?>

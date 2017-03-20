@@ -15238,7 +15238,7 @@ ul.menu-account-info li{
     margin: 5px
 }
 .table-striped > tbody > tr:nth-child(odd) > td, .table-striped > tbody > tr:nth-child(odd) > th {
-    min-width: 150px;
+    /*min-width: 150px;*/
 }   
 .title-gallery{
         z-index: 5;

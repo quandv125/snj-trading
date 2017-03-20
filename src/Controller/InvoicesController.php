@@ -262,4 +262,41 @@ class InvoicesController extends AppController
             $this->request->session()->write('Invoices', $this->request->data);
         }
     }
+
+    public function orders() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $data = [
+                'code' => '1',
+                'status' => '1',
+                'user_id' => $this->Auth->user('id'),
+                'total' => NULL,
+                'customers_paid' => NULL,
+                'money' => NULL,
+                'return_money' => NULL
+            ];
+          
+            if (!empty($this->Auth->user('id'))) {
+                $Invoice        = TableRegistry::get('Invoices');
+                $InvoiceProduct = TableRegistry::get('InvoiceProducts');
+
+                $invoice = $Invoice->newEntity();
+                $invoice = $Invoice->patchEntity($invoice, $data);
+                $Invoice->save($invoice);
+                $invoice_id = $invoice->id;
+             
+                foreach ($this->request->data['products'] as $key => $products) {
+                    $products['invoice_id'] = $invoice_id;
+                    $invoiceproduct = $InvoiceProduct->newEntity();
+                    $invoiceproduct = $InvoiceProduct->patchEntity($invoiceproduct, $products);
+                    $InvoiceProduct->save($invoiceproduct);
+                }
+                $msg = array('status' => true, 'message' => __('OK'));
+                $this->request->session()->delete('Cart');
+            } else {
+                $msg = array('status' => false, 'message' => __('NO.'));
+            }
+            echo json_encode($msg); exit();
+        }
+    }
 }

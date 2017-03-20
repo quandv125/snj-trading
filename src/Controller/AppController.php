@@ -150,8 +150,8 @@ class AppController extends Controller
     private function menu() {
         $Categorie   = TableRegistry::get( 'Categories' );
         $Article     = TableRegistry::get( 'Articles' );
-        $categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL ])->order([ 'created' => 'ASC' ]);
-        $categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL ])->limit( 5 )->order([ 'created' => 'ASC' ]);
+        $categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL, 'actived' => 1 ])->order([ 'name' => 'ASC' ]);
+        $categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL , 'actived' => 1])->order([ 'created' => 'ASC' ]);
         $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
         $snj         = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
         $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);

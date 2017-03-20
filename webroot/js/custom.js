@@ -7,9 +7,6 @@ jQuery( document ).ready(function() {
 		maxHeight: null, 
 		focus: true
 	});
-	if (jQuery("#editor1").length){
-		CKEDITOR.replace( 'editor1' );
-	}
 	jQuery('.auto').autoNumeric('init', { aSep: ',', aDec: '.', mDec: 0, vMax: '100000000' });
 	var str_rand = Math.random().toString(36).substring(7);
 	jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
@@ -26,12 +23,12 @@ jQuery( document ).ready(function() {
 			startDate: start,
 			endDate: end,
 			ranges: {
-			   'Today': [moment(), moment()], 
-			   'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-			   'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-			   'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-			   'This Month': [moment().startOf('month'), moment().endOf('month')],
-			   'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+				'Today': [moment(), moment()], 
+				'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+				'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+				'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+				'This Month': [moment().startOf('month'), moment().endOf('month')],
+				'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
 			},
 				"alwaysShowCalendars": true,
 				"drops": "up"

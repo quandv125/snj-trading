@@ -1,8 +1,9 @@
+#################
+## CAKEPHP 3
+#################
 
-/logs/
+logs/
 
-.tmp/
+tmp/
 
-/vendor/
 *.sql
-

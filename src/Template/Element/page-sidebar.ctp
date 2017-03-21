@@ -24,10 +24,13 @@
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-home"></span><p>'.__('Home').'</p>',array('controller'=>'pages','action'=>'display','home'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <li>
-                <?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i> <p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+                <?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <li>
-                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-tasks"></span><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-shopping-cart"></span><p>'.__('Orders').'</p>',array('controller'=>'Invoices','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+            </li>
+            <li>
+                <?= $this->Html->link('<i class="menu-icon fa fa-newspaper-o"></i><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <!-- <li class="droplink">
                 <a href="#" class="waves-effect waves-button">
@@ -104,7 +107,7 @@
                 <a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-flash"></span><p><?= __('Permission') ?></p><span class="arrow"></span></a>
                 <ul class="sub-menu">
                     <li>
-                        <?= $this->Html->link('<i class="menu-icon fa fa-group"></i> <p>'.__('Group').'</p>',array( 'controller' => 'users','action' => 'permission'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+                        <?= $this->Html->link('<i class="menu-icon fa fa-group"></i><p>'.__('Group').'</p>',array( 'controller' => 'users','action' => 'permission'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
                     </li>
                     <li>
                          <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('User').'</p>',array('controller'=>'users','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>

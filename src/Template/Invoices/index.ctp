@@ -28,32 +28,29 @@
                                     <th style="width: 1px;">
                                         <input tabindex="10" type="checkbox" class="icheck CheckboxAll" id="input-10">
                                     </th>
-                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Code') ?></th>
-                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Time') ?></th>
+                                    <th class="text-center" scope="col"><?= $this->Paginator->sort(__('Code')) ?></th>
                                     <th class="text-center" scope="col"><?= $this->Paginator->sort('Customer') ?></th>
-                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Total Value') ?></th>
-                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Discount') ?></th>
-                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Pain amount') ?></th>
+                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Status') ?></th>
+                                    <th class="text-center" scope="col"><?= $this->Paginator->sort('Time') ?></th>
+                                    
                                 </tr>
                             </thead>
                             <tbody id="invoices-details">
-                                <tr>
+                              <!--   <tr>
                                     <td colspan="4"></td>
                                     <td class="text-center"><?= number_format($total['final_price'], DECIMALS) ?> VNĐ</td>
                                     <td></td>
                                     <td class="text-center"><?= number_format($total['total_paid'], DECIMALS) ?> VNĐ</td>
-                                </tr>
+                                </tr> -->
                                 <?php foreach ($invoices as $invoice): ?>
                                     <tr class="row-cz cursor-pointer">
                                         <td style="width: 1px;">
                                             <input tabindex="1" type="checkbox" class="icheck Checkbox" id="input-1">
                                         </td>
-                                        <td class="text-center"><?php echo INVOICE.str_pad($invoice->id,ZEROFILL,ZERO,STR_PAD_LEFT); ?></td>
-                                        <td class="text-center"><?= h(date("Y-m-d ", strtotime($invoice->created))) ?></td>
-                                        <td class="text-center"><?= h($invoice->customer->name) ?></td>
-                                        <td class="text-center"><?= number_format($invoice->total, DECIMALS) ?></td>
-                                        <td class="text-center"><?= h($invoice->discount) ?></td>
-                                        <td class="text-center"><?= number_format($invoice->customers_paid, DECIMALS); ?></td>
+                                        <td class="text-center"><?php echo '#'.$invoice->id; ?></td>
+                                        <td class="text-center"><?= $invoice->user['username']; ?></td>
+                                        <td class="text-center"><?php echo $invoice->status ?></td>
+                                        <td class="text-center"><?= h(date("Y-m-d H:s:i", strtotime($invoice->created))) ?></td>
                                     </tr>
                                     <tr class="row-cz-details hidden">
                                         <td colspan="7">
@@ -63,9 +60,9 @@
                                                     <li role="presentation" class="active">
                                                         <a href="#tab1<?= $invoice->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
                                                     </li>
-                                                    <li role="presentation">
-                                                        <a href="#tab3<?= $invoice->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("History") ?></a>
-                                                    </li>
+                                                    <!-- <li role="presentation">
+                                                        <a href="#tab3<?= $invoice->id?>" class="bold" role="tab" data-toggle="tab"><?php //echo __("History") ?></a>
+                                                    </li> -->
                                                 </ul>
                                                 <!-- Tab panes -->
                                                 <div class="tab-content">
@@ -86,29 +83,25 @@
                                                                     <tr>
                                                                         <td class="bold"><?php echo  __('Time')?></td>
                                                                         <td><?= h(date("Y-m-d H:m:s", strtotime($invoice->created))) ?></td>
-                                                                        <td class="bold"><?php echo __('Outlet') ?>:</td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr>
                                                                         <td class="bold"><?= __('Customer')?>:</td>
-                                                                        <td><?= h($invoice->customer->name) ?></td>
-                                                                        <td class="bold"><?= __('User')?>:</td>
                                                                         <td><?= $invoice->user['username']; ?></td>
                                                                     </tr>
+                                                                    
                                                                     <tr>
-                                                                        <td class="bold"><?= __('Order code')?>:</td>
-                                                                        <td></td>
+                                                                       
                                                                         <td class="bold"><?= __('Create By')?>:</td>
                                                                         <td><?= $invoice->CreateBy['username']; ?></td>
+                                                                         <td class="bold"><?= __('')?></td>
+                                                                        <td></td>
                                                                     </tr>
                                                                 </table>
                                                             </div>
                                                             
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                                                 <div class="invoices">
-                                                                    <h5><?php echo __('Descriptions')?></h5><div class="divider10"></div>
+                                                                    <!-- <h5><?php echo __('Remark')?></h5><div class="divider10"></div> -->
                                                                     <div class="content">
-                                                                        <textarea cols="33" rows="6"><?= $invoice->note; ?></textarea>
+                                                                        <textarea cols="33" rows="6" class="form-control" placeholder="Remark..."><?= $invoice->note; ?></textarea>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -121,11 +114,11 @@
                                                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                                                 </button>
                                                                             </th>
-                                                                            <th><?php echo __("SKU");?></th>
                                                                             <th><?php echo __("Product Name");?></th>
                                                                             <th><?php echo __("Price");?></th>
                                                                             <th><?php echo __("Quantity");?></th>
                                                                             <th><?php echo __("Total");?></th>
+                                                                            <th><?php echo __("Remark");?></th>
                                                                             <th class="width5">Action</th>
                                                                         </tr>
                                                                     </thead>
@@ -134,16 +127,16 @@
                                                                     
                                                                     <tr class="invoice_products_<?= $InvoiceProducts->id?>">
                                                                         <th class="text-center"> <input tabindex="100<?= $key?>" type="checkbox" class="icheck invoice-product-chbox-<?= $invoice->id;?>" invoice-product-id="<?= $InvoiceProducts->id?>" cid="<?= $key?>" id="input-100<?= $key?>" name="chbox-invoice"></th>
-                                                                        <td><?= PRODUCT.str_pad($IP->id, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
                                                                         <td><?= $IP->product_name?></td>
                                                                         <td><?= number_format($IP->retail_price, DECIMALS) ?></td>
                                                                         <td><?= $InvoiceProducts->quantity?></td>
                                                                         <td><?= number_format($InvoiceProducts->quantity*($IP->retail_price), DECIMALS) ?>
                                                                         </td>
+                                                                        <td><?= $InvoiceProducts->remark?></td>
                                                                         <td>
                                                                             <button class="btn btn-success" data-toggle="modal", data-target= "#myModal-<?= $invoice->id.$IP->id?>"><i class="fa fa-refresh" aria-hidden="true"></i></button>
                                                                         </td>
-                                                                        <!--  -->
+                                                                        <!-- Modal -->
                                                                         <div class="modal fade" id="myModal-<?= $invoice->id.$IP->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                                                                             <div class="modal-dialog modal-sm modal-center">
                                                                                 <div class="modal-content" style=" margin-top: 100px; ">
@@ -168,14 +161,14 @@
                                                                                 </div>
                                                                             </div>
                                                                         </div>  
-                                                                        <!-- End -->
+                                                                        <!-- End Modal-->
                                                                     </tr>
                                                                 <?php endforeach ?>
                                                                 </table>
                                                             </div>
                                                             <div class="clearfix"> </div>
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 table-responsive float-right">
-                                                            <table class="table table-striped">
+                                                            <!-- <table class="table table-striped">
                                                                 <tr>
                                                                     <td>Total value:</td>
                                                                     <td><?= number_format($invoice->total, DECIMALS);?></td>
@@ -196,7 +189,7 @@
                                                                     <td>Return Money:</td>
                                                                     <td><?= number_format($invoice->return_money, DECIMALS);?></td>
                                                                 </tr>
-                                                            </table>
+                                                            </table> -->
                                                             </div>
                                                             <div class="clearfix"> </div>
                                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -206,9 +199,9 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div role="tabpanel" class="tab-pane fade" id="tab3<?= $invoice->id?>">
+                                                    <!-- <div role="tabpanel" class="tab-pane fade" id="tab3<?= $invoice->id?>">
                                                         comming soon
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                             </div>
                                         </td>

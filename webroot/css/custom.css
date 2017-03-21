@@ -430,10 +430,16 @@ mark {
     background: #ff0 !important;
 }
 
+i.menu-icon {
+    display: inline-block!important;
+    font-size: 14px!important;
+    margin-bottom: 0!important;
+    margin-right: 10px!important;
+}
+
 .tab-pane, .tab-pane img{
     max-width: 950px !important;
 }
-
 
 #overlay{
     position:fixed;

@@ -6845,6 +6845,12 @@ a:focus {
     margin: 15px 0;
     padding: 0 20px;
 }
+
+.sub-widget-post-cat{
+    margin: 10px 0;
+    padding: 0 0 0px 20px;
+}
+
 .widget.widget-post-cat a {
     display: block;
     position: relative;

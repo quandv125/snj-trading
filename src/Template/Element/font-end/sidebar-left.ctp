@@ -33,14 +33,24 @@
             </ul>
         </div>
     </div>
-    <?php if ($type == 'categories'): ?>
+
+    <?php if ($type == 'categories' ): ?>
         <div class="sidebar-left sidebar-post">
             <div class="widget widget-post-cat">
                 <h2 class="widget-title"><?php echo __('Categoties') ?></h2>
                 <ul>
-                    <?php foreach ($category as $key => $category1): ?>
+                    <?php foreach ($category as $key => $c): ?>
                         <li>
-                        <?php echo $this->Html->link($category1->name.'<span>('.count($category1->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$category1->id],['escape' => false]) ?>
+                        <?php echo $this->Html->link($c->name.'<span>('.count($c->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$c->id],['escape' => false]) ?>
+                            <ul class="sub-widget-post-cat">
+                                <?php if (!empty($c->children)): ?>
+                                    <?php foreach ($c->children as $key => $children): ?>
+                                        <li>
+                                            <?php echo $this->Html->link($children->name.'<span>('.count($children->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$children->id],['escape' => false]) ?>
+                                        </li>
+                                    <?php endforeach ?>
+                                <?php endif ?>
+                            </ul>
                         </li>
                     <?php endforeach ?>
                 </ul>
@@ -50,7 +60,6 @@
 
     <div class="divider25"></div>
     
-    <!-- End Filter -->
    
     <div class="widget widget-adv">
         <h2 class="title-widget-adv">
@@ -61,7 +70,6 @@
             <div class="item">
                 <div class="item-widget-adv">
                     <div class="adv-widget-thumb">
-                        <a href="#"><!-- <img src="images/grid/sl1.jpg" alt="" /> --></a>
                         <?php echo $this->Html->image('assets/images/sl1.jpg') ?>
                     </div>
                     <div class="adv-widget-info">
@@ -73,7 +81,6 @@
             <div class="item">
                 <div class="item-widget-adv">
                     <div class="adv-widget-thumb">
-                        <a href="#"><!-- <img src="images/grid/sl2.jpg" alt="" /> --></a>
                         <?php echo $this->Html->image('assets/images/sl2.jpg') ?>
                     </div>
                     <div class="adv-widget-info">
@@ -85,7 +92,6 @@
             <div class="item">
                 <div class="item-widget-adv">
                     <div class="adv-widget-thumb">
-                        <a href="#"><!-- <img src="images/grid/sl3.jpg" alt="" /> --></a>
                         <?php echo $this->Html->image('assets/images/sl3.jpg') ?>
                     </div>
                     <div class="adv-widget-info">
@@ -96,6 +102,4 @@
             </div>
         </div>
     </div>
-    <!-- End Adv -->
 </div>
-<!-- End Sidebar Shop -->

@@ -9,7 +9,7 @@
                         <thead>
                             <tr>
                                 <th class="text-center product-remove"><?php echo __('#'); ?></th>
-                                <th class="text-center product-thumbnail"><?php echo __('Picture'); ?></th>
+                               <!--  <th class="text-center product-thumbnail"><?php echo __('Picture'); ?></th> -->
                                 <th class="text-center product-name" style="max-width: 100px;"><?php echo __('Name'); ?></th>
                                 <th class="text-center product-subtotal"><?php echo __('Category'); ?></th>
                                 <th class="text-center product-thumbnail"><?php echo __('Serial No'); ?></th>
@@ -25,23 +25,23 @@
                                     <td class="text-center product-remove">
                                         <?php echo $key+1; ?>
                                     </td>
-                                    <td class="text-center"> <!-- Picture -->
-                                        <?= $this->Html->link($this->Html->image($products['Products']['thumbnail'],['width'=>70]), ['controller'=>'pages','action'=>'products',$products['Products']['id']], array('escape' => false)); ?>
+                                   <!--  <td class="text-center"> 
+                                        <?= $this->Html->link($this->Html->image($products['products']['thumbnail'],['width'=>70]), ['controller'=>'pages','action'=>'products',$products['products']['id']], array('escape' => false)); ?>
+                                    </td> -->
+                                    <td class="text-center">
+                                        <?= $this->Html->link($products['products']['product_name'], ['controller'=>'pages','action'=>'products', $products['products']['id']], array('escape' => false)); ?>
                                     </td>
                                     <td class="text-center">
-                                        <?= $this->Html->link($products['Products']['product_name'], ['controller'=>'pages','action'=>'products', $products->id], array('escape' => false)); ?>
+                                        <?= $this->Html->link($products['categories']['name'], ['controller'=>'pages','action'=>'categoriesParent', $products['categories']['id']], array('escape' => false)); ?>
                                     </td>
                                     <td class="text-center">
-                                        <?= $this->Html->link($products['categories']['name'], ['controller'=>'pages','action'=>'products', $products->id], array('escape' => false)); ?>
+                                        <?= $products['products']['serial_no'] ?>
                                     </td>
                                     <td class="text-center">
-                                        <?= $products['Products']['serial_no'] ?>
+                                        <?= $products['products']['type_model'] ?>
                                     </td>
                                     <td class="text-center">
-                                        <?= $products['Products']['type_model'] ?>
-                                    </td>
-                                    <td class="text-center">
-                                        <?= $products['Products']['origin'] ?>
+                                        <?= $products['products']['origin'] ?>
                                     </td>
                                     <td class="text-center product-quantity">
                                         <div class="info-qty">

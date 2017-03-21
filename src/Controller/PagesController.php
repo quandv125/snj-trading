@@ -45,8 +45,11 @@ class PagesController extends AppController
             return $this->redirect(['controller'=>'Pages','action' => 'login']);
         }
         $Product  = TableRegistry::get('Products');
+        $Invoice  = TableRegistry::get('Invoices');
         $User  = TableRegistry::get('Users');
         $actived = $Product->find()->where(['Products.actived' => false])->count();
+        $order = $Invoice->find()->where(['Invoices.status' => 1])->count();
+       
         $users = $User->find()->count();
         $path = func_get_args();
         $count = count($path);
@@ -60,7 +63,7 @@ class PagesController extends AppController
         if (!empty($path[1])) {
             $subpage = $path[1];
         }
-        $this->set(compact('page', 'subpage','actived','users'));
+        $this->set(compact('page', 'order','actived','users'));
         try {
             $this->render(implode('/', $path));
         } catch (MissingTemplateException $e) {
@@ -79,13 +82,13 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         if ($this->request->is('get')) {
             $keyword    = $this->request->query['search'];
-            $category_id = $this->request->query['type-search'];
-            if ($category_id != null) {
-                $conditions = ['Products.actived'=> PRODUCT_ACTIVE,'Products.product_name LIKE' => '%'. $keyword .'%', 'Products.categorie_id' => $category_id];
-                $conditions2 = ['Products.actived'=> PRODUCT_ACTIVE,'Products.sku LIKE' => '%'. $keyword .'%', 'Products.categorie_id' => $category_id];
+            $c_id = $this->request->query['type-search'];
+            if ($c_id != null) {
+                $conditions  = ['Products.actived'=>PRODUCT_ACTIVE,'Products.product_name LIKE'=>'%'. $keyword .'%', 'Products.categorie_id'=>$c_id];
+                $conditions2 = ['Products.actived'=>PRODUCT_ACTIVE,'Products.sku LIKE'=>'%'. $keyword .'%', 'Products.categorie_id'=>$c_id];
             } else {
-                $conditions = ['Products.actived'=> PRODUCT_ACTIVE,'Products.product_name LIKE' => '%'. $keyword .'%'];
-                $conditions2 = ['Products.actived'=> PRODUCT_ACTIVE,'Products.sku LIKE' => '%'. $keyword .'%'];
+                $conditions  = ['Products.actived'=>PRODUCT_ACTIVE,'Products.product_name LIKE'=>'%'. $keyword .'%'];
+                $conditions2 = ['Products.actived'=>PRODUCT_ACTIVE,'Products.sku LIKE'=>'%'. $keyword .'%'];
             }
             $Supplier   = TableRegistry::get('Suppliers');
             $suppliers  = $Supplier->find('list',['keyField' => 'id', 'valueField' => 'name' ]);
@@ -95,13 +98,13 @@ class PagesController extends AppController
     }
 
     private function gettreelist($childrens, $id) {
-          $myarr = array($id => $id);
+        $myarr = array($id => $id);
         foreach ($childrens as $key => $children) {
             $myarr[$children->id] = $children->id;
             if (!empty($children->children)) {
-               foreach ($children->children as $key => $child) {
+                foreach ($children->children as $key => $child) {
                     $myarr[$child->id] = $child->id;
-               }
+                }
             }
         }
         return $myarr;
@@ -113,16 +116,15 @@ class PagesController extends AppController
         $Supplier   = TableRegistry::get('Suppliers');
         $info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
         $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
-        $arr = $this->gettreelist($cat_list, $id);
+        $arr        = $this->gettreelist($cat_list, $id);
         $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
-        $parent_id  = $id;
-        $category = $Categorie->find()->select(['id','name'])->contain([
-            'Products' => function ($q) {
-                return $q->autoFields(false)->select(['id','categorie_id','product_name']);
-            },
-        ])->where(['parent_id' => $parent_id, 'actived' => true]);
+       
+        $category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
+            'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
+        ])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
+
         $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
-        $this->set(compact('info','categories','products','cat_list','id','parent_id','suppliers','category'));
+        $this->set(compact('id','info','products','cat_list','suppliers','category'));
     }
 
     public function categories($parent_id, $id) {
@@ -131,11 +133,11 @@ class PagesController extends AppController
         $Supplier   = TableRegistry::get('Suppliers');
         $conditions = ['Products.categorie_id ' => $id ];
         $products   = $this->Pages->getInfoProducts($conditions);
-        $category = $Categorie->find()->select(['id','name'])->contain([
-            'Products' => function ($q) {
-                return $q->autoFields(false)->select(['id','categorie_id','product_name']);
-            },
-        ])->where(['parent_id' => $parent_id, 'actived' => true]);
+       
+        $category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
+            'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
+        ])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
+       
         $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
         $this->set(compact('products','category','suppliers','parent_id'));
     }
@@ -208,7 +210,6 @@ class PagesController extends AppController
             ->leftJoin('suppliers', 'suppliers.id = products.supplier_id')
             ->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'products.id','products.sku','products.supplier_id','products.origin','products.quantity','products.type_model','products.serial_no','products.short_description','categories.id','categories.name','products.product_name','products.thumbnail', 'suppliers.id','suppliers.name'])
             ->where(['Wishlists.user_id' => $this->Auth->user('id')]);
-
        $this->set(compact('wishlists'));
     }
 
@@ -216,22 +217,20 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         $this->check_user();
         $Invoice  = TableRegistry::get('Invoices');
-        $orders = $Invoice->find()->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['user_id' => $this->Auth->user('id')])->order(['Invoices.created'=>'DESC']);
-       
+        $orders = $Invoice->find()->select([ 'id', 'code', 'status', 'created']) ->where(['user_id' => $this->Auth->user('id')])->order(['created' => 'DESC']);
         $this->set(compact('orders'));
     }
 
-    public function OrderDetails($id)    {
+    public function OrderDetails($id){
         $this->viewBuilder()->layout('product');
         $this->check_user();
         $Invoice  = TableRegistry::get('Invoices');
         $orders = $Invoice->find()->contain([
-           
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.quantity','Products.serial_no','Products.type_model','Products.origin','Products.product_name','Products.thumbnail','Categories.id','Categories.name',])
-                ->leftJoin('Products', 'Products.id = InvoiceProducts.product_id')
-                ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
-            },
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.thumbnail','categories.id','categories.name',])
+                ->leftJoin('products', 'products.id = Invoiceproducts.product_id')
+                ->leftJoin('categories', 'categories.id = products.categorie_id');
+            }
         ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
         // pr($orders);die();
         $this->set(compact('orders'));

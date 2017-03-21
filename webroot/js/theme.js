@@ -105,6 +105,7 @@ jQuery(document).ready(function(){
 
 	if ($("#datatable").length){
 		$('#datatable').DataTable({
+			 order: [ 3, 'desc' ]
 			// "iDisplayLength": 100,
 			// columnDefs: [ {
 			// 	targets: [ 0 ],
@@ -1077,27 +1078,37 @@ jQuery(document).ready(function($){
 
 	jQuery('input.smart-search').keyup(function(e) { 
 		var keyword = jQuery(this).val();
-		delay(function(){
-			jQuery.ajax({
-				url: '/products/quick_search',
-				type: 'POST',
-				data: {keyword: keyword, id:'slimtest1'},
-				dataType: 'html',
-				cache: false,
-				beforeSend: function(){
-					jQuery("#loader").fadeIn();
-				},
-				success: function(response){
-					jQuery("#loader").fadeOut();
-					jQuery('.quick-smart-search').toggleClass('hidden').html(response);
-					jQuery(window).click(function(e) {
-						jQuery('.quick-smart-search-fixed').addClass('hidden');
-						jQuery('.quick-smart-search').addClass('hidden');
-						jQuery('.type-search').focus();
-					});
-				}
-			}); // Ajax
-		}, 500 );
+		if (keyword != '') {
+			// delay(function(){
+				jQuery.ajax({
+					url: '/products/quick_search',
+					type: 'POST',
+					data: {keyword: keyword, id:'slimtest1'},
+					dataType: 'html',
+					cache: false,
+					beforeSend: function(){
+						jQuery("#loader").fadeIn();
+					},
+					success: function(response){
+						jQuery("#loader").fadeOut();
+						jQuery('.quick-smart-search').toggleClass('hidden').html(response);
+						jQuery('#content').click(function(e) {
+							jQuery('.quick-smart-search-fixed').addClass('hidden');
+							jQuery('.quick-smart-search').addClass('hidden');
+							jQuery('.type-search').focus();
+						});
+						jQuery('.banner-slider').click(function(e) {
+							jQuery('.quick-smart-search-fixed').addClass('hidden');
+							jQuery('.quick-smart-search').addClass('hidden');
+							jQuery('.type-search').focus();
+						});
+					}
+				}); // Ajax
+			// }, 200 );
+		} else {
+			jQuery('.quick-smart-search').toggleClass('hidden');
+		}
+		
 	});
 	
 	jQuery('input.smart-search-fixed').keyup(function(e) { 

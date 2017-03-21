@@ -45,20 +45,21 @@ class InvoicesController extends AppController
                     return $q->autoFields(false)->select(['id','username']);
                 },
                 'InvoiceProducts' => function ($q) {
-                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price'])->innerJoinWith('Products');
+                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price'])->innerJoinWith('Products');
                 },
-                'Customers',
-                'Outlets',
-                'Coupons',
-                'Payments',
-                'PartnerDeliverys'
+                // 'Customers',
+                // 'Outlets',
+                // 'Coupons',
+                // 'Payments',
+                // 'PartnerDeliverys'
             ],
-            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.total','Invoices.customers_paid','Invoices.money','Invoices.return_money','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','Customers.name','Users.username'],
+            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.total','Invoices.customers_paid','Invoices.money','Invoices.return_money','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','Users.username'],
             'conditions' => $conditions,
             'order' => ['Invoices.created'  => 'DESC'],
             'limit' => LIMIT
         ];
         $invoices  = $this->paginate($this->Invoices);
+        // pr($invoices);die();
         $total     = $this->Invoices->find()->select(['final_price'=>'SUM(Invoices.total)','total_paid' => 'SUM(Invoices.customers_paid)'])->first();
         $users     = $this->Invoices->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username', 'limit' => 200]);
         $customers = $this->Invoices->Customers->find('list', ['limit' => 200]);

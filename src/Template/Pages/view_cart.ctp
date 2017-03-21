@@ -10,7 +10,7 @@
 								<thead>
 									<tr>
 										<th class="text-center product-remove"><?php echo __('#'); ?></th>
-										<th class="text-center product-thumbnail"><?php echo __('Picture'); ?></th>
+										<!-- <th class="text-center product-thumbnail"><?php echo __('Picture'); ?></th> -->
 										<th class="text-center product-name" style="max-width: 100px;"><?php echo __('Name'); ?></th>
 										<th class="text-center product-quantity"><?php echo __('Category'); ?></th>
 										<th class="text-center product-subtotal"><?php echo __('Type Model'); ?></th>
@@ -28,9 +28,9 @@
 												<td class="text-center product-remove">
 													<span class="remove-items" product_id="<?php echo $products->id ?>"><i class="fa fa-times"></i></span>
 												</td>
-												<td class="text-center product-thumbnail"> <!-- Picture -->
+												<!-- <td class="text-center product-thumbnail">
 													<?= $this->Html->link($this->Html->image($products->thumbnail,['width'=>70]), ['controller'=>'pages','action'=>'products',$products->id], array('escape' => false)); ?>
-												</td>
+												</td> -->
 												<td class="text-center product-name">
 													<?= $this->Html->link($products->product_name, ['controller'=>'pages','action'=>'products', $products->id], array('escape' => false)); ?>
 												</td>

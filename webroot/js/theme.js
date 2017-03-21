@@ -1079,7 +1079,7 @@ jQuery(document).ready(function($){
 	jQuery('input.smart-search').keyup(function(e) { 
 		var keyword = jQuery(this).val();
 		if (keyword != '') {
-			// delay(function(){
+			// delay(function(){ 
 				jQuery.ajax({
 					url: '/products/quick_search',
 					type: 'POST',
@@ -1103,7 +1103,7 @@ jQuery(document).ready(function($){
 							jQuery('.type-search').focus();
 						});
 					}
-				}); // Ajax
+				}); 
 			// }, 200 );
 		} else {
 			jQuery('.quick-smart-search').toggleClass('hidden');

@@ -221,7 +221,7 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-					console.log(response);
+					// console.log(response);
 					var data = jQuery.parseJSON(response);
 					if (data.status == true) {
 						jQuery('select#UserGroupId').append("<option value='"+data.id+"'>"+name+"</option>"); 
@@ -254,7 +254,7 @@ jQuery( document ).ready(function() {
 				},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				var data = jQuery.parseJSON(response);
 				if(data.status == true){
 					jQuery( '#PCategorie_Id' ).append(new Option(name, data.id));
@@ -284,7 +284,7 @@ jQuery( document ).ready(function() {
 				},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				var data = jQuery.parseJSON(response);
 				if(data.status == true){
 					jQuery( '#POutlet_Id' ).append(new Option(name, data.id));
@@ -455,7 +455,7 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				jQuery('.show-image-'+id).fadeOut();
 			}
 		});
@@ -482,7 +482,7 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				var data = jQuery.parseJSON(response);
 				if (data.actived == true) {
 					toastr.success(data.message);
@@ -510,7 +510,7 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-					console.log(response);
+					// console.log(response);
 					jQuery('tbody#customers-details').html(response);
 					jQuery.getScript('/js/show_action.js',function(){
 						show_action(str_rand);
@@ -535,7 +535,7 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-					console.log(response);
+					// console.log(response);
 					jQuery('tbody#suppliers-details').html(response);
 					jQuery.getScript('/js/show_action.js',function(){
 						show_action(str_rand);
@@ -560,7 +560,7 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-					console.log(response);
+					// console.log(response);
 					jQuery('tbody#partnerDeliverys-details').html(response);
 					jQuery.getScript('/js/show_action.js',function(){
 						show_action(str_rand);
@@ -635,7 +635,7 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				var data = jQuery.parseJSON(response);
 				if (data.status == true) {
 					jQuery('#stocks-details').append('<tr class="cursor-pointer product-stock-order" id="'+data.id+'" pid="'+data.pid+'"><td style="width:1px;" class="text-center delete-sp">X</td><td class="text-center"><span class="sku-product-stocks" id="'+data.pid+'">P.'+data.sku+'</td><td class="text-center">'+product_name+'</td><td class="text-center ISKA1"><input type="number" value="'+supply_price+'" id="'+data.id+'" class="form-control price-product price-product-'+data.id+'" name=""></td><td class="text-center ISKA"><input type="number" value="1" id="'+data.id+'" class="form-control quantity-product-'+data.id+' quantity-product" name=""></td><td class="text-center ISKA"><input type="number" value="0" id="'+data.id+'" class="form-control discount-product-'+data.id+' discount-product" name=""></td><td class="text-center width200px"><span class="total-price total-'+data.id+'">'+supply_price+'</td></tr>')
@@ -682,7 +682,7 @@ jQuery( document ).ready(function() {
 				jQuery("#loader").fadeIn();
 			},
 			success: function(response){
-				// console.log(response);return;
+				console.log(response);return;
 				window.location.href = "/stocks";
 			}
 		});
@@ -757,7 +757,7 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				// console.log(response);
+				console.log(response);
 				jQuery('tbody#stocks-details').html(response);
 				jQuery.getScript('/js/show_action.js',function(){
 					show_action(str_rand);
@@ -796,7 +796,7 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				console.log(response);
+				// console.log(response);
 				jQuery('tbody#invoices-details').html(response);
 				jQuery.getScript('/js/show_action.js',function(){
 					show_action(str_rand);
@@ -882,7 +882,7 @@ jQuery( document ).ready(function() {
 		});
 	});
 	function format_show(num) {
-		var num = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+		var num = num.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
 		return num;
 	}
 	
@@ -1016,7 +1016,7 @@ jQuery( document ).ready(function() {
 				jQuery( '#customers' ).val(response);
 				jQuery( '#myModal2' ).modal('toggle');
 				toastr.success(response);
-				console.log(response);
+				// console.log(response);
 			}
 		});
 	}));
@@ -1049,7 +1049,7 @@ jQuery( document ).ready(function() {
 				jQuery("#loader").fadeOut();
 				toastr.success('The stock has been deleted.');
 				window.location.href = "/stocks";
-				console.log(response);
+				// console.log(response);
 			}
 		});
 	});
@@ -1077,7 +1077,7 @@ jQuery( document ).ready(function() {
 				jQuery("#loader").fadeOut();
 				toastr.success('The Invoices has been deleted.');
 				window.location.href = "/invoices";
-				console.log(response);
+				// console.log(response);
 			}
 		});
 	});
@@ -1123,5 +1123,157 @@ jQuery( document ).ready(function() {
 	// 		}); // Ajax
 	// 	}
 	// });
+	
+	jQuery('.show-detail-product').click(function(){
+		var product_id = jQuery(this).attr('id');
+		jQuery.ajax({
+			url: '/products/get_detail_products',
+			type: 'POST',
+			data: {product_id: product_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				console.log(response);
+				jQuery( '.modal-x' ).html('').append(response);
+				jQuery( '#ModalX' ).modal('toggle');
+			}
+		}); // Ajax
+	});
+
+	jQuery('.profit-jobs').change(function(){
+		var id 		= jQuery(this).attr('id');
+		var price 	= jQuery('.cart-price-'+id).attr('price');
+		var delivery_cost 	= jQuery('.delivery_cost_'+id).val();
+		var packing_cost 	= jQuery('.packing_cost_'+id).val();
+		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
+		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		var profit 	= parseFloat(jQuery(this).val()).toFixed(2);
+		var pp 		= (parseFloat(price) * profit)/100 ;
+		var total 	= parseFloat(cp)+ parseFloat(pp);
+		var f_pp 	= format_show(pp);
+		var f_total = format_show(total);
+		jQuery('.price-profit-'+id).html(pp);
+		jQuery('.total-price-'+id).html(total);
+	});
+
+	jQuery('.delivery_cost').change(function(){
+		var id 		= jQuery(this).attr('id');
+		var price 	= jQuery('.cart-price-'+id).attr('price');
+		var delivery_cost 	= jQuery(this).val();
+		var packing_cost 	= jQuery('.packing_cost_'+id).val();
+		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
+		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		// alert(price+"__"+delivery_cost+"__"+packing_cost+"__"+insurance_cost);return;
+		var profit 	= parseFloat(jQuery('.profit-jobs-'+id).val()).toFixed(2);
+		var pp 		= (parseFloat(price) * profit)/100 ;
+		var total 	= parseFloat(cp)+ parseFloat(pp);
+		var f_total = format_show(total);
+		jQuery('.total-price-'+id).html(total);
+	});
+
+	jQuery('input[name="del-cost"]').on('ifClicked', function (event) {
+		var index = jQuery(this).attr('tabindex');
+		var id 				= jQuery(this).attr('id');
+		if (index == '2002') {
+			jQuery('.delivery_cost_'+id).removeClass('hidden');
+			// jQuery('.remark_delivery_'+id).removeClass('hidden');
+		} else {
+			jQuery('.delivery_cost_'+id).addClass('hidden');
+			// jQuery('.remark_delivery_'+id).addClass('hidden');
+		}
+		var price 			= jQuery('.cart-price-'+id).attr('price');
+		// var delivery_cost 	= jQuery(this).attr('value');
+		var delivery_cost 	= jQuery(this).val();
+		var packing_cost 	= jQuery('.packing_cost_'+id).val();
+		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
+		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		// alert(price+"__"+delivery_cost+"__"+packing_cost+"__"+insurance_cost);return;
+		var profit 	= parseFloat(jQuery('.profit-jobs-'+id).val()).toFixed(2);
+		var pp 		= (parseFloat(price) * profit)/100 ;
+		var total 	= parseFloat(cp)+ parseFloat(pp);
+		var f_total = format_show(total);
+		jQuery('.total-price-'+id).html(total);
+		jQuery('.delivery_cost_'+id).val(delivery_cost);
+		
+	});
+
+	jQuery('.packing_cost').change(function(){
+		var id 		= jQuery(this).attr('id');
+		var price 	= jQuery('.cart-price-'+id).attr('price');
+		var delivery_cost 	= jQuery('.delivery_cost_'+id).val();
+		var packing_cost 	= jQuery(this).val();
+		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
+		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		// alert(price+"__"+delivery_cost+"__"+packing_cost+"__"+insurance_cost);return;
+		var profit 	= parseFloat(jQuery('.profit-jobs-'+id).val()).toFixed(2);
+		var pp 		= (parseFloat(price) / 100) * profit;
+		var total 	= parseFloat(cp)+ parseFloat(pp);
+		var f_total = format_show(total);
+		jQuery('.total-price-'+id).html(total);
+	});
+
+	jQuery('.insurance_cost').change(function(){
+		var id 		= jQuery(this).attr('id');
+		var price 	= jQuery('.cart-price-'+id).attr('price');
+		var delivery_cost 	= jQuery('.delivery_cost_'+id).val();
+		var packing_cost 	= jQuery('.packing_cost_'+id).val();
+		var insurance_cost 	= jQuery(this).val();
+		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		// alert(price+"__"+delivery_cost+"__"+packing_cost+"__"+insurance_cost);return;
+		var profit 	= parseFloat(jQuery('.profit-jobs-'+id).val()).toFixed(2);
+		var pp 		= (parseFloat(price) / 100) * profit;
+		var total 	= parseFloat(cp)+ parseFloat(pp);
+		var f_total = format_show(total);
+		jQuery('.total-price-'+id).html(total);
+	});
+
+	jQuery('.update-invoices').click(function(){
+		var id 		= jQuery(this).attr('id');
+		var delivery_cost 	= jQuery('.delivery_cost_'+id).val();
+		var packing_cost 	= jQuery('.packing_cost_'+id).val();
+		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
+		var profit 			= jQuery('.profit-jobs-'+id).val();
+		var note 			= jQuery('.remark_delivery_'+id).val();
+
+		jQuery.ajax({
+			url: '/invoices/update-invoices',
+			type: 'POST',
+			data: {id: id, profit: profit, delivery_cost: delivery_cost,packing_cost: packing_cost,insurance_cost: insurance_cost,note: note},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				// console.log(response);
+				toastr.success(response);
+			}
+		}); // Ajax
+	});
+
+	jQuery('.send-invoices-supplier').click(function(){
+		var id 	= jQuery(this).attr('id');
+		var user = jQuery(this).attr('user');
+		jQuery.ajax({
+			url: '/invoices/send-invoices-supplier',
+			type: 'POST',
+			data: {id: id, user: user},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				// console.log(response);
+				toastr.success(response);
+			}
+		}); // Ajax
+	});
 
 }); // jQuery document

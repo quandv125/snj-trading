@@ -8,7 +8,7 @@
                             <h2>HELP</h2>
                             <ul>
                                 <?php foreach ($help as $key => $help_article): ?>
-                                      <li><?php echo $this->Html->link(__($help_article), ['controller' => 'Articles', 'action' => 'details', $key]) ?>
+                                      <li><?php echo $this->Html->link(__($help_article), ['controller' => 'pages', 'action' => 'index']) ?>
                                       </li>
                                 <?php endforeach ?>
                             </ul>
@@ -20,7 +20,7 @@
                             <ul>
                                 <li><?php echo $this->Html->link(__('Contact Us'), ['controller' => 'pages', 'action' => 'contacts']) ?></li>
                                 <?php foreach ($snj as $key => $snj_article): ?>
-                                      <li><?php echo $this->Html->link(__($snj_article), ['controller' => 'Articles', 'action' => 'details', $key]) ?>
+                                      <li><?php echo $this->Html->link(__($snj_article), ['controller' => 'pages', 'action' => 'index']) ?>
                                       </li>
                                 <?php endforeach ?>
                             </ul>
@@ -58,7 +58,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="item-order-policy">
                             <ul>
-                                <li><i class="fa fa-dropbox"></i></li>
+                                <li><i class="fa fa-dropbox" aria-hidden="true"></i></li>
                                 <li><span>ORDER ONLINE</span></li>
 
                             </ul>
@@ -75,7 +75,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="item-order-policy">
                             <ul>
-                                <li><i class="fa fa-refresh"></i></li>
+                                <li><i class="fa fa-refresh" aria-hidden="true"></i></li>
                                 <li><span>FREE &amp; EASY RETURNS</span></li>
                             </ul>
                         </div>
@@ -83,7 +83,7 @@
                     <div class="col-md-3 col-sm-3 col-xs-12">
                         <div class="item-order-policy last-item">
                             <ul>
-                                <li><i class="fa fa-times-circle"></i></li>
+                                <li><i class="fa fa-times-circle" aria-hidden="true"></i></li>
                                 <li><span>ONLINE CANCELLATIONS</span></li>
                             </ul>
                         </div>

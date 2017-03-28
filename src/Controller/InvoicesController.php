@@ -3,7 +3,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
-
+use Cake\Mailer\Email;
 /**
  * Invoices Controller
  *
@@ -22,7 +22,7 @@ class InvoicesController extends AppController
         $this->getInfo(null);
     }
 
-    public function InvoiceDetail() {
+    public function InvoiceDetail($id) {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $id = $this->request->data['id'];
@@ -30,9 +30,15 @@ class InvoicesController extends AppController
             $this->getInfo($conditions);
             $this->render('/Element/Invoices/invoice_detail');
         }
+       
+          $conditions = ['Invoices.id' => $id];
+          $this->getInfo($conditions);
+         
+        
     }
 
     protected function getInfo($conditions){
+       
         $this->paginate = [
             'join' => [
                 'table' => 'users',
@@ -45,7 +51,8 @@ class InvoicesController extends AppController
                     return $q->autoFields(false)->select(['id','username']);
                 },
                 'InvoiceProducts' => function ($q) {
-                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price'])->innerJoinWith('Products');
+                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price','Products.unit','Products.user_id'])
+                    ->innerJoinWith('Products');
                 },
                 // 'Customers',
                 // 'Outlets',
@@ -53,17 +60,19 @@ class InvoicesController extends AppController
                 // 'Payments',
                 // 'PartnerDeliverys'
             ],
-            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.total','Invoices.customers_paid','Invoices.money','Invoices.return_money','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','Users.username'],
+            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.profit','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','Users.username'],
             'conditions' => $conditions,
             'order' => ['Invoices.created'  => 'DESC'],
             'limit' => LIMIT
         ];
         $invoices  = $this->paginate($this->Invoices);
-        // pr($invoices);die();
-        $total     = $this->Invoices->find()->select(['final_price'=>'SUM(Invoices.total)','total_paid' => 'SUM(Invoices.customers_paid)'])->first();
+       
+        //$total     = $this->Invoices->find()->select(['final_price'=>'SUM(Invoices.total)','total_paid' => 'SUM(Invoices.customers_paid)'])->first();
         $users     = $this->Invoices->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username', 'limit' => 200]);
+        $deliverys = $this->Invoices->PartnerDeliverys->find('list',[ 'keyField' => 'value', 'valueField' => 'name', 'limit' => 200]);
+      
         $customers = $this->Invoices->Customers->find('list', ['limit' => 200]);
-        $this->set(compact('invoices','users','customers','total'));
+        $this->set(compact('invoices','users','customers','deliverys'));
         $this->set('_serialize', ['invoices']);
     }
     /**
@@ -169,16 +178,104 @@ class InvoicesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $invoice = $this->Invoices->get($id);
+        $InvoiceProduct = TableRegistry::get('InvoiceProducts');
+        $InvoiceProduct->query()->delete()->where(['invoice_id' => $id])->execute();
         if ($this->Invoices->delete($invoice)) {
             $this->Flash->success(__('The invoice has been deleted.'));
         } else {
             $this->Flash->error(__('The invoice could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller'=>'pages','action' => 'orders']);
     }
 
-    public function ChangeInvoicesProducts($id) {
-        // $Invoice                 = TableRegistry::get('Invoices');
+    public function ChangeInvoicesProducts() {
+        $Invoice = TableRegistry::get('Invoices');
+        $InvoiceProduct = TableRegistry::get('InvoiceProducts');
+        $User = TableRegistry::get('Users');
+        // $invoices = $Invoice->find()->contain([
+        //     // 'Users' => function ($q) {
+        //     //     return $q->autoFields(false)->select(['id','username']);
+        //     // },
+        //     'InvoiceProducts' => function ($q) {
+        //         return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.user_id','Users.id','Users.username','Users.email'])
+        //             ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+        //             ->leftJoin('Users', 'Users.id = Products.user_id')
+        //             ->where(['Products.user_id' => $this->Auth->user('id')]);
+        //     },
+          
+        // ])->select(['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.total','Invoices.customers_paid','Invoices.money','Invoices.return_money','Invoices.discount','Invoices.note','Invoices.created'])
+        // ->where(['Invoices.id' => $id])
+        // ->order(['Invoices.created'  => 'DESC'])->toarray();
+        $this->loadModel('Users');
+        $invoice_id = 34;
+        $users = [5,2];
+        foreach ($users as $key => $id) {
+            $query = $this->Users->find('all');
+            $query->join([
+                'Products' =>[
+                    'table' => 'Products',
+                    'type' => 'INNER',
+                    'conditions' => 'Users.id = Products.user_id'
+                ],
+                'invoice_products' =>[
+                    'table' => 'invoice_products',
+                    'type' => 'INNER',
+                    'conditions' => 'Products.id = invoice_products.product_id'
+                ],   
+                'categories' =>[
+                    'table' => 'categories',
+                    'type' => 'INNER',
+                    'conditions' => 'categories.id = Products.categorie_id'
+                ],     
+            ])
+            ->select(['Users.id','Users.username','Users.email','Products.id','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','invoice_products.id','invoice_products.invoice_id','invoice_products.quantity','invoice_products.remark','categories.name'])
+            ->where(['invoice_products.invoice_id' => $invoice_id,'Products.user_id' => $id])
+            ->order(['Users.id' => 'ASC'])
+            ->group(['invoice_products.id']);
+            $email = $query->toarray()[0]['email'];
+            $html = '';
+            foreach ($query as $key => $value) {
+              
+                $html .='<tr class="cart_item">
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            <span class="">'.($key+1).'</span>
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["Products"]["product_name"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["categories"]["name"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["Products"]["serial_no"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["Products"]["type_model"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["Products"]["origin"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            '.$value["Products"]["retail_price"].'
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                            <div class="info-qty" id="0">
+                                <span class="qty-val">
+                                    '.$value["invoice_products"]["quantity"].'
+                                </span>
+                            </div>          
+                        </td>
+                        <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">  
+                            '.$value["invoice_products"]["remark"].' 
+                        </td>
+                    </tr>';
+            }
+            $this->sendUserEmail($email,'inquiry', $html, 'inquiry');
+        }
+        echo $email;
+        die();
+
+       
         // $Product                 = TableRegistry::get('Products');
         // $InvoiceProduct          = TableRegistry::get('InvoiceProducts');
         // $this->request->data['price'] = str_replace(',', '', $this->request->data['price']);
@@ -206,6 +303,19 @@ class InvoicesController extends AppController
         // }     
         // return $this->redirect(['action' => 'index']);
     }
+
+    public function sendUserEmail($to, $subject, $msg, $temp) {
+       $email = new Email('default');
+       $email->transport('gmail')
+            ->template($temp)
+            ->from(['snjtrading2017@gmail.com' => 'snjtrading2017@gmail.com'])
+            ->to($to)
+            ->subject($subject)
+            ->emailFormat('html')
+            ->viewVars(['value' => $msg])
+            ->send($msg); 
+    }
+
     public function DeleteInvoiceProduct() {
         if ($this->request->is('Ajax')) {
             $this->autoRender = false;
@@ -268,24 +378,19 @@ class InvoicesController extends AppController
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $data = [
-                'code' => '1',
-                'status' => '1',
-                'user_id' => $this->Auth->user('id'),
-                'total' => NULL,
-                'customers_paid' => NULL,
-                'money' => NULL,
-                'return_money' => NULL
+                'code'              => '1',
+                'status'            => '1',
+                'user_id'           => $this->Auth->user('id'),
             ];
           
             if (!empty($this->Auth->user('id'))) {
                 $Invoice        = TableRegistry::get('Invoices');
                 $InvoiceProduct = TableRegistry::get('InvoiceProducts');
-
                 $invoice = $Invoice->newEntity();
                 $invoice = $Invoice->patchEntity($invoice, $data);
+              
                 $Invoice->save($invoice);
                 $invoice_id = $invoice->id;
-             
                 foreach ($this->request->data['products'] as $key => $products) {
                     $products['invoice_id'] = $invoice_id;
                     $invoiceproduct = $InvoiceProduct->newEntity();
@@ -294,10 +399,176 @@ class InvoicesController extends AppController
                 }
                 $msg = array('status' => true, 'message' => __('OK'));
                 $this->request->session()->delete('Cart');
+                $this->request->session()->delete('my_cart');
             } else {
                 $msg = array('status' => false, 'message' => __('NO.'));
             }
             echo json_encode($msg); exit();
+        }
+    }
+    public function check_user(){
+        if (empty($this->Auth->user())) {
+            return $this->redirect(['controller'=>'pages','action' => 'login']);
+        }
+    }
+    public function inquiry(){
+        $this->viewBuilder()->layout('product');
+        $this->check_user();
+        $Invoice = TableRegistry::get('Invoices');
+        
+        $inquiry = $Invoice->find()->contain([
+            'Users' => function ($q) {
+                return $q->autoFields(false)->select(['id','username']);
+            },
+            'InvoiceProducts' => function ($q) {
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id'])
+                    ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+                    ->where(['Products.user_id' => $this->Auth->user('id')]);
+            },
+        ])->select(['Invoices.id','Invoices.code','Invoices.user_id','Invoices.status','Invoices.customer_id','Invoices.note','Invoices.created'])
+        ->where(['Invoices.status' => 3])
+        ->order(['Invoices.created'  => 'DESC']);
+        // pr(count($inquiry->toarray()));die();
+       $this->set(compact('inquiry'));
+    }
+
+    public function inqDetails($id)    {
+        $this->viewBuilder()->layout('product');
+        $this->check_user();
+        $Invoice = TableRegistry::get('Invoices');
+        
+        $inquiry = $Invoice->find()->contain([
+            'InvoiceProducts' => function ($q) {
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Users.id','Users.username','Users.email','Categories.id','Categories.name'])
+                    ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+                    ->leftJoin('Users', 'Users.id = Products.user_id')  
+                    ->leftJoin('Categories', 'Categories.id = Products.categorie_id')
+                    ->where(['Products.user_id' => $this->Auth->user('id')]);
+            },
+          
+        ])->select(['Invoices.id','Invoices.code','Invoices.user_id','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created'])
+        ->where(['Invoices.id' => $id])
+        ->order(['Invoices.created'  => 'DESC'])->first();
+        $this->set(compact('inquiry'));
+    }
+
+    public function updateOrders(){
+       if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $InvoiceProduct = TableRegistry::get('InvoiceProducts');
+            foreach ($this->request->data['items'] as $key => $item) {
+                $InvoiceProduct->updateAll(['quantity' => $item['quantity'], 'remark' => $item['remark']], ['id' => $item['invoice_product_id']]);
+            }
+            echo 'ok';
+        }
+    }
+
+    public function delItems() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $InvoiceProduct = TableRegistry::get('InvoiceProducts');
+            $invoiceproduct = $InvoiceProduct->get($this->request->data['id']);
+            if ($InvoiceProduct->delete($invoiceproduct)) {
+                if (!$InvoiceProduct->exists(['invoice_id' => $invoiceproduct->invoice_id])) {
+                    $invoice = $this->Invoices->get($invoiceproduct->invoice_id);
+                    if ($this->Invoices->delete($invoice)) {
+                        echo 'delete all';
+                    } 
+                }
+                echo 'ok';
+            } else {
+                echo 'error';
+            }
+        }
+    }
+
+    public function UpdateInvoices() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+          
+            $result = $this->Invoices->updateAll(['status' => 2,'profit' => $this->request->data['profit'],'delivery_cost' => $this->request->data['delivery_cost'],'packing_cost' => $this->request->data['packing_cost'], 'insurance_cost' => $this->request->data['insurance_cost'],'note' => $this->request->data['note']], ['id' => $this->request->data['id']]);
+            if ($result) {
+                echo "ok";
+            } else {
+                echo "no";
+            }
+        }
+    }
+
+    public function SendInvoicesSupplier() {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $users = explode(',', $this->request->data['user']);
+            $users = str_replace("[","",$users);
+            $users = str_replace("]","",$users);
+          
+            $this->loadModel('Users');
+            $invoice_id = $this->request->data['id'];
+            foreach ($users as $key => $id) {
+
+                $query = $this->Users->find('all');
+                $query->join([
+                    'Products' =>[
+                        'table' => 'Products',
+                        'type' => 'INNER',
+                        'conditions' => 'Users.id = Products.user_id'
+                    ],
+                    'invoice_products' =>[
+                        'table' => 'invoice_products',
+                        'type' => 'INNER',
+                        'conditions' => 'Products.id = invoice_products.product_id'
+                    ],   
+                    'categories' =>[
+                        'table' => 'categories',
+                        'type' => 'INNER',
+                        'conditions' => 'categories.id = Products.categorie_id'
+                    ],     
+                ])
+                ->select(['Users.id','Users.username','Users.email','Products.id','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','invoice_products.id','invoice_products.invoice_id','invoice_products.quantity','invoice_products.remark','categories.name'])
+                ->where(['invoice_products.invoice_id' => $invoice_id,'Products.user_id' => trim($id)])
+                ->order(['Users.id' => 'ASC'])
+                ->group(['invoice_products.id']);
+                $email = $query->toarray()[0]['email'];
+                $html = '';
+                foreach ($query as $key => $value) {
+                    $html .='<tr class="cart_item">
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                <span class="">'.($key+1).'</span>
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["product_name"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["categories"]["name"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["serial_no"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["type_model"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["origin"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["retail_price"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                <div class="info-qty" id="0">
+                                    <span class="qty-val">
+                                        '.$value["invoice_products"]["quantity"].'
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">  
+                                '.$value["invoice_products"]["remark"].' 
+                            </td>
+                        </tr>';
+                }
+                $this->sendUserEmail($email,'inquiry #'.$invoice_id, $html, 'inquiry');
+            }
+            $result = $this->Invoices->updateAll(['status' => 3], ['id' => $this->request->data['id']]);
+           
         }
     }
 }

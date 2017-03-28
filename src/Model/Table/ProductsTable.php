@@ -217,10 +217,12 @@ class ProductsTable extends Table
             'Suppliers' => function ($q) {
                 return $q->autoFields(false)->select(['id','name']);
             },
-            'Outlets' => function ($q) {
-                return $q->autoFields(false)->select(['id','name']);
+            // 'Outlets' => function ($q) {
+            //     return $q->autoFields(false)->select(['id','name']);
+            // },
+            'Users' => function ($q) {
+                return $q->autoFields(false)->select(['id','username']);
             },
-            
             'Images' => function ($q) {
                 return $q->autoFields(false)->select(['id','product_id','path','thumbnail']);
             }
@@ -236,7 +238,7 @@ class ProductsTable extends Table
 
     public function MaxSKU() {
         $Product = TableRegistry::get('Products');
-        $max_sku = $Product->find()->select(['sku' => 'MAX(Products.sku)'])->first();
+        $max_sku = $Product->find()->select(['sku'])->order(['created' => 'desc'])->first();
         $max_sku = $max_sku->sku+1;
         return $max_sku;
     }

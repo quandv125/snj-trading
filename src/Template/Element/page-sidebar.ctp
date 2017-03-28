@@ -74,6 +74,9 @@
             <li>
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-tasks"></span><p>'.__('Menu').'</p>',array('controller'=>'categories','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
+            <li>
+                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-plane"></span><p>'.__('Partner Deliverys ').'</p>',array('controller'=>'partner_deliverys','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+            </li>
            <!--  <li class="droplink">
                 <a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-signal"></span><p><?= __('Report') ?></p><span class="arrow"></span></a>
                 <ul class="sub-menu">

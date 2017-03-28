@@ -118,12 +118,12 @@ class PagesController extends AppController
         $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
         $arr        = $this->gettreelist($cat_list, $id);
         $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
-       
+        $suppliers  = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+
         $category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
             'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
         ])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
-
-        $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+       
         $this->set(compact('id','info','products','cat_list','suppliers','category'));
     }
 
@@ -131,15 +131,16 @@ class PagesController extends AppController
         $this->viewBuilder()->layout('product');
         $Categorie  = TableRegistry::get('Categories');
         $Supplier   = TableRegistry::get('Suppliers');
+        $info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
         $conditions = ['Products.categorie_id ' => $id ];
         $products   = $this->Pages->getInfoProducts($conditions);
-       
-        $category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
+        $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
+        $category = $Categorie->find('children', ['for' => $parent_id])->find('threaded')->contain([
             'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
         ])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
        
-        $suppliers    = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
-        $this->set(compact('products','category','suppliers','parent_id'));
+        
+        $this->set(compact('info','products','category','suppliers','parent_id'));
     }
 
     public function products($id) {
@@ -227,12 +228,12 @@ class PagesController extends AppController
         $Invoice  = TableRegistry::get('Invoices');
         $orders = $Invoice->find()->contain([
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.thumbnail','categories.id','categories.name',])
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.retail_price','products.thumbnail','categories.id','categories.name',])
                 ->leftJoin('products', 'products.id = Invoiceproducts.product_id')
                 ->leftJoin('categories', 'categories.id = products.categorie_id');
             }
-        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
-        // pr($orders);die();
+        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost',])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
+       
         $this->set(compact('orders'));
     }
 }

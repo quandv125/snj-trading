@@ -71,17 +71,17 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'assets/plugins/jquery/jquery-2.1.4.min',
         'assets/plugins/jquery-ui/jquery-ui.min',
         'assets/plugins/pace-master/pace.min',
-        'assets/plugins/jquery-blockui/jquery.blockui',
+        // 'assets/plugins/jquery-blockui/jquery.blockui',
         'assets/plugins/bootstrap/js/bootstrap.min',
         'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
         'assets/plugins/switchery/switchery.min',
         'assets/plugins/uniform/jquery.uniform.min',
-        'assets/plugins/offcanvasmenueffects/js/main',
+        // 'assets/plugins/offcanvasmenueffects/js/main',
         'assets/plugins/waves/waves.min',
-        'assets/plugins/3d-bold-navigation/js/main',
+        // 'assets/plugins/3d-bold-navigation/js/main',
         'assets/plugins/jquery-counterup/jquery.counterup.min', // Menu
         'assets/plugins/toastr/toastr.min',
-        'assets/plugins/metrojs/MetroJs.min',
+        // 'assets/plugins/metrojs/MetroJs.min',
         'assets/plugins/icheck/icheck.min',
         'assets/js/modern.min',
         'assets/plugins/ion.rangeslider/js/ion-rangeSlider/ion.rangeSlider.min',
@@ -115,7 +115,6 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?php echo $this->element('breadcrumbs') ?>
                 <div id="main-wrapper">
                     <!--  -->         
-
                     <!--  -->
                     <?= $this->fetch('content') ?>
                 </div><!-- Main Wrapper -->
@@ -124,7 +123,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </main><!-- Page Content -->
        
     <?php echo $this->element('nav-container'); ?>
-<?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?>
+    <?php echo $this->Html->image('loader.gif',['id' => 'loader', "style"=>"display: none;"]) ?>
  
 
 </body>

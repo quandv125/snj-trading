@@ -99,29 +99,29 @@ class InvoicesTable extends Table
             ->integer('type')
             ->allowEmpty('type');
 
-        $validator
-            ->decimal('total')
-            ->requirePresence('total', 'create')
-            ->allowEmpty('total');
+        // $validator
+        //     ->decimal('total')
+        //     ->requirePresence('total', 'create')
+        //     ->allowEmpty('total');
 
-        $validator
-            ->decimal('customers_paid')
-            ->requirePresence('customers_paid', 'create')
-            ->allowEmpty('customers_paid');
+        // $validator
+        //     ->decimal('customers_paid')
+        //     ->requirePresence('customers_paid', 'create')
+        //     ->allowEmpty('customers_paid');
 
-        $validator
-            ->decimal('money')
-            ->requirePresence('money', 'create')
-            ->allowEmpty('money');
+        // $validator
+        //     ->decimal('money')
+        //     ->requirePresence('money', 'create')
+        //     ->allowEmpty('money');
 
-        $validator
-            ->decimal('return_money')
-            ->requirePresence('return_money', 'create')
-            ->allowEmpty('return_money');
+        // $validator
+        //     ->decimal('return_money')
+        //     ->requirePresence('return_money', 'create')
+        //     ->allowEmpty('return_money');
 
-        $validator
-            ->integer('discount')
-            ->allowEmpty('discount');
+        // $validator
+        //     ->integer('discount')
+        //     ->allowEmpty('discount');
 
         $validator
             ->allowEmpty('note');
@@ -159,7 +159,7 @@ class InvoicesTable extends Table
                 return $q->autoFields(false)->select(['id','username']);
             },
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price'])->innerJoinWith('Products');
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.user_id'])->innerJoinWith('Products');
             },
             'Customers',
             'Outlets',

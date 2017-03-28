@@ -12,11 +12,13 @@
 					<td>
 						<?php echo $this->Html->link($product->product_name,['controller' => 'Pages','action' => 'products',$product->id]) ; ?>
 					</td>
-					<!-- <td>
-						<span class="addcart-link cursor-point" product_id="<?php echo $product->id ?>">
-							Add to Cart
-						</span>
-					</td> -->
+					<td>
+						<div class="search-attr-info">
+							<span class="addcart-link2 cursor-point" product_id="<?= $product->id;?>" >
+								<i class="fa fa-shopping-cart"></i> Add to Cart
+							</span>
+						</div>
+					</td>
 				</tr>
 			<?php endforeach ?>
 		</table>

@@ -178,8 +178,8 @@ class ProductsController extends AppController
     {
         $product = $this->Products->get($id, [ 'contain' => [] ]);
         $this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
-        $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
-        $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+        // $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
+        // $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
         $this->request->data['actived'] = true;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $product = $this->Products->patchEntity($product, $this->request->data);
@@ -533,29 +533,73 @@ class ProductsController extends AppController
     public function cart() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
-            $cart = $this->request->session()->read('Cart');
-
-            if (!isset($cart)) {
+            $cart    = $this->request->session()->read('Cart');
+            $my_cart = $this->request->session()->read('my_cart');
+            
+            if (!isset($my_cart)) {
                 $my_cart = array();
             } else {
-                $my_cart = $cart;
+                $my_cart = $my_cart;
             }
 
             if (!in_array($this->request->data['id'], $my_cart)) {
-                $products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null);  
-                $my_cart[$this->request->data['id']] = $products;
-                unset($my_cart[null]);
-                $this->request->session()->write('Cart', $my_cart);
-            }            
-             // $this->request->session()->delete('Cart');
+                $my_cart[$this->request->data['id']] = $this->request->data['id'];
+                // $products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null); 
+                $conditions = ['Products.id'=>$this->request->data['id']];
+    			$Product = TableRegistry::get('Products');
+		        $products = $Product->find()->contain([
+		            'Categories' => function ($q) {
+		                return $q->autoFields(false)->select(['id','name']);
+		            }
+		        ])
+				->select(['id','product_name','type_model','serial_no','origin','unit'])
+				->where(['Products.id'=>$this->request->data['id']])
+				->order(['Products.created' => 'DESC'])->first();
+
+                $cart[$this->request->data['id']] = $products;
+                $this->request->session()->write('my_cart', $my_cart);
+                $this->request->session()->write('Cart', $cart);
+                $html = '';
+                $html .= '<tr class="cart_item cart_item_'.$products->id.'" id="'.$products->id.'">
+                    <td class="text-center product-remove">
+                        <span class="remove-items" product_id="'.$products->id.'"><i class="fa fa-times"></i></span>
+                    </td>
+                    <td class="text-center product-name">
+                    	<a href="/pages/products/'.$products->id.'">'.$products->product_name.'</a>                                               
+                    </td>
+                    <td class="text-center product-name">'.$products->category["name"].'</td>
+                    <td class="text-center product-name">'.$products->type_model.'</td>
+                    <td class="text-center product-name">'.$products->serial_no.'</td>
+                    <td class="text-center product-name">'.$products->origin.'</td>
+
+                    <td class="text-center product-quantity">
+                        <div class="info-qty">
+                            <a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
+                            <span class="qty-val">1</span>
+                            <a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
+                        </div>          
+                    </td>
+                    <td class="text-center product-name">'.$products->unit.'</td>
+                    <td class="text-center product-subtotal">
+                        <span class="amount"><textarea class="form-control remark-item" rows="2" cols="30" id="comment"></textarea></span>
+                    </td>
+                </tr>';
+                echo $html;
+            } else {
+                echo '0';
+            }
+            // $this->request->session()->delete('Cart');
         }
     }
 
-    public function RemoveItems()    {
+    public function RemoveItems() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
+            $my_cart = $this->request->session()->read('my_cart');
             $cart = $this->request->session()->read('Cart');
+            unset($my_cart[$this->request->data['id']]);
             unset($cart[$this->request->data['id']]);
+            $this->request->session()->write('my_cart', $my_cart);
             $this->request->session()->write('Cart', $cart);
         }
     }
@@ -601,5 +645,13 @@ class ProductsController extends AppController
         }
     }
 
+    public function getDetailProducts()  {
+        if ($this->request->is('ajax')) {
+            $this->autoRender = false;
+            $products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['product_id']], null, null);  
+            $this->set(compact('products'));
+            $this->render('/Element/Products/detail_products');
+        }
+    }
    
 }

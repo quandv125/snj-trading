@@ -15,7 +15,7 @@
                 <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Images</a></li>
             </ul>
             <!-- Tab panes -->
-             <?php echo $this->Form->create('add',['url'=>['controller'=>'Products','action'=>'SupplierAddProduct'],'enctype'=>'multipart/form-data']);?>
+             <?php echo $this->Form->create('add',['url'=>['controller'=>'Products','action'=>'SupplierAddProduct'],'id'=>'form-add-products','enctype'=>'multipart/form-data']);?>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home"><br/>
                     <div class="col-lg-6 col-md-6">

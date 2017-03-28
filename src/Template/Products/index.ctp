@@ -113,7 +113,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="bold"><?php echo __('Type Model')?>:</td>
-                                                                    <td><?= $product->typ_model ?></td>
+                                                                    <td><?= $product->type_model ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="bold"><?php echo __('Origin') ?>:</td>

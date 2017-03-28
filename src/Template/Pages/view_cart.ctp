@@ -6,7 +6,7 @@
 					<h2 class="title-shop-page">my cart</h2>
 					
 						<div class="table-responsive">
-							<table cellspacing="0" class="shop_table cart table">
+							<table cellspacing="0" class="shop_table my_order cart table">
 								<thead>
 									<tr>
 										<th class="text-center product-remove"><?php echo __('#'); ?></th>
@@ -17,6 +17,7 @@
 										<th class="text-center product-thumbnail"><?php echo __('Serial No'); ?></th>
 										<th class="text-center product-thumbnail"><?php echo __('Origin'); ?></th>
 										<th class="text-center product-quantity"><?php echo __('Quantity'); ?></th>
+										<th class="text-center product-quantity"><?php echo __('Unit'); ?></th>
 										<th class="text-center product-subtotal"><?php echo __('Remark'); ?></th>
 									</tr>
 								</thead>
@@ -28,9 +29,7 @@
 												<td class="text-center product-remove">
 													<span class="remove-items" product_id="<?php echo $products->id ?>"><i class="fa fa-times"></i></span>
 												</td>
-												<!-- <td class="text-center product-thumbnail">
-													<?= $this->Html->link($this->Html->image($products->thumbnail,['width'=>70]), ['controller'=>'pages','action'=>'products',$products->id], array('escape' => false)); ?>
-												</td> -->
+												
 												<td class="text-center product-name">
 													<?= $this->Html->link($products->product_name, ['controller'=>'pages','action'=>'products', $products->id], array('escape' => false)); ?>
 												</td>
@@ -47,11 +46,14 @@
 													<?= $products->origin ?>
 												</td>
 												<td class="text-center product-quantity">
-													<div class="info-qty">
-														<a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
+													 <div class="info-qty" id="<?php echo $key; ?>">
+														<a href="#" class="qty-down qty-down-<?php echo $key; ?>"><i class="fa fa-angle-left"></i></a>
 														<span class="qty-val">1</span>
-														<a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
+														<a href="#" class="qty-up qty-up-<?php echo $key; ?>"><i class="fa fa-angle-right"></i></a>
 													</div>			
+												</td>
+												<td class="text-center product-name">
+													<?= $products->unit ?>
 												</td>
 												<td class="text-center product-subtotal">
 
@@ -61,17 +63,14 @@
 										<?php endforeach ?>
 									<?php endif ?>
 									
-									<tr>
-										<td class="actions" colspan="9">
-											
-											<input type="submit" value="Create Quotation" name="update_cart" id="update_cart" class="button">
-										</td>
-									</tr>
 								</tbody>
 							</table>
+							<button id="update_cart" class="float-right">Create Quotation</button>
 						</div>
 					
 				</div>
 			</div>	
 		</div>
 	</div>
+
+	<?php echo $this->Html->image('loader.gif',['class' => 'loader3', "style"=>"display: none;"]) ?>

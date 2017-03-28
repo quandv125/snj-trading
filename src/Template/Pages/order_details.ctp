@@ -27,7 +27,8 @@
                                 <tr class="cart_item cart_item_<?php echo $ip->id; ?>" invoice_product_id="<?php echo $ip->id; ?>">
                                     <td class="text-center">
                                         <?php if ($orders->status == 2): ?>
-                                            <span class="" product_id=""><i class="fa fa-times"></i></span>
+                                            <!-- <span class="" product_id=""><i class="fa fa-times"></i></span> -->
+                                            <?php echo $key+1 ?>
                                         <?php endif ?>
                                         
                                     </td>
@@ -55,13 +56,13 @@
                                     
                                     <td class="text-center">
                                         <div class="info-qty" id="<?php echo $key; ?>">
-                                            <a href="#" class="qty-down qty-down-<?php echo $key; ?>"><i class="fa fa-angle-left"></i></a>
+                                            <!-- <a href="#" class="qty-down qty-down-<?php //echo $key; ?>"><i class="fa fa-angle-left"></i></a> -->
                                             <span class="qty-val"><?php echo $ip->quantity ?></span>
-                                            <a href="#" class="qty-up qty-up-<?php echo $key; ?>"><i class="fa fa-angle-right"></i></a>
+                                            <!-- <a href="#" class="qty-up qty-up-<?php //echo $key; ?>"><i class="fa fa-angle-right"></i></a> -->
                                         </div>          
                                     </td>
                                     <td class="text-center">
-                                        <textarea class="form-control remark-item" rows="2" cols="30"><?php echo $ip->remark ?></textarea>
+                                        <textarea class="form-control remark-item" disabled rows="2" cols="30"><?php echo $ip->remark ?></textarea>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

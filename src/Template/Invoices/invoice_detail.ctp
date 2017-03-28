@@ -156,7 +156,7 @@
                                             <div class="clearfix"> </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                 <button class="float-right btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red" ><i class="fa fa-trash"></i> Cancel</button>
-                                                <button class="float-right btn btn-info btn-addon m-b-sm waves-effect waves-button waves-red send-invoices-supplier" style="margin-right: 10px;" user="<?php echo json_encode($user) ?>" id="<?= $invoice->id;?>"><i class="fa fa-paper-plane"></i> Send</button>
+                                                <button class="float-right btn btn-info btn-addon m-b-sm waves-effect waves-button waves-red send-invoices-supplier" style="margin-right: 10px;" user="<?php echo json_encode($user) ?>" id="<?= $invoice->id;?>"><i class="fa fa-paper-plane"></i> Send Suppliers</button>
                                                 <button class="float-right btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red update-invoices" style="margin-right: 10px;" id="<?= $invoice->id;?>"><i class="fa fa-check-square"></i> Save</button>
                                             </div>
                                         </div>

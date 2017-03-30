@@ -35,7 +35,7 @@
                                 <td><?= $products->category->name?></td>
                             </tr>
                             <tr>
-                                <td class="bold"><?php echo  __('Supplier')?></td>
+                                <td class="bold"><?php echo  __('Sold By')?></td>
                                 <td><?= $products->user->username?></td>
                             </tr>
                             <tr>

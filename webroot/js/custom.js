@@ -1123,7 +1123,28 @@ jQuery( document ).ready(function() {
 	// 		}); // Ajax
 	// 	}
 	// });
-	
+	jQuery('.btn-remove-invp').click(function(){
+		var id = jQuery(this).attr('product_id');
+		var r = confirm("Press a button!");
+		if (r == true) {
+			jQuery(this).parent().parent().fadeOut();
+			jQuery.ajax({
+				url: '/invoices/del_items',
+				type: 'POST',
+				data: {id: id},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					console.log(response);
+				}
+			});
+		}
+	});
+
 	jQuery('.show-detail-product').click(function(){
 		var product_id = jQuery(this).attr('id');
 		jQuery.ajax({
@@ -1145,17 +1166,17 @@ jQuery( document ).ready(function() {
 	});
 
 	jQuery('.profit-jobs').change(function(){
-		var id 		= jQuery(this).attr('id');
-		var price 	= jQuery('.cart-price-'+id).attr('price');
+		var id 				= jQuery(this).attr('id');
+		var price 			= jQuery('.cart-price-'+id).attr('price');
 		var delivery_cost 	= jQuery('.delivery_cost_'+id).val();
 		var packing_cost 	= jQuery('.packing_cost_'+id).val();
 		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
-		var cp = parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
-		var profit 	= parseFloat(jQuery(this).val()).toFixed(2);
-		var pp 		= (parseFloat(price) * profit)/100 ;
-		var total 	= parseFloat(cp)+ parseFloat(pp);
-		var f_pp 	= format_show(pp);
-		var f_total = format_show(total);
+		var cp 				= parseFloat(price)+ parseFloat(delivery_cost)+parseFloat(packing_cost)+ parseFloat(insurance_cost);
+		var profit 			= parseFloat(jQuery(this).val()).toFixed(2);
+		var pp 				= (parseFloat(price) * profit)/100 ;
+		var total 			= parseFloat(cp)+ parseFloat(pp);
+		var f_pp 			= format_show(pp);
+		var f_total 		= format_show(total);
 		jQuery('.price-profit-'+id).html(pp);
 		jQuery('.total-price-'+id).html(total);
 	});
@@ -1238,11 +1259,11 @@ jQuery( document ).ready(function() {
 		var insurance_cost 	= jQuery('.insurance_cost_'+id).val();
 		var profit 			= jQuery('.profit-jobs-'+id).val();
 		var note 			= jQuery('.remark_delivery_'+id).val();
-
+		var price 			= jQuery('.cart-price-'+id).html();
 		jQuery.ajax({
 			url: '/invoices/update-invoices',
 			type: 'POST',
-			data: {id: id, profit: profit, delivery_cost: delivery_cost,packing_cost: packing_cost,insurance_cost: insurance_cost,note: note},
+			data: {id: id, profit: profit, delivery_cost: delivery_cost,packing_cost: packing_cost,insurance_cost: insurance_cost,note: note,price:price},
 			dataType: 'html',
 			cache: false,
 			beforeSend: function(){
@@ -1250,8 +1271,8 @@ jQuery( document ).ready(function() {
 			},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				// console.log(response);
-				toastr.success(response);
+				console.log(response);
+				// toastr.success(response);
 			}
 		}); // Ajax
 	});

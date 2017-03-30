@@ -5,6 +5,24 @@
             <div class="cart-content-page">
                 <h2 class="title-shop-page"></h2>
                 <div class="table-responsive">
+
+                    <!-- <div class="timeline-horizontal-wap">
+                        <ul class="timeline timeline-horizontal">
+                            <li class="timeline-item">
+                                <div class="timeline-badge <?php //echo ($orders->status >= 1)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-badge <?php //echo ($orders->status >= 2)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-badge <?php //echo ($orders->status >= 3)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                            </li>
+                            <li class="timeline-item">
+                                <div class="timeline-badge <?php //echo ($orders->status >= 4)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                            </li>
+                        </ul>
+                    </div> -->
+
                     <table cellspacing="0" class="shop_table cart table">
                         <thead>
                             <tr>
@@ -14,7 +32,7 @@
                                 <th class="text-center"><?php echo __('Serial No'); ?></th>
                                 <th class="text-center"><?php echo __('Type Model'); ?></th>
                                 <th class="text-center"><?php echo __('Origin'); ?></th>
-                                <?php if ($orders->status == 2): ?>
+                                <?php if ($orders->status >= 2): ?>
                                 <th class="text-center"><?php echo __('Price'); ?></th>
                                 <?php endif ?>
                                 <th class="text-center"><?php echo __('Quantity'); ?></th>
@@ -26,11 +44,11 @@
                             <?php foreach ($orders->invoice_products as $key => $ip): ?>
                                 <tr class="cart_item cart_item_<?php echo $ip->id; ?>" invoice_product_id="<?php echo $ip->id; ?>">
                                     <td class="text-center">
-                                        <?php if ($orders->status == 2): ?>
-                                            <!-- <span class="" product_id=""><i class="fa fa-times"></i></span> -->
-                                            <?php echo $key+1 ?>
+                                        <?php if ($orders->status < 3): ?>
+                                            <span class="del-items-order" product_id="<?= $ip->id ?>"><i class="fa fa-times"></i></span>
+                                        <?php else: ?>
+                                            <span class="" product_id="<?= $ip->id ?>"><i class="fa fa-times"></i></span>
                                         <?php endif ?>
-                                        
                                     </td>
                                     <td class="text-center">
                                         <?= $this->Html->link($ip['products']['product_name'], ['controller'=>'pages','action'=>'products', $ip['products']['id']], array('escape' => false)); ?>
@@ -47,28 +65,38 @@
                                     <td class="text-center">
                                         <?= $ip['products']['origin'] ?>
                                     </td>
-                                     <?php if ($orders->status == 2): ?>
-                                         <td class="text-center">
-                                        $ <?= $price = ($ip['products']['retail_price']+($ip['products']['retail_price']*$orders->profit)/100); ?>
-                                        <?php $total = $total+($price*$ip->quantity); ?>
-                                    </td>
-                                     <?php endif ?>
-                                    
-                                    <td class="text-center">
-                                        <div class="info-qty" id="<?php echo $key; ?>">
-                                            <!-- <a href="#" class="qty-down qty-down-<?php //echo $key; ?>"><i class="fa fa-angle-left"></i></a> -->
-                                            <span class="qty-val"><?php echo $ip->quantity ?></span>
-                                            <!-- <a href="#" class="qty-up qty-up-<?php //echo $key; ?>"><i class="fa fa-angle-right"></i></a> -->
-                                        </div>          
-                                    </td>
-                                    <td class="text-center">
-                                        <textarea class="form-control remark-item" disabled rows="2" cols="30"><?php echo $ip->remark ?></textarea>
-                                    </td>
+                                    <?php if ($orders->status >= 2): ?>
+                                        <td class="text-center">
+                                            $ <?= $price = ($ip['products']['retail_price']+($ip['products']['retail_price']*$orders->profit)/100); ?>
+                                            <?php $total = $total+($price*$ip->quantity); ?>
+                                        </td>
+                                    <?php endif ?>
+                                    <?php if ($orders->status < 3): ?>
+                                        <td class="text-center">
+                                            <div class="info-qty" id="<?php echo $key; ?>">
+                                                <a href="#" class="qty-down qty-down-<?php echo $key; ?>"><i class="fa fa-angle-left"></i></a>
+                                                <span class="qty-val"><?php echo $ip->quantity ?></span>
+                                                <a href="#" class="qty-up qty-up-<?php echo $key; ?>"><i class="fa fa-angle-right"></i></a>
+                                            </div>          
+                                        </td>
+                                        <td class="text-center">
+                                            <textarea class="form-control remark-item" rows="2" cols="30"><?php echo $ip->remark ?></textarea>
+                                        </td>
+                                    <?php else: ?>
+                                        <td class="text-center">
+                                            <div class="info-qty" id="<?php echo $key; ?>">
+                                                <span class="qty-val"><?php echo $ip->quantity ?></span>
+                                            </div>          
+                                        </td>
+                                        <td class="text-center">
+                                            <textarea class="form-control" disabled rows="2" cols="30"><?php echo $ip->remark ?></textarea>
+                                        </td>
+                                    <?php endif ?>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>
-                   <?php if ($orders->status == 2): ?>
+                   <?php if ($orders->status >= 2): ?>
                         <div class=" table-responsive float-right" style="width:412px;">
                         <table class="table table-striped">
                             <tr>
@@ -85,18 +113,20 @@
                             </tr>
                             <tr>
                                 <td><b><?php echo __("Total"); ?>:</b></td>
-                                <td><span class="total-price">
-                                    $ <?php echo $total+$orders->delivery_cost+$orders->packing_cost+$orders->insurance_cost  ?>
-                                    </span></td>
+                                <td>
+                                    <span class="total-price">
+                                        $ <?php echo $total+$orders->delivery_cost+$orders->packing_cost+$orders->insurance_cost  ?>
+                                    </span>
+                                </td>
                             </tr>
                         </table>
                     </div>
                    <?php endif ?>
                     <div class="clearfix"></div><br>
-                    <?php if ($orders->status < 2): ?>
-                         <button id="save_cart" class="float-right">Update</button>
+                        
+                    <?php if ($orders->status <= 2): ?>
+                        <button id="save_cart" class="float-right" style="margin-right: 10px;">Update</button>
                     <?php endif ?>
-                   
                 </div>
             </div>
         </div>  

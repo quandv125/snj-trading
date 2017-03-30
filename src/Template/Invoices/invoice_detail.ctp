@@ -60,38 +60,37 @@
                                                 <table class="table table-bordered table-color">
                                                      <thead>
                                                         <tr>
-                                                            <th class="width5">
-                                                                <!-- <button class="btn btn-danger del-invoice-products" invoice_id="<?= $invoice->id?>" >
-                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                                </button> -->
-                                                            </th>
+                                                           
                                                             <th><?php echo __("Product Name");?></th>
                                                             <th><?php echo __("Price");?></th>
                                                             <th><?php echo __("Quantity");?></th>
                                                             <th><?php echo __("Unit");?></th>
                                                             <th><?php echo __("Total");?></th>
                                                             <th><?php echo __("Remark");?></th>
+                                                            <th class="width5">
+                                                                <!-- <button class="btn btn-danger del-invoice-products" invoice_id="<?= $invoice->id?>" >
+                                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                                </button> -->
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <?php $tp = 0; $user = array();?>
                                                     <?php foreach ($invoice->invoice_products as $key => $InvoiceProducts): ?>
 
                                                         <?php $IP = $InvoiceProducts['_matchingData']['Products'];?>
-
                                                         
-                                                        <?php if (!in_array($IP->user_id, $user)){
-                                                            $user[] = $IP->user_id;
-                                                        } ?>
+                                                        <?php if (!in_array($IP->user_id, $user)){ $user[] = $IP->user_id; } ?>
                                                         
                                                         <?php $tp = $tp+($InvoiceProducts->quantity*($IP->retail_price)); ?>
                                                         <tr class="invoice_products_<?= $InvoiceProducts->id?>">
-                                                            <th class="text-center"> <input tabindex="100<?= $key?>" type="checkbox" class="icheck invoice-product-chbox-<?= $invoice->id;?>" invoice-product-id="<?= $InvoiceProducts->id?>" cid="<?= $key?>" id="input-100<?= $key?>" name="chbox-invoice"></th>
+                                                           
                                                             <td class="cursor-pointer show-detail-product" id="<?= $IP->id?>"><?= $IP->product_name?></td>
                                                             <td><?= ($IP->retail_price) ?></td>
                                                             <td><?= $InvoiceProducts->quantity?></td>
                                                             <td><?= $IP->unit?></td>
                                                             <td><?= ($InvoiceProducts->quantity*($IP->retail_price)) ?></td>
                                                             <td><?= $InvoiceProducts->remark?></td>
+                                                            <td><span class="btn btn-danger btn-remove-invp" product_id="<?= $InvoiceProducts->id?>"><i class="fa fa-trash"></i></span></td>
                                                         </tr>
                                                     <?php endforeach ?>
                                                 </table>
@@ -156,8 +155,8 @@
                                             <div class="clearfix"> </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                 <button class="float-right btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red" ><i class="fa fa-trash"></i> Cancel</button>
-                                                <button class="float-right btn btn-info btn-addon m-b-sm waves-effect waves-button waves-red send-invoices-supplier" style="margin-right: 10px;" user="<?php echo json_encode($user) ?>" id="<?= $invoice->id;?>"><i class="fa fa-paper-plane"></i> Send Suppliers</button>
-                                                <button class="float-right btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red update-invoices" style="margin-right: 10px;" id="<?= $invoice->id;?>"><i class="fa fa-check-square"></i> Save</button>
+                                                <button title="Save and Send Email Supplier" class="float-right btn btn-info btn-addon m-b-sm waves-effect waves-button waves-red send-invoices-supplier" style="margin-right: 10px;" user="<?php echo json_encode($user) ?>" id="<?= $invoice->id;?>"><i class="fa fa-envelope"></i> Send</button>
+                                                <button title="Save and Send Email Customer" class="float-right btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red update-invoices" style="margin-right: 10px;" id="<?= $invoice->id;?>"><i class="fa fa-check-square"></i> Save</button>
                                             </div>
                                         </div>
                                     </div>

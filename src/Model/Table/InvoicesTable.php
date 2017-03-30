@@ -178,4 +178,124 @@ class InvoicesTable extends Table
         $max_code = $max_code->code+1;
         return $max_code;
     }
+
+    public function getInfo($id){
+        $Invoice = TableRegistry::get('Invoices');
+      
+        $invoices = $Invoice->find()
+        ->join([
+            'table' => 'users',
+            'alias' => 'Users',
+            'conditions' => ['Invoices.user_id = Users.id']
+        ])
+        ->contain([
+            'InvoiceProducts' => function ($q) {
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
+                    ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+                    ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
+            },
+          
+        ])
+        ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
+        ->where(['Invoices.id' => $id])
+        ->order(['Invoices.created'  => 'DESC'])->first();
+
+        return $invoices;
+    }
+
+
+    public function sendordertocustomer($data, $invoices) {
+            $total = $data['price']+$data['delivery_cost']+$data['packing_cost']+$data['insurance_cost']+(($data['price']*$data['profit'])/100);
+            $html = '';
+            $html .= ' <table cellspacing="0" class="shop_table cart table" style="border: 1px solid #e5e5e5;border-collapse: collapse;border-radius: 0;margin: 0 0 30px; text-align: left;width: 100%;">
+                        <thead style="color: #fff;background: #f4f4f4;text-align: center;position: relative;">
+                            <tr>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">#
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Name
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Category
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Serial No
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Type Model
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Origin
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Price
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Quantity
+                                </th>
+                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Remark
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>';
+                foreach ($invoices['invoice_products'] as $key => $value) {
+                    $html .='
+                        <tr class="cart_item">
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                <span class="">'.($key+1).'</span>
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["product_name"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Categories"]["name"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["serial_no"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["type_model"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.$value["Products"]["origin"].'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                '.($value["Products"]["retail_price"]+($value["Products"]["retail_price"]*$data['profit'])/100).'
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
+                                <div class="info-qty" id="0">
+                                    <span class="qty-val">
+                                        '.$value["quantity"].'
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">  
+                                '.$value["remark"].' 
+                            </td>
+                        </tr>
+                    ';
+                }
+                $html .= '</tbody>
+                    </table><br/>
+                    <div class=" table-responsive float-right" style="width:412px;">
+                        <table cellspacing="0" class="shop_table cart table" style="float:right; border: 1px solid #e5e5e5;border-collapse: collapse;border-radius: 0;margin: 0 0 30px; text-align: left;width: 100%;">
+                            <tr>
+                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Delivery cost:</b></td>
+                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$data['delivery_cost'].'</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Packing cost:</b></td>
+                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$data['packing_cost'].'</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Insurance cost:</b></td>
+                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$data['insurance_cost'].'</td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Total:</b></td>
+                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">
+                                    <span class="total-price">
+                                        $ '.number_format($total, 2).'
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>';
+                   
+                return $html;
+            
+    }
 }

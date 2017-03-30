@@ -482,7 +482,27 @@ class InvoicesController extends AppController
             $this->autoRender = false;
             $this->Invoices->updateAll(['status' => 2,'profit' => $this->request->data['profit'],'delivery_cost' => $this->request->data['delivery_cost'],'packing_cost' => $this->request->data['packing_cost'], 'insurance_cost' => $this->request->data['insurance_cost'],'note' => $this->request->data['note']], ['id' => $this->request->data['id']]);
 
-            $invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
+            //$invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
+
+             $Invoice = TableRegistry::get('Invoices');
+      
+            $invoices = $Invoice->find()
+            ->join([
+                'table' => 'users',
+                'alias' => 'Users',
+                'conditions' => ['Invoices.user_id = Users.id']
+            ])
+            ->contain([
+                'InvoiceProducts' => function ($q) {
+                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
+                        ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+                        ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
+                },
+              
+            ])
+            ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
+            ->where(['Invoices.id' => $this->request->data['id']])
+            ->order(['Invoices.created'  => 'DESC'])->first();
 
             $total = $this->request->data['price']+$this->request->data['delivery_cost']+$this->request->data['packing_cost']+$this->request->data['insurance_cost']+(($this->request->data['price']*$this->request->data['profit'])/100);
             $html = '';

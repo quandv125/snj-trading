@@ -480,9 +480,10 @@ class InvoicesController extends AppController
     public function UpdateInvoices() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
-            $this->Invoices->updateAll(['status' => 2,'profit' => $this->request->data['profit'],'delivery_cost' => $this->request->data['delivery_cost'],'packing_cost' => $this->request->data['packing_cost'], 'insurance_cost' => $this->request->data['insurance_cost'],'note' => $this->request->data['note']], ['id' => $this->request->data['id']]);
+            $result = $this->Invoices->updateAll(['status' => 2,'profit' => $this->request->data['profit'],'delivery_cost' => $this->request->data['delivery_cost'],'packing_cost' => $this->request->data['packing_cost'], 'insurance_cost' => $this->request->data['insurance_cost'],'note' => $this->request->data['note']], ['id' => $this->request->data['id']]);
 
             $invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
+
             $html = $this->Invoices->sendordertocustomer($this->request->data, $invoices);
             $email = $invoices['Users']['email'];
             $this->sendUserEmail($email,'order #'.$this->request->data['id'], $html, 'orders');
@@ -502,24 +503,24 @@ class InvoicesController extends AppController
 
                 $query = $this->Users->find('all');
                 $query->join([
-                    'Products' =>[
-                        'table' => 'Products',
+                    'products' =>[
+                        'table' => 'products',
                         'type' => 'INNER',
-                        'conditions' => 'Users.id = Products.user_id'
+                        'conditions' => 'Users.id = products.user_id'
                     ],
                     'invoice_products' =>[
                         'table' => 'invoice_products',
                         'type' => 'INNER',
-                        'conditions' => 'Products.id = invoice_products.product_id'
+                        'conditions' => 'products.id = invoice_products.product_id'
                     ],   
                     'categories' =>[
                         'table' => 'categories',
                         'type' => 'INNER',
-                        'conditions' => 'categories.id = Products.categorie_id'
+                        'conditions' => 'categories.id = products.categorie_id'
                     ],     
                 ])
-                ->select(['Users.id','Users.username','Users.email','Products.id','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','invoice_products.id','invoice_products.invoice_id','invoice_products.quantity','invoice_products.remark','categories.name'])
-                ->where(['invoice_products.invoice_id' => $invoice_id,'Products.user_id' => trim($id)])
+                ->select(['Users.id','Users.username','Users.email','products.id','products.product_name','products.serial_no','products.type_model','products.origin','products.retail_price','invoice_products.id','invoice_products.invoice_id','invoice_products.quantity','invoice_products.remark','categories.name'])
+                ->where(['invoice_products.invoice_id' => $invoice_id,'products.user_id' => trim($id)])
                 ->order(['Users.id' => 'ASC'])
                 ->group(['invoice_products.id']);
                 $email = $query->toarray()[0]['email'];
@@ -530,22 +531,22 @@ class InvoicesController extends AppController
                                 <span class="">'.($key+1).'</span>
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["product_name"].'
+                                '.$value["products"]["product_name"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
                                 '.$value["categories"]["name"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["serial_no"].'
+                                '.$value["products"]["serial_no"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["type_model"].'
+                                '.$value["products"]["type_model"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["origin"].'
+                                '.$value["products"]["origin"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["retail_price"].'
+                                '.$value["products"]["retail_price"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
                                 <div class="info-qty" id="0">

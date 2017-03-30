@@ -229,7 +229,7 @@ class PagesController extends AppController
         $orders = $Invoice->find()->contain([
             'InvoiceProducts' => function ($q) {
                 return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.retail_price','products.thumbnail','categories.id','categories.name',])
-                ->leftJoin('products', 'products.id = Invoiceproducts.product_id')
+                ->leftJoin('products', 'products.id = InvoiceProducts.product_id')
                 ->leftJoin('categories', 'categories.id = products.categorie_id');
             }
         ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost',])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();

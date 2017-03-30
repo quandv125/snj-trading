@@ -46,8 +46,7 @@
                                     <td class="text-center">
                                         <?php if ($orders->status < 3): ?>
                                             <span class="del-items-order" product_id="<?= $ip->id ?>"><i class="fa fa-times"></i></span>
-                                        <?php else: ?>
-                                            <span class="" product_id="<?= $ip->id ?>"><i class="fa fa-times"></i></span>
+                                       
                                         <?php endif ?>
                                     </td>
                                     <td class="text-center">
@@ -125,7 +124,7 @@
                     <div class="clearfix"></div><br>
                         
                     <?php if ($orders->status <= 2): ?>
-                        <button id="save_cart" class="float-right" style="margin-right: 10px;">Update</button>
+                        <button id="save_cart" invoice_id="<?php echo $orders->id ?>" class="float-right" style="margin-right: 10px;">Update</button>
                     <?php endif ?>
                 </div>
             </div>

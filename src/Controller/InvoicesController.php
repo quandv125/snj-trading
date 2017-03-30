@@ -399,7 +399,6 @@ class InvoicesController extends AppController
                 $msg = array('status' => false, 'message' => __('NO.'));
             }
             $this->sendUserEmail('quandv.125@gmail.com','New Order', 'You have new Order', 'default');
-            
             echo json_encode($msg); exit();
         }
     }
@@ -452,10 +451,16 @@ class InvoicesController extends AppController
        if ($this->request->is('ajax')) {
             $this->autoRender = false;
             $InvoiceProduct = TableRegistry::get('InvoiceProducts');
-            foreach ($this->request->data['items'] as $key => $item) {
-                $InvoiceProduct->updateAll(['quantity' => $item['quantity'], 'remark' => $item['remark']], ['id' => $item['invoice_product_id']]);
+          
+            $invoice = $this->Invoices->get($this->request->data['invoice_id']);
+            if ($invoice->status < 3) {
+                foreach ($this->request->data['items'] as $key => $item) {
+                    $InvoiceProduct->updateAll(['quantity' => $item['quantity'], 'remark' => $item['remark']], ['id' => $item['invoice_product_id']]);
+                }
+                echo 'ok';
+            } else {
+                echo 'error';
             }
-            echo 'ok';
         }
     }
 
@@ -464,14 +469,18 @@ class InvoicesController extends AppController
             $this->autoRender = false;
             $InvoiceProduct = TableRegistry::get('InvoiceProducts');
             $invoiceproduct = $InvoiceProduct->get($this->request->data['id']);
-            if ($InvoiceProduct->delete($invoiceproduct)) {
-                if (!$InvoiceProduct->exists(['invoice_id' => $invoiceproduct->invoice_id])) {
-                    $invoice = $this->Invoices->get($invoiceproduct->invoice_id);
-                    if ($this->Invoices->delete($invoice)) {
-                        echo 'delete all';
-                    } 
+            $invoice = $this->Invoices->get($invoiceproduct->invoice_id);
+            if ($invoice->status < 3) {
+                if ($InvoiceProduct->delete($invoiceproduct)) {
+                    if (!$InvoiceProduct->exists(['invoice_id' => $invoiceproduct->invoice_id])) {
+                        if ($this->Invoices->delete($invoice)) {
+                            echo 'delete all';
+                        } 
+                    }
+                    echo 'ok';
+                } else {
+                    echo 'error';
                 }
-                echo 'ok';
             } else {
                 echo 'error';
             }

@@ -74,6 +74,7 @@ jQuery(document).ready(function(){
 
 	jQuery('#save_cart').click(function(){
 		var items		= new Array();
+		var invoice_id = jQuery(this).attr('invoice_id');
 		jQuery.each(jQuery('.cart_item'), function(i, v) {
 			var invoice_product_id	= jQuery( this ).attr('invoice_product_id');
 			var quantity	= jQuery(this).find('.qty-val').html();
@@ -83,7 +84,7 @@ jQuery(document).ready(function(){
 		jQuery.ajax({
 			url: '/invoices/update_orders',
 			type: 'POST',
-			data: {items: items},
+			data: {items: items,invoice_id: invoice_id},
 			dataType: 'html',
 			cache: false,
 			beforeSend: function(){
@@ -91,6 +92,12 @@ jQuery(document).ready(function(){
 			},
 			success: function(response){
 				jQuery(".loader3").fadeOut();
+				
+				if (response == 'error') {
+					alert("You can't update");
+				} else {
+					alert("update successfully!");
+				}
 				location.reload();
 			}
 		});
@@ -123,7 +130,7 @@ jQuery(document).ready(function(){
 
 		var r = confirm("Press a button!");
 		if (r == true) {
-			jQuery(this).parent().parent().fadeOut();
+			// jQuery(this).parent().parent().fadeOut();
 			jQuery.ajax({
 				url: '/invoices/del_items',
 				type: 'POST',
@@ -135,8 +142,11 @@ jQuery(document).ready(function(){
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-
 					console.log(response);
+					if (response == 'error') {
+						alert("You can't delete");
+					}
+					location.reload();
 				}
 			});
 		}

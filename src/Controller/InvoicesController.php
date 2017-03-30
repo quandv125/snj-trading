@@ -189,6 +189,26 @@ class InvoicesController extends AppController
     }
 
     public function ChangeInvoicesProducts() {
+        $Invoice = TableRegistry::get('Invoices');
+          
+                $invoices = $Invoice->find()
+                ->join([
+                    'table' => 'users',
+                    'alias' => 'Users',
+                    'conditions' => ['Invoices.user_id = Users.id']
+                ])
+                ->contain([
+                    'InvoiceProducts' => function ($q) {
+                        return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.retail_price','products.user_id','categories.id','categories.name'])
+                            ->leftJoin('Products','products.id = InvoiceProducts.product_id')
+                            ->leftJoin('categories', 'categories.id = products.categorie_id');
+                    },
+                  
+                ])
+                ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
+                ->where(['Invoices.id' => 43])
+                ->order(['Invoices.created'  => 'DESC'])->first();
+                pr($invoices);die();
         // $Invoice = TableRegistry::get('Invoices');
         // $InvoiceProduct = TableRegistry::get('InvoiceProducts');
         // $User = TableRegistry::get('Users');
@@ -197,7 +217,7 @@ class InvoicesController extends AppController
         //     //     return $q->autoFields(false)->select(['id','username']);
         //     // },
         //     'InvoiceProducts' => function ($q) {
-        //         return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.user_id','Users.id','Users.username','Users.email'])
+        //         return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','Products.sku','Products.product_name','Products.user_id','Users.id','Users.username','Users.email'])
         //             ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
         //             ->leftJoin('Users', 'Users.id = Products.user_id')
         //             ->where(['Products.user_id' => $this->Auth->user('id')]);
@@ -484,25 +504,25 @@ class InvoicesController extends AppController
 
             //$invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
 
-             $Invoice = TableRegistry::get('Invoices');
-      
-            $invoices = $Invoice->find()
-            ->join([
-                'table' => 'users',
-                'alias' => 'Users',
-                'conditions' => ['Invoices.user_id = Users.id']
-            ])
-            ->contain([
-                'InvoiceProducts' => function ($q) {
-                    return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
-                        ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
-                        ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
-                },
-              
-            ])
-            ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
-            ->where(['Invoices.id' => $this->request->data['id']])
-            ->order(['Invoices.created'  => 'DESC'])->first();
+                 $Invoice = TableRegistry::get('Invoices');
+          
+                $invoices = $Invoice->find()
+                ->join([
+                    'table' => 'users',
+                    'alias' => 'Users',
+                    'conditions' => ['Invoices.user_id = Users.id']
+                ])
+                ->contain([
+                    'InvoiceProducts' => function ($q) {
+                        return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
+                            ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
+                            ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
+                    },
+                  
+                ])
+                ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
+                ->where(['Invoices.id' => $this->request->data['id']])
+                ->order(['Invoices.created'  => 'DESC'])->first();
 
             $total = $this->request->data['price']+$this->request->data['delivery_cost']+$this->request->data['packing_cost']+$this->request->data['insurance_cost']+(($this->request->data['price']*$this->request->data['profit'])/100);
             $html = '';

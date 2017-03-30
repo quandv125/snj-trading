@@ -378,7 +378,7 @@ class InvoicesController extends AppController
                 'status'  => '1',
                 'user_id' => $this->Auth->user('id'),
             ];
-          
+            
             if (!empty($this->Auth->user('id'))) {
                 $Invoice        = TableRegistry::get('Invoices');
                 $InvoiceProduct = TableRegistry::get('InvoiceProducts');
@@ -398,6 +398,8 @@ class InvoicesController extends AppController
             } else {
                 $msg = array('status' => false, 'message' => __('NO.'));
             }
+            $this->sendUserEmail('quandv.125@gmail.com','New Order', 'You have new Order', 'default');
+            
             echo json_encode($msg); exit();
         }
     }

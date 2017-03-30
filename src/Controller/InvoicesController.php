@@ -189,26 +189,6 @@ class InvoicesController extends AppController
     }
 
     public function ChangeInvoicesProducts() {
-        $Invoice = TableRegistry::get('Invoices');
-          
-                $invoices = $Invoice->find()
-                ->join([
-                    'table' => 'users',
-                    'alias' => 'Users',
-                    'conditions' => ['Invoices.user_id = Users.id']
-                ])
-                ->contain([
-                    'InvoiceProducts' => function ($q) {
-                        return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.retail_price','products.user_id','categories.id','categories.name'])
-                            ->leftJoin('Products','products.id = InvoiceProducts.product_id')
-                            ->leftJoin('categories', 'categories.id = products.categorie_id');
-                    },
-                  
-                ])
-                ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
-                ->where(['Invoices.id' => 43])
-                ->order(['Invoices.created'  => 'DESC'])->first();
-                pr($invoices);die();
         // $Invoice = TableRegistry::get('Invoices');
         // $InvoiceProduct = TableRegistry::get('InvoiceProducts');
         // $User = TableRegistry::get('Users');
@@ -217,7 +197,7 @@ class InvoicesController extends AppController
         //     //     return $q->autoFields(false)->select(['id','username']);
         //     // },
         //     'InvoiceProducts' => function ($q) {
-        //         return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','Products.sku','Products.product_name','Products.user_id','Users.id','Users.username','Users.email'])
+        //         return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.user_id','Users.id','Users.username','Users.email'])
         //             ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
         //             ->leftJoin('Users', 'Users.id = Products.user_id')
         //             ->where(['Products.user_id' => $this->Auth->user('id')]);
@@ -502,119 +482,8 @@ class InvoicesController extends AppController
             $this->autoRender = false;
             $this->Invoices->updateAll(['status' => 2,'profit' => $this->request->data['profit'],'delivery_cost' => $this->request->data['delivery_cost'],'packing_cost' => $this->request->data['packing_cost'], 'insurance_cost' => $this->request->data['insurance_cost'],'note' => $this->request->data['note']], ['id' => $this->request->data['id']]);
 
-            //$invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
-
-                 $Invoice = TableRegistry::get('Invoices');
-          
-                $invoices = $Invoice->find()
-                ->join([
-                    'table' => 'users',
-                    'alias' => 'Users',
-                    'conditions' => ['Invoices.user_id = Users.id']
-                ])
-                ->contain([
-                    'InvoiceProducts' => function ($q) {
-                        return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
-                            ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
-                            ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
-                    },
-                  
-                ])
-                ->select(['Invoices.id','Invoices.code','Invoices.profit','Invoices.status','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.created','Users.id','Users.email'])
-                ->where(['Invoices.id' => $this->request->data['id']])
-                ->order(['Invoices.created'  => 'DESC'])->first();
-
-            $total = $this->request->data['price']+$this->request->data['delivery_cost']+$this->request->data['packing_cost']+$this->request->data['insurance_cost']+(($this->request->data['price']*$this->request->data['profit'])/100);
-            $html = '';
-            $html .= ' <table cellspacing="0" class="shop_table cart table" style="border: 1px solid #e5e5e5;border-collapse: collapse;border-radius: 0;margin: 0 0 30px; text-align: left;width: 100%;">
-                        <thead style="color: #fff;background: #f4f4f4;text-align: center;position: relative;">
-                            <tr>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">#
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Name
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Category
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Serial No
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Type Model
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Origin
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Price
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Quantity
-                                </th>
-                                <th class="text-center" style=" border-color: #e5e5e5;color: #333;border: 1px solid #e5e5e5;padding: 10px 10px;">Remark
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-                foreach ($invoices['invoice_products'] as $key => $value) {
-                    $html .='
-                        <tr class="cart_item">
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                <span class="">'.($key+1).'</span>
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["product_name"].'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Categories"]["name"].'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["serial_no"].'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["type_model"].'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["origin"].'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.($value["Products"]["retail_price"]+($value["Products"]["retail_price"]*$this->request->data['profit'])/100).'
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                <div class="info-qty" id="0">
-                                    <span class="qty-val">
-                                        '.$value["quantity"].'
-                                    </span>
-                                </div>
-                            </td>
-                            <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">  
-                                '.$value["remark"].' 
-                            </td>
-                        </tr>
-                    ';
-                }
-                $html .= '</tbody>
-                    </table><br/>
-                    <div class=" table-responsive float-right" style="width:412px;">
-                        <table cellspacing="0" class="shop_table cart table" style="float:right; border: 1px solid #e5e5e5;border-collapse: collapse;border-radius: 0;margin: 0 0 30px; text-align: left;width: 100%;">
-                            <tr>
-                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Delivery cost:</b></td>
-                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$this->request->data['delivery_cost'].'</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Packing cost:</b></td>
-                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$this->request->data['packing_cost'].'</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Insurance cost:</b></td>
-                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">$ '.$this->request->data['insurance_cost'].'</td>
-                            </tr>
-                            <tr>
-                                <td class="text-center" style="background: #f4f4f4;border: 1px solid #e5e5e5 !important;color: #555;margin: 0;"><b>Total:</b></td>
-                                <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;margin: 0;">
-                                    <span class="total-price">
-                                        $ '.number_format($total, 2).'
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>';
-
-            // $html = $this->Invoices->sendordertocustomer($this->request->data, $invoices);
+            $invoices = $this->Invoices->getInfo($this->request->data['id'])->toarray();
+            $html = $this->Invoices->sendordertocustomer($this->request->data, $invoices);
             $email = $invoices['Users']['email'];
             $this->sendUserEmail($email,'order #'.$this->request->data['id'], $html, 'orders');
         }

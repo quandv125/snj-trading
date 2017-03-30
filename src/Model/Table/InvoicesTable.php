@@ -190,9 +190,9 @@ class InvoicesTable extends Table
         ])
         ->contain([
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
-                    ->leftJoin('Products','Products.id = InvoiceProducts.product_id')
-                    ->leftJoin('Categories', 'Categories.id = Products.categorie_id');
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.remark','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.retail_price','products.user_id','categories.id','categories.name'])
+                    ->leftJoin('products','products.id = InvoiceProducts.product_id')
+                    ->leftJoin('categories', 'categories.id = products.categorie_id');
             },
           
         ])
@@ -238,22 +238,22 @@ class InvoicesTable extends Table
                                 <span class="">'.($key+1).'</span>
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["product_name"].'
+                                '.$value["products"]["product_name"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Categories"]["name"].'
+                                '.$value["categories"]["name"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["serial_no"].'
+                                '.$value["products"]["serial_no"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["type_model"].'
+                                '.$value["products"]["type_model"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.$value["Products"]["origin"].'
+                                '.$value["products"]["origin"].'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
-                                '.($value["Products"]["retail_price"]+($value["Products"]["retail_price"]*$data['profit'])/100).'
+                                '.($value["products"]["retail_price"]+($value["products"]["retail_price"]*$data['profit'])/100).'
                             </td>
                             <td class="text-center" style="border: 1px solid #e5e5e5 !important;color: #555;text-align: center;margin: 0;">
                                 <div class="info-qty" id="0">

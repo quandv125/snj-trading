@@ -372,6 +372,11 @@ class InvoicesController extends AppController
     public function orders() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
+            if (empty($this->Auth->user())) {
+                $msg = array('status' => false, 'message' => __('You must login before order.'));
+                echo json_encode($msg); exit();
+                exit();
+            } 
             $data = [
                 'code'    => '1',
                 'status'  => '1',

@@ -59,7 +59,7 @@ jQuery(document).ready(function(){
 			},
 			success: function(response){
 				jQuery(".loader3").fadeOut();
-				
+				// console.log(response);return;
 				var data = jQuery.parseJSON(response);
 				if (data.status == true) {
 					console.log(data.message);

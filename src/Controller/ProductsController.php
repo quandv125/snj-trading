@@ -574,9 +574,9 @@ class ProductsController extends AppController
 
                     <td class="text-center product-quantity">
                         <div class="info-qty">
-                            <a href="#" class="qty-down"><i class="fa fa-angle-left"></i></a>
+                            <a href="#" class="qty-down qty-down-'.$products->id.'"><i class="fa fa-angle-left"></i></a>
                             <span class="qty-val">1</span>
-                            <a href="#" class="qty-up"><i class="fa fa-angle-right"></i></a>
+                            <a href="#" class="qty-up qty-up-'.$products->id.'"><i class="fa fa-angle-right"></i></a>
                         </div>          
                     </td>
                     <td class="text-center product-name">'.$products->unit.'</td>

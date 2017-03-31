@@ -30,11 +30,8 @@ class InvoicesController extends AppController
             $this->getInfo($conditions);
             $this->render('/Element/Invoices/invoice_detail');
         }
-       
-          $conditions = ['Invoices.id' => $id];
-          $this->getInfo($conditions);
-         
-        
+        $conditions = ['Invoices.id' => $id];
+        $this->getInfo($conditions);
     }
 
     protected function getInfo($conditions){
@@ -189,6 +186,8 @@ class InvoicesController extends AppController
     }
 
     public function ChangeInvoicesProducts() {
+      
+        die();
         // $Invoice = TableRegistry::get('Invoices');
         // $InvoiceProduct = TableRegistry::get('InvoiceProducts');
         // $User = TableRegistry::get('Users');
@@ -311,7 +310,7 @@ class InvoicesController extends AppController
             ->viewVars(['value' => $msg])
             ->send($msg); 
     }
-
+ 
     public function DeleteInvoiceProduct() {
         if ($this->request->is('Ajax')) {
             $this->autoRender = false;
@@ -487,7 +486,6 @@ class InvoicesController extends AppController
         }
     }
 
-
     public function UpdateInvoices() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
@@ -511,7 +509,6 @@ class InvoicesController extends AppController
             $this->loadModel('Users');
             $invoice_id = $this->request->data['id'];
             foreach ($users as $key => $id) {
-
                 $query = $this->Users->find('all');
                 $query->join([
                     'products' =>[

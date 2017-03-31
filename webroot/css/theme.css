@@ -15582,3 +15582,11 @@ div.show-image:hover span.delete-wishlist {
   bottom: 0px;
   left: 43px;
 }
+.item-unavailable{
+    border: 1px solid #e4e4e4;
+    padding: 10px;
+    margin: 10px 0px;
+}
+.textarea-available{
+    height: 34px !important;
+}

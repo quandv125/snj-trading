@@ -1272,6 +1272,7 @@ jQuery( document ).ready(function() {
 			success: function(response){
 				jQuery("#loader").fadeOut();
 				console.log(response);
+				location.reload();
 				// toastr.success(response);
 			}
 		}); // Ajax

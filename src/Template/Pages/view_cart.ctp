@@ -48,10 +48,6 @@
 												<td class="text-center product-quantity">
 													 <div class="info-qty" id="<?php echo $key; ?>">
 
-													 	<!--<a href="#" class="qty-down qty-down-<?php echo $key; ?>"><i class="fa fa-angle-left"></i></a>
-														<span class="qty-val">1</span>
-														<a href="#" class="qty-up qty-up-<?php echo $key; ?>"><i class="fa fa-angle-right"></i></a> -->
-
 														<a href="#" class="qty-down qty-down-<?php echo $key; ?>"><i class="fa fa-angle-left"></i></a>
 			                                            <span class="qty-val"><?php echo '1' ?></span>
 			                                            <a href="#" class="qty-up qty-up-<?php echo $key; ?>"><i class="fa fa-angle-right"></i></a>

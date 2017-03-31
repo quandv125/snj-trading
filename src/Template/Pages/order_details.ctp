@@ -22,7 +22,8 @@
                             </li>
                         </ul>
                     </div> -->
-
+                    
+                    <?php if (!empty($orders->invoice_products)): ?>
                     <table cellspacing="0" class="shop_table cart table">
                         <thead>
                             <tr>
@@ -95,6 +96,8 @@
                             <?php endforeach ?>
                         </tbody>
                     </table>
+                    <?php endif ?>
+                  
                    <?php if ($orders->status >= 2): ?>
                         <div class=" table-responsive float-right" style="width:412px;">
                         <table class="table table-striped">
@@ -121,13 +124,63 @@
                         </table>
                     </div>
                    <?php endif ?>
-                    <div class="clearfix"></div><br>
-                        
-                    <?php if ($orders->status <= 2): ?>
-                        <button id="save_cart" invoice_id="<?php echo $orders->id ?>" class="float-right" style="margin-right: 10px;">Update</button>
-                    <?php endif ?>
+                    
                 </div>
+
             </div>
         </div>  
     </div>
+    <?php if (!empty($orders->unavailables)): ?>
+        
+    
+    <div class="col-md-12 item-unavailable">
+            <div class="col-md-4">
+                <label>Vessel Name</label>
+                <input type="text" class="form-control vessel_name" value="<?= $orders->vessel; ?>" name="">
+            </div>
+            <div class="col-md-4">
+                <label>IMO No</label>
+                <input type="text" class="form-control imo_no" value="<?= $orders->imo_no; ?>" name="">
+            </div>
+            <div class="col-md-4">
+                
+                <label>Maker/Type Ref</label>
+                <input type="text" class="form-control maker_type" value="<?= $orders->maker_type; ?>" name="">
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                <label>Description</label>
+                <textarea class="form-control textarea-available note"><?= $orders->note; ?></textarea>
+            </div>
+                <div class="clearfix"></div><br>
+            <table class="table table-bordered table-color">
+                <thead style="background: rgba(77, 101, 101, 0.16);">
+                    <tr>
+                        <th><?php echo __("Part No*");?></th>
+                        <th><?php echo __("Name*");?></th>
+                        <th><?php echo __("Model/Serial No");?></th>
+                        <th><?php echo __("Quantity*");?></th>
+                        <th><?php echo __("Unit");?></th>
+                        <th><?php echo __("Remark");?></th>
+                    </tr>
+                </thead>
+                <tbody class="tbody-unavailable">
+                <?php foreach ($orders->unavailables as $key => $products): ?>
+                    <tr class="tr-unavailable">
+                        <td><input type="text" class="form-control part_no" value="<?= $products->part_no?>" name=""></td>
+                        <td><input type="text" class="form-control product_name" value="<?= $products->product_name?>" name=""></td>
+                        <td><input type="text" class="form-control model_serial_no" value="<?= $products->model_serial_no?>" name=""></td>
+                        <td><input type="text" class="form-control quantity" value="<?= $products->quantity?>" name=""></td>
+                        <td><input type="text" class="form-control unit" value="<?= $products->quantity?>" name=""></td>
+                        <td><textarea class="form-control textarea-available remark"><?= $products->remark?></textarea></td>
+                    </tr>
+                 <?php endforeach ?>
+                </tbody>
+            </table>
+    </div>
+    <div class="clearfix"></div>
+    <?php endif ?>
 </div>
+<?php if ($orders->status <= 2): ?>
+    <!-- <button id="save_cart" invoice_id="<?php echo $orders->id ?>" class="float-right" style="margin-right: 10px;">Update</button> -->
+<?php endif ?>

@@ -1302,6 +1302,41 @@ jQuery(document).ready(function($){
 		}, 500 );
 	});
 	
-	
+	jQuery('#add-new-unavailable').click(function(){
+		jQuery('.tbody-unavailable').append('<tr class="tr-unavailable"><td><input type="checkbox" class="" name=""></td><td><input type="text" class="form-control part_no" name=""></td><td><input type="text" class="form-control product_name" name=""></td><td><input type="text" class="form-control model_serial_no" name=""></td><td><input type="text" class="form-control quantity" name=""></td><td><input type="text" class="form-control unit" name=""></td><td><textarea class="form-control textarea-available remark"></textarea></td></tr>');
+	});
+
+	jQuery('#send-inquiry-unavailable').click(function(){
+		var unavailables = new Array();
+		var vessel_name	 = jQuery( '.vessel_name' ).val();
+		var imo_no 	 	 = jQuery( '.imo_no' ).val();
+		var maker_type 	 = jQuery( '.maker_type' ).val();
+		var note  		 = jQuery( '.note' ).val();
+		
+		jQuery.each(jQuery('.tr-unavailable'), function(i, v) {
+			var part_no 	 = jQuery( this ).find('.part_no').val();
+			var product_name = jQuery( this ).find('.product_name').val();
+			var model_serial_no	 = jQuery( this ).find('.model_serial_no').val();
+			var quantity 	 = jQuery( this ).find('.quantity').val();
+			var unit 	 	 = jQuery( this ).find('.unit').val();
+			var remark 		 = jQuery( this ).find('.remark').val();
+			if (part_no != '' && product_name != '') {
+				unavailables.push({'part_no':part_no, 'product_name': product_name,'unit': unit ,'model_serial_no': model_serial_no, 'quantity': quantity, 'remark': remark});
+			};
+		});
+		
+		jQuery.ajax({
+			url: '/invoices/unavailables',
+			type: 'POST',
+			data: {unavailables: unavailables,vessel_name: vessel_name,imo_no: imo_no, maker_type:maker_type, note:note },
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){},
+			success: function(response){
+				// window.location.href = "../pages/orders";
+				console.log(response);
+			}
+		}); // Ajax
+	});
 
 }); // End document

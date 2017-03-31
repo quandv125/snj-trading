@@ -69,10 +69,13 @@ class InvoicesTable extends Table
         $this->hasMany('InvoiceProducts', [
             'foreignKey' => 'invoice_id'
         ]);
+         $this->hasMany('Unavailables', [
+            'foreignKey' => 'invoice_id'
+        ]);
     }
 
     /**
-     * Default validation rules.
+     * Default validation rules. 
      *
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator

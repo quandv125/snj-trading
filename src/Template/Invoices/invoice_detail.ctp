@@ -41,10 +41,16 @@
                                                         <td><?= $invoice->user['username']; ?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="bold"><?= __('Create By')?>:</td>
-                                                        <td><?= $invoice->CreateBy['username']; ?></td>
-                                                        <td class="bold"><?= __('')?></td>
-                                                        <td></td>
+                                                        <td class="bold"><?= __('Vessel Name')?>:</td>
+                                                        <td><?= $invoice->vessel; ?></td>
+                                                        <td class="bold"><?= __('IMO No')?></td>
+                                                        <td><?= $invoice->imo_no; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="bold"><?= __('Maker/Type Ref')?>:</td>
+                                                        <td><?= $invoice->maker_type_ref; ?></td>
+                                                        <td class="bold"><?= __('Description')?></td>
+                                                        <td><?= $invoice->note; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -57,6 +63,10 @@
                                                 </div>
                                             </div> -->
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 table-responsive">
+                                             <?php $tp = 0; $user = array();?>
+                                            <?php if (!empty($invoice->invoice_products)): ?>
+                                                
+                                          
                                                 <table class="table table-bordered table-color">
                                                      <thead>
                                                         <tr>
@@ -64,6 +74,7 @@
                                                             <th><?php echo __("Product Name");?></th>
                                                             <th><?php echo __("Price");?></th>
                                                             <th><?php echo __("Quantity");?></th>
+                                                            <th><?php echo __("Price(profit)");?></th>
                                                             <th><?php echo __("Unit");?></th>
                                                             <th><?php echo __("Total");?></th>
                                                             <th><?php echo __("Remark");?></th>
@@ -74,19 +85,17 @@
                                                             </th>
                                                         </tr>
                                                     </thead>
-                                                    <?php $tp = 0; $user = array();?>
+                                                   
                                                     <?php foreach ($invoice->invoice_products as $key => $InvoiceProducts): ?>
-
                                                         <?php $IP = $InvoiceProducts['_matchingData']['Products'];?>
-                                                        
                                                         <?php if (!in_array($IP->user_id, $user)){ $user[] = $IP->user_id; } ?>
-                                                        
                                                         <?php $tp = $tp+($InvoiceProducts->quantity*($IP->retail_price)); ?>
                                                         <tr class="invoice_products_<?= $InvoiceProducts->id?>">
                                                            
                                                             <td class="cursor-pointer show-detail-product" id="<?= $IP->id?>"><?= $IP->product_name?></td>
                                                             <td><?= ($IP->retail_price) ?></td>
                                                             <td><?= $InvoiceProducts->quantity?></td>
+                                                            <td><?= $IP->retail_price+(($IP->retail_price*$invoice->profit)/100) ?></td>
                                                             <td><?= $IP->unit?></td>
                                                             <td><?= ($InvoiceProducts->quantity*($IP->retail_price)) ?></td>
                                                             <td><?= $InvoiceProducts->remark?></td>
@@ -94,9 +103,38 @@
                                                         </tr>
                                                     <?php endforeach ?>
                                                 </table>
+                                            <?php elseif(!empty($invoice->unavailables)): ?>
+                                                <table class="table table-bordered table-color">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><?php echo __("#");?></th>
+                                                            <th><?php echo __("Name");?></th>
+                                                            <th><?php echo __("Part No");?></th>
+                                                            <th><?php echo __("Model/Serial No");?></th>
+                                                            <th><?php echo __("Quantity");?></th>
+                                                            <th><?php echo __("Unit");?></th>
+                                                            <th><?php echo __("Remark");?></th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody-unavailable">
+                                                        <?php foreach ($invoice->unavailables as $key => $products): ?>
+                                                            <tr class="tr-unavailable">
+                                                                <td><?= ($key+1)?></td>
+                                                                <td><?= $products->product_name?></td>
+                                                                <td><?= $products->part_no?></td>
+                                                                <td><?= $products->model_serial_no?></td>
+                                                                <td><?= $products->quantity?></td>
+                                                                <td><?= $products->unit?></td>
+                                                                <td><?= $products->remark?></td>
+                                                            </tr>
+                                                        <?php endforeach ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php endif ?>
                                             </div>
                                             <div class="clearfix"> </div>
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 table-responsive float-right">
+                                          <!--   <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 table-responsive float-right">
                                                 <table class="table table-striped">
                                                     <?php $profit_money = ($tp*$invoice->profit)/100; ?>
                                                     <tr class="">
@@ -151,13 +189,13 @@
                                                         </b></span></td>
                                                     </tr>
                                                 </table>
-                                            </div>
+                                            </div> -->
                                             <div class="clearfix"> </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+                                           <!--  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
                                                 <button class="float-right btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red" ><i class="fa fa-trash"></i> Cancel</button>
                                                 <button title="Save and Send Email Supplier" class="float-right btn btn-info btn-addon m-b-sm waves-effect waves-button waves-red send-invoices-supplier" style="margin-right: 10px;" user="<?php echo json_encode($user) ?>" id="<?= $invoice->id;?>"><i class="fa fa-envelope"></i> Send</button>
                                                 <button title="Save and Send Email Customer" class="float-right btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red update-invoices" style="margin-right: 10px;" id="<?= $invoice->id;?>"><i class="fa fa-check-square"></i> Save</button>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>

@@ -231,9 +231,14 @@ class PagesController extends AppController
                 return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.retail_price','products.thumbnail','categories.id','categories.name',])
                 ->leftJoin('products', 'products.id = InvoiceProducts.product_id')
                 ->leftJoin('categories', 'categories.id = products.categorie_id');
+            },
+            'Unavailables' => function ($q) {
+                return $q->autoFields(false)->select(['Unavailables.id','Unavailables.part_no','Unavailables.product_name','Unavailables.vessel_name','Unavailables.engine_type','Unavailables.engine_maker','Unavailables.model_serial_no','Unavailables.description','Unavailables.remark','Unavailables.quantity','Unavailables.invoice_id']);
             }
-        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost',])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
-       
+        ])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.vessel','Invoices.imo_no','Invoices.maker_type_ref','Invoices.note'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
+        
         $this->set(compact('orders'));
     }
 }
+
+

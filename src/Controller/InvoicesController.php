@@ -51,13 +51,16 @@ class InvoicesController extends AppController
                     return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.price','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Products.id','Products.sku','Products.product_name','Products.retail_price','Products.unit','Products.user_id'])
                     ->innerJoinWith('Products');
                 },
+                'Unavailables' => function ($q) {
+                    return $q->autoFields(false)->select(['Unavailables.id','Unavailables.part_no','Unavailables.product_name','Unavailables.vessel_name','Unavailables.engine_type','Unavailables.engine_maker','Unavailables.model_serial_no','Unavailables.description','Unavailables.remark','Unavailables.quantity','Unavailables.unit','Unavailables.invoice_id']);
+                }
                 // 'Customers',
                 // 'Outlets',
                 // 'Coupons',
                 // 'Payments',
                 // 'PartnerDeliverys'
             ],
-            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.profit','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','CreateBy.email','Users.username'],
+            'fields' => ['Invoices.id','Invoices.code','Invoices.user_id','Invoices.create_by','Invoices.status','Invoices.customer_id','Invoices.outlet_id','Invoices.coupon_id','Invoices.profit','Invoices.vessel','Invoices.imo_no','Invoices.maker_type_ref','Invoices.note','Invoices.payment_id','Invoices.partner_delivery_id','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.note','Invoices.discount','Invoices.note','Invoices.created','CreateBy.username','CreateBy.email','Users.username'],
             'conditions' => $conditions,
             'order' => ['Invoices.created'  => 'DESC'],
             'limit' => LIMIT
@@ -375,7 +378,6 @@ class InvoicesController extends AppController
             if (empty($this->Auth->user())) {
                 $msg = array('status' => false, 'message' => __('You must login before order.'));
                 echo json_encode($msg); exit();
-                exit();
             } 
             $data = [
                 'code'    => '1',
@@ -578,4 +580,60 @@ class InvoicesController extends AppController
             $result = $this->Invoices->updateAll(['status' => 3], ['id' => $this->request->data['id']]);
         }
     } // End function
+
+    public function unavailable() {
+        $this->viewBuilder()->layout('product');
+        // $this->check_user();
+    }
+
+    public function unavailables()    {
+        if ($this->request->is('Ajax')) {
+            $this->autoRender = false;
+           
+            $invoice_data = [
+                'code'    => '1',
+                'status'  => '1',
+                'type'    => '1',
+                'user_id' => $this->Auth->user('id'),
+                'vessel' => $this->request->data['vessel_name'],
+                'imo_no' => $this->request->data['imo_no'],
+                'maker_type' => $this->request->data['maker_type'],
+                'note' => $this->request->data['note']
+            ];
+            
+            if (!empty($this->Auth->user('id'))) {
+                $Invoice        = TableRegistry::get('Invoices');
+                $Unavailable = TableRegistry::get('Unavailables');
+                $invoice = $Invoice->newEntity();
+                $invoice = $Invoice->patchEntity($invoice, $invoice_data);
+
+                $Invoice->save($invoice);
+                $invoice_id = $invoice->id;
+
+                foreach ($this->request->data['unavailables'] as $key => $data) {
+                    $data['invoice_id'] = $invoice_id;
+                    $unavailable = $Unavailable->newEntity();
+                    $unavailable = $Unavailable->patchEntity($unavailable, $data);
+
+                    if ($Unavailable->save($unavailable)) {
+                    //     $this->Flash->success(__('The orders has been saved.'));
+                    // } else {
+                    //     $this->Flash->error(__('The orders could not be saved. Please, try again.'));
+                    }
+                }
+                $msg = array('status' => true, 'message' => __('OK'));
+            } else {
+                $msg = array('status' => false, 'message' => __('NO.'));
+            }
+
+            // $this->sendUserEmail('quandv.125@gmail.com','New Order', 'You have new Order', 'default');
+            echo json_encode($msg); exit();
+
+
+           
+            
+           
+            // pr($this->request->data);
+        }
+    }
 }

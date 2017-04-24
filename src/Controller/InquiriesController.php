@@ -522,9 +522,11 @@ class InquiriesController extends AppController
 				$data[] = ["ProductID"=> $inquirie_product->id, "no" => $no, "name"=> $inquirie_product->name, "maker_type_ref"=>$inquirie_product->maker_type_ref, "partno"=>$inquirie_product->partno, "unit"=>$inquirie_product->unit, "quantity"=>$inquirie_product->quantity,"price"=>$price,"delivery_time"=>$delivery_time,"remark"=>$remark];
 			}
 		}
-		// pr($data);die();
+		$inquiry = $this->Inquiries->getInfo($id);
+		$InquirieSupplier = TableRegistry::get('InquirieSuppliers');
+		$user_id = $InquirieSupplier->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
 		$data = json_encode($data);
-		$this->set(compact('inquiries','data','user_id'));
+		$this->set(compact('inquiries','data','inquiry','user_id'));
 		
 	}
 

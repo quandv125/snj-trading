@@ -3,7 +3,7 @@
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 				Quotation
-				<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+				<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 					
 		</div> <!-- panel-heading -->
 		<div class="panel-body"> 
@@ -17,51 +17,51 @@
 					<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 						<div class="panel-body">
 							
-							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
+							<div class="col-md-6 item-unavailable" id="<?= h($inquiry->id) ?>">
 								<div class="col-md-12">
-									<?= $this->Form->input('pic',['class'=>'our_ref','label' => 'PIC','value' => $inquiries['PicID']['username']]) ?>
+									<?= $this->Form->input('pic',['class'=>'our_ref','label' => 'PIC','options' => $user_id]) ?>
 								</div>
 								<div class="col-md-12">
-									<?= $this->Form->input('our_ref',['class'=>'our_ref','label' => 'Our REF','value' => $inquiries->id]) ?>
+									<?= $this->Form->input('our_ref',['class'=>'our_ref','label' => 'Our REF','value' => $inquiry->id]) ?>
 								</div>
 								
 								
 								<div class="col-md-12">
-									<?php $date = new DateTime($inquiries->created); ?>
+									<?php $date = new DateTime($inquiry->created); ?>
 									<?= $this->Form->input('created',['class'=>'created onlydate2','label' => 'Inquiry date','value' => $date->format('Y-m-d')]) ?>
 								</div>
 								
 							</div>
-							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
-								<?= $this->Form->create(null, ['url' => [ 'action' => 'edit',  $inquiries->id]]); ?>
-								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiries->id]) ?>
-								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiries->status]) ?>
+							<div class="col-md-6 item-unavailable" id="<?= h($inquiry->id) ?>">
+								<?= $this->Form->create(null, ['url' => [ 'action' => 'edit',  $inquiry->id]]); ?>
+								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiry->id]) ?>
+								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiry->status]) ?>
 								<div class="col-md-6">
-									<?= $this->Form->input('username',['label'=>'Customer PIC','class'=>'username','value' => $inquiries->user['username']]) ?>
+									<?= $this->Form->input('username',['label'=>'Customer PIC','class'=>'username','value' => $inquiry->user['username']]) ?>
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('username',['label'=>'Customer Name','class'=>'username']) ?>
 								</div>
 								<div class="col-md-6">
-									<?= $this->Form->input('ref',['class'=>'ref','label'=>'Cus Ref', 'value' => $inquiries->ref]) ?>
+									<?= $this->Form->input('ref',['class'=>'ref','label'=>'Cus Ref', 'value' => $inquiry->ref]) ?>
 								</div>
 								<div class="col-md-6">
-									<?= $this->Form->input('vessel',['class'=>'vessel','label' => 'Vessel Name', 'value' => $inquiries->vessel]) ?>
+									<?= $this->Form->input('vessel',['class'=>'vessel','label' => 'Vessel Name', 'value' => $inquiry->vessel]) ?>
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('subject',['class'=>'subject','label'=>'Subject','value' => 'Spare Part']) ?>
 								</div>
 								<div class="col-md-6">
-									<?= $this->Form->input('imo_no',['class'=>'imo_no', 'label' => 'IMO No','value' => $inquiries->imo_no]) ?>
+									<?= $this->Form->input('imo_no',['class'=>'imo_no', 'label' => 'IMO No','value' => $inquiry->imo_no]) ?>
 								</div>
 								
 								<div class="col-md-6">
-									<?= $this->Form->input('hull_no',['class'=>'hull_no', 'label' => 'HULL No','value' => $inquiries->hull_no]) ?>
+									<?= $this->Form->input('hull_no',['class'=>'hull_no', 'label' => 'HULL No','value' => $inquiry->hull_no]) ?>
 								</div>
 								
 								
 								<div class="col-md-12">
-									<?= $this->Form->input('description',['type'=>'textarea','class'=>'description','label' => 'Remark','value'=>$inquiries->description])?>
+									<?= $this->Form->input('description',['type'=>'textarea','class'=>'description','label' => 'Remark','value'=>$inquiry->description])?>
 								</div>
 							</div>
 
@@ -90,4 +90,3 @@
 		</div>
 	</div> <!-- panel-body -->
 </div> <!-- row -->
-

@@ -113,9 +113,9 @@ use Cake\Datasource\ConnectionManager;
 					return $q->autoFields(false)->select(['id','username','fullname']);
 				},
 				'InquirieProducts' => function ($q) {
-					return $q->autoFields(false)->select(['InquirieProducts.id','InquirieProducts.price','InquirieProducts.no','InquirieProducts.status','InquirieProducts.name','InquirieProducts.partno','InquirieProducts.assign','InquirieProducts.unit','InquirieProducts.maker_type_ref','InquirieProducts.amount','InquirieProducts.quantity','InquirieProducts.price','InquirieProducts.remark','InquirieProducts.product_id','InquirieProducts.inquiry_id','Products.id','Products.sku','Products.product_name','Products.serial_no','Products.type_model','Products.origin','Products.unit','Products.retail_price','Products.user_id','Categories.id','Categories.name'])
-					->leftJoin('Products','Products.id = InquirieProducts.product_id')
-					->leftJoin('Categories', 'Categories.id = Products.categorie_id')
+					return $q->autoFields(false)->select(['InquirieProducts.id','InquirieProducts.price','InquirieProducts.no','InquirieProducts.status','InquirieProducts.name','InquirieProducts.partno','InquirieProducts.assign','InquirieProducts.unit','InquirieProducts.maker_type_ref','InquirieProducts.amount','InquirieProducts.quantity','InquirieProducts.price','InquirieProducts.remark','InquirieProducts.product_id','InquirieProducts.inquiry_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.unit','products.retail_price','products.user_id','categories.id','categories.name'])
+					->leftJoin('products','products.id = InquirieProducts.product_id')
+					->leftJoin('categories', 'categories.id = products.categorie_id')
 					->order(['InquirieProducts.created' => 'desc']);
 					// ->leftJoin('Users', 'Users.id = Products.user_id')  
 					// ->where(['Products.user_id' => $this->Auth->user('id')]);
@@ -183,28 +183,32 @@ use Cake\Datasource\ConnectionManager;
 
 	public function query1($id)	{
 		$Inquirie = TableRegistry::get('inquiries');
-		$inquiries = $Inquirie->find()->join([
-				'Pic' => [
-					'table' => 'users',
-					'alias' => 'PicID',
-					'conditions' => 'Inquiries.pic_id = PicID.id'
-				]
-			])->contain([
-			'Users' => function ($q) {
-				return $q->autoFields(false)->select(['id','username','fullname']);
-			},
-			'InquirieProducts' => function ($q) {
-				return $q->autoFields(false)->select(['id','inquiry_id','name','partno','maker_type_ref','unit','quantity','no','remark'])->contain([
-					'InquirieSupplierProducts' => function ($q) {
-						return $q->autoFields(false)
-						->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_product_id','InquirieSupplierProducts.inquirie_supplier_id','InquirieSupplierProducts.price','InquirieSupplierProducts.delivery_time','InquirieSupplierProducts.choose','InquirieSupplierProducts.remark','suppliers.name'])
-						->leftJoin('inquirie_suppliers','inquirie_suppliers.id = InquirieSupplierProducts.inquirie_supplier_id')
-						->leftJoin('suppliers','suppliers.id = inquirie_suppliers.supplier_id')
-						->where(['InquirieSupplierProducts.choose' => 1]);
-					}]);
-			}
-		])->select(['id','user_id','status','type','vessel','imo_no','hull_no','ref','description','created','PicID.id','PicID.username'])
-		->where(['Inquiries.id'=>$id])->first();
+		$inquiries = $Inquirie->find()
+			// ->join([
+			// 	'Pic' => [
+			// 		'table' => 'users',
+			// 		'alias' => 'PicID',
+			// 		'conditions' => 'inquiries.pic_id = PicID.id'
+			// 	]
+			// ])
+			->contain([
+				'Users' => function ($q) {
+					return $q->autoFields(false)->select(['id','username','fullname']);
+				},
+				'InquirieProducts' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','name','partno','maker_type_ref','unit','quantity','no','remark'])->contain([
+						'InquirieSupplierProducts' => function ($q) {
+							return $q->autoFields(false)
+							->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_product_id','InquirieSupplierProducts.inquirie_supplier_id','InquirieSupplierProducts.price','InquirieSupplierProducts.delivery_time','InquirieSupplierProducts.choose','InquirieSupplierProducts.remark','suppliers.name'])
+							->leftJoin('inquirie_suppliers','inquirie_suppliers.id = InquirieSupplierProducts.inquirie_supplier_id')
+							->leftJoin('suppliers','suppliers.id = inquirie_suppliers.supplier_id')
+							->where(['InquirieSupplierProducts.choose' => 1]);
+						}]);
+				}
+		])->select(['id','user_id','status','type','vessel','imo_no','hull_no','ref','description','created'
+			// ,'PicID.id','PicID.username'
+		])
+		->where(['inquiries.id'=>$id])->first();
 		return $inquiries;
 	}
 

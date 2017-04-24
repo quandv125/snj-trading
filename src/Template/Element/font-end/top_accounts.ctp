@@ -9,7 +9,7 @@
 		<li><?php echo $this->Html->link('<i class="fa fa-heart-o"></i> '.__('Wishlists'),['controller'=>'Pages','action'=>'wishlists'],['escape' =>false]) ?>
 		</li>
 		<?php if ($user_info['group_id'] == ADMIN): ?>
-			<li><?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['controller'=>'pages','action'=>'display','home'],['escape' =>false]) ?>
+			<li><?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['controller'=>'Inquiries','action'=>'inquiries'],['escape' =>false]) ?>
 		</li>
 		<?php endif ?>
 		<li><?php echo $this->Html->link('<i class="fa fa-unlock-alt"></i> '.__('Logout'),['controller'=>'users','action'=>'logout'],['escape' =>false]) ?>

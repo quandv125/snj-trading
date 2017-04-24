@@ -3,7 +3,7 @@
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 			<div class="col-lg-9 col-md-9 col-sm-9">
-				Inquiries #<?= $inquiry->id?>
+				Inquiries to Suppliers: #<?= $inquiry->id?>
 			</div> <!-- col-lg-9 -->
 			<!-- <?php //echo $this->Html->link('Quotations',['controller' =>'inquiries','action' =>'quotations', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 			<?php //echo $this->Html->link('Comparing',['controller' =>'inquiries','action' =>'comparing', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?> -->

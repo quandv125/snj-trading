@@ -1,18 +1,26 @@
 
 <div class="row">
-	<div class="panel panel-white" id="inquiry_id" val="<?php echo $id ?>">
-		<div class="panel-body "> 
-			<div role="tabpanel">
-				<div class="table-responsive">	
-					<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+	<div class="panel panel-white">
+		<div class="panel-heading clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				Comparing
+				<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 					<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'inquiries-suppliers', $id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 					<div class="col-md-2 float-right">
 						
 						<?= $this->Form->create(null, ['url' => [ 'action' => 'SelectPrice', $id]]); ?>
 						<?= $this->Form->input('choose',['label' => false,'empty' => '-- Choose --','options' => $list,'onchange' => 'this.form.submit()']) ?>
 						<?php echo $this->Form->end(); ?>
-						
 					</div>
+					<div class="clearfix"></div>
+			</div> <!-- col-lg-9 -->
+		</div> <!-- panel-heading --><br/>
+	</div>
+	<div class="panel panel-white" id="inquiry_id" val="<?php echo $id ?>">
+		<div class="panel-body "> 
+			<div role="tabpanel">
+				<div class="table-responsive">	
+					
 					<table class="table table-striped">
 					<thead>
 						<tr>

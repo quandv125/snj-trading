@@ -155,3 +155,9 @@ define('ARTICLE_MYACCOUNT', 4);
 
 //
 define('SIZE180', 180);
+
+//
+define('UNAVAILABLE', 1);
+define('AVAILABLE', 0);
+
+

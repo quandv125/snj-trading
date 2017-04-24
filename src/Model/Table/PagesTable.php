@@ -178,9 +178,9 @@ class PagesTable extends Table
             'Users' => function ($q) {
                 return $q->autoFields(false)->select(['id','username']);
             },
-            'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Invoices.id','Invoices.status','Invoices.total'])->innerJoinWith('Invoices');
-            }
+            // 'InvoiceProducts' => function ($q) {
+            //     return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Invoices.id','Invoices.status','Invoices.total'])->innerJoinWith('Invoices');
+            // }
             ])->where($conditions)->order(['Products.created' => 'DESC'])->first();
         
         return $product;

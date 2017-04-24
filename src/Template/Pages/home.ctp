@@ -61,8 +61,8 @@
             <div class="panel info-box panel-white1">
                 <div class="panel-body">
                     <div class="info-box-stats">
-                        <p class="counter"><?= $this->Html->link($order, ['controller'=>'Invoices','action'=>'index'])?></p>
-                        <span class="info-box-title"><?= $this->Html->link('Order', ['controller'=>'Invoices','action'=>'index'])?></span>
+                        <p class="counter"><?= $this->Html->link($order, ['controller'=>'inquiries','action'=>'inquiries'])?></p>
+                        <span class="info-box-title"><?= $this->Html->link('Order', ['controller'=>'inquiries','action'=>'inquiries'])?></span>
                     </div>
                     <div class="info-box-icon">
                         <i class="icon-envelope"></i>

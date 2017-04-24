@@ -1,22 +1,18 @@
 
 <div class="row">
     <div class="col-lg-12 col-md-12 panel panel-white">
-        <div class="col-lg-2 col-md-2 col-sm-3">
-        <!-- Searchbox -->
+        <div class="col-lg-2 col-md-2 col-sm-3"> <!-- Searchbox -->
            <?= $this->element('Products/searchbox_product',['categories' => $categories]); ?>
-        </div>
-        <!-- col-lg-3 -->
+        </div> <!-- col-lg-3 -->
         <div class="col-lg-10 col-md-10 col-sm-9">
             <div class="panel-heading clearfix">
                 <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                     Products
-                </div> 
-                <!-- col-lg-8 -->
+                </div> <!-- col-lg-8 -->
                 <div class="col-lg-4 col-md-4 col-md-4 col-xs-4">
                     <!-- Add new products -->
                    <?= $this->element('Products/index_add',['categories' => $categories]) ?>
-                </div> 
-                <!-- col-lg-4 -->
+                </div> <!-- col-lg-4 -->
             </div> 
             <!-- panel-heading -->
             <div class="panel-body">
@@ -27,7 +23,7 @@
                                 <th style="width: 1px;">
                                     <input tabindex="10" type="checkbox" class="icheck CheckboxAll" id="input-10">
                                 </th>
-                                <th class="text-center"><?php echo __('SKU/part no') ?></th>
+                                <th class="text-center"><?php echo __('Part no') ?></th>
                                 <th class="text-center"><?php echo __('Product Name') ?></th>
                                 <th class="text-center"><?php echo __('Retail Price') ?></th>
                                 <th class="text-center"><?php echo __('Quantity') ?></th>
@@ -40,7 +36,7 @@
                                 <td style="width: 1px;">
                                     <input tabindex="1" type="checkbox" class="icheck Checkbox" id="input-1">
                                 </td>
-                                <td class="text-center"><?= PRODUCT.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+                                <td class="text-center"><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
                                 <td class="text-center"><?= $product->product_name; ?></td>
                                 <td class="text-center"><?= number_format($product->retail_price, DECIMALS); ?></td>
                                 <td class="text-center"><?= $product->quantity; ?></td>
@@ -96,8 +92,8 @@
                                                         <div class="table-responsive table-products">
                                                             <table class="table table-striped">
                                                                 <tr>
-                                                                    <td class="bold"><?php echo __('SKU/Part No')?></td>
-                                                                    <td><?= PRODUCT.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+                                                                    <td class="bold"><?php echo __('Part No')?></td>
+                                                                    <td><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="bold"><?php echo  __('Category')?></td>
@@ -136,7 +132,7 @@
                                                         <button class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red" data-toggle="modal" data-target="#ProductEdit<?= $product->id;?>"><i class="fa fa-check-square"></i> Update</button>
                                                         <!-- Modal -->
                                                         <?= $this->element('Products/index_edit',['product'=> $product]);?>
-                                                    <!-- End -->
+                                                   
                                                         <?php if ($product->actived == PRODUCT_DEACTIVE): ?>
                                                              <button class="btn btn-info deactive-product btn-addon m-b-sm waves-effect waves-button waves-red" actived="<?= PRODUCT_ACTIVE;?>" id="<?= $product->id?>"><i class="fa fa-unlock" aria-hidden="true"></i> Active</button>
                                                         <?php else: ?>

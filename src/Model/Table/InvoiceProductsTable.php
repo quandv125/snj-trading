@@ -49,6 +49,9 @@ class InvoiceProductsTable extends Table
             'foreignKey' => 'invoice_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('InquirieSupplierProducts', [
+            'foreignKey' => 'inquirie_product_id'
+        ]);
     }
 
     /**

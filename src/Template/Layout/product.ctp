@@ -17,14 +17,14 @@
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
-    <?= $this->Html->script(['loader' ]); ?>
+    <?= $this->Html->script(['loader']); ?>
     <!-- CSS -->
     <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'> -->
     <?= $this->Html->css([
         'libs/font-awesome.min',
         'libs/font-linearicons',
-        'libs/bootstrap',
-        'libs/bootstrap-theme',
+        'libs/bootstrap.min',
+        'libs/bootstrap-theme.min',
         'libs/jquery.fancybox',
         'libs/jquery-ui',
         'libs/owl.carousel',
@@ -32,18 +32,20 @@
         'libs/owl.theme',
         'libs/query.mCustomScrollbar',
         'libs/settings',
-         'assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new',
-        // 'assets/plugins/summernote-master/summernote',
+        'assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new',
+        'assets/plugins/handsometable/handsontable.full.min',
         'theme','libs/bootstrap-select',
         'libs/jquery.dataTables.min',
+        'libs/kendo.default.min','libs/kendo.common.min',
         'responsive'
     ])?>
+
     <?= $this->Html->script([
-        'libs/jquery-3.1.1.min',
+        'assets/plugins/jquery/jquery-2.1.4.min',
+        'assets/plugins/jquery-ui/jquery-ui.min',
         'libs/ckeditor/ckeditor',
         'libs/bootstrap.min',
         'libs/jquery.fancybox',
-        'libs/jquery-ui',
         'libs/owl.carousel',
         // 'libs/TimeCircles',
         // 'libs/jquery.countdown',
@@ -55,17 +57,19 @@
         'libs/jquery.elevatezoom',
         'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
         'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
-        // 'assets/plugins/summernote-master/summernote.min',
+        'assets/plugins/handsometable/handsontable.full.min',
         'assets/plugins/livesearch/vendor/jquery.hideseek.min',
         'assets/plugins/livesearch/initializers',
         'libs/bootstrap-select',
         'libs/bootstrapvalidator.min',
         'libs/masonry.pkgd.min',
         'libs/jquery.dataTables',
+        'libs/kendo.all.min',
         'theme',
     ]); ?>
 </head>
 <body>
+
 <div class="wrap">
     <div id="header">
         <?= $this->element('font-end/Pages/header') ?>
@@ -84,12 +88,9 @@
     </div>
     <!-- End Footer -->
 </div>
-<!-- <div id="overlay">
-    <div id="progstat"></div>
-    <div id="progress"></div>
-</div> -->
 <div id="menufix">
     <?= $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
 </div>
+    <?php echo $this->Html->image('loader.gif',['class' => 'loader3', "style"=>"display: none;"]) ?>
 </body>
 </html>

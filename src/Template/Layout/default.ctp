@@ -58,7 +58,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'custom',
         'assets/plugins/fancybox/jquery.fancybox',
         'assets/plugins/fancybox/jquery.fancybox-thumbs',
-        'assets/plugins/daterangepicker/daterangepicker',
+        'assets/plugins/daterangepicker/daterangepicker', 'libs/kendo.default.min','libs/kendo.common.min',
     )); ?>
    
     <!-- Theme Styles -->
@@ -93,13 +93,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'libs/bootstrap-select',
         // End table
         'assets/plugins/summernote-master/summernote.min',
-        'assets/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min',
+        // 'assets/plugins/elevatezoom/jquery.elevatezoom-3.0.8.min',
         'assets/plugins/fancybox/jquery.fancybox',
         'assets/plugins/fancybox/jquery.fancybox-thumbs',
         'assets/js/pages/ui-sliders',
         'assets/plugins/daterangepicker/daterangepicker',
         'assets/plugins/livesearch/vendor/jquery.hideseek.min',
-        'assets/plugins/livesearch/initializers',
+        'assets/plugins/livesearch/initializers','libs/kendo.all.min',
         'custom'
        
     )); ?>

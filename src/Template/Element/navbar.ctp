@@ -8,7 +8,7 @@
         </div>
         <div class="logo-box">
             
-            <?php echo $this->Html->link('<span>SNJ</span>',['controller'=>'Pages','action'=>'index'],['escape'=>false, 'class' => 'logo-text']) ?>
+            <?php echo $this->Html->link('<span>S&J</span>',['controller'=>'Pages','action'=>'index'],['escape'=>false, 'class' => 'logo-text']) ?>
         </div><!-- Logo Box -->
         <div class="search-button">
             <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>
@@ -19,13 +19,13 @@
                     <li>		
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-classic sidebar-toggle"><i class="fa fa-bars"></i></a>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="#cd-nav" class="waves-effect waves-button waves-red cd-nav-trigger"><i class="fa fa-diamond"></i></a>
                     </li>
                     <li>		
                         <a href="javascript:void(0);" class="waves-effect waves-button waves-red toggle-fullscreen"><i class="fa fa-expand"></i></a>
-                    </li>
-                    <li class="dropdown">
+                    </li> -->
+                    <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-red" data-toggle="dropdown">
                             <i class="fa fa-cogs"></i>
                         </a>
@@ -101,7 +101,7 @@
                             </li>
                             <li class="no-link"><button class="btn btn-default reset-options">Reset Options</button></li>
                         </ul>
-                    </li>
+                    </li> -->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>	
@@ -228,7 +228,7 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle waves-effect waves-button waves-red" data-toggle="dropdown">
-                            <span class="user-name"><?php echo $user_info['username'] ?><i class="fa fa-angle-down"></i></span>
+                            <span class="user-name"><?php echo $user_info['username'] ?></span>
                             <?php 
                                 if (!empty($user_info['thumbnail'])) {                              
                                     echo $this->Html->image($user_info['thumbnail'],['class'=>'img-circle avatar','width'=>'40', 'height' => '40']);

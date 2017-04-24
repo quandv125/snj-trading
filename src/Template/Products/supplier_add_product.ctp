@@ -19,8 +19,8 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home"><br/>
                     <div class="col-lg-6 col-md-6">
-                        <?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Part No/ Code/ SKU','label' => 'Part No/ Code/ SKU']); ?>
-                        <?= $this->Form->input('product_name',['label'=>"Products Name/ Part Name",'class' => 'product_name','placeholder' => 'Products Name/ Part Name']); ?>
+                        <?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Part No/ Code','label' => 'Part No/ Code']); ?>
+                        <?= $this->Form->input('product_name',['label'=>"Products Name",'class' =>'product_name','placeholder' => 'Products Name']); ?>
                         <?= $this->Form->input('retail_price',['class' => 'auto retail_price','placeholder' => 'USD']); ?>
                         <!-- <?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?> -->
                         <?= $this->Form->input('categorie_id',[ 'label'=>"Categories/ Machinery's Name",'type'=>'select','multiple'=>false,
@@ -47,7 +47,7 @@
                         <?= $this->Form->input('unit',array('class' => 'unit','placeholder' => 'Unit')); ?>    
                     </div>
                     <div class="col-lg-12 col-md-12">
-                        <label class="control-label" for="Short_Description">Remark/ Short Description</label>
+                        <label class="control-label" for="Short_Description">Remark</label>
                         <?= $this->Form->textarea('short_description',['id'=>'editor1','class'=>'summernote']);?>
                     </div>
                 </div>

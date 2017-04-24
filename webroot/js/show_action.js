@@ -305,4 +305,144 @@ jQuery(document).ready(function() {
 	} // end function stock_products
 
 	jQuery('.auto').autoNumeric('init', { aSep: '.', aDec: ',', mDec: 0, vMax: '100000000' });
+
+	grid = function() {
+		var sampleData = jQuery('#grid').data('room');
+				var sampleDataNextID = sampleData.length + 1;
+				function getIndexById(id) {
+					var idx,
+						l = sampleData.length;
+
+					for (var j=0; j < l; j++) {
+						if (sampleData[j].ProductID == id) {
+							return j;
+						}
+					}
+					return null;
+				}
+				var dataSource = new kendo.data.DataSource({
+					transport: {
+						read: function (e) {
+							// on success
+							e.success(sampleData);
+							// on failure
+							//e.error("XHR response", "status code", "error message");
+						},
+						create: function (e) {
+							// assign an ID to the new item
+							e.data.ProductID = sampleDataNextID++;
+							// save data item to the original datasource
+							// sampleData.push(e.data);
+							// on success
+							e.success(e.data);	
+							var id = jQuery('.item-unavailable').attr('id');
+							// alert('ok');
+							// jQuery.ajax({
+							// 	url: '/inquiries/create_inq',
+							// 	type: 'POST',
+							// 	data: {"data":e.data, 'id': id},
+							// 	dataType: 'html',
+							// 	cache: false,
+							// 	beforeSend: function(){jQuery("#loader").fadeIn();},
+							// 	success: function(response){
+							// 		jQuery("#loader").fadeOut();
+							// 		console.log(response);return;
+									
+							// 	}
+							// });
+							// on failure
+							//e.error("XHR response", "status code", "error message");
+						},
+						update: function (e) {
+							// locate item in original datasource and update it
+							sampleData[getIndexById(e.data.ProductID)] = e.data;
+							// on success
+							e.success();
+							console.log(e.data);
+							// alert('upadte');
+							jQuery.ajax({
+								url: '/inquiries/update_supplier_product',
+								type: 'POST',
+								data: {"data":e.data},
+								dataType: 'html',
+								cache: false,
+								beforeSend: function(){},
+								success: function(response){
+									jQuery("#loader").fadeOut();
+									console.log(response);return;
+									
+								}
+							});
+							// on failure
+							// e.error("XHR response", "status code", "error message");
+						},
+						destroy: function (e) {
+							// locate item in original datasource and remove it
+							sampleData.splice(getIndexById(e.data.ProductID), 1);
+							// on success
+							e.success();
+							// console.log(e.data);
+							// jQuery.ajax({
+							// 	url: '/inquiries/destroy_inq',
+							// 	type: 'POST',
+							// 	data: {"data":e.data},
+							// 	dataType: 'html',
+							// 	cache: false,
+							// 	beforeSend: function(){jQuery("#loader").fadeIn();},
+							// 	success: function(response){
+							// 		jQuery("#loader").fadeOut();
+							// 		e.success();
+							// 		console.log(response);return;
+									
+							// 	}
+							// });
+							// on failure
+							//e.error("XHR response", "status code", "error message");
+						}
+					},
+					error: function (e) {
+						// handle data operation error
+						alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+					},
+					pageSize: 30,
+					batch: false,
+					schema: {
+						model: {
+							id: "ProductID",
+							fields: {
+								ProductID: { editable: false},
+								no: {},
+								name: {},
+								maker_type_ref: {},
+								partno:  {},
+								unit: {},
+								quantity: {},
+								price: {},
+								delivery_time: {},
+								remark: {},
+							}
+						}
+					}
+				});
+
+				jQuery("#grid").kendoGrid({
+					dataSource: dataSource,
+					navigatable: true,
+					pageable: true,
+					toolbar: ["save", "cancel"],
+					columns: [
+						{ field: "no", title: "#", width: "45px" },
+						{ field: "name", title: "Description", width: "310px" },
+						{ field: "maker_type_ref", title: "Maker/Type Ref", width: "150px" },
+						{ field: "partno", title: "PartNo", width: "120px" },
+						{ field: "unit", title:"Units", width: "70px" },
+						{ field: "quantity",title:"Quantity", width: "70px" },
+						{ field: "price",title:"Price", width: "70px" },
+						{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
+						{ field: "remark",title:"Remark", width: "200px" },
+						{ command: ["destroy"], title: "&nbsp;", width: "90px" }
+					],
+					editable: true
+				});
+	}
 });//End jquery

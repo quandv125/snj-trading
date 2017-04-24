@@ -23,10 +23,201 @@ function animated(){
 		}
 	});
 }
-
 //Document Ready
 jQuery(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip()
+	if ($("#grid").length){
+		var sampleData = jQuery('#datahandtable').data('room');
+		var sampleDataNextID = sampleData.length + 1;
+		function getIndexById(id) {
+			var idx,
+				l = sampleData.length;
 
+			for (var j=0; j < l; j++) {
+				if (sampleData[j].ProductID == id) {
+					return j;
+				}
+			}
+			return null;
+		}
+		var dataSource = new kendo.data.DataSource({
+			transport: {
+				read: function (e) {
+					// on success
+					e.success(sampleData);
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				create: function (e) {
+					// assign an ID to the new item
+					e.data.ProductID = sampleDataNextID++;
+					// save data item to the original datasource
+					// sampleData.push(e.data);
+					// on success
+					e.success(e.data);	
+					var id = jQuery('.item-unavailable').attr('id');
+					jQuery.ajax({
+						url: '/inquiries/create_inq',
+						type: 'POST',
+						data: {"data":e.data, 'id': id},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						success: function(response){
+							jQuery(".loader3").fadeOut();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				update: function (e) {
+					// locate item in original datasource and update it
+					sampleData[getIndexById(e.data.ProductID)] = e.data;
+					// on success
+					e.success();
+					// console.log(e.data);
+					jQuery.ajax({
+						url: '/inquiries/update_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						success: function(response){
+							jQuery(".loader3").fadeOut();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					// e.error("XHR response", "status code", "error message");
+				},
+				destroy: function (e) {
+					// locate item in original datasource and remove it
+					sampleData.splice(getIndexById(e.data.ProductID), 1);
+					// on success
+					e.success();
+					// console.log(e.data);
+					jQuery.ajax({
+						url: '/inquiries/destroy_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						success: function(response){
+							jQuery(".loader3").fadeOut();
+							e.success();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				}
+			},
+			error: function (e) {
+				// handle data operation error
+				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+			},
+			pageSize: 20,
+			batch: false,
+			schema: {
+				model: {
+					id: "ProductID",
+					fields: {
+						ProductID: { editable: false, nullable: true },
+						no: {},
+						name: {},
+						maker_type_ref: {},
+						partno:  {},
+						unit: {},
+						quantity: {},
+						remark: {},
+					}
+				}
+			}
+		});
+
+		$("#grid").kendoGrid({
+			dataSource: dataSource,
+			pageable: true,
+			toolbar: ["create"],
+			columns: [
+				{ field: "no", title: "#", width: "45px" },
+				{ field: "name", title: "Description", width: "350px" },
+				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "140px" },
+				{ field: "partno", title: "PartNo", width: "100px" },
+				{ field: "unit", title:"Units", width: "50px" },
+				{ field: "quantity",title:"Quantity", width: "65px" },
+				{ field: "remark",title:"Remark", width: "200px" },
+				{ command: ["edit", "destroy"], title: "&nbsp;", width: "170px" }
+			],
+			editable: "inline"
+		});
+	}
+	// Handsometable
+	if ($("#exampleAdd").length){
+		var $$ = function(id) { return document.getElementById(id); }, container = $$('exampleAdd'), save = $$('save'), hot;
+		hot = new Handsontable(container, {
+			// width: 584,
+			height: 420, startRows: 5,
+						  //Des//REF//P.No//Unit//Qty//Remark
+			colWidths: [    250, 250,  160,  70, 80,   365],
+			colHeaders: ['Name/ Description', 'Maker/Type Ref', 'PartNo','Unit','Quantity','Remark'],
+			columnSorting: true, contextMenu: true, minSpareRows: 1,
+			columns: [ {}, {}, {className: "htCenter"}, { className: "htCenter",}, { type: 'numeric', className: "htCenter",}, {}]
+		});
+		Handsontable.Dom.addEvent(save, 'click', function() {
+			var vessel 		= jQuery('.vessel').val();
+			var imo_no 		= jQuery('.imo_no').val();
+			var hull_no 	= jQuery('.hull_no').val();
+			var description = jQuery('.description').val();
+			var date 		= jQuery('.date').val();
+			var ref 		= jQuery('.ref').val();
+
+			jQuery.ajax({
+				url: '/inquiries/make_inq',
+				type: 'POST',
+				data: {data: hot.getData(), "vessel": vessel, "imo_no": imo_no, "hull_no": hull_no, "date": date, "ref": ref,"description":description},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){jQuery(".loader3").fadeIn();},
+				success: function(response){
+					jQuery(".loader3").fadeOut();
+					// console.log(response);return;
+					window.location.href = "../inquiries/index"; 
+				}
+			});
+		});
+	}
+	////////////////
+	if ($("#exampleView").length){
+		var getData = jQuery('#datahandtable').data('room');
+		var container = document.getElementById('exampleView'),autosaveNotification,hot;
+		hot = new Handsontable(container, {
+					//Des//REF//P.No//Unit//Qty//Price//Remark
+		colWidths: [   30, 240, 210,   155,  80, 80,   130,      220],
+		height: 420, data: getData,
+		colHeaders: ['#', 'Name/ Description', 'Maker/Type Ref', 'PartNo','Unit','Quantity','Price','Remark'],
+		columnSorting: true, contextMenu: true, minSpareRows: 1,
+		columns: [{  readOnly: true, className: "htCenter", }, {}, {}, {className: "htCenter"}, { className: "htCenter",}, { type: 'numeric', className: "htCenter",}, { type: 'numeric', format: '$ 0,0.00' }, {}],
+		afterChange: function (change, source) {
+			console.log(change);
+			console.log(source);
+			// clearTimeout(autosaveNotification);
+			// // ajax('scripts/json/save.json', 'GET', JSON.stringify({data: change}), function (data) {
+			// //   exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
+			// autosaveNotification = setTimeout(function() {
+			// 	alert('ok123');
+			// }, 1000);
+			// // });
+			}
+		});
+	}
+	// End Handsometable
 	$( "#form-add-products" ).submit(function( event ) {
 		var price = $('#retail-price').val();
 		if (price == '') {
@@ -41,6 +232,12 @@ jQuery(document).ready(function(){
 	});
 
 	jQuery('#update_cart').click(function(){
+		var vessel 		= jQuery('.vessel').val();
+		var imo_no 		= jQuery('.imo_no').val();
+		var hull_no 	= jQuery('.hull_no').val();
+		var description = jQuery('.description').val();
+		var date 		= jQuery('.date').val();
+		var ref 		= jQuery('.ref').val();
 		var products		= new Array();
 		jQuery.each(jQuery('.cart_item'), function(i, v) {
 			var product_id	= jQuery( this ).attr('id');
@@ -49,9 +246,9 @@ jQuery(document).ready(function(){
 			products.push({'product_id':product_id,'quantity':quantity,'remark':remark, 'price': 0});
 		});
 		jQuery.ajax({
-			url: '/invoices/orders',
+			url: '/inquiries/make_inquiry',
 			type: 'POST',
-			data: {products: products},
+			data: {products: products,vessel:vessel, imo_no: imo_no, hull_no: hull_no, description:description, date:date, ref:ref},
 			dataType: 'html',
 			cache: false,
 			beforeSend: function(){
@@ -63,7 +260,7 @@ jQuery(document).ready(function(){
 				var data = jQuery.parseJSON(response);
 				if (data.status == true) {
 					console.log(data.message);
-					window.location.href = "../pages/orders";
+					window.location.href = "../inquiries/index";
 				} else {
 					alert(data.message);
 				}
@@ -979,166 +1176,166 @@ jQuery(document).ready(function($){
 	if ($("#contact_form").length){
 	
 	$('#contact_form').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            fullname: {
-                validators: {
-                    stringLength: {
-                        min: 4,
-                        message: 'Please enter at least 4 characters'
-                    },
-                        notEmpty: {
-                        message: 'Please supply your full name'
-                    }
-                }
-            },
-            username: {
-                validators: {
-                     stringLength: {
-                        min: 4,
-                        message: 'Please enter at least 4 characters'
-                    },
-                    notEmpty: {
-                        message: 'Please supply your username'
-                    }
-                }
-            },
-            password: {
-                validators: {
-                     stringLength: {
-                        min: 4,
-                        message: 'Please enter at least 4 characters'
-                    },
-                    notEmpty: {
-                        message: 'Please supply your password'
-                    }
-                }
-            },
-            confirm_password: {
-                validators: {
-                    stringLength: {
-                        min: 4,
-                        message: 'Please enter at least 4 characters'
-                    },
-                    identical: {
-	                    field: 'password',
-	                    message: 'The password and its confirm are not the same'
-	                },
-                    notEmpty: {
-                        message: 'Please supply your password'
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your email address'
-                    },
-                    emailAddress: {
-                        message: 'Please supply a valid email address'
-                    }
-                }
-            },
-            tel: {
-                validators: {
-                	stringLength: {
-                        min: 10,
-                        max: 15,
-                        message: 'Please enter at least 10 characters and no more than 15'
-                    },
-                    notEmpty: {
-                        message: 'Please supply your phone number'
-                    },
-                    //phone: {
-                        // country: 'US',
-                        //message: 'Please supply a vaild phone number with area code'
-                   //}
-                }
-            },
-            address: {
-                validators: {
-                    stringLength: {
-                        min: 5,
-                        message: 'Please enter at least 5 characters'
-                    },
-                    notEmpty: {
-                        message: 'Please supply your street address or Please enter at least 8 characters'
-                    }
-                }
-            },
-            city: {
-                validators: {
-                     stringLength: {
-                        min: 4,
-                    },
-                    notEmpty: {
-                        message: 'Please supply your city'
-                    }
-                }
-            },
-            captcha: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your captcha'
-                    }
-                }
-            },
-            state: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please select your state'
-                    }
-                }
-            },
-            zip: {
-                validators: {
-                    notEmpty: {
-                        message: 'Please supply your zip code'
-                    },
-                    zipCode: {
-                        country: 'US',
-                        message: 'Please supply a vaild zip code'
-                    }
-                }
-            },
-            description: {
-                validators: {
-                    stringLength: {
-                        min: 10,
-                        max: 200,
-                        message:'Please enter at least 10 characters and no more than 200'
-                    },
-                    notEmpty: {
-                        message: 'Please supply a description of your project'
-                    }
-                    }
-                }
-            }
-        })
-        .on('success.form.bv', function(e) {
-            $('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
-                $('#contact_form').data('bootstrapValidator').resetForm();
+		// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+		feedbackIcons: {
+			valid: 'glyphicon glyphicon-ok',
+			invalid: 'glyphicon glyphicon-remove',
+			validating: 'glyphicon glyphicon-refresh'
+		},
+		fields: {
+			fullname: {
+				validators: {
+					stringLength: {
+						min: 4,
+						message: 'Please enter at least 4 characters'
+					},
+						notEmpty: {
+						message: 'Please supply your full name'
+					}
+				}
+			},
+			username: {
+				validators: {
+					 stringLength: {
+						min: 4,
+						message: 'Please enter at least 4 characters'
+					},
+					notEmpty: {
+						message: 'Please supply your username'
+					}
+				}
+			},
+			password: {
+				validators: {
+					 stringLength: {
+						min: 4,
+						message: 'Please enter at least 4 characters'
+					},
+					notEmpty: {
+						message: 'Please supply your password'
+					}
+				}
+			},
+			confirm_password: {
+				validators: {
+					stringLength: {
+						min: 4,
+						message: 'Please enter at least 4 characters'
+					},
+					identical: {
+						field: 'password',
+						message: 'The password and its confirm are not the same'
+					},
+					notEmpty: {
+						message: 'Please supply your password'
+					}
+				}
+			},
+			email: {
+				validators: {
+					notEmpty: {
+						message: 'Please supply your email address'
+					},
+					emailAddress: {
+						message: 'Please supply a valid email address'
+					}
+				}
+			},
+			tel: {
+				validators: {
+					stringLength: {
+						min: 10,
+						max: 15,
+						message: 'Please enter at least 10 characters and no more than 15'
+					},
+					notEmpty: {
+						message: 'Please supply your phone number'
+					},
+					//phone: {
+						// country: 'US',
+						//message: 'Please supply a vaild phone number with area code'
+				   //}
+				}
+			},
+			address: {
+				validators: {
+					stringLength: {
+						min: 5,
+						message: 'Please enter at least 5 characters'
+					},
+					notEmpty: {
+						message: 'Please supply your street address or Please enter at least 8 characters'
+					}
+				}
+			},
+			city: {
+				validators: {
+					 stringLength: {
+						min: 4,
+					},
+					notEmpty: {
+						message: 'Please supply your city'
+					}
+				}
+			},
+			captcha: {
+				validators: {
+					notEmpty: {
+						message: 'Please select your captcha'
+					}
+				}
+			},
+			state: {
+				validators: {
+					notEmpty: {
+						message: 'Please select your state'
+					}
+				}
+			},
+			zip: {
+				validators: {
+					notEmpty: {
+						message: 'Please supply your zip code'
+					},
+					zipCode: {
+						country: 'US',
+						message: 'Please supply a vaild zip code'
+					}
+				}
+			},
+			description: {
+				validators: {
+					stringLength: {
+						min: 10,
+						max: 200,
+						message:'Please enter at least 10 characters and no more than 200'
+					},
+					notEmpty: {
+						message: 'Please supply a description of your project'
+					}
+					}
+				}
+			}
+		})
+		.on('success.form.bv', function(e) {
+			$('#success_message').slideDown({ opacity: "show" }, "slow") // Do something ...
+				$('#contact_form').data('bootstrapValidator').resetForm();
 
-            // Prevent form submission
-            e.preventDefault();
+			// Prevent form submission
+			e.preventDefault();
 
-            // Get the form instance
-            var $form = $(e.target);
+			// Get the form instance
+			var $form = $(e.target);
 
-            // Get the BootstrapValidator instance
-            var bv = $form.data('bootstrapValidator');
+			// Get the BootstrapValidator instance
+			var bv = $form.data('bootstrapValidator');
 
-            // Use Ajax to submit form data
-            $.post($form.attr('action'), $form.serialize(), function(result) {
-                console.log(result);
-            }, 'json');
-        }
-       );
+			// Use Ajax to submit form data
+			$.post($form.attr('action'), $form.serialize(), function(result) {
+				console.log(result);
+			}, 'json');
+		}
+	   );
 	}// End 
 
 	jQuery('#btn-add-suppliers').click(function(){
@@ -1303,7 +1500,7 @@ jQuery(document).ready(function($){
 	});
 	
 	jQuery('#add-new-unavailable').click(function(){
-		jQuery('.tbody-unavailable').append('<tr class="tr-unavailable"><td><input type="checkbox" class="" name=""></td><td><input type="text" class="form-control part_no" name=""></td><td><input type="text" class="form-control product_name" name=""></td><td><input type="text" class="form-control model_serial_no" name=""></td><td><input type="text" class="form-control quantity" name=""></td><td><input type="text" class="form-control unit" name=""></td><td><textarea class="form-control textarea-available remark"></textarea></td></tr>');
+		jQuery('.tbody-unavailable').append('<tr class="tr-unavailable"><td><input type="checkbox" class="" name=""></td><td><input type="text" class="form-control product_name" name=""></td><td><input type="text" class="form-control model_serial_no" name=""></td><td><input type="text" class="form-control part_no" name=""></td><td><input type="text" class="form-control unit" name=""></td><td><input type="text" class="form-control quantity" name=""></td><td><textarea class="form-control textarea-available remark"></textarea></td></tr>');
 	});
 
 	jQuery('#send-inquiry-unavailable').click(function(){
@@ -1337,6 +1534,10 @@ jQuery(document).ready(function($){
 				console.log(response);
 			}
 		}); // Ajax
+	});
+	
+	jQuery("#save-all").click(function(){
+		console.log(handsontable.getData());
 	});
 
 }); // End document

@@ -27,11 +27,11 @@
                 <?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
             <li>
-                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-shopping-cart"></span><p>'.__('Orders').'</p>',array('controller'=>'Invoices','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+                <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-shopping-cart"></span><p>'.__('Inquiries').'</p>',array('controller'=>'Inquiries','action'=>'Inquiries'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
-            <li>
+          <!--   <li>
                 <?= $this->Html->link('<i class="menu-icon fa fa-newspaper-o"></i><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-            </li>
+            </li> -->
             <!-- <li class="droplink">
                 <a href="#" class="waves-effect waves-button">
                     <span class="menu-icon glyphicon glyphicon-transfer"></span><p><?= __('Transactions') ?></p><span class="arrow"></span>
@@ -74,9 +74,9 @@
             <li>
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-tasks"></span><p>'.__('Menu').'</p>',array('controller'=>'categories','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
             </li>
-            <li>
+            <!-- <li>
                 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-plane"></span><p>'.__('Partner Deliverys ').'</p>',array('controller'=>'partner_deliverys','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-            </li>
+            </li> -->
            <!--  <li class="droplink">
                 <a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-signal"></span><p><?= __('Report') ?></p><span class="arrow"></span></a>
                 <ul class="sub-menu">

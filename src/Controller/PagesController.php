@@ -45,10 +45,10 @@ class PagesController extends AppController
             return $this->redirect(['controller'=>'Pages','action' => 'login']);
         }
         $Product  = TableRegistry::get('Products');
-        $Invoice  = TableRegistry::get('Invoices');
+        $Inquiry  = TableRegistry::get('Inquiries');
         $User  = TableRegistry::get('Users');
         $actived = $Product->find()->where(['Products.actived' => false])->count();
-        $order = $Invoice->find()->where(['Invoices.status' => 1])->count();
+        $order = $Inquiry->find()->where(['Inquiries.status' => 1])->count();
        
         $users = $User->find()->count();
         $path = func_get_args();

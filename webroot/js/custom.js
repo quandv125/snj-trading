@@ -9,10 +9,11 @@ jQuery( document ).ready(function() {
 	});
 	jQuery('.auto').autoNumeric('init', { aSep: ',', aDec: '.', mDec: 0, vMax: '100000000' });
 	var str_rand = Math.random().toString(36).substring(7);
-	jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
+	// jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
 
 	//** Plugin Datepicker **//
-	jQuery('.onlydate').datetimepicker({ format: 'YYYY-MM-DD' });
+	jQuery('.onlydate').datetimepicker({ format: 'yyyy-MM-DD' });
+	jQuery('.onlydate2').datetimepicker({ format: 'YYYY-MM-DD' });
 	jQuery('.datetimepicker').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
 	jQuery('.date-picker').datepicker({ orientation: "top auto",  autoclose: true, format: 'yyyy-mm-dd', });
 	jQuery(function() {
@@ -55,9 +56,144 @@ jQuery( document ).ready(function() {
 			height: '350px',
 			railVisible: true,
 			alwaysVisible: true
-	 	});
+		});
 	});
+	if ($("#grid").length){
+		var sampleData = jQuery('#grid').data('room');
+		var sampleDataNextID = sampleData.length + 1;
+		function getIndexById(id) {
+			var idx,
+				l = sampleData.length;
 
+			for (var j=0; j < l; j++) {
+				if (sampleData[j].ProductID == id) {
+					return j;
+				}
+			}
+			return null;
+		}
+		var dataSource = new kendo.data.DataSource({
+			transport: {
+				read: function (e) {
+					// on success
+					e.success(sampleData);
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				create: function (e) {
+					// assign an ID to the new item
+					e.data.ProductID = sampleDataNextID++;
+					// save data item to the original datasource
+					// sampleData.push(e.data);
+					// on success
+					e.success(e.data);	
+					var id = jQuery('.item-unavailable').attr('id');
+					jQuery.ajax({
+						url: '/inquiries/create_inq',
+						type: 'POST',
+						data: {"data":e.data, 'id': id},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery("#loader").fadeIn();},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				update: function (e) {
+					// locate item in original datasource and update it
+					sampleData[getIndexById(e.data.ProductID)] = e.data;
+					// on success
+					e.success();
+					// console.log(e.data);
+					jQuery.ajax({
+						url: '/inquiries/update_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery("#loader").fadeIn();},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					// e.error("XHR response", "status code", "error message");
+				},
+				destroy: function (e) {
+					// locate item in original datasource and remove it
+					sampleData.splice(getIndexById(e.data.ProductID), 1);
+					// on success
+					e.success();
+					// console.log(e.data);
+					jQuery.ajax({
+						url: '/inquiries/destroy_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery("#loader").fadeIn();},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							e.success();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				}
+			},
+			error: function (e) {
+				// handle data operation error
+				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+			},
+			pageSize: 30,
+			batch: false,
+			schema: {
+				model: {
+					id: "ProductID",
+					fields: {
+						ProductID: { editable: false, nullable: true },
+						no: {editable: false},
+						name: {editable: false},
+						maker_type_ref: {editable: false},
+						partno:  {editable: false},
+						unit: {},
+						quantity: {},
+						price: {},
+						delivery_time: {},
+						remark: {},
+					}
+				}
+			}
+		});
+
+		$("#grid").kendoGrid({
+			dataSource: dataSource,
+			pageable: true,
+			toolbar: ["create"],
+			columns: [
+				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+				{ field: "name", title: "Description", width: "300px" },
+				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "150px" },
+				{ field: "partno", title: "PartNo", width: "90px" },
+				{ field: "unit", title:"Units", width: "70px" },
+				{ field: "quantity",title:"Quantity", width: "70px" },
+				{ field: "price",title:"Price", width: "70px" },
+				{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
+				{ field: "remark",title:"Remark", width: "170px" },
+				{ command: ["edit", "destroy"], title: "&nbsp;", width: "180px" }
+			],
+			editable: "inline"
+		});
+	}
 	// Plugin Fancybox
 	jQuery('.fancyboxs').click(function(){
 		var id = jQuery(this).attr('id');
@@ -1000,8 +1136,8 @@ jQuery( document ).ready(function() {
 
 	jQuery("#AddCustomerSales").on('submit',(function(event) {
 		event.preventDefault();
- 		var name = jQuery("#CustomersName").val();
- 		jQuery.ajax({
+		var name = jQuery("#CustomersName").val();
+		jQuery.ajax({
 			url: '/customers/add',
 			type: 'POST',
 			data: {name: name},
@@ -1024,7 +1160,7 @@ jQuery( document ).ready(function() {
 	jQuery('.link').click(function(){
 		var id = jQuery(this).attr('id');
 		jQuery('.popUpShow-'+id).toggleClass('block');
-    });
+	});
 
 	jQuery('.del-stockproducts').click(function(){
 		var id = jQuery(this).attr('sid');
@@ -1053,7 +1189,7 @@ jQuery( document ).ready(function() {
 			}
 		});
 	});
-   	
+	
 	jQuery('.del-invoice-products').click(function(){
 		var invoice_id = jQuery(this).attr('invoice_id');
 		var invoice_products = new Array();
@@ -1298,4 +1434,159 @@ jQuery( document ).ready(function() {
 		}); // Ajax
 	});
 
+	function roundUp(n, l) {
+		var newnumber = Math.round(n * Math.pow(10, l)) / Math.pow(10, l);
+		return newnumber;
+	}
+
+	jQuery('.percent-commission-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var percent = jQuery(this).val();
+		var pc = roundUp((parseFloat(total_price) * percent)/ 100, 2);
+		var pp = jQuery('.price-profit-lx').val();
+		var pd = jQuery('.price-discount-lx').val();
+		var fp = roundUp((parseFloat(pc) + parseFloat(total_price) + parseFloat(pp)) - parseFloat(pd),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.price-commission-lx').val(pc);
+	});
+
+	jQuery('.price-commission-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var price = jQuery(this).val();
+		var pc = roundUp((parseFloat(price) / parseFloat(total_price))* 100, 2);
+		var pp = jQuery('.price-profit-lx').val();
+		var pd = jQuery('.price-discount-lx').val();
+		var fp = roundUp((parseFloat(price) + parseFloat(total_price) + parseFloat(pp)) - parseFloat(pd),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.percent-commission-lx').val(pc);
+	});
+
+	jQuery('.percent-discount-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var percent = jQuery(this).val();
+		var pd = roundUp((parseFloat(total_price) * percent)/ 100, 2);
+		var pp = jQuery('.price-profit-lx').val();
+		var pc = jQuery('.price-commission-lx').val();
+		var fp = roundUp((parseFloat(pc) + parseFloat(total_price) + parseFloat(pp)) - parseFloat(pd),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.price-discount-lx').val(pd);
+	});
+
+	jQuery('.price-discount-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var price = jQuery(this).val();
+		var pd = roundUp((parseFloat(price) / parseFloat(total_price))* 100, 2);
+		var pp = jQuery('.price-profit-lx').val();
+		var pc = jQuery('.price-commission-lx').val();
+		var fp = roundUp((parseFloat(pc) + parseFloat(total_price) + parseFloat(pp)) - parseFloat(price),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.percent-discount-lx').val(pd);
+	});
+
+	jQuery('.percent-profit-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var percent = jQuery(this).val();
+		var pp = roundUp((parseFloat(total_price) * percent)/ 100, 2);
+		var pc = jQuery('.price-commission-lx').val();
+		var pd = jQuery('.price-discount-lx').val();
+		var fp = roundUp((parseFloat(pc) + parseFloat(total_price) + parseFloat(pp)) - parseFloat(pd),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.price-profit-lx').val(pp);
+	});
+
+	jQuery('.price-profit-lx').change(function(){
+		var total_price = jQuery('.grand-total').val();
+		var price = jQuery(this).val();
+		var pp = roundUp((parseFloat(price) / parseFloat(total_price))* 100, 2);
+		var pd = jQuery('.price-discount-lx').val();
+		var pc = jQuery('.price-commission-lx').val();
+		var fp = roundUp((parseFloat(price) + parseFloat(total_price) + parseFloat(pc)) - parseFloat(pd),2);
+		jQuery('.final-price').val(fp);
+		jQuery('.percent-profit-lx').val(pp);
+	});
+
+	jQuery("#inquiries-details tr").click(function(){
+		jQuery('.panel-supplier-details').addClass('hidden');
+		var id = jQuery(this).attr('id');
+		jQuery.ajax({
+			url: '/inquiries/get_supplier_details',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				jQuery('.panel-supplier-details').removeClass('hidden');
+				jQuery('.panel-supplier-details').html(response);
+				jQuery.getScript('/js/show_action.js',function(){
+					grid();
+				});
+				// console.log(response);
+				jQuery('.delete-items').click(function(){
+					jQuery(this).parent().parent().remove().fadeOut();
+					var id = jQuery(this).attr('id');
+					jQuery.ajax({
+						url: '/inquiries/delete_item_supplier',
+						type: 'POST',
+						data: {id: id},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){
+							jQuery("#loader").fadeIn();
+						},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							console.log(response);
+						}
+					}); // Ajax
+				});
+			}
+		}); // Ajax
+	});
+	
+	jQuery('.inquiry-suppliers').click(function(){
+		var id = jQuery(this).attr('id');
+		jQuery('.supplier-quotation-details').addClass('hidden');
+		jQuery.ajax({
+			url: '/inquiries/supplier_quotation_details',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				jQuery('.supplier-quotation-details').removeClass('hidden');
+				jQuery('.supplier-quotation-details').html(response);
+				jQuery.getScript('/js/show_action.js',function(){
+					grid();
+				});
+			}
+		}); // Ajax
+
+	});
+
+	jQuery('.rdo-price').click(function(){
+		var inquirie_product_id = jQuery(this).attr('inquirie_product_id');
+		var id = jQuery(this).attr('id');
+		jQuery.ajax({
+			url: '/inquiries/set_choose',
+			type: 'POST',
+			data: {id: id, inquirie_product_id: inquirie_product_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();	
+				console.log(response);			
+			}
+		}); // Ajax
+	});
 }); // jQuery document

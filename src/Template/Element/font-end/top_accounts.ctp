@@ -2,9 +2,9 @@
 	<?php  echo $this->Html->link('<i class="fa fa-user"></i> '.$this->MyHtml->_Cutstring($user_info['username'], $max = 13, $num = 10), ['controller' => 'pages', 'action' => 'accounts'],['escape' =>false]); ?>
 	<ul class="sub-menu-top">
 		<li> <?php echo $this->Html->link('<i class="fa fa-user"></i> '.__('Account Info'), ['controller'=>'Pages','action' => 'accounts'],['escape' => false]) ?></li>
-		<li><?php echo $this->Html->link('<i class="fa fa-cubes"></i> '.__('Orders'),['controller'=>'Pages','action'=>'orders'],['escape' =>false]) ?>
-		</li>
-		<li><?php echo $this->Html->link('<i class="fa fa-file-text-o"></i> '.__('Inquiry'),['controller'=>'Invoices','action'=>'inquiry'],['escape' =>false]) ?>
+		<!-- <li><?php echo $this->Html->link('<i class="fa fa-cubes"></i> '.__('Orders'),['controller'=>'Pages','action'=>'orders'],['escape' =>false]) ?>
+		</li> -->
+		<li><?php echo $this->Html->link('<i class="fa fa-file-text-o"></i> '.__('Inquiry'),['controller'=>'Inquiries','action'=>'index'],['escape' =>false]) ?>
 		</li>
 		<li><?php echo $this->Html->link('<i class="fa fa-heart-o"></i> '.__('Wishlists'),['controller'=>'Pages','action'=>'wishlists'],['escape' =>false]) ?>
 		</li>

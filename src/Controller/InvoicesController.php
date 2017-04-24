@@ -189,7 +189,52 @@ class InvoicesController extends AppController
     }
 
     public function ChangeInvoicesProducts() {
-      
+        if ($this->request->is('Ajax')) {
+            $this->autoRender = false;
+            $Inquiry = TableRegistry::get('Inquiries');
+            $InquirieProduct = TableRegistry::get('InquirieProducts');
+            
+            unset($this->request->data['data'][count($this->request->data['data'])-1]);
+            $data = [
+                'status'        => '1',
+                'type'          => UNAVAILABLE,
+                'customer_id'   => $this->Auth->user('id'),
+                'vessel'        => $this->request->data['vessel'],
+                'imo_no'        => $this->request->data['imo_no'],
+                'ref'           => $this->request->data['ref'],
+                'description'   => $this->request->data['description']
+            ];
+          
+            if (!empty($this->Auth->user('id'))) {
+              
+                $inquiry = $Inquiry->newEntity();
+                $inquiry = $Inquiry->patchEntity($inquiry, $data);
+                $Inquiry->save($inquiry);
+                $inquiry_id = $inquiry->id;
+                foreach ($this->request->data['data'] as $key => $inq) {
+                    $inq['inquiry_id']      = $inquiry->id;
+                    $inq['product_id']      = null;
+                    $inq['name']            = $inq[1];
+                    $inq['maker_type_ref']  = $inq[2];
+                    $inq['partno']          = $inq[3];
+                    $inq['unit']            = $inq[4];
+                    $inq['quantity']        = $inq[5];
+                    $inq['price']           = $inq[6];
+                    $inq['amount']          = $inq[7];
+                    $inq['remark']          = $inq[8];
+                    $inq['status']          = 1;
+                    $inquirieproduct = $InquirieProduct->newEntity();
+                    $inquirieproduct = $InquirieProduct->patchEntity($inquirieproduct, $inq);
+                    $InquirieProduct->save($inquirieproduct);
+                }
+                $msg = array('status' => true, 'message' => __('OK'));
+            } else {
+                $msg = array('status' => false, 'message' => __('NO.'));
+            }
+        }
+       
+        $test = $Inquiry->find();
+        pr($test->toarray());
         die();
         // $Invoice = TableRegistry::get('Invoices');
         // $InvoiceProduct = TableRegistry::get('InvoiceProducts');
@@ -375,6 +420,7 @@ class InvoicesController extends AppController
     public function orders() {
         if ($this->request->is('ajax')) {
             $this->autoRender = false;
+            pr($this->request->data);die();
             if (empty($this->Auth->user())) {
                 $msg = array('status' => false, 'message' => __('You must login before order.'));
                 echo json_encode($msg); exit();
@@ -384,7 +430,6 @@ class InvoicesController extends AppController
                 'status'  => '1',
                 'user_id' => $this->Auth->user('id'),
             ];
-            
             if (!empty($this->Auth->user('id'))) {
                 $Invoice        = TableRegistry::get('Invoices');
                 $InvoiceProduct = TableRegistry::get('InvoiceProducts');
@@ -628,12 +673,6 @@ class InvoicesController extends AppController
 
             // $this->sendUserEmail('quandv.125@gmail.com','New Order', 'You have new Order', 'default');
             echo json_encode($msg); exit();
-
-
-           
-            
-           
-            // pr($this->request->data);
         }
     }
 }

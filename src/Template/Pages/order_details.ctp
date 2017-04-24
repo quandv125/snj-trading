@@ -6,22 +6,22 @@
                 <h2 class="title-shop-page"></h2>
                 <div class="table-responsive">
 
-                    <!-- <div class="timeline-horizontal-wap">
+                    <div class="timeline-horizontal-wap">
                         <ul class="timeline timeline-horizontal">
                             <li class="timeline-item">
-                                <div class="timeline-badge <?php //echo ($orders->status >= 1)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-badge <?php echo ($orders->status >= 1)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
                             </li>
                             <li class="timeline-item">
-                                <div class="timeline-badge <?php //echo ($orders->status >= 2)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-badge <?php echo ($orders->status >= 2)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
                             </li>
                             <li class="timeline-item">
-                                <div class="timeline-badge <?php //echo ($orders->status >= 3)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-badge <?php echo ($orders->status >= 3)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
                             </li>
                             <li class="timeline-item">
-                                <div class="timeline-badge <?php //echo ($orders->status >= 4)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
+                                <div class="timeline-badge <?php echo ($orders->status >= 4)? "success":"default"?>"><i class="glyphicon glyphicon-check"></i></div>
                             </li>
                         </ul>
-                    </div> -->
+                    </div>
                     
                     <?php if (!empty($orders->invoice_products)): ?>
                     <table cellspacing="0" class="shop_table cart table">

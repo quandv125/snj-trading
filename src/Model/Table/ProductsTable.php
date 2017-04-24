@@ -194,15 +194,15 @@ class ProductsTable extends Table
                 return $q->autoFields(false)->select(['id','name']);
             },
             'StockProducts' => function ($q) {
-                    return $q->autoFields(false)->select(['StockProducts.id','StockProducts.quantity','StockProducts.discount','StockProducts.stock_id','StockProducts.product_id','Stocks.id','Stocks.code','Stocks.total_quantity','Stocks.total_price','Stocks.discount_stock','Stocks.final_price'])->innerJoinWith('Stocks');
+                return $q->autoFields(false)->select(['StockProducts.id','StockProducts.quantity','StockProducts.discount','StockProducts.stock_id','StockProducts.product_id','Stocks.id','Stocks.code','Stocks.total_quantity','Stocks.total_price','Stocks.discount_stock','Stocks.final_price'])->innerJoinWith('Stocks');
             },
             'Images' => function ($q) {
                 return $q->autoFields(false)->select(['id','product_id','path','thumbnail']);
             },
             'InvoiceProducts' => function ($q) {
-                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Invoices.id','Invoices.status','Invoices.total'])->innerJoinWith('Invoices');
+                return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Invoices.id','Invoices.status'])->innerJoinWith('Invoices');
             }
-            ])->where($conditions)->limit($lm)->page($pg)->order(['Products.created' => 'DESC']);
+        ])->where($conditions)->limit($lm)->page($pg)->order(['Products.created' => 'DESC']);
         return $products;
     }
 

@@ -21,8 +21,8 @@
                     <div class="col-lg-6 col-md-6">
                       
 
-                        <?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Part No/ Code/ SKU','label' => 'Part No/ Code/ SKU','value'=>$products->sku]); ?>
-                        <?= $this->Form->input('product_name',['label'=>"Products Name/ Part Name",'class' => 'product_name','placeholder' => 'Products Name/ Part Name','value'=> $products->product_name]); ?>
+                        <?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Part No/ Code','label' => 'Part No/ Code','value'=>$products->sku]); ?>
+                        <?= $this->Form->input('product_name',['label'=>"Products Name",'class' => 'product_name','placeholder' => 'Products Name','value'=> $products->product_name]); ?>
 
                         <?= $this->Form->input('retail_price',['class' => 'auto','placeholder' => 'USD','value'=>$products->retail_price]); ?>
                         
@@ -56,7 +56,7 @@
                         <?= $this->Form->input('unit',array('class' => 'unit','placeholder' => 'Unit','value'=>$products->unit)); ?>    
                     </div>
                      <div class="col-lg-12 col-md-6">
-                        <label class="control-label" for="Short_Description">Remark/ Short Description</label>
+                        <label class="control-label" for="Short_Description">Remark</label>
                         <?= $this->Form->textarea('short_description',['id'=>'editor1','value'=>$products->short_description]);?>
                     </div>
                 </div>

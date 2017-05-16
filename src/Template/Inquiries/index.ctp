@@ -18,25 +18,27 @@
 				<table id="datatable" class="display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th class="text-center"><?php echo __('Code') ?></th>
+							<th class="text-center"><?php echo __('Ref') ?></th>
+							<th class="text-center"><?php echo __('Vessel') ?></th>
+							<th class="text-center"><?php echo __('Our Ref') ?></th>
 							<th class="text-center"><?php echo __('Status') ?></th>
 							<th class="text-center"><?php echo __('Created') ?></th>
 							<th class="text-center"><?php echo __('Action') ?></th>
 						</tr>
 					</thead>
 					<tbody>
-
 						<?php foreach ($inquiries as  $inquiry): ?>
-
 						<tr>
 							<td class="text-center"><?= $this->Html->link('#'.$inquiry->id,['controller'=>'Inquiries','action' => 'view', $inquiry->id],['escape' => false]) ?></td>
+							
+							<td class="text-center"><?= $inquiry->vessel?></td>
+							<td class="text-center"><?= $inquiry->ref?></td>
 							<td class="text-center"><?= $inquiry->status?></td>
 							<td class="text-center"><?= date_format($inquiry->created, 'Y-m-d H:i:s'); ?></td>
 							<td class="text-center">
 								  <?= $this->Form->postLink('<i class="fa fa-trash" aria-hidden="true"></i>', ['controller' => 'Inquiries', 'action' => 'delete', $inquiry->id], ['class'=>'btn btn-danger','escape' => false,'confirm' => __('Are you sure you want to delete # {0}?', $inquiry->id)]) ?> 
 							</td>
 						</tr>
-					   
 						<?php endforeach ?>
 					</tbody>
 				</table>

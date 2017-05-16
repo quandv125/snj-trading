@@ -10,7 +10,7 @@ jQuery( document ).ready(function() {
 	jQuery('.auto').autoNumeric('init', { aSep: ',', aDec: '.', mDec: 0, vMax: '100000000' });
 	var str_rand = Math.random().toString(36).substring(7);
 	// jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
-
+	$("#datepicker").kendoDatePicker({format: "yyyy-MM-dd"});
 	//** Plugin Datepicker **//
 	jQuery('.onlydate').datetimepicker({ format: 'yyyy-MM-DD' });
 	jQuery('.onlydate2').datetimepicker({ format: 'YYYY-MM-DD' });
@@ -58,6 +58,18 @@ jQuery( document ).ready(function() {
 			alwaysVisible: true
 		});
 	});
+
+	function getIndexById(id) {
+		var idx,
+			l = sampleData.length;
+		for (var j=0; j < l; j++) {
+			if (sampleData[j].ProductID == id) {
+				return j;
+			}
+		}
+		return null;
+	}
+
 	if ($("#grid").length){
 		var sampleData = jQuery('#grid').data('room');
 		var sampleDataNextID = sampleData.length + 1;
@@ -165,10 +177,10 @@ jQuery( document ).ready(function() {
 						name: {editable: false},
 						maker_type_ref: {editable: false},
 						partno:  {editable: false},
-						unit: {},
-						quantity: {},
-						price: {},
-						delivery_time: {},
+						unit: {editable: false},
+						quantity: {editable: false},
+						price: {editable: false},
+						delivery_time: {editable: false},
 						remark: {},
 					}
 				}
@@ -194,6 +206,351 @@ jQuery( document ).ready(function() {
 			editable: "inline"
 		});
 	}
+
+	if ($("#grid_quotation").length){
+		var sampleData = jQuery('#grid_quotation').data('room');
+		// console.log(sampleData);
+		var sampleDataNextID = sampleData.length + 1;
+		function getIndexById(id) {
+			var idx,
+				l = sampleData.length;
+
+			for (var j=0; j < l; j++) {
+				if (sampleData[j].ProductID == id) {
+					return j;
+				}
+			}
+			return null;
+		}
+		var dataSource = new kendo.data.DataSource({
+			transport: {
+				read: function (e) {
+					// on success
+					e.success(sampleData);
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				create: function (e) {
+					// assign an ID to the new item
+					e.data.ProductID = sampleDataNextID++;
+					// save data item to the original datasource
+					// sampleData.push(e.data);
+					// on success
+					e.success(e.data);	
+					// var id = jQuery('.item-unavailable').attr('id');
+					// jQuery.ajax({
+					// 	url: '/inquiries/create_inq',
+					// 	type: 'POST',
+					// 	data: {"data":e.data, 'id': id},
+					// 	dataType: 'html',
+					// 	cache: false,
+					// 	beforeSend: function(){jQuery("#loader").fadeIn();},
+					// 	success: function(response){
+					// 		jQuery("#loader").fadeOut();
+					// 		console.log(response);return;
+					// 	}
+					// });
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				},
+				update: function (e) {
+					// locate item in original datasource and update it
+					// sampleData[getIndexById(e.data.ProductID)] = e.data;
+					// // on success
+					// e.success();
+					// e.data.u_p = e.data.supp_u_p + ((e.data.supp_u_p*e.data.profit)/100);
+					// e.data.f_total = e.data.u_p*e.data.quantity;
+
+					jQuery.ajax({
+						url: '/inquiries/update_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){
+							jQuery("#loader").fadeIn();
+						},
+						success: function(response){
+
+							var data1 = jQuery.parseJSON(response);
+							sampleData = data1;
+							// console.log(sampleData);
+							var grid = $('#grid_quotation').data("kendoGrid");
+							grid.dataSource.read();
+							grid.dataSource.refresh;
+							
+							jQuery("#loader").fadeOut();
+							return false;
+						}
+					});
+					// on failure
+					// e.error("XHR response", "status code", "error message");
+					
+				},
+				destroy: function (e) {
+					// locate item in original datasource and remove it
+					sampleData.splice(getIndexById(e.data.ProductID), 1);
+					// on success
+					e.success();
+					// console.log(e.data);
+					jQuery.ajax({
+						url: '/inquiries/destroy_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery("#loader").fadeIn();},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							e.success();
+							console.log(response);return;
+							
+						}
+					});
+					// on failure
+					//e.error("XHR response", "status code", "error message");
+				}
+			},
+			error: function (e) {
+				// handle data operation error
+				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+			},
+			pageSize: 30,
+			batch: false,
+			schema: {
+				model: {
+					id: "ProductID",
+					fields: {
+						ProductID: { editable: false, nullable: true },
+						no: {editable: false},
+						name: {editable: false},
+						unit: {editable: false},
+						quantity: {editable: true},
+
+						supplier: {editable: false},
+
+						supp_u_p:  {editable: false},
+						supp_u_p_usd:  {editable: false},
+
+						profit:  {},
+
+						u_p:  {editable: false},
+						u_p_usd:  {editable: false},
+
+						f_total:  {editable: false},
+						f_total_usd:  {editable: false},
+
+						del_time: {editable: false},
+						del_time_final: {editable: false},
+						remark: {},
+					}
+				}
+			}
+		});
+
+		$("#grid_quotation").kendoGrid({
+			dataSource: dataSource,
+			navigatable: true,
+			pageable: true,
+			toolbar: ["save", "cancel"],
+			columns: [
+				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+				{ field: "name", title: "Description", width: "200px" },
+				{ field: "unit", title:"Units", width: "70px" },
+				{ field: "quantity",title:"Quantity", width: "70px" },
+
+				{ field: "supplier",title:"Supplier", width: "120px" },
+
+				{ field: "supp_u_p",title:"Supp.U/P", width: "90px" },
+				{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px" },
+
+				{ field: "profit",title:"P(%)", width: "50px" },
+
+				{ field: "u_p",title:"U/Price", width: "70px" },
+				{ field: "u_p_usd",title:"U/Price(USD)", width: "110px" },
+
+				{ field: "f_total",title:"Final total", width: "90px" },
+				{ field: "f_total_usd",title:"Final total(USD)", width: "120px" },
+				{ field: "del_time",title:"Delivery Time(day)", width: "130px" },
+				{ field: "del_time_final",title:"Final Delivery Time", width: "130px" },
+				{ field: "remark",title:"Remark", width: "170px" },
+
+
+				{ command: ["destroy"], title: "&nbsp;", width: "100px" }
+			],
+			editable: true
+		});
+	}
+
+	jQuery('.profit-percent-inquiries').change(function(){
+		var percent = jQuery(this).val();
+		var arrid = jQuery('#ArrID').attr('value');
+		var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
+		jQuery.ajax({
+			url: '/inquiries/set_profit_inquiries',
+			type: 'POST',
+			data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id},
+			dataType: 'json',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(result){
+				jQuery("#loader").fadeOut();
+				var grid = $('#grid_quotation').data("kendoGrid");
+				grid.dataSource.data(result);
+				grid.dataSource.refresh;
+				
+				console.log(grid);
+				return false;
+			}
+		});
+		
+	});
+
+	if ($("#grid_quotation2").length){
+		var sampleData = jQuery('#grid_quotation2').data('room');
+		var sampleDataNextID = sampleData.length + 1;
+		
+		var dataSource = new kendo.data.DataSource({
+			transport: {
+				read: function (e) {
+					e.success(sampleData);
+				},
+				update: function (e) {
+					sampleData[getIndexById(e.data.ProductID)] = e.data;
+					e.success();
+					
+					jQuery.ajax({
+						url: '/inquiries/update_inq2',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){
+							jQuery("#loader").fadeIn();
+						},
+						success: function(response){
+							sampleData = jQuery.parseJSON(response);
+							var grid = $('#grid_quotation2').data("kendoGrid");
+							grid.dataSource.read();
+							grid.dataSource.refresh;
+							jQuery("#loader").fadeOut();
+							return false;
+						}
+					});
+				},
+				destroy: function (e) {
+					sampleData.splice(getIndexById(e.data.ProductID), 1);
+					e.success();
+					jQuery.ajax({ 
+						url: '/inquiries/destroy_inq',
+						type: 'POST',
+						data: {"data":e.data},
+						dataType: 'html',
+						cache: false,
+						beforeSend: function(){jQuery("#loader").fadeIn();},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							e.success();
+							console.log(response);return;
+						}
+					});
+				}
+			},
+			error: function (e) {
+				// handle data operation error
+				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+			},
+			pageSize: 30,
+			batch: false,
+			schema: {
+				model: {
+					id: "ProductID",
+					fields: {
+						ProductID: { editable: false, nullable: true },
+						no: {editable: false},
+						name: {editable: false},
+						unit: {editable: false},
+						quantity: {editable: true},
+
+						supplier: {editable: false},
+
+						supp_u_p:  {editable: false},
+						supp_u_p_usd:  {editable: false},
+
+						profit:  {},
+
+						u_p:  {editable: false},
+						u_p_usd:  {editable: false},
+
+						f_total:  {editable: false},
+						f_total_usd:  {editable: false},
+
+						del_time: {editable: false},
+						del_time_final: {editable: false},
+						remark: {},
+					}
+				}
+			}
+		});
+
+		$("#grid_quotation2").kendoGrid({
+			dataSource: dataSource,
+			navigatable: true,
+			pageable: true,
+			toolbar: ["save", "cancel"],
+			columns: [
+				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+				{ field: "name", title: "Description", width: "200px" },
+				{ field: "unit", title:"Units", width: "70px" },
+				{ field: "quantity",title:"Quantity", width: "70px" },
+
+				{ field: "supplier",title:"Supplier", width: "120px" },
+
+				{ field: "supp_u_p",title:"Supp.U/P", width: "90px" },
+				{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px" },
+
+				{ field: "profit",title:"P(%)", width: "50px" },
+
+				{ field: "u_p",title:"U/Price", width: "70px" },
+				{ field: "u_p_usd",title:"U/Price(USD)", width: "110px" },
+
+				{ field: "f_total",title:"Final total", width: "90px" },
+				{ field: "f_total_usd",title:"Final total(USD)", width: "120px" },
+				{ field: "del_time",title:"Delivery Time(day)", width: "130px" },
+				{ field: "del_time_final",title:"Final Delivery Time", width: "130px" },
+				{ field: "remark",title:"Remark", width: "170px" },
+
+
+				{ command: ["destroy"], title: "&nbsp;", width: "100px" }
+			],
+			editable: true
+		});
+	}
+
+	jQuery('.profit2-percent-inquiries').change(function(){
+		var percent = jQuery(this).val();
+		var arrid = jQuery('#ArrID').attr('value');
+		var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
+		jQuery.ajax({ 
+			url: '/inquiries/set_profit_inquiry',
+			type: 'POST',
+			data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){jQuery("#loader").fadeIn();},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				sampleData = jQuery.parseJSON(response);
+				var grid = $('#grid_quotation2').data("kendoGrid");
+				grid.dataSource.read();
+				grid.dataSource.refresh;
+				return;
+			}
+		});
+	});
+
 	// Plugin Fancybox
 	jQuery('.fancyboxs').click(function(){
 		var id = jQuery(this).attr('id');
@@ -1507,6 +1864,8 @@ jQuery( document ).ready(function() {
 
 	jQuery("#inquiries-details tr").click(function(){
 		jQuery('.panel-supplier-details').addClass('hidden');
+		jQuery("#inquiries-details tr").removeClass('tr-actived');
+		jQuery(this).addClass('tr-actived');
 		var id = jQuery(this).attr('id');
 		jQuery.ajax({
 			url: '/inquiries/get_supplier_details',
@@ -1589,4 +1948,251 @@ jQuery( document ).ready(function() {
 			}
 		}); // Ajax
 	});
+
+	jQuery('#form-quotation').on('submit',(function(event) {
+		event.preventDefault();
+		
+		jQuery.ajax({
+			url: '/inquiries/update_quotations',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				toastr.success(response);
+				console.log(response);
+				jQuery("#loader").fadeOut();
+			},
+			error: function(response, status){
+				jQuery("#loader").fadeOut();
+			}
+		});
+	}));
+
+	jQuery('#form-inquiries-info').on('submit',(function(event) {
+		event.preventDefault();
+		
+		jQuery.ajax({
+			url: '/inquiries/update_inquiries_info',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				// console.log(response);
+				toastr.success(response);
+				jQuery("#loader").fadeOut();
+			},
+			error: function(response, status){
+				jQuery("#loader").fadeOut();
+			}
+		});
+	}));
+	$('#discount-inquiry').on('change',(function(event) {
+		var discount = $(this).val();
+		var inquiry_id = $("#ArrID").attr('inquiry_id');
+		var sub_total = jQuery('#sub-total-inquiries').val();
+		var amount = (sub_total*discount)/100;
+
+		jQuery.ajax({
+			url: '/inquiries/set_discount_inquiries',
+			type: 'POST',
+			data: {discount: discount, inquiry_id:inquiry_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				toastr.success(response);
+				jQuery('#amount-discount').val(amount);
+			}
+		}); // Ajax
+	}));
+	
+	$('#commission-inquiry').on('change',(function(event) {
+		var commission = $(this).val();
+		var inquiry_id = $("#ArrID").attr('inquiry_id');
+		jQuery.ajax({
+			url: '/inquiries/set_commission_inquiries',
+			type: 'POST',
+			data: {commission: commission, inquiry_id:inquiry_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				toastr.success(response);
+				
+			}
+		}); // Ajax
+	}));
+
+	$('#add_commission-inquiry').on('change',(function(event) {
+		var add_commission = $(this).val();
+		var inquiry_id = $("#ArrID").attr('inquiry_id');
+		jQuery.ajax({
+			url: '/inquiries/set_add_commission_inquiries',
+			type: 'POST',
+			data: {add_commission: add_commission, inquiry_id:inquiry_id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				toastr.success(response);
+				
+			}
+		}); // Ajax
+	}));
+
+	jQuery('#extra-cost').on('submit',(function(event) {
+		event.preventDefault();
+		
+		jQuery.ajax({
+			url: '/inquiries/extra_cost',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			success: function(response){
+				// toastr.success(response);
+				jQuery('#table-cost-price').append('<tr class="tr-cost-price-'+response+'"><td>'+jQuery('#extra-cost #name').val()+'</td><td>'+jQuery('#extra-cost #cost').val()+'</td><td>'+jQuery('#extra-cost #profit').val()+'</td><td>'+jQuery('#extra-cost #final').val()+'</td><td><span class="btn btn-primary margin-right5 waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalEdit'+response+'"><i class="fa fa-pencil"></i></span><div class="modal fade" id="myModalEdit'+response+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"><div class="modal-dialog modal-sm modal-center"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="myModalLabel">Extra Cost</h4> </div><div class="modal-body"> <form method="post" accept-charset="utf-8" class="edit-extra-cost edit-extra-cost-'+response+'" id="edit-extra-cost" role="form" action="/inquiries/quotations/112"><div style="display:none;"><input type="hidden" name="_method" class="form-control" value="POST"></div><div class="form-group text"><input type="text" name="inquiryid" class="form-control hidden" id="id" value="'+response+'"></div><div class="form-group text"><label class="control-label" for="name">Name</label><input type="text" name="name" class="form-control" id="name" value="'+jQuery('#extra-cost #name').val()+'"></div><div class="form-group text"><label class="control-label" for="cost">Cost</label><input type="text" name="cost" class="form-control" id="cost" value="'+jQuery('#extra-cost #cost').val()+'"></div><div class="form-group text"><label class="control-label" for="profit">Profit</label><input type="text" name="profit" class="form-control" id="profit" value="'+jQuery('#extra-cost #profit').val()+'"></div><div class="form-group text"><label class="control-label" for="final">Final</label><input type="text" name="final" class="form-control" value="'+jQuery('#extra-cost #final').val()+'" id="final"></div></form></div><div class="modal-footer"> <button class="btn btn-success btn-edit-cost-'+response+'" type="submit">Submit</button> </div></div></div></div><span class="btn btn-primary waves-effect waves-button waves-red delete-extras cursor-pointer" value="'+response+'"><i class="fa fa-trash"></i></span></td></tr>');
+				editcost(response);
+				jQuery('#myModal').modal('toggle');
+				//## Delete 
+				jQuery('.delete-extras').on('click',(function(event){
+					var id = jQuery(this).attr('value');
+					jQuery.ajax({
+						url: '/inquiries/extra_delete',
+						type: 'POST',
+						data: {id: id},
+						dataType: 'html',
+						cache: false,
+						success: function(response){
+							toastr.success(response);
+							jQuery('.tr-cost-price-'+id).fadeOut();
+						}
+					}); // Ajax
+				}));
+				//## End delete
+
+			},
+			error: function(response, status){}
+		});
+	}));
+	
+	function editcost (id) {
+		
+		jQuery('.btn-edit-cost-'+id).click(function(){
+			var extra_id = jQuery('.edit-extra-cost-'+id+' #id').val();
+			var cost = jQuery('.edit-extra-cost-'+id+' #cost').val();
+			var name = jQuery('.edit-extra-cost-'+id+' #name').val();
+			var final_cost = jQuery('.edit-extra-cost-'+id+' #final').val();
+			var profit = jQuery('.edit-extra-cost-'+id+' #profit').val();
+			
+			jQuery.ajax({
+				url: '/inquiries/extra_edit',
+				type: "POST",
+				data: {"id": extra_id, "name": name, "cost": cost, "profit": profit, "final": final_cost},
+				dataType: "html",
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					jQuery('.tr-cost-price-'+response).html('<td>'+jQuery('.edit-extra-cost-'+response+' #name').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #cost').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #profit').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #final').val()+'</td><td><span class="btn btn-primary margin-right5 waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalEdit'+response+'"><i class="fa fa-pencil"></i></span><div class="modal fade" id="myModalEdit'+response+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"><div class="modal-dialog modal-sm modal-center"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="myModalLabel">Extra Cost</h4> </div><div class="modal-body"> <form method="post" accept-charset="utf-8" class="edit-extra-cost edit-extra-cost-'+response+'" role="form" action="/inquiries/quotations/112"><div style="display:none;"><input type="hidden" name="_method" class="form-control" value="POST"></div><div class="form-group text"><input type="text" name="id" class="form-control hidden" id="id" value="'+response+'"></div><div class="form-group text"><label class="control-label" for="name">Name</label><input type="text" name="name" class="form-control" id="name" value="'+jQuery('.edit-extra-cost-'+response+' #name').val()+'"></div><div class="form-group text"><label class="control-label" for="cost">Cost</label><input type="text" name="cost" class="form-control" id="cost" value="'+jQuery('.edit-extra-cost-'+response+' #cost').val()+'"></div><div class="form-group text"><label class="control-label" for="profit">Profit</label><input type="text" name="profit" class="form-control" id="profit" value="'+jQuery('.edit-extra-cost-'+response+' #profit').val()+'"></div><div class="form-group text"><label class="control-label" for="final">Final</label><input type="text" name="final" class="form-control" value="'+jQuery('.edit-extra-cost-'+response+' #final').val()+'" id="final"></div></form></div><div class="modal-footer"> <button class="btn btn-success btn-edit-cost-'+response+'" type="submit">Submit</button> </div></div></div></div><span class="btn btn-primary waves-effect waves-button waves-red delete-extras cursor-pointer" value="'+response+'"><i class="fa fa-trash"></i></span></td>');
+					jQuery('.fade ').removeClass('modal-backdrop');
+					editcost(response);
+					//## Delete 
+					jQuery('.delete-extras').on('click',(function(event){
+						var id = jQuery(this).attr('value');
+						jQuery.ajax({
+							url: '/inquiries/extra_delete',
+							type: 'POST',
+							data: {id: id},
+							dataType: 'html',
+							cache: false,
+							success: function(response){
+								toastr.success(response);
+								jQuery('.tr-cost-price-'+id).fadeOut();
+							}
+						}); // Ajax
+					}));
+					//## End delete
+				},
+				error:function() {
+					alert('Error!');
+				}
+			}); // end ajax
+			
+		});
+	}
+
+	jQuery('.edit-extra-cost').on('submit',(function(event) {
+		event.preventDefault();
+		jQuery.ajax({
+			url: '/inquiries/extra_edit',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			success: function(response){
+				
+				jQuery('.tr-cost-price-'+response).html('<td>'+jQuery('.edit-extra-cost-'+response+' #name').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #cost').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #profit').val()+'</td><td>'+jQuery('.edit-extra-cost-'+response+' #final').val()+'</td><td><span class="btn btn-primary margin-right5 waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalEdit'+response+'"><i class="fa fa-pencil"></i></span><div class="modal fade" id="myModalEdit'+response+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;"><div class="modal-dialog modal-sm modal-center"> <div class="modal-content"> <div class="modal-header"> <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button> <h4 class="modal-title" id="myModalLabel">Extra Cost</h4> </div><div class="modal-body"> <form method="post" accept-charset="utf-8" class="edit-extra-cost edit-extra-cost-'+response+'" role="form" action="/inquiries/quotations/112"><div style="display:none;"><input type="hidden" name="_method" class="form-control" value="POST"></div><div class="form-group text"><input type="text" name="id" class="form-control hidden" id="id" value="'+response+'"></div><div class="form-group text"><label class="control-label" for="name">Name</label><input type="text" name="name" class="form-control" id="name" value="'+jQuery('.edit-extra-cost-'+response+' #name').val()+'"></div><div class="form-group text"><label class="control-label" for="cost">Cost</label><input type="text" name="cost" class="form-control" id="cost" value="'+jQuery('.edit-extra-cost-'+response+' #cost').val()+'"></div><div class="form-group text"><label class="control-label" for="profit">Profit</label><input type="text" name="profit" class="form-control" id="profit" value="'+jQuery('.edit-extra-cost-'+response+' #profit').val()+'"></div><div class="form-group text"><label class="control-label" for="final">Final</label><input type="text" name="final" class="form-control" value="'+jQuery('.edit-extra-cost-'+response+' #final').val()+'" id="final"></div></form></div><div class="modal-footer"> <button class="btn btn-success btn-edit-cost-'+response+'" type="submit">Submit</button> </div></div></div></div><span class="btn btn-primary waves-effect waves-button waves-red delete-extras cursor-pointer" value="'+response+'"><i class="fa fa-trash"></i></span></td>');
+				jQuery('.fade ').removeClass('modal-backdrop');
+				editcost(response);
+				//## Delete 
+				jQuery('.delete-extras').on('click',(function(event){
+					var id = jQuery(this).attr('value');
+					jQuery.ajax({
+						url: '/inquiries/extra_delete',
+						type: 'POST',
+						data: {id: id},
+						dataType: 'html',
+						cache: false,
+						success: function(response){
+							toastr.success(response);
+							jQuery('.tr-cost-price-'+id).fadeOut();
+						}
+					}); // Ajax
+				}));
+				//## End delete
+				
+			},
+			error: function(response, status){}
+		});
+	}));
+
+	jQuery('.delete-extras').on('click',(function(event){
+		var id = jQuery(this).attr('value');
+		jQuery.ajax({
+			url: '/inquiries/extra_delete',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			success: function(response){
+				toastr.success(response);
+				jQuery('.tr-cost-price-'+id).fadeOut();
+			}
+		}); // Ajax
+	}));
+
 }); // jQuery document

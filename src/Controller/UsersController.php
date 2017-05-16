@@ -366,6 +366,7 @@ class UsersController extends AppController
                 if ($exists == false &&  $this->request->data['password'] ==  $this->request->data['confirm_password']) {
                     $code = substr( md5(time()), 0, 30);
                     $this->request->data['code'] = $code;
+                     $this->request->data['group_id'] = 4;
                     $user = $this->Users->newEntity();
                     $user = $this->Users->patchEntity($user, $this->request->data);
                     if ($this->Users->save($user)) {
@@ -373,7 +374,7 @@ class UsersController extends AppController
                         $msg = ROOT_ACTIVE_ACC.$id.'/'.$code;
                         $value = [$msg, $user->username];
                         $this->sendUserEmail($this->request->data['email'],'Actice Accounts', $value, 'activeacc');
-                        $this->Flash->success(__('The user register successfully.'));
+                        $this->Flash->success1(__('The user register successfully.'));
                     } else {
                         $this->Flash->error1(__('The user could not be saved or the username already use. Please, try again.'));
                         return $this->redirect(['controller' => 'Users','action' => 'register']);
@@ -467,9 +468,9 @@ class UsersController extends AppController
         if ($exists) {
             $query = $User->query();
             $query->update()->set(['actived' => true])->where(['id' => $id])->execute();
-            $this->Flash->success(__('Your email address was successfully activated.'));
+            $this->Flash->success1(__('Your email address was successfully activated.'));
        } else {
-            $this->Flash->success(__('The user already active.'));
+            $this->Flash->success1(__('The user already active.'));
        }
        return $this->redirect(['controller'=>'pages','action' => 'login', $users->username]);
     }
@@ -497,7 +498,7 @@ class UsersController extends AppController
                         $password = $hasher->hash($this->request->data['password']);
                         $update = $this->Users->updateAll(['password' => $password], ['id' => $this->Auth->user('id')]);
                         if ($update) {
-                            $this->Flash->success(__('The password change successfully.')); 
+                            $this->Flash->success1(__('The password change successfully.')); 
                         } else {
                             $this->Flash->error1(__('Error. Please, try again!'));
                         }
@@ -510,7 +511,7 @@ class UsersController extends AppController
                     $this->Flash->error1(__('Password incorrect!'));
                 }
             }
-            return $this->redirect(['controller'=>'pages','action' => 'login']);
+            return $this->redirect(['controller'=>'pages','action' => 'accounts']);
         }
     }
 

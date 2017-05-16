@@ -111,8 +111,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <?php echo $this->element('navbar') ?>
             <?php echo $this->element('page-sidebar') ?>
             <div class="page-inner">
-                <?= $this->Flash->render() ?>
+                
                 <?php echo $this->element('breadcrumbs') ?>
+                <?= $this->Flash->render() ?>
                 <div id="main-wrapper">
                     <!--  -->         
                     <!--  -->

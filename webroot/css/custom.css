@@ -679,25 +679,25 @@ i.menu-icon {
     font-weight: 600;
 }
 .panel-body2{
-    position: relative;
-    padding: 15px 0px 15px 10px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+  position: relative;
+  padding: 15px 0px 15px 10px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .panel-head-lx .control-label{
     padding-top: 9px;
 }
 .panel-body2 label.control-label{
-    float: left;
-    margin-right: 15px;
-    width: 20%;
+  float: left;
+  margin-right: 15px;
+  width: 20%;
 }
 .input-xps{
-    width: 80%;
+  width: 80%;
 }
 .panel-head .line{
-    border: 1px solid #22baa0;
-    margin-top: 5px;
+  border: 1px solid #22baa0;
+  margin-top: 5px;
 }
 .item-unavailable  .form-group {
      margin-bottom: 0px !important; 
@@ -710,6 +710,17 @@ i.menu-icon {
 }
 
 .table-responsive tbody tr:hover {
-    background-color: rgba(189, 189, 179, 0.31);
+  background-color: rgba(78, 187, 147, 0.58);
 }
-
+.tr-actived{
+  background-color: rgba(78, 187, 147, 0.58);
+}
+.border-spacings{
+    border-bottom: 3px solid #22BAA0;
+    margin-bottom: 15px;
+}
+.group-addon-width{
+    min-width: 55px;
+    font-size: 12px;
+    font-weight: bold;
+}

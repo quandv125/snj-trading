@@ -66,7 +66,7 @@ jQuery(document).ready(function() {
 				dataType: 'html',
 				cache: false,
 				beforeSend: function(){
-				    jQuery("#loader").fadeIn();
+					jQuery("#loader").fadeIn();
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
@@ -171,10 +171,10 @@ jQuery(document).ready(function() {
 			case "categories":
 				var id = null;
 				jQuery('input[name="demo-radio"]').each(function(){
-				    var $this = jQuery(this);
-				    if($this.is(":checked")){
-				       	id = jQuery($this).attr('cid');
-				    }
+					var $this = jQuery(this);
+					if($this.is(":checked")){
+						id = jQuery($this).attr('cid');
+					}
 				});
 				var data = {page: page, limit: limit, str_rand: str_rand, type: type, value:'categories' , id: id};
 			break;
@@ -182,10 +182,10 @@ jQuery(document).ready(function() {
 				var rel = null;
 				var price = jQuery('#range_03').val();
 				jQuery('input[name="price-radio"]').each(function(){
-				    var $this = jQuery(this);
-				    if($this.is(":checked")){
-				       	rel = jQuery($this).attr('rel');
-				    }
+					var $this = jQuery(this);
+					if($this.is(":checked")){
+						rel = jQuery($this).attr('rel');
+					}
 				});
 				var data = {page: page, limit: limit, str_rand: str_rand, type: rel, value:'price' , price: price};
 
@@ -306,7 +306,16 @@ jQuery(document).ready(function() {
 
 	jQuery('.auto').autoNumeric('init', { aSep: '.', aDec: ',', mDec: 0, vMax: '100000000' });
 
+
+
 	grid = function() {
+		var delay = (function(){
+			var timer = 0;
+			return function(callback, ms){
+				clearTimeout (timer);
+				timer = setTimeout(callback, ms);
+			};
+		})();
 		var sampleData = jQuery('#grid').data('room');
 				var sampleDataNextID = sampleData.length + 1;
 				function getIndexById(id) {
@@ -358,18 +367,24 @@ jQuery(document).ready(function() {
 							sampleData[getIndexById(e.data.ProductID)] = e.data;
 							// on success
 							e.success();
-							console.log(e.data);
-							// alert('upadte');
+							var id = jQuery('#inquiries').attr('inq');
 							jQuery.ajax({
 								url: '/inquiries/update_supplier_product',
 								type: 'POST',
-								data: {"data":e.data},
+								data: {"data":e.data, "inquiry_id": id},
 								dataType: 'html',
 								cache: false,
-								beforeSend: function(){},
+								beforeSend: function(){
+									jQuery("#loader").fadeIn();
+								},
 								success: function(response){
 									jQuery("#loader").fadeOut();
-									console.log(response);return;
+									
+									var data = jQuery.parseJSON(response);
+									delay(function(){
+										jQuery('#supps-total-'+data.id).html(data.total);
+										jQuery('.supps-total-'+data.id).val(data.total);
+									}, 300 );
 									
 								}
 							});
@@ -412,12 +427,13 @@ jQuery(document).ready(function() {
 							fields: {
 								ProductID: { editable: false},
 								no: {},
-								name: {},
-								maker_type_ref: {},
-								partno:  {},
-								unit: {},
-								quantity: {},
+								name: {editable: false},
+								maker_type_ref: {editable: false},
+								partno:  {editable: false},
+								unit: {editable: false},
+								quantity: {editable: false},
 								price: {},
+								total_price: {editable: false},
 								delivery_time: {},
 								remark: {},
 							}
@@ -437,12 +453,36 @@ jQuery(document).ready(function() {
 						{ field: "partno", title: "PartNo", width: "120px" },
 						{ field: "unit", title:"Units", width: "70px" },
 						{ field: "quantity",title:"Quantity", width: "70px" },
-						{ field: "price",title:"Price", width: "70px" },
+						{ field: "price",title:"Price", width: "70px",format: "{0:n}" },
+						{ field: "total_price",title:"T/Price", width: "70px",format: "{0:n}" },
 						{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
 						{ field: "remark",title:"Remark", width: "200px" },
 						{ command: ["destroy"], title: "&nbsp;", width: "90px" }
 					],
 					editable: true
 				});
+
+				jQuery("#SuppsInfo").on('submit',(function(event) {
+					event.preventDefault();
+					jQuery.ajax({
+						url: "/inquiries/update_inquirie_supplier",
+						type: "POST",
+						data:  new FormData(this),
+						contentType: false,
+						cache: false,
+						processData:false,
+						beforeSend: function(){
+							jQuery("#loader").fadeIn();
+						},
+						success: function(response){
+							jQuery("#loader").fadeOut();
+							toastr.success(response);
+							console.log(response);return;
+						},
+						error: function(response, status){
+							jQuery("#loader").fadeOut();
+						}
+					});
+				}));
 	}
 });//End jquery

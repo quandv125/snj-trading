@@ -25,9 +25,13 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
-	$('[data-toggle="tooltip"]').tooltip()
+	$('[data-toggle="tooltip"]').tooltip();
+	if ($("#datepicker").length){
+		$("#datepicker").kendoDatePicker({format: "yyyy-MM-dd"});
+	}
+	
 	if ($("#grid").length){
-		var sampleData = jQuery('#datahandtable').data('room');
+		var sampleData = jQuery('#grid').data('room');
 		var sampleDataNextID = sampleData.length + 1;
 		function getIndexById(id) {
 			var idx,
@@ -62,9 +66,9 @@ jQuery(document).ready(function(){
 						data: {"data":e.data, 'id': id},
 						dataType: 'html',
 						cache: false,
-						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						beforeSend: function(){jQuery("#loader").fadeIn();},
 						success: function(response){
-							jQuery(".loader3").fadeOut();
+							jQuery("#loader").fadeOut();
 							console.log(response);return;
 							
 						}
@@ -84,9 +88,9 @@ jQuery(document).ready(function(){
 						data: {"data":e.data},
 						dataType: 'html',
 						cache: false,
-						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						beforeSend: function(){jQuery("#loader").fadeIn();},
 						success: function(response){
-							jQuery(".loader3").fadeOut();
+							jQuery("#loader").fadeOut();
 							console.log(response);return;
 							
 						}
@@ -106,9 +110,9 @@ jQuery(document).ready(function(){
 						data: {"data":e.data},
 						dataType: 'html',
 						cache: false,
-						beforeSend: function(){jQuery(".loader3").fadeIn();},
+						beforeSend: function(){jQuery("#loader").fadeIn();},
 						success: function(response){
-							jQuery(".loader3").fadeOut();
+							jQuery("#loader").fadeOut();
 							e.success();
 							console.log(response);return;
 							
@@ -122,19 +126,22 @@ jQuery(document).ready(function(){
 				// handle data operation error
 				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
 			},
-			pageSize: 20,
+			pageSize: 30,
 			batch: false,
 			schema: {
 				model: {
 					id: "ProductID",
 					fields: {
 						ProductID: { editable: false, nullable: true },
-						no: {},
-						name: {},
-						maker_type_ref: {},
-						partno:  {},
-						unit: {},
-						quantity: {},
+						no: {editable: false},
+						name: {editable: false},
+						maker_type_ref: {editable: false},
+						partno:  {editable: false},
+						unit: {editable: false},
+						quantity: {editable: false},
+						price: {editable: false},
+						final_total: {editable: false},
+						delivery_time: {editable: false},
 						remark: {},
 					}
 				}
@@ -144,16 +151,19 @@ jQuery(document).ready(function(){
 		$("#grid").kendoGrid({
 			dataSource: dataSource,
 			pageable: true,
-			toolbar: ["create"],
+			// toolbar: ["create"],
 			columns: [
-				{ field: "no", title: "#", width: "45px" },
-				{ field: "name", title: "Description", width: "350px" },
-				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "140px" },
+				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+				{ field: "name", title: "Description", width: "240px" },
+				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "150px" },
 				{ field: "partno", title: "PartNo", width: "100px" },
-				{ field: "unit", title:"Units", width: "50px" },
-				{ field: "quantity",title:"Quantity", width: "65px" },
-				{ field: "remark",title:"Remark", width: "200px" },
-				{ command: ["edit", "destroy"], title: "&nbsp;", width: "170px" }
+				{ field: "unit", title:"Units", width: "70px" },
+				{ field: "quantity",title:"Quantity", width: "70px" },
+				{ field: "price",title:"Price(USD)", width: "80px" },
+				{ field: "final_total",title:"Total(USD)", width: "100px" },
+				{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
+				{ field: "remark",title:"Remark", width: "170px" },
+				{ command: [ "destroy"], title: "&nbsp;", width: "100px" }
 			],
 			editable: "inline"
 		});
@@ -171,26 +181,69 @@ jQuery(document).ready(function(){
 			columns: [ {}, {}, {className: "htCenter"}, { className: "htCenter",}, { type: 'numeric', className: "htCenter",}, {}]
 		});
 		Handsontable.Dom.addEvent(save, 'click', function() {
-			var vessel 		= jQuery('.vessel').val();
-			var imo_no 		= jQuery('.imo_no').val();
-			var hull_no 	= jQuery('.hull_no').val();
-			var description = jQuery('.description').val();
-			var date 		= jQuery('.date').val();
-			var ref 		= jQuery('.ref').val();
+			// var vessel 		= jQuery('.vessel').val();
+			// var imo_no 		= jQuery('.imo_no').val();
+			// var hull_no 	= jQuery('.hull_no').val();
+			// var description = jQuery('.description').val();
+			// var date 		= jQuery('.date').val();
+			// var ref 		= jQuery('.ref').val();
+			// var test = new FormData(document.getElementById('InqSuppsInfo'));
+			// var data = jQuery('.js-example-tags').select2('data');
 
+			// console.log( test );
+			// console.log(data["0"].text);return;
+			// jQuery.ajax({
+			// 	url: '/inquiries/make_inq',
+			// 	type: 'POST',
+			// 	data: {data: hot.getData(), "vessel": vessel, "imo_no": imo_no, "hull_no": hull_no, "date": date, "ref": ref,"description":description},
+			// 	dataType: 'html',
+			// 	cache: false,
+			// 	beforeSend: function(){jQuery(".loader3").fadeIn();},
+			// 	success: function(response){
+			// 		jQuery(".loader3").fadeOut();
+			// 		console.log(response);return;
+			// 		// window.location.href = "../inquiries/index"; 
+			// 	}
+			// });
+
+			event.preventDefault();
 			jQuery.ajax({
-				url: '/inquiries/make_inq',
-				type: 'POST',
-				data: {data: hot.getData(), "vessel": vessel, "imo_no": imo_no, "hull_no": hull_no, "date": date, "ref": ref,"description":description},
-				dataType: 'html',
+				url: "/inquiries/create_inquiries",
+				type: "POST",
+				data: new FormData(document.getElementById('InqSuppsInfo')),
+				contentType: false,
 				cache: false,
-				beforeSend: function(){jQuery(".loader3").fadeIn();},
+				processData:false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
 				success: function(response){
-					jQuery(".loader3").fadeOut();
+					jQuery("#loader").fadeOut();
 					// console.log(response);return;
-					window.location.href = "../inquiries/index"; 
+					var data = jQuery.parseJSON(response);
+					if (data.status == true) {
+						jQuery.ajax({
+							url: '/inquiries/make_inq',
+							type: 'POST',
+							data: {data: hot.getData(), "inquiry_id": data.inquiry_id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){jQuery(".loader3").fadeIn();},
+							success: function(response){
+								jQuery(".loader3").fadeOut();
+								// console.log(response);return;
+								window.location.href = "../inquiries/index"; 
+							}
+						});
+					} else {
+						toastr.error(data.message);
+					}
+				},
+				error: function(response, status){
+					jQuery("#loader").fadeOut();
 				}
 			});
+			
 		});
 	}
 	////////////////
@@ -403,7 +456,7 @@ jQuery(document).ready(function(){
 
 	if ($("#datatable").length){
 		$('#datatable').DataTable({
-			 order: [ 3, 'desc' ]
+			 order: [ 4, 'desc' ]
 			// "iDisplayLength": 100,
 			// columnDefs: [ {
 			// 	targets: [ 0 ],

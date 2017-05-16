@@ -2,32 +2,41 @@
 <div class="row">
 	<button name="save" class="btn btn-success float-right" id="save"><i class="fa fa-paper-plane"></i> Send</button>
 	<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
+	<?= $this->Form->create(null, ['id' => 'InqSuppsInfo']); ?>
 		<div class="col-md-4">
 			<label><?php echo __("Vessel Name"); ?></label>
-			<input type="text" class="form-control vessel" name="">
+			<div class="clearfix"></div>
+			<!-- <?php //$data = ['Alabama'=>'Alabama','Wyoming'=>'Wyoming']; ?>
+			<?php //echo $this->Form->input('vessel',['class'=>'js-example-tags','multiple','label'=>false,'options'=> $data]) ?> -->
+			<?= $this->Form->input('vessel',['class'=>'vessel','label'=>false]) ?>
 		</div>
 		<div class="col-md-4">
 			<label><?php echo __("IMO No"); ?></label>
-			<input type="text" class="form-control imo_no" name="">
+			<?= $this->Form->input('imo_no',['class'=>'imo_no','label'=>false]) ?>
 		</div>
 		<div class="col-md-4">
 			
 			<label><?php echo __("Hull No"); ?></label>
-			<input type="text" class="form-control hull_no" name="">
+			<?= $this->Form->input('hull_no',['class'=>'hull_no','label'=>false]) ?>
 		</div>
 		<div class="col-md-4">
 			<label><?php echo __("Date"); ?></label>
-			<input type="text" class="form-control date" value="<?php echo date("Y-m-d"); ?>" name="">
+			<?= $this->Form->input('date',['class'=>'date','id'=>'datepicker','label'=>false,'value' => date("Y-m-d") ]) ?>
 		</div>
 		<div class="col-md-4">
 			<label><?php echo __("Ref"); ?></label>
-			<input type="text" class="form-control ref" name="">
+			<?= $this->Form->input('ref',['class'=>'ref','label'=>false]) ?>
+		</div>
+		<div class="col-md-4">
+			<label><?php echo __("Attachment File"); ?></label>
+			<?= $this->Form->input('file.',["type"=>"file",'class'=>'ref','multiple','label'=>false]) ?>
 		</div>
 		<div class="clearfix"></div>
-		<div class="col-md-12">
-			<label><?php echo __("Description"); ?></label>
-			<textarea class="form-control description" rows="5"></textarea>
+		<div class="col-md-4">
+			<label><?php echo __("Remark"); ?></label>
+			<?= $this->Form->input('description',['type'=>'textarea','label'=>false]) ?>
 		</div>
+		<?= $this->Form->end(); ?>
 		<div class="clearfix"></div><br>
 		<div id="exampleAdd"></div>
 	</div>

@@ -95,6 +95,8 @@ define('AVATARS', WWW_ROOT.'img'.DS.'avatars'.DS);
 
 define('THUMBNAILS', WWW_ROOT.'img'.DS.'thumbnails'.DS);
 
+define('FILES', WWW_ROOT.'files'.DS);
+
 define('ARTICLES', WWW_ROOT.'img'.DS.'articles'.DS);
 
 define('PRODUCTS', WWW_ROOT.'img'.DS.'products'.DS);
@@ -161,3 +163,14 @@ define('UNAVAILABLE', 1);
 define('AVAILABLE', 0);
 
 
+## inquirie_suppliers: status
+define('IS_ASSIGN', 0);
+define('IS_NOPRICE', 1);
+define('IS_PRICE', 2);
+
+## Currency
+define('CURR', [0 => '-- Choose -- ', 1 => 'KRW', 2 => 'USD', 3 => 'EUR', 4 => 'VND']);
+
+define('VESSEL_NAME', 0);
+define('IMO_NO', 1);
+define('HULL_NO', 2);

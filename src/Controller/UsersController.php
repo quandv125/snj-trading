@@ -121,7 +121,7 @@ class UsersController extends AppController
                 if (!$user['group_id'] == CUSTOMERS) {
                     return $this->redirect($this->Auth->redirectUrl());
                 } else {
-                    return $this->redirect(['controller'=>'Pages','action' => 'accounts']);
+                    return $this->redirect(['controller'=>'Pages','action' => 'index']);
                 }
                 
             }

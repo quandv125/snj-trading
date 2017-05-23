@@ -28,6 +28,10 @@ Author URI: https://7uptheme.com/
     }*/
 /*}*/
 
+/* unset bs3 setting */
+.modal-open {
+ overflow: auto; 
+}
 body {
     color: #333;    
     font-family: "Open Sans",sans-serif;
@@ -5402,7 +5406,7 @@ a:focus {
     padding-right: 20px;
     vertical-align: middle;
 }
-.top-info.top-info3 > li > a {
+.top-info.top-info3 > li > a,.top-info.top-info3 > li > span {
     color: #fff;
     font-size: 13px;
 }
@@ -10718,6 +10722,9 @@ ol.list-post-comment {
 	background:#fff;
 	color:#1b1d1f;
 }
+.white{
+    color: #fff;
+}
 .bt-style1:hover {
     background: #fff none repeat scroll 0 0;
     box-shadow: 0 0 0 2px #1b1d1f inset;
@@ -15205,6 +15212,9 @@ ul.menu-account-info li{
 #a-row2{
     height: 700px;
 }
+#a-row3{
+    height: 230px;
+}
 #a-left{
    height:100%;
    position: relative;
@@ -15340,7 +15350,7 @@ ul.menu-account-info li{
     z-index: 999;
 }
 .loader3{
-    position: absolute;
+    position: fixed;
     top: 45%;
     left: 47.2%;
     width: 5%;
@@ -15457,7 +15467,7 @@ div.show-image:hover span.delete-wishlist {
   margin-left: -25px;
   background-color: #7c7c7c;
   border: 3px solid #ffffff;
-  z-index: 100;
+  z-index: 1;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;
   border-bottom-right-radius: 50%;
@@ -15590,4 +15600,9 @@ div.show-image:hover span.delete-wishlist {
 }
 .textarea-available{
     height: 34px !important;
+}
+.modal-backdrop {
+   
+    z-index: 1 !important;
+   
 }

@@ -55,6 +55,9 @@
         'theme',
         // 'custom',
     ]); ?>
+    <script type="text/javascript">
+        $("#myModal").modal();
+    </script>
 </head>
 <body>
     <div class="wrap">
@@ -62,6 +65,9 @@
             <?php echo $this->element('font-end/header03'); ?>
         </div>
         <!-- End Header -->
+       
+
+
         <div id="content">
             <div class="container">
                 <?php echo $this->element('font-end/shipping'); ?>
@@ -86,6 +92,4 @@
     <?php echo $this->Html->image('loader.gif',['class' => 'loader2', "style"=>"display: none;"]) ?>
 </body>
 </html>
-
-
 

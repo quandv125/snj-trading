@@ -710,10 +710,10 @@ i.menu-icon {
 }
 
 .table-responsive tbody tr:hover {
-  background-color: rgba(78, 187, 147, 0.58);
+  background-color: rgba(122, 202, 122, 0.54);
 }
 .tr-actived{
-  background-color: rgba(78, 187, 147, 0.58);
+  background-color: rgba(122, 202, 122, 0.54);
 }
 .border-spacings{
     border-bottom: 3px solid #22BAA0;

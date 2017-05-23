@@ -57,8 +57,8 @@
 				<h4 class="modal-title" id="myModalLabel"><?= __("ADD") ?></h4>
 			</div>
 			<div class="modal-body">
-				
-				<?= $this->Form->create(null, ['url' => [ 'action' => 'AddInqSupplier', $inquiry->id]]); ?>
+				<?= $this->Form->create(NULL, ['id' => 'AddInqSupplier']); ?>
+				<?= $this->Form->input('inquiry_id',['type'=>'text','label' => false,'class'=>'hidden', 'value'=>$inquiry->id]) ?>
 				<div class="col-md-6"><?= $this->Form->input('user_id',['label' => 'Username', 'options'=>$user_id]) ?></div>
 				<div class="col-md-6"><?= $this->Form->input('Subject',['value' => 'Spare Part']) ?></div>
 				<div class="col-md-6"><?= $this->Form->input('supplier_id',['label'=>'SuppliersName','options'=>$supplier_id]) ?></div>
@@ -67,7 +67,7 @@
 				<div class="col-md-6"><?= $this->Form->input('Cus Ref',['disabled','value'=>$inquiry->ref]) ?></div>
 				<div class="col-md-12"><?= $this->Form->input('remark',['type'=>'textarea','class'=>'Remark','label' => 'Remark'])?></div>
 				<div class="clearfix"></div>
-				<?= $this->Form->button('Submit',['class'=>'btn btn-primary float-right margin-right15']) ?>
+				<?= $this->Form->button('Submit',['class'=>'btn btn-success float-right margin-right15']) ?>
 				<?= $this->Form->end(); ?><div class="clearfix"></div>
 			
 			</div>  <!-- modal-body -->

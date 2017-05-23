@@ -308,181 +308,52 @@ jQuery(document).ready(function() {
 
 
 
-	grid = function() {
-		var delay = (function(){
-			var timer = 0;
-			return function(callback, ms){
-				clearTimeout (timer);
-				timer = setTimeout(callback, ms);
-			};
-		})();
-		var sampleData = jQuery('#grid').data('room');
-				var sampleDataNextID = sampleData.length + 1;
-				function getIndexById(id) {
-					var idx,
-						l = sampleData.length;
-
-					for (var j=0; j < l; j++) {
-						if (sampleData[j].ProductID == id) {
-							return j;
-						}
-					}
-					return null;
+	grid = function(data) {
+		
+		jQuery('.panel-supplier-details').removeClass('hidden');
+		jQuery('.panel-supplier-details').html(data);
+		jQuery("#SuppsInfo").on('submit',(function(event) {
+			event.preventDefault();
+			jQuery.ajax({
+				url: "/inquiries/update_inquirie_supplier",
+				type: "POST",
+				data: new FormData(this),
+				contentType: false,
+				cache: false,
+				processData:false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					toastr.success(response);
+					console.log(response);return;
+				},
+				error: function(response, status){
+					jQuery("#loader").fadeOut();
 				}
-				var dataSource = new kendo.data.DataSource({
-					transport: {
-						read: function (e) {
-							// on success
-							e.success(sampleData);
-							// on failure
-							//e.error("XHR response", "status code", "error message");
-						},
-						create: function (e) {
-							// assign an ID to the new item
-							e.data.ProductID = sampleDataNextID++;
-							// save data item to the original datasource
-							// sampleData.push(e.data);
-							// on success
-							e.success(e.data);	
-							var id = jQuery('.item-unavailable').attr('id');
-							// alert('ok');
-							// jQuery.ajax({
-							// 	url: '/inquiries/create_inq',
-							// 	type: 'POST',
-							// 	data: {"data":e.data, 'id': id},
-							// 	dataType: 'html',
-							// 	cache: false,
-							// 	beforeSend: function(){jQuery("#loader").fadeIn();},
-							// 	success: function(response){
-							// 		jQuery("#loader").fadeOut();
-							// 		console.log(response);return;
-									
-							// 	}
-							// });
-							// on failure
-							//e.error("XHR response", "status code", "error message");
-						},
-						update: function (e) {
-							// locate item in original datasource and update it
-							sampleData[getIndexById(e.data.ProductID)] = e.data;
-							// on success
-							e.success();
-							var id = jQuery('#inquiries').attr('inq');
-							jQuery.ajax({
-								url: '/inquiries/update_supplier_product',
-								type: 'POST',
-								data: {"data":e.data, "inquiry_id": id},
-								dataType: 'html',
-								cache: false,
-								beforeSend: function(){
-									jQuery("#loader").fadeIn();
-								},
-								success: function(response){
-									jQuery("#loader").fadeOut();
-									
-									var data = jQuery.parseJSON(response);
-									delay(function(){
-										jQuery('#supps-total-'+data.id).html(data.total);
-										jQuery('.supps-total-'+data.id).val(data.total);
-									}, 300 );
-									
-								}
-							});
-							// on failure
-							// e.error("XHR response", "status code", "error message");
-						},
-						destroy: function (e) {
-							// locate item in original datasource and remove it
-							sampleData.splice(getIndexById(e.data.ProductID), 1);
-							// on success
-							e.success();
-							// console.log(e.data);
-							// jQuery.ajax({
-							// 	url: '/inquiries/destroy_inq',
-							// 	type: 'POST',
-							// 	data: {"data":e.data},
-							// 	dataType: 'html',
-							// 	cache: false,
-							// 	beforeSend: function(){jQuery("#loader").fadeIn();},
-							// 	success: function(response){
-							// 		jQuery("#loader").fadeOut();
-							// 		e.success();
-							// 		console.log(response);return;
-									
-							// 	}
-							// });
-							// on failure
-							//e.error("XHR response", "status code", "error message");
-						}
-					},
-					error: function (e) {
-						// handle data operation error
-						alert("Status: " + e.status + "; Error message: " + e.errorThrown);
-					},
-					pageSize: 30,
-					batch: false,
-					schema: {
-						model: {
-							id: "ProductID",
-							fields: {
-								ProductID: { editable: false},
-								no: {},
-								name: {editable: false},
-								maker_type_ref: {editable: false},
-								partno:  {editable: false},
-								unit: {editable: false},
-								quantity: {editable: false},
-								price: {},
-								total_price: {editable: false},
-								delivery_time: {},
-								remark: {},
-							}
-						}
-					}
-				});
+			});
+		}));
 
-				jQuery("#grid").kendoGrid({
-					dataSource: dataSource,
-					navigatable: true,
-					pageable: true,
-					toolbar: ["save", "cancel"],
-					columns: [
-						{ field: "no", title: "#", width: "45px" },
-						{ field: "name", title: "Description", width: "310px" },
-						{ field: "maker_type_ref", title: "Maker/Type Ref", width: "150px" },
-						{ field: "partno", title: "PartNo", width: "120px" },
-						{ field: "unit", title:"Units", width: "70px" },
-						{ field: "quantity",title:"Quantity", width: "70px" },
-						{ field: "price",title:"Price", width: "70px",format: "{0:n}" },
-						{ field: "total_price",title:"T/Price", width: "70px",format: "{0:n}" },
-						{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
-						{ field: "remark",title:"Remark", width: "200px" },
-						{ command: ["destroy"], title: "&nbsp;", width: "90px" }
-					],
-					editable: true
-				});
+		// console.log(response);
+		jQuery('.delete-items').click(function(){
+			jQuery(this).parent().parent().remove().fadeOut();
+			var id = jQuery(this).attr('id');
+			jQuery.ajax({
+				url: '/inquiries/delete_item_supplier',
+				type: 'POST',
+				data: {id: id},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					console.log(response);
+				}
+			}); // Ajax
+		});
 
-				jQuery("#SuppsInfo").on('submit',(function(event) {
-					event.preventDefault();
-					jQuery.ajax({
-						url: "/inquiries/update_inquirie_supplier",
-						type: "POST",
-						data:  new FormData(this),
-						contentType: false,
-						cache: false,
-						processData:false,
-						beforeSend: function(){
-							jQuery("#loader").fadeIn();
-						},
-						success: function(response){
-							jQuery("#loader").fadeOut();
-							toastr.success(response);
-							console.log(response);return;
-						},
-						error: function(response, status){
-							jQuery("#loader").fadeOut();
-						}
-					});
-				}));
 	}
 });//End jquery

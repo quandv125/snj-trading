@@ -53,7 +53,8 @@ use Cake\Validation\Validator;
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('InquirieSupplierProducts', [
-            'foreignKey' => 'inquirie_supplier_id'
+            'foreignKey' => 'inquirie_supplier_id',
+            'dependent' => true,
         ]);
     }
 

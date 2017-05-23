@@ -231,61 +231,37 @@ jQuery( document ).ready(function() {
 					//e.error("XHR response", "status code", "error message");
 				},
 				create: function (e) {
-					// assign an ID to the new item
+					
 					e.data.ProductID = sampleDataNextID++;
-					// save data item to the original datasource
-					// sampleData.push(e.data);
-					// on success
 					e.success(e.data);	
-					// var id = jQuery('.item-unavailable').attr('id');
-					// jQuery.ajax({
-					// 	url: '/inquiries/create_inq',
-					// 	type: 'POST',
-					// 	data: {"data":e.data, 'id': id},
-					// 	dataType: 'html',
-					// 	cache: false,
-					// 	beforeSend: function(){jQuery("#loader").fadeIn();},
-					// 	success: function(response){
-					// 		jQuery("#loader").fadeOut();
-					// 		console.log(response);return;
-					// 	}
-					// });
-					// on failure
-					//e.error("XHR response", "status code", "error message");
+					
 				},
 				update: function (e) {
 					// locate item in original datasource and update it
-					// sampleData[getIndexById(e.data.ProductID)] = e.data;
+					sampleData[getIndexById(e.data.ProductID)] = e.data;
+					e.data.f_total = e.data.u_p*e.data.quantity;
 					// // on success
-					// e.success();
-					// e.data.u_p = e.data.supp_u_p + ((e.data.supp_u_p*e.data.profit)/100);
-					// e.data.f_total = e.data.u_p*e.data.quantity;
-
+					e.success();
+					var type = jQuery('.profit-percent-inquiries').attr('type');
 					jQuery.ajax({
-						url: '/inquiries/update_inq',
+						url: '/inquiries/update_inquiries',
 						type: 'POST',
-						data: {"data":e.data},
-						dataType: 'html',
+						data: {"data":e.data,'type': type},
+						dataType: 'json',
 						cache: false,
 						beforeSend: function(){
 							jQuery("#loader").fadeIn();
 						},
 						success: function(response){
-
-							var data1 = jQuery.parseJSON(response);
-							sampleData = data1;
-							// console.log(sampleData);
-							var grid = $('#grid_quotation').data("kendoGrid");
-							grid.dataSource.read();
-							grid.dataSource.refresh;
-							
 							jQuery("#loader").fadeOut();
+							var grid = $('#grid_quotation').data("kendoGrid");
+							grid.dataSource.data(response);
+							grid.dataSource.refresh;
 							return false;
 						}
 					});
 					// on failure
 					// e.error("XHR response", "status code", "error message");
-					
 				},
 				destroy: function (e) {
 					// locate item in original datasource and remove it
@@ -304,7 +280,6 @@ jQuery( document ).ready(function() {
 							jQuery("#loader").fadeOut();
 							e.success();
 							console.log(response);return;
-							
 						}
 					});
 					// on failure
@@ -384,27 +359,32 @@ jQuery( document ).ready(function() {
 
 	jQuery('.profit-percent-inquiries').change(function(){
 		var percent = jQuery(this).val();
+		var type = jQuery(this).attr('type');
 		var arrid = jQuery('#ArrID').attr('value');
 		var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
 		jQuery.ajax({
 			url: '/inquiries/set_profit_inquiries',
-			type: 'POST',
-			data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id},
+			type: "POST",
+			data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id,'type':type},
 			dataType: 'json',
 			cache: false,
 			beforeSend: function(){
 				jQuery("#loader").fadeIn();
 			},
-			success: function(result){
+			success: function(response){
 				jQuery("#loader").fadeOut();
 				var grid = $('#grid_quotation').data("kendoGrid");
-				grid.dataSource.data(result);
+				grid.dataSource.data(response);
 				grid.dataSource.refresh;
+				// console.log(response);
 				
-				console.log(grid);
-				return false;
+			},
+			error:function(res) {
+				alert('Error!');
+				jQuery("#loader").fadeOut();
 			}
-		});
+		}); // end ajax
+		
 		
 	});
 
@@ -529,8 +509,8 @@ jQuery( document ).ready(function() {
 		});
 	}
 
-	jQuery('.profit2-percent-inquiries').change(function(){
-		var percent = jQuery(this).val();
+	jQuery('.btn-set-profit').click(function(){
+		var percent = jQuery('.profit2-percent-inquiries').val();
 		var arrid = jQuery('#ArrID').attr('value');
 		var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
 		jQuery.ajax({ 
@@ -542,10 +522,12 @@ jQuery( document ).ready(function() {
 			beforeSend: function(){jQuery("#loader").fadeIn();},
 			success: function(response){
 				jQuery("#loader").fadeOut();
-				sampleData = jQuery.parseJSON(response);
+				var data = jQuery.parseJSON(response);
+				sampleData = data;
 				var grid = $('#grid_quotation2').data("kendoGrid");
 				grid.dataSource.read();
 				grid.dataSource.refresh;
+				toastr.success('Set profit successfully!');
 				return;
 			}
 		});
@@ -1861,12 +1843,252 @@ jQuery( document ).ready(function() {
 		jQuery('.final-price').val(fp);
 		jQuery('.percent-profit-lx').val(pp);
 	});
+	
+
+	function kendo_ui_grid() {
+		jQuery('#choose-all-inquiries').on('click',(function(event){
+			var inquiry_id = jQuery(this).attr('inquiry');
+			var supplier_id = jQuery(this).attr('supplier');
+			jQuery.ajax({
+				url: '/inquiries/choose_all',
+				type: 'POST',
+				data: {inquiry_id: inquiry_id,supplier_id:supplier_id},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					jQuery('.panel-supplier-details').removeClass('hidden');
+					jQuery('.panel-supplier-details').html(response);
+					kendo_ui_grid();
+					jQuery('#presentation1').removeClass('active');
+					jQuery('#presentation2').addClass('active');
+					jQuery('#tab1').removeClass('active').removeClass('in');
+					jQuery('#tab2').addClass('active').addClass('in');
+				}
+			}); // Ajax
+		}));
+		
+		jQuery('#form-choose-main').on('submit',(function(event) {
+			event.preventDefault();
+			var inquiry_id 	= jQuery(this).attr('inquiry');
+			var supplier_id = jQuery(this).attr('supplier');
+			var main 		= jQuery('#main').val();
+			jQuery.ajax({
+				url: '/inquiries/choose_main',
+				type: 'POST',
+				data: {inquiry_id: inquiry_id,supplier_id: supplier_id,main: main},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+
+					jQuery('.panel-supplier-details').removeClass('hidden');
+					jQuery('.panel-supplier-details').html(response);
+					kendo_ui_grid();
+					jQuery('#presentation1').removeClass('active');
+					jQuery('#presentation2').addClass('active');
+					jQuery('#tab1').removeClass('active').removeClass('in');
+					jQuery('#tab2').addClass('active').addClass('in');
+				}
+			}); // Ajax
+		}));
+
+		jQuery('#form-choose-number').on('submit',(function(event) {
+			event.preventDefault();
+			var inquiry_id 	= jQuery(this).attr('inquiry');
+			var supplier_id = jQuery(this).attr('supplier');
+			var num 		= jQuery('#num').val();
+			jQuery.ajax({
+				url: '/inquiries/choose_main',
+				type: 'POST',
+				data: {inquiry_id: inquiry_id,supplier_id: supplier_id,num: num},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					
+					jQuery('.panel-supplier-details').removeClass('hidden');
+					jQuery('.panel-supplier-details').html(response);
+					kendo_ui_grid();
+					jQuery('#presentation1').removeClass('active');
+					jQuery('#presentation2').addClass('active');
+					jQuery('#tab1').removeClass('active').removeClass('in');
+					jQuery('#tab2').addClass('active').addClass('in');
+				}
+			}); // Ajax
+		}));
+
+		jQuery("#SuppsInfo").on('submit',(function(event) {
+				event.preventDefault();
+				jQuery.ajax({
+					url: "/inquiries/update_inquirie_supplier",
+					type: "POST",
+					data: new FormData(this),
+					contentType: false,
+					cache: false,
+					processData:false,
+					beforeSend: function(){
+						jQuery("#loader").fadeIn();
+					},
+					success: function(response){
+						jQuery("#loader").fadeOut();
+						toastr.success(response);
+						console.log(response);return;
+					},
+					error: function(response, status){
+						jQuery("#loader").fadeOut();
+					}
+				});
+		}));
+
+		// console.log(response);
+		jQuery('.delete-items').click(function(){
+			jQuery(this).parent().parent().remove().fadeOut();
+			var id = jQuery(this).attr('id');
+			jQuery.ajax({
+				url: '/inquiries/delete_item_supplier',
+				type: 'POST',
+				data: {id: id},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					console.log(response);
+				}
+			}); // Ajax
+		});
+		if ($("#grid").length){
+			var sampleData = jQuery('#grid').data('room');
+			var sampleDataNextID = sampleData.length + 1;
+			function getIndexById(id) {
+				var idx,
+					l = sampleData.length;
+
+				for (var j=0; j < l; j++) {
+					if (sampleData[j].ProductID == id) {
+						return j;
+					}
+				}
+				return null;
+			}
+			var dataSource = new kendo.data.DataSource({
+				transport: {
+					read: function (e) {
+						e.success(sampleData);
+					},
+					create: function (e) {
+						e.data.ProductID = sampleDataNextID++;
+						e.success(e.data);	
+					},
+					update: function (e) {
+						// locate item in original datasource and update it
+						sampleData[getIndexById(e.data.ProductID)] = e.data;
+						e.data.total_price = e.data.price*e.data.quantity;
+						
+						e.success();
+					
+						var id = jQuery('#inquiries').attr('inq');
+						jQuery.ajax({
+							url: '/inquiries/update_supplier_product',
+							type: 'POST',
+							data: {"data":e.data, "inquiry_id": id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){
+								jQuery("#loader").fadeIn();
+							},
+							success: function(response){
+								jQuery("#loader").fadeOut();
+								// sampleData = e.data;
+								// console.log(sampleData);
+								var grid = $('#grid').data("kendoGrid");
+								grid.dataSource.read();
+								grid.dataSource.refresh;
+								var data = jQuery.parseJSON(response);
+								delay(function(){
+									jQuery('#supps-total-'+data.id).html(data.total);
+									jQuery('.supps-total-'+data.id).val(data.total);
+								}, 300 );
+								
+							}
+						});
+						// on failure
+						// e.error("XHR response", "status code", "error message");
+					},
+					destroy: function (e) {
+						sampleData.splice(getIndexById(e.data.ProductID), 1);
+						e.success();
+					}
+				},
+				error: function (e) {
+					// handle data operation error
+					alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+				},
+				pageSize: 30,
+				batch: false,
+				schema: {
+					model: {
+						id: "ProductID",
+						fields: {
+							ProductID: { editable: false},
+							no: {},
+							name: {editable: false},
+							maker_type_ref: {editable: false},
+							partno: {editable: false},
+							unit: {editable: false},
+							quantity: {editable: false},
+							price: {},
+							total_price: {editable: false},
+							delivery_time: {},
+							remark: {},
+						}
+					}
+				}
+			});
+
+			jQuery("#grid").kendoGrid({
+				dataSource: dataSource,
+				navigatable: true,
+				pageable: true,
+				toolbar: ["save", "cancel"],
+				columns: [
+					{ field: "no", title: "#", width: "45px" },
+					{ field: "name", title: "Description", width: "250px" },
+					{ field: "maker_type_ref", title: "Maker/Type Ref", width: "150px" },
+					{ field: "partno", title: "PartNo", width: "120px" },
+					{ field: "unit", title:"Units", width: "70px" },
+					{ field: "quantity",title:"Quantity", width: "70px" },
+					{ field: "price",title:"Price", width: "70px",format: "{0:n}" },
+					{ field: "total_price",title:"T/Price", width: "70px",format: "{0:n}" },
+					{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
+					{ field: "remark",title:"Remark", width: "150px" },
+					{ command: ["destroy"], title: "&nbsp;", width: "100px" }
+				],
+				editable: true
+			}); // end grid
+		}
+
+	}
+
 
 	jQuery("#inquiries-details tr").click(function(){
 		jQuery('.panel-supplier-details').addClass('hidden');
 		jQuery("#inquiries-details tr").removeClass('tr-actived');
 		jQuery(this).addClass('tr-actived');
 		var id = jQuery(this).attr('id');
+
 		jQuery.ajax({
 			url: '/inquiries/get_supplier_details',
 			type: 'POST',
@@ -1880,28 +2102,9 @@ jQuery( document ).ready(function() {
 				jQuery("#loader").fadeOut();
 				jQuery('.panel-supplier-details').removeClass('hidden');
 				jQuery('.panel-supplier-details').html(response);
-				jQuery.getScript('/js/show_action.js',function(){
-					grid();
-				});
-				// console.log(response);
-				jQuery('.delete-items').click(function(){
-					jQuery(this).parent().parent().remove().fadeOut();
-					var id = jQuery(this).attr('id');
-					jQuery.ajax({
-						url: '/inquiries/delete_item_supplier',
-						type: 'POST',
-						data: {id: id},
-						dataType: 'html',
-						cache: false,
-						beforeSend: function(){
-							jQuery("#loader").fadeIn();
-						},
-						success: function(response){
-							jQuery("#loader").fadeOut();
-							console.log(response);
-						}
-					}); // Ajax
-				});
+				
+				kendo_ui_grid();
+
 			}
 		}); // Ajax
 	});
@@ -2193,6 +2396,53 @@ jQuery( document ).ready(function() {
 				jQuery('.tr-cost-price-'+id).fadeOut();
 			}
 		}); // Ajax
+	}));
+
+	jQuery('#AddInqSupplier').on('submit',(function(event) {
+		event.preventDefault();
+		
+		jQuery.ajax({
+			url: '/inquiries/add-inq-supplier',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			success: function(response){
+				var data = jQuery.parseJSON(response);
+				if (data.status == true) {
+					jQuery('#inquiries-details').append(data.result);
+					jQuery('#myModal').modal('toggle');
+					
+					jQuery("#inquiries-details tr").click(function(){
+						jQuery('.panel-supplier-details').addClass('hidden');
+						jQuery("#inquiries-details tr").removeClass('tr-actived');
+						jQuery(this).addClass('tr-actived');
+						var id = jQuery(this).attr('id');
+						jQuery.ajax({
+							url: '/inquiries/get_supplier_details',
+							type: 'POST',
+							data: {id: id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){
+								jQuery("#loader").fadeIn();
+							},
+							success: function(response){
+								jQuery("#loader").fadeOut();
+								jQuery('.panel-supplier-details').removeClass('hidden');
+								jQuery('.panel-supplier-details').html(response);
+								kendo_ui_grid();
+							}
+						}); // Ajax
+					}); // End 
+
+				}else{
+					 toastr.success(data.result);
+				}
+			},
+			error: function(response, status){}
+		});
 	}));
 
 }); // jQuery document

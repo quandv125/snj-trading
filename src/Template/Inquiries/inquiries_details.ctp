@@ -5,7 +5,7 @@
 		<?php if ($inquiry->type == 1): ?>
 			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'InquiriesSuppliers', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		<?php else: ?>
-			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotation', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $inquiry->id, $inquiry->type],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		<?php endif ?>
 		
 		<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'inquiries'],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>

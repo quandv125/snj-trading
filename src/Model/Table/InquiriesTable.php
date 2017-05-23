@@ -52,15 +52,19 @@ use Cake\Datasource\ConnectionManager;
 		]);
 		
 		$this->hasMany('InquirieSuppliers', [
+			'dependent' => true,
 			'foreignKey' => 'inquiry_id'
 		]);
 		$this->hasMany('InquirieProducts', [
+			'dependent' => true,
 			'foreignKey' => 'inquiry_id'
 		]);
 		$this->hasMany('Attachments', [
-            'foreignKey' => 'inquiry_id'
-        ]);
-        $this->hasMany('Extras', [
+			'dependent' => true,
+			'foreignKey' => 'inquiry_id'
+		]);
+		$this->hasMany('Extras', [
+			'dependent' => true,
 			'foreignKey' => 'inquiry_id'
 		]);
 	}
@@ -117,7 +121,7 @@ use Cake\Datasource\ConnectionManager;
 					return $q->autoFields(false)->select(['InquirieProducts.id','InquirieProducts.price','InquirieProducts.no','InquirieProducts.status','InquirieProducts.name','InquirieProducts.partno','InquirieProducts.assign','InquirieProducts.unit','InquirieProducts.maker_type_ref','InquirieProducts.amount','InquirieProducts.quantity','InquirieProducts.price','InquirieProducts.remark','InquirieProducts.product_id','InquirieProducts.inquiry_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.unit','products.retail_price','products.user_id','categories.id','categories.name'])
 					->leftJoin('products','products.id = InquirieProducts.product_id')
 					->leftJoin('categories', 'categories.id = products.categorie_id')
-					->order(['InquirieProducts.created' => 'asc']);
+					->order(['InquirieProducts.id' => 'asc']);
 					// ->leftJoin('Users', 'Users.id = Products.user_id')  
 					// ->where(['Products.user_id' => $this->Auth->user('id')]);
 				}
@@ -125,6 +129,97 @@ use Cake\Datasource\ConnectionManager;
 			'fields' => ['Inquiries.id','Inquiries.pic_id','Inquiries.status','Inquiries.type','Inquiries.vessel','Inquiries.imo_no','Inquiries.hull_no','Inquiries.ref','Inquiries.description','Inquiries.created']
 		]);
 		return $inquiries;
+	}
+
+	public function available($id)	{
+		
+		$Inq = TableRegistry::get('Inquiries');
+		$inquiries = $Inq->get($id, [
+			'contain' => [
+				'Attachments' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','path']);
+				},
+				'Extras' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','name','cost','profit','final']);
+				},
+				'InquirieProducts' => function ($q) {
+					return $q->autoFields(false)->select(['InquirieProducts.id','InquirieProducts.price','InquirieProducts.profit','InquirieProducts.status','InquirieProducts.name','InquirieProducts.partno','InquirieProducts.assign','InquirieProducts.unit','InquirieProducts.maker_type_ref','InquirieProducts.amount','InquirieProducts.quantity','InquirieProducts.remark','InquirieProducts.product_id','InquirieProducts.inquiry_id','products.id','products.sku','products.product_name','products.serial_no','products.type_model','products.origin','products.unit','products.retail_price','products.user_id','users.username'])
+					->leftJoin('products','products.id = InquirieProducts.product_id')
+					->leftJoin('users', 'users.id = Products.user_id')  
+					->order(['InquirieProducts.created' => 'asc']);
+				}
+			],
+			'fields' => ['id','user_id','status','type','vessel','imo_no','hull_no','ref','description','scope_of_supply','delivery_terms','terms_of_payment','discount','commission','add_commission','others','quotation_date','delivery_time','validity_of_the_offer','remark','created']
+		]);
+		return $inquiries;
+		// return $inquiries;
+	}
+
+	public function unavailable($id) {
+		$Inquirie = TableRegistry::get('inquiries');
+		$inquiries = $Inquirie->find()
+			->contain([
+				'Attachments' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','path']);
+				},
+				'Extras' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','name','cost','profit','final']);
+				},
+				'InquirieProducts' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','name','partno','maker_type_ref','unit','quantity','profit','no','remark'])->contain([
+						'InquirieSupplierProducts' => function ($q) {
+							return $q->autoFields(false)
+							->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_product_id','InquirieSupplierProducts.inquirie_supplier_id','InquirieSupplierProducts.price','InquirieSupplierProducts.delivery_time','InquirieSupplierProducts.choose','InquirieSupplierProducts.remark','suppliers.name'])
+							->leftJoin('inquirie_suppliers','inquirie_suppliers.id = InquirieSupplierProducts.inquirie_supplier_id')
+							->leftJoin('suppliers','suppliers.id = inquirie_suppliers.supplier_id')
+							->where(['InquirieSupplierProducts.choose' => 1]);
+						}]);
+				}
+		])->select(['id','user_id','status','type','vessel','imo_no','hull_no','ref','description','scope_of_supply','delivery_terms','terms_of_payment','discount','commission','add_commission','others','quotation_date','delivery_time','validity_of_the_offer','remark','created'
+		])
+		->where(['inquiries.id'=>$id])->first();
+		// pr($inquiries);die();
+		return $inquiries;
+	}
+
+	public function get_total_available($id){
+		$conn = ConnectionManager::get('default');
+		$stmt = $conn->execute('SELECT I.discount, SUM((P.retail_price + ((P.retail_price*IP.profit)/100))*IP.quantity) as Total
+			FROM `inquiries` as I
+			LEFT JOIN `inquirie_products` as IP ON I.id = IP.inquiry_id
+			LEFT JOIN `products` as P ON P.id = IP.product_id
+			WHERE I.id = '.$id);
+		$results = $stmt ->fetchAll('assoc');
+		$discount = ($results[0]['Total']*$results[0]['discount'])/100;	
+		$arr = array('Total' => $results[0]['Total'],'discount'=>$discount);
+		return $arr;
+	}
+
+	public function get_total_unavailable($id){
+		$Inquirie = TableRegistry::get('inquiries');
+		$inquiries = $Inquirie->find()
+			->contain([
+				'InquirieProducts' => function ($q) {
+					return $q->autoFields(false)->select(['id','inquiry_id','quantity','profit'])->contain([
+						'InquirieSupplierProducts' => function ($q) {
+							return $q->autoFields(false)
+							->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_product_id','InquirieSupplierProducts.price'])
+							->where(['InquirieSupplierProducts.choose' => 1]);
+						}])->where(['InquirieProducts.level !='=>'0']);
+				}
+		])->select(['id','discount'])
+		->where(['inquiries.id'=>$id])->first();
+		$total = 0;
+		foreach ($inquiries['inquirie_products'] as $key => $inquirie_product) {
+			$profit = $inquirie_product->profit;
+			$quantity = $inquirie_product->quantity;
+			$price = $inquirie_product->inquirie_supplier_products[0]['price'];
+			$total = $total + (($price + ($price*$profit)/100)*$quantity);
+		}
+		$discount = ($total*$inquiries->discount)/100;
+		$arr = array('Total' => $total,'discount'=>$discount);
+		return $arr;
+		
 	}
 
 	public function saveInq($data) {
@@ -145,8 +240,9 @@ use Cake\Datasource\ConnectionManager;
 				$InquirieProduct->updateAll(['assign' => 1 ], ['id' => $inquirieproduct['inquirie_product_id']]);
 			}
 			return true;
+		} else { 
+			return false;
 		}
-		
 	}
 
 	public function saveInqProduct($data) {
@@ -162,9 +258,9 @@ use Cake\Datasource\ConnectionManager;
 	}
 
 	public function saveInqAttachments($data) {
-		$articles = TableRegistry::get('attachments');
-		$entities = $articles->newEntities($data);
-		$result = $articles->saveMany($entities);
+		$attachments = TableRegistry::get('attachments');
+		$entities = $attachments->newEntities($data);
+		$result = $attachments->saveMany($entities);
 		
 		return true;
 	}
@@ -183,10 +279,12 @@ use Cake\Datasource\ConnectionManager;
 			},
 			'InquirieSupplierProducts' => function ($q) {
 				return $q->autoFields(false)->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_supplier_id','InquirieSupplierProducts.price','InquirieSupplierProducts.delivery_time','InquirieSupplierProducts.remark','inquirie_products.id','inquirie_products.name','inquirie_products.partno','inquirie_products.no','inquirie_products.maker_type_ref','inquirie_products.unit','inquirie_products.quantity','inquirie_products.remark'])
-				->leftJoin('inquirie_products','inquirie_products.id = InquirieSupplierProducts.inquirie_product_id');
+				->leftJoin('inquirie_products','inquirie_products.id = InquirieSupplierProducts.inquirie_product_id')
+				->order(['inquirie_products.id' => 'asc']);
 			}
-		])->select(['id','supplier_ref','delivery_terms','payment_terms','currency','remark','created'])->where(['inquirie_suppliers.id' => $id])->first();
-
+		])->select(['id','supplier_ref','delivery_terms','payment_terms','currency','remark','created'])
+		->where(['inquirie_suppliers.id' => $id])->first();
+		// pr($inqSuppliers);die();
 		return $inqSuppliers;
 	}
 
@@ -194,46 +292,13 @@ use Cake\Datasource\ConnectionManager;
 		$Inquirie = TableRegistry::get('inquiries');
 		$inquiry = $Inquirie->get($data['id'], [ 'contain' => [] ]);
 		$inquiry = $Inquirie->patchEntity($inquiry, $data);
-		
 		if($Inquirie->save($inquiry)){
 			return true;
 		} else {
 			return false;
 		}
 	}
-
-	public function view($id)	{
-		$Inquirie = TableRegistry::get('inquiries');
-		$inquiries = $Inquirie->find()
-			// ->join([
-			// 	'Pic' => [
-			// 		'table' => 'users',
-			// 		'alias' => 'PicID',
-			// 		'conditions' => 'inquiries.pic_id = PicID.id'
-			// 	]
-			// ])
-			->contain([
-				'Users' => function ($q) {
-					return $q->autoFields(false)->select(['id','username','fullname']);
-				},
-				'InquirieProducts' => function ($q) {
-					return $q->autoFields(false)->select(['id','inquiry_id','name','partno','maker_type_ref','unit','quantity','profit','no','remark'])->contain([
-						'InquirieSupplierProducts' => function ($q) {
-							return $q->autoFields(false)
-							->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_product_id','InquirieSupplierProducts.inquirie_supplier_id','InquirieSupplierProducts.price','InquirieSupplierProducts.delivery_time','InquirieSupplierProducts.choose','InquirieSupplierProducts.remark','suppliers.name'])
-							->leftJoin('inquirie_suppliers','inquirie_suppliers.id = InquirieSupplierProducts.inquirie_supplier_id')
-							->leftJoin('suppliers','suppliers.id = inquirie_suppliers.supplier_id')
-							->where(['InquirieSupplierProducts.choose' => 1]);
-						}]);
-				}
-		])->select(['id','user_id','status','type','vessel','imo_no','hull_no','ref','description','scope_of_supply','delivery_terms','terms_of_payment','others','quotation_date','delivery_time','validity_of_the_offer','remark','created'
-			// ,'PicID.id','PicID.username'
-		])
-		->where(['inquiries.id'=>$id])->first();
-		
-		return $inquiries;
-	}
-
+	
 	public function query1($id)	{
 		$Inquirie = TableRegistry::get('inquiries');
 		$inquiries = $Inquirie->find()
@@ -320,9 +385,9 @@ use Cake\Datasource\ConnectionManager;
 	public function query6($id)	{
 		## get min price
 		$conn = ConnectionManager::get('default');
-		$stmt = $conn->execute('SELECT t2.id FROM inquirie_products as t3 LEFT JOIN ( SELECT t1.id, t1.price, t1.inquirie_product_id FROM inquirie_supplier_products as t1 INNER JOIN( SELECT inquirie_product_id,choose,min(price) as minVal FROM inquirie_supplier_products GROUP BY inquirie_product_id ) as t2 ON t1.price = t2.minVal GROUP BY t1.inquirie_product_id ) t2 ON t3.id = t2.inquirie_product_id WHERE t3.inquiry_id = '.$id);
+		$stmt = $conn->execute('SELECT t3.id,t3.price FROM `inquirie_products` t4 INNER JOIN( SELECT t1.id,t1.inquirie_product_id,t1.price FROM `inquirie_supplier_products` t1 INNER JOIN ( SELECT inquirie_product_id, min(price) as minprice FROM inquirie_supplier_products Group BY inquirie_product_id ) t2 ON t2.minprice = t1.price and t2.inquirie_product_id = t1.inquirie_product_id ) t3 ON t4.id = t3.inquirie_product_id WHERE inquiry_id = '.$id);
 		$results = $stmt ->fetchAll('assoc');
-// pr($results);die();
+
 		$IngSupProd = TableRegistry::get('inquirie_supplier_products');
 		$flag = true;
 		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
@@ -336,8 +401,10 @@ use Cake\Datasource\ConnectionManager;
 				$update = $IngSupProd->updateAll(['choose'=>0],['id'=>$is->id]);
 			}
 		}
+
 		foreach ($results as $key => $value) {
-			if (!empty($value)) {
+			if (!empty($value['id'])) {
+				
 				$update = $IngSupProd->updateAll(['choose'=>1],['id'=>$value['id']]);
 				if (!$update) {
 					$flag = false;
@@ -350,7 +417,7 @@ use Cake\Datasource\ConnectionManager;
 	public function query7($id)	{
 		## get max price
 		$conn = ConnectionManager::get('default');
-		$stmt = $conn->execute('SELECT t2.id FROM inquirie_products as t3 LEFT JOIN ( SELECT t1.id, t1.price, t1.inquirie_product_id FROM inquirie_supplier_products as t1 INNER JOIN( SELECT inquirie_product_id,choose,max(price) as minVal FROM inquirie_supplier_products GROUP BY inquirie_product_id ) as t2 ON t1.price = t2.minVal GROUP BY t1.inquirie_product_id ) t2 ON t3.id = t2.inquirie_product_id WHERE t3.inquiry_id = '.$id);
+		$stmt = $conn->execute('SELECT t3.id,t3.price FROM `inquirie_products` t4 INNER JOIN( SELECT t1.id,t1.inquirie_product_id,t1.price FROM `inquirie_supplier_products` t1 INNER JOIN ( SELECT inquirie_product_id, max(price) as minprice FROM inquirie_supplier_products Group BY inquirie_product_id ) t2 ON t2.minprice = t1.price and t2.inquirie_product_id = t1.inquirie_product_id ) t3 ON t4.id = t3.inquirie_product_id WHERE inquiry_id = '.$id);
 		$results = $stmt ->fetchAll('assoc');
 		$IngSupProd = TableRegistry::get('inquirie_supplier_products');
 		$flag = true;
@@ -441,6 +508,36 @@ use Cake\Datasource\ConnectionManager;
 		$results = $stmt ->fetchAll('assoc');
 	
 		return $results[0]['grand_total'];
+	}
+
+	public function query10($inqSupp_id)	{
+		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
+		$info = $InquirieSupplier->find()
+			->contain([
+				'Suppliers' => function ($q) {
+					return $q->autoFields(false)->select(['id','name']);
+				},
+				'Users' => function ($q) {
+					return $q->autoFields(false)->select(['id','username']);
+				},
+			])
+			->where(['inquirie_suppliers.id'=> $inqSupp_id])->first();
+			$html = '';
+			$html .= '
+				<tr class="cursor-pointer" id="'.$info->id.'">
+					<td class="text-center"><b>#'.$info->inquiry_id.'</b></td>
+					<td class="text-center">'.$info->supplier['name'].'</td>
+					<td class="text-center">'.$info->user['username'].'</td>
+					<td class="text-center">0/0</td>
+					<td class="text-center" id="supps-total-'.$info->id.'"></td>
+					<td class="text-center"></td>
+					<td class="text-center">'.date_format($info->created,"Y-m-d").'</td>
+					<td class="text-center">
+						<form name="post_591eba634aeb9809707693" style="display:none;" method="post" action="/inquiries/del-inq-supplier/'.$info->id.'"><input type="hidden" name="_method" class="form-control" value="POST"></form><a href="#" onclick="if (confirm(&quot;Are you sure you want to delete # '.$info->id.'?&quot;)) { document.post_591eba634aeb9809707693.submit(); } event.returnValue = false; return false;">Delete</a>	
+					</td>
+				</tr>';
+
+		return $html;
 	}
 	############ FUNCTION ###############
 	public function func1($n, $m,$inquiry_id, $inqsupp_id)	{

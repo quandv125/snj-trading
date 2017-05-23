@@ -199,14 +199,14 @@
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
 					<div class="input number">
-					<?php if (isset($quotation2)): ?>
-						<input name="" type="number" class="form-control profit2-percent-inquiries">
-					<?php else: ?>
+					<!-- <?php// if (isset($quotation2) && $quotation2 == true): ?> -->
+						<input name="" type="<?php echo $inquiries->type; ?>" type="number" class="form-control profit-percent-inquiries">
+					<!-- <?php// else: ?>
 						<input name="" type="number" class="form-control profit-percent-inquiries">
-					<?php endif ?>
+					<?php// endif ?> -->
 						
 					</div>
-					<span class="input-group-addon group-addon-width">%</span>
+					<span class="btn btn-set-profit input-group-addon group-addon-width"><i class="fa fa-check" aria-hidden="true"></i></span>
 				</div>
 			</div>
 		</div>

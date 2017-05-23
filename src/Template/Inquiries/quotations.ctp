@@ -103,9 +103,7 @@
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('subject',['class'=>'subject','label'=>'Subject','value' => 'Spare Part']) ?>
-								</div>
-
-							
+								</div>							
 							</div>
 							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
 								<?= $this->Form->create(null, ['url' => [ 'action' => 'edit',  $inquiries->id]]); ?>
@@ -123,7 +121,6 @@
 								<div class="col-md-6">
 									<?= $this->Form->input('vessel',['class'=>'vessel','label' => 'Vessel Name', 'value' => $inquiries->vessel]) ?>
 								</div>
-								
 								<div class="col-md-6">
 									<?= $this->Form->input('imo_no',['class'=>'imo_no', 'label' => 'IMO No','value' => $inquiries->imo_no]) ?>
 								</div>
@@ -138,9 +135,9 @@
 						</div>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="tab3">
-					<div class="panel-body">
-						<?php echo $this->element('Inquiries/cost_price'); ?>
-					</div>
+						<div class="panel-body">
+							<?php echo $this->element('Inquiries/cost_price'); ?>
+						</div>
 					</div>
 					
 				</div>
@@ -152,9 +149,14 @@
 
 	<div class="panel panel-white">
 		<div class="panel-body"> 
-			<?php if (!empty($inquiries->inquirie_products)): ?>
-				<div id="grid_quotation" data-room='<?= ($data);?>'></div>
-			<?php endif ?>
+
+			<!-- <?php// if (!empty($inquiries->inquirie_products)): ?> -->
+				<!-- <?php// if ($quotation2 == true): ?>
+					<div id="grid_quotation2" data-room='<?= ($data);?>'></div>
+				<?php// else: ?> -->
+					<div id="grid_quotation"  data-room='<?= ($data);?>'></div>
+				<!-- <?php// endif ?> -->
+			<!-- <?php// endif ?> -->
 		</div>
 	</div> <!-- panel-body -->
 </div> <!-- row -->

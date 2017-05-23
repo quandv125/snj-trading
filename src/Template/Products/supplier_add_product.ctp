@@ -29,9 +29,9 @@
                             ]
                         ); ?>
                    
-                        <?= $this->Form->input('supplier_id',['label'=>"Suppliers/ Maker's Name",'class' => 'supplier_id',"class" => "selectpicker", "data-live-search" => "true", 
+                        <!-- <?= $this->Form->input('supplier_id',['label'=>"Suppliers/ Maker's Name",'class' => 'supplier_id',"class" => "selectpicker", "data-live-search" => "true", 
                             'append' => [ $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
-                        ]); ?>
+                        ]); ?> -->
                         
                         <!-- <?= $this->Form->input('outlet_id',['class' => 'outlet_id','id' => 'PSupplier_Id','append' => [
                             $this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?> -->

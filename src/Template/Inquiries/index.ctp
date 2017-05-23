@@ -28,8 +28,9 @@
 					</thead>
 					<tbody>
 						<?php foreach ($inquiries as  $inquiry): ?>
+							
 						<tr>
-							<td class="text-center"><?= $this->Html->link('#'.$inquiry->id,['controller'=>'Inquiries','action' => 'view', $inquiry->id],['escape' => false]) ?></td>
+							<td class="text-center"><?= $this->Html->link('#'.$inquiry->id,['controller'=>'Inquiries','action' => 'InquiriesView', $inquiry->id,$inquiry->type],['escape' => false]) ?></td>
 							
 							<td class="text-center"><?= $inquiry->vessel?></td>
 							<td class="text-center"><?= $inquiry->ref?></td>

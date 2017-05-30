@@ -1,5 +1,5 @@
 
-<div class="panel-heading clearfix" id="inqSuppliers" val="<?= $inqSuppliers->id?>">
+<div class="panel-heading clearfix" id="inqSuppliers" count="<?= $count ?>" val="<?= $inqSuppliers->id?>">
 	Suppliers: <?= $inqSuppliers->supplier['name'] ?>
 </div> <!-- panel-heading -->
 <div class="panel-body "> 

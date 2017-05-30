@@ -52,6 +52,7 @@
         // 'libs/jquery.themepunch.plugins.min',
         // 'libs/less.min',
         'assets/plugins/jquery-slimscroll/jquery.slimscroll.min',
+        'assets/plugins/toastr/toastr.min',
         'theme',
         // 'custom',
     ]); ?>

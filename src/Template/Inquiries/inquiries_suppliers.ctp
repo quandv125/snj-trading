@@ -26,16 +26,17 @@
 					</thead>
 					<tbody id="inquiries-details">
 						<?php foreach ($inqSuppliers as $inqSupplier): ?>
-							<tr class="cursor-pointer" id="<?= $inqSupplier->id; ?>">
-								<td class="text-center"><b><?= '#'.$inqSupplier->inquiry_id; ?></b></td>
-								<td class="text-center"><?= $inqSupplier->supplier['name']; ?></td>
-								<td class="text-center"><?= $inqSupplier->user['username']; ?></td>
-								<td class="text-center"><?= count($inqSupplier->inquirie_supplier_products) ?>/<?php echo ($total1); ?></td>
-								<td class="text-center" id="supps-total-<?= $inqSupplier->id; ?>"><?php echo $this->Myhtml->SumPrice($inqSupplier->inquirie_supplier_products); ?></td>
-								<td class="text-center"><?= $this->Myhtml->Currency($inqSupplier->currency); ?></td>
-								<td class="text-center"><?= h(date("Y-m-d", strtotime($inqSupplier->created))) ?></td>
+							<tr class="cursor-pointer myrowaxn-<?= $inqSupplier->id; ?>" id="<?= $inqSupplier->id; ?>">
+								<td class="text-center main"><b><?= '#'.$inqSupplier->inquiry_id; ?></b></td>
+								<td class="text-center main"><?= $inqSupplier->supplier['name']; ?></td>
+								<td class="text-center main"><?= $inqSupplier->user['username']; ?></td>
+								<td class="text-center main"><span id="count-product-of-supp-<?= $inqSupplier->id?>"><?= count($inqSupplier->inquirie_supplier_products) ?></span>/<?php echo ($total1); ?></td>
+								<td class="text-center main" id="supps-total-<?= $inqSupplier->id; ?>"><?php echo $this->Myhtml->SumPrice($inqSupplier->inquirie_supplier_products); ?></td>
+								<td class="text-center main"><?= $this->Myhtml->Currency($inqSupplier->currency); ?></td>
+								<td class="text-center main"><?= h(date("Y-m-d", strtotime($inqSupplier->created))) ?></td>
 								<td class="text-center">
-									<?= $this->Form->postLink(__('Delete'), ['controller'=>'inquiries','action'=>'DelInqSupplier',$inqSupplier->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inqSupplier->id)]) ?>
+									<span class="btn btn-primary DeleteInqSupplier" id="<?= $inqSupplier->id?>"><i class="fa fa-trash"></i></span>
+									<!-- <?= $this->Form->postLink(__('Delete'), ['controller'=>'inquiries','action'=>'DelInqSupplier',$inqSupplier->id], ['confirm' => __('Are you sure you want to delete # {0}?', $inqSupplier->id)]) ?> -->
 								</td>
 							</tr>
 						<?php endforeach; ?>
@@ -76,3 +77,4 @@
 		</div>
 	</div>
 </div>  <!-- End -->
+

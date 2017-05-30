@@ -156,6 +156,7 @@ jQuery(document).ready(function(){
 					id: "ProductID",
 					fields: {
 						ProductID: { editable: false, nullable: true },
+						// choose: {editable: false},
 						no: {editable: false},
 						name: {editable: false},
 						maker_type_ref: {editable: false},
@@ -171,12 +172,13 @@ jQuery(document).ready(function(){
 			}
 		});
 
-		$("#grid").kendoGrid({
+		 var grid = $("#grid").kendoGrid({
 			dataSource: dataSource,
 			pageable: true,
 			navigatable: true,
-			toolbar: ["save", "cancel"],
+			// toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>'  }],
 			columns: [
+				// { field: "choose",editable: false, nullable: true, title: "Choose", width: "65px" , template: "<input type='checkbox' class='checkbox' />" },
 				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
 				{ field: "name", title: "Description", width: "240px" },
 				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "120px" },
@@ -190,7 +192,70 @@ jQuery(document).ready(function(){
 				// { command: [ "destroy"], title: "&nbsp;", width: "100px" }
 			],
 			editable: true
+		}).data("kendoGrid");
+
+		grid.table.on("click", ".checkbox" , selectRow);
+
+		$("#btn-delete-kendo").bind("click", function () {
+			var type = jQuery("#grid").attr("data-type");
+			var inquiry_id = jQuery("#grid").attr("inquiry_id");
+			var checked = [];
+			for(var i in checkedIds){
+				if(checkedIds[i]){
+					checked.push(i);
+				}
+			}
+			
+			jQuery.ajax({
+				url: '/inquiries/delete_item_products',
+				type: 'POST',
+				data: {"data":checked, "type":type,"inquiry_id":inquiry_id,"font_end": '1'},
+				dataType: 'json',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					var grid = $('#grid').data("kendoGrid");
+					grid.dataSource.data(response);
+					grid.dataSource.refresh;
+					// console.log(response);
+					return false;
+				}
+			});
 		});
+
+		var checkedIds = {};
+
+		//on click of the checkbox:
+		function selectRow() {
+			var checked = this.checked,
+			row = $(this).closest("tr"),
+			grid = $("#grid").data("kendoGrid"),
+			dataItem = grid.dataItem(row);
+			checkedIds[dataItem.id] = checked;
+			if (checked) {
+				//-select the row
+				row.addClass("k-state-selected");
+			} else {
+				//-remove selection
+				row.removeClass("k-state-selected");
+			}
+		}
+
+		//on dataBound event restore previous selected rows:
+		function onDataBound(e) {
+			var view = this.dataSource.view();
+			for(var i = 0; i < view.length;i++){
+				if(checkedIds[view[i].id]){
+					this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+					.addClass("k-state-selected")
+					.find(".checkbox")
+					.attr("checked","checked");
+				}
+			}
+		}
 	}
 	// Handsometable
 	if ($("#exampleAdd").length){
@@ -1627,16 +1692,57 @@ jQuery(document).ready(function($){
 			contentType: false,
 			cache: false,
 			processData:false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
 			success: function(response){
+				jQuery(".loader3").fadeOut();
 				toastr.success('The inquiry has been saved.');
-				// console.log(response);
 				if (response != '') {
 					jQuery('.file-attachments').append(response);
+					jQuery('.remove-file-att').click(function(){
+						var id = jQuery(this).attr("id");
+						jQuery.ajax({
+							url: '/inquiries/remove_file_attachment',
+							type: 'POST',
+							data: {id: id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){
+								jQuery(".loader3").fadeIn();
+							},
+							success: function(response){
+								jQuery(".loader3").fadeOut();
+								jQuery('#attachments-'+id).remove();
+								toastr.success(response);
+								console.log(response);
+							}
+						}); // Ajax
+					});
 				};
-				
-				// toastr["success"]("2222222", "11111");
+				jQuery('#file-input').val('');
 			},
 			error: function(response, status){}
 		});
 	}));
+
+	jQuery('.remove-file-att').click(function(){
+		var id = jQuery(this).attr("id");
+		jQuery.ajax({
+			url: '/inquiries/remove_file_attachment',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
+			success: function(response){
+				jQuery(".loader3").fadeOut();
+				jQuery('#attachments-'+id).remove();
+				toastr.success(response);
+				console.log(response);
+			}
+		}); // Ajax
+	});
 }); // End document

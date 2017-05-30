@@ -64,10 +64,20 @@ class InquiriesController extends AppController
 		$this->set('_serialize', ['inquiry']);
 	}
 
-	public function InquiriesView($id, $type){
+	public function InquiriesView($id, $type=null){
 		$this->viewBuilder()->layout('product');
-		$data = ''; $total = 0;
-		if ($type == AVAILABLE) { ## Yes Price
+		$result 	= $this->get_data_kendo_fontend($id);
+		$inquiries 	= $result['inquiries'];
+		$data  		= json_encode($result['data']);
+		$total 		= json_encode($result['total']);
+		
+		$this->set(compact('inquiries','data','total'));
+	}
+
+	protected function get_data_kendo_fontend($id)	{
+		$total = 0;
+		if ($this->Inquiries->exists(['id' => $id, 'type' => AVAILABLE])) {
+			
 			$inquiries = $this->Inquiries->available($id);
 			if (!empty($inquiries->inquirie_products)) {
 				foreach ($inquiries->inquirie_products as $key => $inquirie_product){
@@ -76,6 +86,7 @@ class InquiriesController extends AppController
 					$arr[] = $inquirie_product->id;
 					$data[] = [
 						"ProductID"		 => $inquirie_product->id,
+						"choose" 		 => NULL,
 						"no" 			 => $key+1,
 						"name"			 => $inquirie_product['products']['product_name'],
 						"maker_type_ref" => '',
@@ -92,6 +103,7 @@ class InquiriesController extends AppController
 			}
 			
 		} else { ## No Price
+			
 			$inquiries = $this->Inquiries->unavailable($id);
 			if (!empty($inquiries->inquirie_products)) {
 				foreach ($inquiries->inquirie_products as $inquirie_product){
@@ -108,12 +120,17 @@ class InquiriesController extends AppController
 						$u_p 	 = NULL;
 						$f_total = NULL;
 					} else {
+						if ($price == null) {
+							$u_p = null;$f_total = NULL;
+						}else {
+							$u_p 	 = $price + (($price*$inquirie_product->profit)/100);
+							$f_total = $u_p*$inquirie_product->quantity;
+						}
 						$no 	 = $inquirie_product->no;
-						$u_p 	 = $price + (($price*$inquirie_product->profit)/100);
-						$f_total = $u_p*$inquirie_product->quantity;
 					}
 					$data[] = [
 						"ProductID" 	=> $inquirie_product->id,
+						"choose" 		 => NULL,
 						"no" 			=> $no,
 						"name"			=> $inquirie_product->name,
 						"maker_type_ref"=> $inquirie_product->maker_type_ref,
@@ -128,10 +145,10 @@ class InquiriesController extends AppController
 					$total = $total + $f_total;
 				}
 			} //end if
+
 		}
-		// pr($data);die();
-		$data = json_encode($data);
-		$this->set(compact('inquiries','data','total'));
+		$arr = array('inquiries' => $inquiries, 'data' => $data, 'total' => $total);
+		return $arr;
 	}
 
 	public function add() {
@@ -188,7 +205,6 @@ class InquiriesController extends AppController
 	public function MakeInq() {
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
-			
 			$inquiry_id =  $this->request->data['inquiry_id'];
 			$i = 1; $parent = 1;
 			foreach ($this->request->data['data'] as $key => $inq) {
@@ -219,7 +235,7 @@ class InquiriesController extends AppController
 			}
 			die();
 		}
-	}
+	}	
 
 	public function MakeInquiry() {
 		if ($this->request->is('ajax')) {
@@ -378,7 +394,7 @@ class InquiriesController extends AppController
 			}
 		}
 	}
- 
+
 	public function DestroyInq() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
@@ -410,66 +426,64 @@ class InquiriesController extends AppController
 		}
 	}
 
-	public function info($id)	{
-		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
-		$inqSuppliers = $InquirieSupplier->find()->contain([
-			'Suppliers' => function ($q) {
-				return $q->autoFields(false)->select(['id','name']);
-			},
-			'Users' => function ($q) {
-				return $q->autoFields(false)->select(['id','username']);
-			},
-			'InquirieSupplierProducts' => function ($q) {
-				return $q->autoFields(false)->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_supplier_id']);
-			}
-		])->where(['inquiry_id' => $id])->toarray();
-		
-		$inquiry = $this->Inquiries->getInfo($id);
+	// public function info($id)	{
+	// 	$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
+	// 	$inqSuppliers = $InquirieSupplier->find()->contain([
+	// 		'Suppliers' => function ($q) {
+	// 			return $q->autoFields(false)->select(['id','name']);
+	// 		},
+	// 		'Users' => function ($q) {
+	// 			return $q->autoFields(false)->select(['id','username']);
+	// 		},
+	// 		'InquirieSupplierProducts' => function ($q) {
+	// 			return $q->autoFields(false)->select(['InquirieSupplierProducts.id','InquirieSupplierProducts.inquirie_supplier_id']);
+	// 		}
+	// 	])->where(['inquiry_id' => $id])->toarray();
+	// 	$inquiry = $this->Inquiries->getInfo($id);
+	// 	// $total = 0;
+	// 	$count = 0;
+	// 	if ($inquiry->type == AVAILABLE) {
+	// 		foreach ($inquiry->inquirie_products as $inquirieProducts){
+	// 			$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
+	// 			$price = ($inquirieProducts['Products']['retail_price'] == 0)? "":$inquirieProducts['Products']['retail_price']; 
+	// 			$data[] = [
+	// 				"ProductID"		=> $inquirieProducts->id,
+	// 				"no" 			=> $no,
+	// 				"name"			=> $inquirieProducts['Products']['product_name'],
+	// 				"maker_type_ref"=> $inquirieProducts['Products']['type_model'],
+	// 				"partno"		=> $inquirieProducts['Products']['sku'],
+	// 				"unit"			=> $inquirieProducts['Products']['unit'],
+	// 				"quantity"		=> $inquirieProducts->quantity,
+	// 				"price"			=> $price,
+	// 				"remark"		=> $inquirieProducts->remark];
+	// 			// $total = $total + $price;
+	// 		}
+	// 	}else {
+	// 		foreach ($inquiry->inquirie_products as $inquirieProducts){
+	// 			$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
+	// 			$price = ($inquirieProducts->price == 0)? "":$inquirieProducts->price; 
+	// 			$data[] = [
+	// 				"ProductID"		=> $inquirieProducts->id,
+	// 				"no" 			=> $no,
+	// 				"name"			=> $inquirieProducts->name,
+	// 				"maker_type_ref"=> $inquirieProducts->maker_type_ref,
+	// 				"partno"		=> $inquirieProducts->partno,
+	// 				"unit"			=> $inquirieProducts->unit,
+	// 				"quantity"		=> $inquirieProducts->quantity,
+	// 				"price"			=> $price,
+	// 				"remark"		=> $inquirieProducts->remark
+	// 			];
+	// 			$count = $count + $inquirieProducts->assign;
+	// 			// $total = $total + $price;
+	// 		}
+	// 	}
 
-		// $total = 0;
-		$count = 0;
-		if ($inquiry->type == AVAILABLE) {
-			foreach ($inquiry->inquirie_products as $inquirieProducts){
-				$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
-				$price = ($inquirieProducts['Products']['retail_price'] == 0)? "":$inquirieProducts['Products']['retail_price']; 
-				$data[] = [
-					"ProductID"		=> $inquirieProducts->id,
-					"no" 			=> $no,
-					"name"			=> $inquirieProducts['Products']['product_name'],
-					"maker_type_ref"=> $inquirieProducts['Products']['type_model'],
-					"partno"		=> $inquirieProducts['Products']['sku'],
-					"unit"			=> $inquirieProducts['Products']['unit'],
-					"quantity"		=> $inquirieProducts->quantity,
-					"price"			=> $price,
-					"remark"		=> $inquirieProducts->remark];
-				// $total = $total + $price;
-			}
-		}else {
-			foreach ($inquiry->inquirie_products as $inquirieProducts){
-				$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
-				$price = ($inquirieProducts->price == 0)? "":$inquirieProducts->price; 
-				$data[] = [
-					"ProductID"		=> $inquirieProducts->id,
-					"no" 			=> $no,
-					"name"			=> $inquirieProducts->name,
-					"maker_type_ref"=> $inquirieProducts->maker_type_ref,
-					"partno"		=> $inquirieProducts->partno,
-					"unit"			=> $inquirieProducts->unit,
-					"quantity"		=> $inquirieProducts->quantity,
-					"price"			=> $price,
-					"remark"		=> $inquirieProducts->remark
-				];
-				$count = $count + $inquirieProducts->assign;
-				// $total = $total + $price;
-			}
-		}
+	// 	$data = json_encode($data);
+	// 	$user_id = $InquirieSupplier->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
+	// 	$supplier_id = $InquirieSupplier->Suppliers->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
 
-		$data = json_encode($data);
-		$user_id = $InquirieSupplier->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
-		$supplier_id = $InquirieSupplier->Suppliers->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
-
-		$this->set(compact('inqSuppliers','inquiry','data','count', 'user_id','supplier_id'));
-	}
+	// 	$this->set(compact('inqSuppliers','inquiry','data','count', 'user_id','supplier_id'));
+	// }
 
 	public function InquiriesSuppliers($id) {
 		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
@@ -594,7 +608,7 @@ class InquiriesController extends AppController
 					];
 				}
 			}
-			
+
 			$data = json_encode($data);
 			$main_id = $InquirieProduct->find('list',['keyField'=>'main','valueField'=>'name'])->where(['inquiry_id' => $inqSuppliers->inquiry['id'], 'level' => 0]);
 			
@@ -627,15 +641,29 @@ class InquiriesController extends AppController
 	}
 
 	public function DelInqSupplier($id = null) {
-		// pr($id);die();
-		$this->request->allowMethod(['post', 'delete']);
 		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
-		$inqSupp = $InquirieSupplier->get($id);
-		if ($InquirieSupplier->delete($inqSupp)) {
-			return $this->redirect(['action' => 'inquiries-suppliers', $inqSupp->inquiry_id]);
-		} else {
-			return $this->redirect(['action' => 'inquiries-suppliers', $inqSupp->inquiry_id]);
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			
+			$inqSupp = $InquirieSupplier->get($this->request->data['id']);
+			if ($InquirieSupplier->delete($inqSupp)) {
+				echo "OK";
+			} else {
+				echo "Error!";
+			}
+			exit();
+		}else {
+			// pr($id);die();
+			$this->request->allowMethod(['post', 'delete']);
+			
+			$inqSupp = $InquirieSupplier->get($id);
+			if ($InquirieSupplier->delete($inqSupp)) {
+				return $this->redirect(['action' => 'inquiries-suppliers', $inqSupp->inquiry_id]);
+			} else {
+				return $this->redirect(['action' => 'inquiries-suppliers', $inqSupp->inquiry_id]);
+			}
 		}
+		
 	}
 
 	public function AddSupProd($inqsupp_id, $inquiry_id) {
@@ -699,6 +727,7 @@ class InquiriesController extends AppController
 					];
 				}
 			}
+
 			$data = json_encode($data);
 			$main_id = $InquirieProduct->find('list',['keyField'=>'main','valueField'=>'name'])->where(['inquiry_id' => $inqSuppliers->inquiry['id'], 'level' => 0]);
 			
@@ -810,131 +839,15 @@ class InquiriesController extends AppController
 	}
 	
 	public function quotations($id, $type = null) {
-		
-		if (isset($type) && $type == AVAILABLE) {
-			$quotation2 = true;
-			$inquiries = $this->Inquiries->query9($id);
-			$data = ''; $grand_total = 0;
-			if (!empty($inquiries->inquirie_products)) {
-				foreach ($inquiries->inquirie_products as $key => $inquirie_product){
-					$u_p 	 = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
-					$f_total = $u_p*$inquirie_product->quantity;
-					$grand_total = $grand_total+$f_total;
-					$arr[] = $inquirie_product->id;
-					$data[] = [
-						"ProductID"		 => $inquirie_product->id,
-						"no" 			 => $key+1,
-						"name"			 => $inquirie_product['products']['product_name'],
-						"unit"			 => $inquirie_product['products']['unit'],
-						"quantity"		 => $inquirie_product->quantity,
-
-						"supplier"		 => $inquirie_product['users']['username'],
-						"supp_u_p"		 => $inquirie_product['products']['retail_price'],
-						"supp_u_p_usd"	 => '',
-						
-						"profit"		 => $inquirie_product->profit,
-
-						"u_p"	 		 => $u_p,
-						"u_p_usd"		 => '',
-						"f_total"		 => $f_total,
-						"f_total_usd"	 => '',
-						 
-						"del_time"		 => '',
-						"del_time_final" => '',
-						"remark"		 => ''
-					];
-				}
-			}
-		} else {
-			$quotation2 = false;
-			$inquiries = $this->Inquiries->query1($id);
-			$data = ''; $grand_total = 0;
-			if (!empty($inquiries->inquirie_products)) {
-				foreach ($inquiries->inquirie_products as $inquirie_product){
-					
-					if (!empty($inquirie_product->inquirie_supplier_products)) {
-						$supp_u_p 	= $inquirie_product->inquirie_supplier_products[0]['price']; 
-						$remark 	= $inquirie_product->inquirie_supplier_products[0]['remark'];
-						$no 		= $inquirie_product->no; 
-						$delivery_time = $inquirie_product->inquirie_supplier_products[0]['delivery_time'];
-						$supplier 	= $inquirie_product->inquirie_supplier_products[0]['suppliers']['name'];
-					} else {
-						$no = ''; $supp_u_p = ''; $delivery_time = ''; $remark = '';$supplier ='';
-					}
-					$u_p 	 = $supp_u_p + (($supp_u_p*$inquirie_product->profit)/100);
-					$f_total = $u_p*$inquirie_product->quantity;
-					$grand_total = $grand_total+$f_total;
-					$arr[] = $inquirie_product->id;
-					
-					$data[] = [
-						"ProductID"		 => $inquirie_product->id,
-						"no" 			 => $no,
-						"name"			 => $inquirie_product->name,
-						"unit"			 => $inquirie_product->unit,
-						"quantity"		 => $inquirie_product->quantity,
-
-						"supplier"		 => $supplier,
-						"supp_u_p"		 => $supp_u_p,
-						"supp_u_p_usd"	 => '',
-						
-						"profit"		 => $inquirie_product->profit,
-
-						"u_p"	 		 => $u_p,
-						"u_p_usd"		 => '',
-						"f_total"		 => $f_total,
-						"f_total_usd"	 => '',
-						 
-						"del_time"		 => $delivery_time,
-						"del_time_final" => '',
-						"remark"		 => $remark
-					];
-				}
-			}
-		}
-		$data = json_encode($data);
-		$myarr = json_encode($arr);
-		$this->set(compact('inquiries','data','myarr','grand_total','quotation2'));
+		$result 	= $this->get_data_kendo($id);
+		$inquiries 	= $result['inquiries'];
+		$data  		= json_encode($result['data']);
+		$myarr 		= json_encode($result['arr']);
+		$grand_total = $result['grand_total'];
+		$this->set(compact('inquiries','data','myarr','grand_total'));
 	}
 
-	// public function quotation($id) {
-		// 	$inquiries = $this->Inquiries->query9($id);
-		// 		$data = ''; $grand_total = 0;
-		// 		if (!empty($inquiries->inquirie_products)) {
-		// 			foreach ($inquiries->inquirie_products as $key => $inquirie_product){
-		// 				$u_p 	 = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
-		// 				$f_total = $u_p*$inquirie_product->quantity;
-		// 				$grand_total = $grand_total+$f_total;
-		// 				$arr[] = $inquirie_product->id;
-		// 				$data[] = [
-		// 					"ProductID"		 => $inquirie_product->id,
-		// 					"no" 			 => $key+1,
-		// 					"name"			 => $inquirie_product['products']['product_name'],
-		// 					"unit"			 => $inquirie_product['products']['unit'],
-		// 					"quantity"		 => $inquirie_product->quantity,
-
-		// 					"supplier"		 => $inquirie_product['users']['username'],
-		// 					"supp_u_p"		 => $inquirie_product['products']['retail_price'],
-		// 					"supp_u_p_usd"	 => '',
-							
-		// 					"profit"		 => $inquirie_product->profit,
-
-		// 					"u_p"	 		 => $u_p,
-		// 					"u_p_usd"		 => '',
-		// 					"f_total"		 => $f_total,
-		// 					"f_total_usd"	 => '',
-							 
-		// 					"del_time"		 => '',
-		// 					"del_time_final" => '',
-		// 					"remark"		 => ''
-		// 				];
-		// 			}
-		// 		}
-		// 	$quotation2 = true;
-		// 	$data = json_encode($data);
-		// 	$myarr = json_encode($arr);
-		// 	$this->set(compact('inquiries','data','grand_total','myarr','quotation2'));
-	// }
-
+	
 	public function UpdateInq() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
@@ -948,7 +861,6 @@ class InquiriesController extends AppController
 					$total = $this->Inquiries->get_total_unavailable($inquiryproducts->inquiry_id);
 				} else {
 					$total = $this->Inquiries->get_total_available($inquiryproducts->inquiry_id);
-
 				}
 				echo json_encode($total);exit();
 			} else {
@@ -960,52 +872,15 @@ class InquiriesController extends AppController
 	public function UpdateInquiries() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-
-			$InquirieProduct = TableRegistry::get('InquirieProducts');
-			$inquiryproducts = $InquirieProduct->get($this->request->data['data']['ProductID'], [
-				'contain' => []
-			]);	 
-			$inquiryproducts = $InquirieProduct->patchEntity($inquiryproducts, $this->request->data['data']);
-
-			if ($InquirieProduct->save($inquiryproducts)) {
-				
-				if ($this->request->data['type'] == AVAILABLE) {
-					$inquiries = $this->Inquiries->query9($inquiryproducts->inquiry_id);
-					$data = ''; $grand_total = 0;
-					if (!empty($inquiries->inquirie_products)) {
-						foreach ($inquiries->inquirie_products as $key => $inquirie_product){
-							$u_p 	 = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
-							$f_total = $u_p*$inquirie_product->quantity;
-							$grand_total = $grand_total+$f_total;
-							$arr[] = $inquirie_product->id; 
-							$data[] = [
-								"ProductID"		 => $inquirie_product->id, 
-								"no"			 => $key+1,
-								"name"			 => $inquirie_product['products']['product_name'],
-								"unit"			 => $inquirie_product['products']['unit'],
-								"quantity"		 => $inquirie_product->quantity,
-								"supplier"		 => $inquirie_product['users']['username'],
-								"supp_u_p"		 => $inquirie_product['products']['retail_price'],
-								"supp_u_p_usd"	 => '',
-								"profit"		 => $inquirie_product->profit,
-								"u_p"	 		 => $u_p,
-								"u_p_usd"		 => '',
-								"f_total"		 => $f_total,
-								"f_total_usd"	 => '',
-								"del_time"		 => '',
-								"del_time_final" => '',
-								"remark"		 => ''
-							];
-						}
-					}
-					echo json_encode($data);
-				} else {
-					$inquiries = $this->Inquiries->query1($inquiryproducts->inquiry_id);
-					$data = $this->get_kendoui_data($inquiries);
-					echo json_encode($data);
-				}
+			$inquiry_id = $this->Inquiries->UpdateInquiriesProducts($this->request->data['data']['ProductID'],$this->request->data['data']);
+			if ($this->request->data['type'] == AVAILABLE) {
+				$inquiries = $this->Inquiries->query9($inquiry_id);
+				$data = $this->Inquiries->func2($inquiries->inquirie_products);
+				echo json_encode($data);exit();
 			} else {
-				die('error');
+				$inquiries = $this->Inquiries->query1($inquiry_id);
+				$data = $this->get_kendoui_data($inquiries);
+				echo json_encode($data);exit();
 			}
 		}
 	}
@@ -1176,6 +1051,83 @@ class InquiriesController extends AppController
 			}
 		}
 		return $data;
+	}
+
+	protected function get_data_kendo($id)	{
+		### Quotation
+		if ($this->Inquiries->exists(['id' => $id, 'type' => AVAILABLE])) {
+			$inquiries = $this->Inquiries->query9($id);
+			$data = ''; $grand_total = 0;
+			if (!empty($inquiries->inquirie_products)) {
+				foreach ($inquiries->inquirie_products as $key => $inquirie_product){
+					$u_p 	 = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
+					$f_total = $u_p*$inquirie_product->quantity;
+					$grand_total = $grand_total+$f_total;
+					$arr[] = $inquirie_product->id;
+					$data[] = [
+ 						"ProductID"		 => $inquirie_product->id,
+ 						"choose" 		 => NULL,
+						"no" 			 => $key+1,
+						"name"			 => $inquirie_product['products']['product_name'],
+						"unit"			 => $inquirie_product['products']['unit'],
+						"quantity"		 => $inquirie_product->quantity,
+						"supplier"		 => $inquirie_product['users']['username'],
+						"supp_u_p"		 => $inquirie_product['products']['retail_price'],
+						"supp_u_p_usd"	 => '',
+						"profit"		 => $inquirie_product->profit,
+						"u_p"	 		 => $u_p,
+						"u_p_usd"		 => '',
+						"f_total"		 => $f_total,
+						"f_total_usd"	 => '',
+						"del_time"		 => '',
+						"del_time_final" => '',
+						"remark"		 => '' 
+					];
+				} 
+			}
+		} else { 
+			$inquiries = $this->Inquiries->query1($id);
+			$data = ''; $grand_total = 0;
+			if (!empty($inquiries->inquirie_products)) {
+				foreach ($inquiries->inquirie_products as $inquirie_product){
+					if (!empty($inquirie_product->inquirie_supplier_products)) {
+						$supp_u_p 	= $inquirie_product->inquirie_supplier_products[0]['price']; 
+						$remark 	= $inquirie_product->inquirie_supplier_products[0]['remark'];
+						$no 		= $inquirie_product->no; 
+						$delivery_time = $inquirie_product->inquirie_supplier_products[0]['delivery_time'];
+						$supplier 	= $inquirie_product->inquirie_supplier_products[0]['suppliers']['name'];
+					} else {
+						$no = ''; $supp_u_p = ''; $delivery_time = ''; $remark = '';$supplier ='';
+					}
+					$u_p 	 = $supp_u_p + (($supp_u_p*$inquirie_product->profit)/100);
+					$f_total = $u_p*$inquirie_product->quantity;
+					$grand_total = $grand_total+$f_total;
+					$arr[] = $inquirie_product->id;
+					$data[] = [
+						"ProductID"		 => $inquirie_product->id,
+						"choose" 		 => NULL,
+						"no" 			 => $no,
+						"name"			 => $inquirie_product->name,
+						"unit"			 => $inquirie_product->unit,
+						"quantity"		 => $inquirie_product->quantity,
+						"supplier"		 => $supplier,
+						"supp_u_p"		 => $supp_u_p,
+						"supp_u_p_usd"	 => '',
+						"profit"		 => $inquirie_product->profit,
+						"u_p"	 		 => $u_p,
+						"u_p_usd"		 => '',
+						"f_total"		 => $f_total,
+						"f_total_usd"	 => '',
+						"del_time"		 => $delivery_time,
+						"del_time_final" => '',
+						"remark"		 => $remark
+					];
+				}
+			}
+		}
+
+		$arr = array('inquiries' => $inquiries, 'data' => $data, 'arr' => $arr, 'grand_total' => $grand_total);
+		return $arr;
 	}
 
 	public function SetProfitInquiries() {
@@ -1351,7 +1303,6 @@ class InquiriesController extends AppController
 				$html = '';
 				if (!empty($this->request->data['file'][0]['name'])) {
 					$flag = true;
-					
 					for ($i=0; $i < count($this->request->data['file']); $i++) { 
 						if(move_uploaded_file($this->request->data['file'][$i]['tmp_name'], FILES.$this->request->data['file'][$i]['name'])){
 							$item['path']		= 'files'.DS.$this->request->data['file'][$i]['name'];
@@ -1359,7 +1310,7 @@ class InquiriesController extends AppController
 							$attachment = $attachments->newEntity();
 							$attachment = $attachments->patchEntity($attachment, $item);
 							$attachments->save($attachment);
-							$html .= '<a href="/inquiries/download/'.$attachment->id.'">'.$this->request->data['file'][$i]['name'].'</a><br/>';
+							$html .= '<tr id="attachments-'.$attachment->id.'"><td><a href="/inquiries/download/'.$attachment->id.'">'.$this->request->data['file'][$i]['name'].'</a></td><td><span class="cursor-point remove-file-att" id="'.$attachment->id.'">X</span></td></tr>';
 						}
 					}
 				} 
@@ -1370,4 +1321,54 @@ class InquiriesController extends AppController
 			exit();
 		}
 	}
+
+	public function OrderAcknowledgement($id=null){
+		$result 	= $this->get_data_kendo($id);
+		$inquiries 	= $result['inquiries'];
+		$data  		= json_encode($result['data']);
+		$myarr 		= json_encode($result['arr']);
+		$grand_total 		= json_encode($result['grand_total']);
+		$this->set(compact('inquiries','data','myarr','grand_total'));
+	}
+
+	public function PurchaseOrder($id=null)	{
+		// $inquiries = $this->Inquiries->query11($id);
+		// pr($inquiries);die();
+		$this->set(compact('id'));
+	}
+
+	public function InvoiceDocuments($id=null)	{
+		$this->set('id', $id);
+
+	}
+
+	public function DeleteItemProducts(){
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+
+			$InqProd = TableRegistry::get('inquirie_products');
+			$IqSPrs  = TableRegistry::get('inquirie_supplier_products');
+			$InqProd->deleteAll(['id IN' => $this->request->data['data']]);
+			$IqSPrs->deleteAll(['inquirie_product_id IN' => $this->request->data['data']]);
+			if (isset($this->request->data['font_end'])) {
+				$result = $this->get_data_kendo_fontend($this->request->data['inquiry_id']);
+			} else {
+				$result = $this->get_data_kendo($this->request->data['inquiry_id']);
+			}
+			echo json_encode($result['data']);exit();
+		}
+	}
+
+	public function RemoveFileAttachment()	{
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$att = $this->Inquiries->Attachments->get($this->request->data['id']);
+			if ($this->Inquiries->Attachments->delete($att)) {
+				echo(__('The Attachments has been deleted.'));
+			} else {
+				echo(__('The Attachments could not be deleted. Please, try again.'));
+			}
+		}
+	}
+
 }

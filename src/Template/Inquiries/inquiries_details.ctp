@@ -5,7 +5,7 @@
 		<?php if ($inquiry->type == 1): ?>
 			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'InquiriesSuppliers', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		<?php else: ?>
-			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $inquiry->id, $inquiry->type],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		<?php endif ?>
 		
 		<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'inquiries'],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
@@ -51,10 +51,10 @@
 								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiry->id]) ?>
 								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiry->status]) ?>
 								<div class="col-md-6">
-									<?= $this->Form->input('username',['label'=>'Customer PIC','class'=>'username','value' => $inquiry->user['fullname']]) ?>
+									<?= $this->Form->input('username',['label'=>'Customer PIC','class'=>'username','value' => $inquiry->user['username']]) ?>
 								</div>
 								<div class="col-md-6">
-									<?= $this->Form->input('username',['label'=>'Customer Name','class'=>'username']) ?>
+									<?= $this->Form->input('username',['label'=>'Customer Name','class'=>'username','value' => $inquiry->user['fullname']]) ?>
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('ref',['class'=>'ref','label'=>'Cus Ref', 'value' => $inquiry->ref]) ?>

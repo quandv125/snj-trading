@@ -104,8 +104,6 @@
 								<div class="col-md-6">
 									<?= $this->Form->input('subject',['class'=>'subject','label'=>'Subject','value' => 'Spare Part']) ?>
 								</div>
-
-							
 							</div>
 							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
 								
@@ -141,7 +139,6 @@
 						<?php echo $this->element('Inquiries/cost_price'); ?>
 					</div>
 					</div>
-					
 				</div>
 			</div>
 		</div> <!-- panel-body -->

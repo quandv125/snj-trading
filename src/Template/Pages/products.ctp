@@ -48,7 +48,7 @@
 									<!-- <label>Categories: </label> <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
-									<label>Maker's Name: </label>  <span><?php echo $product->supplier['name']; ?></span>
+									<!--   -->
 									<!-- <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
@@ -70,7 +70,6 @@
 
 								<div class="attr-info">
 									<label>Remark:</label>
-									
 								</div>
 								<div class="info-price info-price-detail">
 									<!-- <label>Price:</label> <span><?php //echo number_format( $product->retail_price, DECIMALS); ?></span>

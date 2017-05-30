@@ -58,12 +58,9 @@ use Cake\Validation\Validator;
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('id')            ->allowEmpty('id', 'create');
-        $validator
-            ->decimal('price')            ->allowEmpty('price');
-        $validator
-            ->boolean('choose')            ->allowEmpty('choose');
+        $validator->integer('id')->allowEmpty('id', 'create');
+        $validator->decimal('price')->allowEmpty('price');
+        $validator->boolean('choose')->allowEmpty('choose');
         return $validator;
     }
 

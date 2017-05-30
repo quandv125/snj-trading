@@ -66,10 +66,8 @@ use Cake\Validation\Validator;
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('id')            ->allowEmpty('id', 'create');
-        $validator
-            ->allowEmpty('remark');
+        $validator->integer('id')->allowEmpty('id', 'create');
+        $validator->allowEmpty('remark');
         return $validator;
     }
 

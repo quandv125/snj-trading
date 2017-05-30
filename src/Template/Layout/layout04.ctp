@@ -46,6 +46,7 @@
         'libs/jquery.mCustomScrollbar.concat.min',
         'libs/jquery.themepunch.revolution',
         'libs/jquery.themepunch.plugins.min',
+        'assets/plugins/toastr/toastr.min',
         'theme',
         // 'custom',
     ]); ?>

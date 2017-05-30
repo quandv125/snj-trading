@@ -55,7 +55,7 @@
 				</div>
 			</div>
 			<div class="divider10"></div> 
-			<label class="col-md-3 control-label text-right">Amount KRW</label>
+			<!-- <label class="col-md-3 control-label text-right">Amount KRW</label>
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
 					<div class="input number">
@@ -63,7 +63,7 @@
 					</div>
 					<span class="input-group-addon group-addon-width">KRW</span>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -81,7 +81,7 @@
 					<div class="input number">
 						<input name="" type="number" class="form-control" value="<?= $inquiries->add_commission?>" id="add_commission-inquiry">
 					</div>
-					<span class="input-group-addon group-addon-width">USD</span>
+					<span class="input-group-addon group-addon-width">%</span>
 				</div>
 			</div>
 			<div class="divider10"></div> 
@@ -95,7 +95,7 @@
 				</div>
 			</div>
 			<div class="divider10"></div> 
-			<label class="col-md-3 control-label text-right">KRW Commission</label>
+			<!-- <label class="col-md-3 control-label text-right">KRW Commission</label>
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
 					<div class="input number">
@@ -103,7 +103,7 @@
 					</div>
 					<span class="input-group-addon group-addon-width">KRW</span>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -135,7 +135,7 @@
 				</div>
 			</div>
 			<div class="divider10"></div> 
-			<label class="col-md-3 control-label text-right">Amount KRW</label>
+			<!-- <label class="col-md-3 control-label text-right">Amount KRW</label>
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
 					<div class="input number">
@@ -143,7 +143,7 @@
 					</div>
 					<span class="input-group-addon group-addon-width">KRW</span>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -164,7 +164,7 @@
 					<span class="input-group-addon group-addon-width">USD</span>
 				</div>
 			</div>
-			<div class="divider10"></div> 
+			<!-- <div class="divider10"></div> 
 			<label class="col-md-3 control-label text-right">In KRW</label>
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
@@ -173,13 +173,13 @@
 					</div>
 					<span class="input-group-addon group-addon-width">KRW</span>
 				</div>
-			</div>
+			</div> -->
 			<div class="divider10"></div> 
 			<label class="col-md-3 control-label text-right">Grand Total</label>
 			<div class="col-md-9">
 				<div class="input-group group-indicator">
 					<div class="input number">
-						<input name=""  class="form-control">
+						<input name="" class="form-control">
 					</div>
 					<span class="input-group-addon group-addon-width">USD</span>
 				</div>
@@ -190,7 +190,7 @@
 
 <div class="col-md-3"> 
 	<div class="panel info-box panel-white">
-		<div class="panel-body">	
+		<div class="panel-body">
 			<div class="info-box-stats1">
 				<p class="counter">Profit</p>
 			</div>
@@ -228,7 +228,7 @@
 						<td><?= $extras->cost?></td>
 						<td><?= $extras->profit?></td>
 						<td><?= $extras->final?></td>
-						<td>
+						<td class="width100px">
 							<span class="btn btn-primary waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalEdit<?= $extras->id ?>">
 							<i class="fa fa-pencil"></i>
 							</span>
@@ -255,7 +255,6 @@
 							</div>
 							</div>  
 							<!-- End -->
-							
 							<span class="btn btn-primary waves-effect waves-button waves-red delete-extras cursor-pointer" value="<?= $extras->id ?>">
 							<i class="fa fa-trash"></i>
 							</span>

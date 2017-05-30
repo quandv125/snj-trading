@@ -1,16 +1,15 @@
-
 <div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
-				Quotation
-				<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
-					
+			Quotation
+			<?php echo $this->Html->link('Next.Stage',['controller' =>'inquiries','action' =>'OrderAcknowledgement',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+			<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		</div> <!-- panel-heading -->
 		<div class="panel-body"> 
 			<div role="tabpanel">
 				<ul class="nav nav-tabs" role="tablist">
 					<li role="presentation" class="active"><a href="#tab1" role="tab" data-toggle="tab"><?= __("Terms") ?></a></li>
-					<li role="presentation"><a href="#tab2" role="tab" data-toggle="tab"><?= __("Infomations"); ?></a></li>
+					<li role="presentation"><a href="#tab2" role="tab" data-toggle="tab"><?= __("Infomations"); ?></a></li> 
 					<li role="presentation"><a href="#tab3" role="tab" data-toggle="tab"><?= __("Price"); ?></a></li>
 				</ul>
 				<div class="tab-content tab-content-lx">
@@ -87,7 +86,7 @@
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<?= $this->Form->button("Update",['class'=>'btn btn-success']) ?>
+							<?= $this->Form->button("Update",['class'=>'btn btn-success float-right']) ?>
 						</div>
 						<?= $this->Form->end(); ?>
 					</div>
@@ -110,10 +109,10 @@
 								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiries->id]) ?>
 								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiries->status]) ?>
 								<div class="col-md-6">
-									<?= $this->Form->input('username',['label'=>'Customer PIC','class'=>'username','value' => $inquiries->user['username']]) ?>
+									<?= $this->Form->input('customer_pic',['label'=>'Customer PIC','class'=>'username','value' => $inquiries->user['username']]) ?>
 								</div>
 								<div class="col-md-6">
-									<?= $this->Form->input('username',['label'=>'Customer Name','class'=>'username']) ?>
+									<?= $this->Form->input('customer_name',['label'=>'Customer Name','class'=>'username','value' => $inquiries->user['fullname']]) ?>
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('ref',['class'=>'ref','label'=>'Cus Ref', 'value' => $inquiries->ref]) ?>
@@ -146,17 +145,11 @@
 		<div class="panel-body"> 
 		</div>
 	</div><!-- panel panel-white -->
-
 	<div class="panel panel-white">
 		<div class="panel-body"> 
 
-			<!-- <?php// if (!empty($inquiries->inquirie_products)): ?> -->
-				<!-- <?php// if ($quotation2 == true): ?>
-					<div id="grid_quotation2" data-room='<?= ($data);?>'></div>
-				<?php// else: ?> -->
-					<div id="grid_quotation"  data-room='<?= ($data);?>'></div>
-				<!-- <?php// endif ?> -->
-			<!-- <?php// endif ?> -->
+			<div id="grid_quotation" inquiry_id="<?= $inquiries->id?>" data-type="<?= $inquiries->type?>" data-room='<?= ($data);?>'></div>
+			
 		</div>
 	</div> <!-- panel-body -->
 </div> <!-- row -->

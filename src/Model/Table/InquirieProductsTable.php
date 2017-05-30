@@ -49,6 +49,7 @@ use Cake\Validation\Validator;
             'joinType' => 'INNER'
         ]);
         $this->hasMany('InquirieSupplierProducts', [
+            'dependent' => true,
             'foreignKey' => 'inquirie_product_id'
         ]);
     }
@@ -62,9 +63,11 @@ use Cake\Validation\Validator;
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')            ->allowEmpty('id', 'create');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
         $validator
-            ->integer('status')            ->allowEmpty('status');
+            ->integer('status')
+            ->allowEmpty('status');
         $validator
             ->allowEmpty('partno');
         $validator
@@ -74,21 +77,28 @@ use Cake\Validation\Validator;
         $validator
             ->allowEmpty('amount');
         $validator
-            ->decimal('price')            ->requirePresence('price', 'create')            ->allowEmpty('price');
+            ->decimal('price')
+            ->requirePresence('price', 'create')
+            ->allowEmpty('price');
         $validator
-            ->integer('quantity')            ->allowEmpty('quantity');
+            ->integer('quantity')
+            ->allowEmpty('quantity');
         $validator
             ->allowEmpty('remark');
         $validator
             ->allowEmpty('unit');
         $validator
-            ->boolean('level')            ->allowEmpty('level');
+            ->boolean('level')
+            ->allowEmpty('level');
         $validator
-            ->integer('main')            ->allowEmpty('main');
+            ->integer('main')
+            ->allowEmpty('main');
         $validator
-            ->integer('parent')            ->allowEmpty('parent');
+            ->integer('parent')
+            ->allowEmpty('parent');
         $validator
-            ->integer('no')            ->allowEmpty('no');
+            ->integer('no')
+            ->allowEmpty('no');
         return $validator;
     }
 

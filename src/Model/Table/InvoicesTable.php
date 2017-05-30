@@ -184,7 +184,6 @@ class InvoicesTable extends Table
 
     public function getInfo($id){
         $Invoice = TableRegistry::get('Invoices');
-      
         $invoices = $Invoice->find()
         ->join([
             'table' => 'users',

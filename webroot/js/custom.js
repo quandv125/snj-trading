@@ -240,6 +240,7 @@ jQuery( document ).ready(function() {
 					// locate item in original datasource and update it
 					sampleData[getIndexById(e.data.ProductID)] = e.data;
 					e.data.f_total = e.data.u_p*e.data.quantity;
+					
 					// // on success
 					e.success();
 					var type = jQuery('.profit-percent-inquiries').attr('type');
@@ -254,6 +255,10 @@ jQuery( document ).ready(function() {
 						},
 						success: function(response){
 							jQuery("#loader").fadeOut();
+
+							// console.log(response);
+							// return;
+							
 							var grid = $('#grid_quotation').data("kendoGrid");
 							grid.dataSource.data(response);
 							grid.dataSource.refresh;
@@ -297,6 +302,7 @@ jQuery( document ).ready(function() {
 					id: "ProductID",
 					fields: {
 						ProductID: { editable: false, nullable: true },
+						choose: {editable: false},
 						no: {editable: false},
 						name: {editable: false},
 						unit: {editable: false},
@@ -323,12 +329,14 @@ jQuery( document ).ready(function() {
 			}
 		});
 
-		$("#grid_quotation").kendoGrid({
+		var grid = $("#grid_quotation").kendoGrid({
 			dataSource: dataSource,
 			navigatable: true,
+			sortable: { mode: "single", allowUnsort: false },
 			pageable: true,
-			toolbar: ["save", "cancel"],
+			toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>'  }],
 			columns: [
+				{ field: "choose",editable: false, nullable: true, title: "Choose", width: "65px" , template: "<input type='checkbox' class='checkbox' />" },
 				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
 				{ field: "name", title: "Description", width: "200px" },
 				{ field: "unit", title:"Units", width: "70px" },
@@ -337,7 +345,7 @@ jQuery( document ).ready(function() {
 				{ field: "supplier",title:"Supplier", width: "120px" },
 
 				{ field: "supp_u_p",title:"Supp.U/P", width: "90px" },
-				{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px" },
+				{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px"},
 
 				{ field: "profit",title:"P(%)", width: "50px" },
 
@@ -351,11 +359,74 @@ jQuery( document ).ready(function() {
 				{ field: "remark",title:"Remark", width: "170px" },
 
 
-				{ command: ["destroy"], title: "&nbsp;", width: "100px" }
+				// { command: ["destroy"], title: "&nbsp;", width: "100px" }
 			],
 			editable: true
+		}).data("kendoGrid");
+
+		grid.table.on("click", ".checkbox" , selectRow);
+
+		$("#btn-delete-kendo").bind("click", function () {
+			var type = jQuery("#grid_quotation").attr("data-type");
+			var inquiry_id = jQuery("#grid_quotation").attr("inquiry_id");
+			var checked = [];
+			for(var i in checkedIds){
+				if(checkedIds[i]){
+					checked.push(i);
+				}
+			}
+			jQuery.ajax({
+				url: '/inquiries/delete_item_products',
+				type: 'POST',
+				data: {"data":checked, "type":type,"inquiry_id":inquiry_id},
+				dataType: 'json',
+				cache: false,
+				beforeSend: function(){
+					jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					jQuery("#loader").fadeOut();
+					var grid = $('#grid_quotation').data("kendoGrid");
+					grid.dataSource.data(response);
+					grid.dataSource.refresh;
+					console.log(response);
+					return false;
+				}
+			});
 		});
-	}
+
+		var checkedIds = {};
+
+
+		//on click of the checkbox:
+		function selectRow() {
+			var checked = this.checked,
+			row = $(this).closest("tr"),
+			grid = $("#grid_quotation").data("kendoGrid"),
+			dataItem = grid.dataItem(row);
+			checkedIds[dataItem.id] = checked;
+			if (checked) {
+				//-select the row
+				row.addClass("k-state-selected");
+				} else {
+				//-remove selection
+				row.removeClass("k-state-selected");
+			}
+		}
+
+		//on dataBound event restore previous selected rows:
+		function onDataBound(e) {
+			var view = this.dataSource.view();
+			for(var i = 0; i < view.length;i++){
+				if(checkedIds[view[i].id]){
+					this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+					.addClass("k-state-selected")
+					.find(".checkbox")
+					.attr("checked","checked");
+				}
+			}
+		}
+	} //end if length
 
 	jQuery('.profit-percent-inquiries').change(function(){
 		var percent = jQuery(this).val();
@@ -376,7 +447,7 @@ jQuery( document ).ready(function() {
 				var grid = $('#grid_quotation').data("kendoGrid");
 				grid.dataSource.data(response);
 				grid.dataSource.refresh;
-				// console.log(response);
+				console.log(response);
 				
 			},
 			error:function(res) {
@@ -385,153 +456,152 @@ jQuery( document ).ready(function() {
 			}
 		}); // end ajax
 		
-		
 	});
 
-	if ($("#grid_quotation2").length){
-		var sampleData = jQuery('#grid_quotation2').data('room');
-		var sampleDataNextID = sampleData.length + 1;
+	// if ($("#grid_quotation2").length){
+	// 	var sampleData = jQuery('#grid_quotation2').data('room');
+	// 	var sampleDataNextID = sampleData.length + 1;
 		
-		var dataSource = new kendo.data.DataSource({
-			transport: {
-				read: function (e) {
-					e.success(sampleData);
-				},
-				update: function (e) {
-					sampleData[getIndexById(e.data.ProductID)] = e.data;
-					e.success();
+	// 	var dataSource = new kendo.data.DataSource({
+	// 		transport: {
+	// 			read: function (e) {
+	// 				e.success(sampleData);
+	// 			},
+	// 			update: function (e) {
+	// 				sampleData[getIndexById(e.data.ProductID)] = e.data;
+	// 				e.success();
 					
-					jQuery.ajax({
-						url: '/inquiries/update_inq2',
-						type: 'POST',
-						data: {"data":e.data},
-						dataType: 'html',
-						cache: false,
-						beforeSend: function(){
-							jQuery("#loader").fadeIn();
-						},
-						success: function(response){
-							sampleData = jQuery.parseJSON(response);
-							var grid = $('#grid_quotation2').data("kendoGrid");
-							grid.dataSource.read();
-							grid.dataSource.refresh;
-							jQuery("#loader").fadeOut();
-							return false;
-						}
-					});
-				},
-				destroy: function (e) {
-					sampleData.splice(getIndexById(e.data.ProductID), 1);
-					e.success();
-					jQuery.ajax({ 
-						url: '/inquiries/destroy_inq',
-						type: 'POST',
-						data: {"data":e.data},
-						dataType: 'html',
-						cache: false,
-						beforeSend: function(){jQuery("#loader").fadeIn();},
-						success: function(response){
-							jQuery("#loader").fadeOut();
-							e.success();
-							console.log(response);return;
-						}
-					});
-				}
-			},
-			error: function (e) {
-				// handle data operation error
-				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
-			},
-			pageSize: 30,
-			batch: false,
-			schema: {
-				model: {
-					id: "ProductID",
-					fields: {
-						ProductID: { editable: false, nullable: true },
-						no: {editable: false},
-						name: {editable: false},
-						unit: {editable: false},
-						quantity: {editable: true},
+	// 				jQuery.ajax({
+	// 					url: '/inquiries/update_inq2',
+	// 					type: 'POST',
+	// 					data: {"data":e.data},
+	// 					dataType: 'html',
+	// 					cache: false,
+	// 					beforeSend: function(){
+	// 						jQuery("#loader").fadeIn();
+	// 					},
+	// 					success: function(response){
+	// 						sampleData = jQuery.parseJSON(response);
+	// 						var grid = $('#grid_quotation2').data("kendoGrid");
+	// 						grid.dataSource.read();
+	// 						grid.dataSource.refresh;
+	// 						jQuery("#loader").fadeOut();
+	// 						return false;
+	// 					}
+	// 				});
+	// 			},
+	// 			destroy: function (e) {
+	// 				sampleData.splice(getIndexById(e.data.ProductID), 1);
+	// 				e.success();
+	// 				jQuery.ajax({ 
+	// 					url: '/inquiries/destroy_inq',
+	// 					type: 'POST',
+	// 					data: {"data":e.data},
+	// 					dataType: 'html',
+	// 					cache: false,
+	// 					beforeSend: function(){jQuery("#loader").fadeIn();},
+	// 					success: function(response){
+	// 						jQuery("#loader").fadeOut();
+	// 						e.success();
+	// 						console.log(response);return;
+	// 					}
+	// 				});
+	// 			}
+	// 		},
+	// 		error: function (e) {
+	// 			// handle data operation error
+	// 			alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+	// 		},
+	// 		pageSize: 30,
+	// 		batch: false,
+	// 		schema: {
+	// 			model: {
+	// 				id: "ProductID",
+	// 				fields: {
+	// 					ProductID: { editable: false, nullable: true },
+	// 					no: {editable: false},
+	// 					name: {editable: false},
+	// 					unit: {editable: false},
+	// 					quantity: {editable: true},
 
-						supplier: {editable: false},
+	// 					supplier: {editable: false},
 
-						supp_u_p:  {editable: false},
-						supp_u_p_usd:  {editable: false},
+	// 					supp_u_p:  {editable: false},
+	// 					supp_u_p_usd:  {editable: false},
 
-						profit:  {},
+	// 					profit:  {},
 
-						u_p:  {editable: false},
-						u_p_usd:  {editable: false},
+	// 					u_p:  {editable: false},
+	// 					u_p_usd:  {editable: false},
 
-						f_total:  {editable: false},
-						f_total_usd:  {editable: false},
+	// 					f_total:  {editable: false},
+	// 					f_total_usd:  {editable: false},
 
-						del_time: {editable: false},
-						del_time_final: {editable: false},
-						remark: {},
-					}
-				}
-			}
-		});
+	// 					del_time: {editable: false},
+	// 					del_time_final: {editable: false},
+	// 					remark: {},
+	// 				}
+	// 			}
+	// 		}
+	// 	});
 
-		$("#grid_quotation2").kendoGrid({
-			dataSource: dataSource,
-			navigatable: true,
-			pageable: true,
-			toolbar: ["save", "cancel"],
-			columns: [
-				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
-				{ field: "name", title: "Description", width: "200px" },
-				{ field: "unit", title:"Units", width: "70px" },
-				{ field: "quantity",title:"Quantity", width: "70px" },
+	// 	$("#grid_quotation2").kendoGrid({
+	// 		dataSource: dataSource,
+	// 		navigatable: true,
+	// 		pageable: true,
+	// 		toolbar: ["save", "cancel"],
+	// 		columns: [
+	// 			{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+	// 			{ field: "name", title: "Description", width: "200px" },
+	// 			{ field: "unit", title:"Units", width: "70px" },
+	// 			{ field: "quantity",title:"Quantity", width: "70px" },
 
-				{ field: "supplier",title:"Supplier", width: "120px" },
+	// 			{ field: "supplier",title:"Supplier", width: "120px" },
 
-				{ field: "supp_u_p",title:"Supp.U/P", width: "90px" },
-				{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px" },
+	// 			{ field: "supp_u_p",title:"Supp.U/P", width: "90px" },
+	// 			{ field: "supp_u_p_usd",title:"Supp.U/P(USD)", width: "110px" },
 
-				{ field: "profit",title:"P(%)", width: "50px" },
+	// 			{ field: "profit",title:"P(%)", width: "50px" },
 
-				{ field: "u_p",title:"U/Price", width: "70px" },
-				{ field: "u_p_usd",title:"U/Price(USD)", width: "110px" },
+	// 			{ field: "u_p",title:"U/Price", width: "70px" },
+	// 			{ field: "u_p_usd",title:"U/Price(USD)", width: "110px" },
 
-				{ field: "f_total",title:"Final total", width: "90px" },
-				{ field: "f_total_usd",title:"Final total(USD)", width: "120px" },
-				{ field: "del_time",title:"Delivery Time(day)", width: "130px" },
-				{ field: "del_time_final",title:"Final Delivery Time", width: "130px" },
-				{ field: "remark",title:"Remark", width: "170px" },
+	// 			{ field: "f_total",title:"Final total", width: "90px" },
+	// 			{ field: "f_total_usd",title:"Final total(USD)", width: "120px" },
+	// 			{ field: "del_time",title:"Delivery Time(day)", width: "130px" },
+	// 			{ field: "del_time_final",title:"Final Delivery Time", width: "130px" },
+	// 			{ field: "remark",title:"Remark", width: "170px" },
 
 
-				{ command: ["destroy"], title: "&nbsp;", width: "100px" }
-			],
-			editable: true
-		});
-	}
+	// 			{ command: ["destroy"], title: "&nbsp;", width: "100px" }
+	// 		],
+	// 		editable: true
+	// 	});
+	// }
 
-	jQuery('.btn-set-profit').click(function(){
-		var percent = jQuery('.profit2-percent-inquiries').val();
-		var arrid = jQuery('#ArrID').attr('value');
-		var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
-		jQuery.ajax({ 
-			url: '/inquiries/set_profit_inquiry',
-			type: 'POST',
-			data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id},
-			dataType: 'html',
-			cache: false,
-			beforeSend: function(){jQuery("#loader").fadeIn();},
-			success: function(response){
-				jQuery("#loader").fadeOut();
-				var data = jQuery.parseJSON(response);
-				sampleData = data;
-				var grid = $('#grid_quotation2').data("kendoGrid");
-				grid.dataSource.read();
-				grid.dataSource.refresh;
-				toastr.success('Set profit successfully!');
-				return;
-			}
-		});
-	});
+	// jQuery('.btn-set-profit').click(function(){
+	// 	var percent = jQuery('.profit2-percent-inquiries').val();
+	// 	var arrid = jQuery('#ArrID').attr('value');
+	// 	var inquiry_id = jQuery('#ArrID').attr('inquiry_id');
+	// 	jQuery.ajax({ 
+	// 		url: '/inquiries/set_profit_inquiry',
+	// 		type: 'POST',
+	// 		data: {"percent":percent,"arrid":arrid,"inquiry_id":inquiry_id},
+	// 		dataType: 'html',
+	// 		cache: false,
+	// 		beforeSend: function(){jQuery("#loader").fadeIn();},
+	// 		success: function(response){
+	// 			jQuery("#loader").fadeOut();
+	// 			var data = jQuery.parseJSON(response);
+	// 			sampleData = data;
+	// 			var grid = $('#grid_quotation2').data("kendoGrid");
+	// 			grid.dataSource.read();
+	// 			grid.dataSource.refresh;
+	// 			toastr.success('Set profit successfully!');
+	// 			return;
+	// 		}
+	// 	});
+	// });
 
 	// Plugin Fancybox
 	jQuery('.fancyboxs').click(function(){
@@ -968,8 +1038,6 @@ jQuery( document ).ready(function() {
 		});
 	});
 
-	
-
 	jQuery(".customer-search").bind('blur keyup',function(e) {  
 		if (e.type == 'blur' || e.keyCode == '13')  {
 			var tbl = jQuery(this).attr('tbl');
@@ -1298,6 +1366,7 @@ jQuery( document ).ready(function() {
 			}, 500 );
 		}
 	});
+
 	jQuery("#range_invoices").ionRangeSlider({
 		type: "double",
 		grid: true,
@@ -1384,6 +1453,7 @@ jQuery( document ).ready(function() {
 		var result = (parseInt(percent) / 100) * parseInt(price);
 		return result;
 	}
+	
 	var myarr = new Array();
 	jQuery.each(jQuery('.product-order'), function(i, v) {
 		var id	= jQuery( this ).attr('id');
@@ -1844,6 +1914,27 @@ jQuery( document ).ready(function() {
 		jQuery('.percent-profit-lx').val(pp);
 	});
 	
+	jQuery(".DeleteInqSupplier").click(function(event){
+		var r = confirm("Are you sure you want to delete?");
+		if (r == true) {
+			var id_supp = jQuery(this).attr('id');
+			jQuery('.myrowaxn-'+id_supp).remove();
+			jQuery.ajax({
+				url: '/inquiries/del_inq_supplier',
+				type: 'POST',
+				data: {"id": id_supp},
+				dataType: 'html',
+				cache: false,
+				beforeSend: function(){
+					// jQuery("#loader").fadeIn();
+				},
+				success: function(response){
+					// jQuery("#loader").fadeOut();
+					
+				}
+			}); // Ajax
+		}
+	});
 
 	function kendo_ui_grid() {
 		jQuery('#choose-all-inquiries').on('click',(function(event){
@@ -1867,6 +1958,8 @@ jQuery( document ).ready(function() {
 					jQuery('#presentation2').addClass('active');
 					jQuery('#tab1').removeClass('active').removeClass('in');
 					jQuery('#tab2').addClass('active').addClass('in');
+					jQuery("#count-product-of-supp-"+supplier_id).html(jQuery("#inqSuppliers").attr('count'));
+					
 				}
 			}); // Ajax
 		}));
@@ -1887,7 +1980,6 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-
 					jQuery('.panel-supplier-details').removeClass('hidden');
 					jQuery('.panel-supplier-details').html(response);
 					kendo_ui_grid();
@@ -1895,6 +1987,7 @@ jQuery( document ).ready(function() {
 					jQuery('#presentation2').addClass('active');
 					jQuery('#tab1').removeClass('active').removeClass('in');
 					jQuery('#tab2').addClass('active').addClass('in');
+					jQuery("#count-product-of-supp-"+supplier_id).html(jQuery("#inqSuppliers").attr('count'));
 				}
 			}); // Ajax
 		}));
@@ -1915,7 +2008,6 @@ jQuery( document ).ready(function() {
 				},
 				success: function(response){
 					jQuery("#loader").fadeOut();
-					
 					jQuery('.panel-supplier-details').removeClass('hidden');
 					jQuery('.panel-supplier-details').html(response);
 					kendo_ui_grid();
@@ -1923,6 +2015,7 @@ jQuery( document ).ready(function() {
 					jQuery('#presentation2').addClass('active');
 					jQuery('#tab1').removeClass('active').removeClass('in');
 					jQuery('#tab2').addClass('active').addClass('in');
+					jQuery("#count-product-of-supp-"+supplier_id).html(jQuery("#inqSuppliers").attr('count'));
 				}
 			}); // Ajax
 		}));
@@ -2083,12 +2176,11 @@ jQuery( document ).ready(function() {
 	}
 
 
-	jQuery("#inquiries-details tr").click(function(){
+	jQuery("#inquiries-details tr .main").click(function(){
 		jQuery('.panel-supplier-details').addClass('hidden');
 		jQuery("#inquiries-details tr").removeClass('tr-actived');
-		jQuery(this).addClass('tr-actived');
-		var id = jQuery(this).attr('id');
-
+		jQuery(this).parent().addClass('tr-actived');
+		var id = jQuery(this).parent().attr('id');
 		jQuery.ajax({
 			url: '/inquiries/get_supplier_details',
 			type: 'POST',
@@ -2414,11 +2506,11 @@ jQuery( document ).ready(function() {
 					jQuery('#inquiries-details').append(data.result);
 					jQuery('#myModal').modal('toggle');
 					
-					jQuery("#inquiries-details tr").click(function(){
+					jQuery("#inquiries-details tr .main").click(function(){
 						jQuery('.panel-supplier-details').addClass('hidden');
 						jQuery("#inquiries-details tr").removeClass('tr-actived');
-						jQuery(this).addClass('tr-actived');
-						var id = jQuery(this).attr('id');
+						jQuery(this).parent().addClass('tr-actived');
+						var id = jQuery(this).parent().attr('id');
 						jQuery.ajax({
 							url: '/inquiries/get_supplier_details',
 							type: 'POST',
@@ -2435,10 +2527,32 @@ jQuery( document ).ready(function() {
 								kendo_ui_grid();
 							}
 						}); // Ajax
-					}); // End 
+					});
 
-				}else{
-					 toastr.success(data.result);
+					jQuery(".DeleteInqSupplier").click(function(event){
+						var r = confirm("Are you sure you want to delete?");
+						if (r == true) {
+							var id_supp = jQuery(this).attr('id');
+							jQuery('.myrowaxn-'+id_supp).remove();
+							jQuery.ajax({
+								url: '/inquiries/del_inq_supplier',
+								type: 'POST',
+								data: {"id": id_supp},
+								dataType: 'html',
+								cache: false,
+								beforeSend: function(){
+									// jQuery("#loader").fadeIn();
+								},
+								success: function(response){
+									// jQuery("#loader").fadeOut();
+									
+								}
+							}); // Ajax
+						}
+					});
+
+				} else {
+					toastr.success(data.result);
 				}
 			},
 			error: function(response, status){}

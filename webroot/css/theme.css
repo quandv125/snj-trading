@@ -15612,3 +15612,6 @@ div.show-image:hover span.delete-wishlist {
     border-right: 1px solid #e4e4e4;
     padding: 10px;
 }
+.modal{
+    z-index: 99999 !important;
+}

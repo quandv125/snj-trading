@@ -38,10 +38,17 @@
 									<div class="form-group text">
 										<label class="control-label" for="created">Files:</label><div class="clearfix"></div>
 										<div class="file-attachment margin-left15">
-											<?php foreach ($inquiry->attachments as $key => $attachment): ?>
-												<?php echo $this->Html->link(basename($attachment->path),['controller'=>'inquiries','action'=>'download',$attachment->id]) ?>
-												<div class="clearfix"></div>
-											<?php endforeach ?>
+										
+											<?php if (isset($inquiry->attachments)): ?>
+											<table class="table">
+												<?php foreach ($inquiry->attachments as $key => $attachment): ?>
+												<tr id="attachments-<?= $attachment->id;?>">
+													<td><?php echo $this->Html->link(basename($attachment->path),['controller'=>'inquiries','action'=>'download',$attachment->id]) ?></td>
+													<td><span class="cursor-point remove-file-att" id="<?= $attachment->id;?>"><i class="fa fa-trash-o"></i></span></td>
+												</tr>
+												<?php endforeach ?>
+											</table>
+											<?php endif ?>
 										</div>
 									</div>								
 								</div>

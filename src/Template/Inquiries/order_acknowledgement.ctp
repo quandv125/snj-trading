@@ -1,5 +1,5 @@
-<div class="row">
 
+<div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 			O.A
@@ -13,7 +13,6 @@
 					<li role="presentation"><a href="#tab2" role="tab" data-toggle="tab"><?= __("Price"); ?></a></li>
 				</ul>
 				<div class="tab-content tab-content-lx">
-					
 					<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 					<?php echo $this->Form->create(null); ?>
 						<div class="panel-body">
@@ -21,7 +20,6 @@
 							<div class="col-sm-6">
 								<?php echo $this->Form->input('delivery_time',['value'=>$inquiries->delivery_time]); ?>
 							</div>
-							
 							<div class="col-sm-6">
 								<?php echo $this->Form->input('our_pic',['value'=>$inquiries->Pic['fullname']]); ?>
 							</div>
@@ -35,7 +33,6 @@
 							<div class="col-sm-6">
 								<?php echo $this->Form->input('oa_date',['value'=>'','label'=>'OA Date','class'=>'onlydate2']); ?>
 							</div>
-							
 						</div>
 						<div class="col-sm-6">
 							<div class="col-sm-6">

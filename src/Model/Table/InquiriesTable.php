@@ -50,7 +50,6 @@ use Cake\Datasource\ConnectionManager;
 		$this->belongsTo('Customers', [
 			'foreignKey' => 'customer_id'
 		]);
-		
 		$this->hasMany('InquirieSuppliers', [
 			'dependent' => true,
 			'foreignKey' => 'inquiry_id'
@@ -109,7 +108,7 @@ use Cake\Datasource\ConnectionManager;
 			->allowEmpty('insurance_cost');
 		$validator
 			->allowEmpty('description');
-			
+
 		return $validator;
 	}
 
@@ -540,7 +539,7 @@ use Cake\Datasource\ConnectionManager;
 			],
 			'fields' => ['Inquiries.id','Inquiries.user_id','Inquiries.pic_id','Inquiries.status','Inquiries.type','Inquiries.vessel','Inquiries.imo_no','Inquiries.hull_no','Inquiries.ref','Inquiries.description','Inquiries.scope_of_supply','Inquiries.delivery_terms','Inquiries.terms_of_payment','Inquiries.discount','Inquiries.commission','Inquiries.add_commission','Inquiries.others','Inquiries.quotation_date','Inquiries.delivery_time','Inquiries.validity_of_the_offer','Inquiries.remark','Inquiries.created','Pic.id','Pic.username','Pic.fullname']
 		]);
-			pr($inquiries);die("12444");
+		
 		return $inquiries;
 	}
 

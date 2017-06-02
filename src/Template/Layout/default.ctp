@@ -100,9 +100,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'assets/plugins/daterangepicker/daterangepicker',
         'assets/plugins/livesearch/vendor/jquery.hideseek.min',
         'assets/plugins/livesearch/initializers','libs/kendo.all.min',
+        'libs/angular.js',
+        'myapp',
         'custom'
+        
        
     )); ?>
+     
 </head>
 <body class="page-horizontal-bar compact-menu ">
    

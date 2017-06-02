@@ -1,6 +1,8 @@
+
 <div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
+
 			Quotation
 			<?php echo $this->Html->link('Next.Stage',['controller' =>'inquiries','action' =>'OrderAcknowledgement',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 			<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>

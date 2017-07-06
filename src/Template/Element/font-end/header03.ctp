@@ -5,7 +5,7 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-2 col-xs-6">
 					<div class="logo5">
-						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
+						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'width' => '100%']) ?>
 					</div>
 				</div>
 				<div class="col-md-7 col-sm-10 col-xs-12">
@@ -22,8 +22,8 @@
 							</li>
 							<li class="top-language has-child">
 								<a class="language-selected" href="#">
-								    <?php 
-										if ($this->request->session()->read('Config.language') == NULL) {
+									<?php
+										if ($this->request->session()->read('Config.language') == NULL) { 
 											echo $this->Html->image('flags/en.png',['class'=>"position-left"]);
 										} else {
 											echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);

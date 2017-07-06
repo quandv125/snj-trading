@@ -3,7 +3,7 @@ jQuery(document).ready(function() {
 	
 	show_action = function(str_rand){
 		// Plugin Fancybox
-		jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
+		// jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
 		jQuery('.onlydate').datetimepicker({	format: 'YYYY-MM-DD'	});
 		jQuery('.datetimepicker').datetimepicker({	format: 'YYYY-MM-DD HH:mm'	});
 		jQuery('.date-picker').datepicker({ orientation: "top auto",  autoclose: true, format: 'yyyy-mm-dd' });

@@ -49,6 +49,10 @@ use Cake\Validation\Validator;
             'foreignKey' => 'supplier_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('SupplierPics', [
+            'foreignKey' => 'supplier_pic_id',
+              'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);

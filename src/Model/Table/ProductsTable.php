@@ -62,12 +62,15 @@ class ProductsTable extends Table
             'foreignKey' => 'user_id'
         ]);
         $this->hasMany('Images', [
+            'dependent' => true,
             'foreignKey' => 'product_id'
         ]);
         $this->hasMany('InvoiceProducts', [
+             'dependent' => true,
             'foreignKey' => 'product_id'
         ]);
         $this->hasMany('StockProducts', [
+             'dependent' => true,
             'foreignKey' => 'product_id'
         ]);
         $this->hasMany('Tags', [

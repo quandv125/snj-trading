@@ -4,7 +4,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Mailer\Email;
-
+use Cake\Network\Exception\NotFoundException;
 /**
  * Inquiries Controller
  *
@@ -23,6 +23,19 @@ class InquiriesController extends AppController
 		$this->set(compact('inquiries'));
 		$this->set('_serialize', ['inquiries']);
 	}
+
+	public function InquiryInfo() {
+		if ($this->request->is(['get'])) {
+			$this->paginate = [
+				'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'],
+				'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
+				'order' => ['Inquiries.created'  => 'DESC'],
+			];
+			$inquiries = $this->paginate($this->Inquiries);
+			echo json_encode($inquiries); exit();
+ 		}
+	}
+
 
 	public function view($id = null){
 		$this->viewBuilder()->layout('product');
@@ -59,7 +72,6 @@ class InquiriesController extends AppController
 		$data = json_encode($data);
 		$this->set(compact('inquiries','data','total'));
 
-		// $inquiry = $this->Inquiries->getInfo($id);
 		$this->set('inquiry', $inquiry);
 		$this->set('_serialize', ['inquiry']);
 	}
@@ -73,10 +85,15 @@ class InquiriesController extends AppController
 		$this->set(compact('inquiries','data','total'));
 	}
 
+	public function InquiriesDetailsCtrl()	{
+		$result		= $this->get_data_kendo_fontend($this->request->data['id']);
+		$data = array('inquiries' => $result['inquiries'], 'data' => $result['data'], 'total' => $result['total']);
+		echo json_encode($data);exit();
+	}
+
 	protected function get_data_kendo_fontend($id)	{
 		$total = 0;
 		if ($this->Inquiries->exists(['id' => $id, 'type' => AVAILABLE])) {
-			
 			$inquiries = $this->Inquiries->available($id);
 			if (!empty($inquiries->inquirie_products)) {
 				foreach ($inquiries->inquirie_products as $key => $inquirie_product){
@@ -104,6 +121,7 @@ class InquiriesController extends AppController
 		} else { ## No Price
 			
 			$inquiries = $this->Inquiries->unavailable($id);
+
 			if (!empty($inquiries->inquirie_products)) {
 				foreach ($inquiries->inquirie_products as $inquirie_product){
 					if (!empty($inquirie_product->inquirie_supplier_products)) {
@@ -120,16 +138,17 @@ class InquiriesController extends AppController
 						$f_total = NULL;
 					} else {
 						if ($price == null) {
-							$u_p = null;$f_total = NULL;
+							$u_p = null; $f_total = NULL;
 						}else {
 							$u_p 	 = $price + (($price*$inquirie_product->profit)/100);
 							$f_total = $u_p*$inquirie_product->quantity;
 						}
 						$no 	 = $inquirie_product->no;
 					}
+
 					$data[] = [
 						"ProductID" 	=> $inquirie_product->id,
-						"choose" 		 => NULL,
+						"choose" 		=> NULL,
 						"no" 			=> $no,
 						"name"			=> $inquirie_product->name,
 						"maker_type_ref"=> $inquirie_product->maker_type_ref,
@@ -142,6 +161,7 @@ class InquiriesController extends AppController
 						"remark"		=> $remark
 					];
 					$total = $total + $f_total;
+
 				}
 			} //end if
 
@@ -169,6 +189,7 @@ class InquiriesController extends AppController
 	}
 
 	public function edit($id = null)	{
+		
 		$inquiry = $this->Inquiries->get($id, [
 			'contain' => []
 		]);
@@ -196,6 +217,17 @@ class InquiriesController extends AppController
 		}
 
 		return $this->redirect(['action' => 'inquiries']);
+	}
+
+	public function deleteinquiry()	{
+		$this->request->allowMethod(['post', 'delete']);
+		$inquiry = $this->Inquiries->get($this->request->data);
+		if ($this->Inquiries->delete($inquiry)) {
+			$msg = array('status' => true, 'message' => __('The inquiry has been deleted.'));
+		} else {
+			$msg = array('status' => false, 'message' => __('The inquiry could not be deleted. Please, try again.'));
+		}
+		echo json_encode($msg);exit();
 	}
 
 	public function MakeInq() {
@@ -275,13 +307,8 @@ class InquiriesController extends AppController
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
 			if (!empty($this->Auth->user('id'))) {
-
-				$this->request->data['status']  =  '1';
-				$this->request->data['type'] 	= UNAVAILABLE;
 				$this->request->data['user_id'] = $this->Auth->user('id');
-
 					$inquiry_id =  $this->Inquiries->saveInq($this->request->data);
-				
 					if (!empty($this->request->data['file'][0]['name'])) {
 						$flag = true;
 						for ($i=0; $i < count($this->request->data['file']) ; $i++) { 
@@ -311,7 +338,7 @@ class InquiriesController extends AppController
 		}
 	}
 
-	public function Inquiries()    {
+	public function Inquiries() {
 		$inquiries = $this->Inquiries->find()
 			->contain([
 				'Users' => function ($q) {
@@ -327,10 +354,14 @@ class InquiriesController extends AppController
 		$this->set(compact('inquiries'));
 	}
 
-	public function InquiriesDetails($id)    {
+	public function InquiriesDetails($id)    {	
+		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
+			throw new NotFoundException(__('Inquiries not found'));
+		}
+
 		$InquirieSupplier = TableRegistry::get('InquirieSuppliers');
 		$inquiry = $this->Inquiries->getInfo($id);
-		// pr($inquiry);die();
+	
 		$total = 0;
 		if ($inquiry->type == AVAILABLE) {
 			# 1 Price
@@ -405,6 +436,7 @@ class InquiriesController extends AppController
 	}
 
 	public function UpdateSupplierProduct() {
+		
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
 			// pr(count($this->request->data));die();
@@ -424,9 +456,15 @@ class InquiriesController extends AppController
 
 	public function InquiriesSuppliers($id) {
 		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
-		
+		$SupplierPic = TableRegistry::get('Supplier_pics');
 		$inqSuppliers = $InquirieSupplier->find()->contain([
+			'Inquiries'=> function ($q) {
+				return $q->autoFields(false)->select(['id','vessel','ref']);
+			},
 			'Suppliers' => function ($q) {
+				return $q->autoFields(false)->select(['id','name']);
+			},
+			'SupplierPics' => function ($q) {
 				return $q->autoFields(false)->select(['id','name']);
 			},
 			'Users' => function ($q) {
@@ -437,54 +475,15 @@ class InquiriesController extends AppController
 					->leftJoin('inquirie_products','inquirie_products.id = InquirieSupplierProducts.inquirie_product_id');
 			}
 		])->where(['inquiry_id' => $id])->toarray();
-		
-		$inquiry = $this->Inquiries->getInfo($id);
+	
+		// pr($inqSuppliers);die();
 		
 		$total1 = $this->Inquiries->InquirieProducts->find()->where(['inquiry_id' => $id,'level' => 1])->count();
-
-		// $count = 0;
-		// if ($inquiry->type == AVAILABLE) {
-		// 	foreach ($inquiry->inquirie_products as $inquirieProducts){
-		// 		$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
-		// 		$price = ($inquirieProducts['Products']['retail_price'] == 0)? "":$inquirieProducts['Products']['retail_price']; 
-		// 		$data[] = [
-		// 				"ProductID"		=> $inquirieProducts->id,
-		// 				"no" 			=> $no,
-		// 				"name"			=> $inquirieProducts['Products']['product_name'],
-		// 				"maker_type_ref"=> $inquirieProducts['Products']['type_model'],
-		// 				"partno"		=> $inquirieProducts['Products']['sku'],
-		// 				"unit"			=> $inquirieProducts['Products']['unit'],
-		// 				"quantity"		=> $inquirieProducts->quantity,
-		// 				"price"			=> $price,
-		// 				"remark"		=> $inquirieProducts->remark
-		// 			];
-		// 		// $total = $total + $price;
-		// 	}
-		// }else {
-		// 	foreach ($inquiry->inquirie_products as $inquirieProducts){
-		// 		$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
-		// 		$price = ($inquirieProducts->price == 0)? "":$inquirieProducts->price; 
-		// 		$data[] = [
-		// 				"ProductID"		=> $inquirieProducts->id,
-		// 				"no" 			=> $no,
-		// 				"name"			=> $inquirieProducts->name,
-		// 				"maker_type_ref"=> $inquirieProducts->maker_type_ref,
-		// 				"partno"		=> $inquirieProducts->partno,
-		// 				"unit"			=> $inquirieProducts->unit,
-		// 				"quantity"		=> $inquirieProducts->quantity,
-		// 				"price"			=> $price,
-		// 				"remark"		=> $inquirieProducts->remark
-		// 			];
-		// 		$count = $count + $inquirieProducts->assign;
-		// 		// $total = $total + $price;
-		// 	}
-		// }
-
-		// $data = json_encode($data);
+		$options = $SupplierPic->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ])->where(['supplier_id'=>1]);
 		$user_id = $InquirieSupplier->Users->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
 		$supplier_id = $InquirieSupplier->Suppliers->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
 
-		$this->set(compact('inqSuppliers','inquiry','data','count','total1', 'user_id','supplier_id'));
+		$this->set(compact('inqSuppliers','id','options','total1', 'user_id','supplier_id'));
 	}
 
 	public function SuppliersQuotation($id)	{
@@ -522,6 +521,7 @@ class InquiriesController extends AppController
 			$this->autoRender = false;
 			$InquirieProduct = TableRegistry::get('inquirie_products');
 			$inqSuppliers = $this->Inquiries->InquirieSupplierInfo($this->request->data['id']);
+		
 			$count = count($inqSuppliers->inquirie_supplier_products);
 			$data = '';
 			$total = 0;
@@ -545,19 +545,92 @@ class InquiriesController extends AppController
 					];
 				}
 			}
-
+			$SupplierPic = TableRegistry::get('Supplier_pics');
+			
+			$supplier_pics = $SupplierPic->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ])->where(['supplier_id'=>$inqSuppliers['supplier']['id']]);
 			$data = json_encode($data);
 			$main_id = $InquirieProduct->find('list',['keyField'=>'main','valueField'=>'name'])->where(['inquiry_id' => $inqSuppliers->inquiry['id'], 'level' => 0]);
 			
+			$this->set(compact('inqSuppliers','main_id','count','data','total','supplier_pics'));
+			$this->render('/Element/Inquiries/supplier_details');
+		}
+	}
+
+	public function GetPurchaseOrder(){
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false;
+			$InquirieProduct = TableRegistry::get('inquirie_products');
+			$inqSuppliers = $this->Inquiries->PurchaseOrderDetails($this->request->data['id']);
+			$count = count($inqSuppliers->inquirie_supplier_products);
+			$data = '';
+			$total = 0;
+			if (!empty($inqSuppliers->inquirie_supplier_products)) {
+				foreach ($inqSuppliers->inquirie_supplier_products as $QuotationProducts){
+					$qp = $QuotationProducts['inquirie_products'];
+					$total_price = $QuotationProducts->price * $qp['quantity'];
+					$total = $total + ($QuotationProducts->price *$qp['quantity']);
+					$data[] = [
+						"ProductID"		=> $QuotationProducts->id,
+						"no" 			=> $qp['no'],
+						"name"			=> $qp['name'],
+						"maker_type_ref"=> $qp['maker_type_ref'],
+						"partno"		=> $qp['partno'],
+						"unit"			=> $qp['unit'],
+						"quantity"		=> $qp['quantity'],
+						"price"			=> $QuotationProducts->price,
+						"delivery_time"	=> $QuotationProducts->delivery_time,
+						"total_price"	=> $total_price,
+						"remark"		=> $QuotationProducts->remark
+					];
+				}
+			}
+			$data = json_encode($data);
+			$main_id = $InquirieProduct->find('list',['keyField'=>'main','valueField'=>'name'])->where(['inquiry_id' => $inqSuppliers->inquiry['id'], 'level' => 0]);
 			$this->set(compact('inqSuppliers','main_id','count','data','total'));
 			$this->render('/Element/Inquiries/supplier_details');
+		}
+	}
+
+	public function GetPurchaseOrderAvailable(){
+		if ($this->request->is('Ajax')) {
+			$this->autoRender = false; 
+			$inqSuppliers = $this->Inquiries->PurchaseOrderDetailsAVAILABLE($this->request->data['id'],$this->request->data['inquiry_id']);
+			$data = '';
+			$total = 0;
+			if (!empty($inqSuppliers)) {
+				foreach ($inqSuppliers as $key => $QuotationProducts){
+
+					$total_price = $QuotationProducts['retail_price'] * $QuotationProducts['quantity'];
+					$total_price = $total_price + (($total_price*$QuotationProducts['profit'])/100);
+					
+					$total = $total + $QuotationProducts['retail_price'];
+					$data[] = [
+						"ProductID"		=> $QuotationProducts['id'],
+						"no" 			=> $key+1,
+						"name"			=> $QuotationProducts['product_name'],
+						"maker_type_ref"=> '',
+						"partno"		=> $QuotationProducts['serial_no'],
+						"unit"			=> $QuotationProducts['unit'],
+						"quantity"		=> $QuotationProducts['quantity'],
+						"profit" 		=> $QuotationProducts['profit'],
+						"price"			=> $QuotationProducts['retail_price'],
+						"delivery_time"	=> '',
+						"total_price"	=> $total_price,
+						"remark"		=> ''
+					];
+				}
+			}
+			
+			$data = json_encode($data);
+			
+			$this->set(compact('inqSuppliers','data','total'));
+			$this->render('/Element/Inquiries/po');
 		}
 	}
 
 	public function AddInqSupplier($id = null){
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-			
 			$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
 			if (!$InquirieSupplier->exists([
 					'supplier_id' => $this->request->data['supplier_id'], 
@@ -581,7 +654,6 @@ class InquiriesController extends AppController
 		$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-			
 			$inqSupp = $InquirieSupplier->get($this->request->data['id']);
 			if ($InquirieSupplier->delete($inqSupp)) {
 				echo "OK";
@@ -592,7 +664,6 @@ class InquiriesController extends AppController
 		}else {
 			// pr($id);die();
 			$this->request->allowMethod(['post', 'delete']);
-			
 			$inqSupp = $InquirieSupplier->get($id);
 			if ($InquirieSupplier->delete($inqSupp)) {
 				return $this->redirect(['action' => 'inquiries-suppliers', $inqSupp->inquiry_id]);
@@ -604,13 +675,11 @@ class InquiriesController extends AppController
 	}
 
 	public function AddSupProd($inqsupp_id, $inquiry_id) {
-		
 		if (isset($this->request->data['num'])) {
 			$data = $this->Inquiries->func1($this->request->data['num'], null,$inquiry_id, $inqsupp_id);
 		}else{
 			$data = $this->Inquiries->func1(null, $this->request->data['main'],$inquiry_id, $inqsupp_id);
 		}
-		
 		if (isset($data) && !empty($data)) {
 			if ($this->Inquiries->saveInqSupProd($data)) {
 			} else{
@@ -756,13 +825,24 @@ class InquiriesController extends AppController
 	public function comparing($id){
 		$inquiryproducts = $this->Inquiries->query2($id);
 		// Get list supplier in inquiries
-		$inqSuppliers = $this->Inquiries->query3($id);
-		$list = ['LowestPrice'=>'Lowest Price','HightPrice'=>'Hight Price'];
-		foreach ($inqSuppliers as $key => $value) {
-			$list[$value->supplier['id']] = $value->supplier['name']; 
+		$inqSuppliers  = $this->Inquiries->query3($id);
+		// $listSuppliers = $this->Inquiries->query3_1($id);
+	
+		$list = ['LowestPrice' => 'Lowest Price', 'HightPrice' => 'Hight Price'];
+		// if (!empty($listSuppliers)) {
+			// foreach ($listSuppliers as $key => $value) {
+				// $list[$value['id']] = $value['username']; 
+			// }
+		// }
+
+		if (!empty($inqSuppliers)) {
+			foreach ($inqSuppliers as $key => $value) {
+				$list[$value->id] = $value->supplier['name']; 
+			}
 		}
+		
 		// End list supplier
-		$this->set(compact('inquiryproducts','inqSuppliers','id','list'));
+		$this->set(compact('inquiryproducts','inqSuppliers','listSuppliers','id','list'));
 	}
 
 	public function SetChoose()	{
@@ -776,10 +856,13 @@ class InquiriesController extends AppController
 	}
 	
 	public function quotations($id, $type = null) {
-		$result 	= $this->get_data_kendo($id);
-		$inquiries 	= $result['inquiries'];
-		$data  		= json_encode($result['data']);
-		$myarr 		= json_encode($result['arr']);
+		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
+			throw new NotFoundException(__('Inquiries not found'));
+		} 
+		$result		 = $this->get_data_kendo($id);
+		$inquiries	 = $result['inquiries'];
+		$data		 = json_encode($result['data']);
+		$myarr		 = json_encode($result['arr']);
 		$grand_total = $result['grand_total'];
 		$this->set(compact('inquiries','data','myarr','grand_total'));
 	}
@@ -842,7 +925,7 @@ class InquiriesController extends AppController
 						$arr[] 	 = $inquirie_product->id;
 						$data[] = [
 							"ProductID"		 => $inquirie_product->id,
-							"no"			 => $key+1,
+							"no"			 => $key+1, 
 							"name"			 => $inquirie_product['products']['product_name'],
 							"unit"			 => $inquirie_product['products']['unit'],
 							"quantity"		 => $inquirie_product->quantity,
@@ -909,9 +992,11 @@ class InquiriesController extends AppController
 	public function UpdateInquirieSupplier() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
+			pr($this->request->data);die();
 			$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
 			$inqSuppliers = $InquirieSupplier->get($this->request->data['id'], [ 'contain' => [] ]);
 			$inqSuppliers = $InquirieSupplier->patchEntity($inqSuppliers, $this->request->data);
+			// pr($inqSuppliers);die();
 			if ($InquirieSupplier->save($inqSuppliers)) {
 				echo "The infomation has been updated";
 			} else {
@@ -1003,8 +1088,8 @@ class InquiriesController extends AppController
 					$grand_total = $grand_total+$f_total;
 					$arr[] = $inquirie_product->id;
 					$data[] = [
- 						"ProductID"		 => $inquirie_product->id,
- 						"choose" 		 => NULL,
+						"ProductID"		 => $inquirie_product->id,
+						"choose" 		 => NULL,
 						"no" 			 => $key+1,
 						"name"			 => $inquirie_product['products']['product_name'],
 						"unit"			 => $inquirie_product['products']['unit'],
@@ -1080,10 +1165,10 @@ class InquiriesController extends AppController
 				$data = ''; $grand_total = 0;
 				if (!empty($inquiries->inquirie_products)) {
 					foreach ($inquiries->inquirie_products as $key => $inquirie_product){
-						$u_p 	 = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
+						$u_p = $inquirie_product['products']['retail_price'] + (($inquirie_product['products']['retail_price']*$inquirie_product->profit)/100);
 						$f_total = $u_p*$inquirie_product->quantity;
 						$grand_total = $grand_total+$f_total;
-						$arr[] = $inquirie_product->id; 
+						$arr[] = $inquirie_product->id;
 						$data[] = [
 							"ProductID"		 => $inquirie_product->id, 
 							"no"			 => $key+1,
@@ -1097,14 +1182,15 @@ class InquiriesController extends AppController
 							"u_p"			 => $u_p,
 							"u_p_usd"		 => '',
 							"f_total"		 => $f_total,
-							"f_total_usd"	 => '', 
+							"f_total_usd"	 => '',
 							"del_time"		 => '',
 							"del_time_final" => '',
 							"remark"		 => ''
 						];
 					}
 				}
-				echo json_encode($data);exit();
+				$myarray = array('data' => $data, 'total' => $grand_total);
+				echo json_encode($myarray);exit();
 			} else {
 
 				$inquiries = $this->Inquiries->query1($this->request->data['inquiry_id']);
@@ -1146,7 +1232,7 @@ class InquiriesController extends AppController
 						
 						"profit"		 => $inquirie_product->profit,
 
-						"u_p"	 		 => $u_p,
+						"u_p"			 => $u_p,
 						"u_p_usd"		 => '',
 						"f_total"		 => $f_total,
 						"f_total_usd"	 => '', 
@@ -1232,6 +1318,7 @@ class InquiriesController extends AppController
 	public function EditInquiriesCus()	{
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
+			// pr($this->request->data);die();
 			$inquiry = $this->Inquiries->get($this->request->data['id'], [
 				'contain' => []
 			]);
@@ -1251,7 +1338,7 @@ class InquiriesController extends AppController
 							$html .= '<tr id="attachments-'.$attachment->id.'"><td><a href="/inquiries/download/'.$attachment->id.'">'.$this->request->data['file'][$i]['name'].'</a></td><td><span class="cursor-point remove-file-att" id="'.$attachment->id.'">X</span></td></tr>';
 						}
 					}
-				} 
+				}
 				echo $html;
 			} else {
 				echo (__('The inquiry could not be saved. Please, try again.'));
@@ -1261,21 +1348,41 @@ class InquiriesController extends AppController
 	}
 
 	public function OrderAcknowledgement($id=null){
-		$result 	= $this->get_data_kendo($id);
-		$inquiries 	= $result['inquiries'];
-		$data  		= json_encode($result['data']);
-		$myarr 		= json_encode($result['arr']);
-		$grand_total 		= json_encode($result['grand_total']);
+		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
+            throw new NotFoundException(__('Inquiries not found'));
+        }
+
+		$result		 = $this->get_data_kendo($id);
+		$inquiries 	 = $result['inquiries'];
+		$data		 = json_encode($result['data']);
+		$myarr		 = json_encode($result['arr']);
+		$grand_total = json_encode($result['grand_total']);
 		$this->set(compact('inquiries','data','myarr','grand_total'));
 	}
 
 	public function PurchaseOrder($id=null)	{
-		// $inquiries = $this->Inquiries->query11($id);
-		// pr($inquiries);die();
-		$this->set(compact('id'));
+		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
+            throw new NotFoundException(__('Inquiries not found'));
+        }
+
+		if ($this->Inquiries->exists(['id' => $id, 'type' => AVAILABLE])) {
+			$inqSuppliers = $this->Inquiries->PurchaseOrderInfo($id, AVAILABLE);
+			$total = $this->Inquiries->InquirieProducts->find()->where(['inquiry_id' => $id])->count();
+			$type = AVAILABLE;
+		} else { 
+			$inqSuppliers = $this->Inquiries->PurchaseOrderInfo($id, UNAVAILABLE);
+			$total = $this->Inquiries->InquirieProducts->find()->where(['inquiry_id' => $id,'level' => 1])->count();
+			$type = UNAVAILABLE;
+		}
+		// pr($inqSuppliers);die();
+		$this->set(compact('id','inqSuppliers','total','type'));
 	}
 
 	public function InvoiceDocuments($id=null)	{
+		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
+            throw new NotFoundException(__('Inquiries not found'));
+        }
+
 		$this->set('id', $id);
 
 	}
@@ -1298,15 +1405,17 @@ class InquiriesController extends AppController
 	}
 
 	public function RemoveFileAttachment()	{
-		if ($this->request->is('Ajax')) {
-			$this->autoRender = false;
+		// if ($this->request->is('Ajax')) {
+		// 	$this->autoRender = false;
+
 			$att = $this->Inquiries->Attachments->get($this->request->data['id']);
 			if ($this->Inquiries->Attachments->delete($att)) {
-				echo(__('The Attachments has been deleted.'));
+				// echo(__('The Attachments has been deleted.'));
 			} else {
-				echo(__('The Attachments could not be deleted. Please, try again.'));
+				// echo(__('The Attachments could not be deleted. Please, try again.'));
 			}
-		}
+		// }
 	}
 
 }
+

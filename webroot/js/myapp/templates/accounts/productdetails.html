@@ -1,0 +1,77 @@
+<script src="/js/libs/materialize.js"></script>
+
+<div class="row wapper-content11" style="min-height: 400px;">
+	<div class="col s12">
+		<ul class="tabs">
+			<li class="tab col m3 s12"><a class="blue-text" href="#info">Infomations</a></li>
+			<li class="tab col m3 s12"><a class="blue-text" href="#descriptions">Descriptions</a></li>
+		</ul><br/>
+	</div>
+	
+	<form method="post" enctype='multipart/form-data' accept-charset="utf-8" id="FrmEditProducts" role="form">
+		<input type="text" name="id" class="form-control hidden" value="{{products.id}}" id="id">
+		<div id="info" class="col s12">
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group text">
+					<label class="control-label" for="sku">Part No/ Code</label>
+					<input type="text" name="sku" class="form-control sku" value="{{products.sku}}" placeholder="Part No/ Code" id="sku">
+				</div>
+				<div class="form-group text">
+					<label class="control-label" for="product-name">Products Name</label>
+					<input type="text" name="product_name" class="form-control product_name" value="{{products.product_name}}" placeholder="Products Name" id="product-name">
+				</div>
+				<div class="form-group text">
+					<label class="control-label" for="retail-price">Retail Price</label>
+					<input type="text" name="retail_price" class="form-control auto retail_price" value="{{products.retail_price | currency: ''}}" placeholder="USD" id="retail-price">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputGroups">Categories</label>
+					<select class="form-control" id="categories" ng-model="products.category.id" ng-options="c.key as c.value for c in categories" required></select>
+				</div>
+			</div>
+			<div class="col-lg-6 col-md-6">
+				<div class="form-group text">
+					<label class="control-label" for="serial-no">Serial No</label>
+					<input type="text" name="serial_no" class="form-control serial_no" value="{{products.serial_no}}" placeholder="Serial No" id="serial-no">
+				</div>
+				<div class="form-group text">
+					<label class="control-label" for="type-model">Type Model</label>
+					<input type="text" name="type_model" class="form-control type_model" value="{{products.type_model}}" placeholder="Type Model" id="type-model">
+				</div>  
+				<div class="form-group text">
+					<label class="control-label" for="quantity">Quantity</label>
+					<input type="text" name="quantity" class="form-control auto quantity" value="{{products.quantity}}" placeholder="Quantity" id="quantity">
+				</div>
+				<div class="form-group text">
+					<label class="control-label" for="origin">Origin</label>
+					<input type="text" name="origin" class="form-control origin" value="{{products.origin}}" placeholder="Origin" id="origin">
+				</div>
+				<div class="form-group text">
+					<label class="control-label" for="unit">Unit</label>
+					<input type="text" name="unit" class="form-control unit" value="{{products.unit}}" placeholder="Unit" id="unit">
+				</div>
+			</div>
+			<div class="col-md-12 col-lg-12">
+				<label class="control-label" for="Short_Description">Remark</label>
+				<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
+			</div>
+		</div>
+	
+		<div id="descriptions" class="col s12">
+			<div class="col-md-12 col-lg-12">
+				<label class="control-label" for="Description">Descriptions</label>
+				<textarea ckeditor="options" id="description" ng-model="products.description"></textarea>
+				<br/>
+				<div class="input-group">
+					<input type="file" name='files[]' multiple="multiple" />  
+					
+					<output id="listProductFile" ng-repeat="i in images">
+						<img ng-src="/img/{{i.thumbnail}}" alt="" width="100">		
+					</output>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-success" id="sb-add-products" type="submit">Submit</button>
+	</form>
+</div>
+<script src="/js/theme.js"></script>

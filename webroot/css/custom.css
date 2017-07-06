@@ -79,7 +79,7 @@ div.modal .modal-header{
     color: #fff;
     text-align: left;
     text-transform: uppercase;
-    margin-bottom: 2em;
+    margin-bottom: 0em;
 }
 .float-right{
     float: right;
@@ -170,8 +170,13 @@ div.modal .modal-header{
 .row-cz-details{
     border-top: 2px solid #22baa0;
     border-left: 3px solid #22baa0;
-    border-right: 2px solid #22baa0;
+    border-right: 4px solid #22baa0;
     border-bottom: 2px solid #22baa0;
+}
+.row-cz-details #row-spacy{
+ 
+    border-right: 5px solid #22baa0;
+  
 }
 .cursor-pointer,.cursor-point, .pagination ul li,.slimScrollBar{
     cursor: pointer;
@@ -726,3 +731,27 @@ i.menu-icon {
     font-size: 12px;
     font-weight: bold;
 }
+/*Effect modal*/
+.modal.fade .modal-dialog {
+  -webkit-transform: scale(0.1);
+  -moz-transform: scale(0.1);
+  -ms-transform: scale(0.1);
+  transform: scale(0.1);
+  top: 50%;
+  /*width: 50%;*/
+  opacity: 0;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.modal.fade.in .modal-dialog {
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+  -webkit-transform: translate3d(0, -300px, 0);
+  transform: translate3d(0, -300px, 0);
+  opacity: 1;
+}
+/*End effect modal*/

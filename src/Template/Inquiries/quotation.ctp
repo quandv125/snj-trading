@@ -1,11 +1,11 @@
-
+<!-- 
 <div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 				Quotation
-				<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
+				<?php //echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 					
-		</div> <!-- panel-heading -->
+		</div> 
 		<div class="panel-body"> 
 			<div role="tabpanel">
 				<ul class="nav nav-tabs" role="tablist">
@@ -23,7 +23,7 @@
 								<div class="form-groups">
 									<span class="col-md-3 margin-top5"><label class="control-label float-right">inquiries date</label></span>
 									<span class="col-md-5">
-										<?php $date = new DateTime($inquiries->created); ?>
+										<?php //$date = new DateTime($inquiries->created); ?>
 										<?= $this->Form->input('created',['class'=>'created onlydate2','disabled','label' => false,'value' => $date->format('Y-m-d')]) ?>
 									</span>
 								</div>
@@ -136,15 +136,15 @@
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="tab3">
 					<div class="panel-body">
-						<?php echo $this->element('Inquiries/cost_price'); ?>
+						<?php //echo $this->element('Inquiries/cost_price'); ?>
 					</div>
 					</div>
 				</div>
 			</div>
-		</div> <!-- panel-body -->
+		</div> 
 		<div class="panel-body"> 
 		</div>
-	</div><!-- panel panel-white -->
+	</div>
 
 	<div class="panel panel-white">
 		<div class="panel-body"> 
@@ -152,5 +152,5 @@
 				<div id="grid_quotation2" data-room='<?= ($data);?>'></div>
 			<?php endif ?>
 		</div>
-	</div> <!-- panel-body -->
-</div> <!-- row -->
+	</div> 
+</div>  -->

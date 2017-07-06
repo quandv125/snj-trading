@@ -7,7 +7,6 @@
 		<?php else: ?>
 			<?php echo $this->Html->link('Next Stage',['controller' =>'inquiries','action' =>'quotations', $inquiry->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		<?php endif ?>
-		
 		<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'inquiries'],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 			<div role="tabpanel">
 				<!-- Nav tabs -->
@@ -19,9 +18,7 @@
 				<div class="tab-content tab-content-lx">
 					<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 						<div class="panel-body">
-							
 							<?= $this->Form->create(null, ['id' => 'form-inquiries-info']); ?>
-							
 							<div class="col-md-6 item-unavailable" id="<?= h($inquiry->id) ?>">
 								<div class="col-md-6">
 									<?php $date = new DateTime($inquiry->created); ?>
@@ -38,13 +35,16 @@
 									<div class="form-group text">
 										<label class="control-label" for="created">Files:</label><div class="clearfix"></div>
 										<div class="file-attachment margin-left15">
-										
 											<?php if (isset($inquiry->attachments)): ?>
 											<table class="table">
 												<?php foreach ($inquiry->attachments as $key => $attachment): ?>
 												<tr id="attachments-<?= $attachment->id;?>">
 													<td><?php echo $this->Html->link(basename($attachment->path),['controller'=>'inquiries','action'=>'download',$attachment->id]) ?></td>
-													<td><span class="cursor-point remove-file-att" id="<?= $attachment->id;?>"><i class="fa fa-trash-o"></i></span></td>
+													<td>
+														<span class="cursor-point remove-file-att" id="<?= $attachment->id;?>">
+															<i class="fa fa-trash-o"></i>
+														</span>
+													</td>
 												</tr>
 												<?php endforeach ?>
 											</table>
@@ -54,7 +54,6 @@
 								</div>
 							</div>
 							<div class="col-md-6 item-unavailable" id="<?= h($inquiry->id) ?>">
-								
 								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiry->id]) ?>
 								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiry->status]) ?>
 								<div class="col-md-6">
@@ -83,7 +82,6 @@
 									<?= $this->Form->input('description',['type'=>'textarea','class'=>'description','label' => 'Remark','value'=>$inquiry->description])?>
 								</div>
 							</div>
-
 						</div>
 						<div class="col-md-12"><?= $this->Form->button('Update',['class'=>'btn btn-primary float-right margin-top10']); ?></div>
 						<?= $this->Form->end(); ?>
@@ -99,7 +97,7 @@
 		
 	</div><!-- panel panel-white -->
 </div> <!-- row -->
-<!--  -->
+
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-lg modal-center">
         <div class="modal-content" style=" margin-top: 50px; ">

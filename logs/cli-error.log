@@ -186,3 +186,45 @@ Stack Trace:
 #16 {main}
 
 
+2017-06-30 09:47:08 Error: [ParseError] syntax error, unexpected ';', expecting ',' or ')'
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(389): ReflectionClass->__construct('App\\Controller\\...')
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(430): Acl\AclExtras->_getCallbacks('ProductsControl...', '', NULL)
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(320): Acl\AclExtras->_checkMethods('ProductsControl...', 'Products', Object(Acl\Model\Entity\Aco), '', NULL)
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(199): Acl\AclExtras->_updateControllers(Object(Acl\Model\Entity\Aco), Array)
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(165): Acl\AclExtras->_processControllers(Object(Acl\Model\Entity\Aco))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(151): Acl\AclExtras->acoUpdate(Array)
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\Shell\AclExtrasShell.php(83): Acl\AclExtras->acoSync(Array)
+#10 [internal function]: Acl\Shell\AclExtrasShell->acoSync()
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\Shell.php(452): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+
+2017-07-04 16:07:09 Error: [ParseError] syntax error, unexpected 'public' (T_PUBLIC)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\composer\ClassLoader.php(301): Composer\Autoload\includeFile('D:\\xampp\\htdocs...')
+#1 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Controller\\...')
+#2 [internal function]: spl_autoload_call('App\\Controller\\...')
+#3 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(389): ReflectionClass->__construct('App\\Controller\\...')
+#4 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(430): Acl\AclExtras->_getCallbacks('ProductsControl...', '', NULL)
+#5 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(320): Acl\AclExtras->_checkMethods('ProductsControl...', 'Products', Object(Acl\Model\Entity\Aco), '', NULL)
+#6 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(199): Acl\AclExtras->_updateControllers(Object(Acl\Model\Entity\Aco), Array)
+#7 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(165): Acl\AclExtras->_processControllers(Object(Acl\Model\Entity\Aco))
+#8 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\AclExtras.php(151): Acl\AclExtras->acoUpdate(Array)
+#9 D:\xampp\htdocs\snj-trading\vendor\cakephp\acl\src\Shell\AclExtrasShell.php(83): Acl\AclExtras->acoSync(Array)
+#10 [internal function]: Acl\Shell\AclExtrasShell->acoSync()
+#11 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\Shell.php(452): call_user_func_array(Array, Array)
+#12 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(227): Cake\Console\Shell->runCommand(Array, true, Array)
+#13 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#14 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#15 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#16 {main}
+
+

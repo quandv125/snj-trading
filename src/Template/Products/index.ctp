@@ -43,7 +43,7 @@
                                 <td class="text-center actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
                             </tr>
                             <tr class="row-cz-details hidden">
-                                <td colspan="6">
+                                <td id="row-spacy" colspan="6">
                                     <div role="tabpanel">
                                         <!-- Nav tabs -->
                                         <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -158,7 +158,7 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            
+                                                            <div class="clearfix"></div>
 
                                                     </div>
                                                 </div>

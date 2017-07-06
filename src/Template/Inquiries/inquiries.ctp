@@ -3,6 +3,20 @@
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<?= __('Search'); ?>
+			</div> <!-- col-lg-8 -->
+		</div> <!-- panel-heading -->
+		<div class="panel-body">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			</div> <!-- col-lg-6 -->
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+			</div> <!-- col-lg-6 -->
+		</div> <!-- panel-body -->
+	</div><!-- panel panel-white -->
+
+	<div class="panel panel-white">
+		<div class="panel-heading clearfix">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<?= __('Inquiries'); ?>
 			</div> <!-- col-lg-8 -->
 		</div> <!-- panel-heading -->
@@ -42,6 +56,5 @@
 				</div>
 			</div><!-- col-lg-4 -->
 		</div> <!-- panel-body -->
-		
 	</div><!-- col-lg-12 -->
 </div> <!-- row -->

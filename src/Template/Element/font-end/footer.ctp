@@ -7,10 +7,20 @@
                         <div class="box-menu-footer4">
                             <h2>HELP</h2>
                             <ul>
-                                <?php foreach ($help as $key => $help_article): ?>
-                                      <li><?php echo $this->Html->link(__($help_article), ['controller' => 'pages', 'action' => 'index']) ?>
+                                <!-- <?php //foreach ($help as $key => $help_article): ?>
+                                      <li><?php// echo $this->Html->link(__($help_article), ['controller' => 'pages', 'action' => 'index']) ?>
                                       </li>
-                                <?php endforeach ?>
+                                <?php// endforeach ?> -->
+                                <li><?php echo $this->Html->link(__('Payments'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Saved Cards'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                 <li><?php echo $this->Html->link(__('Shipping'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Cancellation & Returns'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Report Infringement'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
                             </ul>
                         </div>
                     </div>
@@ -19,10 +29,18 @@
                             <h2>S&J Trading</h2>
                             <ul>
                                 <li><?php echo $this->Html->link(__('Contact Us'), ['controller' => 'pages', 'action' => 'contacts']) ?></li>
-                                <?php foreach ($snj as $key => $snj_article): ?>
-                                      <li><?php echo $this->Html->link(__($snj_article), ['controller' => 'pages', 'action' => 'index']) ?>
+                              <!--   <?php// foreach ($snj as $key => $snj_article): ?>
+                                      <li><?php// echo $this->Html->link(__($snj_article), ['controller' => 'pages', 'action' => 'index']) ?>
                                       </li>
-                                <?php endforeach ?>
+                                <?php// endforeach ?> -->
+                                <li><?php echo $this->Html->link(__('About Us'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Careers'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Press'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
+                                <li><?php echo $this->Html->link(__('Blog'), ['controller' => 'pages', 'action' => 'index']) ?>
+                                      </li>
                             </ul>
                         </div>
                     </div>

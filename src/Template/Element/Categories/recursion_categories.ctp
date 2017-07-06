@@ -7,6 +7,7 @@
         <td><?= $this->Number->format($category->id) ?></td>
         <td><?= h($str.$category->name) ?></td>
         <td><?= ($category->type == VERTICAL)? 'Vertical Menu': 'Horizontal Menu' ?></td>
+        <td><?= ($category->actived)? 'True': '' ?></td>
         <td><?= h($category->created) ?></td>
         <td><?= h($category->modified) ?></td>
         <td class="actions">

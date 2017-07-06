@@ -47,216 +47,216 @@ jQuery(document).ready(function(){
 		$("#datepicker").kendoDatePicker({format: "yyyy-MM-dd"});
 	}
 	
-	if ($("#grid").length){
-		var sampleData = jQuery('#grid').data('room');
-		var type = jQuery('#grid').attr('type');
-		var sampleDataNextID = sampleData.length + 1;
-		function getIndexById(id) {
-			var idx,
-				l = sampleData.length;
+	// if ($("#grid").length){
+	// 	var sampleData = jQuery('#grid').data('room');
+	// 	var type = jQuery('#grid').attr('type');
+	// 	var sampleDataNextID = sampleData.length + 1;
+	// 	function getIndexById(id) {
+	// 		var idx,
+	// 			l = sampleData.length;
 
-			for (var j=0; j < l; j++) {
-				if (sampleData[j].ProductID == id) {
-					return j;
-				}
-			}
-			return null;
-		}
-		var dataSource = new kendo.data.DataSource({
-			transport: {
-				read: function (e) {
-					// on success
-					e.success(sampleData);
-					// on failure
-					//e.error("XHR response", "status code", "error message");
-				},
-				create: function (e) {
-					// assign an ID to the new item
-					e.data.ProductID = sampleDataNextID++;
-					// save data item to the original datasource
-					// sampleData.push(e.data);
-					// on success
-					e.success(e.data);	
-					var id = jQuery('.item-unavailable').attr('id');
-					jQuery.ajax({
-						url: '/inquiries/create_inq',
-						type: 'POST',
-						data: {"data":e.data, 'id': id},
-						dataType: 'html',
-						cache: false,
-						beforeSend: function(){jQuery("#loader").fadeIn();},
-						success: function(response){
-							jQuery("#loader").fadeOut();
-							console.log(response);return;
+	// 		for (var j=0; j < l; j++) {
+	// 			if (sampleData[j].ProductID == id) {
+	// 				return j;
+	// 			}
+	// 		}
+	// 		return null;
+	// 	}
+	// 	var dataSource = new kendo.data.DataSource({
+	// 		transport: {
+	// 			read: function (e) {
+	// 				// on success
+	// 				e.success(sampleData);
+	// 				// on failure
+	// 				//e.error("XHR response", "status code", "error message");
+	// 			},
+	// 			create: function (e) {
+	// 				// assign an ID to the new item
+	// 				e.data.ProductID = sampleDataNextID++;
+	// 				// save data item to the original datasource
+	// 				// sampleData.push(e.data);
+	// 				// on success
+	// 				e.success(e.data);	
+	// 				var id = jQuery('.item-unavailable').attr('id');
+	// 				jQuery.ajax({
+	// 					url: '/inquiries/create_inq',
+	// 					type: 'POST',
+	// 					data: {"data":e.data, 'id': id},
+	// 					dataType: 'html',
+	// 					cache: false,
+	// 					beforeSend: function(){jQuery("#loader").fadeIn();},
+	// 					success: function(response){
+	// 						jQuery("#loader").fadeOut();
+	// 						console.log(response);return;
 							
-						}
-					});
-					// on failure
-					//e.error("XHR response", "status code", "error message");
-				},
-				update: function (e) {
-					// locate item in original datasource and update it
-					sampleData[getIndexById(e.data.ProductID)] = e.data;
-					// on success
-					e.data.final_total = e.data.price*e.data.quantity;
-					e.success();
-					jQuery.ajax({
-						url: '/inquiries/update_inq',
-						type: 'POST',
-						data: {"data":e.data,'type': type},
-						dataType: 'html',
-						cache: false,
-						beforeSend: function(){jQuery(".loader3").fadeIn();},
-						success: function(response){
-							jQuery(".loader3").fadeOut();
-							var data = jQuery.parseJSON(response);
-							var grid = $('#grid').data("kendoGrid");
-							grid.dataSource.read();
-							grid.dataSource.refresh;
-							jQuery('#total-price').val(data.Total);
-							jQuery('#discount-price').val(data.discount);
-							console.log(response);return;
-						}
-					});
-					// on failure
-					// e.error("XHR response", "status code", "error message");
-				},
-				destroy: function (e) {
-					// locate item in original datasource and remove it
-					// sampleData.splice(getIndexById(e.data.ProductID), 1);
-					// // on success
-					// e.success();
-					// // console.log(e.data);
-					// jQuery.ajax({
-					// 	url: '/inquiries/destroy_inq',
-					// 	type: 'POST',
-					// 	data: {"data":e.data},
-					// 	dataType: 'html',
-					// 	cache: false,
-					// 	beforeSend: function(){jQuery("#loader").fadeIn();},
-					// 	success: function(response){
-					// 		jQuery("#loader").fadeOut();
-					// 		// e.success();
-					// 		console.log(response);return;
+	// 					}
+	// 				});
+	// 				// on failure
+	// 				//e.error("XHR response", "status code", "error message");
+	// 			},
+	// 			update: function (e) {
+	// 				// locate item in original datasource and update it
+	// 				sampleData[getIndexById(e.data.ProductID)] = e.data;
+	// 				// on success
+	// 				e.data.final_total = e.data.price*e.data.quantity;
+	// 				e.success();
+	// 				jQuery.ajax({
+	// 					url: '/inquiries/update_inq',
+	// 					type: 'POST',
+	// 					data: {"data":e.data,'type': type},
+	// 					dataType: 'html',
+	// 					cache: false,
+	// 					beforeSend: function(){jQuery(".loader3").fadeIn();},
+	// 					success: function(response){
+	// 						jQuery(".loader3").fadeOut();
+	// 						var data = jQuery.parseJSON(response);
+	// 						var grid = $('#grid').data("kendoGrid");
+	// 						grid.dataSource.read();
+	// 						grid.dataSource.refresh;
+	// 						jQuery('#total-price').val(data.Total);
+	// 						jQuery('#discount-price').val(data.discount);
+	// 						console.log(response);return;
+	// 					}
+	// 				});
+	// 				// on failure
+	// 				// e.error("XHR response", "status code", "error message");
+	// 			},
+	// 			destroy: function (e) {
+	// 				// locate item in original datasource and remove it
+	// 				// sampleData.splice(getIndexById(e.data.ProductID), 1);
+	// 				// // on success
+	// 				// e.success();
+	// 				// // console.log(e.data);
+	// 				// jQuery.ajax({
+	// 				// 	url: '/inquiries/destroy_inq',
+	// 				// 	type: 'POST',
+	// 				// 	data: {"data":e.data},
+	// 				// 	dataType: 'html',
+	// 				// 	cache: false,
+	// 				// 	beforeSend: function(){jQuery("#loader").fadeIn();},
+	// 				// 	success: function(response){
+	// 				// 		jQuery("#loader").fadeOut();
+	// 				// 		// e.success();
+	// 				// 		console.log(response);return;
 							
-					// 	}
-					// });
-					// on failure
-					//e.error("XHR response", "status code", "error message");
-				}
-			},
-			error: function (e) {
-				// handle data operation error
-				alert("Status: " + e.status + "; Error message: " + e.errorThrown);
-			},
-			pageSize: 30,
-			batch: false,
-			schema: {
-				model: {
-					id: "ProductID",
-					fields: {
-						ProductID: { editable: false, nullable: true },
-						// choose: {editable: false},
-						no: {editable: false},
-						name: {editable: false},
-						maker_type_ref: {editable: false},
-						partno:  {editable: false},
-						unit: {editable: false},
-						quantity: {},
-						price: {editable: false},
-						final_total: {editable: false},
-						delivery_time: {editable: false},
-						remark: {},
-					}
-				}
-			}
-		});
+	// 				// 	}
+	// 				// });
+	// 				// on failure
+	// 				//e.error("XHR response", "status code", "error message");
+	// 			}
+	// 		},
+	// 		error: function (e) {
+	// 			// handle data operation error
+	// 			alert("Status: " + e.status + "; Error message: " + e.errorThrown);
+	// 		},
+	// 		pageSize: 30,
+	// 		batch: false,
+	// 		schema: {
+	// 			model: {
+	// 				id: "ProductID",
+	// 				fields: {
+	// 					ProductID: { editable: false, nullable: true },
+	// 					// choose: {editable: false},
+	// 					no: {editable: false},
+	// 					name: {editable: false},
+	// 					maker_type_ref: {editable: false},
+	// 					partno:  {editable: false},
+	// 					unit: {editable: false},
+	// 					quantity: {},
+	// 					price: {editable: false},
+	// 					final_total: {editable: false},
+	// 					delivery_time: {editable: false},
+	// 					remark: {},
+	// 				}
+	// 			}
+	// 		}
+	// 	});
 
-		 var grid = $("#grid").kendoGrid({
-			dataSource: dataSource,
-			pageable: true,
-			navigatable: true,
-			// toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>'  }],
-			columns: [
-				// { field: "choose",editable: false, nullable: true, title: "Choose", width: "65px" , template: "<input type='checkbox' class='checkbox' />" },
-				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
-				{ field: "name", title: "Description", width: "240px" },
-				{ field: "maker_type_ref", title: "Maker/Type Ref", width: "120px" },
-				{ field: "partno", title: "PartNo", width: "80px" },
-				{ field: "unit", title:"Units", width: "50px" },
-				{ field: "quantity",title:"Quantity", width: "70px" },
-				{ field: "price",title:"Price(USD)", width: "80px" },
-				{ field: "final_total",title:"Total(USD)", width: "80px" },
-				{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
-				{ field: "remark",title:"Remark", width: "150px" },
-				// { command: [ "destroy"], title: "&nbsp;", width: "100px" }
-			],
-			editable: true
-		}).data("kendoGrid");
+	// 	 var grid = $("#grid").kendoGrid({
+	// 		dataSource: dataSource,
+	// 		pageable: true,
+	// 		navigatable: true,
+	// 		// toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>'  }],
+	// 		columns: [
+	// 			// { field: "choose",editable: false, nullable: true, title: "Choose", width: "65px" , template: "<input type='checkbox' class='checkbox' />" },
+	// 			{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
+	// 			{ field: "name", title: "Description", width: "240px" },
+	// 			{ field: "maker_type_ref", title: "Maker/Type Ref", width: "120px" },
+	// 			{ field: "partno", title: "PartNo", width: "80px" },
+	// 			{ field: "unit", title:"Units", width: "50px" },
+	// 			{ field: "quantity",title:"Quantity", width: "70px" },
+	// 			{ field: "price",title:"Price(USD)", width: "80px" },
+	// 			{ field: "final_total",title:"Total(USD)", width: "80px" },
+	// 			{ field: "delivery_time",title:"Delivery Time(day)", width: "130px" },
+	// 			{ field: "remark",title:"Remark", width: "150px" },
+	// 			// { command: [ "destroy"], title: "&nbsp;", width: "100px" }
+	// 		],
+	// 		editable: true
+	// 	}).data("kendoGrid");
 
-		grid.table.on("click", ".checkbox" , selectRow);
+	// 	grid.table.on("click", ".checkbox" , selectRow);
 
-		$("#btn-delete-kendo").bind("click", function () {
-			var type = jQuery("#grid").attr("data-type");
-			var inquiry_id = jQuery("#grid").attr("inquiry_id");
-			var checked = [];
-			for(var i in checkedIds){
-				if(checkedIds[i]){
-					checked.push(i);
-				}
-			}
+	// 	$("#btn-delete-kendo").bind("click", function () {
+	// 		var type = jQuery("#grid").attr("data-type");
+	// 		var inquiry_id = jQuery("#grid").attr("inquiry_id");
+	// 		var checked = [];
+	// 		for(var i in checkedIds){
+	// 			if(checkedIds[i]){
+	// 				checked.push(i);
+	// 			}
+	// 		}
 			
-			jQuery.ajax({
-				url: '/inquiries/delete_item_products',
-				type: 'POST',
-				data: {"data":checked, "type":type,"inquiry_id":inquiry_id,"font_end": '1'},
-				dataType: 'json',
-				cache: false,
-				beforeSend: function(){
-					jQuery("#loader").fadeIn();
-				},
-				success: function(response){
-					jQuery("#loader").fadeOut();
-					var grid = $('#grid').data("kendoGrid");
-					grid.dataSource.data(response);
-					grid.dataSource.refresh;
-					// console.log(response);
-					return false;
-				}
-			});
-		});
+	// 		jQuery.ajax({
+	// 			url: '/inquiries/delete_item_products',
+	// 			type: 'POST',
+	// 			data: {"data":checked, "type":type,"inquiry_id":inquiry_id,"font_end": '1'},
+	// 			dataType: 'json',
+	// 			cache: false,
+	// 			beforeSend: function(){
+	// 				jQuery("#loader").fadeIn();
+	// 			},
+	// 			success: function(response){
+	// 				jQuery("#loader").fadeOut();
+	// 				var grid = $('#grid').data("kendoGrid");
+	// 				grid.dataSource.data(response);
+	// 				grid.dataSource.refresh;
+	// 				// console.log(response);
+	// 				return false;
+	// 			}
+	// 		});
+	// 	});
 
-		var checkedIds = {};
+	// 	var checkedIds = {};
 
-		//on click of the checkbox:
-		function selectRow() {
-			var checked = this.checked,
-			row = $(this).closest("tr"),
-			grid = $("#grid").data("kendoGrid"),
-			dataItem = grid.dataItem(row);
-			checkedIds[dataItem.id] = checked;
-			if (checked) {
-				//-select the row
-				row.addClass("k-state-selected");
-			} else {
-				//-remove selection
-				row.removeClass("k-state-selected");
-			}
-		}
+	// 	//on click of the checkbox:
+	// 	function selectRow() {
+	// 		var checked = this.checked,
+	// 		row = $(this).closest("tr"),
+	// 		grid = $("#grid").data("kendoGrid"),
+	// 		dataItem = grid.dataItem(row);
+	// 		checkedIds[dataItem.id] = checked;
+	// 		if (checked) {
+	// 			//-select the row
+	// 			row.addClass("k-state-selected");
+	// 		} else {
+	// 			//-remove selection
+	// 			row.removeClass("k-state-selected");
+	// 		}
+	// 	}
 
-		//on dataBound event restore previous selected rows:
-		function onDataBound(e) {
-			var view = this.dataSource.view();
-			for(var i = 0; i < view.length;i++){
-				if(checkedIds[view[i].id]){
-					this.tbody.find("tr[data-uid='" + view[i].uid + "']")
-					.addClass("k-state-selected")
-					.find(".checkbox")
-					.attr("checked","checked");
-				}
-			}
-		}
-	}
+	// 	//on dataBound event restore previous selected rows:
+	// 	function onDataBound(e) {
+	// 		var view = this.dataSource.view();
+	// 		for(var i = 0; i < view.length;i++){
+	// 			if(checkedIds[view[i].id]){
+	// 				this.tbody.find("tr[data-uid='" + view[i].uid + "']")
+	// 				.addClass("k-state-selected")
+	// 				.find(".checkbox")
+	// 				.attr("checked","checked");
+	// 			}
+	// 		}
+	// 	}
+	// }
 	// Handsometable
 	if ($("#exampleAdd").length){
 		var $$ = function(id) { return document.getElementById(id); }, container = $$('exampleAdd'), save = $$('save'), hot;
@@ -270,30 +270,7 @@ jQuery(document).ready(function(){
 			columns: [ {}, {}, {className: "htCenter"}, { className: "htCenter",}, { type: 'numeric', className: "htCenter",}, {}]
 		});
 		Handsontable.Dom.addEvent(save, 'click', function() {
-			// var vessel 		= jQuery('.vessel').val();
-			// var imo_no 		= jQuery('.imo_no').val();
-			// var hull_no 	= jQuery('.hull_no').val();
-			// var description = jQuery('.description').val();
-			// var date 		= jQuery('.date').val();
-			// var ref 		= jQuery('.ref').val();
-			// var test = new FormData(document.getElementById('InqSuppsInfo'));
-			// var data = jQuery('.js-example-tags').select2('data');
-
-			// console.log( test );
-			// console.log(data["0"].text);return;
-			// jQuery.ajax({
-			// 	url: '/inquiries/make_inq',
-			// 	type: 'POST',
-			// 	data: {data: hot.getData(), "vessel": vessel, "imo_no": imo_no, "hull_no": hull_no, "date": date, "ref": ref,"description":description},
-			// 	dataType: 'html',
-			// 	cache: false,
-			// 	beforeSend: function(){jQuery(".loader3").fadeIn();},
-			// 	success: function(response){
-			// 		jQuery(".loader3").fadeOut();
-			// 		console.log(response);return;
-			// 		// window.location.href = "../inquiries/index"; 
-			// 	}
-			// });
+			
 
 			event.preventDefault();
 			jQuery.ajax({
@@ -304,11 +281,9 @@ jQuery(document).ready(function(){
 				cache: false,
 				processData:false,
 				beforeSend: function(){
-					jQuery("#loader").fadeIn();
+					jQuery(".loader3").fadeIn();
 				},
 				success: function(response){
-					jQuery("#loader").fadeOut();
-					// console.log(response);return;
 					var data = jQuery.parseJSON(response);
 					if (data.status == true) {
 						jQuery.ajax({
@@ -321,7 +296,8 @@ jQuery(document).ready(function(){
 							success: function(response){
 								jQuery(".loader3").fadeOut();
 								// console.log(response);return;
-								window.location.href = "../inquiries/index"; 
+								// window.location.href = "../inquiries/index"; 
+								window.location.href = "../pages/accounts#/inquiry";
 							}
 						});
 					} else {
@@ -1317,7 +1293,7 @@ jQuery(document).ready(function($){
 	}); // end class
 	if ($("#contact_form").length){
 	
-	$('#contact_form').bootstrapValidator({
+		$('#contact_form').bootstrapValidator({
 		// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -1745,4 +1721,100 @@ jQuery(document).ready(function($){
 			}
 		}); // Ajax
 	});
+	jQuery("#FrmAddProducts").on('submit',(function(event) {
+		event.preventDefault();
+		var form_data = new FormData(this);
+		form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
+		form_data.append('description', CKEDITOR.instances['description'].getData());  
+		jQuery.ajax({
+			url: "/products/supplier_add_product",
+			type: "POST",
+			data: form_data,
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
+			success: function(response){
+				jQuery(".loader3").fadeOut();
+				console.log(response);
+				window.location.href = "../pages/accounts#/products";
+			},
+			error: function(response, status){
+				jQuery(".loader3").fadeOut();
+			}
+		});
+	}));
+
+	jQuery("#FrmEditProducts").on('submit',(function(event) {
+		event.preventDefault();
+		var form_data = new FormData(this);
+		var categorie_id = jQuery("#categories").val();
+		form_data.append('categorie_id', categorie_id);  
+		form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
+		form_data.append('description', CKEDITOR.instances['description'].getData());  
+		jQuery.ajax({
+			url: "/products/supplier_edit_product",
+			type: "POST",
+			data: form_data,
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
+			success: function(response){
+				jQuery(".loader3").fadeOut();
+				console.log(response);
+				toastr.success('The Product has been saved.');
+			},
+			error: function(response, status){
+				jQuery(".loader3").fadeOut();
+			}
+		});
+	}));
+
+	jQuery("#fx-inquiries-details").on("submit",(function(){
+		jQuery.ajax({
+			url: '/inquiries/edit-inquiries-cus',
+			type: "POST",
+			data:  new FormData(this),
+			contentType: false,
+			cache: false,
+			processData:false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
+			success: function(response){
+				jQuery(".loader3").fadeOut();
+				
+				toastr.success('The inquiry has been saved.');
+				if (response != '') {
+					jQuery('.file-attachments').append(response);
+					jQuery('.remove-file-att').click(function(){
+						var id = jQuery(this).attr("id");
+						jQuery.ajax({
+							url: '/inquiries/remove_file_attachment',
+							type: 'POST',
+							data: {id: id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){
+								jQuery(".loader3").fadeIn();
+							},
+							success: function(response){
+								jQuery(".loader3").fadeOut();
+								jQuery('#attachments-'+id).remove();
+								toastr.success(response);
+								console.log(response);
+							}
+						}); // Ajax
+					});
+				};
+				jQuery('#file-input').val('');
+			},
+			error: function(response, status){}
+		});
+	}));
 }); // End document

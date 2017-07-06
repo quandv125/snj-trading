@@ -100,7 +100,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         'assets/plugins/daterangepicker/daterangepicker',
         'assets/plugins/livesearch/vendor/jquery.hideseek.min',
         'assets/plugins/livesearch/initializers','libs/kendo.all.min',
-        'libs/angular.js',
+        'libs/angular.min',
         'myapp',
         'custom'
         
@@ -108,7 +108,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     )); ?>
      
 </head>
-<body class="page-horizontal-bar compact-menu ">
+<body class="page-horizontal-bar compact-menu">
    
     <?php echo $this->element('menu-wrap'); ?>
         <main class="page-content content-wrap">

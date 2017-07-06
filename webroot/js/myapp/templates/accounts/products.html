@@ -1,0 +1,65 @@
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="wapper-content">
+			<div class="main-content-shop ">
+				Search
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="wapper-content">
+			<div class="main-content-shop ">
+				<a href="#/addproducts" class="float-right btn btn-success"><i class="fa fa-plus" style="color:#fff;"></i></a>
+				<br/><br/>
+				<table id="datatable" class="table display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th class="text-center">Part No/ Code</th>
+							<th class="text-center">Product Name</th>
+							<th class="text-center">Origin</th>
+							<th class="text-center">Serial No</th>
+							<th class="text-center">Model</th>
+							<th class="text-center" style=" width: 80px;">Actived</th>
+							<th class="text-center" style=" width: 80px;">Created</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="(key, product) in products" class="products_{{product.id}}">
+							<td class="text-center"><a href="#/productdetails/{{product.id}}">{{product.sku}}</a></td>
+							<td class="text-center">{{product.product_name}}</td>
+							<td class="text-center">{{product.origin}}</td>
+							<td class="text-center">{{product.serial_no}}</td>
+							<td class="text-center">{{product.type_model}}</td>
+							<td class="text-center">
+								<span class="label label-{{product.actived? 'primary' : 'danger'}}">{{product.actived ? 'Actived' : 'Deactived'}}</span>
+							</td>
+							<td class="text-center">{{ product.created | date : "dd.MM.y" }}</td>
+							<td class="text-center">
+								<a btn href="#/productdetails/{{product.id}}"><i class="fa fa-pencil"></i></a>  
+							</td>
+							<td>
+								<a href="#/delete-products/{{product.id}}" Onclick="return ConfirmDelete();" id="{{product.id}}" class="delete-products"><i class="fa fa-trash"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	
+	function ConfirmDelete(){
+        var x = confirm("Are you sure you want to delete?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+   
+</script>

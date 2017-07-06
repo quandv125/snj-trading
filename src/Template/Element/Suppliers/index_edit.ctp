@@ -13,22 +13,23 @@
                     <div class="col-lg-6 col-md-6">
                         <?php
                             echo $this->Form->input('code',['value'=>$supplier->code]);
-                            echo $this->Form->input('name',['value'=>$supplier->name]);
-                            echo $this->Form->input('supplier_group',['value'=>$supplier->supplier_group]);
+                           
+                            // echo $this->Form->input('supplier_group',['value'=>$supplier->supplier_group]);
                             echo $this->Form->input('tel',['value'=>$supplier->tel]);
                             echo $this->Form->input('note',['type'=>'textarea','value'=>$supplier->note]);
                         ?>
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <?php 
+                            echo $this->Form->input('name',['value'=>$supplier->name]);
                             echo $this->Form->input('address',['value'=>$supplier->address]);
-                            echo $this->Form->input('location',['value'=>$supplier->location]);
-                            echo $this->Form->input('date_of_birth',['type' => 'text','class' => 'date-picker','value' => date('Y-m-d', strtotime($supplier->date_of_birth))]); 
-                             echo $this->Form->input('email',['value'=>$supplier->email]);
-                            echo $this->Form->input('tax_registration_number',['value'=>$supplier->tax_registration_number]);
+                            // echo $this->Form->input('location',['value'=>$supplier->location]);
+                            // echo $this->Form->input('date_of_birth',['type' => 'text','class' => 'date-picker','value' => date('Y-m-d', strtotime($supplier->date_of_birth))]); 
+                            echo $this->Form->input('email',['value'=>$supplier->email]);
+                            // echo $this->Form->input('tax_registration_number',['value'=>$supplier->tax_registration_number]);
                         ?>
-                        <label class="control-label" for="Gender">Gender</label>
-                        <?= $this->Form->radio('gender',[1=> 'Male', 2=>'Female'],['default'=>1],['value'=>$supplier->gender]); ?>
+                        <!-- <label class="control-label" for="Gender">Gender</label> -->
+                        <!-- <?= $this->Form->radio('gender',[1=> 'Male', 2=>'Female'],['default'=>1],['value'=>$supplier->gender]); ?> -->
                     </div>
                 </div>
             </div> <!-- modal-body -->

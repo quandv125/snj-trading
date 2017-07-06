@@ -18,225 +18,151 @@
 	</ul>
 </div>
 
-
 <div class="col-md-12 item-unavailable1" id="<?= h($inquiries->id) ?>">
 
-	<div>
-		<!-- Nav tabs -->
-		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Infomation</a></li>
-			<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Cost & Price</a></li>
-		</ul>
-		<!-- Tab panes -->
-		<div class="tab-content tab-customer">
-			<div role="tabpanel" class="tab-pane active" id="home">
-				<?= $this->Form->create(NULL, ['id' => 'inquiries-info']); ?>
-					<?= $this->Form->input('id',['class'=>'hidden','label' => false,"value"=> ($inquiries->id)]) ?>
-					<div class="col-md-4">
-						<?= $this->Form->input('vessel',['class'=>'vessel',"value"=> ($inquiries->vessel)]) ?>
-					</div>
-					<div class="col-md-4">
-						<?= $this->Form->input('imo_no',['class'=>'imo_no',"value"=> ($inquiries->imo_no)]) ?>
-					</div>
-					<div class="col-md-4">
-						<?= $this->Form->input('hull_no',['class'=>'hull_no',"value"=> ($inquiries->hull_no)]) ?>
-					</div>
-					<div class="col-md-4">
-						<?= $this->Form->input('ref',['class'=>'ref',"value"=> ($inquiries->ref)]) ?>
-					</div>
-					<div class="col-md-4">
-						<?= $this->Form->input('date',['class'=>'date','id'=>'datepicker1','disabled','value' => date("Y-m-d") ]) ?>
-					</div>
-				<div class="clearfix"></div>
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Infomation</a></li>
+		<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Cost & Price</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content tab-customer">
+		<div role="tabpanel" class="tab-pane active" id="home">
+			<?= $this->Form->create(NULL, ['id' => 'inquiries-info']); ?>
+				<?= $this->Form->input('id',['class'=>'hidden','label' => false,"value"=> ($inquiries->id)]) ?>
 				<div class="col-md-4">
-					<?= $this->Form->input('description',['type'=>'textarea','label'=>'Remark','value' => $inquiries->description]) ?>
+					<?= $this->Form->input('vessel',['class'=>'vessel','label'=>'Vessel Name',"value"=> ($inquiries->vessel)]) ?>
 				</div>
 				<div class="col-md-4">
-					<div class="form-group text">
-					<label class="control-label" for="ref">File</label><div class="clearfix"></div>
-					<?= $this->Form->input('file.',["type"=>"file",'class'=>'ref','multiple','label'=>false]) ?>
-						<?php if (isset($inquiries->attachments)): ?>
-						<table class="table file-attachments">
-							<?php foreach ($inquiries->attachments as $key => $attachment): ?>
-							<tr id="attachments-<?= $attachment->id;?>">
-								<td><?php echo $this->Html->link(basename($attachment->path),['controller'=>'inquiries','action'=>'download',$attachment->id]) ?></td>
-								<td><span class="cursor-point remove-file-att" id="<?= $attachment->id;?>">X</span></td>
-							</tr>
-							<?php endforeach ?>
-						</table>
-						<?php endif ?>
-					</div>
+					<?= $this->Form->input('imo_no',['class'=>'imo_no','label' =>'IMO No',"value"=> ($inquiries->imo_no)]) ?>
 				</div>
-					<div class="clearfix"></div>
-					<?= $this->Form->button("Update",['class'=>'btn btn-success float-right']) ?>
-					<?= $this->Form->end(); ?>
-					<div class="clearfix"></div>
+				<div class="col-md-4">
+					<?= $this->Form->input('hull_no',['class'=>'hull_no','label' =>'HULL No',"value"=> ($inquiries->hull_no)]) ?>
+				</div>
+				<div class="col-md-4">
+					<?= $this->Form->input('ref',['class'=>'ref','label'=>'Ref No',"value"=> ($inquiries->ref)]) ?>
+				</div>
+				<div class="col-md-4">
+					<label class="control-label" for="date">Date</label><div class="clearfix"></div>
+					<?= $this->Form->input('date',['class'=>'date','id'=>'datepicker','label'=>false,'value' => date("Y-m-d") ]) ?>
+				</div>
+				<div class="col-md-4">
+					
+					<?= $this->Form->input('subject',['class'=>'date','id'=>'datepicker','value' => $inquiries->subject ]) ?>
+				</div>
+			<div class="clearfix"></div>
+			<div class="col-md-4">
+				<?= $this->Form->input('description',['type'=>'textarea','label'=>'Remark','value' => $inquiries->description]) ?>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="profile">
-				<div id="content">
-					<div class="content-page woocommerce">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12 col-sm-12 col-xs-12 ">
-									<div class="woocommerce-checkout-review-order" id="order_review">
-										<div class="table-responsive">
-											<table class="shop_table woocommerce-checkout-review-order-table">
-												<thead>
-													<tr>
-														<th class="product-name">name</th>
-														<th class="product-total">Price</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr class="cart_item">
-														<td class="product-name">
-															Total
-														</td>
-														<td class="product-total">
-															<span class="amount"> $ <?= $total?></span>
-														</td>
-													</tr>
-
-													<tr class="cart_item">
-														<td class="product-name">
-															Commission&nbsp;	<span class="product-quantity">(<?= $inquiries->commission.'%';?>)</span>
-														</td>
-														<td class="product-total">
-															<?php $commission = ($total*$inquiries->commission)/100;?>
-															<span class="amount"> $ <?= number_format($commission, 2); ?></span>
-														</td>
-													</tr>
-													<tr class="cart_item">
-														<td class="product-name">
-															Add Commission&nbsp;	<span class="product-quantity">(<?= $inquiries->add_commission.'%';?>)</span>
-														</td>
-														<td class="product-total">
-															<?php $add_commission = ($total*$inquiries->add_commission)/100;?>
-															<span class="amount"> $ <?= number_format($add_commission, 2); ?></span>
-														</td>
-													</tr>
-													<tr class="cart_item">
-														<td class="product-name">
-															Discount&nbsp;	<span class="product-quantity">(<?= $inquiries->discount.'%';?>)</span>
-														</td>
-														<td class="product-total">
-															<?php $discount = ($total*$inquiries->discount)/100;?>
-															<span class="amount"> $ <?= number_format($discount, 2); ?></span>
-														</td>
-													</tr>
-												</tbody>
-												<tfoot>
-													<?php $cost = 0; ?>
-													<?php foreach ($inquiries->extras as $key => $extra): ?>
-														<?php $cost = $cost+$extra->cost; ?>
-													<?php endforeach ?>
-											
-													<tr class="shipping">
-														<td>Extras Cost ($ <?php echo $cost; ?>)</td>
-														<td>
-															<ul id="shipping_method">
-																<?php foreach ($inquiries->extras as $key => $extra): ?>
-																<li>
-																	<label for="shipping_method_0_free_shipping"><?php echo ucfirst($extra->name) ?>(<?php echo '$ '.number_format($extra->cost,2) ?>)</label>
-																</li>
-																<?php endforeach ?>
-															</ul>
-														</td>
-													</tr>
-													<tr class="order-total">
-														<th>Grand Total</th>
-														<td><strong><span class="amount"> $ <?= number_format($total+$commission+$add_commission-$discount+$cost, 2); ?></span></strong> </td>
-													</tr>
-												</tfoot>
-											</table>
-										</div>
+			<div class="col-md-4">
+				<div class="form-group text">
+				<label class="control-label" for="ref">File</label><div class="clearfix"></div>
+				<?= $this->Form->input('file.',["type"=>"file",'class'=>'ref','multiple','label'=>false]) ?>
+					<?php if (isset($inquiries->attachments)): ?>
+					<table class="table file-attachments">
+						<?php foreach ($inquiries->attachments as $key => $attachment): ?>
+						<tr id="attachments-<?= $attachment->id;?>">
+							<td><?php echo $this->Html->link(basename($attachment->path),['controller'=>'inquiries','action'=>'download',$attachment->id]) ?></td>
+							<td><span class="cursor-point remove-file-att" id="<?= $attachment->id;?>">X</span></td>
+						</tr>
+						<?php endforeach ?>
+					</table>
+					<?php endif ?>
+				</div>
+			</div>
+				<div class="clearfix"></div>
+				<?= $this->Form->button("Update",['class'=>'btn btn-success float-right']) ?>
+				<?= $this->Form->end(); ?>
+				<div class="clearfix"></div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="profile">
+			<div id="content">
+				<div class="content-page woocommerce">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12 ">
+								<div class="woocommerce-checkout-review-order" id="order_review">
+									<div class="table-responsive">
+										<table class="shop_table woocommerce-checkout-review-order-table">
+											<thead>
+												<tr>
+													<th class="product-name">name</th>
+													<th class="product-total">Price</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="cart_item">
+													<td class="product-name">
+														Total
+													</td>
+													<td class="product-total">
+														<span class="amount"> $ <?= number_format($total, 2); ?></span>
+													</td>
+												</tr>
+												<tr class="cart_item">
+													<td class="product-name">
+														Commission <span class="product-quantity">(<?= $inquiries->commission.'%';?>)</span>
+													</td>
+													<td class="product-total">
+														<?php $commission = ($total*$inquiries->commission)/100;?>
+														<span class="amount"> $ <?= number_format($commission, 2); ?></span>
+													</td>
+												</tr>
+												<tr class="cart_item">
+													<td class="product-name">
+														Add Commission <span class="product-quantity">(<?= $inquiries->add_commission.'%';?>)</span>
+													</td>
+													<td class="product-total">
+														<?php $add_commission = ($total*$inquiries->add_commission)/100;?>
+														<span class="amount"> $ <?= number_format($add_commission, 2); ?></span>
+													</td>
+												</tr>
+												<tr class="cart_item">
+													<td class="product-name">
+														Discount <span class="product-quantity">(<?= $inquiries->discount.'%';?>)</span>
+													</td>
+													<td class="product-total">
+														<?php $discount = ($total*$inquiries->discount)/100;?>
+														<span class="amount"> $ <?= number_format($discount, 2); ?></span>
+													</td>
+												</tr>
+											</tbody>
+											<tfoot>
+												<?php $cost = 0; ?>
+												<?php foreach ($inquiries->extras as $key => $extra): ?>
+													<?php $cost = $cost+$extra->cost; ?>
+												<?php endforeach ?>
+										
+												<tr class="shipping">
+													<td>Extras Cost ($ <?php echo $cost; ?>)</td>
+													<td>
+														<ul id="shipping_method">
+															<?php foreach ($inquiries->extras as $key => $extra): ?>
+															<li>
+																<label for="shipping_method_0_free_shipping"><?php echo ucfirst($extra->name) ?>(<?php echo '$ '.number_format($extra->cost,2) ?>)</label>
+															</li>
+															<?php endforeach ?>
+														</ul>
+													</td>
+												</tr>
+												<tr class="order-total">
+													<th>Grand Total</th>
+													<td><strong><span class="amount"> $ <?= number_format($total+$commission+$add_commission-$discount+$cost, 2); ?></span></strong> </td>
+												</tr>
+											</tfoot>
+										</table>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<!-- End Content Page -->
 				</div>
-			
-			<div class="clearfix"></div>
-				<!-- <div class="col-md-4">
-					<label class="control-label" for="ref">Total</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<div class="input number">
-							<input disabled value="<?php// $total?>" id="total-price" class="form-control">
-						</div>
-						<span class="input-group-addon group-addon-width">USD</span>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<label class="control-label" for="ref">Discount(<?php // $inquiries->discount.'%';?>)</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<div class="input number">
-							<?php //$discount = ($total*$inquiries->discount)/100;?>
-							<input disabled value="<?php // number_format($discount, 2); ?>" id="discount-price" class="form-control">
-						</div>
-						<span class="input-group-addon group-addon-width">USD</span>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<label class="control-label" for="ref">Commission(<?php // $inquiries->commission.'%';?>)</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<div class="input number">
-							<?php //$commission = ($total*$inquiries->commission)/100;?>
-							<input disabled value="<?php // number_format($commission, 2); ?>" id="commission-price" class="form-control">
-						</div>
-						<span class="input-group-addon group-addon-width">USD</span>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<label class="control-label" for="ref">Add Commission(<?php // $inquiries->add_commission.'%';?>)</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<div class="input number">
-							<?php //$add_commission = ($total*$inquiries->add_commission)/100;?>
-							<input disabled value="<?php // number_format($add_commission, 2); ?>" id="add_commission-price" class="form-control">
-						</div>
-						<span class="input-group-addon group-addon-width">USD</span>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<?php //$cost = 0; ?>
-					<?php //foreach ($inquiries->extras as $key => $extra): ?>
-						<?php //$cost = $cost+$extra->cost; ?>
-					<?php //endforeach ?>
-					<?php //if (!empty($inquiries->extras)): ?>
-					<label class="control-label" for="ref">Extras Cost ($ <?php //echo $cost; ?>)</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<table class="table">
-							<tbody>
-							<?php //foreach ($inquiries->extras as $key => $extra): ?>
-								<tr>
-									<td><?php //echo $extra->name ?></td>
-									<td><?php //echo '$ '.number_format($extra->cost,2) ?></td>
-								</tr>
-							<?php //endforeach ?>
-							</tbody>
-						</table>
-					</div>
-
-					<?php //endif ?>
-				</div>
-				<div class="clearfix"></div>
-				<div class="col-md-4">
-					<label class="control-label" for="ref">Grand Total</label><div class="clearfix"></div>
-					<div class="col-md-12 input-group group-indicator">
-						<div class="input number">
-							<input disabled value="<?php // number_format($total+$commission+$add_commission-$discount+$cost, 2); ?>" id="total-price" class="form-control">
-						</div>
-						<span class="input-group-addon group-addon-width">USD</span>
-					</div>
-				</div> -->
-				<div class="clearfix"></div>
-				<br/>
+				<!-- End Content Page -->
 			</div>
+			<div class="clearfix"></div>
+			<br/>
 		</div>
-
 	</div>
-
 	<div class="clearfix"></div>
 	<br>
 	<div id="grid" inquiry_id="<?= $inquiries->id?>" data-type="<?= $inquiries->type?>" data-room='<?php echo($data);?>'></div>

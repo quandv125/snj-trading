@@ -2,8 +2,7 @@
 <div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
-
-			Quotation
+		<span>Quotations</span>
 			<?php echo $this->Html->link('Next.Stage',['controller' =>'inquiries','action' =>'OrderAcknowledgement',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 			<?php echo $this->Html->link('Pre.Stage',['controller' =>'inquiries','action' =>'comparing',$inquiries->id],['class'=>'btn btn-primary float-right margin-right10','escape' => false]) ?>
 		</div> <!-- panel-heading -->
@@ -15,14 +14,13 @@
 					<li role="presentation"><a href="#tab3" role="tab" data-toggle="tab"><?= __("Price"); ?></a></li>
 				</ul>
 				<div class="tab-content tab-content-lx">
-					
 					<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 						<div class="panel-body">
 							<?= $this->Form->create(null, ['id' => 'form-quotation']); ?>
 							<?= $this->Form->input('id',['class'=>'hidden','label'=>false,'value' => $inquiries->id]) ?>
 							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
 								<div class="form-groups">
-									<span class="col-md-3 margin-top5"><label class="control-label float-right">inquiries date</label></span>
+									<span class="col-md-3 margin-top5"><label class="control-label float-right">Inquiries date</label></span>
 									<span class="col-md-5">
 										<?php $date = new DateTime($inquiries->created); ?>
 										<?= $this->Form->input('created',['class'=>'created onlydate2','disabled','label' => false,'value' => $date->format('Y-m-d')]) ?>
@@ -93,8 +91,8 @@
 						<?= $this->Form->end(); ?>
 					</div>
 					<div role="tabpanel" class="tab-pane fade" id="tab2">
-						<div class="panel-body">
-							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
+						<div class="panel-body col-md-offset-1">
+							<div class="col-md-5 item-unavailable" id="<?= h($inquiries->id) ?>">
 								<div class="col-md-12">
 									<?= $this->Form->input('our_ref',['class'=>'our_ref','label' => 'Our REF','value' => $inquiries->id]) ?>
 								</div>
@@ -104,9 +102,9 @@
 								</div>
 								<div class="col-md-6">
 									<?= $this->Form->input('subject',['class'=>'subject','label'=>'Subject','value' => 'Spare Part']) ?>
-								</div>							
+								</div>
 							</div>
-							<div class="col-md-6 item-unavailable" id="<?= h($inquiries->id) ?>">
+							<div class="col-md-5 item-unavailable" id="<?= h($inquiries->id) ?>">
 								<?= $this->Form->create(null, ['url' => [ 'action' => 'edit',  $inquiries->id]]); ?>
 								<?= $this->Form->input('id',['class'=>'hidden','label' => false, 'value' => $inquiries->id]) ?>
 								<?= $this->Form->input('status',['class'=>'hidden','label' => false, 'value' => $inquiries->status]) ?>
@@ -149,9 +147,7 @@
 	</div><!-- panel panel-white -->
 	<div class="panel panel-white">
 		<div class="panel-body"> 
-
 			<div id="grid_quotation" inquiry_id="<?= $inquiries->id?>" data-type="<?= $inquiries->type?>" data-room='<?= ($data);?>'></div>
-			
 		</div>
 	</div> <!-- panel-body -->
 </div> <!-- row -->

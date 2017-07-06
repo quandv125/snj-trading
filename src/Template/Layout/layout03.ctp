@@ -1,3 +1,5 @@
+<!-- Layout Index -->
+
 <?php $cakeDescription = 'CakePHP: the rapid development php framework'; ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +27,7 @@
         'libs/reset',
         'libs/font-awesome.min',
         'libs/font-linearicons',
-        'libs/bootstrap',
+        'libs/bootstrap.min',
         'libs/bootstrap-theme',
         'libs/jquery.fancybox',
         'libs/jquery-ui',

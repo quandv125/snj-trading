@@ -29,133 +29,135 @@ use Cake\ORM\TableRegistry;
 class AppController extends Controller
 {
 
-    /**
-     * Initialization hook method.
-     *
-     * Use this method to add common initialization code like loading components.
-     *
-     * e.g. `$this->loadComponent('Security');`
-     *
-     * @return void
-     */
-    public function initialize()
-    {
-        parent::initialize();
+	/**
+	 * Initialization hook method.
+	 *
+	 * Use this method to add common initialization code like loading components.
+	 *
+	 * e.g. `$this->loadComponent('Security');`
+	 *
+	 * @return void
+	 */
+	public function initialize()
+	{
+		parent::initialize();
 
-        $this->loadComponent('Custom');
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Flash');
-        
-        switch($this->request->session()->read('Config.language')) {
-            case "vn":
-                I18n::locale('vn_VN');
-                break;
-            default:
-                I18n::locale('en_US');
-                break;
-        }
+		$this->loadComponent('Custom');
+		$this->loadComponent('RequestHandler');
+		$this->loadComponent('Flash');
+		
+		switch($this->request->session()->read('Config.language')) {
+			case "vn":
+				I18n::locale('vn_VN');
+				break;
+			default:
+				I18n::locale('en_US');
+				break;
+		}
 
-        $this->loadComponent('Auth', [
-            'authorize' => [
-                'Acl.Actions' => ['actionPath' => 'controllers/']
-            ],
-            'loginAction' => [
-                'plugin' => false,
-                'controller' => 'Users',
-                'action' => 'logout'
-            ],
-            'loginRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'display',
-                'home'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Pages',
-                'action' => 'index',
-            ],
-            'authError' => __('You are not authorized to access that location.'),
-            'unauthorizedRedirect' => [
-                // 'controller' => 'Users',
-                'action' => 'index',
-                'prefix' => false
-            ],
-            'flash' => [
-                'element' => 'error'
-            ]
-        ]);
-    }
+		$this->loadComponent('Auth', [
+			'authorize' => [
+				'Acl.Actions' => ['actionPath' => 'controllers/']
+			],
+			'loginAction' => [
+				'plugin' => false,
+				'controller' => 'Users',
+				'action' => 'logout'
+			],
+			'loginRedirect' => [
+				'controller' => 'Pages',
+				'action' => 'display',
+				'home'
+			],
+			'logoutRedirect' => [
+				'controller' => 'Pages',
+				'action' => 'index',
+			],
+			'authError' => __('You are not authorized to access that location.'),
+			'unauthorizedRedirect' => [
+				// 'controller' => 'Users',
+				'action' => 'index',
+				'prefix' => false
+			],
+			'flash' => [
+				'element' => 'error'
+			]
+		]);
+	}
 
-    public $components = [
-        'Acl' => [ 'className' => 'Acl.Acl' ]
-    ];
+	public $components = [
+		'Acl' => [ 'className' => 'Acl.Acl' ]
+	];
 
-    public $helpers = [
-        'Html' => [
-            'className' => 'Bootstrap.BootstrapHtml',
-            'useFontAwesome' => true 
-        ],
-        'Form' => [
-            'className' => 'Bootstrap.BootstrapForm',
-            'useCustomFileInput' => true
-        ],
-        'Paginator' => [
-            'className' => 'Bootstrap.BootstrapPaginator'
-        ],
-        'Modal' => [
-            'className' => 'Bootstrap.BootstrapModal'
-        ],
-        'MyHtml' => [
-            'className' => 'MyHtml'
-        ]
-    ];
-    /**
-     * Before render callback.
-     *
-     * @param \Cake\Event\Event $event The beforeRender event.
-     * @return \Cake\Network\Response|null|void
-     */
-    public function beforeRender(Event $event) {
-        if (!array_key_exists('_serialize', $this->viewVars) &&
-            in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
-            $this->set('_serialize', true);
-        }
-    }
+	public $helpers = [
+		'Html' => [
+			'className' => 'Bootstrap.BootstrapHtml',
+			'useFontAwesome' => true 
+		],
+		'Form' => [
+			'className' => 'Bootstrap.BootstrapForm',
+			'useCustomFileInput' => true
+		],
+		'Paginator' => [
+			'className' => 'Bootstrap.BootstrapPaginator'
+		],
+		'Modal' => [
+			'className' => 'Bootstrap.BootstrapModal'
+		],
+		'MyHtml' => [
+			'className' => 'MyHtml'
+		]
+	];
+	/**
+	 * Before render callback.
+	 *
+	 * @param \Cake\Event\Event $event The beforeRender event.
+	 * @return \Cake\Network\Response|null|void
+	 */
+	public function beforeRender(Event $event) {
+		if (!array_key_exists('_serialize', $this->viewVars) &&
+			in_array($this->response->type(), ['application/json', 'application/xml'])
+		) {
+			$this->set('_serialize', true);
+		}
+	}
 
-    public function isAuthorized($user) {
-        // Admin can access every action
-        if (isset($user['role']) && $user['role'] === 'admin') {
-            return true;
-        }
-        // Default deny
-        return false;
-    }
+	public function isAuthorized($user) {
+		// Admin can access every action
+		if (isset($user['role']) && $user['role'] === 'admin') {
+			return true;
+		}
+		// Default deny
+		return false;
+	}
 
-    public function beforeFilter(Event $event)  {
-        // if ($this->Auth->user('group_id') == ADMIN) {
-            $this->Auth->allow();
-        // }
-        $language = $this->request->session()->read('Config.language');
-        $this->Auth->allow(['index','display','logout','changeLang']); 
-        $user_info = $this->Auth->user();
-        $this->menu();
-        $this->set(compact('user_info','language'));
-    }
-    //...
-    public function changeLang($lang) {
-        $this->request->session()->write('Config.language', $lang);
-        return $this->redirect($this->request->referer());
-    }
+	public function beforeFilter(Event $event)  {
+		// if ($this->Auth->user('group_id') == ADMIN) {
+			$this->Auth->allow();
+		// }
+		$language = $this->request->session()->read('Config.language');
+		$this->Auth->allow(['index','display','logout','changeLang']); 
+		$user_info = $this->Auth->user();
+		$this->menu();
+		$this->set(compact('user_info','language'));
+	}
+	//...
+	public function changeLang($lang) {
+		$this->request->session()->write('Config.language', $lang);
+		return $this->redirect($this->request->referer());
+	}
 
-    private function menu() {
-        $Categorie   = TableRegistry::get( 'Categories' );
-        $Article     = TableRegistry::get( 'Articles' );
-        $categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL, 'actived' => 1 ])->order([ 'name' => 'ASC' ]);
-        $categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL , 'actived' => 1])->order([ 'created' => 'ASC' ]);
-        $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
-        $snj         = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
-        $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);
-        $signles     = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SIGNLE])->limit(5)->order(['created' => 'ASC']);
-        $this->set(compact('categories','categories2','help','snj','my_acc','signles'));
-    }
+	private function menu() {
+		$Categorie   = TableRegistry::get( 'Categories' );
+		$Article     = TableRegistry::get( 'Articles' );
+		$categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL, 'actived' => 1 ])->order([ 'name' => 'ASC' ]);
+
+		$categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL , 'actived' => 1])->order([ 'created' => 'ASC' ]);
+				// pr($categories->toarray());die();
+		// $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
+		// $snj         = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
+		// $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);
+		//$signles     = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SIGNLE])->limit(5)->order(['created' => 'ASC']);
+		$this->set(compact('categories','categories2','help','snj','my_acc','signles'));
+	}
 }

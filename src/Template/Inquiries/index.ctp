@@ -11,16 +11,16 @@
 	<div class="clearfix"></div>
 		<div class="main-content-shop ">
 			<div class="shop-tab-title">
-			<!--  <h3><?php echo __('Orders') ?></h3> -->
+			<!--  <h3><?php //echo __('Orders') ?></h3> -->
 			</div>
 			<div class="main-content-shop ">
 
 				<table id="datatable" class="display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th class="text-center"><?php echo __('Ref') ?></th>
+							<th class="text-center"><?php echo __('#') ?></th>
+							<th class="text-center"><?php echo __('Ref.No') ?></th>
 							<th class="text-center"><?php echo __('Vessel') ?></th>
-							<th class="text-center"><?php echo __('Our Ref') ?></th>
 							<th class="text-center"><?php echo __('Status') ?></th>
 							<th class="text-center"><?php echo __('Created') ?></th>
 							<th class="text-center"><?php echo __('Action') ?></th>
@@ -31,9 +31,8 @@
 							
 						<tr>
 							<td class="text-center"><?= $this->Html->link('#'.$inquiry->id,['controller'=>'Inquiries','action' => 'InquiriesView', $inquiry->id],['escape' => false]) ?></td>
-							
-							<td class="text-center"><?= $inquiry->vessel?></td>
 							<td class="text-center"><?= $inquiry->ref?></td>
+							<td class="text-center"><?= $inquiry->vessel?></td>
 							<td class="text-center"><?= $inquiry->status?></td>
 							<td class="text-center"><?= date_format($inquiry->created, 'Y-m-d H:i:s'); ?></td>
 							<td class="text-center">

@@ -1,0 +1,71 @@
+
+<div class="row">
+	<button name="save" class="btn btn-success float-right" id="save"><i class="fa fa-paper-plane"></i> Send</button>
+	<div class="clearfix"></div>
+	<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
+	<form method="post" accept-charset="utf-8" id="InqSuppsInfo" role="form" action="/inquiries/add">
+		<div class="col-md-4">
+			<div class="form-group text">
+				<label class="control-label" for="vessel">Vessel Name</label>
+				<input type="text" name="vessel" class="form-control vessel" id="vessel">
+			</div>		
+		</div>
+		<div class="col-md-4">
+			<div class="form-group text">
+				<label class="control-label" for="imo-no">IMO No</label>
+				<input type="text" name="imo_no" class="form-control imo_no" id="imo-no">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group text">
+				<label class="control-label" for="hull-no">Hull No</label>
+				<input type="text" name="hull_no" class="form-control hull_no" id="hull-no">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group text">
+			<label class="control-label" for="datepicker">Date</label><span class="k-widget k-datepicker k-header form-control date"><span class="k-picker-wrap k-state-default">
+			<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" 	aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview"><span class="k-icon k-i-calendar"></span></span></span></span>
+	
+			</div>		
+		</div>
+		<div class="col-md-4">
+			<div class="form-group text">
+				<label class="control-label" for="ref">Ref</label>
+				<input type="text" name="ref" class="form-control ref" id="ref">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group file">
+				<label class="control-label" for="file">Attachment File</label>
+				<input type="file" name="file[]" class="ref" multiple="multiple" id="file" button-label="Choose File" style="display: none;" onchange="document.getElementById('file-input').value= (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';">
+				<div class="input-group">
+					<div class="input-group-btn">
+						<button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button>
+					</div>
+					<input type="text" name="file.-text" class="form-control" readonly="readonly" id="file-input" onclick="document.getElementById('file').click();">
+				</div>
+			</div>		
+		</div>
+		<div class="clearfix"></div>
+		<div class="col-md-4">
+			<div class="form-group textarea">
+				<label class="control-label" for="description">Remark</label>
+				<textarea name="description" class="form-control" id="description" rows="5"></textarea>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="form-group text">
+				<label class="control-label active" for="subject">Subject</label>
+				<input type="text" name="subject" class="form-control" placeholder="Spare Part" id="subject"></div>			
+				<input type="text" name="status" class="form-control hidden" id="status" value="1">
+				<input type="text" name="type" class="form-control hidden" id="type" value="1">
+				
+		</div>
+	</form>
+		<div class="clearfix"></div><br>
+		<div id="exampleAdd"></div>
+	</div>
+</div>
+
+<script src="/js/theme.js"></script>

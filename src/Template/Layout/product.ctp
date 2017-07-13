@@ -39,6 +39,7 @@
 		'theme','libs/bootstrap-select',
 		'libs/jquery.dataTables.min',
 		'libs/kendo.default.min','libs/kendo.common.min',
+		'libs/angular-material.min',
 		'responsive'
 	])?>
 
@@ -71,6 +72,7 @@
 		'libs/materialize',
 		'theme',
 	]); ?>
+	
 	<?php 
 	// Start Angular
 		echo $this->Html->script('myapp/lib/angular/angular.min.js');
@@ -78,6 +80,7 @@
 		echo $this->Html->script('myapp/lib/angular/angular-animate.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-resource.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-sanitize.min.js');
+		echo $this->Html->script('myapp/lib/angular/angular-aria.min.js');
 		echo $this->Html->script('myapp/angular-ckeditor.min.js');
 		echo $this->Html->script('myapp/controllers/controllers.js');
 		echo $this->Html->script('myapp/services/services.js');
@@ -85,6 +88,7 @@
 		echo $this->Html->script('myapp/controllers/filters.js');
 		// echo $this->Html->script('myapp/controllers/routes.js');
 		echo $this->Html->script('myapp/app.js');
+		echo $this->Html->script('myapp/lib/angular/angular-material.min');
 		// End Angular
 	 ?>
 	

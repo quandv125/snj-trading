@@ -1,186 +1,186 @@
-<script src="/js/libs/materialize.js"></script>
-<script src="/js/theme.js"></script>
-<div class="row" ng-controller="attachmentCtrl">
-	<div class="col s12">
-		<ul class="tabs">
-			
-			<li class="tab col m3 s12"><a class="blue-text" href="#info">Infomations</a></li>
-			<li class="tab col m3 s12"><a class="blue-text" href="#cost_price">Cost & price</a></li>
 
-		   
-		</ul><br/>
-	</div>
+<script src="/js/theme.js"></script>
+
+<div class="tab-container">
 	
-	<div id="info" class="col s12">
-		<form method="post" accept-charset="utf-8" id="fx-inquiries-details" role="form">
-			<div style="display:none;">
-				<input type="hidden" name="_method" class="form-control" value="POST">
-			</div>
-			<div class="form-group text">
-				<input type="text" name="id" class="form-control hidden" id="id" ng-model="inquiries.id">
-			</div>
-			<div class="col-md-4">
-				<div class="form-group text">
-					<label class="control-label active" for="vessel">Vessel Name</label>
-					<input type="text" name="vessel" class="form-control vessel" id="vessel" ng-model="inquiries.vessel">
-				</div>
-			</div>
-			<div class="col-md-4">
-			<div class="form-group text">
-				<label class="control-label active" for="imo-no">IMO No</label>
-				<input type="text" name="imo_no" class="form-control imo_no" id="imo-no" ng-model="inquiries.imo_no">
-				</div>
-			</div>
-			<div class="col-md-4">
-			<div class="form-group text">
-				<label class="control-label active" for="hull-no">HULL No</label>
-				<input type="text" name="hull_no" class="form-control hull_no" id="hull-no" ng-model="inquiries.hull_no">
-				</div>
-			</div>
-			<div class="col-md-4">
-			<div class="form-group text">
-				<label class="control-label active" for="ref">Ref No</label>
-				<input type="text" name="ref" class="form-control ref" id="ref" ng-model="inquiries.ref">
-				</div>
-			</div>
-			<div class="col-md-4">
-			<label class="control-label" for="date">Date</label>
-			<div class="clearfix"></div>
-			<div class="form-group text">
-				<span class="k-widget k-datepicker k-header form-control date">
-					<span class="k-picker-wrap k-state-default">
-						<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
-							<span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview">
-								<span class="k-icon k-i-calendar"></span>
-							</span>
-						</span>
-					</span>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group text">
-					<label class="control-label" for="datepicker">Subject</label>
-					<input type="text" name="subject" class="form-control" value="Spare Part" id="datepicker">
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="col-md-4">
-				<div class="form-group textarea">
-					<label class="control-label active" for="remark">Remark</label>
-					<textarea name="remark" class="form-control" id="remark" rows="5" ng-model="inquiries.remark"></textarea>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="form-group text">
-					<label class="control-label" for="ref">File</label>
-					<div class="clearfix"></div>
-					<div class="form-group file">
-						<input type="file" name="file[]" class="ref" multiple="multiple" id="file" button-label="Choose File" style="display: none;" onchange="document.getElementById('file-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';">
-						<div class="input-group">
-							<div class="input-group-btn">
-								<button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button>
-							</div>
-							<input type="text" name="file.-text" class="form-control" readonly="readonly" id="file-input" onclick="document.getElementById('file').click();">
+		<md-tabs md-selected="selectedTab" style=" min-height:431px !important;">
+		
+			<md-tab label="Infomations">
+				<div class="tab-content">
+					<form method="post" accept-charset="utf-8" id="fx-inquiries-details" role="form">
+						<div style="display:none;">
+							<input type="hidden" name="_method" class="form-control" value="POST">
 						</div>
-					</div>
-					<table class="table file-attachments">
-						<tbody>
-							
-							<tr ng-repeat="a in attachments" id="attachments-{{a.id}}">
-								<td>
-									<a href="/inquiries/download/{{a.id}}">{{a.path}}</a>
-								</td>
-								<td>
-									<span class="cursor-point remove-file-att" ng-click='go()' id="{{a.id}}">X</span>
-								</td>
-							</tr>
-							
-						</tbody>
-					</table>
+						<div class="form-group text">
+							<input type="text" name="id" class="form-control hidden" id="id" ng-model="inquiries.id">
+						</div>
+						<div class="col-md-4">
+							<div class="form-group text">
+								<label class="control-label active" for="vessel">Vessel Name</label>
+								<input type="text" name="vessel" class="form-control vessel" id="vessel" ng-model="inquiries.vessel">
+							</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group text">
+							<label class="control-label active" for="imo-no">IMO No</label>
+							<input type="text" name="imo_no" class="form-control imo_no" id="imo-no" ng-model="inquiries.imo_no">
+							</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group text">
+							<label class="control-label active" for="hull-no">HULL No</label>
+							<input type="text" name="hull_no" class="form-control hull_no" id="hull-no" ng-model="inquiries.hull_no">
+							</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group text">
+							<label class="control-label active" for="ref">Ref No</label>
+							<input type="text" name="ref" class="form-control ref" id="ref" ng-model="inquiries.ref">
+							</div>
+						</div>
+						<div class="col-md-4">
+						<label class="control-label" for="date">Date</label>
+						<div class="clearfix"></div>
+						<div class="form-group text">
+							<span class="k-widget k-datepicker k-header form-control date">
+								<span class="k-picker-wrap k-state-default">
+									<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
+										<span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview">
+											<span class="k-icon k-i-calendar"></span>
+										</span>
+									</span>
+								</span>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group text">
+								<label class="control-label" for="datepicker">Subject</label>
+								<input type="text" name="subject" class="form-control" value="Spare Part" id="datepicker">
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="col-md-4">
+							<div class="form-group textarea">
+								<label class="control-label active" for="remark">Remark</label>
+								<textarea name="remark" class="form-control" id="remark" rows="5" ng-model="inquiries.remark"></textarea>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group text">
+								<label class="control-label" for="ref">File</label>
+								<div class="clearfix"></div>
+								<div class="form-group file">
+									<input type="file" name="file[]" class="ref" multiple="multiple" id="file" button-label="Choose File" style="display: none;" onchange="document.getElementById('file-input').value = (this.files.length <= 1) ? this.files[0].name : this.files.length + ' ' + 'files selected';">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" onclick="document.getElementById('file').click();" class="btn btn-default">Choose File</button>
+										</div>
+										<input type="text" name="file.-text" class="form-control" readonly="readonly" id="file-input" onclick="document.getElementById('file').click();">
+									</div>
+								</div>
+								<table class="table file-attachments">
+									<tbody>
+										
+										<tr ng-repeat="a in attachments" id="attachments-{{a.id}}">
+											<td>
+												<a href="/inquiries/download/{{a.id}}">{{a.path}}</a>
+											</td>
+											<td>
+												<span class="cursor-point remove-file-att" ng-click='go()' id="{{a.id}}">X</span>
+											</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<button class="btn btn-success float-right" type="submit">Update</button>
+					</form>
 				</div>
-			</div>
-			<div class="clearfix"></div>
-			<button class="btn btn-success float-right" type="submit">Update</button>
-		</form>
-	</div>
-	<div id="cost_price" class="col s12">
-		<div id="content">
-			<div class="content-page woocommerce">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12 col-sm-12 col-xs-12 ">
-							<div class="woocommerce-checkout-review-order" id="order_review">
-								<div class="table-responsive">
-									<table class="shop_table woocommerce-checkout-review-order-table">
-										<thead>
-											<tr>
-												<th class="product-name">name</th>
-												<th class="product-total">Price</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="cart_item">
-												<td class="product-name">
-													Total
-												</td>
-												<td class="product-total">
-													<span> {{ total | currency : "$ " : 2 }}</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="product-name">
-													Commission (<span ng-bind="inquiries.commission"> </span>%)
-												</td>
-												<td class="product-total">
-													<!-- $ <span ng-bind="commission"> </span> -->
-													<span> {{ commission | currency: "$ " : 2 }}</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="product-name">
-													Add Commission (<span ng-bind="inquiries.add_commission"> </span>%)
-												</td>
-												<td class="product-total">
-													<!-- $ <span ng-bind="add_commission"> </span> -->
-														<span> {{ add_commission | currency: "$ " : 2 }}</span>
-												</td>
-											</tr>
-											<tr class="cart_item">
-												<td class="product-name">
-													Discount (<span ng-bind="inquiries.discount"> </span>%)
-												</td>
-												<td class="product-total">
-													<!-- $ <span ng-bind="discount"> </span> -->
-													<span> {{ discount | currency: "$ " : 2 }}</span>
-												</td>
-											</tr>
-										</tbody>
-										<tfoot>
-											<tr class="shipping">
-												<td>Extras Cost</td>
-												<td>
-													<ul ng-repeat="e in extras">
-														<li>{{e.name}}  ({{ e.cost | currency: "$ " : 2 }})</li>
-													</ul>
-												</td>
-											</tr>
-											<tr class="order-total">
-												<th>Grand Total</th>
-												<td><strong>{{ grand_total | currency: "$ " : 2 }}</td>
-											</tr>
-										</tfoot>
-									</table>
+			</md-tab>
+			<md-tab label="Cost & Price">
+				<div class="tab-content">
+					<div id="content">
+						<div class="content-page woocommerce">
+							<div class="container">
+								<div class="row">
+									<div class="col-md-12 col-sm-12 col-xs-12 ">
+										<div class="woocommerce-checkout-review-order" id="order_review">
+											<div class="table-responsive">
+												<table class="shop_table woocommerce-checkout-review-order-table">
+													<thead>
+														<tr>
+															<th class="product-name">name</th>
+															<th class="product-total">Price</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr class="cart_item">
+															<td class="product-name">
+																Total
+															</td>
+															<td class="product-total">
+																<span> {{ total | currency : "$ " : 2 }}</span>
+															</td>
+														</tr>
+														<tr class="cart_item">
+															<td class="product-name">
+																Commission (<span ng-bind="inquiries.commission"> </span>%)
+															</td>
+															<td class="product-total">
+																<!-- $ <span ng-bind="commission"> </span> -->
+																<span> {{ commission | currency: "$ " : 2 }}</span>
+															</td>
+														</tr>
+														<tr class="cart_item">
+															<td class="product-name">
+																Add Commission (<span ng-bind="inquiries.add_commission"> </span>%)
+															</td>
+															<td class="product-total">
+																<!-- $ <span ng-bind="add_commission"> </span> -->
+																	<span> {{ add_commission | currency: "$ " : 2 }}</span>
+															</td>
+														</tr>
+														<tr class="cart_item">
+															<td class="product-name">
+																Discount (<span ng-bind="inquiries.discount"> </span>%)
+															</td>
+															<td class="product-total">
+																<!-- $ <span ng-bind="discount"> </span> -->
+																<span> {{ discount | currency: "$ " : 2 }}</span>
+															</td>
+														</tr>
+													</tbody>
+													<tfoot>
+														<tr class="shipping">
+															<td>Extras Cost</td>
+															<td>
+																<ul ng-repeat="e in extras">
+																	<li>{{e.name}}  ({{ e.cost | currency: "$ " : 2 }})</li>
+																</ul>
+															</td>
+														</tr>
+														<tr class="order-total">
+															<th>Grand Total</th>
+															<td><strong>{{ grand_total | currency: "$ " : 2 }}</td>
+														</tr>
+													</tfoot>
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
+						<!-- End Content Page -->
 					</div>
 				</div>
-			</div>
-			<!-- End Content Page -->
-		</div>
-	</div>
+			</md-tab>
+			
+		</md-tabs>
+		
 </div>
 
-<div class="clearfix"></div><br>
 
 <div id="grid"></div>

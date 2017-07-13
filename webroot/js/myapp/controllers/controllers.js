@@ -45,6 +45,7 @@
 			$scope.products	= response.data.products;
 			$scope.images	= response.data.products.images;
 			$scope.categories = response.data.categories;
+			
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
@@ -484,4 +485,5 @@
 			toastr.error("Error");
 		});
 	});
+	
 }());

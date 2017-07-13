@@ -21,6 +21,6 @@
 	</div>
 </div> -->
 
-<div ng-app="myapp" style=" min-height: 463px; ">
+<div ng-app="myapp" style=" min-height: 666px; ">
     <div ng-view></div>
 </div>

@@ -4910,3 +4910,17 @@ table.dataTable tbody th, table.dataTable tbody td {
 	left: 100%;
   }
 }
+
+.tab-content {
+    margin: 20px 0 0 0;
+    /*text-align:center;*/
+}
+
+.tab-change-row {
+    text-align:center;
+}
+
+.tab-change-btn {
+    display: inline-block
+}
+

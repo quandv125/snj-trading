@@ -2,16 +2,17 @@
 
   "use strict";
 
-  var App = angular.module("myapp", [
-    "App.controllers",
-    "App.services",
-    "App.directives",
-    "App.filters",
-    "ngRoute",
-    "ngResource",
-    "ngAnimate",
-    "ckeditor"
-  ]);
+	var App = angular.module("myapp", [
+		"App.controllers",
+		"App.services",
+		"App.directives",
+		"App.filters",
+		"ngRoute",
+		"ngResource",
+		"ngAnimate",
+		"ngMaterial",
+		"ckeditor"
+	]);
 
   	App.config(function($routeProvider, $locationProvider) {
 		$routeProvider

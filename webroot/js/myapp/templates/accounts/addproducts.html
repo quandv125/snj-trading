@@ -1,87 +1,71 @@
-<script src="/js/libs/materialize.js"></script>
 
-  
-<div class="row wapper-content11" style="min-height: 400px;">
-	<div class="col s12">
-		<ul class="tabs">
-			<li class="tab col m3 s12"><a class="blue-text" href="#info">Infomations</a></li>
-			<li class="tab col m3 s12"><a class="blue-text" href="#descriptions">Descriptions</a></li>
-		</ul><br/>
-	</div>
-	
+<div class="tab-container">
 	<form method="post" enctype='multipart/form-data' accept-charset="utf-8" id="FrmAddProducts" role="form">
-
-		<div id="info" class="col s12">
-			<div class="col-lg-6 col-md-6">
-				<div class="form-group text">
-					<label class="control-label" for="sku">Part No/ Code</label>
-					<input type="text" name="sku" class="form-control sku" placeholder="Part No/ Code" id="sku">
-					
-				</div>
-				<div class="form-group text">
-					<label class="control-label" for="product-name">Products Name</label>
-					<input type="text" name="product_name" class="form-control product_name" placeholder="Products Name" id="product-name">
-				</div>
-				<div class="form-group text">
-					<label class="control-label" for="retail-price">Retail Price</label>
-					<input type="text" name="retail_price" class="form-control auto retail_price" placeholder="USD" id="retail-price">
-				</div>
-				<div class="form-group">
-	                <label for="exampleInputGroups">Categories</label>
-	                <select name="categorie_id" class="form-control" id="categorie-id" >
-	                	<option ng-repeat="(k, c) in categories" value="{{c.key}}">{{c.value}}</option>
-	                	<!-- <option value="3">Store</option>
-	                	<option value="5">____Deek store</option>
-	                	<option value="26">____Electrical Store</option>
-	                	<option value="47">____Other</option>
-	                	<option value="29">____Engine Store</option>
-	                	<option value="2">Spare Part</option>
-	                	<option value="6">____M/E</option>
-	                	<option value="19">____G/E</option>
-	                	<option value="1">____Pumps</option>
-	                	<option value="20">____Other</option>
-	                	<option value="17">____Main Air Compressor</option> -->
-	                </select>
-	            </div>
-			</div>
-			<div class="col-lg-6 col-md-6">
-				<div class="form-group text">
-					<label class="control-label" for="serial-no">Serial No</label>
-					<input type="text" name="serial_no" class="form-control serial_no" placeholder="Serial No" id="serial-no">
-				</div>
-				<div class="form-group text">
-					<label class="control-label" for="type-model">Type Model</label>
-					<input type="text" name="type_model" class="form-control type_model" placeholder="Type Model" id="type-model">
-				</div>  
-				<div class="form-group text">
-					<label class="control-label" for="quantity">Quantity</label>
-					<input type="text" name="quantity" class="form-control auto quantity" placeholder="Quantity" id="quantity">
-				</div>                        
-				<div class="form-group text">
-					<label class="control-label" for="origin">Origin</label>
-					<input type="text" name="origin" class="form-control origin" placeholder="Origin" id="origin">
-				</div>                        
-				<div class="form-group text">
-					<label class="control-label" for="unit">Unit</label>
-					<input type="text" name="unit" class="form-control unit" placeholder="Unit" id="unit">
-				</div>    
-			</div>
-			<div class="col-md-12 col-lg-12">
-				<label class="control-label" for="Short_Description">Remark</label>
-				<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
-			</div>
-		</div>
-		<div id="descriptions" class="col s12">
-			<div class="col-md-12 col-lg-12">
-				<label class="control-label" for="Description">Descriptions</label>
-				<textarea ckeditor="options" id="description" ng-model="products.description"></textarea>
-				<br/>
-				<div class="input-group">
-					<input type="file" name='files[]' multiple="multiple" />  
-					
-				</div>
-			</div>
-		</div>
+		<md-tabs md-selected="selectedTab" style=" min-height:737px !important;">
+				<md-tab label="Infomations">
+					<div class="tab-content">
+						<div class="col-lg-6 col-md-6">
+							<div class="form-group text">
+								<label class="control-label" for="sku">Part No/ Code</label>
+								<input type="text" name="sku" class="form-control sku" placeholder="Part No/ Code" id="sku">
+							</div>
+							<div class="form-group text">
+								<label class="control-label" for="product-name">Products Name</label>
+								<input type="text" name="product_name" class="form-control product_name" placeholder="Products Name" id="product-name">
+							</div>
+							<div class="form-group text">
+								<label class="control-label" for="retail-price">Retail Price</label>
+								<input type="text" name="retail_price" class="form-control auto retail_price" placeholder="USD" id="retail-price">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputGroups">Categories</label>
+								<select name="categorie_id" class="form-control" id="categorie-id" >
+									<option ng-repeat="(k, c) in categories" value="{{c.key}}">{{c.value}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<div class="form-group text">
+								<label class="control-label" for="serial-no">Serial No</label>
+								<input type="text" name="serial_no" class="form-control serial_no" placeholder="Serial No" id="serial-no">
+							</div>
+							<div class="form-group text">
+								<label class="control-label" for="type-model">Type Model</label>
+								<input type="text" name="type_model" class="form-control type_model" placeholder="Type Model" id="type-model">
+							</div>  
+							<div class="form-group text">
+								<label class="control-label" for="quantity">Quantity</label>
+								<input type="text" name="quantity" class="form-control auto quantity" placeholder="Quantity" id="quantity">
+							</div>                        
+							<div class="form-group text">
+								<label class="control-label" for="origin">Origin</label>
+								<input type="text" name="origin" class="form-control origin" placeholder="Origin" id="origin">
+							</div>                        
+							<div class="form-group text">
+								<label class="control-label" for="unit">Unit</label>
+								<input type="text" name="unit" class="form-control unit" placeholder="Unit" id="unit">
+							</div>    
+						</div>
+						<div class="col-md-12 col-lg-12">
+							<label class="control-label" for="Short_Description">Remark</label>
+							<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
+						</div>
+					</div>
+				</md-tab>
+				<md-tab label="Descriptions">
+					<div class="tab-content">
+						<div class="col-md-12 col-lg-12">
+							<label class="control-label" for="Description">Descriptions</label>
+							<textarea ckeditor="options" id="description" ng-model="products.description"></textarea>
+							<br/>
+							<div class="input-group">
+								<input type="file" name='files[]' multiple="multiple" />  
+							</div>
+						</div>
+					</div>
+				</md-tab>
+			
+		</md-tabs>
 		<button class="btn btn-success" id="sb-add-products" type="submit">Submit</button>
 	</form>
 </div>

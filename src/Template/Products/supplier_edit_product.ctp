@@ -93,20 +93,20 @@
 	</div>
 </div>
 
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+<!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-sm modal-center">
 		<div class="modal-content" style="margin-top: 100px; ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Suppliers/ Maker's Name") ?></h4>
+				<h4 class="modal-title" id="myModalLabel"><?php //echo __("Add Suppliers/ Maker's Name") ?></h4>
 			</div>
 			<div class="modal-body">
-				<?= $this->Form->input('name',['id' => 'supplier-name']);?> 
+				<?php //echo $this->Form->input('name',['id' => 'supplier-name']);?> 
 			</div>
 			
 			<div class="modal-footer">
-				<button class="btn btn-success float-right" count="<?= $suppliers->count()?>" id="btn-add-suppliers">Submit</button>
+				<button class="btn btn-success float-right" count="<?php //echo $suppliers->count()?>" id="btn-add-suppliers">Submit</button>
 			</div>
 		</div>
 	</div>
-</div>  <!-- End -->
+</div>  --> <!-- End -->

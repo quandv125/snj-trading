@@ -22,8 +22,8 @@ class UsersController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow('login','logout');
 	}
-   
-	public function index() {     
+
+	public function index() {
 		$this->paginate = [
 			'contain' => ['Groups']
 		];
@@ -81,7 +81,7 @@ class UsersController extends AppController
 				$this->request->session()->write('Auth.User.fullname', $user->fullname);
 				$this->Flash->success(__('The user has been saved.'));
 				if ($this->Auth->user('group_id') == CUSTOMERS) {
-					 return $this->redirect(['controller' => 'Pages','action' => 'accounts']);
+					return $this->redirect(['controller' => 'Pages','action' => 'accounts']);
 				}
 				return $this->redirect(['controller'=>'Pages','action' => 'accounts']);
 			} else {
@@ -469,6 +469,8 @@ class UsersController extends AppController
 	}
 
 	public function ChangePasswordUser(){
+		$this->check_user();
+		$this->viewBuilder()->layout('product');
 		if ($this->request->is('post')) {
 			$captcha = $this->request->session()->read('captcha');
 			if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
@@ -544,6 +546,7 @@ class UsersController extends AppController
 				$user = $this->Users->get($this->request->data['id'], [
 					'contain' => []
 				]);
+
 				if ($this->request->is(['patch', 'post', 'put'])) {
 					$user = $this->Users->patchEntity($user, $this->request->data);
 					if ($this->Users->save($user)) {

@@ -27,13 +27,13 @@ class InquiriesController extends AppController
 	public function InquiryInfo() {
 		if ($this->request->is(['get'])) {
 			$this->paginate = [
-				'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'],
+				'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.imo_no','Inquiries.hull_no','Inquiries.type','Inquiries.description','Inquiries.created'],
 				'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
 				'order' => ['Inquiries.created'  => 'DESC'],
 			];
 			$inquiries = $this->paginate($this->Inquiries);
 			echo json_encode($inquiries); exit();
- 		}
+		}
 	}
 
 
@@ -992,16 +992,22 @@ class InquiriesController extends AppController
 	public function UpdateInquirieSupplier() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-			pr($this->request->data);die();
 			$InquirieSupplier = TableRegistry::get('inquirie_suppliers');
-			$inqSuppliers = $InquirieSupplier->get($this->request->data['id'], [ 'contain' => [] ]);
-			$inqSuppliers = $InquirieSupplier->patchEntity($inqSuppliers, $this->request->data);
-			// pr($inqSuppliers);die();
-			if ($InquirieSupplier->save($inqSuppliers)) {
-				echo "The infomation has been updated";
-			} else {
-				echo "The infomation could not be saved. Please, try again.";
-			}
+			$datasourceIS = $InquirieSupplier->connection();
+			try {
+				$datasourceIS->begin();
+				$inqSuppliers = $InquirieSupplier->get($this->request->data['id'], [ 'contain' => [] ]);
+				$inqSuppliers = $InquirieSupplier->patchEntity($inqSuppliers, $this->request->data);
+				if ($InquirieSupplier->save($inqSuppliers)) {
+					echo "The infomation has been updated";
+				} else {
+					echo "The infomation could not be saved. Please, try again.";
+				}
+				$datasourceIS->commit();
+			} catch (Exception $e) {
+				$datasourceIS->rollback();
+				throw $e;
+			}			
 		}
 	}
 
@@ -1009,7 +1015,7 @@ class InquiriesController extends AppController
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
 			unset($this->request->data['created']);
-			$result = $this->Inquiries->UpdateData($this->request->data);
+			$result = $this->Inquiries->UpdateData($this->requevst->data);
 			if ($result) {
 				echo "The inquiry has been updated";
 			} else {
@@ -1349,8 +1355,8 @@ class InquiriesController extends AppController
 
 	public function OrderAcknowledgement($id=null){
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
-            throw new NotFoundException(__('Inquiries not found'));
-        }
+			throw new NotFoundException(__('Inquiries not found'));
+		}
 
 		$result		 = $this->get_data_kendo($id);
 		$inquiries 	 = $result['inquiries'];
@@ -1362,8 +1368,8 @@ class InquiriesController extends AppController
 
 	public function PurchaseOrder($id=null)	{
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
-            throw new NotFoundException(__('Inquiries not found'));
-        }
+			throw new NotFoundException(__('Inquiries not found'));
+		}
 
 		if ($this->Inquiries->exists(['id' => $id, 'type' => AVAILABLE])) {
 			$inqSuppliers = $this->Inquiries->PurchaseOrderInfo($id, AVAILABLE);
@@ -1380,8 +1386,8 @@ class InquiriesController extends AppController
 
 	public function InvoiceDocuments($id=null)	{
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
-            throw new NotFoundException(__('Inquiries not found'));
-        }
+			throw new NotFoundException(__('Inquiries not found'));
+		}
 
 		$this->set('id', $id);
 

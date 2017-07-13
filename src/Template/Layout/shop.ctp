@@ -1,4 +1,4 @@
-<?php $cakeDescription = 'CakePHP: the rapid development php framework'; ?>
+<?php $cakeDescription = 'S&J Trading Company'; ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <!-- CSS -->
-    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'> -->
+  
     <?= $this->Html->css([
         'libs/font-awesome.min',
         'libs/font-linearicons',

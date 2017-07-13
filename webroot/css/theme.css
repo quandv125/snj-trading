@@ -1370,7 +1370,10 @@ a:focus {
 	padding-top: 20px;
 }
 .product-list .title-product {
-	font-size: 18px;
+	font-size: 18px;    width: 450px;
+}
+#products-remark, #products-remark h3{
+font-size: 15px;
 }
 .product-list .product-info {
 	margin-bottom: 25px;
@@ -2851,7 +2854,9 @@ a:focus {
 	color: #428bca;
 	font-weight: 700;
 	margin: 0 0 15px;
+	font-size: 15px;
 }
+.info-price-detail h3{ font-size: 15px;}
 .detail-info .product-rating {
 	display: inline-block;
 	margin: 0;

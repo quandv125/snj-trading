@@ -1,6 +1,6 @@
-<!-- Layout Index -->
+<!-- Layout layout03 -->
 
-<?php $cakeDescription = 'CakePHP: the rapid development php framework'; ?>
+<?php $cakeDescription = 'S&J Trading Company'; ?>
 <!DOCTYPE html>
 <html>
 <head>

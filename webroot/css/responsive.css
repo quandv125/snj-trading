@@ -4648,13 +4648,13 @@ table.dataTable tbody th, table.dataTable tbody td {
 }
 
 
-.ng-leave {
+/*.ng-leave {
 	-webkit-transition: 0.1s;
 	transition: 0.1s;
 }
 .ng-leave-active {
 	opacity:0;
-}
+}*/
 /********/
 .row .col.s12 {
   width: 100%;

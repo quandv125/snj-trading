@@ -13,7 +13,7 @@
                     <select class="live-search-box form-control">
                     <option value="all">All</option>
                     <?php //foreach ($suppliers as $key => $supplier): ?>
-                        <option value="supplier<?= $key?>"><?php //echo $supplier; ?></option>
+                        <option value="supplier<?php //echo $key?>"><?php //echo $supplier; ?></option>
                     <?php //endforeach ?>
                     </select>
                 </li> -->
@@ -22,7 +22,7 @@
                         <div class="widget widget-post-cat">
                              <?php// foreach ($suppliers as $key => $supplier): ?>
                                 <label class="custom-control custom-checkbox">
-                                    <input type="checkbox" id="<?= $key?>" class="custom-control-input">
+                                    <input type="checkbox" id="<?php //echo $key?>" class="custom-control-input">
                                     <?php// echo $supplier; ?>
                                 </label>
                                <br/>

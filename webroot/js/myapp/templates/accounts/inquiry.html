@@ -18,22 +18,26 @@
 				<table id="datatable2" class="table table-sm"" cellspacing="0" width="100%">
 					<thead class="table-success">
 						<tr>
-							<th class="text-center">#</th>
-							<th class="text-center">Ref.No</th>
-							<th class="text-center">Vessel</th>
-							<th class="text-center" style=" width: 80px;">Status</th>
-							<th class="text-center" style=" width: 80px;">Created</th>
-							<th class="text-center"></th>
+							<th class="text-center1">#</th>
+							<th class="text-center1">Ref No</th>
+							<th class="text-center1">Vessel</th>
+							<th class="text-center1">IMO No</th>
+							<th class="text-center1">HULL No</th>
+							<th class="text-center1" style=" width: 80px;">Status</th>
+							<th class="text-center1" style=" width: 80px;">Created</th>
+							<th class="text-center1"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="(key, inquirie) in inquiries">
-							<td class="text-center"><a href="#/inquirydetails/{{inquirie.id}}">#{{inquirie.id}}</a></td>
-							<td class="text-center">{{inquirie.ref}}</td>
-							<td class="text-center">{{inquirie.vessel}}</td>
-							<td class="text-center">{{inquirie.status}}</td>
-							<td class="text-center">{{inquirie.created | date : "dd.MM.y" }}</td>
-							<td class="text-center">
+							<td class="text-center1"><a href="#/inquirydetails/{{inquirie.id}}">#{{inquirie.id}}</a></td>
+							<td class="text-center1">{{inquirie.ref}}</td>
+							<td class="text-center1">{{inquirie.vessel | cut:true:50:' ...'}}</td>
+							<td class="text-center1">{{inquirie.imo_no}}</td>
+							<td class="text-center1">{{inquirie.hull_no}}</td>
+							<td class="text-center1">{{inquirie.status}}</td>
+							<td class="text-center1">{{inquirie.created | date : "dd.MM.y" }}</td>
+							<td class="text-center1">
 								<a Onclick="return ConfirmDelete();" href="#/delete-inquiry/{{inquirie.id}}"> <i class="fa fa-trash"></i></a>
 								
 							</td>
@@ -46,12 +50,13 @@
 </div>
 
 <script type="text/javascript">
-   
-    function ConfirmDelete(){
-        var x = confirm("Are you sure you want to delete?");
-        if (x)
-            return true;
-        else
-            return false;
-    }
+	function ConfirmDelete(){
+		var x = confirm("Are you sure you want to delete?");
+		if (x)
+			return true;
+		else
+			return false;
+	}
 </script>
+
+

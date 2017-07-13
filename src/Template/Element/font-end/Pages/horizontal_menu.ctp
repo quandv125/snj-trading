@@ -16,7 +16,7 @@
 		<!--  <?php// if (isset($signles) && !empty($signles)): ?>
 			<?php// foreach ($signles as $key => $signle): ?>
 				<li class="has-mega-menu">
-				   <?= $this->Html->link($signle, ['controller'=>'Articles','action' => 'details', $key]) ?>
+				   <?php //echo $this->Html->link($signle, ['controller'=>'Articles','action' => 'details', $key]) ?>
 				</li>
 			<?php// endforeach ?>
 		<?php// endif ?> -->

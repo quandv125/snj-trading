@@ -22,6 +22,7 @@
 	App.controller('PersonalInfomationCtrl', function($scope, $routeParams, $http){
 		$http.get("/pages/account_info").then(function (response) {
 			$scope.users = response.data;
+			console.log($scope.users);
 		});
 	});
 
@@ -44,7 +45,6 @@
 			$scope.products	= response.data.products;
 			$scope.images	= response.data.products.images;
 			$scope.categories = response.data.categories;
-			
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
@@ -58,7 +58,6 @@
 		// });
 	});
 	
-
 	// View User
 	// App.controller('ViewCtrl', function($scope, $routeParams, $http){
 	// 	var id = $routeParams.id;
@@ -89,7 +88,7 @@
 	// Main User Page
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
 		$http.get("/inquiries/inquiry_info").then(function (response) {
-			// console.log(response.data);
+			console.log(response.data);
 			$scope.inquiries = response.data;
 		});
 	});
@@ -254,6 +253,7 @@
 			form_data.append('email', jQuery('.email').val());
 			form_data.append('tel', jQuery('.tel').val());
 			form_data.append('address', jQuery('.address').val());
+			form_data.append('company', jQuery('.company').val());
 			form_data.append('description', jQuery('.description').val());
 			form_data.append('captcha', jQuery('#captcha').val());
 			$http.post('/users/change_user_info_art', form_data, {

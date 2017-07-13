@@ -30,7 +30,7 @@
 					<tbody>
 						<tr ng-repeat="(key, product) in products" class="products_{{product.id}}">
 							<td class="text-center"><a href="#/productdetails/{{product.id}}">{{product.sku}}</a></td>
-							<td class="text-center">{{product.product_name}}</td>
+							<td class="text-center">{{product.product_name | cut:true:50:' ...'}}</td>
 							<td class="text-center">{{product.origin}}</td>
 							<td class="text-center">{{product.serial_no}}</td>
 							<td class="text-center">{{product.type_model}}</td>

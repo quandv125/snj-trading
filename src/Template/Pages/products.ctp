@@ -48,7 +48,6 @@
 									<!-- <label>Categories: </label> <span><?php echo $this->Html->link($product->category['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
-									<!--   -->
 									<!-- <span><?php echo $this->Html->link($product->supplier['name'],['controller'=>'Pages','action'=>'categories',$product->category['id']]) ?></span> -->
 								</div>
 								<div class="attr-info">
@@ -177,7 +176,6 @@
 						<li>
 							<div class="work-icon">
 								<i class="fa fa-clock-o" aria-hidden="true"></i>
-
 							</div>
 							<div class="work-info">
 								<h3><a href="#">Speed</a></h3>
@@ -233,7 +231,6 @@
 			<div class="upsell-detail-slider">
 				<div class="wrap-item" data-navigation="true" data-pagination="false" data-itemscustom="[[0,1],[480,2],[768,3],[1200,4]]">
 					<?php foreach ($products as $key => $cat): ?>
-						
 					<div class="item" style="max-width: 195px;">
 						<div class="item-product">
 							<div class="product-thumb">
@@ -256,9 +253,9 @@
 							</div>
 							<div class="product-info">
 								<h3 class="title-product">
-									<?php echo $this->Html->link($cat->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
+									<?php echo $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,30,30),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
 								</h3>
-<!-- 								<div class="info-price">
+								<!--<div class="info-price">
 									<span><?php //	 echo number_format( $cat->retail_price, DECIMALS); ?></span>
 								</div> -->
 								<!-- <div class="product-rating">
@@ -277,3 +274,5 @@
 	</div>
 </div>
 <!-- End Main Content Shop -->
+
+

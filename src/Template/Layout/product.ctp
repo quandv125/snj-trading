@@ -1,3 +1,4 @@
+<!-- Layout product -->
 <?php $cakeDescription = 'S&J Trading Company'; ?>
 <!DOCTYPE html>
 <html>

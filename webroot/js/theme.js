@@ -205,7 +205,7 @@ jQuery(document).ready(function(){
 	// 				checked.push(i);
 	// 			}
 	// 		}
-			
+
 	// 		jQuery.ajax({
 	// 			url: '/inquiries/delete_item_products',
 	// 			type: 'POST',

@@ -1,4 +1,5 @@
-<?php $cakeDescription = 'CakePHP: the rapid development php framework'; ?>
+<!-- Layout layout04 -->
+<?php $cakeDescription = 'S&J Trading Company'; ?>
 <!DOCTYPE html>
 <html>
 <head>

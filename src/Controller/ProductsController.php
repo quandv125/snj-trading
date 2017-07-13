@@ -38,9 +38,9 @@ class ProductsController extends AppController
 
 	public function suppliers() {
 		$conditions = ['Products.user_id' => $this->Auth->user('id')];
-		$products   = $this->Products->getProductsSearch($conditions, null, null);  
-		$User       = TableRegistry::get('Users');
-		$users      = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
+		$products	= $this->Products->getProductsSearch($conditions, null, null);  
+		$User		= TableRegistry::get('Users');
+		$users		= $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
 		$this->infoPagi($conditions, 1);
 		$this->set(compact('products','users'));
 		$this->set('_serialize', ['products']);
@@ -227,12 +227,13 @@ class ProductsController extends AppController
 	public function SupplierEditProduct($id = null){
 		$this->viewBuilder()->layout('product');
 		$Categorie  = TableRegistry::get('Categories');
+	
 		if ($id == null) { $id = $this->request->data['id']; }
-		$this->request->data['categorie_id'] = explode('number:', $this->request->data['categorie_id'])[1];
 		$product = $this->Products->get($id, [
 			'contain' => []
 		]);
 		if ($this->request->is(['patch', 'post', 'put'])) {
+			$this->request->data['categorie_id'] = explode('number:', $this->request->data['categorie_id'])[1];
 			$product = $this->Products->patchEntity($product, $this->request->data);
 			if ($this->Products->save($product)) {
 				$Image = TableRegistry::get('Images');
@@ -267,10 +268,10 @@ class ProductsController extends AppController
 		
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
-		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
+		// $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		// $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
 		$products   = $this->Products->OneProductsSearch(['Products.id'=>$id], null, null);  
-		$this->set(compact('products','categorie', 'outlets', 'suppliers'));
+		$this->set(compact('products','categorie'));
 	}
 
 	public function fxEditProducts(){	

@@ -35,7 +35,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-4 control-label">Phone *</label>  
+					<label class="col-md-4 control-label">Phone *</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
@@ -55,20 +55,31 @@
 				</div>
 				
 				<div class="form-group">
-				  <label class="col-md-4 control-label">Description *</label>
+					<label class="col-md-4 control-label">Company *</label>  
 					<div class="col-md-4 inputGroupContainer">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-							<textarea class="form-control description" ng-model="users.description" name="description" placeholder="Description"></textarea>
-				  </div>
-				  </div>
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="company" placeholder="Company" class="form-control company" ng-model="users.company" type="text">
+						</div>
+					</div>
 				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Description *</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+							<textarea class="form-control description" ng-model="users.description" name="description" placeholder="Description"></textarea>
+						</div>
+					</div>
+				</div>
+
 				<div class="form-group">
 					<label class="col-md-4 control-label"></label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<div class="col-md-8 wapper-captcha1"><img src="/users/captcha" class="captcha" alt=""></div>
-							<div class="col-md-4 reload"> <span class="btn btn-success reload_captcha cursor-point" style="margin-top: 5px;"><i class="fa fa-refresh" aria-hidden="true" style="font-size: 1.4em;"></i></span></div><br/><br/>
+							<div class="col-md-4 reload"> <span class="btn btn-success reload_captcha cursor-point" style="margin-top: 5px;"><i class="fa fa-refresh" aria-hidden="true" style="font-size: 1.4em;"></i></span></div><br/></br/>
 						</div>
 					</div>
 				</div>

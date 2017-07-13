@@ -204,6 +204,21 @@ class PagesTable extends Table
         return $products;
     }
 
+    public function getProductsIndex($conditions = null, $limit = null, $page = null)  {
+        $lm = ($limit == null)? LIMIT : $limit;
+        $pg = ($page == null)? 1 : $page;
+        $Product = TableRegistry::get('Products');
+        $products = $Product->find()->contain([
+            'Categories' => function ($q) {
+                return $q->autoFields(false)->select(['id','name']);
+            }
+            ])
+            ->select(['id','sku','product_name','categorie_id','actived','status','origin','type_model','serial_no','created'])
+            ->where($conditions)->limit($lm)->page($pg)->order(['Products.created' => 'DESC']);
+        // pr($products->toarray());die();
+        return $products;
+    }
+
     public function getInfoSearch($conditions = null, $conditions2 = null) {
         $Product    = TableRegistry::get('Products');
         $products   = $Product->find()->contain([

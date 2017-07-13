@@ -23,7 +23,7 @@
                     <?php foreach ($products as $key => $product): ?>
                         <tr>
                             <td class="text-center"><?= $this->Html->link(str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT), ['controller' => 'Pages', 'action' => 'products', $product->id]); ?></td>
-                            <td class="text-center"><?= $this->Html->link( $product->product_name, ['controller' => 'Pages', 'action' => 'products', $product->id]); ?></td>
+                            <td class="text-center"><?= $this->Html->link($this->MyHtml->_Cutstring($product->product_name,10,40), ['controller' => 'Pages', 'action' => 'products', $product->id]); ?></td>
                             <td class="text-center"><?= ($product->origin); ?></td>
                             <td class="text-center"><?= $product->type_model; ?></td>
                             <td class="text-center">

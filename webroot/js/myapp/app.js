@@ -11,6 +11,7 @@
 		"ngResource",
 		"ngAnimate",
 		"ngMaterial",
+		"ngProgress",
 		"ckeditor"
 	]);
 

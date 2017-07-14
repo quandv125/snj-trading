@@ -1,8 +1,17 @@
-(function() {
-
-	"use strict";
+(function() {	"use strict";
 
 	var App = angular.module("App.controllers", []);
+	// Create progressbar when app run
+	App.run(function ($rootScope, ngProgressFactory) {
+		$rootScope.$on("$routeChangeStart", function () {
+			$rootScope.progressbar = ngProgressFactory.createInstance();
+			$rootScope.progressbar.start();
+		});
+		$rootScope.$on("$routeChangeSuccess", function () {
+			$rootScope.progressbar.complete();
+		});
+	});
+	// End
 
 	// Main User Page
 	App.controller('IndexCtrl', function($scope, $routeParams, $http){

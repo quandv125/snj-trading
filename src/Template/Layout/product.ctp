@@ -18,60 +18,62 @@
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>
-	<?= $this->Html->script(['loader']); ?>
+	<!-- <?php //echo $this->Html->script(['loader']); ?> -->
 	<!-- CSS -->
-  
-	<?= $this->Html->css([
-		'libs/font-awesome.min',
-		'libs/font-linearicons',
-		'libs/bootstrap.min',
-		'libs/bootstrap-theme.min',
-		'libs/jquery.fancybox',
-		'libs/jquery-ui',
-		'libs/owl.carousel',
-		'libs/owl.transitions',
-		'libs/owl.theme',
-		'assets/plugins/toastr/toastr.min',
-		'libs/query.mCustomScrollbar',
-		'libs/settings',
-		'assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new',
-		'assets/plugins/handsometable/handsontable.full.min',
-		'theme','libs/bootstrap-select',
-		'libs/jquery.dataTables.min',
-		'libs/kendo.default.min','libs/kendo.common.min',
-		'libs/angular-material.min',
-		'responsive'
-	])?>
-
-	<?= $this->Html->script([
-		'assets/plugins/jquery/jquery-2.1.4.min',
-		'assets/plugins/jquery-ui/jquery-ui.min',
-		'libs/ckeditor/ckeditor',
-		'libs/bootstrap.min',
-		'libs/jquery.fancybox',
-		'libs/owl.carousel',
-		// 'libs/TimeCircles',
-		// 'libs/jquery.countdown',
-		'libs/jquery.bxslider.min',
-		'libs/jquery.mCustomScrollbar.concat.min',
-		'libs/jquery.themepunch.revolution',
-		'libs/jquery.themepunch.plugins.min',
-		'libs/jquery.jcarousellite.min',
-		'libs/jquery.elevatezoom',
-		'assets/plugins/toastr/toastr.min',
-		'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
-		'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
-		'assets/plugins/handsometable/handsontable.full.min',
-		'assets/plugins/livesearch/vendor/jquery.hideseek.min',
-		'assets/plugins/livesearch/initializers',
-		'libs/bootstrap-select',
-		'libs/bootstrapvalidator.min',
-		'libs/masonry.pkgd.min',
-		'libs/jquery.dataTables',
-		'libs/kendo.all.min',
-		'libs/materialize',
-		'theme',
-	]); ?>
+	
+	<?php 
+		echo $this->Html->css('libs/font-awesome.min');
+		echo $this->Html->css('libs/font-linearicons');
+		echo $this->Html->css('libs/bootstrap.min');
+		echo $this->Html->css('libs/bootstrap-theme.min');
+		echo $this->Html->css('libs/jquery.fancybox');
+		echo $this->Html->css('libs/jquery-ui');
+		echo $this->Html->css('libs/owl.carousel');
+		echo $this->Html->css('libs/owl.transitions');
+		echo $this->Html->css('libs/owl.theme');
+		echo $this->Html->css('assets/plugins/toastr/toastr.min');
+		echo $this->Html->css('libs/query.mCustomScrollbar');
+		echo $this->Html->css('libs/settings');
+		echo $this->Html->css('assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new');
+		echo $this->Html->css('assets/plugins/handsometable/handsontable.full.min');
+		echo $this->Html->css('theme');
+		echo $this->Html->css('libs/bootstrap-select');
+		echo $this->Html->css('libs/jquery.dataTables.min');
+		echo $this->Html->css('libs/kendo.default.min');
+		echo $this->Html->css('libs/kendo.common.min');
+		echo $this->Html->css('libs/angular-material.min');
+		echo $this->Html->css('responsive');
+	?>
+	
+	<?php
+		echo $this->Html->script('assets/plugins/jquery/jquery-2.1.4.min');
+		echo $this->Html->script('assets/plugins/jquery-ui/jquery-ui.min');
+		echo $this->Html->script('libs/ckeditor/ckeditor');
+		echo $this->Html->script('libs/bootstrap.min');
+		echo $this->Html->script('libs/jquery.fancybox');
+		echo $this->Html->script('libs/owl.carousel');
+		// echo $this->Html->script('libs/TimeCircles');
+		// echo $this->Html->script('libs/jquery.countdown');
+		echo $this->Html->script('libs/jquery.bxslider.min');
+		echo $this->Html->script('libs/jquery.mCustomScrollbar.concat.min');
+		echo $this->Html->script('libs/jquery.themepunch.revolution');
+		echo $this->Html->script('libs/jquery.themepunch.plugins.min');
+		echo $this->Html->script('libs/jquery.jcarousellite.min');
+		echo $this->Html->script('libs/jquery.elevatezoom');
+		echo $this->Html->script('assets/plugins/toastr/toastr.min');
+		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment-with-locales');
+		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker');
+		echo $this->Html->script('assets/plugins/handsometable/handsontable.full.min');
+		echo $this->Html->script('assets/plugins/livesearch/vendor/jquery.hideseek.min');
+		echo $this->Html->script('assets/plugins/livesearch/initializers');
+		// echo $this->Html->script('libs/bootstrap-select');
+		echo $this->Html->script('libs/bootstrapvalidator.min');
+		echo $this->Html->script('libs/masonry.pkgd.min');
+		echo $this->Html->script('libs/jquery.dataTables');
+		echo $this->Html->script('libs/kendo.all.min');
+		echo $this->Html->script('libs/materialize');
+		echo $this->Html->script('theme');
+	?>
 	
 	<?php 
 	// Start Angular
@@ -81,6 +83,8 @@
 		echo $this->Html->script('myapp/lib/angular/angular-resource.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-sanitize.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-aria.min.js');
+		echo $this->Html->script('myapp/lib/angular/angular-material.min');
+		echo $this->Html->script('myapp/lib/angular/ngprogress.min.js');
 		echo $this->Html->script('myapp/angular-ckeditor.min.js');
 		echo $this->Html->script('myapp/controllers/controllers.js');
 		echo $this->Html->script('myapp/services/services.js');
@@ -88,9 +92,7 @@
 		echo $this->Html->script('myapp/controllers/filters.js');
 		// echo $this->Html->script('myapp/controllers/routes.js');
 		echo $this->Html->script('myapp/app.js');
-		echo $this->Html->script('myapp/lib/angular/angular-material.min');
-		// End Angular
-	 ?>
+	?>
 	
 </head>
 <body>

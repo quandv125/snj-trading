@@ -17,7 +17,7 @@ class InquiriesController extends AppController
 		$this->paginate = [
 			'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'],
 			'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
-			'order' => ['Inquiries.created'  => 'DESC'],
+			'order' => ['Inquiries.created' => 'DESC'],
 		];
 		$inquiries = $this->paginate($this->Inquiries);
 		$this->set(compact('inquiries'));
@@ -35,7 +35,6 @@ class InquiriesController extends AppController
 			echo json_encode($inquiries); exit();
 		}
 	}
-
 
 	public function view($id = null){
 		$this->viewBuilder()->layout('product');
@@ -303,7 +302,7 @@ class InquiriesController extends AppController
 		}
 	}
 
-	public function CreateInquiries()	{
+	public function CreateInquiries() {
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
 			if (!empty($this->Auth->user('id'))) {

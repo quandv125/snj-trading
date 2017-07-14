@@ -15179,6 +15179,9 @@ ul.menu-account-info li{
 .float-right{
 	float:right;
 }
+.float-left{
+	float:left;
+}
 .min-height-460{
 	min-height: 460px;
 }

@@ -157,7 +157,7 @@ use Cake\Datasource\ConnectionManager;
 		$inquiries = $Inq->get($id, [
 			'contain' => [
 				'Attachments' => function ($q) {
-					return $q->autoFields(false)->select(['id','inquiry_id','path']);
+					return $q->autoFields(false)->select(['id','inquiry_id','path','filename']);
 				},
 				'Extras' => function ($q) {
 					return $q->autoFields(false)->select(['id','inquiry_id','name','cost','profit','final']);
@@ -180,7 +180,7 @@ use Cake\Datasource\ConnectionManager;
 		$inquiries = $Inquirie->find()
 			->contain([
 				'Attachments' => function ($q) {
-					return $q->autoFields(false)->select(['id','inquiry_id','path']);
+					return $q->autoFields(false)->select(['id','inquiry_id','path','filename']);
 				},
 				'Extras' => function ($q) {
 					return $q->autoFields(false)->select(['id','inquiry_id','name','cost','profit','final']);

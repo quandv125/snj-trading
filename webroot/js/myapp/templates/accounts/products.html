@@ -16,29 +16,29 @@
 				<table id="datatable" class="table display" cellspacing="0" width="100%">
 					<thead>
 						<tr>
-							<th class="text-center">Part No/ Code</th>
-							<th class="text-center">Product Name</th>
-							<th class="text-center">Origin</th>
-							<th class="text-center">Serial No</th>
-							<th class="text-center">Model</th>
-							<th class="text-center" style=" width: 80px;">Actived</th>
-							<th class="text-center" style=" width: 80px;">Created</th>
+							<th class="text-center1">Part No/ Code</th>
+							<th class="text-center1">Product Name</th>
+							<th class="text-center1">Origin</th>
+							<th class="text-center1">Serial No</th>
+							<th class="text-center1">Model</th>
+							<th class="text-center1" style=" width: 80px;">Actived</th>
+							<th class="text-center1" style=" width: 80px;">Created</th>
 							<th></th>
 							<th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="(key, product) in products" class="products_{{product.id}}">
-							<td class="text-center"><a href="#/productdetails/{{product.id}}">{{product.sku}}</a></td>
-							<td class="text-center">{{product.product_name | cut:true:50:' ...'}}</td>
-							<td class="text-center">{{product.origin}}</td>
-							<td class="text-center">{{product.serial_no}}</td>
-							<td class="text-center">{{product.type_model}}</td>
-							<td class="text-center">
+							<td class="text-center1"><a href="#/productdetails/{{product.id}}">{{product.sku}}</a></td>
+							<td class="text-center1">{{product.product_name | cut:true:50:' ...'}}</td>
+							<td class="text-center1">{{product.origin}}</td>
+							<td class="text-center1">{{product.serial_no}}</td>
+							<td class="text-center1">{{product.type_model}}</td>
+							<td class="text-center1">
 								<span class="label label-{{product.actived? 'primary' : 'danger'}}">{{product.actived ? 'Actived' : 'Deactived'}}</span>
 							</td>
-							<td class="text-center">{{ product.created | date : "dd.MM.y" }}</td>
-							<td class="text-center">
+							<td class="text-center1">{{ product.created | date : "dd.MM.y" }}</td>
+							<td class="text-center1">
 								<a btn href="#/productdetails/{{product.id}}"><i class="fa fa-pencil"></i></a>  
 							</td>
 							<td>

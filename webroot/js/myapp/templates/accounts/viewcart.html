@@ -1,0 +1,106 @@
+
+<div class="row" ng-controller="AddMyCartCtrl">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		
+		<div id="content">
+			<div class="content-page woocommerce">
+				<div class="container">
+					<div class="cart-content-page">
+						<h2 class="title-shop-page">my cart</h2>
+						<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
+							<div class="col-md-4">
+								<label>Vessel Name</label>
+								<input type="text" class="form-control vessel" name="">
+							</div>
+							<div class="col-md-4">
+								<label>IMO No</label>
+								<input type="text" class="form-control imo_no" name="">
+							</div>
+							<div class="col-md-4">
+								<label>Hull No</label>
+								<input type="text" class="form-control hull_no" name="">
+							</div>
+							<div class="col-md-4">
+								<label>Date</label>
+								<input type="text" class="form-control date"  value="{{date | date:'yyyy-MM-dd'}}">
+							</div>
+							<div class="col-md-4">
+								<label>Ref</label>
+								<input type="text" class="form-control ref" name="">
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-md-12">
+								<label>Description</label>
+								<textarea class="form-control description" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table cellspacing="0" class="shop_table my_order cart table">
+								<thead>
+									<tr>
+										<th class="text-center product-remove">#</th>
+										<th class="text-center product-name" style="max-width: 100px;">Name</th>
+										<th class="text-center product-quantity">Category</th>
+										<th class="text-center product-subtotal">Type Model</th>
+										<th class="text-center product-thumbnail">Serial No</th>
+										<th class="text-center product-thumbnail">Origin</th>
+										<th class="text-center product-quantity">Quantity</th>
+										<th class="text-center product-quantity">Unit</th>
+										<th class="text-center product-remark">Remark</th>
+									</tr>
+								</thead>
+								<tbody>
+									
+									<tr ng-repeat="(k, c) in cart" class="cart_item cart_item_{{c.id}}" id="{{c.id}}">
+										<td class="text-center product-remove">
+											<span class="remove-items" ng-click="removeitems(c.id)"  data-id="{{c.id}}"><i class="fa fa-times"></i></span>
+										</td>
+										<td class="text-center product-name">
+											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
+										</td>
+										<td class="text-center category-name">
+											{{c.category.name}}
+										</td>
+										<td class="text-center type_model">
+											{{c.type_model}}
+										</td>
+										<td class="text-center serial_no ">
+											{{c.serial_no}}
+										</td>
+										<td class="text-center origin">
+											{{c.origin}}
+										</td>
+										<td class="text-center product-quantity">
+											 <div class="info-qty" id="{{c.id}}">
+												<a ng-click="myfuncdown(c.id)" class="qty-down">
+													<i class="fa fa-angle-left"></i>
+												</a>
+													<span class="qty-val qty-val-{{c.id}}">1</span>
+												<a ng-click="myfuncup(c.id)" class="qty-up">
+													<i class="fa fa-angle-right"></i>
+												</a>
+											</div>			
+										</td>
+										<td class="text-center unit">
+											{{c.unit}}
+										</td>
+										<td class="text-center product-remark">
+											<span class="amount">
+												<textarea class="form-control remark-item" rows="2" cols="30" id="comment"></textarea>
+											</span>
+										</td>
+									</tr>
+									
+								</tbody>
+							</table>
+							
+							<md-button id="update_cart" ng-click="update_cart()" class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
+						</div>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+	</div>
+</div>
+<script src="/js/myapp/snj_custom.js"></script>

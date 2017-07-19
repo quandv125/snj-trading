@@ -86,6 +86,10 @@
 			controller: "WishlistCtrl",
 			templateUrl: "/js/myapp/templates/accounts/wishlist.html"
 		})
+		.when('/viewcart',{
+			controller: "ViewCartCtrl",
+			templateUrl: "/js/myapp/templates/accounts/viewcart.html"
+		})
 		.otherwise({
 			templateUrl: "/js/myapp/templates/404/404.html"
 		});

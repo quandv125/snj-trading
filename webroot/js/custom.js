@@ -42,7 +42,6 @@ jQuery( document ).ready(function() {
 				var keyword = jQuery('input[name="daterange"]').val();
 				var tbl = jQuery('input[name="daterange"]').attr('tbl');
 				var data = {type: 'created', keyword: keyword, str_rand: str_rand};
-				
 				if (tbl == 'invoices') {
 					search_invoices(data, str_rand);
 				} else {

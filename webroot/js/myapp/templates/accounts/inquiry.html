@@ -2,9 +2,7 @@
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="wapper-content">
-			<div class="main-content-shop ">
 				Search
-			</div>
 		</div>
 	</div>
 </div>
@@ -23,8 +21,8 @@
 							<th class="text-center1">Vessel</th>
 							<th class="text-center1">IMO No</th>
 							<th class="text-center1">HULL No</th>
-							<th class="text-center1" style=" width: 80px;">Status</th>
-							<th class="text-center1" style=" width: 80px;">Created</th>
+							<th class="text-center1" style="width: 80px;">Status</th>
+							<th class="text-center1" style="width: 90px;">Created</th>
 							<th class="text-center1"></th>
 						</tr>
 					</thead>
@@ -39,7 +37,6 @@
 							<td class="text-center1">{{inquirie.created | date : "dd.MM.y" }}</td>
 							<td class="text-center1">
 								<a Onclick="return ConfirmDelete();" href="#/delete-inquiry/{{inquirie.id}}"> <i class="fa fa-trash"></i></a>
-								
 							</td>
 						</tr>
 					</tbody>

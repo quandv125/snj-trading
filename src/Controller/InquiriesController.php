@@ -255,7 +255,7 @@ class InquiriesController extends AppController
 						$parent = $parent + 1;
 						$item[$key]['main'] = $parent;
 					}
-				}
+				} 
 			}
 			if ($this->Inquiries->saveInqProduct($item)) {
 				$this->Flash->success(__('The Inquiries has been saved.'));
@@ -265,8 +265,9 @@ class InquiriesController extends AppController
 	}	
 
 	public function MakeInquiry() {
-		if ($this->request->is('ajax')) {
+		if ($this->request->is('ajax') || $this->request->is('post') ) {
 			$this->autoRender = false;
+			// pr($this->request->data);die();
 			if (empty($this->Auth->user())) {
 				$msg = array('status' => false, 'message' => __('You must login before order.'));
 				echo json_encode($msg); exit();
@@ -279,6 +280,7 @@ class InquiriesController extends AppController
 				'imo_no'		=> $this->request->data['imo_no'],
 				'hull_no'		=> $this->request->data['hull_no'],
 				'ref'			=> $this->request->data['ref'],
+				'created'		=> $this->request->data['created'],
 				'description'	=> $this->request->data['description']
 			];
 			if (!empty($this->Auth->user('id'))) {
@@ -317,6 +319,7 @@ class InquiriesController extends AppController
 								$flag = false;
 							}
 							$item[$i]['path']		= 'files'.DS.$this->request->data['file'][$i]['name'];
+							$item[$i]['filename']	=  $this->request->data['file'][$i]['name'];
 							$item[$i]['inquiry_id']	= $inquiry_id;
 						}
 						$this->Inquiries->saveInqAttachments($item);
@@ -1336,6 +1339,7 @@ class InquiriesController extends AppController
 					for ($i=0; $i < count($this->request->data['file']); $i++) { 
 						if(move_uploaded_file($this->request->data['file'][$i]['tmp_name'], FILES.$this->request->data['file'][$i]['name'])){
 							$item['path']		= 'files'.DS.$this->request->data['file'][$i]['name'];
+							$item['filename']	= $this->request->data['file'][$i]['name'];
 							$item['inquiry_id']	= $inquiry->id;
 							$attachment = $attachments->newEntity();
 							$attachment = $attachments->patchEntity($attachment, $item);
@@ -1395,7 +1399,6 @@ class InquiriesController extends AppController
 	public function DeleteItemProducts(){
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
-
 			$InqProd = TableRegistry::get('inquirie_products');
 			$IqSPrs  = TableRegistry::get('inquirie_supplier_products');
 			$InqProd->deleteAll(['id IN' => $this->request->data['data']]);

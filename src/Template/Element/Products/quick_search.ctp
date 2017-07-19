@@ -13,9 +13,9 @@
 						<?php echo $this->Html->link($product->product_name,['controller' => 'Pages','action' => 'products',$product->id]) ; ?>
 					</td>
 					<td>
-						<div class="search-attr-info">
+						<div class="search-attr-info" style=" width: 50px;">
 							<span class="addcart-link2 cursor-point" product_id="<?= $product->id;?>" >
-								<i class="fa fa-shopping-cart"></i> Add to Cart
+								<i class="fa fa-shopping-cart"></i>
 							</span>
 						</div>
 					</td>

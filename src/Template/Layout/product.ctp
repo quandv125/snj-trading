@@ -37,7 +37,7 @@
 		echo $this->Html->css('assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new');
 		echo $this->Html->css('assets/plugins/handsometable/handsontable.full.min');
 		echo $this->Html->css('theme');
-		echo $this->Html->css('libs/bootstrap-select');
+		// echo $this->Html->css('libs/bootstrap-select');
 		echo $this->Html->css('libs/jquery.dataTables.min');
 		echo $this->Html->css('libs/kendo.default.min');
 		echo $this->Html->css('libs/kendo.common.min');
@@ -56,19 +56,19 @@
 		// echo $this->Html->script('libs/jquery.countdown');
 		echo $this->Html->script('libs/jquery.bxslider.min');
 		echo $this->Html->script('libs/jquery.mCustomScrollbar.concat.min');
-		echo $this->Html->script('libs/jquery.themepunch.revolution');
-		echo $this->Html->script('libs/jquery.themepunch.plugins.min');
+		// echo $this->Html->script('libs/jquery.themepunch.revolution');
+		// echo $this->Html->script('libs/jquery.themepunch.plugins.min');
 		echo $this->Html->script('libs/jquery.jcarousellite.min');
 		echo $this->Html->script('libs/jquery.elevatezoom');
 		echo $this->Html->script('assets/plugins/toastr/toastr.min');
-		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment-with-locales');
-		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker');
+		// echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment-with-locales');
+		// echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker');
 		echo $this->Html->script('assets/plugins/handsometable/handsontable.full.min');
 		echo $this->Html->script('assets/plugins/livesearch/vendor/jquery.hideseek.min');
 		echo $this->Html->script('assets/plugins/livesearch/initializers');
 		// echo $this->Html->script('libs/bootstrap-select');
 		echo $this->Html->script('libs/bootstrapvalidator.min');
-		echo $this->Html->script('libs/masonry.pkgd.min');
+		// echo $this->Html->script('libs/masonry.pkgd.min');
 		echo $this->Html->script('libs/jquery.dataTables');
 		echo $this->Html->script('libs/kendo.all.min');
 		echo $this->Html->script('libs/materialize');
@@ -86,11 +86,11 @@
 		echo $this->Html->script('myapp/lib/angular/angular-material.min');
 		echo $this->Html->script('myapp/lib/angular/ngprogress.min.js');
 		echo $this->Html->script('myapp/angular-ckeditor.min.js');
-		echo $this->Html->script('myapp/controllers/controllers.js');
 		echo $this->Html->script('myapp/services/services.js');
 		echo $this->Html->script('myapp/directives/directives.js');
 		echo $this->Html->script('myapp/controllers/filters.js');
 		// echo $this->Html->script('myapp/controllers/routes.js');
+		echo $this->Html->script('myapp/controllers/controllers.js');
 		echo $this->Html->script('myapp/app.js');
 	?>
 	

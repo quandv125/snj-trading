@@ -27,22 +27,21 @@
 		});
 	});
 
-	// Personal Infomation
+	//Change Personal Infomation
 	App.controller('PersonalInfomationCtrl', function($scope, $routeParams, $http){
 		$http.get("/pages/account_info").then(function (response) {
 			$scope.users = response.data;
-			console.log($scope.users);
+			// console.log($scope.users);
 		});
 	});
 
 	// AddProductsCtrl
 	App.controller('AddProductsCtrl', function($scope, $routeParams, $http){
 		$.post('/products/addproducts',  function(response){
-			console.log(response);
+			// console.log(response);
 			$scope.categories	= response;
 		}, 'json');
 	});
-
 	// Product details Ctrl
 	App.controller('ProductdetailsCtrl', function($scope, $routeParams, $http){
 		var id = $routeParams.id;
@@ -60,135 +59,84 @@
 		});
 
 	});
-
 	// AddProductsCtrl
 	App.controller('AddinquiryCtrl', function($scope, $routeParams, $http){
-		// $http.get("/pages/account_info").then(function (response) {
-		// 	$scope.users = response.data;
-		// });
+		$scope.date = new Date();
 	});
-	
-	// View User
-	// App.controller('ViewCtrl', function($scope, $routeParams, $http){
-	// 	var id = $routeParams.id;
-	// 	var table = "users";
-	// 	var key = 'View';
-	// 	$http.get("/js/myapp/select.php?id=" +id+ "&table=" +table+ "&key=" +key).then(function (response) {
-	// 		// console.log(response.data);
-	// 		$scope.users = response.data;
-	// 	});
-	// });
-
-	// Add New User
-	// App.controller('AddCtrl', function($scope, $routeParams, $http){
-	// 	var table = "users";
-	// 	var key = "Add";
-	// 	$http.get("/js/myapp/select.php?table=" +table+ "&key=" +key).then(function (response) {
-	// 		$scope.groups = response.data.groups;
-	// 		$scope.teams = response.data.teams;
-	// 	});
-	// });
-
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
 		$http.get("/pages/products_info").then(function (response) {
 			$scope.products = response.data;
 		});
 	});
-	// Main User Page
+	// InquiryCtrl
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
 		$http.get("/inquiries/inquiry_info").then(function (response) {
-			console.log(response.data);
+			// console.log(response.data);
 			$scope.inquiries = response.data;
 		});
 	});
 	// Main User Page
-	App.controller('WishlistCtrl', function($scope, $routeParams, $http){
-		// $http.get("/pages/account_info").then(function (response) {
-		// 	$scope.users = response.data;
-		// });
+	App.controller('WishlistCtrl', function($scope, $routeParams, $http){});
+	App.controller('ViewCartCtrl', function($scope, $http){
+		$http.get("/pages/getcartdata").then(function (response) {
+			$scope.cart = response.data;
+			$scope.date = new Date();
+		});
 	});
 
-	// App.controller("AddUsersCtrl", function($scope, $http, $location){  
-	// 	$scope.uploadFile = function(){  
-	// 		var form_data = new FormData();  
-	// 		if (jQuery("#files-upload").val() != '') {
-	// 			for (var i = 0; i < $scope.files.length; i++) {
-	// 				form_data.append('files', $scope.files[i]);  
-	// 			};
-	// 		}
-	// 		form_data.append('username', jQuery('#username').val());
-	// 		form_data.append('password', jQuery('#password').val());
-	// 		form_data.append('fullname', jQuery('#fullname').val());
-	// 		form_data.append('role', jQuery('#role').val());
-	// 		form_data.append('group_id', jQuery('#Group').val());
-	// 		form_data.append('team_id', jQuery('#Team').val());
-	// 		$http.post('/users/add', form_data, {
-	// 			transformRequest: angular.identity,
-	// 			headers: {'Content-Type': undefined,'Process-Data': false}
-	// 		})
-	// 		.success(function(response){
-	// 			$location.path('/');
-	// 			// console.log(response);
-	// 		})
-	// 		.error(function(){
-	// 			console.log("Error");
-	// 		});
-	// 	}
-	// });
-
-	// Edit User
-	// App.controller('EditCtrl', function($scope, $routeParams, $http){
-	// 	var id = $routeParams.id;
-	// 	var table = "users";
-	// 	var key = 'Edit';
-	// 	$http.get("/js/myapp/select.php?id=" +id+ "&table=" +table+ "&key=" +key).then(function (response) {
-	// 		$scope.users = response.data.records;
-	// 		$scope.groups = response.data.groups;
-	// 		$scope.teams = response.data.teams;
-	// 	});
-	// });
-
-	// App.controller('EditUsersCtrl', function($scope, $routeParams, $http, $location){
-	// 	var id = $routeParams.id;
-	// 	var table = "users";
-	// 	$scope.EditFromData = function() {
-	// 		var username 	= jQuery('.an_username').val();
-	// 		var password 	= jQuery('.an_password').val();
-	// 		var fullname 	= jQuery('.an_fullname').val();
-	// 		var role 		= jQuery('.an_role').val();
-	// 		var g = document.getElementById("ddlViewByGroup");
-	// 		var group_id = g.options[g.selectedIndex].value;
-	// 		var t = document.getElementById("ddlViewByTeam");
-	// 		var team_id = t.options[t.selectedIndex].value;
-	// 		$scope.info = ({
-	// 			'id' 		: id,
-	// 			'username'	: username,
-	// 			'password'	: password,
-	// 			'fullname'	: fullname,
-	// 			'role'		: role,
-	// 			'group_id'	: group_id,
-	// 			'team_id'	: team_id
-	// 		});
-	// 		$http({
-	// 			method	: 'POST',
-	// 			url 	: '/js/myapp/edit.php?table='+table,
-	// 			data 	: $scope.info,
-	// 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'} 
-	// 		}).success(function(data){
-	// 				$location.path('/'); // working
-	// 		});
-	// 	}
-	// });
-	// Delete User
-	// App.controller("DeleteCtrl", function($scope, $routeParams, $http, $location){
-	// 	var id = $routeParams.id;
-	// 	var table = 'users';
-	// 	var array = [id, table];
-	// 	$http.get("/js/myapp/delete.php?id=" +id+ "&table=" +table).then(function(response){
-	// 		$location.path('/');
-	// 	});
-	// });
+	App.controller('AddMyCartCtrl', function($scope, $http, $location) {
+		$scope.removeitems = function(id) {
+			jQuery('.cart_item_'+id).fadeOut();
+			if (jQuery('.total-mini-cart-item').html() > 0) {
+				var qty = parseInt(jQuery('.total-mini-cart-item').html())-1;
+				jQuery('.total-mini-cart-item').html(qty);
+			}
+			$http({
+				method: 'POST',
+				url: '/products/remove_items',
+				data: {id: id}
+				}).then(function successCallback(response) {
+				}, function errorCallback(response) {
+				});
+		};
+		
+		$scope.myfuncdown = function(id) {
+			var qtyval = parseInt($('.qty-val-'+id).text(),10)-1;
+			jQuery(".qty-val-"+id).html(qtyval);
+		};
+		$scope.myfuncup = function(id) {
+			var qtyval = parseInt($('.qty-val-'+id).text(),10)+1;
+			jQuery(".qty-val-"+id).html(qtyval);
+		};
+		$scope.update_cart = function (argument) {
+			var vessel 		= jQuery('.vessel').val();
+			var imo_no 		= jQuery('.imo_no').val();
+			var hull_no 	= jQuery('.hull_no').val();
+			var description = jQuery('.description').val();
+			var created 	= jQuery('.date').val();
+			var ref 		= jQuery('.ref').val();
+			var products	= new Array();
+			jQuery.each(jQuery('.cart_item'), function(i, v) {
+				var product_id	= jQuery( this ).attr('id');
+				var quantity	= jQuery(this).find('.qty-val').html();
+				var remark 		= jQuery( this ).find('.remark-item').val();
+				products.push({'product_id':product_id,'quantity':quantity,'remark':remark, 'price': 0});
+			});
+			$http({
+				method: 'POST',
+				url: '/inquiries/make_inquiry',
+				data: {products: products,vessel:vessel, imo_no: imo_no, hull_no: hull_no, description:description, created: created, ref:ref},
+				}).then(function successCallback(response) {
+						jQuery('.total-mini-cart-item').html('0');
+						$location.path('/inquiry');
+					
+				}, function errorCallback(response) {
+					
+				});
+			// console.log(products);
+		}
+	});
 	// Delete Product Ctrl
 	App.controller("DeleteProductCtrl", function($scope, $routeParams, $http, $location){
 		var id = $routeParams.id;
@@ -252,7 +200,6 @@
 			});
 		}
 	});
-	
 
 	App.controller('ChangeUserInfoAct', function($scope, $http, $location){  
 		$scope.sbuserinfo = function(){
@@ -293,15 +240,15 @@
 				url: '/inquiries/remove_file_attachment',
 				data: {id: id}
 			}).then(function successCallback(response) {
-				console.log(response);
+				// console.log(response);
 			});
 			toastr.success('The Attachments has been deleted.');
 		}
 	});
 
-
 	// Inquiry details Ctrl
 	App.controller('InquirydetailsCtrl', function($scope, $routeParams, $http){
+
 		var id = $routeParams.id;
 		$http({
 			method: 'POST',
@@ -309,6 +256,7 @@
 			data: {id: id}
 		}).then(function successCallback(response) {
 			$scope.inquiries 		= response.data.inquiries;
+			console.log($scope.inquiries);
 			$scope.extras 			= response.data.inquiries.extras;
 			$scope.attachments 		= response.data.inquiries.attachments;
 			$scope.total 			= response.data.total;
@@ -495,4 +443,104 @@
 		});
 	});
 	
+	// View User
+	// App.controller('ViewCtrl', function($scope, $routeParams, $http){
+	// 	var id = $routeParams.id;
+	// 	var table = "users";
+	// 	var key = 'View';
+	// 	$http.get("/js/myapp/select.php?id=" +id+ "&table=" +table+ "&key=" +key).then(function (response) {
+	// 		// console.log(response.data);
+	// 		$scope.users = response.data;
+	// 	});
+	// });
+
+	// Add New User
+	// App.controller('AddCtrl', function($scope, $routeParams, $http){
+	// 	var table = "users";
+	// 	var key = "Add";
+	// 	$http.get("/js/myapp/select.php?table=" +table+ "&key=" +key).then(function (response) {
+	// 		$scope.groups = response.data.groups;
+	// 		$scope.teams = response.data.teams;
+	// 	});
+	// });
+// App.controller("AddUsersCtrl", function($scope, $http, $location){  
+	// 	$scope.uploadFile = function(){  
+	// 		var form_data = new FormData();  
+	// 		if (jQuery("#files-upload").val() != '') {
+	// 			for (var i = 0; i < $scope.files.length; i++) {
+	// 				form_data.append('files', $scope.files[i]);  
+	// 			};
+	// 		}
+	// 		form_data.append('username', jQuery('#username').val());
+	// 		form_data.append('password', jQuery('#password').val());
+	// 		form_data.append('fullname', jQuery('#fullname').val());
+	// 		form_data.append('role', jQuery('#role').val());
+	// 		form_data.append('group_id', jQuery('#Group').val());
+	// 		form_data.append('team_id', jQuery('#Team').val());
+	// 		$http.post('/users/add', form_data, {
+	// 			transformRequest: angular.identity,
+	// 			headers: {'Content-Type': undefined,'Process-Data': false}
+	// 		})
+	// 		.success(function(response){
+	// 			$location.path('/');
+	// 			// console.log(response);
+	// 		})
+	// 		.error(function(){
+	// 			console.log("Error");
+	// 		});
+	// 	}
+	// });
+
+	// Edit User
+	// App.controller('EditCtrl', function($scope, $routeParams, $http){
+	// 	var id = $routeParams.id;
+	// 	var table = "users";
+	// 	var key = 'Edit';
+	// 	$http.get("/js/myapp/select.php?id=" +id+ "&table=" +table+ "&key=" +key).then(function (response) {
+	// 		$scope.users = response.data.records;
+	// 		$scope.groups = response.data.groups;
+	// 		$scope.teams = response.data.teams;
+	// 	});
+	// });
+
+	// App.controller('EditUsersCtrl', function($scope, $routeParams, $http, $location){
+	// 	var id = $routeParams.id;
+	// 	var table = "users";
+	// 	$scope.EditFromData = function() {
+	// 		var username 	= jQuery('.an_username').val();
+	// 		var password 	= jQuery('.an_password').val();
+	// 		var fullname 	= jQuery('.an_fullname').val();
+	// 		var role 		= jQuery('.an_role').val();
+	// 		var g = document.getElementById("ddlViewByGroup");
+	// 		var group_id = g.options[g.selectedIndex].value;
+	// 		var t = document.getElementById("ddlViewByTeam");
+	// 		var team_id = t.options[t.selectedIndex].value;
+	// 		$scope.info = ({
+	// 			'id' 		: id,
+	// 			'username'	: username,
+	// 			'password'	: password,
+	// 			'fullname'	: fullname,
+	// 			'role'		: role,
+	// 			'group_id'	: group_id,
+	// 			'team_id'	: team_id
+	// 		});
+	// 		$http({
+	// 			method	: 'POST',
+	// 			url 	: '/js/myapp/edit.php?table='+table,
+	// 			data 	: $scope.info,
+	// 			headers : {'Content-Type' : 'application/x-www-form-urlencoded'} 
+	// 		}).success(function(data){
+	// 				$location.path('/'); // working
+	// 		});
+	// 	}
+	// });
+	// Delete User
+	// App.controller("DeleteCtrl", function($scope, $routeParams, $http, $location){
+	// 	var id = $routeParams.id;
+	// 	var table = 'users';
+	// 	var array = [id, table];
+	// 	$http.get("/js/myapp/delete.php?id=" +id+ "&table=" +table).then(function(response){
+	// 		$location.path('/');
+	// 	});
+	// });
 }());

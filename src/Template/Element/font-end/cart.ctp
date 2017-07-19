@@ -1,11 +1,11 @@
 
 
-<div class="mini-cart mini-cart-2">
+<!-- <div class="mini-cart mini-cart-2"> -->
  
-    <?php echo $this->Html->link('<span class="total-mini-cart-icon"><i class="fa fa-shopping-basket"></i></span>
-        <span class="total-mini-cart-item">'.count($this->request->session()->read('Cart')).'</span>',
-            ['controller'=>'pages','action'=> 'view_cart'],
-            ['escape'=> false,'class'=>'header-mini-cart2']); 
+    <?php //echo $this->Html->link('<span class="total-mini-cart-icon"><i class="fa fa-shopping-basket"></i></span>
+       // <span class="total-mini-cart-item">'.count($this->request->session()->read('Cart')).'</span>',
+        //    ['controller'=>'pages','action'=> 'view_cart'],
+          //  ['escape'=> false,'class'=>'header-mini-cart2']); 
     ?>
   
      <!-- <?php // if (!empty($this->request->session()->read('Cart'))): ?>
@@ -29,4 +29,12 @@
             </div>
         </div>
        <?php // endif ?> -->
+<!-- </div> -->
+
+<div class="mini-cart mini-cart-2">
+ 
+    <a href="/pages/accounts#/viewcart" class="header-mini-cart2"><span class="total-mini-cart-icon">
+        <i class="fa fa-shopping-basket"></i></span>
+        <span class="total-mini-cart-item"><?php echo count($this->request->session()->read('Cart')); ?></span></a>  
+    
 </div>

@@ -256,6 +256,14 @@ class PagesController extends AppController
 		
 		$this->set(compact('orders'));
 	}
+
+	public function getcartdata()	{
+		if ($this->request->is('get')) {
+			$cart    = $this->request->session()->read('Cart');
+			echo json_encode($cart);
+		}
+		exit();
+	}
 }
 
 

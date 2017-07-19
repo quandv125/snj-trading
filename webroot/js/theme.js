@@ -1607,11 +1607,73 @@ jQuery(document).ready(function($){
 				success: function(response){
 					jQuery(".loader2").fadeOut();
 					jQuery('.quick-smart-search-fixed').toggleClass('hidden').html(response);
-					jQuery(window).click(function(e) {
-						jQuery('.quick-smart-search-fixed').addClass('hidden');
-						jQuery('.quick-smart-search').addClass('hidden');
-						jQuery('.type-search').focus();
+					jQuery('.addcart-link2').click(function(){
+						var id = jQuery(this).attr('product_id');
+						jQuery.ajax({
+							url: '/products/cart',
+							type: 'POST',
+							data: {id: id},
+							dataType: 'html',
+							cache: false,
+							beforeSend: function(){
+								jQuery("#loader").fadeIn();
+							},
+							success: function(response){
+								jQuery("#loader").fadeOut();
+								if (response != 0) {
+									var qty = parseInt(jQuery('.total-mini-cart-item').html())+1;
+									jQuery('.total-mini-cart-item').html(qty);
+									jQuery('.my_order tbody').append(response);
+									// Remove
+									jQuery('.remove-items').click(function(){
+										var id = jQuery(this).attr('product_id');
+										jQuery('.cart_item_'+id).fadeOut();
+										jQuery.ajax({
+											url: '/products/remove_items',
+											type: 'POST',
+											data: {id: id},
+											dataType: 'html',
+											cache: false,
+											beforeSend: function(){
+												jQuery("#loader").fadeIn();
+											},
+											success: function(response){
+												jQuery("#loader").fadeOut();
+												var qty = parseInt(jQuery('.total-mini-cart-item').html())-1;
+												jQuery('.total-mini-cart-item').html(qty);
+												console.log(response);
+											}
+										});
+									});
+									//Quantity
+									$('.info-qty').each(function(){
+										var qtyval = parseInt($(this).find('.qty-val').text(),10);
+										$('.qty-up-'+id).on('click',function(event){
+											event.preventDefault();
+											qtyval=qtyval+1;
+											$(this).prev().text(qtyval);
+										});
+										$('.qty-down-'+id).on('click',function(event){
+											event.preventDefault();
+											qtyval=qtyval-1;
+											if(qtyval>0){
+												$(this).next().text(qtyval);
+											}else{
+												qtyval=0;
+												$(this).next().text(qtyval);
+											}
+										});
+									});
+								};
+								console.log(response);
+							}
+						});
 					});
+					jQuery('#content').click(function(e) {
+							jQuery('.quick-smart-search-fixed').addClass('hidden');
+							jQuery('.quick-smart-search').addClass('hidden');
+							jQuery('.type-search').focus();
+						});
 				}
 			}); // Ajax
 		}, 500 );

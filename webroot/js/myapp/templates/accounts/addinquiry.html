@@ -1,6 +1,7 @@
 
 <div class="row">
-	<button name="save" class="btn btn-success float-right" id="save"><i class="fa fa-paper-plane"></i> Send</button>
+	
+	<md-button id="save" name="save" class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
 	<div class="clearfix"></div>
 	<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
 	<form method="post" accept-charset="utf-8" id="InqSuppsInfo" role="form" action="/inquiries/add">
@@ -24,10 +25,17 @@
 		</div>
 		<div class="col-md-4">
 			<div class="form-group text">
-			<label class="control-label" for="datepicker">Date</label><span class="k-widget k-datepicker k-header form-control date"><span class="k-picker-wrap k-state-default">
-			<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" 	aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;"><span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview"><span class="k-icon k-i-calendar"></span></span></span></span>
-	
-			</div>		
+				<label class="control-label" for="datepicker">Date</label>
+				<input type="text"  name="created" class="form-control  created" id="" value="{{date | date:'yyyy-MM-dd'}}">
+				<!-- <span class="k-widget k-datepicker k-header form-control date">
+					<span class="k-picker-wrap k-state-default">
+						<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
+						<span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview">
+							<span class="k-icon k-i-calendar"></span>
+						</span>
+					</span>
+				</span> -->
+			</div>
 		</div>
 		<div class="col-md-4">
 			<div class="form-group text">
@@ -68,4 +76,4 @@
 	</div>
 </div>
 
-<script src="/js/theme.js"></script>
+<script src="/js/myapp/snj_custom.js"></script>

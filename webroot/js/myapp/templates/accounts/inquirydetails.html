@@ -1,12 +1,11 @@
 
-<script src="/js/theme.js"></script>
-
 <div class="tab-container">
 	
 		<md-tabs md-selected="selectedTab" style=" min-height:431px !important;">
 		
 			<md-tab label="Infomations">
 				<div class="tab-content">
+				<script src="/js/myapp/snj_custom.js"></script>
 					<form method="post" accept-charset="utf-8" id="fx-inquiries-details" role="form">
 						<div style="display:none;">
 							<input type="hidden" name="_method" class="form-control" value="POST">
@@ -39,17 +38,18 @@
 							</div>
 						</div>
 						<div class="col-md-4">
-						<label class="control-label" for="date">Date</label>
+						<label class="control-label" for="date">Date </label>
 						<div class="clearfix"></div>
 						<div class="form-group text">
-							<span class="k-widget k-datepicker k-header form-control date">
-								<span class="k-picker-wrap k-state-default">
-									<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
+							<input type="text"  name="created" class="form-control created" id="created" value="{{inquiries.created | date:'yyyy-MM-dd'}}">
+								<!-- <span class="k-widget k-datepicker k-header form-control date">
+									<span class="k-picker-wrap k-state-default">
+										<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
 										<span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview">
 											<span class="k-icon k-i-calendar"></span>
 										</span>
 									</span>
-								</span>
+								</span> -->
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -62,7 +62,7 @@
 						<div class="col-md-4">
 							<div class="form-group textarea">
 								<label class="control-label active" for="remark">Remark</label>
-								<textarea name="remark" class="form-control" id="remark" rows="5" ng-model="inquiries.remark"></textarea>
+								<textarea name="remark" class="form-control" id="remark" rows="5">{{inquiries.remark}}</textarea>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -79,11 +79,11 @@
 									</div>
 								</div>
 								<table class="table file-attachments">
-									<tbody>
+									<tbody ng-controller="attachmentCtrl">
 										
 										<tr ng-repeat="a in attachments" id="attachments-{{a.id}}">
 											<td>
-												<a href="/inquiries/download/{{a.id}}">{{a.path}}</a>
+												<a href="/inquiries/download/{{a.id}}">{{a.filename}}</a>
 											</td>
 											<td>
 												<span class="cursor-point remove-file-att" ng-click='go()' id="{{a.id}}">X</span>
@@ -95,8 +95,10 @@
 							</div>
 						</div>
 						<div class="clearfix"></div>
-						<button class="btn btn-success float-right" type="submit">Update</button>
+						<md-button type="submit" class="md-raised float-right md-primary">Update</md-button>
+					
 					</form>
+
 				</div>
 			</md-tab>
 			<md-tab label="Cost & Price">

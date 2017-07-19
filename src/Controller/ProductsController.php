@@ -636,8 +636,17 @@ class ProductsController extends AppController
 	}
 
 	public function RemoveItems() {
+
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
+			$my_cart = $this->request->session()->read('my_cart');
+			$cart = $this->request->session()->read('Cart');
+			unset($my_cart[$this->request->data['id']]);
+			unset($cart[$this->request->data['id']]);
+			$this->request->session()->write('my_cart', $my_cart);
+			$this->request->session()->write('Cart', $cart);
+		}else{
+		
 			$my_cart = $this->request->session()->read('my_cart');
 			$cart = $this->request->session()->read('Cart');
 			unset($my_cart[$this->request->data['id']]);

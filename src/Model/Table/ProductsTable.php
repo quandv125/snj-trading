@@ -230,7 +230,7 @@ class ProductsTable extends Table
 		$stmt = $conn->execute('
 			SELECT id, sku, user_id, product_name, origin, serial_no, type_model, actived, created 
 			FROM  products  
-			WHERE user_id = '.$user_id.' '.$conditions );
+			WHERE user_id = '.$user_id.' '.$conditions.' ORDER by created DESC');
 		$results = $stmt ->fetchAll('assoc');
 		// pr($results);die();
 		return $results;

@@ -149,17 +149,6 @@ class PagesController extends AppController
 		$products   = $this->Pages->getInfoProducts($conditions);
 		$this->set(compact('product','products'));
 	}
-
-	public function ProductsInfo() {
-		if ($this->request->is(['get'])) {
-			$Product    = TableRegistry::get('Products');
-	        $products   = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
-	            ->order(['Products.created' => 'DESC'])
-	            ->Where(['Products.user_id' => $this->Auth->user('id') ])
-	            ->limit(LIMIT);
-			echo json_encode($products); exit();
- 		}
-	}
 	
 	public function suppliers($id) {
 		$this->viewBuilder()->layout('product');

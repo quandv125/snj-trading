@@ -195,7 +195,7 @@ class UsersController extends AppController
 				$datasourceAco->begin();
 				$query = $Aco->query();
 				$query->update()->set(['actived' => $this->request->data['checked']])->where(['id' => $this->request->data['id']])->execute();
-				echo  'Update Successfuly!' ;
+				echo 'Update Successfuly!' ;
 				$datasourceAco->commit();
 			} catch (Exception $e) {
 				echo 'Error. Please, try again!';
@@ -428,7 +428,7 @@ class UsersController extends AppController
 					$this->Flash->success(__('Please! Check your email.'));
 				}
 			}
-		}   
+		}
 	}
 
 	public function changepassword($id = null, $code = null)    {

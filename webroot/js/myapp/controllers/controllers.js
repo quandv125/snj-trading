@@ -65,10 +65,32 @@
 	});
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
-		$http.get("/pages/products_info").then(function (response) {
+		$http.get("/products/products_info").then(function (response) {
 			$scope.products = response.data;
+			// console.log($scope.products);
 		});
 	});
+	// Search Products 
+	App.controller('SearchFormCtrl', function($scope, $http, $location){
+		var date = new Date();
+		$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		$scope.submitSearchForm = function(){
+			var firstDay = jQuery("#firstDay").val();
+			var lastDay = jQuery("#lastDay").val();
+			$http({
+				method: 'POST',
+				url: '/products/searchproducts',
+				data: {"data": $scope.formdata, "firstDay": firstDay, "lastDay": lastDay}
+				}).then(function successCallback(response) {
+					$scope.products = response.data;
+					console.log(response.data);
+				}, function errorCallback(response) {
+
+				});
+		}
+	});
+
 	// InquiryCtrl
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
 		$http.get("/inquiries/inquiry_info").then(function (response) {
@@ -76,6 +98,28 @@
 			$scope.inquiries = response.data;
 		});
 	});
+
+	// Search Products 
+	App.controller('InquirySearchFormCtrl', function($scope, $http, $location){
+		var date = new Date();
+		$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		$scope.InquirySearchForm = function(){
+			var firstDay = jQuery("#firstDay").val();
+			var lastDay = jQuery("#lastDay").val();
+			$http({
+				method: 'POST',
+				url: '/inquiries/searchinquiries',
+				data: {"data": $scope.formdata, "firstDay": firstDay, "lastDay": lastDay}
+				}).then(function successCallback(response) {
+					$scope.inquiries = response.data;
+					console.log(response.data);
+				}, function errorCallback(response) {
+
+				});
+		}
+	});
+
 	// Main User Page
 	App.controller('WishlistCtrl', function($scope, $routeParams, $http){});
 	App.controller('ViewCartCtrl', function($scope, $http){
@@ -151,10 +195,11 @@
 			} else {
 				toastr.error(response.data.message);
 			}
+			$location.path('/products');
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
-		$location.path('/products');
+		
 	});
 	// Delete Inquiry Ctrl
 	App.controller("DeleteInquiryCtrl", function($scope, $routeParams, $http, $location){
@@ -200,6 +245,8 @@
 			});
 		}
 	});
+
+	
 
 	App.controller('ChangeUserInfoAct', function($scope, $http, $location){  
 		$scope.sbuserinfo = function(){
@@ -543,4 +590,6 @@
 	// 		$location.path('/');
 	// 	});
 	// });
+
+	
 }());

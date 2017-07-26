@@ -744,4 +744,16 @@ use Cake\Datasource\ConnectionManager;
 		}
 		return $data;
 	}
+
+	public function SearchInfo($user_id, $conditions = null){
+		// pr( $user_id.' '.$conditions );die();
+		$conn = ConnectionManager::get('default');
+		$stmt = $conn->execute('
+			SELECT id, user_id, status, vessel, ref,imo_no, hull_no, created
+			FROM  inquiries   
+			WHERE user_id = '.$user_id.' '.$conditions );
+		$results = $stmt ->fetchAll('assoc');
+		// pr($results);die();
+		return $results;
+	}
 }

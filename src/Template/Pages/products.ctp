@@ -8,7 +8,7 @@
 						<div class="col-md-7 col-sm-12 col-xs-12">
 							<div class="detail-gallery-fullwidth min-height-460">
 								<div class="mid">
-									<?php echo $this->Html->image($product->images[0]['path'],['width' => 440])?>
+									<?php echo $this->Html->image($product->images[0]['path'])?>
 									
 									<p><i class="fa fa-search"></i> Mouse over to zoom in</p>
 								</div>
@@ -18,7 +18,7 @@
 										<ul>
 										<?php foreach ($product->images as $key => $image): ?>
 											<?php if ($key <= 8	): ?>
-												<li><a href="#"><?php echo $this->Html->image($image['path'])?></a></li>
+												<li><a href="#"><?php echo $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?></a></li>
 											<?php endif ?>
 											
 										<?php endforeach ?>
@@ -190,9 +190,7 @@
 			<div class="title-tab-detail">
 				<ul role="tablist">
 					<li class="active"><a href="#details" data-toggle="tab">Product Details </a></li>
-					
 					<li><a href="#shipping" data-toggle="tab">Shipping & Payment</a></li>
-					
 				</ul>
 			</div>
 			<div class="content-tab-detail">
@@ -203,7 +201,7 @@
 						</div>
 					</div>
 					
-					<div role="tabpanel" class="tab-pane" id="shipping">
+					<div role="tabpanel" class="tab-pane" id="shipping"> 	
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Return Policy</span></div>
 							<div class="icon-table-detail"><?php echo $this->Html->image('assets/grid/rv1.png') ?></div>
@@ -256,7 +254,7 @@
 									<?php echo $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,30,30),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
 								</h3>
 								<!--<div class="info-price">
-									<span><?php //	 echo number_format( $cat->retail_price, DECIMALS); ?></span>
+									<span><?php //echo number_format( $cat->retail_price, DECIMALS); ?></span>
 								</div> -->
 								<!-- <div class="product-rating">
 									<div class="inner-rating" style="width:100%"></div>

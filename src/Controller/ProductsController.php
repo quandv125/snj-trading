@@ -227,14 +227,19 @@ class ProductsController extends AppController
 	public function SupplierEditProduct($id = null){
 		$this->viewBuilder()->layout('product');
 		$Categorie  = TableRegistry::get('Categories');
-	
 		if ($id == null) { $id = $this->request->data['id']; }
 		$product = $this->Products->get($id, [
 			'contain' => []
 		]);
+		
 		if ($this->request->is(['patch', 'post', 'put'])) {
-			$this->request->data['categorie_id'] = explode('number:', $this->request->data['categorie_id'])[1];
+			// $this->request->data['categorie_id'] = explode('string:', $this->request->data['_category_id'])[1];
+			$c = explode('? string:', $this->request->data['_category_id'])[1];
+			$this->request->data['categorie_id'] = trim(explode(' ?', $c)[0]);
+			$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
+		
 			$product = $this->Products->patchEntity($product, $this->request->data);
+			// pr($product);die();
 			if ($this->Products->save($product)) {
 				$Image = TableRegistry::get('Images');
 				$id = $product->id;
@@ -257,6 +262,8 @@ class ProductsController extends AppController
 						}
 					}
 				}
+				//
+				exit();
 				if ($id != null) {
 					$this->Flash->success(__('The product has been saved.'));
 					return $this->redirect(['controller'=>'pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);
@@ -400,6 +407,39 @@ class ProductsController extends AppController
 			$this->set('type',$this->request->data['type']);
 			$this->render('/Element/Products/result_searchbox');
 		}
+	}
+
+	public function searchproducts(){
+		if ($this->request->is('post')) {
+			// pr($this->request->data);
+			$conditions = "";
+			if (isset($this->request->data['data']['sku']) && !empty($this->request->data['data']['sku'])) {
+				$conditions .=' AND sku like "%'.$this->request->data['data']['sku'].'%" ';
+			}
+			if (isset($this->request->data['data']['product_name']) && !empty($this->request->data['data']['product_name'])) {
+				$conditions .=' AND product_name like "%'.$this->request->data['data']['product_name'].'%" ';
+			}
+			if (isset($this->request->data['data']['origin']) && !empty($this->request->data['data']['origin'])) {
+				$conditions .=' AND origin like "%'.$this->request->data['data']['origin'].'%"';
+			}
+			if (isset($this->request->data['data']['actived']) && !empty($this->request->data['data']['actived'])) {
+				if ($this->request->data['data']['actived'] == 'true') {
+					$conditions .=' AND actived = 1';
+				} else if($this->request->data['data']['actived'] == 'false'){
+					$conditions .=' AND actived = 0';
+				} else {
+					$conditions .='';
+				}
+			}
+			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
+				$conditions .=' AND (created BETWEEN "'.$this->request->data['firstDay'].'" AND "'.$this->request->data['lastDay'].'")';
+			}
+			// pr($conditions);die();
+			$products = $this->Products->SearchInfo($this->Auth->user('id'),$conditions);
+		 
+			echo json_encode($products); exit();
+		}
+		exit();
 	}
 
 	public function PaginationProducts()   {
@@ -703,7 +743,23 @@ class ProductsController extends AppController
 			$products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['product_id']], null, null);  
 			$this->set(compact('products'));
 			$this->render('/Element/Products/detail_products');
+		} 
+	}
+   	public function FilterPrice()  {
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			pr($this->request->data);exit();
 		}
 	}
-   
+
+	public function ProductsInfo() {
+		if ($this->request->is(['get'])) {
+			$Product    = TableRegistry::get('Products');
+			$products   = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
+				->where(['Products.user_id' => $this->Auth->user('id'),'Products.created >'=> date('Y-m-01'),'Products.created <'=> date('Y-m-t')])
+				->order(['Products.created' => 'DESC']);
+				// ->limit(LIMIT);
+			echo json_encode($products); exit();
+		}
+	}
 }

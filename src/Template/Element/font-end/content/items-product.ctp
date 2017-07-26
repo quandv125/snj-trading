@@ -6,8 +6,8 @@
 				<div class="item-product">
 					<div class="product-thumb">
 						<a class="product-thumb-link" href="<?= $this->Url->build(['controller'=>'pages','action'=>'products', $product->id]) ?>">
-						<?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193]); ?>
-						<?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193]); ?>
+						<?= $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193]); ?>
+						<?= $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193]); ?>
 						</a>
 						<div class="product-info-cart">
 							<div class="product-extra-link">
@@ -15,13 +15,13 @@
 								<span class="compare-link" href="#"><i class="fa fa-toggle-on"></i></span>
 								<span class="quickview-link1 fancybox.ajax" href="quick-view.html"><i class="fa fa-search"></i></span>
 							</div>
-							<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
+							<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail']; ?>">
 								<i class="fa fa-shopping-cart"></i> Add to Cart
 							</span>
 						</div>
 					</div>
 					<div class="product-info">
-						<h3 class="title-product"><?php echo $this->Html->link(ucfirst($this->MyHtml->_Cutstring($product->product_name,10,20)),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?></h3>
+						<h3 class="title-product"><?= $this->Html->link(ucfirst($this->MyHtml->_Cutstring($product->product_name,10,20)),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?></h3>
 					</div>
 				</div>
 			</li>
@@ -36,61 +36,54 @@
 				<div class="item-product">
 					<div class="row">
 						<div class="col-md-3 col-sm-12 col-xs-12">
-							<div class="product-thumb">
+							<div class="product-thumb product-thumb-border">
 								<a class="product-thumb-link" href="<?= $this->Url->build(['controller'=>'pages','action'=>'products', $product->id]) ?>">
-									<?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb']); ?>
-									<?php echo $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb']); ?>
+									<?= $this->Html->image($product->images[0]['thumbnail'],['class'=>'first-thumb']); ?>
+									<?= $this->Html->image($product->images[0]['thumbnail'],['class'=>'second-thumb']); ?>
 								</a>
+							</div>
+							<br/><br/><br/>
+							<div class="product-info-cart">
+								<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail']; ?>">
+									<i class="fa fa-shopping-cart"></i> Add to Cart
+								</span>
 							</div>
 						</div>
 						<div class="col-md-9 col-sm-12 col-xs-12">
 							<div class="product-info">
-								<h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </h3>
-								<table class="table table-hover" style=" max-width: 73%;">
+								<h3 class="title-product"><?= $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </h3>
+								<table class="table table-hover">
 									<tbody>
 										<tr class="info-category">
-											<td><b> <?php echo __("Maker's name") ?>:</b></td>
-											<td><?= $product->supplier['name'] ?></td>
+											<td><b><?= __("Maker's name"); ?>:</b></td>
+											<td><?= $product->supplier['name']; ?></td>
+											<td><b><?= __("Categories"); ?>:</b></td>
+											<td><?= $product->category['name'];?></td>
 										</tr>
 										<tr class="info-category">
-											<td><b> <?php echo __("Categories") ?>:</b></td>
-											<td><?= $product->category['name']?></td>
-										</tr>
-										<tr class="info-category">
-											<td><b> <?php echo __("Part No") ?>:</b></td>
+											<td><b><?= __("Part No"); ?>:</b></td>
 											<td><?= $product->sku; ?></td>
-										</tr>
-										<tr class="info-category">
-											<td><b> <?php echo __("Availability") ?>:</b></td>
+											<td><b><?= __("Availability"); ?>:</b></td>
 											<td>In stock</td>
 										</tr>
 										<tr class="info-category">
-											<td><b> <?php echo __("Serial No") ?>:</b></td>
-											<td><?= $product->serial_no ?></td>
-										</tr>
-										<tr class="info-category">
-											<td><b> <?php echo __("Type Model") ?>:</b></td>
+											<td><b><?= __("Serial No"); ?>:</b></td>
+											<td><?= $product->serial_no; ?></td>
+											<td><b><?= __("Type Model"); ?>:</b></td>
 											<td><?= $product->type_model; ?></td>
 										</tr>
 										<tr class="info-category">
-											<td><b> <?php echo __("Quantity") ?>:</b></td>
+											<td><b><?= __("Quantity"); ?>:</b></td>
 											<td><?= $product->quantity; ?></td>
-										</tr>
-										 <tr class="info-category">
-											<td><b> <?php echo __("Origin") ?>:</b></td>
+											<td><b><?= __("Origin"); ?>:</b></td>
 											<td><?= $product->origin; ?></td>
 										</tr>
 									</tbody>
 								</table>
-								<label><b> <?php echo __("Remark") ?>:</b> </label>
-								<div class="product-description" id="products-remark">
+								<label><b><?= __("Remark"); ?>:</b> </label>
+								<span class="product-description" id="products-remark">
 									<?= $this->MyHtml->_Cutstring($product->short_description,300,300); ?>
-								</div>
-								<div class="product-info-cart">
-									<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
-										<i class="fa fa-shopping-cart"></i> Add to Cart
-									</span>
-								</div>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -99,3 +92,4 @@
 		<?php endforeach ?>
 	</ul>
 </div>
+

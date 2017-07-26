@@ -1023,17 +1023,12 @@ jQuery(document).ready(function(){
 			zoomWindowFadeIn: 500,
 			zoomWindowFadeOut: 750
 		});
-		// $('.detail-gallery-fullwidth .mid img').elevateZoom({
-		// 	zoomType: "inner",
-		// 	cursor: "crosshair",
-		// 	zoomWindowFadeIn: 500,
-		// 	zoomWindowFadeOut: 750
-		// });
+		
 		$(".detail-gallery-fullwidth .carousel a").on('click',function(event) {
 			event.preventDefault();
 			$(".detail-gallery-fullwidth .carousel a").removeClass('active');
 			$(this).addClass('active');
-			$(".detail-gallery-fullwidth .mid img").attr("src", $(this).find('img').attr("src"));
+			$(".detail-gallery-fullwidth .mid img").attr("src", $(this).find('img').attr("ref"));
 			var z_url = $('.detail-gallery-fullwidth .mid img').attr('src');
 			$('.zoomWindow').css('background-image','url("'+z_url+'")');
 		});
@@ -1139,13 +1134,13 @@ jQuery(document).ready(function(){
 		$( ".range-filter #slider-range" ).slider({
 			range: true,
 			min: 0,
-			max: 500,
-			values: [ 70, 350 ],
+			max: 10000,
+			values: [ 100, 2500 ],
 			slide: function( event, ui ) {
-			$( "#amount" ).html( "<span>" + ui.values[ 0 ] + "</span>" + " - " + "<span>" + ui.values[ 1 ] + "</span>" );
+			$( "#amount" ).html( "<span class='start'>" + ui.values[ 0 ] + "</span>" + " - " + "<span class='end'>" + ui.values[ 1 ] + "</span>" );
 			}
 		});
-		$( ".range-filter #amount" ).html( "<span>" + $( "#slider-range" ).slider( "values", 0 )+ "</span>" + " - " + "<span>" + $( "#slider-range" ).slider( "values", 1 ) + "</span>" );
+		$( ".range-filter #amount" ).html( "<span class='start'>" + $( "#slider-range" ).slider( "values", 0 )+ "</span>" + " - " + "<span class='end'>" + $( "#slider-range" ).slider( "values", 1 ) + "</span>" );
 	}
 	//End Widget Shop
 
@@ -1783,31 +1778,31 @@ jQuery(document).ready(function($){
 			}
 		}); // Ajax
 	});
-	jQuery("#FrmAddProducts").on('submit',(function(event) {
-		event.preventDefault();
-		var form_data = new FormData(this);
-		form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
-		form_data.append('description', CKEDITOR.instances['description'].getData());  
-		jQuery.ajax({
-			url: "/products/supplier_add_product",
-			type: "POST",
-			data: form_data,
-			contentType: false,
-			cache: false,
-			processData:false,
-			beforeSend: function(){
-				jQuery(".loader3").fadeIn();
-			},
-			success: function(response){
-				jQuery(".loader3").fadeOut();
-				console.log(response);
-				window.location.href = "../pages/accounts#/products";
-			},
-			error: function(response, status){
-				jQuery(".loader3").fadeOut();
-			}
-		});
-	}));
+	// jQuery("#FrmAddProducts").on('submit',(function(event) {
+	// 	event.preventDefault();
+	// 	var form_data = new FormData(this);
+	// 	form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
+	// 	form_data.append('description', CKEDITOR.instances['description'].getData());  
+	// 	jQuery.ajax({
+	// 		url: "/products/supplier_add_product",
+	// 		type: "POST",
+	// 		data: form_data,
+	// 		contentType: false,
+	// 		cache: false,
+	// 		processData:false,
+	// 		beforeSend: function(){
+	// 			jQuery(".loader3").fadeIn();
+	// 		},
+	// 		success: function(response){
+	// 			jQuery(".loader3").fadeOut();
+	// 			console.log(response);
+	// 			window.location.href = "../pages/accounts#/products";
+	// 		},
+	// 		error: function(response, status){
+	// 			jQuery(".loader3").fadeOut();
+	// 		}
+	// 	});
+	// }));
 
 	jQuery("#FrmEditProducts").on('submit',(function(event) {
 		event.preventDefault();
@@ -1879,4 +1874,27 @@ jQuery(document).ready(function($){
 			error: function(response, status){}
 		});
 	}));
+
+	jQuery(".btn-filter").click(function(){
+		var start = jQuery(".start").html();
+		var end = jQuery(".end").html();
+		jQuery.ajax({
+			url: "/products/filter_price",
+			type: "POST",
+			data: {start: start, end: end},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery(".loader3").fadeIn();
+			},
+			success: function(response){
+				jQuery(".loader3").fadeOut();
+				console.log(response);
+				
+			},
+			error: function(response, status){
+				jQuery(".loader3").fadeOut();
+			}
+		});
+	});
 }); // End document

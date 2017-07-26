@@ -765,7 +765,7 @@ jQuery(document).ready(function($){
 	jQuery("#FrmAddProducts").on('submit',(function(event) {
 		event.preventDefault();
 		var form_data = new FormData(this);
-		form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
+		// form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
 		form_data.append('description', CKEDITOR.instances['description'].getData());  
 		jQuery.ajax({
 			url: "/products/supplier_add_product",
@@ -791,8 +791,8 @@ jQuery(document).ready(function($){
 	jQuery("#FrmEditProducts").on('submit',(function(event) {
 		event.preventDefault();
 		var form_data = new FormData(this);
-		var categorie_id = jQuery("#categories").val();
-		form_data.append('categorie_id', categorie_id);  
+		// var categorie_id = jQuery("#categories").val();
+		// form_data.append('categorie_id', categorie_id);  
 		form_data.append('short_description', CKEDITOR.instances['short_description'].getData());  
 		form_data.append('description', CKEDITOR.instances['description'].getData());  
 		jQuery.ajax({

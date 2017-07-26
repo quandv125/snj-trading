@@ -14,24 +14,28 @@ class InquiriesController extends AppController
 
 	public function index()	{
 		$this->viewBuilder()->layout('product');
-		$this->paginate = [
-			'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'],
-			'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
-			'order' => ['Inquiries.created' => 'DESC'],
-		];
-		$inquiries = $this->paginate($this->Inquiries);
+		// $this->paginate = [
+		// 	'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'],
+		// 	'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
+		// 	'order' => ['Inquiries.created' => 'DESC'],
+		// ];
+		$inquiries = $this->Inquiries->find()
+			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'])
+			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >'=> date('Y-m-01'),'Inquiries.created <'=> date('Y-m-t')])
+			->order(['Inquiries.created'  => 'DESC']);
+	
+		// $inquiries = $this->paginate($this->Inquiries);
 		$this->set(compact('inquiries'));
 		$this->set('_serialize', ['inquiries']);
 	}
 
 	public function InquiryInfo() {
 		if ($this->request->is(['get'])) {
-			$this->paginate = [
-				'fields' => ['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.imo_no','Inquiries.hull_no','Inquiries.type','Inquiries.description','Inquiries.created'],
-				'conditions' => ['Inquiries.user_id' => $this->Auth->user('id')],
-				'order' => ['Inquiries.created'  => 'DESC'],
-			];
-			$inquiries = $this->paginate($this->Inquiries);
+			$inquiries = $this->Inquiries->find()
+			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'])
+			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >'=> date('Y-m-01'),'Inquiries.created <'=> date('Y-m-t')])
+			->order(['Inquiries.created'  => 'DESC']);
+
 			echo json_encode($inquiries); exit();
 		}
 	}
@@ -1425,5 +1429,40 @@ class InquiriesController extends AppController
 		// }
 	}
 
+	public function searchinquiries()	{
+		if ($this->request->is('post')) {
+			// pr($this->request->data);die();
+			$conditions = "";
+			if (isset($this->request->data['data']['ref']) && !empty($this->request->data['data']['ref'])) {
+				$conditions .=' AND ref like "%'.$this->request->data['data']['ref'].'%" ';
+			}
+			if (isset($this->request->data['data']['vessel']) && !empty($this->request->data['data']['vessel'])) {
+				$conditions .=' AND vessel like "%'.$this->request->data['data']['vessel'].'%" ';
+			}
+			if (isset($this->request->data['data']['imo_no']) && !empty($this->request->data['data']['imo_no'])) {
+				$conditions .=' AND imo_no like "%'.$this->request->data['data']['imo_no'].'%"';
+			}
+				if (isset($this->request->data['data']['hull_no']) && !empty($this->request->data['data']['hull_no'])) {
+				$conditions .=' AND hull_no like "%'.$this->request->data['data']['hull_no'].'%"';
+			}
+			if (isset($this->request->data['data']['status']) && !empty($this->request->data['data']['status'])) {
+				if ($this->request->data['data']['status'] == 'true') {
+					$conditions .=' AND status = 1';
+				} else if($this->request->data['data']['status'] == 'false'){
+					$conditions .=' AND status = 0';
+				} else {
+					$conditions .='';
+				}
+			}
+			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
+				$conditions .=' AND (created BETWEEN "'.$this->request->data['firstDay'].'" AND "'.$this->request->data['lastDay'].'")';
+			}
+			// pr($conditions);die();
+			$products = $this->Inquiries->SearchInfo($this->Auth->user('id'),$conditions);
+		 
+			echo json_encode($products); exit();
+		}
+		exit();
+	}
 }
 

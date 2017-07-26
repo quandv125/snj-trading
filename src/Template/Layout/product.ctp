@@ -54,8 +54,8 @@
 		echo $this->Html->script('libs/owl.carousel');
 		// echo $this->Html->script('libs/TimeCircles');
 		// echo $this->Html->script('libs/jquery.countdown');
-		echo $this->Html->script('libs/jquery.bxslider.min');
-		echo $this->Html->script('libs/jquery.mCustomScrollbar.concat.min');
+		// echo $this->Html->script('libs/jquery.bxslider.min');
+		// echo $this->Html->script('libs/jquery.mCustomScrollbar.concat.min');
 		// echo $this->Html->script('libs/jquery.themepunch.revolution');
 		// echo $this->Html->script('libs/jquery.themepunch.plugins.min');
 		echo $this->Html->script('libs/jquery.jcarousellite.min');
@@ -71,7 +71,9 @@
 		// echo $this->Html->script('libs/masonry.pkgd.min');
 		echo $this->Html->script('libs/jquery.dataTables');
 		echo $this->Html->script('libs/kendo.all.min');
-		echo $this->Html->script('libs/materialize');
+		if ($this->request->params['action'] != 'categories'){
+			echo $this->Html->script('libs/materialize');
+		}
 		echo $this->Html->script('theme');
 	?>
 	
@@ -82,6 +84,7 @@
 		echo $this->Html->script('myapp/lib/angular/angular-animate.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-resource.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-sanitize.min.js');
+		echo $this->Html->script('myapp/lib/angular/angular-messages.min');
 		echo $this->Html->script('myapp/lib/angular/angular-aria.min.js');
 		echo $this->Html->script('myapp/lib/angular/angular-material.min');
 		echo $this->Html->script('myapp/lib/angular/ngprogress.min.js');
@@ -126,12 +129,11 @@
 						<a href="#/products" class="btn-floating purple tooltipped" data-position="left" data-delay="10" data-tooltip="Product">    <i class="fa fa-cubes"></i>
 						</a>
 					<li>
-					  
 						<a href="#/inquiry" class="btn-floating green tooltipped" data-position="left" data-delay="10" data-tooltip="Inquiry"> 
 							<i class="fa fa-file-text-o"></i>
 						</a>
 					</li>
-				   <!--  <li>
+					<!--  <li>
 						<a href="#/wishlist" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Wishlist">     <i class="fa fa-heart-o"></i>
 						</a>
 					</li> -->

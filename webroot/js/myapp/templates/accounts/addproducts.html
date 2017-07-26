@@ -1,11 +1,36 @@
-
 <div class="tab-container">
-	<form method="post" enctype='multipart/form-data' accept-charset="utf-8" id="FrmAddProducts" role="form">
-		<md-tabs md-selected="selectedTab" style=" min-height:737px !important;">
+	<form method="post"  name="projectForm" enctype='multipart/form-data' accept-charset="utf-8" id="FrmAddProducts" role="form">
+		<md-tabs md-selected="selectedTab" style=" min-height:790px !important;">
 			<md-tab label="Infomations">
 				<div class="tab-content">
 					<div class="col-lg-6 col-md-6">
-						<div class="form-group text">
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Part No/ Code</label>
+							<input md-maxlength="30" name="sku" id="sku" ng-model="products.sku" />
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Products Name</label>
+							<input md-maxlength="30" required name="product_name" id="product_name" ng-model="products.product_name" />
+							<div ng-messages="projectForm.product_name.$error">
+								<div ng-message="required">This is required.</div>
+								<div ng-message="md-maxlength">The name must be less than 30 characters long.</div>
+							</div>
+						</md-input-container>
+							
+						<md-input-container class="md-block">
+							<label>Price (USD)</label>
+							<input required type="text" currency-mask step="any" min="1" name="retail_price" id="retail-price" ng-model="products.retail_price"/>
+
+							<div ng-messages="projectForm.retail_price.$error" multiple md-auto-hide="false">
+								<div ng-message="required"> This is required. </div>
+								<div ng-message="min">
+									You should charge at least $1 an hour. This job is a big deal... if you mess up,
+									everyone dies!
+								</div>
+							</div>
+						</md-input-container>
+						<!-- <div class="form-group text">
 							<label class="control-label" for="sku">Part No/ Code</label>
 							<input type="text" name="sku" class="form-control sku" placeholder="Part No/ Code" id="sku">
 						</div>
@@ -16,16 +41,59 @@
 						<div class="form-group text">
 							<label class="control-label" for="retail-price">Retail Price</label>
 							<input type="text" name="retail_price" class="form-control auto retail_price" placeholder="USD" id="retail-price">
-						</div>
-						<div class="form-group">
+						</div> -->
+						<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
+						<md-input-container flex="50">
+							<md-select name="type" ng-model="Categories" aria-label="Select" required>
+								<md-option ng-repeat="(k, c) in categories" value="{{c.key}}">{{c.value}}</md-option>
+							</md-select>
+						</md-input-container>
+
+						<!-- <div class="form-group">
 							<label for="exampleInputGroups">Categories</label>
 							<select name="categorie_id" class="form-control" id="categorie-id" >
 								<option ng-repeat="(k, c) in categories" value="{{c.key}}">{{c.value}}</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<div class="col-lg-6 col-md-6">
-						<div class="form-group text">
+						</md-input-container>
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="serial-no">Serial No</label>
+							<input md-maxlength="30"  name="serial_no" id="serial-no" ng-model="products.serial_no" />
+						</md-input-container>
+						</md-input-container>
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="type-model">Type Model</label>
+							<input md-maxlength="30" name="type_model" id="type-model" ng-model="products.type_model" />
+							
+						</md-input-container>
+						</md-input-container>
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="quantity">Quantity</label>
+							<input md-maxlength="30" required name="quantity" id="quantity" ng-model="products.quantity" />
+							<div ng-messages="projectForm.quantity.$error">
+								<div ng-message="required">This is required.</div>
+								<div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+							</div>
+						</md-input-container>
+						</md-input-container>
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="origin">Origin</label>
+							<input md-maxlength="30" name="origin" id="origin" ng-model="products.origin" />
+							
+						</md-input-container>
+						</md-input-container>
+							<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="unit">Unit</label>
+							<input md-maxlength="30" required name="unit" id="unit" ng-model="products.unit" />
+							<div ng-messages="projectForm.unit.$error">
+								<div ng-message="required">This is required.</div>
+								<div ng-message="md-maxlength">The description must be less than 30 characters long.</div>
+							</div>
+						</md-input-container>
+
+						<!-- <div class="form-group text">
 							<label class="control-label" for="serial-no">Serial No</label>
 							<input type="text" name="serial_no" class="form-control serial_no" placeholder="Serial No" id="serial-no">
 						</div>
@@ -44,11 +112,15 @@
 						<div class="form-group text">
 							<label class="control-label" for="unit">Unit</label>
 							<input type="text" name="unit" class="form-control unit" placeholder="Unit" id="unit">
-						</div>
+						</div> -->
 					</div>
 					<div class="col-md-12 col-lg-12">
 						<label class="control-label" for="Short_Description">Remark</label>
 						<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
+						<!-- <md-input-container class="md-block">
+						 
+						  <textarea aria-label="Short_Description" name="short_description" id="short_description" rows="5" md-select-on-focus></textarea>
+						</md-input-container> -->
 					</div>
 				</div>
 			</md-tab>

@@ -1,8 +1,46 @@
-
+<div ng-controller="InquirySearchFormCtrl">
 <div class="row">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="wapper-content">
-				Search
+			
+			<form class="form-horizontal"  ng-submit="InquirySearchForm()">
+				<div class="form-group form-group-sm">
+					<div class="col-sm-2">
+						<label class=" control-label" for="sm">Ref No</label>
+						<input class="form-control" type="text" placeholder="Ref No" ng-model="formdata.ref">
+					</div>
+					<div class="col-sm-3">
+						<label class="control-label" for="sm">Vessel</label>
+						<input class="form-control" type="text" placeholder="Vessel Name" ng-model="formdata.vessel">
+					</div>
+					<div class="col-sm-3">
+						<label class="control-label" for="sm">IMO No</label>
+						<input class="form-control" type="text" placeholder="IMO No" ng-model="formdata.imo_no">
+					</div>
+					<div class="col-sm-2">
+						<label class="control-label" for="sm">Hull No</label>
+						<input class="form-control" type="text" placeholder="HULL No" ng-model="formdata.hull_no">
+					</div>
+					<div class="col-sm-2">
+						<label class="control-label" for="sm">Status</label>
+						<select ng-model="formdata.status" class="form-control">
+							<option  selected value="">--Select an option--</option>
+							<option value="true">Actived</option>
+							<option value="false">Deactived</option>
+						</select>
+					</div>
+				</div>
+				<label class="" for="sm">Create</label>
+				<div class="form-group form-group-sm">
+					<div class="col-sm-2">
+						<input type="date" class="form-control" id="firstDay" ng-model="firstDay" placeholder="Start"/>
+					</div>
+					<div class="col-sm-2">
+						<input class="form-control" type="date" id="lastDay" ng-model="lastDay" placeholder="End">
+					</div>
+				</div>
+				<button type="submit" ngClick="Submit" class="btn btn-success">Search</button>
+			</form>
 		</div>
 	</div>
 </div>
@@ -45,7 +83,7 @@
 		</div>
 	</div>
 </div>
-
+</div>
 <script type="text/javascript">
 	function ConfirmDelete(){
 		var x = confirm("Are you sure you want to delete?");

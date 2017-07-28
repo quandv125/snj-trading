@@ -4764,18 +4764,18 @@ table.dataTable tbody th, table.dataTable tbody td {
 	left: auto;
 	right: auto;
   }
-  .row .col.m2 {
+.row .col.m2 {
 	width: 16.6666666667%;
 	margin-left: auto;
 	left: auto;
 	right: auto;
-  }
-  .row .col.m3 {
+}
+.row .col.m3 {
 	width: 25%;
 	margin-left: auto;
 	left: auto;
 	right: auto;
-  }
+}
   .row .col.m4 {
 	width: 33.3333333333%;
 	margin-left: auto;

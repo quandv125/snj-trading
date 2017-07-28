@@ -32,7 +32,7 @@ class InquiriesController extends AppController
 	public function InquiryInfo() {
 		if ($this->request->is(['get'])) {
 			$inquiries = $this->Inquiries->find()
-			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.description','Inquiries.created'])
+			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.imo_no','Inquiries.hull_no','Inquiries.description','Inquiries.created'])
 			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >'=> date('Y-m-01'),'Inquiries.created <'=> date('Y-m-t')])
 			->order(['Inquiries.created'  => 'DESC']);
 
@@ -1348,7 +1348,7 @@ class InquiriesController extends AppController
 							$attachment = $attachments->newEntity();
 							$attachment = $attachments->patchEntity($attachment, $item);
 							$attachments->save($attachment);
-							$html .= '<tr id="attachments-'.$attachment->id.'"><td><a href="/inquiries/download/'.$attachment->id.'">'.$this->request->data['file'][$i]['name'].'</a></td><td><span class="cursor-point remove-file-att" id="'.$attachment->id.'">X</span></td></tr>';
+							$html .= '<tr id="attachments-'.$attachment->id.'"><td><a href="/inquiries/download/'.$attachment->id.'">'.$this->request->data['file'][$i]['name'].'</a></td><td><span class="cursor-point float-right remove-file-att" id="'.$attachment->id.'"><i class="fa fa-trash"></i></span></td></tr>';
 						}
 					}
 				}
@@ -1417,16 +1417,15 @@ class InquiriesController extends AppController
 	}
 
 	public function RemoveFileAttachment()	{
-		// if ($this->request->is('Ajax')) {
-		// 	$this->autoRender = false;
-
+		if ($this->request->is(['ajax', 'post'])) {
+			$this->autoRender = false;
 			$att = $this->Inquiries->Attachments->get($this->request->data['id']);
 			if ($this->Inquiries->Attachments->delete($att)) {
-				// echo(__('The Attachments has been deleted.'));
+				echo(__('The Attachments has been deleted.'));
 			} else {
-				// echo(__('The Attachments could not be deleted. Please, try again.'));
+				echo(__('The Attachments could not be deleted. Please, try again.'));
 			}
-		// }
+		}
 	}
 
 	public function searchinquiries()	{
@@ -1442,7 +1441,7 @@ class InquiriesController extends AppController
 			if (isset($this->request->data['data']['imo_no']) && !empty($this->request->data['data']['imo_no'])) {
 				$conditions .=' AND imo_no like "%'.$this->request->data['data']['imo_no'].'%"';
 			}
-				if (isset($this->request->data['data']['hull_no']) && !empty($this->request->data['data']['hull_no'])) {
+			if (isset($this->request->data['data']['hull_no']) && !empty($this->request->data['data']['hull_no'])) {
 				$conditions .=' AND hull_no like "%'.$this->request->data['data']['hull_no'].'%"';
 			}
 			if (isset($this->request->data['data']['status']) && !empty($this->request->data['data']['status'])) {
@@ -1459,7 +1458,6 @@ class InquiriesController extends AppController
 			}
 			// pr($conditions);die();
 			$products = $this->Inquiries->SearchInfo($this->Auth->user('id'),$conditions);
-		 
 			echo json_encode($products); exit();
 		}
 		exit();

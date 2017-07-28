@@ -3,7 +3,7 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="wapper-content">
 			
-			<form class="form-horizontal"  ng-submit="InquirySearchForm()">
+			<form class="form-horizontal" ng-submit="InquirySearchForm()">
 				<div class="form-group form-group-sm">
 					<div class="col-sm-2">
 						<label class=" control-label" for="sm">Ref No</label>
@@ -39,7 +39,7 @@
 						<input class="form-control" type="date" id="lastDay" ng-model="lastDay" placeholder="End">
 					</div>
 				</div>
-				<button type="submit" ngClick="Submit" class="btn btn-success">Search</button>
+				<button type="submit" ngClick="Submit" class="btn btn-warning">Search</button>
 			</form>
 		</div>
 	</div>
@@ -49,7 +49,7 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<div class="wapper-content">
 			<div class="main-content-shop ">
-				<a href="#/addinquiry" class="float-right btn btn-success"><i class="fa fa-plus" style="color:#fff;"></i></a> 
+				<a href="#/addinquiry" class="float-right btn btn-warning"><i class="fa fa-plus" style="color:#fff;"></i></a> 
 				<br/>
 				<table id="datatable2" class="table table-sm"" cellspacing="0" width="100%">
 					<thead class="table-success">
@@ -65,7 +65,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="(key, inquirie) in inquiries">
+						<tr ng-repeat="(key, inquirie) in inquiries" id="fx_inquiries_{{inquirie.id}}">
 							<td class="text-center1"><a href="#/inquirydetails/{{inquirie.id}}">#{{inquirie.id}}</a></td>
 							<td class="text-center1">{{inquirie.ref}}</td>
 							<td class="text-center1">{{inquirie.vessel | cut:true:50:' ...'}}</td>
@@ -74,7 +74,7 @@
 							<td class="text-center1">{{inquirie.status}}</td>
 							<td class="text-center1">{{inquirie.created | date : "dd.MM.y" }}</td>
 							<td class="text-center1">
-								<a Onclick="return ConfirmDelete();" href="#/delete-inquiry/{{inquirie.id}}"> <i class="fa fa-trash"></i></a>
+								<span class="md-primary navButton cursor-point" confirmed-click="delete_inq(inquirie.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
 							</td>
 						</tr>
 					</tbody>
@@ -84,14 +84,5 @@
 	</div>
 </div>
 </div>
-<script type="text/javascript">
-	function ConfirmDelete(){
-		var x = confirm("Are you sure you want to delete?");
-		if (x)
-			return true;
-		else
-			return false;
-	}
-</script>
 
 

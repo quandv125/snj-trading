@@ -746,14 +746,12 @@ use Cake\Datasource\ConnectionManager;
 	}
 
 	public function SearchInfo($user_id, $conditions = null){
-		// pr( $user_id.' '.$conditions );die();
 		$conn = ConnectionManager::get('default');
 		$stmt = $conn->execute('
 			SELECT id, user_id, status, vessel, ref,imo_no, hull_no, created
 			FROM  inquiries   
-			WHERE user_id = '.$user_id.' '.$conditions );
+			WHERE user_id = '.$user_id.' '.$conditions.' ORDER by created DESC');
 		$results = $stmt ->fetchAll('assoc');
-		// pr($results);die();
 		return $results;
 	}
 }

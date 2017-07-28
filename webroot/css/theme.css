@@ -385,7 +385,7 @@ a:focus {
 	position: absolute;
 	right: 0;
 	top: 0;
-	width: 50px;
+	width: 43px;
 }
 .select-category .category-toggle-link {
 	display: block;
@@ -15665,4 +15665,8 @@ div.show-image:hover span.delete-wishlist {
 }
 .md-select-label {
 	padding-top: 7px !important;
+}
+.md-warning{
+	background-color: #ff9800;
+    color: #ffffff;
 }

@@ -41,15 +41,7 @@
 						<label class="control-label" for="date">Date </label>
 						<div class="clearfix"></div>
 						<div class="form-group text">
-							<input type="text"  name="created" class="form-control created" id="created" value="{{inquiries.created | date:'yyyy-MM-dd'}}">
-								<!-- <span class="k-widget k-datepicker k-header form-control date">
-									<span class="k-picker-wrap k-state-default">
-										<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">
-										<span unselectable="on" class="k-select" aria-label="select" role="button" aria-controls="datepicker_dateview">
-											<span class="k-icon k-i-calendar"></span>
-										</span>
-									</span>
-								</span> -->
+							<input type="date"  name="created" class="form-control created" id="created" value="{{inquiries.created | date:'yyyy-MM-dd'}}">
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -86,7 +78,7 @@
 												<a href="/inquiries/download/{{a.id}}">{{a.filename}}</a>
 											</td>
 											<td>
-												<span class="cursor-point remove-file-att" ng-click='go()' id="{{a.id}}">X</span>
+												<span class="cursor-point float-right remove-file-att1" confirmed-click="delete_attachments(a.id)" ng-confirm-click="Would you want to delete?" id="{{a.id}}"><i class="fa fa-trash"></i></span>
 											</td>
 										</tr>
 										

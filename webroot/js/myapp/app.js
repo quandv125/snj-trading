@@ -91,6 +91,16 @@
 			controller: "ViewCartCtrl",
 			templateUrl: "/js/myapp/templates/accounts/viewcart.html"
 		})
+
+		.when('/customer_address',{
+			controller: "CustomerAddressCtrl",
+			templateUrl: "/js/myapp/templates/accounts/customer_address.html"
+		})
+
+		.when('/billing_address',{
+			controller: "BillingAddressCtrl",
+			templateUrl: "/js/myapp/templates/accounts/billing_address.html"
+		})
 		.otherwise({
 			templateUrl: "/js/myapp/templates/404/404.html"
 		});

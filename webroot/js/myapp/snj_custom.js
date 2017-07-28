@@ -311,8 +311,7 @@ jQuery(document).ready(function($){
 		}
 	}); // end class
 	if ($("#contact_form").length){
-	
-		$('#contact_form').bootstrapValidator({
+			$('#contact_form').bootstrapValidator({
 		// To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
 		feedbackIcons: {
 			valid: 'glyphicon glyphicon-ok',
@@ -405,13 +404,14 @@ jQuery(document).ready(function($){
 					}
 				}
 			},
-			city: {
+			company: {
 				validators: {
 					 stringLength: {
 						min: 4,
+						message: 'Please enter at least 4 characters'
 					},
 					notEmpty: {
-						message: 'Please supply your city'
+						message: 'Please supply your company'
 					}
 				}
 			},
@@ -830,7 +830,7 @@ jQuery(document).ready(function($){
 			success: function(response){
 				
 				jQuery(".loader3").fadeOut();
-				toastr.success('The inquiry has been saved.');
+				// toastr.success('The inquiry has been saved.');
 				if (response != '') {
 					jQuery('.file-attachments').append(response);
 					jQuery('.remove-file-att').click(function(){

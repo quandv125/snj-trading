@@ -1,0 +1,70 @@
+
+<div class="row" ng-controller="Cus_Add_Form_Ctrl">
+	<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2 col-sm-offset-2 col-xs-offset-0">
+		<form action="javascript:void(0)" class="well form-horizontal" ng-submit="fr_customer_address()" method="post" id="contact_form">
+			<fieldset>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Name *</label> 
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input name="username" placeholder="Name" class="form-control Name" ng-model="formdata.name"  type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Address *</label>  
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="address" placeholder="Address" class="form-control address" ng-model="formdata.address" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Phone number *</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+							<input name="tel" placeholder="Phone" class="form-control tel" ng-model="formdata.phone" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Company</label>  
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="company" placeholder="Company" class="form-control company" ng-model="formdata.company" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Description</label>
+					<div class="col-md-4 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+							<textarea class="form-control description" ng-model="formdata.description" name="description" placeholder="Description"></textarea>
+						</div>
+					</div>
+				</div>
+		
+				<div class="form-group">
+					<label class="col-md-4 control-label"><?php echo __("");?></label>
+					<div class="col-md-4">
+						
+						<md-button  ng-click="submit" class="md-raised md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<script src="/js/myapp/snj_custom.js"></script>

@@ -1,7 +1,8 @@
 
 <div class="row">
 	
-	<md-button id="save" name="save" class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
+	<!-- <md-button id="save" name="save" class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Send</md-button> -->
+	<button id="save" name="save" class="float-right btn btn-warning"><i class="fa fa-paper-plane"></i> Send</button>
 	<div class="clearfix"></div>
 	<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
 	<form method="post" accept-charset="utf-8" id="InqSuppsInfo" role="form" action="/inquiries/add">
@@ -26,7 +27,7 @@
 		<div class="col-md-4">
 			<div class="form-group text">
 				<label class="control-label" for="datepicker">Date</label>
-				<input type="text"  name="created" class="form-control  created" id="" value="{{date | date:'yyyy-MM-dd'}}">
+				<input type="date"  name="created" class="form-control created" id="" ng-model="date" value="{{date | date:'yyyy-MM-dd'}}">
 				<!-- <span class="k-widget k-datepicker k-header form-control date">
 					<span class="k-picker-wrap k-state-default">
 						<input type="text" name="date" class="form-control date k-input" id="datepicker" value="2017-06-30" data-role="datepicker" role="combobox" aria-expanded="false" aria-owns="datepicker_dateview" aria-disabled="false" style="width: 100%;">

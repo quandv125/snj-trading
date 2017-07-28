@@ -16,10 +16,10 @@
 
 							<md-input-container class="md-block" flex-gt-sm>
 								<label>Products Name</label>
-								<input required md-maxlength="50" name="product_name" id="product_name" ng-model="products.product_name" />
+								<input required md-maxlength="255" name="product_name" id="product_name" ng-model="products.product_name" />
 								<div ng-messages="projectForm.product_name.$error">
 									<div ng-message="required">This is required.</div>
-									<div ng-message="md-maxlength">The name must be less than 50 characters long.</div>
+									<div ng-message="md-maxlength">The name must be less than 255 characters long.</div>
 								</div>
 							</md-input-container>
 								

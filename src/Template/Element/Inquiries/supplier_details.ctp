@@ -1,6 +1,7 @@
 
 <div class="panel-heading clearfix" id="inqSuppliers" count="<?= $count ?>" val="<?= $inqSuppliers->id?>">
 	Suppliers: <?= $inqSuppliers->supplier['name'] ?>
+	<div class="float-right cursor-point close-id">X</div>
 </div> <!-- panel-heading -->
 <div class="panel-body "> 
 	<div role="tabpanel">

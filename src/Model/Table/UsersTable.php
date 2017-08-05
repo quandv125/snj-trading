@@ -102,9 +102,9 @@ class UsersTable extends Table
         $validator
             ->allowEmpty('tel');
 
-        $validator
-            ->date('date_of_birth')
-            ->allowEmpty('date_of_birth');
+        // $validator
+        //     ->date('date_of_birth')
+        //     ->allowEmpty('date_of_birth');
 
         $validator
             ->boolean('actived')

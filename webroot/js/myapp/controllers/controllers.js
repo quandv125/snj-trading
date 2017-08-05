@@ -39,7 +39,7 @@
 	App.controller('AddProductsCtrl', function($scope, $routeParams, $http){
 		$.post('/products/addproducts',  function(response){
 			// console.log(response);
-			$scope.categories	= response;
+			$scope.categories = response;
 		}, 'json');
 	});
 
@@ -51,10 +51,9 @@
 			url: '/products/fx_edit_products',
 			data: {id: id}
 		}).then(function successCallback(response) {
-			$scope.products	= response.data.products;
-			$scope.images	= response.data.products.images;
+			$scope.products	  = response.data.products;
+			$scope.images	  = response.data.products.images;
 			$scope.categories = response.data.categories;
-			
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
@@ -66,6 +65,19 @@
 	});
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
+		jQuery('#firstDay').blur(function(){
+			$.ajax({
+				type: "POST",
+				url: "/products/set_product_date_session",
+				data: {"firstDay": jQuery(this).val()},
+				cache: false,
+				success: function(response) {
+					// console.log(response);
+				}
+			});
+			return false;
+		});
+
 		$scope.delete_product = function (id){
 			//Delete Products
 			jQuery("#fx_product_"+id).remove();
@@ -93,7 +105,17 @@
 	// Search Products 
 	App.controller('SearchFormCtrl', function($scope, $http, $location){
 		var date = new Date();
-		$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		$http({
+			method: 'GET',
+			url: '/products/set_product_date_session',
+			}).then(function successCallback(response) {
+				if (response.data != '') {
+					$scope.firstDay = new Date(response.data);
+				}else{
+					$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+				}
+			}, function errorCallback(response) {
+			});
 		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 		$scope.submitSearchForm = function(){
 			var firstDay = jQuery("#firstDay").val();
@@ -104,7 +126,7 @@
 				data: {"data": $scope.formdata, "firstDay": firstDay, "lastDay": lastDay}
 				}).then(function successCallback(response) {
 					$scope.products = response.data;
-					console.log(response.data);
+					// console.log(response.data);
 				}, function errorCallback(response) {
 
 				});
@@ -113,6 +135,19 @@
 
 	// InquiryCtrl
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
+		jQuery('#firstDay').blur(function(){
+			$.ajax({
+				type: "POST",
+				url: "/inquiries/set_inquiries_date_session",
+				data: {"firstDay": jQuery(this).val()},
+				cache: false,
+				success: function(response) {
+					// console.log(response);
+				}
+			});
+			return false;
+		});
+
 		$scope.delete_inq = function (id){
 			//Delete Inquiry
 			jQuery("#fx_inquiries_"+id).remove();
@@ -127,11 +162,10 @@
 					toastr.error(response.data.message);
 				}
 			}, function errorCallback(response) {
-			   toastr.error("Error");
+				toastr.error("Error");
 			});
 		}
 		$http.get("/inquiries/inquiry_info").then(function (response) {
-			// console.log(response.data);
 			$scope.inquiries = response.data;
 		});
 	});
@@ -139,7 +173,17 @@
 	// Search Products 
 	App.controller('InquirySearchFormCtrl', function($scope, $http, $location){
 		var date = new Date();
-		$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+		$http({
+			method: 'GET',
+			url: '/inquiries/set_inquiries_date_session',
+			}).then(function successCallback(response) {
+				if (response.data != '') {
+					$scope.firstDay = new Date(response.data);
+				}else{
+					$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+				}
+			}, function errorCallback(response) {
+			});
 		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 		$scope.InquirySearchForm = function(){
 			var firstDay = jQuery("#firstDay").val();
@@ -150,7 +194,6 @@
 				data: {"data": $scope.formdata, "firstDay": firstDay, "lastDay": lastDay}
 				}).then(function successCallback(response) {
 					$scope.inquiries = response.data;
-					console.log(response.data);
 				}, function errorCallback(response) {
 
 				});
@@ -227,56 +270,41 @@
 	// Change Password Action
 	App.controller('ChangePasswordAct', function($scope, $http, $location){  
 		$scope.sbchange = function(){
-			var form_data = new FormData();
-			form_data.append('current_password', jQuery('.current_password').val());
-			form_data.append('password', jQuery('.password').val());
-			form_data.append('confirm_password', jQuery('.confirm_password').val());
-			form_data.append('captcha', jQuery('#captcha').val());
-			$http.post('/users/Change_password_art', form_data, {
-				transformRequest: angular.identity,
-				headers: {'Content-Type': undefined,'Process-Data': false}
-			})
-			.success(function(response){
-				if (response.status == true) {
-					toastr.success(response.message);
-					$location.path('/');
-				} else {
-					toastr.error(response.message);
-				}
-			})
-			.error(function(){
-				console.log("Error");
-			});
+			$http({
+				method: 'POST',
+				url: '/users/Change_password_art',
+				data: $scope.formdata
+				}).then(function successCallback(response) {
+					if (response.data.status == true) {
+						toastr.success(response.data.message);
+						$location.path('/');
+					} else {
+						toastr.error(response.data.message);
+					}
+				}, function errorCallback(response) {
+
+				});
 		}
 	});
 
-	App.controller('ChangeUserInfoAct', function($scope, $http, $location){  
-		$scope.sbuserinfo = function(){
-			var form_data = new FormData();
-			form_data.append('id', jQuery('.users_id').val());
-			form_data.append('username', jQuery('.username').val());
-			form_data.append('fullname' , jQuery('.fullname').val());
-			form_data.append('email', jQuery('.email').val());
-			form_data.append('tel', jQuery('.tel').val());
-			form_data.append('address', jQuery('.address').val());
-			form_data.append('company', jQuery('.company').val());
-			form_data.append('description', jQuery('.description').val());
-			form_data.append('captcha', jQuery('#captcha').val());
-			$http.post('/users/change_user_info_art', form_data, {
-				transformRequest: angular.identity,
-				headers: {'Content-Type': undefined,'Process-Data': false}
-			})
-			.success(function(response){
-				if (response.status == true) {
-					toastr.success(response.message);
-					$location.path('/');
-				} else {
-					toastr.error(response.message);
-				}
-			})
-			.error(function(){
-				console.log("Error");
-			});
+	App.controller('PersonalInfomationAct', function($scope, $http, $location){  
+		$scope.form_info = function(){
+			$http({
+				method: 'POST',
+				url: '/users/change_user_info_art',
+				data: $scope.users
+				}).then(function successCallback(response) {
+	
+					if (response.data.status == true) {
+						toastr.success(response.data.message);
+						$location.path('/');
+					} else {
+						toastr.error(response.data.message);
+					}
+				}, function errorCallback(response) {
+
+				});
+			
 		}
 	});
 	// Delete User

@@ -1,7 +1,7 @@
-
-<div class="row" ng-controller="ChangeUserInfoAct">
+<div ng-controller="PersonalInfomationAct">
+<div class="row">
 	<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2 col-sm-offset-2 col-xs-offset-0">
-		<form action="javascript:void(0)" class="well form-horizontal" ng-submit="sbuserinfo()" method="post" id="contact_form">
+		<form class="well form-horizontal" ng-submit="form_info()" >
 			<fieldset>
 				<input class="users_id" ng-model="users.id" type="text" style=" display: none;position: absolute;">
 				<div class="form-group">
@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-4 control-label">E-Mail *</label>  
+					<label class="col-md-4 control-label">E-Mail *</label>
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
@@ -89,7 +89,7 @@
 					<div class="col-md-4 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-qrcode"></i></span>
-							<input type="text" name="captcha" class="form-control" placeholder="Captcha" id="captcha">   
+							<input type="text" name="captcha" class="form-control" placeholder="Captcha" id="captcha" ng-model="users.captcha">   
 						</div>
 					</div>
 				</div>
@@ -104,5 +104,6 @@
 			</fieldset>
 		</form>
 	</div>
+</div>
 </div>
 <script src="/js/myapp/snj_custom.js"></script>

@@ -143,6 +143,7 @@ jQuery( document ).ready(function() {
 				destroy: function (e) {
 					// locate item in original datasource and remove it
 					sampleData.splice(getIndexById(e.data.ProductID), 1);
+
 					// on success
 					e.success();
 					// console.log(e.data);
@@ -155,8 +156,9 @@ jQuery( document ).ready(function() {
 						beforeSend: function(){jQuery("#loader").fadeIn();},
 						success: function(response){
 							jQuery("#loader").fadeOut();
-							console.log(response);return;
-							
+							// console.log(response);
+							toastr.success(response);
+							return false;
 						}
 					});
 					// on failure
@@ -311,16 +313,16 @@ jQuery( document ).ready(function() {
 
 						supplier: {editable: false},
 
-						supp_u_p:  {editable: false},
-						supp_u_p_usd:  {editable: false},
+						supp_u_p: {editable: false},
+						supp_u_p_usd: {editable: false},
 
-						profit:  {},
+						profit: {},
 
-						u_p:  {editable: false},
-						u_p_usd:  {editable: false},
+						u_p: {editable: false},
+						u_p_usd: {editable: false},
 
-						f_total:  {editable: false},
-						f_total_usd:  {editable: false},
+						f_total: {editable: false},
+						f_total_usd: {editable: false},
 
 						del_time: {editable: false},
 						del_time_final: {editable: false},
@@ -335,7 +337,7 @@ jQuery( document ).ready(function() {
 			navigatable: true,
 			sortable: { mode: "single", allowUnsort: false },
 			pageable: true,
-			toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>'  }],
+			toolbar: ["save", "cancel",{ template: '<button class="k-button" id="btn-delete-kendo"><span class="k-icon k-i-close"></span>Delete</button>' }],
 			columns: [
 				{ field: "choose",editable: false, nullable: true, title: "Choose", width: "65px" , template: "<input type='checkbox' class='checkbox' />" },
 				{ field: "no",editable: false, nullable: true, title: "S.No", width: "45px" },
@@ -2199,7 +2201,6 @@ jQuery( document ).ready(function() {
 		}
 	}
 
-
 	jQuery("#inquiries-details tr .main").click(function(){
 		jQuery('.panel-supplier-details').addClass('hidden');
 		jQuery("#inquiries-details tr").removeClass('tr-actived');
@@ -2218,9 +2219,10 @@ jQuery( document ).ready(function() {
 				jQuery("#loader").fadeOut();
 				jQuery('.panel-supplier-details').removeClass('hidden');
 				jQuery('.panel-supplier-details').html(response);
-				
 				kendo_ui_grid();
-
+				jQuery(".close-id").click(function(){
+					jQuery(this).parent().parent().toggleClass('hidden');
+				});
 			}
 		}); // Ajax
 	});

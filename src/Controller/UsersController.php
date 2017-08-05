@@ -24,6 +24,7 @@ class UsersController extends AppController
 	}
 
 	public function index() {
+		
 		$this->paginate = [
 			'contain' => ['Groups']
 		];
@@ -537,7 +538,6 @@ class UsersController extends AppController
 	}
 
 	public function ChangeUserInfoArt(){
-
 		if ($this->request->is('post')) {
 			$captcha = $this->request->session()->read('captcha');
 			if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {

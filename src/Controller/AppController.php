@@ -132,9 +132,9 @@ class AppController extends Controller
 	}
 
 	public function beforeFilter(Event $event)  {
-		// if ($this->Auth->user('group_id') == ADMIN) {
+		if ($this->Auth->user('group_id') == ADMIN) {
 			$this->Auth->allow();
-		// }
+		}
 		$language = $this->request->session()->read('Config.language');
 		$this->Auth->allow(['index','display','logout','changeLang']); 
 		$user_info = $this->Auth->user();

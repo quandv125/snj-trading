@@ -53,7 +53,9 @@
 									
 									<tr ng-repeat="(k, c) in cart" class="cart_item cart_item_{{c.id}}" id="{{c.id}}">
 										<td class="text-center product-remove">
-											<span class="remove-items" ng-click="removeitems(c.id)"  data-id="{{c.id}}"><i class="fa fa-times"></i></span>
+											<span class="remove-items" ng-click="removeitems(c.id)" data-id="{{c.id}}">
+												<i class="fa fa-times"></i>
+											</span>
 										</td>
 										<td class="text-center product-name">
 											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
@@ -71,7 +73,7 @@
 											{{c.origin}}
 										</td>
 										<td class="text-center product-quantity">
-											 <div class="info-qty" id="{{c.id}}">
+											<div class="info-qty" id="{{c.id}}">
 												<a ng-click="myfuncdown(c.id)" class="qty-down">
 													<i class="fa fa-angle-left"></i>
 												</a>

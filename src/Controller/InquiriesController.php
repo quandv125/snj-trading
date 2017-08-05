@@ -29,17 +29,6 @@ class InquiriesController extends AppController
 		$this->set('_serialize', ['inquiries']);
 	}
 
-	public function InquiryInfo() {
-		if ($this->request->is(['get'])) {
-			$inquiries = $this->Inquiries->find()
-			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.imo_no','Inquiries.hull_no','Inquiries.description','Inquiries.created'])
-			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >'=> date('Y-m-01'),'Inquiries.created <'=> date('Y-m-t')])
-			->order(['Inquiries.created'  => 'DESC']);
-
-			echo json_encode($inquiries); exit();
-		}
-	}
-
 	public function view($id = null){
 		$this->viewBuilder()->layout('product');
 		$inquiry = $this->Inquiries->getInfo($id);
@@ -345,7 +334,34 @@ class InquiriesController extends AppController
 	}
 
 	public function Inquiries() {
-		$inquiries = $this->Inquiries->find()
+		if ($this->request->is('post')) {
+			$ref = $vessel = $imo_no = $hull_no = null;
+			if (isset($this->request->data['ref']) && !empty($this->request->data['ref'])) {
+				$ref = 'Inquiries.ref LIKE "%'.$this->request->data['ref'].'%"';
+			}
+			if (isset($this->request->data['vessel']) && !empty($this->request->data['vessel'])) {
+				$vessel = 'Inquiries.vessel LIKE "%'.$this->request->data['vessel'].'%"';
+			}
+			if (isset($this->request->data['imo_no']) && !empty($this->request->data['imo_no'])) {
+				$imo_no = 'Inquiries.imo_no LIKE "%'.$this->request->data['imo_no'].'%"';
+			}
+			if (isset($this->request->data['hull_no']) && !empty($this->request->data['hull_no'])) {
+				$hull_no[] = 'Inquiries.hull_no LIKE "%'.$this->request->data['hull_no'].'%"';
+			}
+			// if (isset($this->request->data['status']) && !empty($this->request->data['status'])) {
+			// 	if ($this->request->data['status'] == 'true') {
+			// 		$conditions .=' AND status = 1';
+			// 	} else if($this->request->data['status'] == 'false'){
+			// 		$conditions .=' AND status = 0';
+			// 	} else {
+			// 		$conditions .='';
+			// 	}
+			// }
+			if (isset($this->request->data['start']) && isset($this->request->data['end'])) {
+				$created = ['Inquiries.created <=' => $this->request->data['end'], 'Inquiries.created >=' => $this->request->data['start']];
+			}
+			$start = $this->request->data['start'];$end = $this->request->data['end'];
+			$inquiries = $this->Inquiries->find()
 			->contain([
 				'Users' => function ($q) {
 					return $q->autoFields(false)->select(['id','username','fullname']);
@@ -354,10 +370,27 @@ class InquiriesController extends AppController
 					return $q->autoFields(false)->select(['id','inquiry_id','status']);
 				}
 			])
-			->select(['Inquiries.id','Inquiries.user_id','Inquiries.status','Inquiries.type','Inquiries.vessel','Inquiries.ref','Inquiries.created'])
+			->select(['Inquiries.id','Inquiries.user_id','Inquiries.status','Inquiries.type','Inquiries.vessel','Inquiries.imo_no','Inquiries.hull_no','Inquiries.ref','Inquiries.created'])
+			->where([$created])->orWhere([$ref])->orWhere([$vessel])->orWhere([$imo_no])->orWhere([$hull_no])
 			->order(['Inquiries.created'  => 'DESC']);
-		// pr($inquiries->toarray());die();
-		$this->set(compact('inquiries'));
+			$this->set(compact('inquiries','start','end'));
+		} else {
+			$inquiries = $this->Inquiries->find()
+				->contain([
+					'Users' => function ($q) {
+						return $q->autoFields(false)->select(['id','username','fullname']);
+					},
+					'InquirieSuppliers' => function ($q) {
+						return $q->autoFields(false)->select(['id','inquiry_id','status']);
+					}
+				])
+				->select(['Inquiries.id','Inquiries.user_id','Inquiries.status','Inquiries.type','Inquiries.vessel','Inquiries.imo_no','Inquiries.hull_no','Inquiries.ref','Inquiries.created'])
+				->where(function($exp) {
+					return $exp->between('Inquiries.created', date('Y-m-01'), date('Y-m-t'), 'date');
+				})
+				->order(['Inquiries.created'  => 'DESC']);
+			$this->set(compact('inquiries'));
+		}
 	}
 
 	public function InquiriesDetails($id)    {	
@@ -387,7 +420,7 @@ class InquiriesController extends AppController
 				];
 				$total = $total + $price;
 			}
-		}else {
+		} else {
 			# 2 No Price
 			foreach ($inquiry->inquirie_products as $inquirieProducts){
 				$no = ($inquirieProducts->no == 0)? "":$inquirieProducts->no; 
@@ -434,15 +467,14 @@ class InquiriesController extends AppController
 			$InquirieProduct = TableRegistry::get('InquirieProducts');
 			$inquiryproducts = $InquirieProduct->get($this->request->data['data']['ProductID']);
 			if ($InquirieProduct->delete($inquiryproducts)) {
-				die('ok');
+				echo __('The product has been deleted.');
 			} else {
-				die('error');
+				echo __('The product could not be deleted. Please, try again.');
 			}
 		}
 	}
 
 	public function UpdateSupplierProduct() {
-		
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
 			// pr(count($this->request->data));die();
@@ -867,12 +899,12 @@ class InquiriesController extends AppController
 		} 
 		$result		 = $this->get_data_kendo($id);
 		$inquiries	 = $result['inquiries'];
+		// pr($inquiries);die();
 		$data		 = json_encode($result['data']);
 		$myarr		 = json_encode($result['arr']);
 		$grand_total = $result['grand_total'];
 		$this->set(compact('inquiries','data','myarr','grand_total'));
 	}
-
 	
 	public function UpdateInq() {
 		if ($this->request->is('ajax')) {
@@ -1138,26 +1170,31 @@ class InquiriesController extends AppController
 					$f_total = $u_p*$inquirie_product->quantity;
 					$grand_total = $grand_total+$f_total;
 					$arr[] = $inquirie_product->id;
-					$data[] = [
-						"ProductID"		 => $inquirie_product->id,
-						"choose" 		 => NULL,
-						"no" 			 => $no,
-						"name"			 => $inquirie_product->name,
-						"unit"			 => $inquirie_product->unit,
-						"quantity"		 => $inquirie_product->quantity,
-						"supplier"		 => $supplier,
-						"supp_u_p"		 => $supp_u_p,
-						"supp_u_p_usd"	 => '',
-						"profit"		 => $inquirie_product->profit,
-						"u_p"	 		 => $u_p,
-						"u_p_usd"		 => '',
-						"f_total"		 => $f_total,
-						"f_total_usd"	 => '',
-						"del_time"		 => $delivery_time,
-						"del_time_final" => '',
-						"remark"		 => $remark
-					];
+					if ($u_p != NULL) {
+						$data[] = [
+							"ProductID"		 => $inquirie_product->id,
+							"choose" 		 => NULL,
+							"no" 			 => $no,
+							"name"			 => $inquirie_product->name,
+							"unit"			 => $inquirie_product->unit,
+							"quantity"		 => $inquirie_product->quantity,
+							"supplier"		 => $supplier,
+							"supp_u_p"		 => $supp_u_p,
+							"supp_u_p_usd"	 => '',
+							"profit"		 => $inquirie_product->profit,
+							"u_p"	 		 => $u_p,
+							"u_p_usd"		 => '',
+							"f_total"		 => $f_total,
+							"f_total_usd"	 => '',
+							"del_time"		 => $delivery_time,
+							"del_time_final" => '',
+							"remark"		 => $remark
+						];
+					}
+					
+					
 				}
+				
 			}
 		}
 
@@ -1459,6 +1496,48 @@ class InquiriesController extends AppController
 			// pr($conditions);die();
 			$products = $this->Inquiries->SearchInfo($this->Auth->user('id'),$conditions);
 			echo json_encode($products); exit();
+		}
+		exit();
+	}
+
+
+	public function InquiryInfo() {
+
+		if ($this->request->is(['get'])) {
+			if (!empty($this->request->session()->read('firstDayInq'))) { 
+				$arr = explode('-', $this->request->session()->read('firstDayInq'));
+				$firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
+			} else {
+				$firstDay = date('Y-m-01');
+			}
+			
+			 $inquiries = $this->Inquiries->find()
+			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.imo_no','Inquiries.hull_no','Inquiries.description','Inquiries.created'])
+			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >='=> $firstDay,'Inquiries.created <'=> date('Y-m-t')])
+			->order(['Inquiries.created'  => 'DESC']);
+			// pr($inquiries->toarray());die();
+			echo json_encode($inquiries); exit();
+		}
+	}
+
+	public function SetInquiriesDateSession() {
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
+				$date = date_create($this->request->data['firstDay']);
+				$this->request->session()->write('firstDayInq', date_format($date, 'm-d-Y'));
+			} elseif (isset($this->request->data['firstDay']) && $this->request->data['firstDay'] == '') {
+				$this->request->session()->write('firstDayInq', '');
+			}
+		}elseif ($this->request->is('get')) {
+			// pr($this->request->session()->read('firstDayInq'));die();
+			if (!empty($this->request->session()->read('firstDayInq'))) {
+				echo $this->request->session()->read('firstDayInq');
+			} elseif ($this->request->session()->read('firstDayInq') == '') {
+				echo "";
+			} else {
+				echo date('m-01-Y');
+			}
 		}
 		exit();
 	}

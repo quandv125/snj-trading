@@ -282,6 +282,7 @@ class ProductsController extends AppController
 	}
 
 	public function fxEditProducts(){	
+
 		$Categorie  = TableRegistry::get('Categories');
 		$arr = [2,3];
 
@@ -755,11 +756,38 @@ class ProductsController extends AppController
 	public function ProductsInfo() {
 		if ($this->request->is(['get'])) {
 			$Product    = TableRegistry::get('Products');
-			$products   = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
-				->where(['Products.user_id' => $this->Auth->user('id'),'Products.created >'=> date('Y-m-01'),'Products.created <'=> date('Y-m-t')])
+			if (!empty($this->request->session()->read('firstDay'))) { 
+				$arr = explode('-', $this->request->session()->read('firstDay'));
+				$firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
+			} else {
+				$firstDay = date('Y-m-01');
+			}
+			$products = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
+				->where(['Products.user_id' => $this->Auth->user('id'),'Products.created >='=> $firstDay ,'Products.created <'=> date('Y-m-t')])
 				->order(['Products.created' => 'DESC']);
 				// ->limit(LIMIT);
 			echo json_encode($products); exit();
 		}
+	}
+
+	public function SetProductDateSession() {
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
+				$date = date_create($this->request->data['firstDay']);
+				$this->request->session()->write('firstDay', date_format($date, 'm-d-Y'));
+			} elseif (isset($this->request->data['firstDay']) && $this->request->data['firstDay'] == '') {
+				$this->request->session()->write('firstDay', '');
+			}
+		}elseif ($this->request->is('get')) {
+			if (!empty($this->request->session()->read('firstDay'))) {
+				echo $this->request->session()->read('firstDay');
+			} elseif ($this->request->session()->read('firstDay') == '') {
+				echo "";
+			} else {
+				echo date('m-01-Y');
+			}
+		}
+		exit();
 	}
 }

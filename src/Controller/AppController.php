@@ -136,7 +136,7 @@ class AppController extends Controller
 			$this->Auth->allow();
 		}
 		$language = $this->request->session()->read('Config.language');
-		$this->Auth->allow(['index','display','logout','changeLang']); 
+		$this->Auth->allow(['index','display','logout','changeLang','lostpassword','captcha','changepassword']); 
 		$user_info = $this->Auth->user();
 		$this->menu();
 		$this->set(compact('user_info','language'));

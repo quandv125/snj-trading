@@ -417,7 +417,7 @@ class UsersController extends AppController
 		if ($this->request->is([ 'post'])) {
 			$captcha = $this->request->session()->read('captcha');
 			if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
-			   $this->Flash->error1(__('captcha incorrect!'));
+				$this->Flash->error1(__('captcha incorrect!'));
 			} else {
 				$users = $this->Users->find()->where(['email' => $this->request->data['email']])->first();
 				if (!empty($users)) {

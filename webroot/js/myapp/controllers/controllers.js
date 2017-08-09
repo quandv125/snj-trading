@@ -65,18 +65,18 @@
 	});
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
-		jQuery('#firstDay').blur(function(){
-			$.ajax({
-				type: "POST",
-				url: "/products/set_product_date_session",
-				data: {"firstDay": jQuery(this).val()},
-				cache: false,
-				success: function(response) {
-					// console.log(response);
-				}
-			});
-			return false;
-		});
+		// jQuery('#firstDay').blur(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: "/products/set_product_date_session",
+		// 		data: {"firstDay": jQuery(this).val()},
+		// 		cache: false,
+		// 		success: function(response) {
+		// 			// console.log(response);
+		// 		}
+		// 	});
+		// 	return false;
+		// });
 
 		$scope.delete_product = function (id){
 			//Delete Products
@@ -120,6 +120,13 @@
 		$scope.submitSearchForm = function(){
 			var firstDay = jQuery("#firstDay").val();
 			var lastDay = jQuery("#lastDay").val();
+			$.ajax({
+				type: "POST",
+				url: "/products/set_product_date_session",
+				data: {"firstDay": firstDay},
+				cache: false,
+				success: function(response) {}
+			});
 			$http({
 				method: 'POST',
 				url: '/products/searchproducts',
@@ -135,18 +142,18 @@
 
 	// InquiryCtrl
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
-		jQuery('#firstDay').blur(function(){
-			$.ajax({
-				type: "POST",
-				url: "/inquiries/set_inquiries_date_session",
-				data: {"firstDay": jQuery(this).val()},
-				cache: false,
-				success: function(response) {
-					// console.log(response);
-				}
-			});
-			return false;
-		});
+		// jQuery('#firstDay').blur(function(){
+		// 	$.ajax({
+		// 		type: "POST",
+		// 		url: "/inquiries/set_inquiries_date_session",
+		// 		data: {"firstDay": jQuery(this).val()},
+		// 		cache: false,
+		// 		success: function(response) {
+		// 			// console.log(response);
+		// 		}
+		// 	});
+		// 	return false;
+		// });
 
 		$scope.delete_inq = function (id){
 			//Delete Inquiry
@@ -188,6 +195,13 @@
 		$scope.InquirySearchForm = function(){
 			var firstDay = jQuery("#firstDay").val();
 			var lastDay = jQuery("#lastDay").val();
+			$.ajax({ // set session 
+				type: "POST",
+				url: "/inquiries/set_inquiries_date_session",
+				data: {"firstDay": firstDay},
+				cache: false,
+				success: function(response) {}
+			});
 			$http({
 				method: 'POST',
 				url: '/inquiries/searchinquiries',

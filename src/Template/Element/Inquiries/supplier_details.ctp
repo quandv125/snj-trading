@@ -80,7 +80,8 @@
 			
 			<div class="divider10 clearfix"></div><br/>
 			<?php if (!empty($inqSuppliers->inquirie_supplier_products)): ?>
-				<div id="grid" data-room='<?= ($data);?>'></div>
+				<!-- <div id="grid" data-room='<?= ($data);?>'></div> -->
+				<div id="grid_inquiries_supplier" data-room='<?= ($data);?>'></div>
 			<?php endif ?>
 		</div>
 	</div>

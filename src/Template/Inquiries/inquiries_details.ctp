@@ -90,7 +90,7 @@
 				</div>
 				<div class="clearfix"></div><br>
 				<?php if (!empty($inquiry->inquirie_products)): ?>
-					<div id="grid" data-room='<?= ($data);?>'></div>
+					<div id="grid" inquiry_id="<?php echo $inquiry->id ?>" data-room='<?= ($data);?>'></div>
 				<?php endif; ?>
 			</div>
 		</div>

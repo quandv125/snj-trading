@@ -20,7 +20,6 @@
         <form class="well form-horizontal" action="/users/changepassword/<?= $id?>" method="post"  id="contact_form">
             <fieldset>
 
-        
             <h2 class="title-shop-page">
                 <?php echo $this->Html->image('logo2.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'15%']) ?>
             </h2>
@@ -30,7 +29,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-key" aria-hidden="true"></i></span>
-                        <input  name="password" placeholder="Password" class="form-control"  type="password">
+                        <input name="password" placeholder="Password" class="form-control"  type="password">
                     </div>
                 </div>
             </div>

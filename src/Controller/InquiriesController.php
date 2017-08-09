@@ -850,12 +850,32 @@ class InquiriesController extends AppController
 	public function DeleteItemSupplier(){
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
-			$InqSupProd = TableRegistry::get('inquirie_supplier_products');
-			$inqsup = $InqSupProd->get($this->request->data['id']);
-			if ($InqSupProd->delete($inqsup)) {
-				echo "OK";
-			} else {
-				echo "NO";
+			$IqSPrs  = TableRegistry::get('inquirie_supplier_products');
+			$info = $IqSPrs->find()->select(['inquirie_supplier_id'])->where(['id' => $this->request->data['ids'][0]])->first();
+			if ($IqSPrs->deleteAll(['id IN' => $this->request->data['ids']])) {
+				$inqSuppliers = $this->Inquiries->InquirieSupplierInfo($info['inquirie_supplier_id']);
+				$data = '';
+				if (!empty($inqSuppliers->inquirie_supplier_products)) {
+					foreach ($inqSuppliers->inquirie_supplier_products as $QuotationProducts){
+						$qp = $QuotationProducts['inquirie_products'];
+						$total_price = $QuotationProducts->price * $qp['quantity'];
+						
+						$data[] = [
+							"ProductID"		=> $QuotationProducts->id,
+							"no" 			=> $qp['no'],
+							"name"			=> $qp['name'],
+							"maker_type_ref"=> $qp['maker_type_ref'],
+							"partno"		=> $qp['partno'],
+							"unit"			=> $qp['unit'],
+							"quantity"		=> $qp['quantity'],
+							"price"			=> $QuotationProducts->price,
+							"delivery_time"	=> $QuotationProducts->delivery_time,
+							"total_price"	=> $total_price,
+							"remark"		=> $QuotationProducts->remark
+						];
+					}
+				}
+				echo json_encode($data);exit();
 			}
 		}
 	}
@@ -1440,19 +1460,54 @@ class InquiriesController extends AppController
 	public function DeleteItemProducts(){
 		if ($this->request->is('Ajax')) {
 			$this->autoRender = false;
+		
 			$InqProd = TableRegistry::get('inquirie_products');
 			$IqSPrs  = TableRegistry::get('inquirie_supplier_products');
 			$InqProd->deleteAll(['id IN' => $this->request->data['data']]);
 			$IqSPrs->deleteAll(['inquirie_product_id IN' => $this->request->data['data']]);
 			if (isset($this->request->data['font_end'])) {
 				$result = $this->get_data_kendo_fontend($this->request->data['inquiry_id']);
+			} elseif (isset($this->request->data['inquiriesdetails'])) {
+					$InquirieSupplier = TableRegistry::get('InquirieSuppliers');
+					$inquiry = $this->Inquiries->getInfo($this->request->data['inquiry_id']);
+					if ($inquiry->type == AVAILABLE) {
+						# 1 Price
+						foreach ($inquiry->inquirie_products as $inquirieProducts){
+							$data[] = [	
+								"ProductID"		 => $inquirieProducts->id,
+								"no" 			 => ($inquirieProducts->no == 0)? "":$inquirieProducts->no,
+								"name"			 => $inquirieProducts->products['product_name'],
+								"maker_type_ref" => "",
+								"partno"		 => $inquirieProducts->products['sku'],
+								"unit"			 => $inquirieProducts->products['unit'],
+								"quantity"		 => $inquirieProducts->quantity,
+								"remark"		 => ""
+							];
+						}
+					} else { 	
+						# 2 No Price
+						foreach ($inquiry->inquirie_products as $inquirieProducts){
+							$data[] = [
+								"ProductID"		 => $inquirieProducts->id,
+								"no" 			 => ($inquirieProducts->no == 0)? "":$inquirieProducts->no,
+								"name"			 => $inquirieProducts->name,
+								"maker_type_ref" => $inquirieProducts->maker_type_ref,
+								"partno"		 => $inquirieProducts->partno,
+								"unit"			 => $inquirieProducts->unit,
+								"quantity"		 => $inquirieProducts->quantity,
+								"remark"		 => $inquirieProducts->remark
+							];
+							
+						}
+					}
+					$result['data'] = $data;
 			} else {
 				$result = $this->get_data_kendo($this->request->data['inquiry_id']);
 			}
 			echo json_encode($result['data']);exit();
 		}
 	}
-
+ 	
 	public function RemoveFileAttachment()	{
 		if ($this->request->is(['ajax', 'post'])) {
 			$this->autoRender = false;
@@ -1465,7 +1520,7 @@ class InquiriesController extends AppController
 		}
 	}
 
-	public function searchinquiries()	{
+	public function searchinquiries() {
 		if ($this->request->is('post')) {
 			// pr($this->request->data);die();
 			$conditions = "";
@@ -1495,11 +1550,11 @@ class InquiriesController extends AppController
 			}
 			// pr($conditions);die();
 			$products = $this->Inquiries->SearchInfo($this->Auth->user('id'),$conditions);
-			echo json_encode($products); exit();
+			echo json_encode($products); 
+			// exit();
 		}
 		exit();
 	}
-
 
 	public function InquiryInfo() {
 

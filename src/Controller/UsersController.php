@@ -438,7 +438,7 @@ class UsersController extends AppController
 			$hasher = new DefaultPasswordHasher();
 			$password = $hasher->hash($this->request->data['password']);
 			$query = $this->Users->query();
-			$query->update()->set(['password' => $password, 'code'=> null, 'actived' => true])->where(['id' => $id])->execute();
+			$query->update()->set(['password' => $password, 'code'=> null, 'actived' => 1])->where(['id' => $id])->execute();
 			$this->Flash->success(__('The password change successfully.'));
 			return $this->redirect(['controller'=>'pages','action' => 'login']);
 		} elseif(!$exists){
@@ -455,7 +455,7 @@ class UsersController extends AppController
 		$users = $User->find()->select(['id','username'])->where(['id' => $id])->first();
 		if ($exists) {
 			$query = $User->query();
-			$query->update()->set(['actived' => true])->where(['id' => $id])->execute();
+			$query->update()->set(['actived' => 1])->where(['id' => $id])->execute();
 			$this->Flash->success1(__('Your email address was successfully activated.'));
 	   } else {
 			$this->Flash->success1(__('The user already active.'));

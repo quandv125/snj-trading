@@ -207,7 +207,6 @@ class InquiriesController extends AppController
 		} else {
 			$this->Flash->error(__('The inquiry could not be deleted. Please, try again.'));
 		}
-
 		return $this->redirect(['action' => 'inquiries']);
 	}
 
@@ -312,7 +311,7 @@ class InquiriesController extends AppController
 								$flag = false;
 							}
 							$item[$i]['path']		= 'files'.DS.$this->request->data['file'][$i]['name'];
-							$item[$i]['filename']	=  $this->request->data['file'][$i]['name'];
+							$item[$i]['filename']	= $this->request->data['file'][$i]['name'];
 							$item[$i]['inquiry_id']	= $inquiry_id;
 						}
 						$this->Inquiries->saveInqAttachments($item);

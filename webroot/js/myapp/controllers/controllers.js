@@ -57,7 +57,6 @@
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
-
 	});
 	// AddProductsCtrl
 	App.controller('AddinquiryCtrl', function($scope, $routeParams, $http){

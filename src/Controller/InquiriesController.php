@@ -387,12 +387,12 @@ class InquiriesController extends AppController
 				->where(function($exp) {
 					return $exp->between('Inquiries.created', date('Y-m-01'), date('Y-m-t'), 'date');
 				})
-				->order(['Inquiries.created'  => 'DESC']);
+				->order(['Inquiries.created' => 'DESC']);
 			$this->set(compact('inquiries'));
 		}
 	}
 
-	public function InquiriesDetails($id)    {	
+	public function InquiriesDetails($id) {
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
 			throw new NotFoundException(__('Inquiries not found'));
 		}
@@ -1420,9 +1420,8 @@ class InquiriesController extends AppController
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
 			throw new NotFoundException(__('Inquiries not found'));
 		}
-
 		$result		 = $this->get_data_kendo($id);
-		$inquiries 	 = $result['inquiries'];
+		$inquiries	 = $result['inquiries'];
 		$data		 = json_encode($result['data']);
 		$myarr		 = json_encode($result['arr']);
 		$grand_total = json_encode($result['grand_total']);

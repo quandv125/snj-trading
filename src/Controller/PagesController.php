@@ -44,15 +44,14 @@ class PagesController extends AppController
 		if (empty($this->Auth->user())) {
 			return $this->redirect(['controller'=>'Pages','action' => 'login']);
 		}
-		$Product  = TableRegistry::get('Products');
-		$Inquiry  = TableRegistry::get('Inquiries');
-		$User  = TableRegistry::get('Users');
-		$actived = $Product->find()->where(['Products.actived' => false])->count();
-		$order = $Inquiry->find()->where(['Inquiries.status' => 1])->count();
-	   
-		$users = $User->find()->count();
-		$path = func_get_args();
-		$count = count($path);
+		$Product 	= TableRegistry::get('Products');
+		$Inquiry	= TableRegistry::get('Inquiries');
+		$User		= TableRegistry::get('Users');
+		$actived	= $Product->find()->where(['Products.actived' => false])->count();
+		$order		= $Inquiry->find()->where(['Inquiries.status' => 1])->count();
+		$users		= $User->find()->count();
+		$path		= func_get_args();
+		$count		= count($path);
 		if (!$count) {
 			return $this->redirect('/');
 		}
@@ -199,7 +198,7 @@ class PagesController extends AppController
 		$this->set(compact('products'));
 	}
 
-	public function ViewCart()    {
+	public function ViewCart() {
 		$this->viewBuilder()->layout('product');
 	}
 
@@ -217,7 +216,7 @@ class PagesController extends AppController
 			->leftJoin('suppliers', 'suppliers.id = products.supplier_id')
 			->select(['Wishlists.id', 'Wishlists.product_id', 'Wishlists.user_id', 'products.id','products.sku','products.supplier_id','products.origin','products.quantity','products.type_model','products.serial_no','products.short_description','categories.id','categories.name','products.product_name','products.thumbnail', 'suppliers.id','suppliers.name'])
 			->where(['Wishlists.user_id' => $this->Auth->user('id')]);
-	   $this->set(compact('wishlists'));
+		$this->set(compact('wishlists'));
 	}
 
 	public function orders() {
@@ -242,7 +241,6 @@ class PagesController extends AppController
 				return $q->autoFields(false)->select(['Unavailables.id','Unavailables.part_no','Unavailables.product_name','Unavailables.vessel_name','Unavailables.engine_type','Unavailables.engine_maker','Unavailables.model_serial_no','Unavailables.description','Unavailables.remark','Unavailables.quantity','Unavailables.invoice_id']);
 			}
 		])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.vessel','Invoices.imo_no','Invoices.maker_type_ref','Invoices.note'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
-		
 		$this->set(compact('orders'));
 	}
 

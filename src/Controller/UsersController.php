@@ -312,30 +312,30 @@ class UsersController extends AppController
 	public function ImportExcel(){
 		if($this->request->is('post')){
 			if (empty($this->request->data['files']['name'])) {
-			    $this->Flash->error('There are not file');
-			    return $this->redirect(array('language' => $this->Session->read('Config.language'), 'action' => 'index'));
+				$this->Flash->error('There are not file');
+				return $this->redirect(array('language' => $this->Session->read('Config.language'), 'action' => 'index'));
 			}
 			$inputFileName = $this->request->data['files']['tmp_name'];
 			try {
-			    $inputFileType  = PHPExcel_IOFactory::identify($inputFileName);
-			    $objReader 		= PHPExcel_IOFactory::createReader($inputFileType);
-			    $objPHPExcel 	= $objReader->load($inputFileName);
+				$inputFileType  = PHPExcel_IOFactory::identify($inputFileName);
+				$objReader 		= PHPExcel_IOFactory::createReader($inputFileType);
+				$objPHPExcel 	= $objReader->load($inputFileName);
 			} catch(Exception $e) {
-			    $this->Flash->error('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
-			    return $this->redirect(array('language' => $this->Session->read('Config.language'), 'action' => 'index'));
+				$this->Flash->error('Error loading file "'.pathinfo($inputFileName,PATHINFO_BASENAME).'": '.$e->getMessage());
+				return $this->redirect(array('language' => $this->Session->read('Config.language'), 'action' => 'index'));
 			}
 			$sheet = $objPHPExcel->getSheet(0);
 			$highestRow = $sheet->getHighestRow();
 			$highestColumn = $sheet->getHighestColumn();
 			for ($row = 2; $row <= $highestRow; $row++){
-			    $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
-			    if (isset($rowData[0][0]) && !empty($rowData[0][0])) {
-			        $data[] = array(
-			            'username' => $rowData[0][1],
-			            'fullname' => $rowData[0][2],
-			            'group_id' => $rowData[0][3]
-			        );
-			    }
+				$rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, NULL, TRUE, FALSE);
+				if (isset($rowData[0][0]) && !empty($rowData[0][0])) {
+					$data[] = array(
+						'username' => $rowData[0][1],
+						'fullname' => $rowData[0][2],
+						'group_id' => $rowData[0][3]
+					);
+				}
 			}
 			$this->User->create();
 			$this->User->saveMany($data);
@@ -413,7 +413,6 @@ class UsersController extends AppController
 
 	public function lostpassword() {
 		$this->viewBuilder()->layout('product');
-		
 		if ($this->request->is([ 'post'])) {
 			$captcha = $this->request->session()->read('captcha');
 			if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
@@ -459,8 +458,8 @@ class UsersController extends AppController
 			$this->Flash->success1(__('Your email address was successfully activated.'));
 	   } else {
 			$this->Flash->success1(__('The user already active.'));
-	   }
-	   return $this->redirect(['controller'=>'pages','action' => 'login', $users->username]);
+		}
+		return $this->redirect(['controller'=>'pages','action' => 'login', $users->username]);
 	}
 
 	public function check_user(){

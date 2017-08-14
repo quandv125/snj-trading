@@ -140,6 +140,8 @@ define('INVOICE', 'IN.');
 // EMAIL
 define('ROOT_CHANGE_PASSWORD', 'http://snj-trading.vn/users/changepassword/');
 define('ROOT_ACTIVE_ACC', 'http://snj-trading.vn/users/activeacc/');
+// define('ROOT_CHANGE_PASSWORD', 'http://45.76.163.56/users/changepassword/');
+// define('ROOT_ACTIVE_ACC', 'http://45.76.163.56/users/activeacc/');
 
 // TYPE CATEGORIES
 define('VERTICAL', 0);

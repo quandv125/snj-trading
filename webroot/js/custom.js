@@ -260,10 +260,8 @@ jQuery( document ).ready(function() {
 					//e.error("XHR response", "status code", "error message");
 				},
 				create: function (e) {
-					
 					e.data.ProductID = sampleDataNextID++;
 					e.success(e.data);	
-					
 				},
 				update: function (e) {
 					// locate item in original datasource and update it

@@ -3,11 +3,11 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		
 		<div id="content">
-			<div class="content-page woocommerce">
+			<div class="content-page woocommerce1">
 				<div class="container">
 					<div class="cart-content-page">
 						<h2 class="title-shop-page">my cart</h2>
-						<div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
+						<!-- <div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
 							<div class="col-md-4">
 								<label>Vessel Name</label>
 								<input type="text" class="form-control vessel" name="">
@@ -33,10 +33,10 @@
 								<label>Description</label>
 								<textarea class="form-control description" rows="5"></textarea>
 							</div>
-						</div>
+						</div> -->
 						<div class="table-responsive">
-							<table cellspacing="0" class="shop_table my_order cart table">
-								<thead>
+							 <table class="table">
+								<!-- <thead>
 									<tr>
 										<th class="text-center product-remove">#</th>
 										<th class="text-center product-name" style="max-width: 100px;">Name</th>
@@ -44,23 +44,53 @@
 										<th class="text-center product-subtotal">Type Model</th>
 										<th class="text-center product-thumbnail">Serial No</th>
 										<th class="text-center product-thumbnail">Origin</th>
+										<th class="text-center product-price">Price</th>
 										<th class="text-center product-quantity">Quantity</th>
 										<th class="text-center product-quantity">Unit</th>
 										<th class="text-center product-remark">Remark</th>
 									</tr>
-								</thead>
-								<tbody>
-									
-									<tr ng-repeat="(k, c) in cart" class="cart_item cart_item_{{c.id}}" id="{{c.id}}">
+								</thead> -->
+								<tbody style="border-bottom: 1px solid #e4e4e4;">
+									<tr ng-repeat="(k, c) in cart" class="cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
+										<td style="width: 220px;"><img ng-src="/img/{{c.thumbnail}}" width="40%"></td>
+										
+										<td class="product-name" style="width: 300px;">
+											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
+										</td>
+										<td class="price">
+											<b>{{ c.retail_price | currency : "$ " : 2 }}</b>
+										</td>
+										<td class="text-center product-quantity">
+											<div class="info-qty" id="{{c.id}}">
+												<a ng-click="myfuncdown(c.id)" class="qty-down">
+													<i class="fa fa-angle-left"></i>
+												</a>
+													<span class="qty-val qty-val-{{c.id}}">{{c.quantity}}</span>
+												<a ng-click="myfuncup(c.id)" class="qty-up">
+													<i class="fa fa-angle-right"></i>
+												</a>
+											</div>			
+										</td>
+										<td class="text-center product-remove" style="width: 40px">
+											<span class="remove-items" ng-click="removeitems(c.id)" data-id="{{c.id}}"><i class="fa fa-trash"></i></span>
+										</td>
+										
+									</tr>
+
+								<!-- 	<tr ng-repeat="(k, c) in cart" class="cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
 										<td class="text-center product-remove">
 											<span class="remove-items" ng-click="removeitems(c.id)" data-id="{{c.id}}">
 												<i class="fa fa-times"></i>
 											</span>
 										</td>
+										<td class="text-center" style="width: 220px;">
+											<img ng-src="/img/{{c.thumbnail}}" width="40%">
+
+										</td>
 										<td class="text-center product-name">
 											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
 										</td>
-										<td class="text-center category-name">
+										 <td class="text-center category-name">
 											{{c.category.name}}
 										</td>
 										<td class="text-center type_model">
@@ -71,32 +101,39 @@
 										</td>
 										<td class="text-center origin">
 											{{c.origin}}
+										</td> 
+										<td class="text-center price">
+											{{ c.retail_price | currency : "$ " : 2 }}
 										</td>
 										<td class="text-center product-quantity">
 											<div class="info-qty" id="{{c.id}}">
 												<a ng-click="myfuncdown(c.id)" class="qty-down">
 													<i class="fa fa-angle-left"></i>
 												</a>
-													<span class="qty-val qty-val-{{c.id}}">1</span>
+													<span class="qty-val qty-val-{{c.id}}">{{c.quantity}}</span>
 												<a ng-click="myfuncup(c.id)" class="qty-up">
 													<i class="fa fa-angle-right"></i>
 												</a>
 											</div>			
 										</td>
-										<td class="text-center unit">
-											{{c.unit}}
+										 <td class="text-center unit">
+											{{c.unit}}	
 										</td>
-										<td class="text-center product-remark">
+										<td class="text-center product-remark" style="width: 300px;">
 											<span class="amount">
-												<textarea class="form-control remark-item" rows="2" cols="30" id="comment"></textarea>
+												<textarea class="form-control remark-item" rows="2" cols="30" id="comment">{{c.remark}}</textarea>
 											</span>
 										</td>
 									</tr>
-									
+									 -->
 								</tbody>
 							</table>
 							
-							<md-button id="update_cart" ng-click="update_cart()" class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
+							
+							<a href="/pages/accounts#/processcheckout">
+								<md-button class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Process to Checkout</md-button>
+							</a>
+							<md-button id="update_cart" ng-click="update_cart()" class="md-raised float-right md-primary"> Update cart</md-button>
 						</div>
 					</div>
 				</div>	

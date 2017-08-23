@@ -91,7 +91,10 @@
 			controller: "ViewCartCtrl",
 			templateUrl: "/js/myapp/templates/accounts/viewcart.html"
 		})
-
+		.when('/processcheckout',{
+			controller: "ProcesscheckoutCtrl",
+			templateUrl: "/js/myapp/templates/accounts/processcheckout.html"
+		})
 		.when('/customer_address',{
 			controller: "CustomerAddressCtrl",
 			templateUrl: "/js/myapp/templates/accounts/customer_address.html"

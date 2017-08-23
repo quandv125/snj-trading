@@ -22,7 +22,6 @@ class CashflowsController extends AppController
 			'contain' => ['Users']
 		];
 		$cashflows = $this->paginate($this->Cashflows);
-
 		$this->set(compact('cashflows'));
 		$this->set('_serialize', ['cashflows']);
 	}
@@ -39,7 +38,6 @@ class CashflowsController extends AppController
 		$cashflow = $this->Cashflows->get($id, [
 			'contain' => ['Users']
 		]);
-
 		$this->set('cashflow', $cashflow);
 		$this->set('_serialize', ['cashflow']);
 	}
@@ -56,7 +54,6 @@ class CashflowsController extends AppController
 			$cashflow = $this->Cashflows->patchEntity($cashflow, $this->request->data);
 			if ($this->Cashflows->save($cashflow)) {
 				$this->Flash->success(__('The cashflow has been saved.'));
-
 				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->error(__('The cashflow could not be saved. Please, try again.'));
@@ -83,7 +80,6 @@ class CashflowsController extends AppController
 			$cashflow = $this->Cashflows->patchEntity($cashflow, $this->request->data);
 			if ($this->Cashflows->save($cashflow)) {
 				$this->Flash->success(__('The cashflow has been saved.'));
-
 				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->error(__('The cashflow could not be saved. Please, try again.'));
@@ -110,7 +106,6 @@ class CashflowsController extends AppController
 		} else {
 			$this->Flash->error(__('The cashflow could not be deleted. Please, try again.'));
 		}
-
 		return $this->redirect(['action' => 'index']);
 	}
 }

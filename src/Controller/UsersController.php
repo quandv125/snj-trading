@@ -8,6 +8,7 @@ use Cake\Datasource\ConnectionManager;
 use PHPExcel_IOFactory; 
 use Cake\Mailer\Email;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Validation\Validation;
 
 //** PDF **/
 require_once(ROOT.DS.'vendor'.DS.'TCPDF'.DS.'tcpdf.php');
@@ -108,6 +109,15 @@ class UsersController extends AppController
 	public function login() {
 		$this->viewBuilder()->layout('product');
 		if ($this->request->is('post')) {
+			if (Validation::email($this->request->data['username'])) {
+				$this->Auth->config('authenticate', [
+					'Form' => [	'fields' => ['username' => 'email']	]
+				]);
+				$this->Auth->constructAuthenticate();
+				$this->request->data['email'] = $this->request->data['username'];
+				unset($this->request->data['username']);
+			}
+
 			$user = $this->Auth->identify();
 			if ($user && $user['actived'] == true) {
 				$this->Auth->setUser($user);

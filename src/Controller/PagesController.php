@@ -199,6 +199,11 @@ class PagesController extends AppController
 	}
 
 	public function ViewCart() {
+		$cart = $this->request->session()->read('Cart');
+		// $cart[82]['quantity'] = 11;
+		// $cart[85]['quantity'] = 14;
+		// $cart[86]['quantity'] = 1121;
+		pr($cart);die();
 		$this->viewBuilder()->layout('product');
 	}
 

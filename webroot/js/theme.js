@@ -25,6 +25,12 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
+
+	if ($("#search").length) {
+		var placeholderText = ["What are you looking for?", "Spare Part, Store ...","Main Air Compressor, Pumps, Deek Store ...", "Eletrical Store, Engine Store ...", "Computer & Phone, Laptop, Electronics ..."];
+		$('#search').placeholderTypewriter({text: placeholderText});
+	}
+
 	toastr.options = {
 		"closeButton": false,
 		"debug": false,
@@ -88,7 +94,6 @@ jQuery(document).ready(function(){
 	// 					success: function(response){
 	// 						jQuery("#loader").fadeOut();
 	// 						console.log(response);return;
-							
 	// 					}
 	// 				});
 	// 				// on failure
@@ -1528,11 +1533,14 @@ jQuery(document).ready(function($){
 									jQuery("#loader").fadeIn();
 								},
 								success: function(response){
+										// console.log(response);
+									
 									jQuery("#loader").fadeOut();
 									if (response != 0) {
 										var qty = parseInt(jQuery('.total-mini-cart-item').html())+1;
 										jQuery('.total-mini-cart-item').html(qty);
 										jQuery('.my_order tbody').append(response);
+										jQuery('#modal-mycart').append(response);
 										// Remove
 										jQuery('.remove-items').click(function(){
 											var id = jQuery(this).attr('product_id');
@@ -1574,7 +1582,7 @@ jQuery(document).ready(function($){
 											});
 										});
 									};
-									console.log(response);
+								
 								}
 							});
 						});
@@ -1619,6 +1627,7 @@ jQuery(document).ready(function($){
 									var qty = parseInt(jQuery('.total-mini-cart-item').html())+1;
 									jQuery('.total-mini-cart-item').html(qty);
 									jQuery('.my_order tbody').append(response);
+									jQuery('#modal-mycart').append(response);
 									// Remove
 									jQuery('.remove-items').click(function(){
 										var id = jQuery(this).attr('product_id');

@@ -34,7 +34,7 @@
 		echo $this->Html->css('assets/plugins/toastr/toastr.min');
 		echo $this->Html->css('libs/query.mCustomScrollbar');
 		echo $this->Html->css('libs/settings');
-		echo $this->Html->css('assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker_new');
+		echo $this->Html->css('assets/plugins/bootstrap-datepicker/css/daterangepicker');
 		echo $this->Html->css('assets/plugins/handsometable/handsontable.full.min');
 		echo $this->Html->css('theme');
 		// echo $this->Html->css('libs/bootstrap-select');
@@ -60,9 +60,11 @@
 		// echo $this->Html->script('libs/jquery.themepunch.plugins.min');
 		echo $this->Html->script('libs/jquery.jcarousellite.min');
 		echo $this->Html->script('libs/jquery.elevatezoom');
+		echo $this->Html->script('libs/placeholderTypewriter');
 		echo $this->Html->script('assets/plugins/toastr/toastr.min');
 		// echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment-with-locales');
-		// echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker');
+		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment.min');
+		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/daterangepicker');
 		echo $this->Html->script('assets/plugins/handsometable/handsontable.full.min');
 		echo $this->Html->script('assets/plugins/livesearch/vendor/jquery.hideseek.min');
 		echo $this->Html->script('assets/plugins/livesearch/initializers');

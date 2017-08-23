@@ -97,7 +97,6 @@ class CustomersController extends AppController
 			$customer = $this->Customers->patchEntity($customer, $this->request->data);
 			if ($this->Customers->save($customer)) {
 				$this->Flash->success(__('The customer has been saved.'));
-
 				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->error(__('The customer could not be saved. Please, try again.'));
@@ -129,18 +128,16 @@ class CustomersController extends AppController
 	public function search() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-
 			$Customer = TableRegistry::get('Customers');
-		   
 			$str_rand = $this->request->data['str_rand'];
 			$tbl = $this->request->data['tbl'];
 			$key = $this->request->data['key'];
 			switch ($tbl) {
 				case 'id':
-				   $conditions = [ $tbl => $key];
+					$conditions = [ $tbl => $key];
 					break;
 				default:
-				   $conditions = [ $tbl.' LIKE' => '%'. $key . '%'];
+					$conditions = [ $tbl.' LIKE' => '%'. $key . '%'];
 					break;
 			}
 			$customers = $Customer->find()->where($conditions);

@@ -2,11 +2,12 @@
 <div class="row">
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<?= __('Search'); ?>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 " id="fe-search-inq">
+				<span><?= __('Search'); ?></span>
+				<span class="float-right cursor-pointer"><i class="fa fa-chevron-down" aria-hidden="true"></i></span>
 			</div> <!-- col-lg-8 -->
 		</div> <!-- panel-heading -->
-		<div class="panel-body">
+		<div class="panel-body display-none" id="fe-search-inq-info">
 			<!-- <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
 				<!-- <form class="form-horizontal"> -->
 				<?= $this->Form->create(null); ?>
@@ -80,14 +81,14 @@
 						<thead>
 							<tr>
 								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('Our Ref')) ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('Customer') ?></th>
-								<th class="text-center1" scope="col"><?= $this->Paginator->sort('Ref') ?></th>
-								<th class="text-center1" scope="col"><?= $this->Paginator->sort('Vessel') ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('IMO NO') ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('HULL No') ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('Supps') ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('Status') ?></th>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('Date') ?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('Customer'))?></th>
+								<th class="text-center1" scope="col"><?= $this->Paginator->sort(__('Ref'))?></th>
+								<th class="text-center1" scope="col"><?= $this->Paginator->sort(__('Vessel'))?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('IMO NO'))?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('HULL No'))?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('Supps'))?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('Status'))?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort(__('Date'))?></th>
 								<th class="text-center" scope="col"></th>
 							</tr>
 						</thead>

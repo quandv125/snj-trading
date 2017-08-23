@@ -49,6 +49,7 @@
         // 'libs/TimeCircles',
         // 'libs/jquery.countdown',
         'libs/jquery.bxslider.min',
+        'libs/placeholderTypewriter',
         // 'libs/jquery.mCustomScrollbar.concat.min',
         // 'libs/jquery.themepunch.revolution',
         // 'libs/jquery.themepunch.plugins.min',

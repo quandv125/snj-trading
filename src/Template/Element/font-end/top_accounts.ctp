@@ -21,7 +21,7 @@
 <?php else: ?>
 <span class="cursor-point" data-toggle="modal" data-target="#myModal">Login/Register</span>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-login">
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-body">

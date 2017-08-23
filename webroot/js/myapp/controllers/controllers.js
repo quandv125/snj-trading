@@ -64,18 +64,8 @@
 	});
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
-		// jQuery('#firstDay').blur(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: "/products/set_product_date_session",
-		// 		data: {"firstDay": jQuery(this).val()},
-		// 		cache: false,
-		// 		success: function(response) {
-		// 			// console.log(response);
-		// 		}
-		// 	});
-		// 	return false;
-		// });
+		$('#firstDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
+		$('#lastDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
 
 		$scope.delete_product = function (id){
 			//Delete Products
@@ -109,22 +99,25 @@
 			url: '/products/set_product_date_session',
 			}).then(function successCallback(response) {
 				if (response.data != '') {
-					$scope.firstDay = new Date(response.data);
+					$scope.firstDay = response.data;
 				}else{
-					$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+					$scope.firstDay = date.getFullYear()+'-'+('0' + (date.getMonth() + 1)).slice(-2)+ '-1';;
 				}
 			}, function errorCallback(response) {
 			});
-		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		
+		$scope.lastDay = date.getFullYear()+'-'+('0' + (date.getMonth() + 1)).slice(-2)+ '-30';
 		$scope.submitSearchForm = function(){
-			var firstDay = jQuery("#firstDay").val();
-			var lastDay = jQuery("#lastDay").val();
+			var firstDay = jQuery("#firstDay1").val();
+			var lastDay = jQuery("#lastDay1").val();
 			$.ajax({
 				type: "POST",
 				url: "/products/set_product_date_session",
 				data: {"firstDay": firstDay},
 				cache: false,
-				success: function(response) {}
+				success: function(response) {
+					console.log(response);
+				}
 			});
 			$http({
 				method: 'POST',
@@ -141,18 +134,8 @@
 
 	// InquiryCtrl
 	App.controller('InquiryCtrl', function($scope, $routeParams, $http){
-		// jQuery('#firstDay').blur(function(){
-		// 	$.ajax({
-		// 		type: "POST",
-		// 		url: "/inquiries/set_inquiries_date_session",
-		// 		data: {"firstDay": jQuery(this).val()},
-		// 		cache: false,
-		// 		success: function(response) {
-		// 			// console.log(response);
-		// 		}
-		// 	});
-		// 	return false;
-		// });
+		$('#firstDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
+		$('#lastDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
 
 		$scope.delete_inq = function (id){
 			//Delete Inquiry
@@ -184,16 +167,17 @@
 			url: '/inquiries/set_inquiries_date_session',
 			}).then(function successCallback(response) {
 				if (response.data != '') {
-					$scope.firstDay = new Date(response.data);
+					$scope.firstDay = response.data;
 				}else{
-					$scope.firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+					$scope.firstDay = date.getFullYear()+'-'+('0' + (date.getMonth() + 1)).slice(-2)+ '-01';;
 				}
 			}, function errorCallback(response) {
 			});
-		$scope.lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+		
+		$scope.lastDay = date.getFullYear()+'-'+('0' + (date.getMonth() + 1)).slice(-2)+ '-30';
 		$scope.InquirySearchForm = function(){
-			var firstDay = jQuery("#firstDay").val();
-			var lastDay = jQuery("#lastDay").val();
+			var firstDay = jQuery("#firstDay1").val();
+			var lastDay = jQuery("#lastDay1").val();
 			$.ajax({ // set session 
 				type: "POST",
 				url: "/inquiries/set_inquiries_date_session",
@@ -252,34 +236,33 @@
 		};
 
 		$scope.update_cart = function (argument) {
-			var vessel 		= jQuery('.vessel').val();
-			var imo_no 		= jQuery('.imo_no').val();
-			var hull_no 	= jQuery('.hull_no').val();
-			var description = jQuery('.description').val();
-			var created 	= jQuery('.date').val();
-			var ref 		= jQuery('.ref').val();
+			
 			var products	= new Array();
-			jQuery.each(jQuery('.cart_item'), function(i, v) {
-				var product_id	= jQuery( this ).attr('id');
+			jQuery.each(jQuery('.cart_item_new'), function(i, v) {
+				var product_id	= jQuery(this).attr('id');
 				var quantity	= jQuery(this).find('.qty-val').html();
-				var remark 		= jQuery( this ).find('.remark-item').val();
+				var remark		= jQuery(this).find('.remark-item').val();
 				products.push({'product_id':product_id,'quantity':quantity,'remark':remark, 'price': 0});
 			});
 			$http({
 				method: 'POST',
-				url: '/inquiries/make_inquiry',
-				data: {products: products,vessel:vessel, imo_no: imo_no, hull_no: hull_no, description:description, created: created, ref:ref},
-				}).then(function successCallback(response) {
-						jQuery('.total-mini-cart-item').html('0');
-						$location.path('/inquiry');
-					
-				}, function errorCallback(response) {
-					
-				});
-			// console.log(products);
+				url: '/products/update_cart',
+				data: {products: products}
+			}).then(function successCallback(response) {
+				toastr.success("Update cart successfully!");
+			}, function errorCallback(response) {
+				toastr.error("Error");
+			});
 		}
 	});
 	
+	App.controller('ProcesscheckoutCtrl', function($scope, $http){
+		$http.get("/pages/getcartdata").then(function (response) {
+			$scope.cart_new = response.data;
+			$scope.date = new Date();
+		});
+	});
+
 	// Change Password Action
 	App.controller('ChangePasswordAct', function($scope, $http, $location){  
 		$scope.sbchange = function(){
@@ -317,7 +300,6 @@
 				}, function errorCallback(response) {
 
 				});
-			
 		}
 	});
 	// Delete User
@@ -330,9 +312,7 @@
 				data: {id: id}
 			}).then(function successCallback(response) {
 				toastr.success(response.data);
-				
 			});
-			
 		}
 	});
 

@@ -120,7 +120,7 @@ class InquiriesController extends AppController
 						$price 			= $inquirie_product->inquirie_supplier_products[0]['price']; 
 						$remark 		= $inquirie_product->remark; 
 						$final_total 	= $price*$inquirie_product->quantity; $no = $inquirie_product->no; 
-						$delivery_time 	= $inquirie_product->inquirie_supplier_products[0]['delivery_time'];	
+						$delivery_time	= $inquirie_product->inquirie_supplier_products[0]['delivery_time'];	
 					}else{
 						$no = ''; $price = ''; $delivery_time = ''; $remark = ''; $final_total = '';
 					}
@@ -1450,9 +1450,7 @@ class InquiriesController extends AppController
 		if (empty($this->Inquiries->findById($id)->select(['id'])->first())) {
 			throw new NotFoundException(__('Inquiries not found'));
 		}
-
 		$this->set('id', $id);
-
 	}
 
 	public function DeleteItemProducts(){
@@ -1558,8 +1556,7 @@ class InquiriesController extends AppController
 
 		if ($this->request->is(['get'])) {
 			if (!empty($this->request->session()->read('firstDayInq'))) { 
-				$arr = explode('-', $this->request->session()->read('firstDayInq'));
-				$firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
+				$firstDay = $this->request->session()->read('firstDayInq');
 			} else {
 				$firstDay = date('Y-m-01');
 			}
@@ -1578,18 +1575,17 @@ class InquiriesController extends AppController
 			$this->autoRender = false;
 			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
 				$date = date_create($this->request->data['firstDay']);
-				$this->request->session()->write('firstDayInq', date_format($date, 'm-d-Y'));
+				$this->request->session()->write('firstDayInq', date_format($date, 'Y-m-d'));
 			} elseif (isset($this->request->data['firstDay']) && $this->request->data['firstDay'] == '') {
 				$this->request->session()->write('firstDayInq', '');
 			}
 		}elseif ($this->request->is('get')) {
-			// pr($this->request->session()->read('firstDayInq'));die();
 			if (!empty($this->request->session()->read('firstDayInq'))) {
 				echo $this->request->session()->read('firstDayInq');
 			} elseif ($this->request->session()->read('firstDayInq') == '') {
 				echo "";
 			} else {
-				echo date('m-01-Y');
+				echo date('Y-m-01');
 			}
 		}
 		exit();

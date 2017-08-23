@@ -74,14 +74,13 @@ class ProductsController extends AppController
 		// $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
 		// $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
 		if (empty($this->request->data['sku'])) {
-		   $this->request->data['sku'] = $this->Products->MaxSKU();
+			$this->request->data['sku'] = $this->Products->MaxSKU();
 		}
 		$this->request->data['actived'] = true;
 		$this->request->data['user_id'] = $this->Auth->user('id');
 		$product = $this->Products->newEntity();
 		if ($this->request->is('post')) {
 			$product = $this->Products->patchEntity($product, $this->request->data);
-		   
 			if ($Product->save($product)) {
 				$id = $product->id;
 				if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -91,9 +90,9 @@ class ProductsController extends AppController
 							$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
 							$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
 							$images = $Image->newEntity();
-							$images->product_id  =  $id;
-							$images->path        = 'products/'.$path;
-							$images->thumbnail   = 'thumbnails/'.$thumbnail;
+							$images->product_id	 =  $id;
+							$images->path		 = 'products/'.$path;
+							$images->thumbnail	 = 'thumbnails/'.$thumbnail;
 							$Image->save($images);
 							if ($i == 0) {
 								$pic = 'products/'.$path;
@@ -125,9 +124,9 @@ class ProductsController extends AppController
 	}
 
 	public function SupplierAddProduct() {
-		$Categorie  = TableRegistry::get('Categories');
-		$Image      = TableRegistry::get('Images');
-		$Product    = TableRegistry::get('Products');
+		$Categorie	= TableRegistry::get('Categories');
+		$Image		= TableRegistry::get('Images');
+		$Product	= TableRegistry::get('Products');
 		// pr($this->request->data);die();
 		if ($this->request->is('post')) {
 			$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
@@ -151,9 +150,9 @@ class ProductsController extends AppController
 							$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
 							$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
 							$images = $Image->newEntity();
-							$images->product_id  = $id;
-							$images->path        = 'products/'.$path;
-							$images->thumbnail   = 'thumbnails/'.$thumbnail;
+							$images->product_id	= $id;
+							$images->path		= 'products/'.$path;
+							$images->thumbnail	= 'thumbnails/'.$thumbnail;
 							$Image->save($images);
 							if ($i == 0) {
 								$pic = 'products/'.$path;
@@ -172,7 +171,6 @@ class ProductsController extends AppController
 		$this->viewBuilder()->layout('product');
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-	  
 		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
 		$this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
@@ -372,7 +370,6 @@ class ProductsController extends AppController
 				$this->request->data['sku'] = $this->Products->MaxSKU();
 				$product = $Products->newEntity();
 				$product = $Products->patchEntity($product, $this->request->data);
-
 				if ($Products->save($product)) {
 					$id = $product->id;
 					$sku = $this->request->data['sku'];
@@ -583,7 +580,6 @@ class ProductsController extends AppController
 			$conditions = ['Products.actived'=> PRODUCT_ACTIVE,'Products.product_name LIKE' => '%'. $this->request->data['keyword'] .'%'];
 			$conditions2 = ['Products.actived'=> PRODUCT_ACTIVE,'Products.sku LIKE' => '%'. $this->request->data['keyword'] .'%'];
 			$products   = $this->Products->getInfoSearch($conditions, $conditions2);
-		   
 			$this->set(compact('products', 'id'));
 			$this->render('/Element/Products/quick_search');
 		}
@@ -595,7 +591,6 @@ class ProductsController extends AppController
 		$users      = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ]);
 		$customers  = $Customer->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
 		$categories = $this->Products->Categories->find('treeList', [ 'valuePath' => 'name', 'spacer' => ' __ ' ]);
-	   
 		if ($this->request->is('post')) {
 			$products = $this->Products->find()->contain([
 				'Images' => function($q){
@@ -636,58 +631,65 @@ class ProductsController extends AppController
 						return $q->autoFields(false)->select(['id','name']);
 					}
 				])
-				->select(['id','product_name','type_model','serial_no','origin','unit'])
+				->select(['id','product_name','type_model','serial_no','origin','unit','thumbnail','retail_price'])
 				->where(['Products.id'=>$this->request->data['id']])
 				->order(['Products.created' => 'DESC'])->first();
+				$products['quantity'] = 1;
 
 				$cart[$this->request->data['id']] = $products;
 				$this->request->session()->write('my_cart', $my_cart);
 				$this->request->session()->write('Cart', $cart);
 				$html = '';
-				$html .= '<tr class="cart_item cart_item_'.$products->id.'" id="'.$products->id.'">
-					<td class="text-center product-remove">
-						<span class="remove-items" product_id="'.$products->id.'"><i class="fa fa-times"></i></span>
-					</td>
-					<td class="text-center product-name">
-						<a href="/pages/products/'.$products->id.'">'.$products->product_name.'</a>                                               
-					</td>
-					<td class="text-center product-name">'.$products->category["name"].'</td>
-					<td class="text-center product-name">'.$products->type_model.'</td>
-					<td class="text-center product-name">'.$products->serial_no.'</td>
-					<td class="text-center product-name">'.$products->origin.'</td>
+				$html .= '
+					<tr class="cart_item cart_item_'.$products->id.'" id="'.$products->id.'">
+						<td style="width: 220px;"><img src="/img/'.$products->thumbnail.'" alt=""></td>
+						
+						<td class="text-center product-name" style="width: 300px;">
+							<a href="/pages/products/'.$products->id.'">'.$products->product_name.'</a>	</td>
+						<td>'.$products->retail_price.'</td>
+						<td class="text-center product-quantity">
+							 <div class="info-qty" id="'.$products->id.'">
+								<a href="#" class="qty-down qty-down-'.$products->id.'"><i class="fa fa-angle-left"></i></a>
+									<span class="qty-val">1</span>
+								<a href="#" class="qty-up qty-up-'.$products->id.'"><i class="fa fa-angle-right"></i></a>
+							</div>			
+						</td>
+						<td class="text-center product-remove" style="width: 40px">
+							<span class="remove-items" product_id="'.$products->id.'"><i class="fa fa-trash"></i></span>
+						</td>
+						
+					</tr>
 
-					<td class="text-center product-quantity">
-						<div class="info-qty">
-							<a href="#" class="qty-down qty-down-'.$products->id.'"><i class="fa fa-angle-left"></i></a>
-							<span class="qty-val">1</span>
-							<a href="#" class="qty-up qty-up-'.$products->id.'"><i class="fa fa-angle-right"></i></a>
-						</div>          
-					</td>
-					<td class="text-center product-name">'.$products->unit.'</td>
-					<td class="text-center product-subtotal">
-						<span class="amount"><textarea class="form-control remark-item" rows="2" cols="30" id="comment"></textarea></span>
-					</td>
-				</tr>';
+					';
 				echo $html;
 			} else {
 				echo '0';
 			}
-			// $this->request->session()->delete('Cart');
+		}
+	}
+
+	public function UpdateCart()	{
+		if ($this->request->is('ajax') || $this->request->is('post') ) {
+			$this->autoRender = false;
+			$cart = $this->request->session()->read('Cart');
+			foreach ($this->request->data['products'] as $key => $product) {
+				$cart[$product['product_id']]['quantity'] = $product['quantity'];
+				$cart[$product['product_id']]['remark'] = $product['remark'];
+			}
+			
 		}
 	}
 
 	public function RemoveItems() {
-
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
 			$my_cart = $this->request->session()->read('my_cart');
 			$cart = $this->request->session()->read('Cart');
-			unset($my_cart[$this->request->data['id']]);
+			unset($my_cart[$this->request->data['id']]);	
 			unset($cart[$this->request->data['id']]);
 			$this->request->session()->write('my_cart', $my_cart);
 			$this->request->session()->write('Cart', $cart);
 		}else{
-		
 			$my_cart = $this->request->session()->read('my_cart');
 			$cart = $this->request->session()->read('Cart');
 			unset($my_cart[$this->request->data['id']]);
@@ -757,15 +759,18 @@ class ProductsController extends AppController
 		if ($this->request->is(['get'])) {
 			$Product    = TableRegistry::get('Products');
 			if (!empty($this->request->session()->read('firstDay'))) { 
-				$arr = explode('-', $this->request->session()->read('firstDay'));
-				$firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
+				// $arr = explode('-', $this->request->session()->read('firstDay'));
+				// $firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
+				$firstDay = $this->request->session()->read('firstDay');
 			} else {
 				$firstDay = date('Y-m-01');
 			}
+			
 			$products = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
 				->where(['Products.user_id' => $this->Auth->user('id'),'Products.created >='=> $firstDay ,'Products.created <'=> date('Y-m-t')])
 				->order(['Products.created' => 'DESC']);
 				// ->limit(LIMIT);
+			// pr($products->toarray());die();
 			echo json_encode($products); exit();
 		}
 	}
@@ -775,17 +780,17 @@ class ProductsController extends AppController
 			$this->autoRender = false;
 			if (isset($this->request->data['firstDay']) && !empty($this->request->data['firstDay'])) {
 				$date = date_create($this->request->data['firstDay']);
-				$this->request->session()->write('firstDay', date_format($date, 'm-d-Y'));
+				$this->request->session()->write('firstDay', date_format($date, 'Y-m-d'));
 			} elseif (isset($this->request->data['firstDay']) && $this->request->data['firstDay'] == '') {
 				$this->request->session()->write('firstDay', '');
 			}
-		}elseif ($this->request->is('get')) {
+		} else if ($this->request->is('get')) {
 			if (!empty($this->request->session()->read('firstDay'))) {
 				echo $this->request->session()->read('firstDay');
 			} elseif ($this->request->session()->read('firstDay') == '') {
 				echo "";
 			} else {
-				echo date('m-01-Y');
+				echo date('Y-m-01');
 			}
 		}
 		exit();

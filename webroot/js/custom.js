@@ -2765,4 +2765,11 @@ jQuery( document ).ready(function() {
 			}
 		}); // ajax
 	});
+	if ($("#fe-search-inq").length){
+		jQuery("#fe-search-inq").click(function(){
+			jQuery('#fe-search-inq-info').slideToggle(1000);
+			 $("i", this).toggleClass("fa fa-chevron-up fa fa-chevron-down");
+		});
+	}
+	
 }); // jQuery document

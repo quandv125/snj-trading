@@ -214,7 +214,7 @@ class StocksController extends AppController
 		}
 	}
 
-	 public function ChangeStocksProducts($id, $discount) {
+	public function ChangeStocksProducts($id, $discount) {
 		$Stock                   = TableRegistry::get('Stocks');
 		$Product                 = TableRegistry::get('Products');
 		$StockProduct            = TableRegistry::get('StockProducts');

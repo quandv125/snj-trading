@@ -1,0 +1,133 @@
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div id="primary" class="content-area">
+			<main id="main" class="site-main" role="main">
+				<div id="post-6" class="post-6 page type-page status-publish hentry">
+					<header class="entry-header">
+						<h1 class="entry-title">Order received</h1>
+					</header>
+					<!-- .entry-header -->
+					<div class="entry-content">
+						<div class="woocommerce">
+							<div class="woocommerce-order table-responsive">
+								<p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received">
+									Thank you. Your order has been received.</p>
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td class="width55">Order number:</td>
+											<td>{{info.id}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Date:</td>
+											<td>{{info.created | date: "dd.MM.y"}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Total:</td>
+											<td>{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Payment method:</td>
+											<td>Check payments</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="clearfix"></div>
+								<h2 class="order-details_title">Shipping Address</h2>
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td class="width55">Firstname:</td>
+											<td>{{info.firstname}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Lastname:</td>
+											<td>{{info.lastname}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Company:</td>
+											<td>{{info.company}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Email:</td>
+											<td>{{info.email}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Phone:</td>
+											<td>{{info.phone}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Address:</td>
+											<td>{{info.address}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Postcode/zip:</td>
+											<td>{{info.postcode_zip}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Town/City:</td>
+											<td>{{info.city}}</td>
+										</tr>
+										<tr>
+											<td class="width55">Country:</td>
+											<td>{{info.country}}</td>
+										</tr>
+									</tbody>
+								</table>
+								<section class="order-details">
+									<h2 class="order-details_title">Order details</h2>
+									<table class="table table-order-details shop_table order_details">
+										<thead>
+											<tr>
+												<th class="product-name product-name">Product</th>
+												<th class="product-table product-total">Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr ng-repeat="(k, c) in info.order_products" class="order_item">
+												<td class="product-name">
+													{{c.product_name}}
+													<strong class="product-quantity">× {{c.quantity}}</strong>
+												</td>
+												<td class="product-total product-total width55">
+													<span class="Price-amount amount">
+														{{ c.price | currency : "$ " : 2 }}
+													</span>
+												</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<th class="width55" scope="row">Subtotal:</th>
+												<td>
+													<span class="Price-amount amount">
+														{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<th class="width55" scope="row">Shipping method:</th>
+												<td>Check shipping</td>
+											</tr>
+											<tr>
+												<th class="width55" scope="row">Total:</th>
+												<td>
+													<span class="Price-amount amount">
+														{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}
+													</span>
+												</td>
+											</tr>
+										</tfoot>
+									</table>
+								</section>
+							</div>
+						</div>
+					</div>
+					<!-- .entry-content -->
+				</div>
+				<!-- #post-## -->
+			</main>
+			<!-- #main -->
+		</div>
+	</div>
+</div>

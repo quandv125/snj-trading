@@ -16,7 +16,7 @@ class ProductsController extends AppController
 
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['searchproduct','paginationproducts']);
+		$this->Auth->allow(['searchproduct','paginationproducts','QuickSearch','cart']);
 	}
 	/**
 	 * Index method
@@ -794,5 +794,52 @@ class ProductsController extends AppController
 			}
 		}
 		exit();
+	}
+
+	public function PlaceOrder() {
+		if ($this->request->is('ajax') || $this->request->is('post') ) {
+			$this->autoRender = false;
+			$Order = TableRegistry::get('Orders');
+			$OrderProduct = TableRegistry::get('OrderProducts');
+
+			$this->request->data['user_id'] = $this->Auth->user('id');
+
+			$info_order = $Order->newEntity();
+			$info_order = $Order->patchEntity($info_order, $this->request->data);
+			$mycart		= $this->request->session()->read('Cart');
+			
+			if ($Order->save($info_order)) {
+				$order_id = $info_order->id;
+				foreach ($mycart as $key => $cart) {
+					$data[] = [
+						'order_id'		=> $order_id,
+						'product_id'	=> $cart->id,
+						'product_name'	=> $cart->product_name,
+						'quantity'		=> $cart->quantity,
+						'price'			=> $cart->retail_price
+					];
+				}
+
+				$entities = $OrderProduct->newEntities($data);
+				$result = $OrderProduct->saveMany($entities);
+				$session = $this->request->session();
+				$session->delete('Cart');$session->delete('my_cart');
+				echo $order_id; exit();
+			}
+		}
+	} // End Function
+
+	public function GetInfoOrder(){
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			$Order = TableRegistry::get('Orders');
+			$orders = $Order->find()->contain([
+				'OrderProducts' => function ($q) {
+					return $q->autoFields(false)->select(['OrderProducts.id','OrderProducts.order_id','OrderProducts.product_id','OrderProducts.product_name','OrderProducts.quantity','OrderProducts.price']);
+				}
+			])->where(['id' => $this->request->data['id']])->first();
+			echo json_encode($orders);
+			exit();
+		}
 	}
 }

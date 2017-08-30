@@ -244,22 +244,59 @@
 				var remark		= jQuery(this).find('.remark-item').val();
 				products.push({'product_id':product_id,'quantity':quantity,'remark':remark, 'price': 0});
 			});
+			jQuery(".loader3").fadeIn();
 			$http({
 				method: 'POST',
 				url: '/products/update_cart',
 				data: {products: products}
 			}).then(function successCallback(response) {
+				jQuery(".loader3").fadeOut();
 				toastr.success("Update cart successfully!");
 			}, function errorCallback(response) {
 				toastr.error("Error");
 			});
 		}
 	});
-	
+	App.controller('OrderReceivedCtrl',function($scope, $routeParams, $http){
+		var id = $routeParams.id;
+		$.ajax({ 
+			type: "POST",
+			url: "/products/get_info_order",
+			data: {"id": id},
+			cache: false,
+			success: function(response) {
+				var data = jQuery.parseJSON(response);
+				console.log(response);
+				$scope.info = data;
+			}
+		});
+	})
+
+	App.controller('PlaceOrderCtrl',function($scope, $http, $location){
+		$scope.order_info = function(){
+			$http({
+				method: 'POST',
+				url: '/products/place_order',
+				data: $scope.info
+			}).then(function successCallback(response) {
+				// console.log(response.data);return;
+				$location.path('/order_received/'+response.data);
+				jQuery('.total-mini-cart-item').html("0");
+				jQuery('table #modal-mycart').html('');
+				
+				
+			}, function errorCallback(response) {
+				toastr.error("Error");
+			});
+		}
+	})
 	App.controller('ProcesscheckoutCtrl', function($scope, $http){
 		$http.get("/pages/getcartdata").then(function (response) {
 			$scope.cart_new = response.data;
 			$scope.date = new Date();
+		});
+		jQuery('#create-account').click(function(){
+			jQuery("#create-password").slideToggle();
 		});
 	});
 

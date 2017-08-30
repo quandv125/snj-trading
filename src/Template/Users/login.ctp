@@ -36,7 +36,7 @@
             <!-- <h2 class="title-shop-page"><?= $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'50%']) ?></h2> -->
                 <div class="account-login">
                     <?= $this->Form->create(Null,['url'=>['controller'=>'Users','action'=>'login'],'class'=>'form-my-account']) ?>
-                    <?= $this->Form->input('username',['label' => false,'placeholder'=>"Username *"]) ?>
+                    <?= $this->Form->input('username',['label' => false,'placeholder'=>"Email / Username *"]) ?>
                     <?= $this->Form->input('password',['label' => false,'placeholder'=>"Password *"]) ?>
                     <p>
                         <input type="checkbox"  id="remember" /> <label for="remember">Remember me</label>

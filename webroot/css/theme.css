@@ -8659,7 +8659,7 @@ ol.list-post-comment {
 	right: 0px;
 }
 .main-content-home5 .item-adv-simple{
-	margin-bottom:30px;
+	margin-bottom: 20px;
 }
 .popular-cat-title > ul {
 	font-size: 0;
@@ -8719,6 +8719,7 @@ ol.list-post-comment {
 .popular-cat-slider.slider-home5 .item {
 	border-left: 1px solid #e5e5e5;
 	padding: 10px 20px;
+	height: 295px;
 }
 .slider-home5 .wrap-item.owl-theme .owl-controls {
 	margin: 0;
@@ -8833,7 +8834,7 @@ ol.list-post-comment {
 	top: -125px;
 }
 .hot-category {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	position: relative;
 }
 
@@ -9090,7 +9091,7 @@ ol.list-post-comment {
 	border-width: 0 1px 1px;
 	margin: 0;
 	overflow: visible;
-	min-height: 444px;
+	/*min-height: 444px;*/
 }
 .special-slider-header {
 	background: #fafafa none repeat scroll 0 0;
@@ -9104,8 +9105,8 @@ ol.list-post-comment {
 	top: -8px;
 }
 .hot-deal5 {
-	margin-bottom: 30px;
-	min-height: 470px;
+	margin-bottom: 20px;
+	/*min-height: 470px;*/
 }
 .product-info5 li {
 	display: inline-block;
@@ -9133,10 +9134,13 @@ ol.list-post-comment {
 	padding: 0 10px;
 }
 .hot-deal-slider5 .item-hotdeal {
-	padding: 0 20px 15px;
+	padding: 0 20px;
+}
+.item-hotdeal{
+	min-height: 295px;
 }
 .content-popular5 {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 }
 .hotdeal-countdown5 {
 	margin: 10px 0 3px;
@@ -9197,6 +9201,7 @@ ol.list-post-comment {
 	display: table-cell;
 	padding-left: 20px;
 	vertical-align: top;
+	width: 160px;
 }
 .item-special li:last-child {
 	border: medium none;
@@ -9205,15 +9210,15 @@ ol.list-post-comment {
 	margin: 0;
 }
 .special-slider {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 
 }
 .slide-adds {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .slide-adds {
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 .slide-adds .wrap-item {
 	border-color: #e5e5e5;
@@ -15670,4 +15675,13 @@ div.show-image:hover span.delete-wishlist {
 .md-warning{
 	background-color: #ff9800;
     color: #ffffff;
+}
+.cart_item img{
+	width: 30% !important;
+}
+.width55{
+	width: 55%;
+}
+#product-thumbs img{
+	margin-left: 23px;
 }

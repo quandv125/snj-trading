@@ -86,9 +86,13 @@
 
 				</div>
 				 <div class="modal-footer">
-				 	<a href="/pages/accounts#/viewcart">
-						<button class="btn btn-sussces float-right">Checkout</button>
-					</a>
+				 	<?php if (isset($user_info) && !empty($user_info)): ?>
+				 		<a href="/pages/accounts#/viewcart">
+							<button class="btn btn-sussces float-right">Checkout</button>
+						</a>
+				 	<?php else: ?>
+				 		<?php echo $this->Html->link('Login/Register',['controller'=>"users",'action'=>"login"],['class'=>'btn btn-sussces']) ?>
+				 	<?php endif ?>
 			      </div>
 				
 			</div>

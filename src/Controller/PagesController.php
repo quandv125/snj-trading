@@ -75,6 +75,8 @@ class PagesController extends AppController
 
 	public function index() {
 		$this->viewBuilder()->layout('layout03');
+		$products = $this->Pages->getInfoProducts();
+		$this->set(compact('products'));
 	}
 
 	public function search(){

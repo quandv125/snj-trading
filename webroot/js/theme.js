@@ -30,6 +30,10 @@ jQuery(document).ready(function(){
 		var placeholderText = ["What are you looking for?", "Spare Part, Store ...","Main Air Compressor, Pumps, Deek Store ...", "Eletrical Store, Engine Store ...", "Computer & Phone, Laptop, Electronics ..."];
 		$('#search').placeholderTypewriter({text: placeholderText});
 	}
+	if($(".smart-search-fixed").length) {
+		var placeholderText = ["What are you looking for?", "Spare Part, Store ...","Main Air Compressor, Pumps, Deek Store ...", "Eletrical Store, Engine Store ...", "Computer & Phone, Laptop, Electronics ..."];
+		$('.smart-search-fixed').placeholderTypewriter({text: placeholderText});
+	}
 
 	toastr.options = {
 		"closeButton": false,
@@ -647,9 +651,12 @@ jQuery(document).ready(function(){
 		$('.box-product-filter').slideToggle('slow');
 	});
 	//Product Quick View
-	$('.quickview-link').each(function(){
-		$(this).fancybox();
-	});
+	if ($(".quickview-link").length) {
+		$('.quickview-link').each(function(){
+			$(this).fancybox();
+		});
+	}
+	
 	$('.team-gallery-thumb').each(function(){
 		$(this).fancybox();
 	});
@@ -1498,6 +1505,7 @@ jQuery(document).ready(function($){
 		jQuery('.quick-smart-search').removeClass('hidden');
 		if (keyword != '') {
 			delay(function(){ 
+				console.log('1508');
 				jQuery.ajax({
 					url: '/products/quick_search',
 					type: 'POST',

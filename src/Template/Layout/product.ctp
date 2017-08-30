@@ -101,10 +101,10 @@
 	
 </head>
 <body>
-
+<?= $this->element('font-end/Pages/header') ?>
 <div class="wrap">
 	<div id="header">
-		<?= $this->element('font-end/Pages/header') ?>
+		<?php //echo $this->element('font-end/Pages/header') ?>
 	</div>
 	<div id="content">
 		<div class="content-shop">
@@ -135,10 +135,10 @@
 							<i class="fa fa-file-text-o"></i>
 						</a>
 					</li>
-					<!--  <li>
-						<a href="#/wishlist" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Wishlist">     <i class="fa fa-heart-o"></i>
+					<li>
+						<a href="#/wishlist" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Orders">     <i class="fa fa-heart-o"></i>
 						</a>
-					</li> -->
+					</li>
 				</ul>
 			</div>
 		<?php endif ?>

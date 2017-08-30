@@ -28,7 +28,7 @@
 				<h4 class="title-shop-page"> <?= $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'50%']) ?>
 				</h4>
 					<?= $this->Form->create(Null,['url'=>['controller'=>'Users','action'=>'login'],'class'=>'form-my-account']) ?>
-					<?= $this->Form->input('username',['label' => false,'placeholder'=>"Username *"]) ?>
+					<?= $this->Form->input('username',['label' => false,'placeholder'=>"Email / Username *"]) ?>
 					<?= $this->Form->input('password',['label' => false,'placeholder'=>"Password *"]) ?>
 				<p>
 					<?= $this->Html->link('Forgot Password',['controller' => 'Users', 'action' => 'lostpassword']) ?>

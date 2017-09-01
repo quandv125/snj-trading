@@ -1590,5 +1590,13 @@ class InquiriesController extends AppController
 		}
 		exit();
 	}
+
+	public function OrderInfo()	{
+		if ($this->request->is(['get'])) {
+			$this->autoRender = false;
+			$orders = $this->Inquiries->getorderinfo();
+			echo json_encode($orders); exit();
+		}
+	}
 }
 

@@ -82,7 +82,10 @@
 			templateUrl: "/js/myapp/templates/accounts/delete.html"
 		})
 		// End
-		
+		.when('/orders',{
+			controller: "OrdersCtrl",
+			templateUrl: "/js/myapp/templates/accounts/orders.html"
+		})
 		.when('/wishlist',{
 			controller: "WishlistCtrl",
 			templateUrl: "/js/myapp/templates/accounts/wishlist.html"

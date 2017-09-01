@@ -7837,7 +7837,7 @@ ol.list-post-comment {
 .logo4 {
 	/*margin-top: 0px;*/
 }
-.cursor-point, ul.sub-menu-search li{
+.cursor-point, ul.sub-menu-search li, .addcart-link2{
 	cursor: pointer;
 }
 .main-nav.main-nav4 > ul > li > a{

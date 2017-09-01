@@ -1,0 +1,40 @@
+
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+		<div class="wapper-content">
+			<div class="main-content-shop ">
+				
+				<table id="datatable2" class="table table-sm"" cellspacing="0" width="100%">
+					<thead class="table-success">
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Phone</th>
+							<th>Address</th>
+							<th>Total</th>
+							<th>Created</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="order in orders">
+							<td><a href="#/order_received/{{order.id}}">#{{order.id}}</a></td>
+							
+							<td>{{order.firstname}} {{order.lastname}}</td>
+							<td>{{order.email}}</td>
+							<td>{{order.phone}}</td>
+							<td>{{order.address}}</td>
+							<td>{{order.Total | currency : "$ " : 2}}</td>
+							<td>{{order.created | date : "dd.MM.y" }}</td>
+							<td>
+								<span class="md-primary navButton cursor-point" confirmed-click="delete_inq(order.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+

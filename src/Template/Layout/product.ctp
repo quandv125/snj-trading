@@ -136,7 +136,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#/wishlist" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Orders">     <i class="fa fa-heart-o"></i>
+						<a href="#/orders" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Orders">     <i class="fa fa-heart-o"></i>
 						</a>
 					</li>
 				</ul>

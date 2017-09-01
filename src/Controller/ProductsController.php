@@ -249,8 +249,8 @@ class ProductsController extends AppController
 							$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
 							$images = $Image->newEntity();
 							$images->product_id  =  $id;
-							$images->path        = 'products/'.$path;
-							$images->thumbnail   = 'thumbnails/'.$thumbnail;
+							$images->path		 = 'products/'.$path;
+							$images->thumbnail	 = 'thumbnails/'.$thumbnail;
 							$Image->save($images);
 						}
 						if ($i == 0) {

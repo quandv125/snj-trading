@@ -64,8 +64,8 @@
 	});
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
-		$('#firstDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
-		$('#lastDay1').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
+		$('#firstDay').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
+		$('#lastDay').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true, });
 
 		$scope.delete_product = function (id){
 			//Delete Products
@@ -108,8 +108,8 @@
 		
 		$scope.lastDay = date.getFullYear()+'-'+('0' + (date.getMonth() + 1)).slice(-2)+ '-30';
 		$scope.submitSearchForm = function(){
-			var firstDay = jQuery("#firstDay1").val();
-			var lastDay = jQuery("#lastDay1").val();
+			var firstDay = jQuery("#firstDay").val();
+			var lastDay = jQuery("#lastDay").val();
 			$.ajax({
 				type: "POST",
 				url: "/products/set_product_date_session",
@@ -156,6 +156,7 @@
 		}
 		$http.get("/inquiries/inquiry_info").then(function (response) {
 			$scope.inquiries = response.data;
+			console.log($scope.inquiries);
 		});
 	});
 
@@ -196,7 +197,14 @@
 				});
 		}
 	});
-
+	// Orders details
+	App.controller('OrdersCtrl', function($scope, $routeParams, $http){
+		$http.get("/inquiries/order_info").then(function (response) {
+			$scope.orders = response.data;
+			
+		});
+		
+	});
 	// Main User Page
 	App.controller('WishlistCtrl', function($scope, $routeParams, $http){});
 
@@ -266,7 +274,7 @@
 			cache: false,
 			success: function(response) {
 				var data = jQuery.parseJSON(response);
-				console.log(response);
+				
 				$scope.info = data;
 			}
 		});

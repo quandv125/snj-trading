@@ -136,7 +136,7 @@ class AppController extends Controller
 			$this->Auth->allow();
 		}
 		$language = $this->request->session()->read('Config.language');
-		$this->Auth->allow(['index','display','logout','changeLang','lostpassword','captcha','changepassword']); 
+		$this->Auth->allow(['index','display','logout','changeLang','lostpassword','captcha','changepassword','products']); 
 		$user_info = $this->Auth->user();
 		$this->menu();
 		$this->set(compact('user_info','language'));
@@ -150,13 +150,20 @@ class AppController extends Controller
 	private function menu() {
 		$Categorie   = TableRegistry::get( 'Categories' );
 		// $Article     = TableRegistry::get( 'Articles' );
-		$categories  = $Categorie->find( 'threaded' )->where([ 'type' => VERTICAL, 'actived' => 1 ])->order([ 'name' => 'ASC' ]);
-		$categories2 = $Categorie->find( 'threaded' )->where([ 'type' => HORIZONTAL , 'actived' => 1])->order([ 'created' => 'ASC' ]);
+		$categories  = $Categorie->find( 'threaded' )
+			->where([ 'type' => VERTICAL, 'actived' => 1 ])
+			->order([ 'name' => 'ASC' ])
+			->toarray();
+		$categories2 = $Categorie
+			->find( 'threaded' )
+			->where([ 'type' => HORIZONTAL , 'actived' => 1])
+			->order([ 'created' => 'ASC' ])
+			->toarray();
 		// $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
-		// $snj         = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
+		// $snj         = $Article->find('list',[ 'keyFi eld' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
 		// $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);
 		//$signles     = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SIGNLE])->limit(5)->order(['created' => 'ASC']);
 		// $this->set(compact('categories','categories2','help','snj','my_acc','signles'));
-		 $this->set(compact('categories','categories2'));
+		$this->set(compact('categories','categories2'));
 	}
 }

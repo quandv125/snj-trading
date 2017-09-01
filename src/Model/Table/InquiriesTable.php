@@ -754,4 +754,16 @@ use Cake\Datasource\ConnectionManager;
 		$results = $stmt ->fetchAll('assoc');
 		return $results;
 	}
+
+	public function getorderinfo() {
+		$conn = ConnectionManager::get('default');
+		$stmt = $conn->execute(
+			"SELECT t1.id, t1.company, t1.lastname, t1.firstname, t1.email, t1.phone, t1.address, sum(t2.price) as Total, t1.created
+			FROM `orders` as t1
+			RIGHT JOIN `order_products` as t2 ON t1.id = t2.order_id
+			GROUP BY t1.id"
+		);
+		$results = $stmt ->fetchAll('assoc');
+		return $results;
+	}
 }

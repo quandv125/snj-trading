@@ -1598,5 +1598,18 @@ class InquiriesController extends AppController
 			echo json_encode($orders); exit();
 		}
 	}
+	public function DeleteOrder()	{
+		if ($this->request->is(['json'])) {
+			$this->autoRender = false;
+			$Order = TableRegistry::get('Orders');
+			$order_info = $Order->get($this->request->data['id']);
+			if ($Order->delete($order_info)) {
+				echo __('The order has been deleted.');
+			} else {
+				echo __('The order could not be deleted. Please, try again.');
+			}
+			
+		}
+	}
 }
 

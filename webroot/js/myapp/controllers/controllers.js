@@ -201,7 +201,19 @@
 	App.controller('OrdersCtrl', function($scope, $routeParams, $http){
 		$http.get("/inquiries/order_info").then(function (response) {
 			$scope.orders = response.data;
-			// console.log(response.data);
+			$scope.delete_order = function (id){
+				
+				jQuery("#orders_obj_"+id).remove();
+				$http({
+					method: 'POST',
+					url: '/inquiries/delete_order',
+					data: {id: id}
+				}).then(function successCallback(response) {
+					toastr.success(response.data);
+				}, function errorCallback(response) {
+					toastr.error("Error");
+				});
+			}
 		});
 	});
 	// Main User Page

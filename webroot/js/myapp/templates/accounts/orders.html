@@ -18,7 +18,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="order in orders">
+						<tr ng-repeat="order in orders" id="orders_obj_{{order.id}}">
 							<td><a href="#/order_received/{{order.id}}">#{{order.id}}</a></td>
 							
 							<td>{{order.firstname}} {{order.lastname}}</td>
@@ -28,7 +28,7 @@
 							<td>{{order.Total | currency : "$ " : 2}}</td>
 							<td>{{order.created | date : "dd.MM.y" }}</td>
 							<td>
-								<span class="md-primary navButton cursor-point" confirmed-click="delete_inq(order.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
+								<span class="md-primary navButton cursor-point" confirmed-click="delete_order(order.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
 							</td>
 						</tr>
 					</tbody>

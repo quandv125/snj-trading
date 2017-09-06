@@ -16,7 +16,7 @@ class ProductsController extends AppController
 
 	public function beforeFilter(Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['searchproduct','paginationproducts','QuickSearch','cart']);
+		$this->Auth->allow(['searchproduct','paginationproducts','QuickSearch','cart',]);
 	}
 	/**
 	 * Index method
@@ -797,13 +797,11 @@ class ProductsController extends AppController
 	}
 
 	public function PlaceOrder() {
-		if ($this->request->is('ajax') || $this->request->is('post') ) {
+		if ($this->request->is(['ajax', 'post', 'put','get'])) {
 			$this->autoRender = false;
 			$Order = TableRegistry::get('Orders');
 			$OrderProduct = TableRegistry::get('OrderProducts');
-
 			$this->request->data['user_id'] = $this->Auth->user('id');
-
 			$info_order = $Order->newEntity();
 			$info_order = $Order->patchEntity($info_order, $this->request->data);
 			$mycart		= $this->request->session()->read('Cart');
@@ -819,7 +817,6 @@ class ProductsController extends AppController
 						'price'			=> $cart->retail_price
 					];
 				}
-
 				$entities = $OrderProduct->newEntities($data);
 				$result = $OrderProduct->saveMany($entities);
 				$session = $this->request->session();

@@ -21,7 +21,8 @@
 							<a class="compare-link" href="#"><i class="fa fa-toggle-on"></i></a>
 							<a class="quickview-link_1" href="#"><i class="fa fa-search"></i></a>
 						</div>
-						<a class="addcart-link" href="#"><i class="fa fa-shopping-basket"></i>  Add to Cart</a>
+						
+						<span class="addcart-link addcart-link2" product_id="<?= $product->id?>"><i class="fa fa-shopping-basket"></i>  Add to Cart</span>
 					</div>
 				</div>
 				<div class="product-info5">

@@ -201,9 +201,8 @@
 	App.controller('OrdersCtrl', function($scope, $routeParams, $http){
 		$http.get("/inquiries/order_info").then(function (response) {
 			$scope.orders = response.data;
-			
+			// console.log(response.data);
 		});
-		
 	});
 	// Main User Page
 	App.controller('WishlistCtrl', function($scope, $routeParams, $http){});
@@ -265,6 +264,7 @@
 			});
 		}
 	});
+
 	App.controller('OrderReceivedCtrl',function($scope, $routeParams, $http){
 		var id = $routeParams.id;
 		$.ajax({ 
@@ -274,7 +274,6 @@
 			cache: false,
 			success: function(response) {
 				var data = jQuery.parseJSON(response);
-				
 				$scope.info = data;
 			}
 		});
@@ -292,12 +291,12 @@
 				jQuery('.total-mini-cart-item').html("0");
 				jQuery('table #modal-mycart').html('');
 				
-				
 			}, function errorCallback(response) {
 				toastr.error("Error");
 			});
 		}
 	})
+
 	App.controller('ProcesscheckoutCtrl', function($scope, $http){
 		$http.get("/pages/getcartdata").then(function (response) {
 			$scope.cart_new = response.data;
@@ -328,14 +327,13 @@
 		}
 	});
 
-	App.controller('PersonalInfomationAct', function($scope, $http, $location){  
+	App.controller('PersonalInfomationAct', function($scope, $http, $location){
 		$scope.form_info = function(){
 			$http({
 				method: 'POST',
 				url: '/users/change_user_info_art',
 				data: $scope.users
 				}).then(function successCallback(response) {
-	
 					if (response.data.status == true) {
 						toastr.success(response.data.message);
 						$location.path('/');
@@ -343,7 +341,6 @@
 						toastr.error(response.data.message);
 					}
 				}, function errorCallback(response) {
-
 				});
 		}
 	});
@@ -377,7 +374,7 @@
 			$scope.commission 		= ($scope.total*$scope.inquiries.commission)/100;
 			$scope.add_commission 	= ($scope.total*$scope.inquiries.add_commission)/100;
 			$scope.discount 		= ($scope.total*$scope.inquiries.discount)/100;
-			$scope.grand_total	 	= ($scope.total+$scope.commission+$scope.add_commission-$scope.discount);
+			$scope.grand_total		= ($scope.total+$scope.commission+$scope.add_commission-$scope.discount);
 			if ($("#grid").length){
 				var sampleData = response.data.data;
 				var type = jQuery('#grid').attr('type');

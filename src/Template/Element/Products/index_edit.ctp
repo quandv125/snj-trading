@@ -15,7 +15,7 @@
 							<li role="presentation" class="active">
 								<a href="#tabs1<?= $product->id;?>" role="tab" data-toggle="tab"><?php echo __("Products") ?></a>
 							</li>
-							<li role="presentation" class="active">
+							<li role="presentation">
 								<a href="#tabs2<?= $product->id;?>" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
 							</li>
 							<li role="presentation">

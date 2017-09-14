@@ -12,7 +12,7 @@
 		</li> -->
 		<?php if ($user_info['group_id'] == ADMIN): ?>
 			<li>
-				<?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['controller'=>'Inquiries','action'=>'inquiries'],['escape' =>false]) ?>
+				<?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['controller'=>'Products','action'=>'index'],['escape' =>false]) ?>
 			</li>
 		<?php endif ?>
 		<li><?php echo $this->Html->link('<i class="fa fa-unlock-alt"></i> '.__('Logout'),['controller'=>'users','action'=>'logout'],['escape' =>false]) ?>

@@ -22,9 +22,9 @@
                     <li role="presentation">
                         <a href="#tab2<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Descriptions"); ?></a>
                     </li>
-                    <li role="presentation">
+                 <!--    <li role="presentation">
                         <a href="#tab3<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Stock card"); ?></a>
-                    </li>
+                    </li> -->
                     <li role="presentation">
                         <a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Invoice") ?></a>
                     </li>
@@ -134,7 +134,7 @@
                      <div role="tabpanel" class="tab-pane fade" id="tab2<?= $product->id?>">
                         <?= $product->description; ?>
                     </div>
-                    <div role="tabpanel" class="tab-pane fade" id="tab3<?= $product->id?>">
+                   <!--  <div role="tabpanel" class="tab-pane fade" id="tab3<?= $product->id?>">
                         <table class="table table-bordered">
                              <thead>
                                 <tr>
@@ -158,7 +158,7 @@
                             </tr>
                         <?php endforeach ?>
                         </table>
-                    </div>
+                    </div> -->
                    
                     <div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
                         <table class="table table-bordered">

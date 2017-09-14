@@ -70,11 +70,9 @@
         </div>
         <!-- End Header -->
        
-
-
         <div id="content">
             <div class="container">
-                <?php echo $this->element('font-end/shipping'); ?>
+                <?php // echo $this->element('font-end/shipping'); ?>
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </div>

@@ -2888,7 +2888,10 @@ font-size: 15px;
 	text-transform: uppercase;
 }
 .info-price.info-price-detail span {
-	/*font-size: 30px;*/
+	font-size:2.2em;
+	color:#ff0a0a;
+	font-family:fantasy;
+	font-style:italic;
 	margin-right: 18px;
 }
 .attr-info {
@@ -3042,7 +3045,7 @@ font-size: 15px;
 	top: 0;
 	width: 100%;
 	content:"";
-	background:rgba(0,0,0,0) url(../img/assets/minus.png) no-repeat center center;
+	/*background:rgba(0,0,0,0) url(../img/assets/minus.png) no-repeat center center;*/
 }
 .info-qty .qty-up {
 	cursor: pointer;
@@ -3060,7 +3063,7 @@ font-size: 15px;
 	top: 0;
 	width: 100%;
 	content:"";
-	background:rgba(0,0,0,0) url(../img/assets/plus.png) no-repeat center center;
+	/*background:rgba(0,0,0,0) url(../img/assets/plus.png) no-repeat center center;*/
 }
 .info-qty a:hover {
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
@@ -3164,21 +3167,23 @@ font-size: 15px;
 .title-table-detail {
 	border-right: 1px solid #e8e8e8;
 	display: table-cell;
-	padding: 0 15px;
-	width: 90px;
+	padding: 6px 15px;
+	width: 21em;    
+	background-color: #fafafa;
 }
 .icon-table-detail {
 	display: table-cell;
 	text-align: center;
 	width: 60px;
+	padding: 15px 0;
 }
-.title-table-detail  span {
-	text-transform: uppercase;
-}
+
 .info-table-detail {
 	color: #666;
 	display: table-cell;
-	padding: 30px 0;
+	padding: 6px 20px;
+	min-width: 70em;
+	
 }
 .info-table-detail  p {
 	margin: 0;
@@ -14378,6 +14383,13 @@ ol.list-post-comment {
 	margin-left: 0px;
 	padding-left: 0;
 }
+.th_table{
+	background-color: #FAFAFA;
+	width: 30%;
+}
+.detail-info-fullwidth .table>tbody>tr>td{
+	border-top: 0px solid #ddd !important;
+}
 .detail-gallery-fullwidth .mid p {
 	background: #fafafa none repeat scroll 0 0;
 	color: #999;
@@ -14433,12 +14445,12 @@ ol.list-post-comment {
 .carousel-fullwidth .carousel li a.active{
 	border-color:#fe9c00;
 }
-.vertical-control.vertical-next {
+/*.vertical-control.vertical-next {
 	margin-bottom: -5px;
 }
 .vertical-control.vertical-prev {
 	margin-top: -5px;
-}
+}*/
 .detail-info-fullwidth .attr-info {
 	background: transparent none repeat scroll 0 0;
 	border: medium none;
@@ -14480,10 +14492,10 @@ ol.list-post-comment {
 	border:1px solid transparent;
 }
 .detail-info-fullwidth .attr-size {
-	margin-left: -8px;
+	margin-left: 0px;
 	margin-right: 25px;
 	max-width: none;
-	width: auto;
+	width: 241px;
 }
 .detail-info-fullwidth .info-price.info-price-detail {
 	/*border-bottom: 1px solid #e5e5e5;*/
@@ -15690,4 +15702,7 @@ div.show-image:hover span.delete-wishlist {
 }
 #product-thumbs img{
 	margin-left: 23px;
+}
+.cart_item_new, .cart_item  {
+	height: 90px;
 }

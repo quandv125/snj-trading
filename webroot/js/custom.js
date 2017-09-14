@@ -7,7 +7,14 @@ jQuery( document ).ready(function() {
 		maxHeight: null, 
 		focus: true
 	});
-	jQuery('.auto').autoNumeric('init', { aSep: ',', aDec: '.', mDec: 0, vMax: '100000000' });
+
+	jQuery('.currency').blur(function(){
+			this.value = parseFloat(this.value.replace(/,/g, ""))
+			.toFixed(2)
+			.toString()
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	});
+	// jQuery('.auto').autoNumeric('init', { aSep: '.', aDec: ',', mDec: 0, vMax: '10000000000' });
 	var str_rand = Math.random().toString(36).substring(7);
 	// jQuery(".zoom_05").elevateZoom({ tint:true, cursor: 'pointer', tintOpacity:0.5});
 	
@@ -2771,5 +2778,10 @@ jQuery( document ).ready(function() {
 			 $("i", this).toggleClass("fa fa-chevron-up fa fa-chevron-down");
 		});
 	}
+	jQuery("#add-mtd-prd").click(function(){
+		console.log('ok');
+		jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-6"><input type="text" name="" class="label123 form-control"></span>	<span class="col-md-6"><input type="text" name="" class="value123 form-control"></span></div><br/>');
+		
+	});
 	
 }); // jQuery document

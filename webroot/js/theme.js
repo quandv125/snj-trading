@@ -450,10 +450,11 @@ jQuery(document).ready(function(){
 	// });
 	jQuery('.addcart-link2').click(function(){
 		var id = jQuery(this).attr('product_id');
+		var qty = jQuery('.qty-prd-cart').html();
 		jQuery.ajax({
 			url: '/products/cart',
 			type: 'POST',
-			data: {id: id},
+			data: {id: id, qty: qty},
 			dataType: 'html',
 			cache: false,
 			beforeSend: function(){
@@ -718,7 +719,9 @@ jQuery(document).ready(function(){
 			$(this).fancybox();
 		});
 	}
-	
+	$('.quickview-link').each(function(){
+			$(this).fancybox();
+		});
 	$('.team-gallery-thumb').each(function(){
 		$(this).fancybox();
 	});
@@ -768,14 +771,14 @@ jQuery(document).ready(function(){
 	$('.expand-category-link').on('click',function(event) {
 		event.preventDefault();
 		$(this).toggleClass('expanding');
-		$('.list-category-dropdown >li:gt(9)').slideToggle('slow');
+		$('.list-category-dropdown >li:gt(9)').slideToggle('fast');
 	});
 	//Category Toggle Home 8
 	$('.list-category-dropdown8 >li:gt(10)').hide();
 	$('.expand-category-link8').on('click',function(event) {
 		event.preventDefault();
 		$(this).toggleClass('expanding');
-		$('.list-category-dropdown8 >li:gt(10)').slideToggle('slow');
+		$('.list-category-dropdown8 >li:gt(10)').slideToggle('fast');
 	});
 	//Outlet mCustom Scrollbar
 	if($('.list-outlet-brand').length>0){
@@ -1160,6 +1163,25 @@ jQuery(document).ready(function(){
 			$(this).prev().text(qtyval);
 		});
 		$('.qty-down-'+id).on('click',function(event){
+			event.preventDefault();
+			qtyval=qtyval-1;
+			if(qtyval>0){
+				$(this).next().text(qtyval);
+			}else{
+				qtyval=0;
+				$(this).next().text(qtyval);
+			}
+		});
+	});
+	//Qty Up-Down
+	$('.info-qty').each(function(){
+		var qtyval = parseInt($(this).find('.qty-val').text(),10);
+		$('.qty-up').on('click',function(event){
+			event.preventDefault();
+			qtyval=qtyval+1;
+			$(this).prev().text(qtyval);
+		});
+		$('.qty-down').on('click',function(event){
 			event.preventDefault();
 			qtyval=qtyval-1;
 			if(qtyval>0){

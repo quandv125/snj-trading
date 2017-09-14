@@ -8,9 +8,9 @@
 						<div class="col-md-7 col-sm-12 col-xs-12">
 							<div class="detail-gallery-fullwidth min-height-460">
 								<div class="mid">
-									<?php echo $this->Html->image($product->images[0]['path'])?>
+									<?= $this->Html->image($product->images[0]['path'])?>
 									
-									<p><i class="fa fa-search"></i> Mouse over to zoom in</p>
+									<p><i class="fa fa-search"></i> <?php echo __("Mouse over to zoom in") ?></p>
 								</div>
 								<div class="carousel-fullwidth">
 									<a href="#" class="vertical-control vertical-next"><i class="fa fa-angle-up"></i></a>
@@ -18,11 +18,9 @@
 										<ul>
 										<?php foreach ($product->images as $key => $image): ?>
 											<?php if ($key <= 8	): ?>
-												<li><a href="#"><?php echo $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?></a></li>
+												<li><a href="#"><?= $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?></a></li>
 											<?php endif ?>
-											
 										<?php endforeach ?>
-											
 										</ul>
 									</div>
 									<a href="#" class="vertical-control vertical-prev"><i class="fa fa-angle-down"></i></a>
@@ -32,85 +30,90 @@
 						</div>
 						<div class="col-md-5 col-sm-12 col-xs-12">
 							<div class="detail-info detail-info-fullwidth">
-								<h2 class="title-detail"><?php echo $product->product_name; ?></h2>
+								<h2 class="title-detail"><?= $product->product_name; ?></h2>
 								<div class="product-rating">
 									<div class="inner-rating" style="width:100%"></div>
 								</div>
 								<div class="info-price info-price-detail">
-									<label>Price:</label> <span style="font-size:2.2em;color:#ff0a0a;font-family:fantasy;font-style:italic;">$ <?php echo number_format( $product->retail_price, DECIMALS); ?></span>
-									<del>$17.96</del>
+									<label>Price:</label>
+									<?php if ($product->vat == 1): ?>
+										<span>$ <?= number_format($product->retail_price + ($product->retail_price*0.1), 2);?></span>
+										(VAT)
+									<?php else: ?>
+										<span>$ <?= number_format($product->retail_price, 2); ?></span>
+									<?php endif ?>
+									<!-- <del>$17.96</del> -->
 								</div> 
 								 <div class="table-responsive">
 								<table class="table">
 									<tbody>
 										<tr>
-											<td><b><?php echo __("Part No:")?></b></td>
-											<td><?php echo 'SP.'.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
-											<td><b><?php echo __("Categories:")?></b></td>
-											<td><?php echo $product->category['name']; ?></td>
+											<td><b><?= __("Part No:")?></b></td>
+											<td><?= 'SP.'.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+											<td><b><?= __("Categories:")?></b></td>
+											<td><?= $product->category['name']; ?></td>
 										</tr>
 										<tr>
-											<td><b><?php echo __("Availability:")?></b></td>
+											<td><b><?= __("Availability:")?></b></td>
 											<td>In stock</td>
-											<td><b><?php echo __("Serial No:")?></b></td>
-											<td><?php echo $product->serial_no ?></td>
+											<td><b><?= __("Serial No:")?></b></td>
+											<td><?= $product->serial_no ?></td>
 										</tr>
 										<tr>
-											<td><b><?php echo __("Type Model:")?></b></td>
-											<td><?php echo $product->type_model ?></td>
-											<td><b><?php echo __("Origin:")?></b></td>
-											<td><?php echo $product->origin ?></td>
+											<td><b><?= __("Type Model:")?></b></td>
+											<td><?= $product->type_model ?></td>
+											<td><b><?= __("Origin:")?></b></td>
+											<td><?= $product->origin ?></td>
 										</tr>
 									</tbody>
 								</table>
 								</div>
 								<?php if (!empty($product->short_description)): ?>
-									
-								
 								<div class="attr-info">
 									<label>Remark:</label>
-									<p><?php echo $this->Myhtml->_Cutstring($product->short_description,200,200) ?></p>
+									<p><?= $this->Myhtml->_Cutstring($product->short_description,200,200) ?></p>
 								</div>
 								<?php endif ?>
+								<div class="clearfix"></div>
 								<div class="attr-info">
-									<!-- <div class="attr-product">
+									<!-- <br><div class="attr-product">
 										<label>Color</label>
 										<div class="attr-color">
-											<ul class="list-color2">
-												<li><a href="#" style="background:#fff;border:1px solid #e5e5e5"></a></li>
-												<li><a href="#" style="background:#e66054"></a></li>
-												<li><a href="#" style="background:#d0b7cc"></a></li>
-												<li><a href="#" style="background:#107a8e"></a></li>
-												<li><a href="#" style="background:#b9cad2"></a></li>
-												<li><a href="#" style="background:#a7bc93"></a></li>
-												<li><a href="#" style="background:#d3b627"></a></li>
+											<a href="#" class="toggle-color">White</a>
+											<ul class="list-color" style="display: none;">
+												<li><a href="#">Black</a></li>
+												<li><a href="#">Red</a></li>
+												<li><a href="#">Green</a></li>
+												<li><a href="#" class="selected">White</a></li>
+												<li><a href="#">Pink</a></li>
 											</ul>
 										</div>
-									</div> -->
-								<!-- 	<div class="attr-product">
+									</div>
+									<div class="attr-product">
 										<label>Size</label>
 										<div class="attr-size">
-											<ul class="list-size2">
+											<a href="#" class="toggle-size">Select Size</a>
+											<ul class="list-size" style="display: none;">
+												<li><a href="#">S</a></li>
 												<li><a href="#">M</a></li>
 												<li><a href="#">L</a></li>
 												<li><a href="#">XL</a></li>
 												<li><a href="#">XXL</a></li>
 											</ul>
 										</div>
-										<span class="size-chart">Size Chart</span>
 									</div> -->
 									<div class="col-md-6">
 										<div class="attr-product attr-product-qty">
 										<label></label>
 										<div class="info-qty">
 											<span class="qty-down" href="#"><i class="fa fa-minus"></i></span>
-											<span class="qty-val">1</span>
+											<span class="qty-val qty-prd-cart">1</span>
 											<span class="qty-up" href="#"><i class="fa fa-plus"></i></span>
 										</div>
 									</div>
 									</div>
 									<div class="col-md-6">
-										<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
+										<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail'] ?>">
 										<i class="fa fa-shopping-cart"></i> Add to Cart
 									</span>
 									<!-- <div class="product-social-extra">
@@ -120,9 +123,7 @@
 										<a class="print-link" href="#"><i class="fa fa-print"></i></a>
 										<a class="share-link" href="#"><i class="fa fa-share"></i></a>
 									</div> -->
-									</div>
-									
-									
+									</div>									
 								</div>
 								<!-- End Attr Info -->
 							</div>
@@ -142,16 +143,6 @@
 						</div>
 					</div>
 					<ul>
-						<!-- <?php // if ($user_info['group_id'] == ADMIN): ?>
-							<li>
-								<div class="work-icon">
-									<div class="sold-by"><?= __('Sold by'); ?></div>
-								</div>
-								<div class="work-info">
-									<h3><?php // echo $this->Html->link($product->user['username'],['controller' => 'pages', 'action' => 'suppliers',$product->user['id']]); ?></h3>
-								</div>
-							</li>
-						<?php // endif ?> -->
 						<li>
 							<div class="work-icon">
 								<i class="fa fa-shield" aria-hidden="true"></i>
@@ -193,7 +184,7 @@
 			<div class="title-tab-detail">
 				<ul role="tablist">
 					<li class="active"><a href="#details" data-toggle="tab">Product Details </a></li>
-					<li><a href="#shipping" data-toggle="tab">Shipping & Payment</a></li>
+					<li><a href="#shipping" data-toggle="tab">Infomation</a></li>
 				</ul>
 			</div>
 			<div class="content-tab-detail">
@@ -203,25 +194,103 @@
 							<?= $product->description ?>
 						</div>
 					</div>
-					
-					<div role="tabpanel" class="tab-pane" id="shipping"> 	
+					<div role="tabpanel" class="tab-pane" id="shipping"> 
+						
 						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span>Return Policy</span></div>
-							<div class="icon-table-detail"><?php echo $this->Html->image('assets/grid/rv1.png') ?></div>
+							<div class="title-table-detail"><span><?= __("Item Number"); ?></span></div>
 							<div class="info-table-detail">
-								<p>If the product you receive is not as described or low quality, the seller promises that you may return it before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe) and receive a full refund. The return shipping fee will be paid by you. Or, you can choose to keep the product and agree the refund amount directly with the seller.</p>
+								<p><?= $product->sku ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Product Name"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->product_name ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Size"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->size ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Weight"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->weight ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Color"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->color ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Meterial"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->meterial ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Product Composition"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->composition ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Issuing a receipt"); ?></span></div>
+							<div class="info-table-detail">
+								<p></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Brand"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->brand ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Origin"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->origin ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Release date of the same model"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->release_date ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Manufacturer"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->manufacturer ?></p>
+							</div>
+						</div>
+						<div class="table-content-tab-detail">
+							<div class="title-table-detail"><span><?= __("Country of manufacturer"); ?></span></div>
+							<div class="info-table-detail">
+								<p><?= $product->origin ?></p>
+							</div>
+						</div>
+						<?php foreach (json_decode($product->properties) as $key => $propertie): ?>
+							<div class="table-content-tab-detail">
+								<div class="title-table-detail" style="text-transform: capitalize;"><span><?= __($propertie->label); ?></span></div>
+								<div class="info-table-detail">
+									<p style="text-transform: capitalize;"><?= $propertie->value ?></p>
+								</div>
+							</div>
+						<?php endforeach ?>
+						<!-- <div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Seller Service</span></div>
-							<div class="icon-table-detail"><?php echo $this->Html->image('assets/grid/rv2.png') ?></div>
+							<div class="icon-table-detail"><?= $this->Html->image('assets/grid/rv2.png') ?></div>
 							<div class="info-table-detail">
 								<h3>On-time Delivery</h3>
 								<p>If you do not receive your purchase within 60 days, you can ask for a full refund before order completion (when you click ‘Confirm Order Received’ or exceed confirmation timeframe).</p>
 							</div>
-						</div>
+						</div> -->
 					</div>
-					
 				</div>
 			</div>
 		</div>
@@ -235,7 +304,7 @@
 				<div class="item" style="max-width: 195px;">
 					<div class="item-product">
 						<div class="product-thumb">
-							<a class="product-thumb-link" href="<?php echo $this->Url->build(array('controller'=>'pages','action'=>'products',$cat->id)) ?>">
+							<a class="product-thumb-link" href="<?= $this->Url->build(array('controller'=>'pages','action'=>'products',$cat->id)) ?>">
 								<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193])?>
 								<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193])?>
 								
@@ -247,17 +316,17 @@
 									<a class="quickview-link" href="#"><i class="fa fa-search"></i></a>
 								</div>
 								
-								<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $cat->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
+								<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $cat->id; ?>" picture="<?= $product->images[0]['thumbnail'] ?>">
 									<i class="fa fa-shopping-cart"></i> Add to Cart
 								</span>
 							</div>
 						</div>
 						<div class="product-info">
 							<h3 class="title-product">
-								<?php echo $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,15,15),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
+								<?= $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,15,15),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
 							</h3>
 							<div class="info-price" style="font-size:1.8em;color:#ff0a0a;font-family:fantasy;font-style:italic;">
-								<span>$ <?php echo number_format( $cat->retail_price, DECIMALS); ?></span>
+								<span>$ <?= number_format( $cat->retail_price, DECIMALS); ?></span>
 							</div> 
 							<div class="product-rating">
 								<div class="inner-rating" style="width:100%"></div>
@@ -268,52 +337,6 @@
 				</div>
 				<?php endforeach ?>
 		</div>
-		
-		<!-- <div class="upsell-detail">
-			<h2 class="title-default">Products Related To This Item </h2>
-			<div class="upsell-detail-slider">
-				<div class="wrap-item" data-navigation="true" data-pagination="false" data-itemscustom="[[0,1],[480,2],[768,3],[1200,4]]">
-					<?php foreach ($products as $key => $cat): ?>
-					<div class="item" style="max-width: 195px;">
-						<div class="item-product">
-							<div class="product-thumb">
-								<a class="product-thumb-link" href="<?php echo $this->Url->build(array('controller'=>'pages','action'=>'products',$cat->id)) ?>">
-									<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193])?>
-									<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193])?>
-									
-								</a>
-								<div class="product-info-cart">
-									<div class="product-extra-link">
-										<a class="wishlist-link" href="#"><i class="fa fa-heart-o"></i></a>
-										<a class="compare-link" href="#"><i class="fa fa-toggle-on"></i></a>
-										<a class="quickview-link" href="#"><i class="fa fa-search"></i></a>
-									</div>
-									
-									<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $cat->id; ?>" picture="<?php echo $product->images[0]['thumbnail'] ?>">
-										<i class="fa fa-shopping-cart"></i> Add to Cart
-									</span>
-								</div>
-							</div>
-							<div class="product-info">
-								<h3 class="title-product">
-									<?php echo $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,15,15),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
-								</h3>
-								<div class="info-price" style="font-size:1.8em;color:#ff0a0a;font-family:fantasy;font-style:italic;">
-									<span>$ <?php echo number_format( $cat->retail_price, DECIMALS); ?></span>
-								</div> 
-								<div class="product-rating">
-									<div class="inner-rating" style="width:100%"></div>
-									
-								</div>
-							</div>
-						</div>
-					</div>
-					<?php endforeach ?>
-				
-				</div>
-			</div>
-		</div> -->
-		<!-- End Upsell Detail -->
 	</div>
 </div>
 <!-- End Main Content Shop -->

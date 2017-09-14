@@ -90,7 +90,7 @@ $cakeDescription = 'S&J Trading Company';
         'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker',
         'assets/plugins/bootstrap-datepicker/js/moment-with-locales',
         'assets/plugins/bootstrap-datepicker/js/bootstrap-datetimepicker',
-        'assets/plugins/autoNumeric/autoNumeric.js',
+        // 'assets/plugins/autoNumeric/autoNumeric.js',
         'libs/bootstrap-select',
         // End table
         'assets/plugins/summernote-master/summernote.min',

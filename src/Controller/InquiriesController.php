@@ -1493,7 +1493,6 @@ class InquiriesController extends AppController
 								"quantity"		 => $inquirieProducts->quantity,
 								"remark"		 => $inquirieProducts->remark
 							];
-							
 						}
 					}
 					$result['data'] = $data;
@@ -1553,7 +1552,6 @@ class InquiriesController extends AppController
 	}
 
 	public function InquiryInfo() {
-
 		if ($this->request->is(['get'])) {
 			if (!empty($this->request->session()->read('firstDayInq'))) { 
 				$firstDay = $this->request->session()->read('firstDayInq');
@@ -1561,9 +1559,9 @@ class InquiriesController extends AppController
 				$firstDay = date('Y-m-01');
 			}
 			
-			 $inquiries = $this->Inquiries->find()
+			$inquiries = $this->Inquiries->find()
 			->select(['Inquiries.id','Inquiries.status','Inquiries.vessel','Inquiries.ref','Inquiries.type','Inquiries.imo_no','Inquiries.hull_no','Inquiries.description','Inquiries.created'])
-			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >='=> $firstDay,'Inquiries.created <'=> date('Y-m-t')])
+			->where(['Inquiries.user_id' => $this->Auth->user('id'),'Inquiries.created >='=>$firstDay,'Inquiries.created <'=> date('Y-m-t')])
 			->order(['Inquiries.created'  => 'DESC']);
 			// pr($inquiries->toarray());die();
 			echo json_encode($inquiries); exit();
@@ -1579,7 +1577,7 @@ class InquiriesController extends AppController
 			} elseif (isset($this->request->data['firstDay']) && $this->request->data['firstDay'] == '') {
 				$this->request->session()->write('firstDayInq', '');
 			}
-		}elseif ($this->request->is('get')) {
+		} elseif ($this->request->is('get')) {
 			if (!empty($this->request->session()->read('firstDayInq'))) {
 				echo $this->request->session()->read('firstDayInq');
 			} elseif ($this->request->session()->read('firstDayInq') == '') {
@@ -1598,6 +1596,7 @@ class InquiriesController extends AppController
 			echo json_encode($orders); exit();
 		}
 	}
+
 	public function DeleteOrder()	{
 		if ($this->request->is(['json'])) {
 			$this->autoRender = false;
@@ -1608,8 +1607,8 @@ class InquiriesController extends AppController
 			} else {
 				echo __('The order could not be deleted. Please, try again.');
 			}
-			
 		}
 	}
+
 }
 

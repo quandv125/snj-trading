@@ -72,7 +72,7 @@ class ProductsController extends AppController
 		$Product = TableRegistry::get('Products');
 		$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
 		// $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
-		// $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+		$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
 		if (empty($this->request->data['sku'])) {
 			$this->request->data['sku'] = $this->Products->MaxSKU();
 		}
@@ -81,6 +81,7 @@ class ProductsController extends AppController
 		$product = $this->Products->newEntity();
 		if ($this->request->is('post')) {
 			$product = $this->Products->patchEntity($product, $this->request->data);
+			// pr($product);die();
 			if ($Product->save($product)) {
 				$id = $product->id;
 				if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -123,6 +124,48 @@ class ProductsController extends AppController
 		exit();
 	}
 
+	/**
+	 * Edit method
+	 *
+	 * @param string|null $id Product id.
+	 * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+	 * @throws \Cake\Network\Exception\NotFoundException When record not found.
+	 */
+	public function edit($id = null)
+	{
+		$product = $this->Products->get($id, [ 'contain' => [] ]);
+		$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
+		$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+	
+		$this->request->data['actived'] = true;
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$product = $this->Products->patchEntity($product, $this->request->data);
+			if ($this->Products->save($product)) {
+				$Image = TableRegistry::get('Images');				
+				for($i=0; $i<count($this->request->data['files'.$product->id]); $i++){
+					$path = rand(1,100000).'_'.$this->request->data['files'.$product->id][$i]['name'];
+					if(move_uploaded_file($this->request->data['files'.$product->id][$i]['tmp_name'], PRODUCTS.$path)){
+						$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$product->id][$i]['name']);
+						$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
+						$images = $Image->newEntity();
+						$images->product_id  =  $product->id;
+						$images->path		 = 'products/'.$path;
+						$images->thumbnail   = 'thumbnails/'.$thumbnail;
+						$Image->save($images);
+					}
+				}
+				$this->Flash->success(__('The product has been saved.'));
+				return $this->redirect(['action' => 'index']);
+			} else {
+				$this->Flash->error(__('The product could not be saved. Please, try again.'));
+			}
+		}
+		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
+		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
+		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
+		$this->set('_serialize', ['product']);
+	}
 	public function SupplierAddProduct() {
 		$Categorie	= TableRegistry::get('Categories');
 		$Image		= TableRegistry::get('Images');
@@ -174,52 +217,6 @@ class ProductsController extends AppController
 		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
 		$this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
-	}
-
-	/**
-	 * Edit method
-	 *
-	 * @param string|null $id Product id.
-	 * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-	 * @throws \Cake\Network\Exception\NotFoundException When record not found.
-	 */
-	public function edit($id = null)
-	{
-		$product = $this->Products->get($id, [ 'contain' => [] ]);
-		$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
-		// $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
-		// $this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
-		$this->request->data['actived'] = true;
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$product = $this->Products->patchEntity($product, $this->request->data);
-			$OldID = $product->id;
-			if ($this->Products->save($product)) {
-				$Image = TableRegistry::get('Images');
-				$id = $product->id;
-				$UF = $this->request->data['files'.$OldID];
-				for($i=0; $i<count($this->request->data['files'.$OldID]); $i++){
-					$path = rand(1,100000).'_'.$this->request->data['files'.$OldID][$i]['name'];
-					if(move_uploaded_file($this->request->data['files'.$OldID][$i]['tmp_name'], PRODUCTS.$path)){
-						$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$OldID][$i]['name']);
-						$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
-						$images = $Image->newEntity();
-						$images->product_id  =  $id;
-						$images->path		 = 'products/'.$path;
-						$images->thumbnail   = 'thumbnails/'.$thumbnail;
-						$Image->save($images);
-					}
-				}
-				$this->Flash->success(__('The product has been saved.'));
-				return $this->redirect(['action' => 'index']);
-			} else {
-				$this->Flash->error(__('The product could not be saved. Please, try again.'));
-			}
-		}
-		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
-		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
-		$this->set('_serialize', ['product']);
 	}
 
 	public function SupplierEditProduct($id = null){
@@ -612,8 +609,13 @@ class ProductsController extends AppController
 	public function cart() {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
+			
 			$cart    = $this->request->session()->read('Cart');
 			$my_cart = $this->request->session()->read('my_cart');
+			$qty = 1;
+			if (isset($this->request->data['qty'])) {
+				$qty = $this->request->data['qty'];
+			}
 			
 			if (!isset($my_cart)) {
 				$my_cart = array();
@@ -634,7 +636,7 @@ class ProductsController extends AppController
 				->select(['id','product_name','type_model','serial_no','origin','unit','thumbnail','retail_price'])
 				->where(['Products.id'=>$this->request->data['id']])
 				->order(['Products.created' => 'DESC'])->first();
-				$products['quantity'] = 1;
+				$products['quantity'] = $qty;
 
 				$cart[$this->request->data['id']] = $products;
 				$this->request->session()->write('my_cart', $my_cart);
@@ -650,7 +652,7 @@ class ProductsController extends AppController
 						<td class="text-center product-quantity">
 							 <div class="info-qty" id="'.$products->id.'">
 								<a href="#" class="qty-down qty-down-'.$products->id.'"><i class="fa fa-angle-left"></i></a>
-									<span class="qty-val">1</span>
+									<span class="qty-val">'.$qty.'</span>
 								<a href="#" class="qty-up qty-up-'.$products->id.'"><i class="fa fa-angle-right"></i></a>
 							</div>			
 						</td>

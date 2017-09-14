@@ -71,13 +71,14 @@
 	</div>
 	<!-- End Main Nav -->
 </div>
+<br/><br/>
 <!-- SlideShow -->
-<div class="banner-slider banner-slider21 slider-home3 bg-slider">
+<!-- <div class="banner-slider banner-slider21 slider-home3 bg-slider">
 	<div class="wrap-item" data-pagination="true" data-autoplay="true" data-transition="fade" data-navigation="true" data-itemscustom="[[0,1]]">
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/s1.jpg') ?>
+					<?php //echo $this->Html->image('gallery/s1.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -90,7 +91,7 @@
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/s2.jpg') ?>
+					<?php //echo $this->Html->image('gallery/s2.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -103,7 +104,7 @@
 		<div class="item-slider">
 			<div class="banner-thumb">
 				<a href="#">
-					<?php echo $this->Html->image('gallery/s4.jpg') ?>
+					<?php //echo $this->Html->image('gallery/s4.jpg') ?>
 				</a>
 			</div>
 			<div class="banner-info text-center animated" data-animated="bounceIn">
@@ -114,4 +115,4 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->

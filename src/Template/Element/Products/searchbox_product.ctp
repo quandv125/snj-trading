@@ -40,10 +40,10 @@
     
 </div>
 <!-- Categories -->
-<?php if (isset($categories)): ?>
+<!-- <?php if (isset($categories)): ?>
 <div class="panel-heading  clearfix border">
        <div class="leftTitle"> <span class="title-searchbox">Categories</span> </div>
-</div> <!-- panel-heading -->
+</div> 
 <div class="panel-body">
 
     <?php foreach ($categories as $key => $categorie): ?>
@@ -52,7 +52,7 @@
     <?php endforeach ?>
 </div>
 <?php endif ?>
-
+ -->
 
 
 <!-- 

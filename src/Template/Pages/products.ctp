@@ -199,89 +199,87 @@
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Item Number"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->sku ?></p>
+								<p style="text-transform: capitalize;"><?= $product->sku ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Product Name"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->product_name ?></p>
+								<p style="text-transform: capitalize;"><?= $product->product_name ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Size"); ?></span></div>
-							<div class="info-table-detail">
+							<div class="title-infomation-detail"><span><?= __("Size"); ?></span></div>
+							<div class="content-infomation-first">
 								<p><?= $product->size ?></p>
 							</div>
-						</div>
-						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Weight"); ?></span></div>
-							<div class="info-table-detail">
-								<p><?= $product->weight ?></p>
+							<div class="title-infomation-detail"><span><?= __("Weight"); ?></span></div>
+							<div class="content-infomation-second">
+								<p style="text-transform: capitalize;"><?= $product->weight ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Color"); ?></span></div>
-							<div class="info-table-detail">
-								<p><?= $product->color ?></p>
+							<div class="title-infomation-detail"><span><?= __("Color"); ?></span></div>
+							<div class="content-infomation-first">
+								<p style="text-transform: capitalize;"><?= $product->color ?></p>
 							</div>
-						</div>
+							<div class="title-infomation-detail"><span><?= __("Meterial"); ?></span></div>
+							<div class="content-infomation-second">
+								<p style="text-transform: capitalize;"><?= $product->meterial ?></p>
+							</div>
+						</div>				
 						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Meterial"); ?></span></div>
-							<div class="info-table-detail">
-								<p><?= $product->meterial ?></p>
+							<div class="title-infomation-detail"><span><?= __("Brand"); ?></span></div>
+							<div class="content-infomation-first">
+								<p style="text-transform: capitalize;"><?= $product->brand ?></p>
 							</div>
-						</div>
+							<div class="title-infomation-detail"><span><?= __("Origin"); ?></span></div>
+							<div class="content-infomation-second">
+								<p style="text-transform: capitalize;"><?= $product->origin ?></p>
+							</div>
+						</div>		
+
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Product Composition"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->composition ?></p>
+								<p style="text-transform: capitalize;"><?= $product->composition ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Issuing a receipt"); ?></span></div>
 							<div class="info-table-detail">
-								<p></p>
+								<p style="text-transform: capitalize;"></p>
 							</div>
 						</div>
-						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Brand"); ?></span></div>
-							<div class="info-table-detail">
-								<p><?= $product->brand ?></p>
-							</div>
-						</div>
-						<div class="table-content-tab-detail">
-							<div class="title-table-detail"><span><?= __("Origin"); ?></span></div>
-							<div class="info-table-detail">
-								<p><?= $product->origin ?></p>
-							</div>
-						</div>
+						
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Release date of the same model"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->release_date ?></p>
+								<p style="text-transform: capitalize;"><?= $product->release_date ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Manufacturer"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->manufacturer ?></p>
+								<p style="text-transform: capitalize;"><?= $product->manufacturer ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Country of manufacturer"); ?></span></div>
 							<div class="info-table-detail">
-								<p><?= $product->origin ?></p>
+								<p style="text-transform: capitalize;"><?= $product->origin ?></p>
 							</div>
 						</div>
-						<?php foreach (json_decode($product->properties) as $key => $propertie): ?>
-							<div class="table-content-tab-detail">
-								<div class="title-table-detail" style="text-transform: capitalize;"><span><?= __($propertie->label); ?></span></div>
-								<div class="info-table-detail">
-									<p style="text-transform: capitalize;"><?= $propertie->value ?></p>
+						<?php if (isset($product->properties) && !empty(isset($product->properties))): ?>
+							<?php foreach (json_decode($product->properties) as $key => $propertie): ?>
+								<div class="table-content-tab-detail">
+									<div class="title-table-detail" style="text-transform: capitalize;"><span><?= __($propertie->label); ?></span></div>
+									<div class="info-table-detail">
+										<p style="text-transform: capitalize;"><?= $propertie->value ?></p>
+									</div>
 								</div>
-							</div>
-						<?php endforeach ?>
+							<?php endforeach ?>
+						<?php endif ?>
 						<!-- <div class="table-content-tab-detail">
 							<div class="title-table-detail"><span>Seller Service</span></div>
 							<div class="icon-table-detail"><?= $this->Html->image('assets/grid/rv2.png') ?></div>

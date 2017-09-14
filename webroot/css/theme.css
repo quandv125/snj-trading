@@ -3162,6 +3162,7 @@ font-size: 15px;
 	border: 1px solid #e8e8e8;
 	display: table;
 	margin-top: -1px;
+	min-height: 40px;
 }
 
 .title-table-detail {
@@ -15706,3 +15707,23 @@ div.show-image:hover span.delete-wishlist {
 .cart_item_new, .cart_item  {
 	height: 90px;
 }
+.title-infomation-detail{
+	border-right: 1px solid #e8e8e8;
+    display: table-cell;
+    padding: 6px 15px;
+    width: 19.9em;
+    background-color: #fafafa;
+}
+.content-infomation-first{
+	color: #666;
+    display: table-cell;
+    padding: 6px 20px;
+    min-width: 24em;
+	border-right: 1px solid #e8e8e8;
+}
+.content-infomation-second{
+	color: #666;
+    display: table-cell;
+    padding: 6px 20px;
+    min-width: 26em;
+}	

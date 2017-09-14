@@ -20,7 +20,7 @@
 	<?= $this->fetch('script') ?>
 	<!-- <?php //echo $this->Html->script(['loader']); ?> -->
 	<!-- CSS -->
-	
+	 <?= $this->Html->script(['loader' ]); ?>
 	<?php 
 		echo $this->Html->css('libs/font-awesome.min');
 		echo $this->Html->css('libs/font-linearicons');
@@ -147,6 +147,10 @@
 	</div>
 	<!-- End Footer -->
 </div>
+<div id="overlay" class="loadbar">
+        <div id="progstat"></div>
+        <div id="progress"></div>
+    </div>
 <div id="menufix">
 	<?= $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
 </div>

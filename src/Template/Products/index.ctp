@@ -58,7 +58,7 @@
 											</li>
 										   -->
 										 <!--    <li role="presentation">
-												<a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Invoice") ?></a>
+												<a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php// echo __("Invoice") ?></a>
 											</li> -->
 										</ul>
 										<!-- Tab panes -->
@@ -169,29 +169,29 @@
 												<table class="table table-bordered">
 													 <thead>
 														<tr>
-															<th><?php echo __("Code")?></th>
-															<th><?php echo __("Quantity")?></th>
-															<th><?php echo __("Total value")?></th>
-															<th><?php echo __("Discount")?></th>
-															<th><?php echo __("Total")?></th>
+															<th><?php // echo __("Code")?></th>
+															<th><?php // echo __("Quantity")?></th>
+															<th><?php // echo __("Total value")?></th>
+															<th><?php // echo __("Discount")?></th>
+															<th><?php // echo __("Total")?></th>
 														</tr>
 													</thead>
 												 <?php// foreach ($product->stock_products as $key => $stocks): ?>
 													<?php// $stock = $stocks['_matchingData']['Stocks']; ?>
 													<tr>
-														<td><span class="stocks-detail cursor-pointer" pid="<?= $product->id?>" id="<?= $stock['id'];?>">
+														<td><span class="stocks-detail cursor-pointer" pid="<?php //echo $product->id?>" id="<?php //echo $stock['id'];?>">
 															<?php// echo 'SK.'.str_pad($stock['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
 														</td>
-														<td><?= $stock['total_quantity'];?></td>
-														<td><?= number_format($stock['total_price'], DECIMALS);?></td>
-														<td><?= $stock['discount_stock'];?></td>
-														<td><?= number_format($stock['final_price'], DECIMALS);?></td>
+														<td><?php //echo $stock['total_quantity'];?></td>
+														<td><?php //echo number_format($stock['total_price'], DECIMALS);?></td>
+														<td><?php //echo $stock['discount_stock'];?></td>
+														<td><?php //echo number_format($stock['final_price'], DECIMALS);?></td>
 													</tr>
 												<?php// endforeach ?>
 												</table>
 											</div> -->
 										   
-											<!-- <div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
+											<!-- <div role="tabpanel" class="tab-pane fade" id="tab4<?php //echo $product->id?>">
 												<table class="table table-bordered">
 													 <thead>
 														<tr>
@@ -202,19 +202,19 @@
 															<th><?php //echo __("Total")?></th>
 														</tr>
 													</thead>
-												<?php foreach ($product->invoice_products as $key => $invoices): ?>
-													<?php $invoice = $invoices['_matchingData']['Invoices']; ?>
+												<?php// foreach ($product->invoice_products as $key => $invoices): ?>
+													<?php// $invoice = $invoices['_matchingData']['Invoices']; ?>
 													<tr>
-														<td><span class="invoices-detail cursor-pointer" pid="<?= $product->id?>" id="<?= $invoice['id'];?>">
+														<td><span class="invoices-detail cursor-pointer" pid="<?php //echo $product->id?>" id="<?php //echo $invoice['id'];?>">
 															<?php //echo INVOICE.str_pad($invoice['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
 														</td>
-														<td><?= $invoice['status'];?></td>
-														<td><?= $invoice['created'];?></td>
-														<td><?= number_format($invoice['total'], DECIMALS);?></td>
+														<td><?php //echo $invoice['status'];?></td>
+														<td><?php //echo $invoice['created'];?></td>
+														<td><?php //echo number_format($invoice['total'], DECIMALS);?></td>
 														
 													  
 													</tr>
-												<?php endforeach ?>
+												<?php// endforeach ?>
 												</table>
 												 
 											</div> -->

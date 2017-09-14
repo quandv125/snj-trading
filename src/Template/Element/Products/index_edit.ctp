@@ -113,7 +113,6 @@
 										<span class="btn btn-danger delete deletePI" id="<?= $image->id?>"><i class="fa fa-trash-o" aria-hidden="true"></i> </span>
 									</div>
 								<?php endforeach; ?>
-								
 							</div>
 						</div>
 					</div>

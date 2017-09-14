@@ -94,7 +94,7 @@ class ProductsTable extends Table
 
 		$validator->boolean('actived')->requirePresence('actived', 'create')->notEmpty('actived');
 
-		$validator->integer('status')->allowEmpty('status');
+		$validator->allowEmpty('status');
 
 		$validator->decimal('retail_price')->allowEmpty('retail_price');
 

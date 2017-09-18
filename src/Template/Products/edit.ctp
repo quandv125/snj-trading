@@ -39,7 +39,7 @@
             echo $this->Form->input('stock_level');
             echo $this->Form->input('unit');
             echo $this->Form->input('variants');
-            echo $this->Form->input('description');
+            echo $this->Form->input('description',['class'=>'ckeditor']);
             echo $this->Form->input('stock_min');
             echo $this->Form->input('stock_max');
             echo $this->Form->input('ordering_note');

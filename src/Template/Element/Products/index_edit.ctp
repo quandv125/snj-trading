@@ -31,11 +31,19 @@
 								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('sku',['class'=>'sku','value' => $product->sku,'placeholder' => 'SKU/Item Number','label' => 'SKU/Part No']); ?>
 									<?= $this->Form->input('product_name',['class' => 'product_name','value' => $product->product_name,'placeholder' => 'Name']); ?>
-									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD','value'=>number_format($product->supply_price, 2, '.', ',')]); ?>
+									<?= $this->Form->input('supplier_id',[
+										'class' => 'supplier_id',
+										'value' => $product->supplier_id,
+										'id' => 'PSupplier_Id',
+										'append' => [
+											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalES'.$product->id])]]); ?>
 									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => 'USD','value'=>number_format($product->retail_price, 2, '.', ',')]); ?>
 									
-									<?= $this->Form->input('vat',['label'=>'VAT(10%)','type' => 'checkbox','checked' => $product->vat? "checked":"" ])?>
+									<?= $this->Form->input('vat',['label'=>'VAT(10%)','type'=>'checkbox','checked'=>$product->vat?"checked":""])?>
+								</div>
+								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('quantity',['class'=>'auto','placeholder' => 'Quantity','value'=>$product->quantity]); ?>
+									<?= $this->Form->input('unit',['class' => 'unit','placeholder' => 'Unit','value'=>$product->unit]); ?>
 									<?= $this->Form->input('categorie_id', [
 										'label'=>__('Category'), 
 										'class' => 'categorie_id js-states', 
@@ -45,47 +53,43 @@
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalEC'.$product->id])]
 										]);
 									?>
-								
-									<?= $this->Form->input('supplier_id',[
-										'class' => 'supplier_id',
-										'value' => $product->supplier_id,
-										'id' => 'PSupplier_Id',
-										'append' => [
-											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalES'.$product->id])]]); ?>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('status',['class' => 'status','placeholder' => 'Status','value'=>$product->status]); ?>
-									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand','value'=>$product->brand]); ?>
-									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size','value'=>$product->size]); ?>
-									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin','value'=>$product->origin]); ?>
-									<?= $this->Form->input('unit',['class' => 'unit','placeholder' => 'Unit','value'=>$product->unit]); ?>
-									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight','value'=>$product->weight]); ?>
-									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color','value'=>$product->color]); ?>
-									<?= $this->Form->input('meterial',['class' => 'Material','placeholder' => 'Material','value'=>$product->meterial]); ?>
-									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition','value'=>$product->composition]); ?>
-									<?= $this->Form->input('release_date',['type'=>'date','placeholder' => 'Release date','value'=>$product->release_date]); ?>
-									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer','value'=>$product->manufacturer]); ?>
-
-									
+									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD','value'=>number_format($product->supply_price, 2, '.', ',')]); ?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tabs2<?= $product->id;?>">
-								
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('release_date',['type'=>'text','placeholder' => 'Release date','class'=>'date-picker','value'=> date("Y-m-d", strtotime($product->release_date)) ]); ?>
+									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size','value'=>$product->size]); ?>
+									<?= $this->Form->input('status',['class' => 'status','placeholder' => 'Status','value'=>$product->status]); ?>
+									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand','value'=>$product->brand]); ?>
+								</div>
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight','value'=>$product->weight]); ?>
+									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color','value'=>$product->color]); ?>
+									<?= $this->Form->input('meterial',['class' => 'Material','placeholder' => 'Material','value'=>$product->meterial]); ?>
+									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin','value'=>$product->origin]); ?>									
+								</div>
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer','value'=>$product->manufacturer]); ?>
+									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition','value'=>$product->composition]); ?>
+								</div>
+								<div class="clearfix"></div>
 								<?= $this->Form->input('properties',['class' =>'result_'.$product->id.' hidden', 'label' => false]); ?>
 								<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" onclick="aiptf(<?= $product->id;?>)"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
 								<div class="menthod-product menthod-product-<?php echo $product->id;?> col-lg-10">
+
 									<?php if (isset($product->properties) && !empty($product->properties)): ?>
 										<?php foreach (json_decode($product->properties) as $key => $propertie): ?>
 											<div class="mth-prd">
-												<span class="col-md-6"><input type="text" value="<?php echo $propertie->label ?>" class="label123 form-control"></span>
-												<span class="col-md-5"><input type="text" value="<?php echo $propertie->value ?>" class="value123 form-control"></span>
+												<span class="col-md-6"><input type="text" placeholder="Label" value="<?php echo $propertie->label ?>" class="label123 form-control"></span>
+												<span class="col-md-5"><input type="text" placeholder="Value" value="<?php echo $propertie->value ?>" class="value123 form-control"></span>
 												<span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span>
 											</div>
 										<?php endforeach ?>
 									<?php endif ?>
 									<div class="mth-prd">
-										<span class="col-md-6"><input type="text" name="" class="label123 form-control"></span>
-										<span class="col-md-5"><input type="text" name="" class="value123 form-control"></span>
+										<span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>
+										<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span>
 										<span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span>
 									</div>
 								</div>
@@ -93,11 +97,11 @@
 							<div role="tabpanel" class="tab-pane fade" id="tabs3<?= $product->id;?>">
 							   	<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Short_Description">Short Description</label>
-									<?= $this->Form->textarea('short_description',['value' => $product->short_description,'class'=>'summernote']);?>
+									<?= $this->Form->textarea('short_description',['value' => $product->short_description,'class'=>'ckeditor']);?>
 								</div>
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Description">Description</label>
-									<?= $this->Form->textarea('description',['value' => $product->description,'class'=>'summernote']);?>
+									<?= $this->Form->textarea('description',['value' => $product->description,'class'=>'ckeditor']);?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tabs4<?= $product->id;?>">
@@ -128,7 +132,7 @@
 </div>  <!-- End Modal -->
 <script type="text/javascript">
 	function aiptf(id) {
-		jQuery(".menthod-product-"+id).append('<div class="mth-prd"><span class="col-md-6"><input type="text" name="" class="label123 form-control"></span>	<span class="col-md-5"><input type="text" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span></div><br/>');
+		jQuery(".menthod-product-"+id).append('<div class="mth-prd"><span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>	<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span></div><br/>');
 		jQuery('.remove-jtfd').click(function(){
 			jQuery(this).parent().remove();
 		});

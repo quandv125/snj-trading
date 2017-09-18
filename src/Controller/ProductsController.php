@@ -134,26 +134,29 @@ class ProductsController extends AppController
 	public function edit($id = null)
 	{
 		$product = $this->Products->get($id, [ 'contain' => [] ]);
-		$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
-		$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
-	
-		$this->request->data['actived'] = true;
+		
 		if ($this->request->is(['patch', 'post', 'put'])) {
+			$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
+			$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+			$this->request->data['actived'] = true;
 			$product = $this->Products->patchEntity($product, $this->request->data);
 			if ($this->Products->save($product)) {
-				$Image = TableRegistry::get('Images');				
-				for($i=0; $i<count($this->request->data['files'.$product->id]); $i++){
-					$path = rand(1,100000).'_'.$this->request->data['files'.$product->id][$i]['name'];
-					if(move_uploaded_file($this->request->data['files'.$product->id][$i]['tmp_name'], PRODUCTS.$path)){
-						$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$product->id][$i]['name']);
-						$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
-						$images = $Image->newEntity();
-						$images->product_id  =  $product->id;
-						$images->path		 = 'products/'.$path;
-						$images->thumbnail   = 'thumbnails/'.$thumbnail;
-						$Image->save($images);
+				if (isset($this->request->data['files'.$product->id]) && !empty($this->request->data['files'.$product->id])) {
+					$Image = TableRegistry::get('Images');				
+					for($i=0; $i<count($this->request->data['files'.$product->id]); $i++){
+						$path = rand(1,100000).'_'.$this->request->data['files'.$product->id][$i]['name'];
+						if(move_uploaded_file($this->request->data['files'.$product->id][$i]['tmp_name'], PRODUCTS.$path)){
+							$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'.$product->id][$i]['name']);
+							$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
+							$images = $Image->newEntity();
+							$images->product_id  =  $product->id;
+							$images->path		 = 'products/'.$path;
+							$images->thumbnail   = 'thumbnails/'.$thumbnail;
+							$Image->save($images);
+						}
 					}
 				}
+				
 				$this->Flash->success(__('The product has been saved.'));
 				return $this->redirect(['action' => 'index']);
 			} else {
@@ -258,7 +261,7 @@ class ProductsController extends AppController
 					}
 				}
 				//
-				exit();
+				exit(); 
 				if ($id != null) {
 					$this->Flash->success(__('The product has been saved.'));
 					return $this->redirect(['controller'=>'pages','action' => 'ProductsOfSuppliers', $this->Auth->user('id')]);

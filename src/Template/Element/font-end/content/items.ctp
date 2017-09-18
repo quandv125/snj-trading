@@ -28,7 +28,7 @@
 			<div class="info-price">
 				<span><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</span>
 				<div class="clearfix"></div>
-				<del><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</del>
+				<!-- <del><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</del> -->
 			</div>
 			<!-- <div class="product-rating">
 				<div class="inner-rating" style="width:100%"></div>

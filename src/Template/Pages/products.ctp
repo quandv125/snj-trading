@@ -255,7 +255,7 @@
 						<div class="table-content-tab-detail">
 							<div class="title-table-detail"><span><?= __("Release date of the same model"); ?></span></div>
 							<div class="info-table-detail">
-								<p style="text-transform: capitalize;"><?= $product->release_date ?></p>
+								<p><?php echo date_format($product->release_date, 'Y-m-d'); ?></p>
 							</div>
 						</div>
 						<div class="table-content-tab-detail">

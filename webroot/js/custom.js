@@ -1,5 +1,3 @@
-
-
 jQuery( document ).ready(function() {
 	jQuery('.summernote').summernote({
 		height: 100,
@@ -2780,8 +2778,12 @@ jQuery( document ).ready(function() {
 	}
 	jQuery("#add-mtd-prd").click(function(){
 		console.log('ok');
-		jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-6"><input type="text" name="" class="label123 form-control"></span>	<span class="col-md-6"><input type="text" name="" class="value123 form-control"></span></div><br/>');
-		
+		jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>	<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span></div><br/>');
+		jQuery('.remove-jtfd').click(function(){
+			jQuery(this).parent().remove();
+		});
 	});
-	
+	jQuery('.remove-jtfd').click(function(){
+		jQuery(this).parent().remove();
+	});
 }); // jQuery document

@@ -102,10 +102,9 @@ $cakeDescription = 'S&J Trading Company';
         'assets/plugins/livesearch/vendor/jquery.hideseek.min',
         'assets/plugins/livesearch/initializers','libs/kendo.all.min',
         'libs/angular.min',
+        'libs/ckeditor/ckeditor',
         'myapp',
         'custom'
-        
-       
     )); ?>
      
 </head>

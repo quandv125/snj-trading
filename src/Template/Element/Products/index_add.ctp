@@ -15,13 +15,16 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs nav-justified" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#tab1" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
+								<a href="#tab1" role="tab" data-toggle="tab"><?php echo __("Products") ?></a>
 							</li>
 							<li role="presentation">
-								<a href="#tab2" role="tab" data-toggle="tab"><?php echo __("Descriptions"); ?></a>
+								<a href="#tab2" role="tab" data-toggle="tab"><?php echo __("Infomations"); ?></a>
 							</li>
 							<li role="presentation">
-								<a href="#tab3" role="tab" data-toggle="tab"><?php echo __("Image") ?></a>
+								<a href="#tab3" role="tab" data-toggle="tab"><?php echo __("Descriptions"); ?></a>
+							</li>
+							<li role="presentation">
+								<a href="#tab4" role="tab" data-toggle="tab"><?php echo __("Image") ?></a>
 							</li>
 						</ul>
 						<!-- Tab panes -->
@@ -31,10 +34,15 @@
 								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'SKU/Item Number','label' => 'SKU/Item Number']); ?>
 									<?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Name']); ?>
-									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD']); ?>
+									<?= $this->Form->input('supplier_id',['class' => 'supplier_id','id' => 'PSupplier_Id','append' => [
+											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
+
 									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => 'USD']); ?>
 									<?= $this->Form->input('vat',['type'=>'checkbox','label' => 'VAT (10%)']); ?>
+								</div>
+								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
+									<?= $this->Form->input('unit',['class' => 'unit','placeholder' => 'Unit']); ?>
 									<?= $this->Form->input('categorie_id', ['label'=>__('Category'), 
 										'class' => 'categorie_id js-states', 
 										'id' => 'PCategorie_Id',
@@ -42,25 +50,38 @@
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
 										]);
 									?>
-								
-									<?= $this->Form->input('supplier_id',['class' => 'supplier_id','id' => 'PSupplier_Id','append' => [
-											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
-								</div>
-								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('status',['class' => 'status','placeholder' => 'Status']); ?>
-									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand']); ?>
-									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size']); ?>
-									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
-									<?= $this->Form->input('unit',['class' => 'unit','placeholder' => 'Unit']); ?>
-									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight']); ?>
-									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color']); ?>
-									<?= $this->Form->input('material',['class' => 'Material','placeholder' => 'Material']); ?>
-									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition']); ?>
-									<?= $this->Form->input('release_date',['type'=>'date','placeholder' => 'Release date']); ?>
-									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer']); ?>
+									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD']); ?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tab2">
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('release_date',['type'=>'text','placeholder' => 'Release date','class'=>'date-picker','value'=> date("Y-m-d") ]); ?>
+									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size']); ?>
+									<?= $this->Form->input('status',['class' => 'status','placeholder' => 'Status']); ?>
+									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand']); ?>
+								</div>
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight']); ?>
+									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color']); ?>
+									<?= $this->Form->input('meterial',['class' => 'Material','placeholder' => 'Material']); ?>
+									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
+								</div>
+								<div class="col-lg-4 col-md-4">
+									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer']); ?>
+									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition']); ?>
+								</div>
+								<div class="clearfix"></div>
+								<?= $this->Form->input('properties',['class' => 'hidden','label'=>false,'id'=>"result"]); ?>
+								<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" id="add-mtd-prd"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
+								<div class="menthod-product col-lg-10">
+									<div class="mth-prd">
+										<span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>
+										<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span>
+										<span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span>
+									</div>
+								</div>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="tab3">
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Short_Description">Short Description</label>
 									<?= $this->Form->textarea('short_description',['class'=>'summernote']);?>
@@ -70,22 +91,12 @@
 									<?= $this->Form->textarea('description',['class'=>'summernote']);?>
 								</div>
 							</div>
-							<div role="tabpanel" class="tab-pane fade" id="tab3">
+							<div role="tabpanel" class="tab-pane fade" id="tab4">
 								<?= $this->Form->input('files.',[ 'type'=>'file', 'id' => 'ProductFile', 'multiple',
 									'append' => [
 										$this->Html->tag('span', '<i class="fa fa-trash"></i>', array('class' => 'btn btn-success btn-trash-image waves-effect waves-button waves-red'))]]); 
 								?>
 								<output id="listProductFile"></output>
-								
-								<?= $this->Form->input('properties',['class' => 'hidden','id'=>"result"]); ?>
-
-								<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" id="add-mtd-prd"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
-								<div class="menthod-product col-lg-10">
-									<div class="mth-prd">
-										<span class="col-md-6"><input type="text" name="" class="label123 form-control"></span>
-										<span class="col-md-6"><input type="text" name="" class="value123 form-control"></span>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>

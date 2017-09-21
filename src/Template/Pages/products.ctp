@@ -301,8 +301,7 @@
 		<div class="upsell-detail">
 			<h2 class="title-default">Products Related To This Item </h2>
 		</div>
-	
-		<div class="wrap-item" data-pagination="false" data-navigation="true" data-autoplay="true"  data-itemscustom="[[0, 5]]" style="padding-left: 35px;">
+		<div class="wrap-item" data-pagination="false" data-navigation="true" data-autoplay="true" data-itemscustom="[[0, 5]]" style="padding-left: 35px;">
 			<?php foreach ($products as $key => $cat): ?>
 				<div class="item" style="max-width: 195px;">
 					<div class="item-product">
@@ -310,7 +309,6 @@
 							<a class="product-thumb-link" href="<?= $this->Url->build(array('controller'=>'pages','action'=>'products',$cat->id)) ?>">
 								<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'first-thumb','width' => 193])?>
 								<?= $this->Html->image($cat->images[0]['thumbnail'],['class'=>'second-thumb','width' => 193])?>
-								
 							</a>
 							<div class="product-info-cart">
 								<div class="product-extra-link">
@@ -326,10 +324,10 @@
 						</div>
 						<div class="product-info">
 							<h3 class="title-product">
-								<?= $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,15,15),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
+								<?= $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,63,63),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
 							</h3>
-							<div class="info-price" style="font-size:1.8em;color:#ff0a0a;font-family:fantasy;font-style:italic;">
-								<span>$ <?= number_format( $cat->retail_price, DECIMALS); ?></span>
+							<div class="info-price">
+								<span><strong><?= number_format( $cat->retail_price, DECIMALS);?>원</strong></span>
 							</div> 
 							<div class="product-rating">
 								<div class="inner-rating" style="width:100%"></div>

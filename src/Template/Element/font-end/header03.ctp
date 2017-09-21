@@ -8,13 +8,16 @@
 						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'width' => '100%']) ?>
 					</div>
 				</div>
-				<div class="col-md-7 col-sm-10 col-xs-12" style=" margin-top: 30px;">
+				<div class="col-md-7 col-sm-10 col-xs-12" style=" margin-top: 10px;">
 					<div class="smart-search search-form3 search-form5">
 						<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
 					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-6 col-sm-6"><span style="color: #ffffff;">Giao hàng trong 2 tiếng hàng chục nghìn sản phẩm  </span></div>
+					<div class="col-md-6 col-sm-6"><span style="color: #ffffff;">Giao hàng tất cả các ngày trong năm  </span></div>
 				</div>
 				
-				<div class="col-md-3 col-sm-12 col-xs-12" style=" margin-top: 30px;">
+				<div class="col-md-3 col-sm-12 col-xs-12" style=" margin-top: 10px;">
 					<div class="wrap-cart-info3">
 						<ul class="top-info top-info3">
 							<li class="top-account has-child">
@@ -43,6 +46,8 @@
 						</ul>
 						<?php echo $this->element('font-end/cart') ?>
 					</div>
+					<br>
+					<div class="col-md-12 col-sm-12"><span style="color: #ffffff;">Hỗ trợ khách hàng 1900 6035 (1.000đ/phút)  </span></div>
 				</div>
 			</div>
 		</div>

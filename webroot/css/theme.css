@@ -213,7 +213,17 @@ a:focus {
   color: #fe9c00;
 }
 .info-price span {
-  color: #fe9c00;
+  
+  font-size:22px;
+  color:#ff0a0a;
+  font-family: "Tahoma" sans-serif ;
+  font-style:normal;
+}
+.info-price span strong	{
+	color: rgba(35, 29, 28, 0.79);
+	font-size:19px;
+	font-family:sans-serif !important;
+  
 }
 .top-header {
 	background-color: #fafafa;
@@ -504,7 +514,7 @@ a:focus {
 	color: #666;
 }
 .info-price span {
-	color: #ED321E;
+	color: rgba(35, 29, 28, 0.79);
 	margin-right: 10px;
 }
 .info-price del {
@@ -2891,9 +2901,9 @@ font-size: 15px;
 }
 .info-price.info-price-detail span {
 	font-size:2.2em;
-	color:#ff0a0a;
-	font-family:fantasy;
-	font-style:italic;
+	color: rgba(35, 29, 28, 0.79);
+	font-family: "Tahoma";
+	font-style: normal;
 	margin-right: 18px;
 }
 .attr-info {
@@ -5461,7 +5471,7 @@ font-size: 15px;
 	display: block;
 }
 .wrap-cart-info3 {
-	float: right;
+	float: left;
 	margin-top: 4px;
 }
 .header-nav3 {

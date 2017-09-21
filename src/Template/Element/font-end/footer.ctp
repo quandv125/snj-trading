@@ -61,9 +61,9 @@
                         <div class="box-menu-footer4">
                             <h2>Contact Us</h2>
                             <ul class="footer-box-contact">
-                                <li><i class="fa fa-home"></i> <a> 12C/182 Van Cao Str., Dang Giang Ward, Ngo Quyen Dist., Hai Phong City, Vietnam (181810) </a></li>
-                                <li><i class="fa fa-phone"></i> <a> +83-(0)313-852-885, Fax: +84-(0)313-261-486 </a></li>
-                                <li><i class="fa fa-fax"></i> <a> C.P: +84-(0)902-870-913 </a></li>
+                                <li><i class="fa fa-home"></i> <a> 3/F No. 301, Sobong Bldg, 217-6, Cheonghak-dong, Yeongdo-gu, Busan, Korea(49007) </a></li>
+                                <li><i class="fa fa-phone"></i> <a> +82-(0)51-404-1125, Fax: +82-(0)51-404-1124 </a></li>
+                                <li><i class="fa fa-fax"></i> <a> Fax: +82-(0)505-310-7593(Internet Fax) </a></li>
                                 <li><i class="fa fa-envelope"></i> <a href="mailto:sales@snj-intl.com">sales@snj-intl.com</a></li>
                             </ul>
                         </div>
@@ -112,7 +112,7 @@
             <div class="copyright-social4">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <p class="copyrigh4">&copy;2017 <a href="#">SNJ Trading Company</a></p>
+                        <p class="copyrigh4">&copy;2017 <a href="#">랍스타 인터넷 쇼핑</a></p>
                         <div class="policy4">
                             <label>Policies: </label>
                             <a href="#">Terms of use</a>

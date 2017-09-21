@@ -1,4 +1,7 @@
-
+<!-- <textarea name="ckeditor1"   rows="10" cols="80">
+    This is my textarea to be replaced with CKEditor.
+</textarea>
+<br> -->
 <div class="row">
 	<div class="col-lg-12 col-md-12 panel panel-white">
 		<div class="col-lg-2 col-md-2 col-sm-3"> <!-- Searchbox -->
@@ -69,22 +72,21 @@
 												</div>
 												<div class="clearfix"></div>
 												<div class="content">
+												
 													<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-													<?php if (isset($product->images[0])): ?>
-														<div class="col-lg-9 text-center">
-															<a class="fancyboxs fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[0]->path?>">
-																<?= $this->Html->image($product->images[0]->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>200, 'data-zoom-image' => '../img/'.$product->images[0]->path]) ?>
-															</a><div class="divider5"></div>
-														</div>
-														<div class="col-lg-3 text-center">
-															<?php for ($i=1; $i < count($product->images); $i++):?>
-																<a class="fancyboxs fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[$i]->path?>">
-																  
-																	<?= $this->Html->image($product->images[$i]->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$product->images[$i]->path]) ?>
-
-																</a>
-															<?php endfor; ?>
-														</div>
+														<?php if (isset($product->images[0])): ?>
+															<div class="col-lg-12 text-center">
+																<a class="fancyboxs fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[0]->path?>">
+																	<?= $this->Html->image($product->images[0]->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>200, 'data-zoom-image' => '../img/'.$product->images[0]->path]) ?>
+																</a><div class="divider5"></div>
+															</div>
+															<div class="col-lg-12 text-center">
+																<?php foreach ($product->images as $image): ?>
+																	<a class="fancyboxs fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $image->path?>">
+																		<?= $this->Html->image($image->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$image->path]) ?>
+																	</a>
+																<?php endforeach ?>
+															</div>
 														<?php endif ?>
 														<div class="clearfix"></div>
 													</div>
@@ -92,7 +94,7 @@
 														<div class="table-responsive table-products">
 															<table class="table table-striped">
 																<tr>
-																	<td class="bold"><?php echo __('Part No')?></td>
+																	<td class="bold"><?php echo __('Sku/ Item Number')?></td>
 																	<td><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
 																</tr>
 																<tr>
@@ -100,16 +102,16 @@
 																	<td><?= $product->category->name?></td>
 																</tr>
 																<tr>
-																	<td class="bold"><?= __("Maker's Name")?>:</td>
-																	<td><?= $product->supplier['name']; ?></td>
+																	<td class="bold"><?= __("Manufacturer")?>:</td>
+																	<td><?= $product->manufacturer; ?></td>
 																</tr>
 																<tr>
-																	<td class="bold"><?php echo __('Serial No') ?>:</td>
-																	<td><?= $product->serial_no ?></td>
+																	<td class="bold"><?php echo __('Status') ?>:</td>
+																	<td><?= $product->status ?></td>
 																</tr>
 																<tr>
-																	<td class="bold"><?php echo __('Type Model')?>:</td>
-																	<td><?= $product->type_model ?></td>
+																	<td class="bold"><?php echo __('Brand')?>:</td>
+																	<td><?= $product->brand ?></td>
 																</tr>
 																<tr>
 																	<td class="bold"><?php echo __('Origin') ?>:</td>
@@ -235,7 +237,7 @@
 	</div><!-- col-lg-12 -->
 </div> <!-- row -->
 
-<div id="modalStocks" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- <div id="modalStocks" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -246,3 +248,4 @@
 		</div>
 	</div>
 </div>
+ -->

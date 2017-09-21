@@ -121,7 +121,7 @@ class UsersController extends AppController
 			$user = $this->Auth->identify();
 			if ($user && $user['actived'] == true) {
 				$this->Auth->setUser($user);
-				$this->request->session()->write('Config.language', 'en');
+				$this->request->session()->write('Config.language', 'kr');
 				if (!$user['group_id'] == CUSTOMERS) {
 					return $this->redirect($this->Auth->redirectUrl());
 				} else {

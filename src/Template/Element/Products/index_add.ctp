@@ -1,4 +1,4 @@
- <span class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red float-right margin-bottom10" data-toggle="modal" data-target="#myModal">
+<span class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red float-right margin-bottom10" data-toggle="modal" data-target="#myModal">
 	<i class="fa fa-plus"></i>Add
 </span>
 
@@ -84,11 +84,11 @@
 							<div role="tabpanel" class="tab-pane fade" id="tab3">
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Short_Description">Short Description</label>
-									<?= $this->Form->textarea('short_description',['class'=>'summernote']);?>
+									<?= $this->Form->textarea('short_description',['class'=>'ckeditor']);?>
 								</div>
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Description">Description</label>
-									<?= $this->Form->textarea('description',['class'=>'summernote']);?>
+									<?= $this->Form->textarea('description',['class'=>'ckeditor']);?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tab4">

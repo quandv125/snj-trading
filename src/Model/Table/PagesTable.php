@@ -156,7 +156,7 @@ class PagesTable extends Table
                 return $q->select(['id','product_id','path','thumbnail']);
             }])
             ->select(['Products.id','Products.sku','Products.product_name','Products.categorie_id','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.retail_price','Products.short_description'])
-            ->order(['Products.created' => 'DESC'])
+            ->order(['Products.created' => 'ASC'])
             ->Where([$conditions])
             ->limit(LIMIT)->toarray();
          

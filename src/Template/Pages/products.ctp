@@ -8,16 +8,21 @@
 						<div class="col-md-7 col-sm-12 col-xs-12">
 							<div class="detail-gallery-fullwidth min-height-460">
 								<div class="mid">
-									<?= $this->Html->image($product->images[0]['path'])?>
-									
+									<a class="fancyboxs fancybox-thumbs-<?= 123 ?>" id="<?= 123 ?>" data-fancybox-group="thumb" href="/img/<?= $product->images[0]->path?>">
+										<?= $this->Html->image($product->images[0]['path'])?>
+									</a>
 									<p><i class="fa fa-search"></i> <?php echo __("Mouse over to zoom in") ?></p>
 								</div>
 								<div class="carousel-fullwidth">
 									<a href="#" class="vertical-control vertical-next"><i class="fa fa-angle-up"></i></a>
 									<div class="carousel">
 										<ul>
+											<li><a href="#"><?= $this->Html->image($product->images[0]['thumbnail'],['ref'=> '/img/'.$product->images[0]['path']])?></a></li>
 										<?php foreach ($product->images as $key => $image): ?>
-											<?php if ($key <= 8	): ?>
+											<?php if ($key >0 && $key <= 8	): ?>
+												<a class="fancybox-thumbs-<?= 123 ?>" style="display: none;" id="<?= 123 ?>" data-fancybox-group="thumb" href="/img/<?= $image['path']?>">
+													<?= $this->Html->image($image['thumbnail'],['class'=>'image-border zoom_05 img-responsive','style'=>'display:none;','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$image['path']]) ?>
+												</a>
 												<li><a href="#"><?= $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?></a></li>
 											<?php endif ?>
 										<?php endforeach ?>
@@ -37,10 +42,10 @@
 								<div class="info-price info-price-detail">
 									<label>Price:</label>
 									<?php if ($product->vat == 1): ?>
-										<span>$ <?= number_format($product->retail_price + ($product->retail_price*0.1), 2);?></span>
+										<span> <?= number_format($product->retail_price + ($product->retail_price*0.1), 0);?> 원</span>
 										(VAT)
 									<?php else: ?>
-										<span>$ <?= number_format($product->retail_price, 2); ?></span>
+										<span> <?= number_format($product->retail_price, 0); ?> 원</span>
 									<?php endif ?>
 									<!-- <del>$17.96</del> -->
 								</div> 
@@ -49,7 +54,7 @@
 									<tbody>
 										<tr>
 											<td><b><?= __("Part No:")?></b></td>
-											<td><?= 'SP.'.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+											<td><?= $product->sku; ?></td>
 											<td><b><?= __("Categories:")?></b></td>
 											<td><?= $product->category['name']; ?></td>
 										</tr>
@@ -114,7 +119,7 @@
 									</div>
 									<div class="col-md-6">
 										<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail'] ?>">
-										<i class="fa fa-shopping-cart"></i> Add to Cart
+										<i class="fa fa-shopping-cart"></i> <?php echo __("Add to Cart") ?>
 									</span>
 									<!-- <div class="product-social-extra">
 										<a class="wishlist-link" href="#"><i class="fa fa-heart-o"></i></a>
@@ -315,7 +320,7 @@
 								</div>
 								
 								<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $cat->id; ?>" picture="<?= $product->images[0]['thumbnail'] ?>">
-									<i class="fa fa-shopping-cart"></i> Add to Cart
+									<i class="fa fa-shopping-cart"></i> <?php echo __("Add to Cart") ?>
 								</span>
 							</div>
 						</div>

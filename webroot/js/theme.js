@@ -1997,4 +1997,25 @@ jQuery(document).ready(function($){
 			}
 		});
 	});
+
+	// Plugin Fancybox
+	jQuery('.fancyboxs').click(function(){
+		var id = jQuery(this).attr('id');
+		jQuery('.fancybox-thumbs-'+id).fancybox({
+			nextClick 	: true,
+			openEffect 	: 'elastic',
+			openSpeed  	: 250,
+			closeEffect : 'elastic',
+			closeSpeed  : 250,
+			helpers : {
+				thumbs : {
+					width  : 50,
+					height : 50
+				},
+				overlay: {
+					locked: false
+				}
+			}
+		});
+	});
 }); // End document

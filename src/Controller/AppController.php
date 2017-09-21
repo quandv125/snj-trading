@@ -47,11 +47,11 @@ class AppController extends Controller
 		$this->loadComponent('Flash');
 		
 		switch($this->request->session()->read('Config.language')) {
-			case "vn":
-				I18n::locale('vn_VN');
+			case "en":
+				I18n::locale('en_US');
 				break;
 			default:
-				I18n::locale('en_US');
+				I18n::locale('kr_KR');
 				break;
 		}
 
@@ -159,6 +159,7 @@ class AppController extends Controller
 			->where([ 'type' => HORIZONTAL , 'actived' => 1])
 			->order([ 'created' => 'ASC' ])
 			->toarray();
+			
 		// $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
 		// $snj         = $Article->find('list',[ 'keyFi eld' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;
 		// $my_acc      = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_MYACCOUNT]);

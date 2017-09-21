@@ -19,7 +19,7 @@
 		</li>
 	</ul>
 <?php else: ?>
-<span class="cursor-point" data-toggle="modal" data-target="#myModal">Login/Register</span>
+<span class="cursor-point" data-toggle="modal" data-target="#myModal"><?php echo __("Login/Register") ?></span>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-login">
 		<!-- Modal content-->

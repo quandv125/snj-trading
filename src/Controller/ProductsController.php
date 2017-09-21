@@ -26,10 +26,12 @@ class ProductsController extends AppController
 	public function index()
 	{
 		$User = TableRegistry::get('Users');
+		
 		if ($this->Auth->user('group_id') == CUSTOMERS) {
 			return $this->redirect(['action' => 'suppliers']);
 		}
 		$products = $this->Products->getProductsSearch(null, null, null);  
+		
 		$users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
 		$this->infoPagi(null, 1);
 		$this->set(compact('products','users'));
@@ -134,7 +136,6 @@ class ProductsController extends AppController
 	public function edit($id = null)
 	{
 		$product = $this->Products->get($id, [ 'contain' => [] ]);
-		
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
 			$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
@@ -844,4 +845,10 @@ class ProductsController extends AppController
 			exit();
 		}
 	}
+
+	public function browse()
+	{
+		
+	}
+
 }

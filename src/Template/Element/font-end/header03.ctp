@@ -8,13 +8,13 @@
 						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'width' => '100%']) ?>
 					</div>
 				</div>
-				<div class="col-md-7 col-sm-10 col-xs-12">
+				<div class="col-md-7 col-sm-10 col-xs-12" style=" margin-top: 30px;">
 					<div class="smart-search search-form3 search-form5">
 						<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
 					</div>
 				</div>
 				
-				<div class="col-md-3 col-sm-12 col-xs-12">
+				<div class="col-md-3 col-sm-12 col-xs-12" style=" margin-top: 30px;">
 					<div class="wrap-cart-info3">
 						<ul class="top-info top-info3">
 							<li class="top-account has-child">
@@ -28,12 +28,12 @@
 										} else {
 											echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
 										} 
-										echo ($this->request->session()->read('Config.language') == 'vn') ? '  ':'  ';
+										echo ($this->request->session()->read('Config.language') == 'kr') ? '  ':'  ';
 									?>
 								</a>
 								<ul class="sub-menu-top">
 									<li>
-										<?= $this->Html->link($this->Html->image('flags/vn.png').' VietNam', ['action' => 'changeLang', 'vn'], ['escape' => false, 'class' => 'position-left']); ?>
+										<?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
 									</li>
 									<li>
 										<?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
@@ -71,7 +71,7 @@
 	</div>
 	<!-- End Main Nav -->
 </div>
-<br/><br/>
+<br/>
 <!-- SlideShow -->
 <!-- <div class="banner-slider banner-slider21 slider-home3 bg-slider">
 	<div class="wrap-item" data-pagination="true" data-autoplay="true" data-transition="fade" data-navigation="true" data-itemscustom="[[0,1]]">

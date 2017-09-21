@@ -76,7 +76,14 @@ class PagesController extends AppController
 	public function index() {
 		$this->viewBuilder()->layout('layout03');
 		$products = $this->Pages->getInfoProducts();
-		$this->set(compact('products'));
+		$Categorie  = TableRegistry::get('Categories');
+		$categories  = $Categorie->find()
+			->select(['id','name'])
+			->where([ 'type' => VERTICAL, 'actived' => 1 ])
+			->order([ 'name' => 'ASC' ])->limit(5)
+			->toarray();
+		
+		$this->set(compact('products','categories'));
 	}
 
 	public function search(){
@@ -115,16 +122,16 @@ class PagesController extends AppController
 		$this->viewBuilder()->layout('product');
 		$Categorie  = TableRegistry::get('Categories');
 		// $Supplier   = TableRegistry::get('Suppliers');
-		// $info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
-		// $cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
-		// $arr        = $this->gettreelist($cat_list, $id);
-		// $products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
+		$info       = $Categorie->find()->select(['id','name'])->where(['id' => $id])->first();
+		$cat_list   = $Categorie->find('children', ['for' => $id])->find('threaded')->toArray();
+		$arr        = $this->gettreelist($cat_list, $id);
+		$products   = $this->Pages->getInfoProducts(['Products.categorie_id IN' => $arr ]);
 		// $suppliers  = $Supplier->find('list',[ 'keyField' => 'id', 'valueField' => 'name' ]);
 
-		$category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
-			'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
-		])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
-		$this->set(compact('id','category'));
+		//$category = $Categorie->find('children', ['for' => $id])->find('threaded')->contain([
+			// 'Products' => function ($q) { return $q->autoFields(false)->select(['id','categorie_id','product_name']); }
+		// ])->select(['id','name','parent_id','picture'])->where(['actived' => true]);
+		$this->set(compact('id','products','info'));
 		// $this->set(compact('id','info','products','cat_list','suppliers','category'));
 	}
 

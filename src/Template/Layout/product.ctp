@@ -50,7 +50,8 @@
 		echo $this->Html->script('assets/plugins/jquery-ui/jquery-ui.min');
 		echo $this->Html->script('libs/ckeditor/ckeditor');
 		echo $this->Html->script('libs/bootstrap.min');
-		echo $this->Html->script('libs/jquery.fancybox');
+		echo $this->Html->script('assets/plugins/fancybox/jquery.fancybox');
+		echo $this->Html->script('assets/plugins/fancybox/jquery.fancybox-thumbs');
 		echo $this->Html->script('libs/owl.carousel');
 		// echo $this->Html->script('libs/TimeCircles');
 		// echo $this->Html->script('libs/jquery.countdown');

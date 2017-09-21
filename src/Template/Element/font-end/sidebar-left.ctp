@@ -45,6 +45,7 @@
 			</ul>
 		
 	</div>
+	<?php if (!empty($category)): ?>
 	<div class="box-filter category-filter">
 		<h2 class="widget-title">CATEGORY</h2>
 		<?php if ($type == 'categories' ): ?>
@@ -52,7 +53,6 @@
 				<?php foreach ($category as $key => $c): ?>
 					<li>
 					<?php echo $this->Html->link($c->name.'<span>('.count($c->products).')</span>',['controller' => 'pages','action' => 'categories', $parent_id,$c->id],['escape' => false]) ?>
-						
 							<?php if (!empty($c->children)): ?>
 								<ul class="sub-widget-post-cat">
 								<?php foreach ($c->children as $key => $children): ?>
@@ -67,8 +67,9 @@
 			</ul>
 		<?php endif ?>
 	</div>
+	<?php endif ?>
 	<!-- End Category -->
-	<div class="box-filter price-filter">
+	<!-- <div class="box-filter price-filter">
 		<h2 class="widget-title">price</h2>
 		<div class="inner-price-filter">
 			<ul>
@@ -86,11 +87,11 @@
 				<div id="slider-range"></div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	<!-- End Price -->
 
 	<!-- End Color -->
-	<div class="box-filter manufacturer-filter">
+	<!-- <div class="box-filter manufacturer-filter">
 		<h2 class="widget-title">Manufacturers</h2>
 		<ul>
 			<li><a href="#">D&D Fashion</a></li>
@@ -99,13 +100,10 @@
 			<li><a href="#">Gucci</a></li>
 			<li><a href="#">CK Fashion</a></li>
 		</ul>
-	</div>
+	</div> -->
 	<!-- End Manufacturers -->
 </div>
-	
-
 	<div class="divider25"></div>
-	
 	<div class="widget widget-adv">
 		<h2 class="title-widget-adv">
 			<span>Week</span>

@@ -65,7 +65,8 @@ class MyHtmlHelper extends HtmlHelper
 
 	public function _Cutstring($string, $max, $num) {
 		if (strlen($string) > $max) {
-			$str = substr($string,0, $num).'...';
+			// $str = substr($string,0, $num).'...';
+			$str = mb_substr($string, 0,$num, "utf-8").'...';
 		} else {
 			$str = $string;
 		}

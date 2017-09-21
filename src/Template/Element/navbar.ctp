@@ -213,13 +213,13 @@
                                 } else {
                                     echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
                                 } 
-                                echo ($this->request->session()->read('Config.language') == 'vn') ? ' VietNam ':' English ';
+                                echo ($this->request->session()->read('Config.language') == 'kr') ? ' Korea ':' English ';
                             ?>
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
                            <li>
-                                <?= $this->Html->link($this->Html->image('flags/vn.png').' VietNam', ['action' => 'changeLang', 'vn'], ['escape' => false, 'class' => 'position-left']); ?>
+                                <?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
                             </li>
                             <li>
                                 <?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>

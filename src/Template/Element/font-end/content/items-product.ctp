@@ -16,12 +16,12 @@
 								<span class="quickview-link1 fancybox.ajax" href="quick-view.html"><i class="fa fa-search"></i></span>
 							</div>
 							<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail']; ?>">
-								<i class="fa fa-shopping-cart"></i> Add to Cart
+								<i class="fa fa-shopping-cart"></i> <?php echo __("Add to Cart"); ?>
 							</span>
 						</div>
 					</div>
 					<div class="product-info">
-						<h3 class="title-product"><?= $this->Html->link(ucfirst($this->MyHtml->_Cutstring($product->product_name,10,20)),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?></h3>
+						<h3 class="title-product"><?= $this->Html->link(ucfirst($product->product_name),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?></h3>
 					</div>
 				</div>
 			</li>
@@ -45,7 +45,7 @@
 							<br/><br/><br/>
 							<div class="product-info-cart">
 								<span class="addcart-link cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail']; ?>">
-									<i class="fa fa-shopping-cart"></i> Add to Cart
+									<i class="fa fa-shopping-cart"></i> <?php echo __("Add to Cart") ?>
 								</span>
 							</div>
 						</div>
@@ -82,7 +82,7 @@
 								</table>
 								<label><b><?= __("Remark"); ?>:</b> </label>
 								<span class="product-description" id="products-remark">
-									<?= $this->MyHtml->_Cutstring($product->short_description,300,300); ?>
+									<?= $product->short_description; ?>
 								</span>
 							</div>
 						</div>

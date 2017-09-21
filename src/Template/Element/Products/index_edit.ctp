@@ -114,6 +114,7 @@
 								<?php foreach ($product->images as $key => $image):?>
 									<div class="show-image show-image-<?= $image->id?>">
 										<?= $this->Html->image($image->thumbnail,['class'=>'image-border','width'=>100, 'height'=> 100]) ?>
+										<span class="btn btn-success star" id="<?= $image->id?>"><i class="fa fa-star" aria-hidden="true"></i> </span>
 										<span class="btn btn-danger delete deletePI" id="<?= $image->id?>"><i class="fa fa-trash-o" aria-hidden="true"></i> </span>
 									</div>
 								<?php endforeach; ?>

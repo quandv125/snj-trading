@@ -1054,6 +1054,26 @@ jQuery( document ).ready(function() {
 		});
 	});
 
+	jQuery('.show-image .star').click(function(){
+		var id = jQuery(this).attr('id');
+		alert(id);
+		// jQuery.ajax({
+		// 	url: '/products/delete_image',
+		// 	type: 'POST',
+		// 	data: {id: id},
+		// 	dataType: 'html',
+		// 	cache: false,
+		// 	beforeSend: function(){
+		// 		jQuery("#loader").fadeIn();
+		// 	},
+		// 	success: function(response){
+		// 		jQuery("#loader").fadeOut();
+		// 		// console.log(response);
+		// 		jQuery('.show-image-'+id).fadeOut();
+		// 	}
+		// });
+	});
+
 	jQuery('.deactive-product').click(function(){
 		var id = jQuery(this).attr('id');
 		var actived = jQuery(this).attr('actived');
@@ -2786,4 +2806,43 @@ jQuery( document ).ready(function() {
 	jQuery('.remove-jtfd').click(function(){
 		jQuery(this).parent().remove();
 	});
+	// Config CKEDITOR
+	var toolbarGroups = [
+		{ name: 'document', groups: [ 'mode'] },
+		
+		{ name: 'paragraph', groups: [ 'list', 'blocks', 'align','paragraph' ] },
+		{ name: 'links', groups: [ 'links' ] },
+		{ name: 'insert', groups: [ 'insert' ] },
+		{ name: 'styles', groups: [ 'styles' ] },
+		{ name: 'colors', groups: [ 'colors' ] },
+		{ name: 'tools', groups: [ 'tools' ] },
+		{ name: 'others', groups: [ 'others' ] },
+		
+	];
+	// var toolbarGroups = [
+	// 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+	// 	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+	// 	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+	// 	{ name: 'forms', groups: [ 'forms' ] },
+	// 	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+	// 	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+	// 	{ name: 'links', groups: [ 'links' ] },
+	// 	{ name: 'insert', groups: [ 'insert' ] },
+	// 	{ name: 'styles', groups: [ 'styles' ] },
+	// 	{ name: 'colors', groups: [ 'colors' ] },
+	// 	{ name: 'tools', groups: [ 'tools' ] },
+	// 	{ name: 'others', groups: [ 'others' ] },
+	// 	{ name: 'about', groups: [ 'about' ] }
+	// ]; 81044254
+	var initEditor = function() {
+		return CKEDITOR.replace( 'ckeditor1',{
+			toolbar : 'Basic',
+			uiColor : '#9AB8F3',
+			toolbarGroups,
+			filebrowserBrowseUrl: '/products/browse',
+    		
+		});
+	}
+	initEditor();
+	// END Config CKEDITOR
 }); // jQuery document

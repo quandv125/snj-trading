@@ -1,0 +1,68 @@
+msgid "Sports Items"
+msgstr "스포츠 용품"
+
+msgid "Food"
+msgstr "건강식품"
+
+msgid "Kicken Items"
+msgstr "주방용품 "
+
+msgid "Car items"
+msgstr "자동차 용품"
+
+msgid "Login/Register"
+msgstr "로그인"
+
+msgid "Add to Cart"
+msgstr "장바구니 담기"
+
+msgid "Category"
+msgstr "카테고리"
+
+msgid "Categories"
+msgstr "카테고리"
+
+msgid "New Category"
+msgstr "카테고리 mới"
+
+msgid "Username"
+msgstr ""
+
+msgid "Product Name"
+msgstr ""
+
+msgid "Retail Price"
+msgstr ""
+
+msgid "Supply Price"
+msgstr ""
+
+msgid "Wholesale price"
+msgstr ""
+
+msgid "Stock Level"
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Infomations"
+msgstr ""
+
+msgid "Stock range"
+msgstr ""
+
+msgid "Descriptions"
+msgstr ""
+
+msgid "Order Note"
+msgstr ""
+
+msgid "History"
+msgstr ""
+
+msgid "Quantity"
+msgstr ""
+
+msgid "Wishlists"
+msgstr ""

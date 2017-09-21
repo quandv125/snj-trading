@@ -13,7 +13,7 @@
 <div class="hot-category-slider popular-cat-slider slider-home5">
 	<div class="wrap-item" data-pagination="false" data-autoplay="true" data-navigation="true" data-itemscustom="[[0, 1],[768, 2],[992, 3],[1200, 4]]">
 		<!-- End Item -->
-		<?php echo $this->element('font-end/content/items',['products'=> $products]) ?>
+		<?php echo $this->element('font-end/content/items',['products'=> $products,'categorie_id'=>'all']) ?>
 		<!-- End Item -->
 	</div>
 </div>

@@ -1,11 +1,11 @@
 <div class="hot-deal5" >
 	<div class="special-slider-header">
-		<h2 class="title-special">hot deals</h2>
+		<h2 class="title-special"><?php echo __("hot deals") ?></h2>
 	</div>
 	<div class="hot-deal-slider5 simple-owl-slider slider-home5">
 		<div class="wrap-item" data-pagination="false" data-autoplay="true" data-navigation="true" data-itemscustom="[[0, 1]]">
 		<?php foreach ($products as $key => $product): ?>
-			<?php if($key == 5) break; ?>
+			<?php if($key == 1) break; ?>
 			<div class="item-hotdeal">
 				<div class="hotdeal-countdown5_1" data-date="12/15/2016"></div>
 				<div class="product-thumb">
@@ -22,7 +22,7 @@
 							<a class="quickview-link_1" href="#"><i class="fa fa-search"></i></a>
 						</div>
 						
-						<span class="addcart-link addcart-link2" product_id="<?= $product->id?>"><i class="fa fa-shopping-basket"></i>  Add to Cart</span>
+						<span class="addcart-link addcart-link2" product_id="<?= $product->id?>"><i class="fa fa-shopping-basket"></i><?php echo __("Add to Cart"); ?></span>
 					</div>
 				</div>
 				<div class="product-info5">
@@ -30,12 +30,12 @@
 					<ul>
 						<li>
 							<div class="info-price">
-								<span><?= number_format($product->retail_price, DECIMALS) ?> VNĐ </span>
+								<span><?= number_format($product->retail_price, DECIMALS) ?> 원 </span>
 								<div class="clearfix"></div>
-								<del><?= number_format($product->retail_price, DECIMALS) ?> VNĐ</del>
+								<del><?= number_format($product->retail_price, DECIMALS) ?> 원</del>
 							</div>
 						</li>
-						  <li>
+						<li>
 							<span class="percent-sale">- 60%</span>
 						</li>
 						<!-- <li>
@@ -51,7 +51,7 @@
 <!-- End Hot Deal5 -->
 <div class="special-slider">
 	<div class="special-slider-header">
-		<h2 class="title-special">SPECIALs</h2>
+		<h2 class="title-special"><?php echo __("SPECIALs") ?></h2>
 	</div>
 	<div class="special-slider-content simple-owl-slider slider-home5">
 		<div class="wrap-item" data-pagination="false" data-autoplay="true" data-navigation="true" data-itemscustom="[[0, 1]]">
@@ -74,7 +74,7 @@
 <div class="slide-adds">
 	<div class="widget widget-adv">
 		<h2 class="title-widget-adv">
-			<strong>slide ads</strong>
+			<strong><?php echo __('slide ads') ?></strong>
 		</h2>
 		<div class="wrap-item" data-pagination="true" data-autoplay="true" data-navigation="false" data-itemscustom="[[0, 1]]">
 			<div class="item">
@@ -115,9 +115,9 @@
 	<!-- End Adv -->
 </div>
 <!-- End Slide Ads -->
-<div class="latest-new5">
+<!-- <div class="latest-new5">
 	<div class="special-slider-header">
-		<h2 class="title-special">Blog</h2>
+		<h2 class="title-special"><?php echo __("Blog") ?></h2>
 	</div>
 	<div class="from-blog-slider slider-home5">
 		<div class="wrap-item" data-pagination="false" data-navigation="true" data-itemscustom="[[0, 1]]">
@@ -175,5 +175,26 @@
 		</div>
 	</div>
 	<a href="#" class="viewall5"><i class="fa fa-long-arrow-right"></i></a>
+</div> -->
+<div class="special-slider">
+	<div class="special-slider-header">
+		<h2 class="title-special"><?php echo __("SPECIALs") ?></h2>
+	</div>
+	<div class="special-slider-content simple-owl-slider slider-home5">
+		<div class="wrap-item" data-pagination="false" data-autoplay="true" data-navigation="true" data-itemscustom="[[0, 1]]">
+			<div class="item-special">
+				<ul>
+					<?php echo $this->element('font-end/content/items-special',['products'=> $products]) ?>
+				</ul>
+			</div>
+			<!-- ENd Item -->
+			<div class="item-special">
+				<ul>
+					<?php echo $this->element('font-end/content/items-special',['products'=> $products]) ?>
+				</ul>
+			</div>
+			<!-- ENd Item -->
+		</div>
+	</div>
 </div>
 <!-- End Latest New5 -->

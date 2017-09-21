@@ -3,7 +3,7 @@
 </div> <!-- panel-heading -->
 <div class="panel-body1">
     <div class="divider10"></div>
-    <input type="text" class="form-control" id="search-sku" name="" placeholder="Search By SKU">
+    <input type="text" class="form-control" id="search-sku" name="" placeholder="Search By Item Number">
     <div class="divider10"></div>
     <input type="text" class="form-control" id="search-product-name" name="" placeholder="Search By Product name">
 </div>

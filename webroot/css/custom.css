@@ -264,6 +264,10 @@ div.show-image span.delete {
 		top: 4px;
 		right: 3px;
 }
+div.show-image span.star {
+		top: 4px;
+		left: 3px;
+}
 .add-products:hover{
 		background-color: #14A1D4 !important;
 		color: #ffffff !important;

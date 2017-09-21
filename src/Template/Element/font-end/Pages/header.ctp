@@ -65,12 +65,12 @@
                         <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-6 col-xs-12">
+                <div class="col-md-7 col-sm-6 col-xs-12" style="margin-top: 26px;">
                     <div class="smart-search search-form14">
                         <?php echo $this->element('font-end/smart-search',['class'=>'smart-search']) ?>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-3 col-xs-12 hidden-xs">
+                <div class="col-md-2 col-sm-3 col-xs-12 hidden-xs" style="margin-top: 26px;">
                     <?php echo $this->element('font-end/cart') ?>
                     <!-- End Mini Cart -->
                 </div>

@@ -368,7 +368,8 @@ a:focus {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	height: 40px;
-	left: 0;
+	left: 3px;
+	z-index: 1;
 	position: absolute;
 	top: 0;
 	width: 125px;
@@ -5473,6 +5474,7 @@ font-size: 15px;
 .wrap-cart-info3 {
 	float: left;
 	margin-top: 4px;
+	margin-left: 5px;
 }
 .header-nav3 {
 	background: #e0cb26 none repeat scroll 0 0;

@@ -12,7 +12,7 @@
 </div>
 <!-- End Hot category -->
 <div class="item-adv-simple">
-	<a href="#"><?php echo $this->Html->image('assets/images/ad6.png') ?></a>
+	<a href="#"><?php echo $this->Html->image('assets/images/ad5_3.png') ?></a>
 </div>
 <div class="hot-category">
 	<?php echo $this->element('font-end/content/hot-category') ?>
@@ -24,7 +24,7 @@
 	</div>
 </div> -->
 <div class="item-adv-simple">
-	<a href="#"><?php echo $this->Html->image('assets/images/ad6.png') ?></a>
+	<a href="#"><?php echo $this->Html->image('assets/images/ad5_3.png') ?></a>
 </div>
 <!-- End Category Brand -->
 <div class="popcat-list-box">

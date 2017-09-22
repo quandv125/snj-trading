@@ -5,7 +5,7 @@
 	<?php foreach ($categories as $key => $category): ?>
 		<?php if ($key == 6) break;?>
 		<li>
-			<?php echo $this->Html->link($category->name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'categories', $category->id],['escape'=> false]) ?> 
+			<?php echo $this->Html->link($category->name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'CategoriesParent', $category->id],['escape'=> false]) ?> 
 		</li>
 	<?php endforeach ?>
 	

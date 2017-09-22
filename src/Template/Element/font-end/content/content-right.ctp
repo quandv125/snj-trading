@@ -80,7 +80,7 @@
 			<div class="item">
 				<div class="item-widget-adv">
 					<div class="adv-widget-thumb">
-						<a href="#"><?php echo $this->Html->image('assets/images/sl1.jpg') ?></a>
+						<a href="#"><?php echo $this->Html->image('assets/images/sl01.jpg') ?></a>
 					</div>
 					<div class="adv-widget-info">
 						<h3>Quality usinesswear </h3>
@@ -91,7 +91,7 @@
 			<div class="item">
 				<div class="item-widget-adv">
 					<div class="adv-widget-thumb">
-						<a href="#"><?php echo $this->Html->image('assets/images/sl2.jpg') ?></a>
+						<a href="#"><?php echo $this->Html->image('assets/images/sl12.jpg') ?></a>
 					</div>
 					<div class="adv-widget-info">
 						<h3>New Collection</h3>
@@ -102,7 +102,7 @@
 			<div class="item">
 				<div class="item-widget-adv">
 					<div class="adv-widget-thumb">
-						<a href="#"><?php echo $this->Html->image('assets/images/sl3.jpg') ?></a>
+						<a href="#"><?php echo $this->Html->image('assets/images/sl22.jpg') ?></a>
 					</div>
 					<div class="adv-widget-info">
 						<h3>Hanbags Style 2016</h3>

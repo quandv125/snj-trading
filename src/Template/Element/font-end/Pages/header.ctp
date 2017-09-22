@@ -65,14 +65,25 @@
                         <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-6 col-xs-12" style="margin-top: 26px;">
+                <div class="col-md-7 col-sm-6 col-xs-12">
                     <div class="smart-search search-form14">
                         <?php echo $this->element('font-end/smart-search',['class'=>'smart-search']) ?>
                     </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span><?php echo $this->Html->image('flags/cal.png') ?></span>
+                        <span><?php echo __("Delivery all day of the year") ?> </span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <span><?php echo $this->Html->image('flags/rocket.png') ?></span>
+                        <span><?php echo __("Fast and accurate delivery service") ?> </span>
+                    </div>
                 </div>
-                <div class="col-md-2 col-sm-3 col-xs-12 hidden-xs" style="margin-top: 26px;">
+                <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
                     <?php echo $this->element('font-end/cart') ?>
-                    <!-- End Mini Cart -->
+                    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                        <span><?php echo $this->Html->image('flags/support.png') ?></span>
+                        <span><?php echo __("Customer Service Professional") ?> </span>
+                    </div>
                 </div>
             </div>
         </div>

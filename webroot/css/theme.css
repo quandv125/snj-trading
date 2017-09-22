@@ -1297,7 +1297,7 @@ a:focus {
 .product-thumb {
 	overflow: hidden;
 	position: relative;
-	min-height: 170px;
+	/*min-height: 170px;*/
 }
 .product-thumb-link {
 	display: block;

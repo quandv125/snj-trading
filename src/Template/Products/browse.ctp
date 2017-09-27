@@ -1,41 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Example: Browsing Files</title>
-    <script>
-        // Helper function to get parameters from the query string.
-        function getUrlParam( paramName ) {
-            var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
-            var match = window.location.search.match( reParam );
 
-            return ( match && match.length > 1 ) ? match[1] : null;
-        }
-        // Simulate user action of selecting a file to be returned to CKEditor.
-        function returnFileUrl() {
+<script>
+	function getUrlParam( paramName ) {
+		var reParam = new RegExp( '(?:[\?&]|&)' + paramName + '=([^&]+)', 'i' );
+		var match = window.location.search.match( reParam );
+		return ( match && match.length > 1 ) ? match[1] : null;
+	}
+	function returnFileUrl( pics ) {
+	
+		var funcNum = getUrlParam( 'CKEditorFuncNum' );
+		var fileUrl = pics;
+		
+		window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function() {
+			var dialog = this.getDialog();
+			
+			if ( dialog.getName() == 'image' ) {
+				var element = dialog.getContentElement( 'info', 'txtAlt' );
+				if ( element )
+					element.setValue( 'alt text' );
+			}
+		} );
+		window.close();
+	}
+</script>
 
-            var funcNum = getUrlParam( 'CKEditorFuncNum' );
-            var fileUrl = 'http://c.cksource.com/a/1/img/sample.jpg';
-            window.opener.CKEDITOR.tools.callFunction( funcNum, fileUrl, function() {
-                // Get the reference to a dialog window.
-                var dialog = this.getDialog();
-                // Check if this is the Image Properties dialog window.
-                if ( dialog.getName() == 'image' ) {
-                    // Get the reference to a text field that stores the "alt" attribute.
-                    var element = dialog.getContentElement( 'info', 'txtAlt' );
-                    // Assign the new value.
-                    if ( element )
-                        element.setValue( 'alt text' );
-                }
-                // Return "false" to stop further execution. In such case CKEditor will ignore the second argument ("fileUrl")
-                // and the "onSelect" function assigned to the button that called the file manager (if defined).
-                // return false;
-            } );
-            window.close();
-        }
-    </script>
-</head>
-<body>
-    <button onclick="returnFileUrl()">Select File</button>
-</body>
-</html>
+
+<?= $this->Form->create(NULL,['url'=>['action'=>'UploadMedia'],'enctype'=>'multipart/form-data']);?>
+<?= $this->Form->input('pics.',[ 'type'=>'file', 'multiple']); ?>
+<?= $this->Form->button('Submit',array('class' => 'btn btn-success waves-effect waves-button waves-red')); ?>
+<?php echo $this->Form->end(); ?>
+
+<div class="clearfix divider15"></div>
+
+
+<?php foreach ($att as $key => $pics): ?>
+	
+	<a href= "#" onClick="returnFileUrl('<?php echo SERVER_ADDRESS.'/img/'.$pics->path;?>');">
+		<?php echo $this->Html->image($pics->thumbnail) ?>
+	</a>
+	
+<?php endforeach ?>

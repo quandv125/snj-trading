@@ -30,12 +30,12 @@
                                     } else {
                                         echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
                                     } 
-                                    echo ($this->request->session()->read('Config.language') == 'kr') ? ' VietNam ':' English ';
+                                    // echo ($this->request->session()->read('Config.language') == 'kr') ? ' Korea ':' English ';
                                 ?>
                             </a>
                             <ul class="sub-menu-top">
                                <li>
-                                    <?= $this->Html->link($this->Html->image('flags/kr.png').' VietNam', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
+                                    <?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
                                 </li>
                                 <li>
                                     <?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
@@ -60,31 +60,39 @@
     <div class="container">
         <div class="header-main">
             <div class="row">
-                <div class="col-md-2 col-sm-3 col-xs-6">
-                    <div class="logo">
-                        <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' =>'index'],'width'=>'100%']) ?>
+
+                <div class="col-md-2 col-sm-12 col-xs-12">
+                    <div class="logo5">
+                        <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'class'=>'img-responsive','width' => '100%']) ?>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-6 col-xs-12">
-                    <div class="smart-search search-form14">
-                        <?php echo $this->element('font-end/smart-search',['class'=>'smart-search']) ?>
+                <div class="col-md-10 col-sm-12 col-xs-12" style="margin-top: 10px;">
+                    <div class="col-md-9 col-sm-12 col-xs-12">
+                         <div class="smart-search search-form14">
+                            <?php echo $this->element('font-end/smart-search',['class'=>'smart-search']) ?>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
+                        <div class="wrap-cart-info3_1">
+                           
+                            <?php echo $this->element('font-end/cart') ?>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         <span><?php echo $this->Html->image('flags/cal.png') ?></span>
-                        <span><?php echo __("Delivery all day of the year") ?> </span>
+                        <span><?php echo __("Delivery all day of the year") ?>  </span>
                     </div>
-                    <div class="col-md-6 col-sm-6">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         <span><?php echo $this->Html->image('flags/rocket.png') ?></span>
                         <span><?php echo __("Fast and accurate delivery service") ?> </span>
                     </div>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12 hidden-xs">
-                    <?php echo $this->element('font-end/cart') ?>
-                    <div class="col-md-12 col-sm-12" style="margin-top: 10px;">
+                    <div class="col-md-4 col-sm-4 col-xs-4">
                         <span><?php echo $this->Html->image('flags/support.png') ?></span>
                         <span><?php echo __("Customer Service Professional") ?> </span>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

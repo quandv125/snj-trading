@@ -40,8 +40,7 @@ use Cake\Validation\Validator;
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Inquiries', [
-            'foreignKey' => 'inquiry_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'inquiry_id'
         ]);
     }
 
@@ -57,6 +56,10 @@ use Cake\Validation\Validator;
             ->integer('id')            ->allowEmpty('id', 'create');
         $validator
             ->requirePresence('path', 'create')            ->notEmpty('path');
+        $validator
+            ->allowEmpty('filename');
+        $validator
+            ->allowEmpty('thumbnail');
         $validator
             ->integer('type')            ->allowEmpty('type');
         $validator

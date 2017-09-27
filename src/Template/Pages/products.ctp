@@ -297,6 +297,7 @@
 				</div>
 			</div>
 		</div>
+		<div class="clearfix"></div>
 		<!-- End Tab Detail -->
 		<div class="upsell-detail">
 			<h2 class="title-default">Products Related To This Item </h2>

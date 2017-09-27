@@ -25,6 +25,8 @@ class OrdersFixture extends TestFixture
         'email' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'phone' => ['type' => 'integer', 'length' => 10, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'address' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'city' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'country' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'postcode_zip' => ['type' => 'string', 'length' => 100, 'null' => true, 'default' => null, 'collate' => 'utf8_unicode_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
@@ -57,9 +59,11 @@ class OrdersFixture extends TestFixture
             'email' => 'Lorem ipsum dolor sit amet',
             'phone' => 1,
             'address' => 'Lorem ipsum dolor sit amet',
+            'city' => 'Lorem ipsum dolor sit amet',
+            'country' => 'Lorem ipsum dolor sit amet',
             'postcode_zip' => 'Lorem ipsum dolor sit amet',
-            'created' => '2017-08-24 14:26:10',
-            'modified' => '2017-08-24 14:26:10'
+            'created' => '2017-09-26 11:01:52',
+            'modified' => '2017-09-26 11:01:52'
         ],
     ];
 }

@@ -14,6 +14,8 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property int $phone
  * @property string $address
+ * @property string $city
+ * @property string $country
  * @property string $postcode_zip
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified

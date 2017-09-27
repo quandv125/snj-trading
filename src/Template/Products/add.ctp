@@ -17,7 +17,7 @@
     </ul>
 </nav>
 <div class="products form large-9 medium-8 columns content">
-    <?= $this->Form->create($product) ?>
+    <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Add Product') ?></legend>
         <?php
@@ -33,7 +33,8 @@
             echo $this->Form->input('stock_level');
             echo $this->Form->input('unit');
             echo $this->Form->input('variants');
-            echo $this->Form->input('description');
+            echo $this->Form->textarea('short_description',['label' => 'Short Description']);
+            echo $this->Form->textarea('description',['label' => 'Description']);
             echo $this->Form->input('stock_min');
             echo $this->Form->input('stock_max');
             echo $this->Form->input('ordering_note');

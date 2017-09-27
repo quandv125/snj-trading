@@ -5441,7 +5441,7 @@ font-size: 15px;
 }
 .top-info.top-info3 > li {
 	border-color: rgba(255, 255, 255, 0.2);
-	padding: 6px 10px;
+	padding: 6px 5px;
 }
 .top-info3 .has-child > a::after {
 	margin-left: 9px;
@@ -5472,9 +5472,12 @@ font-size: 15px;
 	display: block;
 }
 .wrap-cart-info3 {
-	float: left;
+	float: right;
 	margin-top: 4px;
 	margin-left: 5px;
+}
+.img-responsive {
+    margin: 0 auto;
 }
 .header-nav3 {
 	background: #e0cb26 none repeat scroll 0 0;

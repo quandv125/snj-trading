@@ -2809,7 +2809,6 @@ jQuery( document ).ready(function() {
 	// Config CKEDITOR
 	var toolbarGroups = [
 		{ name: 'document', groups: [ 'mode'] },
-		
 		{ name: 'paragraph', groups: [ 'list', 'blocks', 'align','paragraph' ] },
 		{ name: 'links', groups: [ 'links' ] },
 		{ name: 'insert', groups: [ 'insert' ] },
@@ -2834,15 +2833,30 @@ jQuery( document ).ready(function() {
 	// 	{ name: 'others', groups: [ 'others' ] },
 	// 	{ name: 'about', groups: [ 'about' ] }
 	// ]; 81044254
-	var initEditor = function() {
-		return CKEDITOR.replace( 'ckeditor1',{
-			toolbar : 'Basic',
-			uiColor : '#9AB8F3',
-			toolbarGroups,
-			filebrowserBrowseUrl: '/products/browse',
-    		
-		});
+	
+	if ($('textarea[name="short_description"]').length){
+		var initEditor = function() {
+			return CKEDITOR.replace( 'short_description',{
+				toolbar : 'Basic',
+				uiColor : '#9AB8F3',
+				toolbarGroups,
+				filebrowserBrowseUrl: '/products/browse',
+			});
+		}
+		initEditor();
 	}
-	initEditor();
+	
+	if ($('textarea[name="description"]').length){
+		var initEditor2 = function() {
+			return CKEDITOR.replace( 'description',{
+				toolbar : 'Basic',
+				uiColor : '#9AB8F3',
+				toolbarGroups,
+				filebrowserBrowseUrl: '/products/browse',
+			});
+		}
+		initEditor2();
+	}
 	// END Config CKEDITOR
+	
 }); // jQuery document

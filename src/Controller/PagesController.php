@@ -78,9 +78,9 @@ class PagesController extends AppController
 		$products = $this->Pages->getInfoProducts();
 		$Categorie  = TableRegistry::get('Categories');
 		$categories  = $Categorie->find()
-			->select(['id','name'])
+			->select(['id','name','kr_name'])
 			->where([ 'type' => VERTICAL, 'actived' => 1 ])
-			->order([ 'name' => 'ASC' ])->limit(5)
+			->order([ 'created' => 'ASC' ])->limit(5)
 			->toarray();
 		
 		$this->set(compact('products','categories'));

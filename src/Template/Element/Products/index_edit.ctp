@@ -75,9 +75,9 @@
 								</div>
 								<div class="clearfix"></div>
 								<?= $this->Form->input('properties',['class' =>'result_'.$product->id.' hidden', 'label' => false]); ?>
-								<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" onclick="aiptf(<?= $product->id;?>)"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
+								
 								<div class="menthod-product menthod-product-<?php echo $product->id;?> col-lg-10">
-
+									<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" onclick="aiptf(<?= $product->id;?>)"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
 									<?php if (isset($product->properties) && !empty($product->properties)): ?>
 										<?php foreach (json_decode($product->properties) as $key => $propertie): ?>
 											<div class="mth-prd">

@@ -72,18 +72,17 @@ class ProductsController extends AppController
 	{
 		$Image   = TableRegistry::get('Images');
 		$Product = TableRegistry::get('Products');
-		$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
-		// $this->request->data['wholesale_price'] = str_replace(',', '', $this->request->data['wholesale_price']);
-		$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
-		if (empty($this->request->data['sku'])) {
-			$this->request->data['sku'] = $this->Products->MaxSKU();
-		}
-		$this->request->data['actived'] = true;
-		$this->request->data['user_id'] = $this->Auth->user('id');
-		$product = $this->Products->newEntity();
+	
 		if ($this->request->is('post')) {
+			$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
+			$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+			if (empty($this->request->data['sku'])) {
+				$this->request->data['sku'] = $this->Products->MaxSKU();
+			}
+			$this->request->data['actived'] = true;
+			$this->request->data['user_id'] = $this->Auth->user('id');
+			$product = $this->Products->newEntity();
 			$product = $this->Products->patchEntity($product, $this->request->data);
-			// pr($product);die();
 			if ($Product->save($product)) {
 				$id = $product->id;
 				if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
@@ -111,6 +110,10 @@ class ProductsController extends AppController
 			}
 			return $this->redirect(['action' => 'index']);
 		}
+		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
+		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
+		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
 	}
 
 	public function addproducts()	{
@@ -846,9 +849,29 @@ class ProductsController extends AppController
 		}
 	}
 
-	public function browse()
-	{
-		
+	public function browse() {
+		$Attachment = TableRegistry::get('Attachments');
+		$att = $Attachment->find();
+		$this->set(compact('att'));
 	}
 
+	public function uploadMedia(){
+		if ($this->request->is('post')) {
+			$attachment   = TableRegistry::get('Attachments');
+			foreach ($this->request->data['pics'] as $key => $picture) {
+				$path = rand(1,1000000).'_'.$picture['name'];
+				if(move_uploaded_file($picture['tmp_name'], ATTACHMENT_PATH.$path)){
+					// Create thumbnail
+					$thumbnail = $this->Custom->CreateNameThumb($picture['name']);
+					$this->Custom->generate_thumbnail(ATTACHMENT_PATH.$path, $thumbnail, 100);
+					// Save database
+					$attachments = $attachment->newEntity();
+					$attachments->path		 = 'attachment/'.$path;
+					$attachments->thumbnail	 = 'thumbnails/'.$thumbnail;	
+					$attachment->save($attachments);
+				}
+			}
+			return $this->redirect(['action' => 'browse']);
+		}
+	}
 }

@@ -1,3 +1,6 @@
+msgid "All"
+msgstr "전체상품"
+
 msgid "Sports Items"
 msgstr "스포츠 용품"
 

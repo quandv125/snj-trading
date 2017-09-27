@@ -1,3 +1,6 @@
+<?php if (!empty($categories2)): ?>
+	
+
 <nav class="main-nav">
 	<ul>
 		<?php foreach ($categories2 as $key => $category): ?>
@@ -23,3 +26,4 @@
 	</ul>
 	<a href="#" class="toggle-mobile-menu"><span>Menu</span></a>
 </nav>
+<?php endif ?>

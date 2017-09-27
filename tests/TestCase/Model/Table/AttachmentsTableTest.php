@@ -23,22 +23,18 @@ class AttachmentsTableTest extends TestCase
      */
     public $fixtures = [
         'app.attachments',
-        'app.products',
-        'app.categories',
-        'app.articles',
-        'app.outlets',
-        'app.invoices',
+        'app.inquiries',
         'app.users',
         'app.aros',
         'app.acos',
         'app.permissions',
         'app.groups',
         'app.images',
-        'app.cashflows',
-        'app.logs',
-        'app.stocks',
-        'app.suppliers',
-        'app.stock_products',
+        'app.products',
+        'app.categories',
+        'app.articles',
+        'app.outlets',
+        'app.invoices',
         'app.customers',
         'app.payments',
         'app.coupons',
@@ -46,10 +42,16 @@ class AttachmentsTableTest extends TestCase
         'app.invoice_products',
         'app.inquirie_supplier_products',
         'app.inquirie_suppliers',
-        'app.inquiries',
+        'app.suppliers',
+        'app.stocks',
+        'app.stock_products',
+        'app.supplier_pics',
         'app.inquirie_products',
         'app.unavailables',
-        'app.tags'
+        'app.tags',
+        'app.cashflows',
+        'app.logs',
+        'app.extras'
     ];
 
     /**

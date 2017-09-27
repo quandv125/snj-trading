@@ -1,9 +1,14 @@
 
 <div class="popular-cat-title">
 	<ul>
-		<li class="active"><a href="#tabs" data-toggle="tab"><?php echo __('전체상품');?></a></li>
+		<li class="active"><a href="#tabs" data-toggle="tab"><?php echo __('All');?></a></li>
 		<?php foreach ($categories as $key => $categorie): ?>
-			<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->name);?></a></li>
+            <?php if ($this->request->session()->read('Config.language') == 'kr'): ?>
+            	<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->kr_name);?></a></li>
+            <?php else: ?>
+            	<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->name);?></a></li>
+            <?php endif ?>
+			
 		<?php endforeach ?>
 				
 	</ul>

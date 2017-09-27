@@ -3,63 +3,61 @@
 	<div class="header3 header5">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-2 col-sm-2 col-xs-6">
+				<div class="col-md-2 col-sm-12 col-xs-12">
 					<div class="logo5">
-						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'width' => '100%']) ?>
+						<?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'class'=>'img-responsive','width' => '100%']) ?>
 					</div>
 				</div>
-				<div class="col-md-7 col-sm-10 col-xs-12" style=" margin-top: 10px;">
-					<div class="smart-search search-form3 search-form5">
-						<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
+				<div class="col-md-10 col-sm-12 col-xs-12" style="margin-top: 10px;">
+					<div class="col-md-9 col-sm-12 col-xs-12">
+						<div class="smart-search search-form3 search-form5">
+							<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
+						</div>
 					</div>
-					
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-3 col-sm-12 col-xs-12">
+						<div class="wrap-cart-info3">
+							<ul class="top-info top-info3">
+								<li class="top-account has-child">
+									<?php echo $this->element('font-end/top_accounts') ?>
+								</li>
+								<li class="top-language has-child">
+									<a class="language-selected" href="#">
+										<?php
+											if ($this->request->session()->read('Config.language') == NULL) { 
+												echo $this->Html->image('flags/kr.png',['class'=>"position-left"]);
+											} else {
+												echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
+											} 
+										?>
+									</a>
+									<ul class="sub-menu-top">
+										<li>
+											<?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
+										</li>
+										<li>
+											<?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<?php echo $this->element('font-end/cart') ?>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-4 col-sm-4 col-xs-4">
 						<span><?php echo $this->Html->image('flags/cal.png') ?></span>
-						<span style="color: #ffffff;"><?php echo __("Delivery all day of the year") ?>  
+						<span style="color: #ffffff;"><?php echo __("Delivery all day of the year") ?>  </span>
 					</div>
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-4 col-sm-4 col-xs-4">
 						<span><?php echo $this->Html->image('flags/rocket.png') ?></span>
-						
-							<span style="color: #ffffff;"><?php echo __("Fast and accurate delivery service") ?> </span>
-					</span>
-				</div>
-				</div>
-				
-				<div class="col-md-3 col-sm-12 col-xs-12" style=" margin-top: 10px;">
-					<div class="wrap-cart-info3">
-						<ul class="top-info top-info3">
-							<li class="top-account has-child">
-								<?php echo $this->element('font-end/top_accounts') ?>
-							</li>
-							<li class="top-language has-child">
-								<a class="language-selected" href="#">
-									<?php
-										if ($this->request->session()->read('Config.language') == NULL) { 
-											echo $this->Html->image('flags/en.png',['class'=>"position-left"]);
-										} else {
-											echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
-										} 
-										echo ($this->request->session()->read('Config.language') == 'kr') ? '  ':'  ';
-									?>
-								</a>
-								<ul class="sub-menu-top">
-									<li>
-										<?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
-									</li>
-									<li>
-										<?= $this->Html->link($this->Html->image('flags/en.png').' English', ['action' => 'changeLang', 'en'], ['escape' => false, 'class' => 'position-left']); ?>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<?php echo $this->element('font-end/cart') ?>
+						<span style="color: #ffffff;"><?php echo __("Fast and accurate delivery service") ?> </span>
 					</div>
-					
-					<div class="col-md-12 col-sm-12" style="margin-top: 5px;">
+					<div class="col-md-4 col-sm-4 col-xs-4">
 						<span><?php echo $this->Html->image('flags/support.png') ?></span>
 						<span style="color: #ffffff;"><?php echo __("Customer Service Professional") ?> </span>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>

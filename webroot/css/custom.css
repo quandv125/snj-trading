@@ -762,3 +762,6 @@ i.menu-icon {
 	text-align:center;
 	color:#fff;
 }
+.pull-right {
+   margin-right: 50px;
+}

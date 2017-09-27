@@ -154,11 +154,12 @@ class AppController extends Controller
 			->where([ 'type' => VERTICAL, 'actived' => 1 ])
 			->order([ 'name' => 'ASC' ])
 			->toarray();
-		$categories2 = $Categorie
-			->find( 'threaded' )
-			->where([ 'type' => HORIZONTAL , 'actived' => 1])
-			->order([ 'created' => 'ASC' ])
-			->toarray();
+		$categories2 = null;
+		// $categories2 = $Categorie
+		// 	->find( 'threaded' )
+		// 	->where([ 'type' => HORIZONTAL , 'actived' => 1])
+		// 	->order([ 'created' => 'ASC' ])
+		// 	->toarray();
 			
 		// $help        = $Article->find('list',[ 'keyField' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_HELP] );
 		// $snj         = $Article->find('list',[ 'keyFi eld' => 'id', 'valueField' => 'title' ])->where(['type' => ARTICLE_SNJ]) ;

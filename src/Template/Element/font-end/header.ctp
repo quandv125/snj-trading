@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="logo4">
-                    <?php echo $this->Html->image('logo.png',['width'=>'50%']) ?>
+                    <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'class'=>'img-responsive text','width' => '50%']) ?>
                 </div>
             </div>
             <div class="col-md-6 col-sm-7 col-xs-12">

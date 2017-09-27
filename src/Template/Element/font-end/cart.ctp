@@ -55,7 +55,7 @@
 
 						</a>
 					<?php else: ?>
-						<?php echo $this->Html->link('Login/Register',['controller'=>"users",'action'=>"login"],['class'=>'btn btn-sussces']) ?>
+						<?php echo $this->Html->link(__('Login/Register'),['controller'=>"users",'action'=>"login"],['class'=>'btn btn-sussces']) ?>
 					<?php endif ?>
 				</div>
 				

@@ -49,11 +49,11 @@
                         <div class="box-menu-footer4">
                             <h2>MY ACCOUNT</h2>
                             <ul>
-                                <li><?php echo $this->Html->link('My Cart',['controller' => 'pages', 'action' => 'view-cart']) ?></li>
-                                <li><a href="#">My Wishlist</a></li>
-                                <li><a href="#">My Credit Slip</a></li>
-                                <li><a href="#">My Addresses</a></li>
-                                <li><a href="#"><?php echo $this->Html->link(__('My Personal In'), ['controller' => 'pages', 'action' => 'accounts']) ?></a></li>
+                                <li><?php echo $this->Html->link(__('My Cart'),['controller' => 'pages', 'action' => 'accounts#/viewcart']) ?></li>
+                                <li><?php echo $this->Html->link(__('My Wishlist'), ['controller' => 'pages', 'action' => 'accounts']) ?></li>
+                                <li><?php echo $this->Html->link(__('My Credit Slip'), ['controller' => 'pages', 'action' => 'accounts']) ?></li>
+                                <li><?php echo $this->Html->link(__('My Addresses'), ['controller' => 'pages', 'action' => 'accounts']) ?></li>
+                                <li><?php echo $this->Html->link(__('My Personal In'), ['controller' => 'pages', 'action' => 'accounts']) ?></li>
                             </ul>
                         </div>
                     </div>

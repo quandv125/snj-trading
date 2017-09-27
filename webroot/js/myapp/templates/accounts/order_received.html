@@ -24,7 +24,7 @@
 										</tr>
 										<tr>
 											<td class="width55">Total:</td>
-											<td>{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}</td>
+											<td>{{info.order_products | sumOftotal: "quantity" | currency : " " : 0}} 원</td> 
 										</tr>
 										<tr>
 											<td class="width55">Payment method:</td>
@@ -91,7 +91,7 @@
 												</td>
 												<td class="product-total product-total width55">
 													<span class="Price-amount amount">
-														{{ c.price | currency : "$ " : 2 }}
+														{{ c.price | currency : " " : 0 }} 원
 													</span>
 												</td>
 											</tr>
@@ -101,7 +101,7 @@
 												<th class="width55" scope="row">Subtotal:</th>
 												<td>
 													<span class="Price-amount amount">
-														{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}
+														{{info.order_products | sumOftotal: "quantity" | currency : " " : 0}} 원
 													</span>
 												</td>
 											</tr>
@@ -113,7 +113,7 @@
 												<th class="width55" scope="row">Total:</th>
 												<td>
 													<span class="Price-amount amount">
-														{{info.order_products | sumOftotal: "quantity" | currency : "$ " : 2}}
+														{{info.order_products | sumOftotal: "quantity" | currency : " " : 0}} 원
 													</span>
 												</td>
 											</tr>

@@ -9,12 +9,13 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $inquiry_id
  * @property string $path
+ * @property string $filename
+ * @property string $thumbnail
  * @property int $type
  * @property string $note
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
- * @property \App\Model\Entity\Product $product
  * @property \App\Model\Entity\Inquiry $inquiry
  */class Attachment extends Entity
 {

@@ -27,12 +27,12 @@
 				<?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li>
 			<li>
-				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-list-alt"></span><p>'.__('Inquiries').'</p>',array('controller'=>'Inquiries','action'=>'Inquiries'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-list-alt"></span><p>'.__('Orders').'</p>',array('controller'=>'Orders','action'=>'Orders'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li>
-			<li>
+			<!-- 	<li>
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('Suppliers').'</p>',array('controller'=>'Suppliers','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-			</li>
-		  <!--   <li>
+			</li> -->
+			<!--   <li>
 				<?= $this->Html->link('<i class="menu-icon fa fa-newspaper-o"></i><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li> -->
 			<!-- <li class="droplink">

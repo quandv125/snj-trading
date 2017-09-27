@@ -30,6 +30,8 @@ if (!defined('DS')) {
  */
 define('ROOT', dirname(__DIR__));
 
+define('SERVER_ADDRESS', 'http://'.$_SERVER[ 'SERVER_ADDR' ]);
+
 /**
  * The actual directory name for the application directory. Normally
  * named 'src'.
@@ -102,6 +104,10 @@ define('ARTICLES', WWW_ROOT.'img'.DS.'articles'.DS);
 define('PRODUCTS', WWW_ROOT.'img'.DS.'products'.DS);
 
 define('CATEGORIES', WWW_ROOT.'img'.DS.'categories'.DS);
+
+define('ATTACHMENT_PATH', WWW_ROOT.'img'.DS.'attachment'.DS);
+
+define('IMG_PATH', WWW_ROOT.'img'.DS);
 
 // TCPDF
 define('TCPDF_CONFIG', ROOT.DS.'Vendor'.DS.'TCPDF'.DS.'config'.DS);

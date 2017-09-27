@@ -45,7 +45,6 @@ use Cake\Validation\Validator;
             'joinType' => 'INNER'
         ]);
         $this->hasMany('OrderProducts', [
-            'dependent' => true,
             'foreignKey' => 'order_id'
         ]);
     }
@@ -72,6 +71,10 @@ use Cake\Validation\Validator;
             ->integer('phone')            ->allowEmpty('phone');
         $validator
             ->allowEmpty('address');
+        $validator
+            ->allowEmpty('city');
+        $validator
+            ->allowEmpty('country');
         $validator
             ->allowEmpty('postcode_zip');
         return $validator;

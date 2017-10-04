@@ -1,32 +1,125 @@
 
-<div class="row" ng-controller="Bill_Add_Form_Ctrl">
+<div class="row" ng-controller="Billing_Form_Ctrl">
 	<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2 col-sm-offset-2 col-xs-offset-0">
-		<form action="javascript:void(0)" class="well form-horizontal" ng-submit="fr_bulling_address()" method="post" id="contact_form">
+		
+		<form name="frm_info" class="well form-horizontal" ng-submit="fr_bulling_address()" novalidate>
+		<h4> Default Billing Address </h4>
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.username.$invalid && !frm_info.username.$pristine }">
+				<label class="col-md-4 control-label">Firstname *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="firstname" class="form-control" ng-model="formdata.firstname" required>
+				<p ng-show="frm_info.firstname.$invalid && !frm_info.firstname.$pristine" class="help-block">Your firstname is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.username.$invalid && !frm_info.username.$pristine }">
+				<label class="col-md-4 control-label">Lastname *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="lastname" class="form-control" ng-model="formdata.lastname" required>
+				<p ng-show="frm_info.lastname.$invalid && !frm_info.lastname.$pristine" class="help-block">Your lastname is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.email.$invalid && !frm_info.email.$pristine }">
+				<label class="col-md-4 control-label">Email *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="email" name="email" class="form-control" ng-model="formdata.email" placeholder="Email*" required>
+				<p ng-show="frm_info.email.$invalid && !frm_info.email.$pristine" class="help-block">Enter a valid email.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.phone.$invalid && !frm_info.phone.$pristine }">
+				<label class="col-md-4 control-label">Phone *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="phone" class="form-control" ng-model="formdata.phone" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
+					<p ng-show="frm_info.phone.$error.pattern" class="help-block">Not a valid number!</p>
+					<p ng-show="frm_info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
+					<p ng-show="frm_info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>
+				</div>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.company.$invalid && !frm_info.company.$pristine }">
+				<label class="col-md-4 control-label">Company *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="company" class="form-control" ng-model="formdata.company" placeholder="Company Name*" required>
+				<p ng-show="frm_info.company.$invalid && !frm_info.company.$pristine" class="help-block">Your company is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
+				<label class="col-md-4 control-label">Address *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="address" class="form-control" ng-model="formdata.address" placeholder="Address*" required>
+					<p ng-show="frm_info.address.$invalid && !frm_info.address.$pristine" class="help-block">Your address is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
+				<label class="col-md-4 control-label">Town/City *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="city" class="form-control" ng-model="formdata.city" placeholder="city*" required>
+					<p ng-show="frm_info.city.$invalid && !frm_info.city.$pristine" class="help-block">Your city is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
+				<label class="col-md-4 control-label">Country *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="country" class="form-control" ng-model="formdata.country" placeholder="country*" required>
+					<p ng-show="frm_info.country.$invalid && !frm_info.country.$pristine" class="help-block">Your country is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
+				<label class="col-md-4 control-label">Postcode *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="postcode" class="form-control" ng-model="formdata.postcode" placeholder="postcode*" required>
+					<p ng-show="frm_info.postcode.$invalid && !frm_info.postcode.$pristine" class="help-block">Your postcode is required.</p>
+				</div>
+			</div>
+
+			
+			<md-button  ng-click="submit" class="md-raised md-primary" ng-disabled="frm_info.$invalid"><i class="fa fa-paper-plane"></i> Send</md-button>
+			<!-- <button type="submit" class="btn btn-primary" ng-disabled="frm_info.$invalid">Submit</button> -->
+		</form>
+
+		<!-- <form class="well form-horizontal" ng-submit="fr_bulling_address()" method="post" id="contact_form">
 			<fieldset>
-				
+				<h4> Default Billing Address </h4>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Name *</label> 
-					<div class="col-md-4 inputGroupContainer">
+					<label class="col-md-4 control-label">Firstname *</label> 
+					<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-							<input name="username" placeholder="Name" class="form-control Name" ng-model="formdata.name"  type="text">
+							<input name="firstname" placeholder="Firstname" class="form-control Firstname" ng-model="formdata.firstname"  type="text">
 						</div>
 					</div>
 				</div>
 
+
 				<div class="form-group">
-					<label class="col-md-4 control-label">Address *</label>  
-					<div class="col-md-4 inputGroupContainer">
+					<label class="col-md-4 control-label">Lastname *</label> 
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input name="lastname" placeholder="Lastname" class="form-control Lastname" ng-model="formdata.lastname"  type="text">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Email *</label>  
+					<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-							<input name="address" placeholder="Address" class="form-control address" ng-model="formdata.address" type="text">
+							<input name="email" placeholder="Email" class="form-control email" ng-model="formdata.email" type="text">
 						</div>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label class="col-md-4 control-label">Phone number *</label>
-					<div class="col-md-4 inputGroupContainer">
+					<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
 							<input name="tel" placeholder="Phone" class="form-control tel" ng-model="formdata.phone" type="text">
@@ -36,7 +129,7 @@
 
 				<div class="form-group">
 					<label class="col-md-4 control-label">Company</label>  
-					<div class="col-md-4 inputGroupContainer">
+					<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
 							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
 							<input name="company" placeholder="Company" class="form-control company" ng-model="formdata.company" type="text">
@@ -45,25 +138,56 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-md-4 control-label">Description</label>
-					<div class="col-md-4 inputGroupContainer">
+					<label class="col-md-4 control-label">Address *</label>  
+					<div class="col-md-5 inputGroupContainer">
 						<div class="input-group">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-							<textarea class="form-control description" ng-model="formdata.description" name="description" placeholder="Description"></textarea>
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="address" placeholder="Address" class="form-control address" ng-model="formdata.address" type="text">
 						</div>
 					</div>
 				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Town/City</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="city" placeholder="Town/City" class="form-control city" ng-model="formdata.city" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Country</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="country" placeholder="Country" class="form-control Country" ng-model="formdata.country" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Postcode</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="postcoode" placeholder="Postcode" class="form-control Postcode" ng-model="formdata.postcode" type="text">
+						</div>
+					</div>
+				</div>
+			
 		
 				<div class="form-group">
 					<label class="col-md-4 control-label"><?php echo __("");?></label>
-					<div class="col-md-4">
+					<div class="col-md-5">
 						
 						<md-button  ng-click="submit" class="md-raised md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
 					</div>
 				</div>
 
 			</fieldset>
-		</form>
+		</form> -->
 	</div>
 </div>
 

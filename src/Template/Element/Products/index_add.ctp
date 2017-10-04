@@ -15,7 +15,7 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs nav-justified" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#tab1" role="tab" data-toggle="tab"><?php echo __("Products") ?></a>
+								<a href="#tab1" role="tab" data-toggle="tab"><?php echo __("General") ?></a>
 							</li>
 							<li role="presentation">
 								<a href="#tab2" role="tab" data-toggle="tab"><?php echo __("Infomations"); ?></a>
@@ -29,46 +29,48 @@
 						</ul>
 						<!-- Tab panes -->
 						<?php echo $this->Form->create('add',['url'=>['action'=>'add'],'enctype'=>'multipart/form-data', "onSubmit"=>"return myFunctionName()"]);?>
-						<div class="tab-content">
+						<div class="tab-content add-new-products">
 							<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'SKU/Item Number','label' => 'SKU/Item Number']); ?>
-									<?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Name']); ?>
-									<?= $this->Form->input('supplier_id',['class' => 'supplier_id','id' => 'PSupplier_Id','append' => [
-											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
-
+									<?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Product Code','label' => 'Product Code']); ?>
+									<?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Products Name']); ?>
 									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => 'USD']); ?>
+									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD']); ?>
 									<?= $this->Form->input('vat',['type'=>'checkbox','label' => 'VAT (10%)']); ?>
 								</div>
 								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
-									<?= $this->Form->input('unit',['class' => 'unit','placeholder' => 'Unit']); ?>
-									<?= $this->Form->input('categorie_id', ['label'=>__('Category'), 
+									<?= $this->Form->input('conditions',[ 'type' => 'select', 'options' => PRODUCT_CONDITION]); ?>
+									<?= $this->Form->input('categorie_id', ['label'=>'Categories', 
 										'class' => 'categorie_id js-states', 
 										'id' => 'PCategorie_Id',
 										'append' => [
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
 										]);
 									?>
-									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD']); ?>
+									<?= $this->Form->input('supplier_id',['class' => 'supplier_id','label' => __('Manufacturer / Brand'),'id' => 'PSupplier_Id','append' => [
+											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
+									
+									<?= $this->Form->input('actived',['type'=>'checkbox','label' => 'Active']); ?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tab2">
 								<div class="col-lg-4 col-md-4">
 									<?= $this->Form->input('release_date',['type'=>'text','placeholder' => 'Release date','class'=>'date-picker','value'=> date("Y-m-d") ]); ?>
 									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size']); ?>
-									<?= $this->Form->input('status',['class' => 'status','placeholder' => 'Status']); ?>
+									
 									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand']); ?>
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight']); ?>
 									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color']); ?>
 									<?= $this->Form->input('meterial',['class' => 'Material','placeholder' => 'Material']); ?>
-									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
+									
 								</div>
 								<div class="col-lg-4 col-md-4">
 									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer']); ?>
 									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition']); ?>
+									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
 								</div>
 								<div class="clearfix"></div>
 								<?= $this->Form->input('properties',['class' => 'hidden','label'=>false,'id'=>"result"]); ?>
@@ -168,7 +170,7 @@
 		<div class="modal-content" style=" margin-top: 100px; ">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Supplier") ?></h4>
+				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Manufacturer / Brand") ?></h4>
 			</div>
 			<div class="modal-body">
 				<?= $this->Form->input('code',['id' => 'supplier-code']);?> 

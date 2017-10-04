@@ -4,13 +4,13 @@
 	
 	<?php foreach ($categories as $key => $category): ?>
 		<?php if ($key == 6) break;?>
-		<?php if ($this->request->session()->read('Config.language') == 'kr'): ?>
+		<?php if ($this->request->session()->read('Config.language') == 'en'): ?>
 			<li>
-				<?php echo $this->Html->link($category->kr_name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'CategoriesParent', $category->id],['escape'=> false]) ?> 
+				<?php echo $this->Html->link($category->name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'CategoriesParent', $category->id],['escape'=> false]) ?> 
 			</li>
 			<?php else: ?>
 				<li>
-				<?php echo $this->Html->link($category->name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'CategoriesParent', $category->id],['escape'=> false]) ?> 
+				<?php echo $this->Html->link($category->kr_name.' <span><i class="fa fa-angle-right" aria-hidden="true"></i></span>',['controller' => 'pages', 'action' => 'CategoriesParent', $category->id],['escape'=> false]) ?> 
 			</li>
 		<?php endif ?>
 		

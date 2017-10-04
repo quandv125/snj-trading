@@ -177,7 +177,7 @@ class PagesController extends AppController
 	}
 
 	public function accounts() {
-		$this->check_user();
+		// $this->check_user();
 		$this->viewBuilder()->layout('product');
 		// $User  = TableRegistry::get('Users');
 		// $users = $User->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -260,8 +260,16 @@ class PagesController extends AppController
 
 	public function getcartdata()	{
 		if ($this->request->is('get')) {
-			$cart    = $this->request->session()->read('Cart');
-			echo json_encode($cart);
+			$info['cart']    = $this->request->session()->read('Cart');
+			$info['auth'] = false;
+			if (!empty($this->Auth->user('id'))) {
+				$User  = TableRegistry::get('Users');
+				$info['auth'] = true;
+				$info['billing_address'] = $User->find()->select(['id','billing_address','delivery_address'])->where(['id'=>$this->Auth->user('id')])->first();
+			} else {
+				$info['billing_address'] = NULL;
+			}
+			echo json_encode($info);
 		}
 		exit();
 	}

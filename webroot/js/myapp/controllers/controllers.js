@@ -17,6 +17,10 @@
 	App.controller('IndexCtrl', function($scope, $routeParams, $http){
 		$http.get("/pages/account_info").then(function (response) {
 			$scope.users = response.data;
+			var billing_address = jQuery.parseJSON(response.data.billing_address);
+			$scope.billing_address = billing_address;
+			var delivery_address = jQuery.parseJSON(response.data.delivery_address);
+			$scope.delivery_address = delivery_address;
 		});
 	});
 
@@ -221,7 +225,10 @@
 
 	App.controller('ViewCartCtrl', function($scope, $http){
 		$http.get("/pages/getcartdata").then(function (response) {
-			$scope.cart = response.data;
+
+			$scope.cart = response.data.cart;
+			$scope.auth = response.data.auth;
+			// console.log($scope.auth);
 			$scope.date = new Date();
 		});
 	});
@@ -293,27 +300,59 @@
 
 	App.controller('PlaceOrderCtrl',function($scope, $http, $location){
 		$scope.order_info = function(){
+			
+			if ($scope.info.$valid) {
+				jQuery(".loader3").fadeIn();
+				$http({
+					method: 'POST',
+					url: '/products/place_order',
+					data: $scope.user
+				}).then(function successCallback(response) {
+					// console.log(response.data);return;
+					$location.path('/order_received/'+response.data);
+					jQuery('.total-mini-cart-item').html("0");
+					jQuery('table #modal-mycart').html('');
+					
+				}, function errorCallback(response) {
+					toastr.error("Error");
+				});
+			}
+			jQuery(".loader3").fadeOut();
+		}
+	})
+
+	App.controller('CheckoutCtrl', function($scope, $http, $location){
+		$http.get("/pages/getcartdata").then(function (response) {
+			$scope.cart_new = response.data.cart;
+			$scope.address = jQuery.parseJSON(response.data.billing_address.billing_address);
+			
+		});
+		
+		jQuery('#sbm-palce-order').click(function(){
+			jQuery(".loader3").fadeIn();
 			$http({
 				method: 'POST',
 				url: '/products/place_order',
-				data: $scope.info
 			}).then(function successCallback(response) {
 				// console.log(response.data);return;
-				$location.path('/order_received/'+response.data);
+				window.location.href ='/pages/accounts#/order_received/'+response.data;
+				
 				jQuery('.total-mini-cart-item').html("0");
 				jQuery('table #modal-mycart').html('');
+				jQuery(".loader3").fadeOut();
 				
 			}, function errorCallback(response) {
 				toastr.error("Error");
 			});
-		}
-	})
+		});
+		
+	});
 
 	App.controller('ProcesscheckoutCtrl', function($scope, $http){
 		$http.get("/pages/getcartdata").then(function (response) {
-			$scope.cart_new = response.data;
-			$scope.date = new Date();
+			$scope.cart_new = response.data.cart;
 		});
+		
 		jQuery('#create-account').click(function(){
 			jQuery("#create-password").slideToggle();
 		});
@@ -341,6 +380,8 @@
 
 	App.controller('PersonalInfomationAct', function($scope, $http, $location){
 		$scope.form_info = function(){
+			if ($scope.frm_info.$valid) {
+			jQuery(".loader3").fadeIn();
 			$http({
 				method: 'POST',
 				url: '/users/change_user_info_art',
@@ -354,6 +395,9 @@
 					}
 				}, function errorCallback(response) {
 				});
+			jQuery(".loader3").fadeOut();
+			}
+			return;
 		}
 	});
 	// Delete User
@@ -566,20 +610,67 @@
 		});
 	});
 
-	// CustomerAddressCtrl
-	App.controller('CustomerAddressCtrl', function($scope, $routeParams, $http){});
+	// DeliveryAddressCtrl
+	App.controller('DeliveryAddressCtrl', function($scope, $routeParams, $http){
+		$http({
+			method: 'GET',
+			url: '/users/Delivery_address_ctrl',
+			}).then(function successCallback(response) {
+				var data = jQuery.parseJSON(response.data.delivery_address);
+				$scope.formdata = data;
+			}, function errorCallback(response) {
+			}
+		);
+	});
 
-	App.controller("Cus_Add_Form_Ctrl", function($scope){
-		$scope.fr_customer_address = function(){
-			console.log($scope.formdata);
+	App.controller("Delivery_Form_Ctrl", function($scope){
+		$scope.fr_delivery_address = function(){
+			jQuery(".loader3").fadeIn();
+			$.ajax({
+				type: "POST",
+				url: "/users/Delivery_address_ctrl",
+				data:  $scope.formdata,
+				cache: false,
+				success: function(response) {
+					toastr.success(response);
+				},
+				error: function(response){
+					toastr.error(response);
+				}
+			});
+			jQuery(".loader3").fadeOut();
 		}
 	});
 
-	App.controller('BillingAddressCtrl', function($scope, $routeParams, $http){});
 
-	App.controller("Bill_Add_Form_Ctrl", function($scope){
+	App.controller('BillingAddressCtrl', function($scope, $http, $location){
+		$http({
+			method: 'GET',
+			url: '/users/billing_address_ctrl',
+			}).then(function successCallback(response) {
+				var data = jQuery.parseJSON(response.data.billing_address);
+				$scope.formdata = data;
+			}, function errorCallback(response) {
+			}
+		);
+	});
+
+	App.controller("Billing_Form_Ctrl", function($scope, $routeParams, $http){
 		$scope.fr_bulling_address = function(){
-			console.log($scope.formdata);
+			jQuery(".loader3").fadeIn();
+			$.ajax({
+				type: "POST",
+				url: "/users/billing_address_ctrl",
+				data:  $scope.formdata,
+				cache: false,
+				success: function(response) {
+					toastr.success(response);
+				},
+				error: function(response){
+					toastr.error(response);
+				}
+			});
+			jQuery(".loader3").fadeOut();
 		}
 	});
 

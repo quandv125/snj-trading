@@ -94,13 +94,17 @@
 			controller: "ViewCartCtrl",
 			templateUrl: "/js/myapp/templates/accounts/viewcart.html"
 		})
+		.when('/checkout',{
+			controller: "CheckoutCtrl",
+			templateUrl: "/js/myapp/templates/accounts/checkout.html"
+		})
 		.when('/process_checkout',{
 			controller: "ProcesscheckoutCtrl",
 			templateUrl: "/js/myapp/templates/accounts/process_checkout.html"
 		})
-		.when('/customer_address',{
-			controller: "CustomerAddressCtrl",
-			templateUrl: "/js/myapp/templates/accounts/customer_address.html"
+		.when('/delivery_address',{
+			controller: "DeliveryAddressCtrl",
+			templateUrl: "/js/myapp/templates/accounts/delivery_address.html"
 		})
 		.when('/order_received/:id',{
 			controller: "OrderReceivedCtrl",

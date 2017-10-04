@@ -13,7 +13,7 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs nav-justified" role="tablist">
 							<li role="presentation" class="active">
-								<a href="#tabs1<?= $product->id;?>" role="tab" data-toggle="tab"><?php echo __("Products") ?></a>
+								<a href="#tabs1<?= $product->id;?>" role="tab" data-toggle="tab"><?php echo __("General") ?></a>
 							</li>
 							<li role="presentation">
 								<a href="#tabs2<?= $product->id;?>" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
@@ -29,10 +29,10 @@
 						<div class="tab-content">
 							<div role="tabpanel" class="tab-pane active fade in" id="tabs1<?= $product->id;?>">
 								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('sku',['class'=>'sku','value' => $product->sku,'placeholder' => 'SKU/Item Number','label' => 'SKU/Part No']); ?>
+									<?= $this->Form->input('sku',['class'=>'sku','value' => $product->sku,'placeholder' => 'Product Code','label' => 'SKU/Part No']); ?>
 									<?= $this->Form->input('product_name',['class' => 'product_name','value' => $product->product_name,'placeholder' => 'Name']); ?>
 									<?= $this->Form->input('supplier_id',[
-										'class' => 'supplier_id',
+										'class' => 'supplier_id', 'label' => __('Manufacturer / Brand'),
 										'value' => $product->supplier_id,
 										'id' => 'PSupplier_Id',
 										'append' => [

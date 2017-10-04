@@ -49,14 +49,14 @@
 
 				</div>
 				<div class="modal-footer">
-					<?php if (isset($user_info) && !empty($user_info)): ?>
+					<!-- <?php// if (isset($user_info) && !empty($user_info)): ?> -->
 						<a href="/pages/accounts#/viewcart">
 							<button class="bt-link bt-blue bt-radius bt-style23"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Checkout</button>
 
 						</a>
-					<?php else: ?>
-						<?php echo $this->Html->link(__('Login/Register'),['controller'=>"users",'action'=>"login"],['class'=>'btn btn-sussces']) ?>
-					<?php endif ?>
+				<!-- 	<?php// else: ?>
+						<?php// echo $this->Html->link(__('Login/Register'),['controller'=>"users",'action'=>"login"],['class'=>'btn btn-sussces']) ?>
+					<?php// endif ?> -->
 				</div>
 				
 			</div>

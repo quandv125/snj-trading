@@ -1,7 +1,7 @@
 <div ng-controller="PersonalInfomationAct">
 <div class="row">
 	<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2 col-sm-offset-2 col-xs-offset-0">
-		<form class="well form-horizontal" ng-submit="form_info()" >
+		<!-- <form class="well form-horizontal" ng-submit="form_info()" >
 			<fieldset>
 				<input class="users_id" ng-model="users.id" type="text" style=" display: none;position: absolute;">
 				<div class="form-group">
@@ -102,7 +102,90 @@
 				</div>
 
 			</fieldset>
+		</form> -->
+		<form name="frm_info" class="well form-horizontal" ng-submit="form_info()" novalidate>
+		
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.username.$invalid && !frm_info.username.$pristine }">
+				<label class="col-md-4 control-label">Username *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="username" class="form-control" disabled="disabled" ng-model="users.username" required>
+				<p ng-show="frm_info.username.$invalid && !frm_info.username.$pristine" class="help-block">Your username is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.fullname.$invalid && !frm_info.fullname.$pristine }">
+				<label class="col-md-4 control-label">Fullname *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="fullname" class="form-control" ng-model="users.fullname" required>
+				<p ng-show="frm_info.fullname.$invalid && !frm_info.fullname.$pristine" class="help-block">Your fullname is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.email.$invalid && !frm_info.email.$pristine }">
+				<label class="col-md-4 control-label">Email *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="email" name="email" class="form-control" ng-model="users.email" placeholder="Email*" required>
+				<p ng-show="frm_info.email.$invalid && !frm_info.email.$pristine" class="help-block">Enter a valid email.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.phone.$invalid && !frm_info.phone.$pristine }">
+				<label class="col-md-4 control-label">Phone *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="phone" class="form-control" ng-model="users.tel" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
+					<p ng-show="frm_info.phone.$error.pattern" class="help-block">Not a valid number!</p>
+					<p ng-show="frm_info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
+					<p ng-show="frm_info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>
+				</div>
+			</div>
+			
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
+				<label class="col-md-4 control-label">Address *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="address" class="form-control" ng-model="users.address" placeholder="Address*" required>
+					<p ng-show="frm_info.address.$invalid && !frm_info.address.$pristine" class="help-block">Your address is required.</p>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.company.$invalid && !frm_info.company.$pristine }">
+				<label class="col-md-4 control-label">Company *</label> 
+				<div class="col-md-4 inputGroupContainer">
+				<input type="text" name="company" class="form-control" ng-model="users.company" placeholder="Company Name*" required>
+				<p ng-show="frm_info.company.$invalid && !frm_info.company.$pristine" class="help-block">Your company is required.</p>
+				</div>
+			</div>
+
+			
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.description.$invalid && !frm_info.description.$pristine }">
+				<label class="col-md-4 control-label">Description *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					<input type="text" name="description" class="form-control" ng-model="users.description" placeholder="description*" required>
+					<p ng-show="frm_info.description.$invalid && !frm_info.description.$pristine" class="help-block">Your description is required.</p>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<label class="col-md-4 control-label"></label>
+				<div class="col-md-4 inputGroupContainer">
+					<div class="input-group">
+						<div class="col-md-8 wapper-captcha1"><img src="/users/captcha" class="captcha" alt=""></div>
+						<div class="col-md-4 reload"> <span class="btn btn-success reload_captcha cursor-point" style="margin-top: 5px;"><i class="fa fa-refresh" aria-hidden="true" style="font-size: 1.4em;"></i></span></div><br/></br/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.captcha.$invalid && !frm_info.captcha.$pristine }">
+				<label class="col-md-4 control-label">Captcha *</label> 
+				<div class="col-md-4 inputGroupContainer">
+					
+					<input type="text" name="captcha" class="form-control" ng-model="users.captcha" id="captcha" placeholder="captcha*" required>
+					<p ng-show="frm_info.captcha.$invalid && !frm_info.captcha.$pristine" class="help-block">Your captcha is required.</p>
+				</div>
+			</div>
+		
+			<button type="submit" class="btn btn-primary" ng-disabled="frm_info.$invalid">Submit</button>
 		</form>
+	
 	</div>
 </div>
 </div>

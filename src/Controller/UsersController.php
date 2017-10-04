@@ -569,4 +569,57 @@ class UsersController extends AppController
 			echo json_encode($msg); exit();
 		}
 	}
+
+	public function BillingAddressCtrl(){
+		$User = TableRegistry::get('Users');
+		$user_id = $this->Auth->user('id');
+		if ($this->request->is('post')) {
+			$this->autoRender = false;
+			$datasourceUser = $User->connection();
+			try {
+				$datasourceUser->begin();
+				$query = $User->query();
+				$query->update()->set(['billing_address' => json_encode($this->request->data)])->where(['id' => $user_id])->execute();
+				echo __('Update Successfuly!') ;
+				$datasourceUser->commit();
+			} catch (Exception $e) {
+				echo __('Error. Please, try again!');
+				$datasourceUser->rollback();
+				throw $e;
+			}
+		} else if ($this->request->is('get')) {
+			$users = $User->find()->select(['id','billing_address'])->where(['id' => $user_id])->first();
+			echo json_encode($users);
+		}else {
+			echo "Nothing";
+		}
+		exit();
+	}
+
+
+	public function DeliveryAddressCtrl(){
+		$User = TableRegistry::get('Users');
+		$user_id = $this->Auth->user('id');
+		if ($this->request->is('post')) {
+			$this->autoRender = false;
+			$datasourceUser = $User->connection();
+			try {
+				$datasourceUser->begin();
+				$query = $User->query();
+				$query->update()->set(['delivery_address' => json_encode($this->request->data)])->where(['id' => $user_id])->execute();
+				echo __('Update Successfuly!') ;
+				$datasourceUser->commit();
+			} catch (Exception $e) {
+				echo __('Error. Please, try again!');
+				$datasourceUser->rollback();
+				throw $e;
+			}
+		} else if ($this->request->is('get')) {
+			$users = $User->find()->select(['id','delivery_address'])->where(['id' => $user_id])->first();
+			echo json_encode($users);
+		}else {
+			echo "Nothing";
+		}
+		exit();
+	}
 }

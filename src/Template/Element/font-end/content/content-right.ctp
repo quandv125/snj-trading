@@ -30,14 +30,22 @@
 					<ul>
 						<li>
 							<div class="info-price">
-								<span><?= number_format($product->retail_price, DECIMALS) ?> 원 </span>
-								<div class="clearfix"></div>
-								<del><?= number_format($product->retail_price, DECIMALS) ?> 원</del>
+								<?php 
+									if ($product->vat == 1)
+										$retail_price = $product->retail_price + (($product->retail_price / 10));
+									else
+										$retail_price = $product->retail_price;
+									
+									?>
+								<span><?= number_format($retail_price, DECIMALS) ?> 원</span>
+								<!-- <span><?= number_format($product->retail_price, DECIMALS) ?> 원 </span> -->
+								<!-- <div class="clearfix"></div>
+								<del><?= number_format($product->retail_price, DECIMALS) ?> 원</del> -->
 							</div>
 						</li>
-						<li>
+						<!-- <li>
 							<span class="percent-sale">- 60%</span>
-						</li>
+						</li> -->
 						<!-- <li>
 							<span class="count-order">129 Order</span>
 						</li> -->
@@ -74,7 +82,7 @@
 <div class="slide-adds">
 	<div class="widget widget-adv">
 		<h2 class="title-widget-adv">
-			<strong><?php echo __('slide ads') ?></strong>
+			<?= __('slide ads') ?>
 		</h2>
 		<div class="wrap-item" data-pagination="true" data-autoplay="true" data-navigation="false" data-itemscustom="[[0, 1]]">
 			<div class="item">

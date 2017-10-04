@@ -4,53 +4,66 @@
 		<h2 class="title-shop-page">checkout</h2>
 			<div class="col-md-6 col-sm-6 col-ms-12" >
 				<div class="check-billing" >
-					<form class="form-my-account" ng-submit="order_info()">
-						<h2 class="title">Billing Details</h2>
-						<p class="clearfix box-col2">
-							<input type="text" ng-model="info.firstname" placeholder="First Name *" />
-							<input type="text" ng-model="info.lastname" placeholder="Last name *"/>
-						</p>
-						<p><input type="text" ng-model="info.company" placeholder="Company Name"/></p>
-						<p class="clearfix box-col2">
-							<input type="text" ng-model="info.email" placeholder="Email *"/>
-							<input type="text" ng-model="info.phone" placeholder="Phone *"/>
-						</p>
-						<!-- <p>
-							<select name="country" id="country">
-								<option value="">Country*</option>
-								<option value="">United State</option>
-								<option value="">England</option>
-								<option value="">Germany</option>
-								<option value="">France</option>
-								<option value="">China</option>
-								<option value="">Korea</option>
-								<option value="">Japan</option>
-								<option value="">VietNam</option>
-							</select>
-						</p> -->
-						<p><input type="text" ng-model="info.address" placeholder="Address *"/></p>
-						<p class="clearfix box-col2">
-							<!-- <input type="text" ng-model="info.postcode_zip" placeholder="Postcode / Zip"/> -->
-							<input type="text" ng-model="info.city" placeholder="Town / City *"/>
+					
 
-							<input type="text" ng-model="info.country" placeholder="Country *"/>
-						</p>
-						<!-- <p>
-							<input type="text" ng-model="info.country" placeholder="Country *"/>
-						</p> -->
-						<p>
-							<input type="checkbox" id="create-account" /> <label for="create-account">Create an account?</label>
-						</p>
-						<div id="create-password" style="display: none;">
-							<p>
-								<input type="password"  placeholder="Password *"/>
-							</p>
-							<p>
-								<input type="password"  placeholder="Comfirm Password *"/>
-							</p>
-						</div>
-						<md-button type="submit" id="update_cart" class="md-raised float-left md-primary"> Place Order</md-button>
-					</form>
+				<form name="info" class="form-my-account" ng-submit="order_info()" novalidate>
+					<h2 class="title">Billing Details</h2>
+					<div class="form-group" ng-class="{ 'has-error' : info.firstname.$invalid && !info.firstname.$pristine }">
+						<input type="text" name="firstname" class="form-control" ng-model="user.firstname" placeholder="First Name*" required>
+						<p ng-show="info.firstname.$invalid && !info.firstname.$pristine" class="help-block">Your firstname is required.</p>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error' : info.lastname.$invalid && !info.lastname.$pristine }">
+						<input type="text" name="lastname" class="form-control" ng-model="user.lastname" placeholder="Last name *" required>
+						<p ng-show="info.lastname.$invalid && !info.lastname.$pristine" class="help-block">Your lastname is required.</p>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error' : info.company.$invalid && !info.company.$pristine }">
+						<input type="text" name="company" class="form-control" ng-model="user.company" placeholder="Company Name*" required>
+						<p ng-show="info.company.$invalid && !info.company.$pristine" class="help-block">Your company is required.</p>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error' : info.email.$invalid && !info.email.$pristine }">
+						<input type="email" name="email" class="form-control" ng-model="user.email" placeholder="Email*" required>
+						<p ng-show="info.email.$invalid && !info.email.$pristine" class="help-block">Enter a valid email.</p>
+					</div>
+
+					<div class="form-group" ng-class="{ 'has-error' : info.phone.$invalid && !info.phone.$pristine }">
+						<input type="text" name="phone" class="form-control" ng-model="user.phone" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
+						<p ng-show="info.phone.$error.pattern" class="help-block">Not a valid number!</p>
+						<p ng-show="info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
+						<p ng-show="info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>
+					</div>
+					
+					<div class="form-group" ng-class="{ 'has-error' : info.address.$invalid && !info.address.$pristine }">
+						<input type="text" name="address" class="form-control" ng-model="user.address" placeholder="Address*" required>
+						<p ng-show="info.address.$invalid && !info.address.$pristine" class="help-block">Your address is required.</p>
+					</div>
+					 <div class="form-group" ng-class="{ 'has-error' : info.postcode.$invalid && !info.postcode.$pristine }">
+						<input type="text" name="postcode" class="form-control" ng-model="user.postcode_zip" placeholder="Postcode/Zip*" required>
+						<p ng-show="info.postcode.$invalid && !info.postcode.$pristine" class="help-block">Your Postcode/Zip is required.</p>
+					</div>
+					
+					<script src="http://geodata.solutions/includes/countrystatecity.js"></script>
+					<div class="form-group">
+						<select name="country" ng-model="user.country" class="countries" id="countryId">
+							<option value="">Select Country*</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<select name="state" ng-model="user.city" class="states" id="stateId">
+							 <option value="">Select State*</option>
+						</select>
+					</div>
+					<select name="city" class="cities" id="cityId" style="display: none;">
+						<option value="">Select City</option>
+					</select>
+					
+					<button type="submit" class="btn btn-primary" ng-disabled="info.$invalid">Submit</button>
+				</form>
+			
+
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6 col-ms-12">
@@ -65,12 +78,11 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="(k, c) in cart_new" class="cart_item cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
-					
 							<td class="product-name">
 								{{c.product_name}}&nbsp; <span class="product-quantity">× {{c.quantity}}</span>
 							</td>
 							<td class="product-total">
-								<span class="amount">{{ c.retail_price*c.quantity | currency : "$ " : 2 }} </span>						
+								<span class="amount">{{ c.retail_price*c.quantity | currency : " " : 0}} 원</span>						
 							</td>
 						</tr>
 						
@@ -78,15 +90,15 @@
 					<tfoot>
 						<tr class="cart-subtotal">
 							<th>Subtotal</th>
-							<td><strong class="amount">{{cart_new | sumOfValue: "quantity" | currency : "$ " : 2}}</strong></td>
+							<td><strong class="amount">{{cart_new | sumOfValue: "quantity" | currency : " " : 0}} 원</strong></td>
 						</tr>
 						<tr class="cart-Shipping">
 							<th>Shipping</th>
-							<td><strong class="amount">$ 0</strong></td>
+							<td><strong class="amount"> 0 원</strong></td>
 						</tr>
 						<tr class="order-total">
 							<th>Total</th>
-							<td><strong><span class="amount">{{cart_new | sumOfValue: "quantity" | currency : "$ " : 2}}</span></strong> </td>
+							<td><strong><span class="amount">{{cart_new | sumOfValue: "quantity" | currency : " " : 0}} 원</span></strong> </td>
 						</tr>
 					</tfoot>
 				</table>

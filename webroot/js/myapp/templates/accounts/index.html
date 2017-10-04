@@ -2,59 +2,143 @@
 <div class="row">
 	<div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="wapper-content">
-			<h4> <a href="#/personalinfomation">Personal Information <i class="fa fa-edit float-right"> Edit</i></a></h4>
+			<h5> <a href="#/personalinfomation">Personal Information <i class="fa fa-edit float-right"> Edit</i></a></h5>
 			<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
 				<tbody>
 					<tr>
-						<td><label class="box-title">USERNAME</label> </td>
+						<td><label class="box-title">Username</label> </td>
 						<td>{{users.username}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">PASSWORD</label> </td>
+						<td><label class="box-title">Password</label> </td>
 						<td><a href="#/changepassword">Change Password <i class="fa fa-edit"></i></a></td>
 					</tr>
 					<tr>
-						<td><label class="box-title">FULLNAME</label> </td>
+						<td><label class="box-title">Fullname</label> </td>
 						<td>{{users.fullname}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">EMAIL</label> </td>
+						<td><label class="box-title">Email</label> </td>
 						<td>{{users.email}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">ADDRESS</label> </td>
+						<td><label class="box-title">Address</label> </td>
 						<td>{{users.address}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">COMPANY</label></td>
+						<td><label class="box-title">Company</label></td>
 						<td>{{users.company}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">PHONE</label>  </td>
+						<td><label class="box-title">Phone</label>  </td>
 						<td>{{users.tel}}</td>
 					</tr>
 					<tr>
-						<td><label class="box-title">DESCRIPTIONS</label>   </td>
+						<td><label class="box-title">Description</label>   </td>
 						<td>{{users.description}}</td>
 					</tr>
 				</tbody>
-		   </table>  
+		</table>
+			
 		</div>
 		
 	</div>
-	<div class="col-md-4 col-sm-4 col-xs-12">
+	<!-- <div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="wapper-content">
-			<h4>Default Shipping Address</h4>
-			<p>No default shipping address available</p>
+			<h5> <a href="#/delivery_address">Default Delivery Address <i class="fa fa-edit float-right"> Edit</i></a></h5>
 			
-			<a href="#/customer_address"><i class="btn btn-warning fa fa-plus"></i></a>
+		<br/>
+			<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+					<tbody>
+						<tr>
+							<td><label class="box-title">Firstname</label> </td>
+							<td>{{delivery_address.firstname}}</td>
+						</tr>
+						
+						<tr>
+							<td><label class="box-title">Lastname</label> </td>
+							<td>{{delivery_address.lastname}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">EMAIL</label> </td>
+							<td>{{delivery_address.email}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Phone</label> </td>
+							<td>{{delivery_address.phone}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Company</label> </td>
+							<td>{{delivery_address.company}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">ADDRESS</label> </td>
+							<td>{{delivery_address.address}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">city</label></td>
+							<td>{{delivery_address.city}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">COUNTRY</label> </td>
+							<td>{{delivery_address.country}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">POSTCODE</label>  </td>
+							<td>{{delivery_address.postcode}}</td>
+						</tr>
+						
+					</tbody>
+			</table>
 		</div>
-	</div>
+	</div> -->
 	<div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="wapper-content">
-			<h4>Default Billing Address</h4>
-			<p>No default billing address available</p>
-			<a href="#/billing_address"><i class="btn btn-warning fa fa-plus"></i></a>
+			<h5> <a href="#/billing_address">Default Billing Address <i class="fa fa-edit float-right"> Edit</i></a></h5>
+			
+			<br/>
+				<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+					<tbody>
+						<tr>
+							<td><label class="box-title">Firstname</label> </td>
+							<td>{{billing_address.firstname}}</td>
+						</tr>
+						
+						<tr>
+							<td><label class="box-title">Lastname</label> </td>
+							<td>{{billing_address.lastname}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Email</label> </td>
+							<td>{{billing_address.email}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Phone</label> </td>
+							<td>{{billing_address.phone}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Company</label> </td>
+							<td>{{billing_address.company}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Address</label> </td>
+							<td>{{billing_address.address}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">City</label></td>
+							<td>{{billing_address.city}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Country</label> </td>
+							<td>{{billing_address.country}}</td>
+						</tr>
+						<tr>
+							<td><label class="box-title">Postcode</label>  </td>
+							<td>{{billing_address.postcode}}</td>
+						</tr>
+						
+					</tbody>
+				</table>
 		</div>
 	</div>
 </div>

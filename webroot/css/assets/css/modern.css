@@ -2121,7 +2121,11 @@ fieldset[disabled] .btn-danger.active {
 .tab-content {
     padding: 15px;
     background: #fff;
-    
+}
+#tab-content {
+    border-bottom: 1px solid #e4e4e4;
+    border-left: 1px solid #e4e4e4;
+    border-right: 1px solid #e4e4e4;
 }
 
 .nav-tabs > li > a {
@@ -2310,7 +2314,7 @@ fieldset[disabled] .btn-danger.active {
 
 
 /* Labels */
-
+/*
 .label.label-default {
     background: #fff;
     border: 1px solid #e5e5e5;
@@ -2335,7 +2339,7 @@ fieldset[disabled] .btn-danger.active {
 .label.label-warning {
     background: #f6d433;
 }
-
+*/
 
 /* Forms */
 
@@ -2353,7 +2357,7 @@ label {
     width: 100%;
     height: 34px;
     padding: 0px 10px;
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.42857143;
     color: #000000;
     background-color: #fff;
@@ -2714,7 +2718,7 @@ tr.group:hover {
     border-radius: 0!important;
     -webkit-box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.1)!important;
     -moz-box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.1)!important;
-    box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.1)!important;
+    box-shadow: 1px 5px 15px 10px rgba(0, 0, 0, 0.1)!important;
 }
 
 .datepicker table tr td,

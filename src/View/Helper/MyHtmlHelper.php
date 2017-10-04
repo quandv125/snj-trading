@@ -115,6 +115,45 @@ class MyHtmlHelper extends HtmlHelper
 		}
 		return $result;
 	}
+
+	public function Conditions($Conditions)	{
+		switch ($Conditions) {
+			case 1:
+				$result = 'New';
+				break;
+			case 2:
+				$result = 'Used';
+				break;
+			default:
+				$result = 'Refurbished';
+				break;
+		}
+		return $result;
+	}
+
+	public function OrderStatus($stt)	{
+		switch ($stt) {
+			case 0:
+				$result = '<span class="label label-primary">Pending</span>';
+				break;
+			case 1:
+				$result = '<span class="label label-info">Processing</span>';
+				break;
+			case 2:
+				$result = '<span class="label label-success">Complete</span>';
+				break;
+			case 3:
+				$result = '<span class="label label-warning">Declined</span>';
+				break;
+			case 4:
+				$result = '<span class="label label-default">Failed</span>';
+				break;
+			default:
+				$result = '<span class="label label-default">Cancelled</span>';
+				break;
+		}
+		return $result;
+	}
 } // End
 
 

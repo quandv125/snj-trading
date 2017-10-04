@@ -30,7 +30,7 @@ if (!defined('DS')) {
  */
 define('ROOT', dirname(__DIR__));
 
-define('SERVER_ADDRESS', 'http://'.$_SERVER[ 'SERVER_ADDR' ]);
+// define('SERVER_ADDRESS', 'http://'.$_SERVER[ 'SERVER_ADDR' ]);
 
 /**
  * The actual directory name for the application directory. Normally
@@ -182,3 +182,17 @@ define('CURR', [0 => '-- Choose -- ', 1 => 'KRW', 2 => 'USD', 3 => 'EUR', 4 => '
 define('VESSEL_NAME', 0);
 define('IMO_NO', 1);
 define('HULL_NO', 2);
+
+## Product Condition
+define('New', 0);
+define('Used', 1);
+define('Refurbished', 2);
+define('PRODUCT_CONDITION', [ 0 => 'New', 1 => 'Used', 3 => 'Refurbished']);
+
+## Order Status
+define('Pending', 0);
+define('Processing', 1);
+define('Order Complete', 2);
+define('Declined', 3);
+define('Failed Fraud Review', 4);
+define('Cancelled', 5);

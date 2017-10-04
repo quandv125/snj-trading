@@ -8,7 +8,7 @@ jQuery( document ).ready(function() {
 
 	jQuery('.currency').blur(function(){
 			this.value = parseFloat(this.value.replace(/,/g, ""))
-			.toFixed(2)
+			.toFixed(0)
 			.toString()
 			.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	});
@@ -744,7 +744,7 @@ jQuery( document ).ready(function() {
 		ShowMyPictures(this);
 	});
 
-	jQuery('.row-cz td.text-center').click(function(){
+	jQuery('.row-cz td.pulse').click(function(){
 		jQuery(this).parent().next().toggleClass('hidden');
 	});
 
@@ -2792,7 +2792,7 @@ jQuery( document ).ready(function() {
 	});
 	if ($("#fe-search-inq").length){
 		jQuery("#fe-search-inq").click(function(){
-			jQuery('#fe-search-inq-info').slideToggle(1000);
+			jQuery('#fe-search-inq-info').slideToggle('fast');
 			 $("i", this).toggleClass("fa fa-chevron-up fa fa-chevron-down");
 		});
 	}
@@ -2858,5 +2858,25 @@ jQuery( document ).ready(function() {
 		initEditor2();
 	}
 	// END Config CKEDITOR
-	
+	jQuery('select#o_status').change(function(){
+		var status = jQuery(this).val();
+		var id = jQuery("#order_id").attr('order_id');
+		jQuery.ajax({
+			url: '/orders/change_status_orders',
+			type: 'POST',
+			data: {id: id, status: status},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				toastr.success('Change status successfully!');
+			},
+			error: function(response){
+
+			}
+		}); // ajaxalert(value);
+	});
 }); // jQuery document

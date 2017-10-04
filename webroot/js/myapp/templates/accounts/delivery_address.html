@@ -1,0 +1,114 @@
+
+<div class="row" ng-controller="Delivery_Form_Ctrl">
+
+	<div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-2 col-sm-offset-2 col-xs-offset-0">
+		
+		<form action="javascript:void(0)" class="well form-horizontal" ng-submit="fr_delivery_address()" method="post" id="contact_form">
+			<fieldset>
+				<h4> Default Delivery Address </h4>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Firstname *</label> 
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input name="firstname" placeholder="Firstname" class="form-control Firstname" ng-model="formdata.firstname"  type="text">
+						</div>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Lastname *</label> 
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+							<input name="lastname" placeholder="Lastname" class="form-control Lastname" ng-model="formdata.lastname"  type="text">
+						</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label class="col-md-4 control-label">Email *</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="email" placeholder="Email" class="form-control email" ng-model="formdata.email" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Phone number *</label>
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+							<input name="tel" placeholder="Phone" class="form-control tel" ng-model="formdata.phone" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Company</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="company" placeholder="Company" class="form-control company" ng-model="formdata.company" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Address *</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="address" placeholder="Address" class="form-control address" ng-model="formdata.address" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Town/City</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="city" placeholder="Town/City" class="form-control city" ng-model="formdata.city" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Country</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="country" placeholder="Country" class="form-control Country" ng-model="formdata.country" type="text">
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-md-4 control-label">Postcode</label>  
+					<div class="col-md-5 inputGroupContainer">
+						<div class="input-group">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+							<input name="postcoode" placeholder="Postcode" class="form-control Postcode" ng-model="formdata.postcode" type="text">
+						</div>
+					</div>
+				</div>
+			
+		
+				<div class="form-group">
+					<label class="col-md-4 control-label"><?php echo __("");?></label>
+					<div class="col-md-5">
+						
+						<md-button  ng-click="submit" class="md-raised md-primary"><i class="fa fa-paper-plane"></i> Send</md-button>
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<script src="/js/myapp/snj_custom.js"></script>

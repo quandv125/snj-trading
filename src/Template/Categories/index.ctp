@@ -28,11 +28,12 @@
                             <tr>
                                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                                <th scope="col"><?= $this->Paginator->sort('Korea name') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('type') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('Actived') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                               
+                                <th scope="col" class="actions "><?= __('Actions') ?></th>
                             </tr>
                         </thead>
                         <tbody id="categories-result" class="vertical highlight_list1 live-search-list">
@@ -58,6 +59,7 @@
             <div class="modal-body">
                 <?php echo $this->Form->create('add',['url'=>['action'=>'add'],'enctype'=>'multipart/form-data']);?>
                 <?php echo $this->Form->input('name'); ?>
+                <?php echo $this->Form->input('kr_name',['label' => 'Korea name']); ?>
                 <?php  echo $this->Form->input('parent_id',['options'=>$treeList, 'empty' => ' ',"class" =>"selectpicker","data-live-search"=>"true"]);?>
                 <?= $this->Form->input('type', ['options' => [VERTICAL => "Vertical", HORIZONTAL => "Horizontal"],"class" =>"selectpicker"]);?>
                 <?php  echo $this->Form->input('actived',['options'=>[DEACTIVED => "Deactived", ACTIVED => 'Actived'], 'default' => ACTIVED]);?>

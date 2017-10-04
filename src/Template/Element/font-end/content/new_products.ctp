@@ -3,10 +3,10 @@
 	<ul>
 		<li class="active"><a href="#tabs" data-toggle="tab"><?php echo __('All');?></a></li>
 		<?php foreach ($categories as $key => $categorie): ?>
-            <?php if ($this->request->session()->read('Config.language') == 'kr'): ?>
-            	<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->kr_name);?></a></li>
-            <?php else: ?>
+            <?php if ($this->request->session()->read('Config.language') == 'en'): ?>
             	<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->name);?></a></li>
+            <?php else: ?>
+            	<li><a href="#tab_<?= $key; ?>" data-toggle="tab"><?php echo __($categorie->kr_name);?></a></li>
             <?php endif ?>
 			
 		<?php endforeach ?>

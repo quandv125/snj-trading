@@ -1,16 +1,16 @@
 msgid "All"
 msgstr "전체상품"
 
-msgid "Sports Items"
+msgid "Sports"
 msgstr "스포츠 용품"
 
 msgid "Food"
 msgstr "건강식품"
 
-msgid "Kicken Items"
+msgid "Kitchen"
 msgstr "주방용품 "
 
-msgid "Car items"
+msgid "Car"
 msgstr "자동차 용품"
 
 msgid "Login/Register"

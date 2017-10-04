@@ -7,49 +7,10 @@
 				<div class="container">
 					<div class="cart-content-page">
 						<h2 class="title-shop-page">my cart</h2>
-						<!-- <div class="col-md-12 item-unavailable" id="AddNewIqr" inqid="">
-							<div class="col-md-4">
-								<label>Vessel Name</label>
-								<input type="text" class="form-control vessel" name="">
-							</div>
-							<div class="col-md-4">
-								<label>IMO No</label>
-								<input type="text" class="form-control imo_no" name="">
-							</div>
-							<div class="col-md-4">
-								<label>Hull No</label>
-								<input type="text" class="form-control hull_no" name="">
-							</div>
-							<div class="col-md-4">
-								<label>Date</label>
-								<input type="text" class="form-control date"  value="{{date | date:'yyyy-MM-dd'}}">
-							</div>
-							<div class="col-md-4">
-								<label>Ref</label>
-								<input type="text" class="form-control ref" name="">
-							</div>
-							<div class="clearfix"></div>
-							<div class="col-md-12">
-								<label>Description</label>
-								<textarea class="form-control description" rows="5"></textarea>
-							</div>
-						</div> -->
+						
 						<div class="table-responsive">
-							 <table class="table">
-								<!-- <thead>
-									<tr>
-										<th class="text-center product-remove">#</th>
-										<th class="text-center product-name" style="max-width: 100px;">Name</th>
-										<th class="text-center product-quantity">Category</th>
-										<th class="text-center product-subtotal">Type Model</th>
-										<th class="text-center product-thumbnail">Serial No</th>
-										<th class="text-center product-thumbnail">Origin</th>
-										<th class="text-center product-price">Price</th>
-										<th class="text-center product-quantity">Quantity</th>
-										<th class="text-center product-quantity">Unit</th>
-										<th class="text-center product-remark">Remark</th>
-									</tr>
-								</thead> -->
+							<table class="table">
+								
 								<tbody style="border-bottom: 1px solid #e4e4e4;">
 									<tr ng-repeat="(k, c) in cart" class="cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
 										<td style="width: 220px;"><img ng-src="/img/{{c.thumbnail}}" width="40%"></td>
@@ -58,7 +19,7 @@
 											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
 										</td>
 										<td class="price">
-											<b>{{ c.retail_price | currency : "$ " : 2 }}</b>
+											<b>{{ c.retail_price | currency : " " : 0 }} 원</b>
 										</td>
 										<td class="text-center product-quantity">
 											<div class="info-qty" id="{{c.id}}">
@@ -77,63 +38,22 @@
 										
 									</tr>
 
-								<!-- 	<tr ng-repeat="(k, c) in cart" class="cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
-										<td class="text-center product-remove">
-											<span class="remove-items" ng-click="removeitems(c.id)" data-id="{{c.id}}">
-												<i class="fa fa-times"></i>
-											</span>
-										</td>
-										<td class="text-center" style="width: 220px;">
-											<img ng-src="/img/{{c.thumbnail}}" width="40%">
-
-										</td>
-										<td class="text-center product-name">
-											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
-										</td>
-										 <td class="text-center category-name">
-											{{c.category.name}}
-										</td>
-										<td class="text-center type_model">
-											{{c.type_model}}
-										</td>
-										<td class="text-center serial_no ">
-											{{c.serial_no}}
-										</td>
-										<td class="text-center origin">
-											{{c.origin}}
-										</td> 
-										<td class="text-center price">
-											{{ c.retail_price | currency : "$ " : 2 }}
-										</td>
-										<td class="text-center product-quantity">
-											<div class="info-qty" id="{{c.id}}">
-												<a ng-click="myfuncdown(c.id)" class="qty-down">
-													<i class="fa fa-angle-left"></i>
-												</a>
-													<span class="qty-val qty-val-{{c.id}}">{{c.quantity}}</span>
-												<a ng-click="myfuncup(c.id)" class="qty-up">
-													<i class="fa fa-angle-right"></i>
-												</a>
-											</div>			
-										</td>
-										 <td class="text-center unit">
-											{{c.unit}}	
-										</td>
-										<td class="text-center product-remark" style="width: 300px;">
-											<span class="amount">
-												<textarea class="form-control remark-item" rows="2" cols="30" id="comment">{{c.remark}}</textarea>
-											</span>
-										</td>
-									</tr>
-									 -->
+							
 								</tbody>
 							</table>
 							
-							
-							<a href="/pages/accounts#/process_checkout">
-								<md-button class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Process to Checkout</md-button>
-							</a>
-							<md-button id="update_cart" ng-click="update_cart()" class="md-raised float-right md-primary"> Update cart</md-button>
+							<div ng-if="auth === true">
+								<a href="/pages/accounts#/checkout">
+									<md-button class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Process to Checkout</md-button>
+								</a>
+							</div>
+							<div ng-if="auth === false">
+								<a href="/pages/accounts#/process_checkout">
+									<md-button class="md-raised float-right md-primary"><i class="fa fa-paper-plane"></i> Process to Checkout</md-button>
+								</a>
+							</div>
+						
+							<md-button id="update_cart" ng-click="update_cart()" class="md-raised float-right md-primary">Update cart</md-button>
 						</div>
 					</div>
 				</div>	

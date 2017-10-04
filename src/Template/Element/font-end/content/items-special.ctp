@@ -10,9 +10,17 @@
 	<div class="product-info5">
 		<h3 class="title-product"><?php echo $this->Html->link($product->product_name,[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?> </a></h3>
 		<div class="info-price">
-			<span><?= number_format($product->retail_price, DECIMALS) ?> 원 </span>
+			<?php 
+				if ($product->vat == 1)
+					$retail_price = $product->retail_price + (($product->retail_price / 10));
+				else
+					$retail_price = $product->retail_price;
+				
+				?>
+			<span><?= number_format($retail_price, DECIMALS) ?> 원</span>
+			<!-- <span><?= number_format($product->retail_price, DECIMALS) ?> 원 </span>
 			<div class="clearfix"></div>
-			<del><?= number_format($product->retail_price, DECIMALS) ?> 원</del>
+			<del><?= number_format($product->retail_price, DECIMALS) ?> 원</del> -->
 		</div>
 		<div class="product-rating">
 			<div style="width:100%" class="inner-rating"></div>

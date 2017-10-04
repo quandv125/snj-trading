@@ -31,7 +31,6 @@ class ProductsController extends AppController
 			return $this->redirect(['action' => 'suppliers']);
 		}
 		$products = $this->Products->getProductsSearch(null, null, null);  
-		
 		$users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
 		$this->infoPagi(null, 1);
 		$this->set(compact('products','users'));
@@ -75,12 +74,13 @@ class ProductsController extends AppController
 	
 		if ($this->request->is('post')) {
 			$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
-			$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
+			$this->request->data['supply_price'] = str_replace(',', '', $this->request->data['supply_price']);
+			$this->request->data['user_id'] = $this->Auth->user('id');
 			if (empty($this->request->data['sku'])) {
 				$this->request->data['sku'] = $this->Products->MaxSKU();
 			}
-			$this->request->data['actived'] = true;
-			$this->request->data['user_id'] = $this->Auth->user('id');
+
+			
 			$product = $this->Products->newEntity();
 			$product = $this->Products->patchEntity($product, $this->request->data);
 			if ($Product->save($product)) {
@@ -810,13 +810,17 @@ class ProductsController extends AppController
 			$this->autoRender = false;
 			$Order = TableRegistry::get('Orders');
 			$OrderProduct = TableRegistry::get('OrderProducts');
-			$this->request->data['user_id'] = $this->Auth->user('id');
+			if (!empty($this->Auth->user('id'))) {
+				$User = TableRegistry::get('Users');
+				$users= $User->find()->select(['billing_address'])->where(['id' => $this->Auth->user('id')])->first();
+				$this->request->data = json_decode($users->billing_address,true);
+
+			} 
 			$info_order = $Order->newEntity();
 			$info_order = $Order->patchEntity($info_order, $this->request->data);
-			$mycart		= $this->request->session()->read('Cart');
-			
 			if ($Order->save($info_order)) {
 				$order_id = $info_order->id;
+				$mycart		= $this->request->session()->read('Cart');
 				foreach ($mycart as $key => $cart) {
 					$data[] = [
 						'order_id'		=> $order_id,

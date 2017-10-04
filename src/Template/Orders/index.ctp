@@ -8,27 +8,19 @@
 			</div> <!-- col-lg-8 -->
 		</div> <!-- panel-heading -->
 		<div class="panel-body display-none" id="fe-search-inq-info">
-				<?= $this->Form->create(null); ?>
+				<?= $this->Form->create(null,['horizontal' => false]); ?>
 					<div class="form-group form-group-sm">
 						<div class="col-sm-2">
-							<?= $this->Form->input('ref',['class'=>'ref', "placeholder"=>"Ref No" ]) ?>
-						</div>
-						<div class="col-sm-3">
-							<?= $this->Form->input('vessel',['class'=>'Vessel', "placeholder"=>"Vessel Name" ]) ?>
-						</div>
-						<div class="col-sm-3">
-							<?= $this->Form->input('imo',['class'=>'imo', "placeholder"=>"Imo No" ]) ?>
+							<?= $this->Form->input('id',[ "placeholder"=>"Order Number", 'label' => 'Order Number']) ?>
 						</div>
 						<div class="col-sm-2">
-							<?= $this->Form->input('hull_mo',['class'=>'hull_mo', "placeholder"=>"Hull No" ]) ?>
+							<?= $this->Form->input('firstname',[ "placeholder"=>"Firstname", 'label' => 'Firstname']) ?>
 						</div>
 						<div class="col-sm-2">
-							<label class="control-label" for="sm">Status</label>
-							<select class="form-control">
-								<option  selected value="">--Select an option--</option>
-								<option value="true">Actived</option>
-								<option value="false">Deactived</option>
-							</select>
+							<?= $this->Form->input('lastname',[ "placeholder"=>"Lastname", 'label' => 'Lastname']) ?>
+						</div>
+						<div class="col-sm-2">
+							<?= $this->Form->input('status',['class'=>'imo', "placeholder"=>"Status", 'label' => 'Status']) ?>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -48,50 +40,53 @@
 						<?php endif ?>
 						</div><div class="clearfix"></div>
 					</div>
-
-					<button type="submit" class="btn btn-primary">Search</button>
+					<button type="submit" class="btn btn-primary margin-left15">Search</button>
 				<!-- </form> -->
 				<?= $this->Form->end(); ?>
 			<!-- </div> -->
 		</div> <!-- panel-body -->
 	</div><!-- panel panel-white -->
-
 	<div class="panel panel-white">
 		<div class="panel-heading clearfix">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				<?= __('Inquiries'); ?>
+				<?= __('Orders'); ?>
 			</div> <!-- col-lg-8 -->
 		</div> <!-- panel-heading -->
 		<div class="panel-body">
 			<div class="">
-				<div class="table-responsive">
-					<table class="table table-striped">
+				<div class="table-responsive" style="min-height: 500px;">
+					<table class="table table-striped" >
 						<thead>
 							<tr>
-								<th scope="col"><?= $this->Paginator->sort('#') ?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort('#') ?></th>
 								<th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
 								<th scope="col"><?= $this->Paginator->sort('lastname') ?></th>
 								<th scope="col"><?= $this->Paginator->sort('email') ?></th>
-								<th scope="col"><?= $this->Paginator->sort('Total') ?></th>
-								<th scope="col"><?= $this->Paginator->sort('Status') ?></th>
-								<th scope="col"><?= $this->Paginator->sort('created') ?></th>
-								<th scope="col" class="actions"><?= __('Actions') ?></th>
+								<th class="text-center width10" scope="col"><?= $this->Paginator->sort('Total') ?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort('Status') ?></th>
+								<th class="text-center width15" scope="col"><?= $this->Paginator->sort('created') ?></th>
+								<th scope="col" class="actions text-center"><?php echo __('Actions') ?></th>
 							</tr>
 						</thead>
 						<tbody class="inquiries-details">
 							<?php foreach ($orders as $key => $order): ?>
 								<tr>
-								   	<td><?= $key+1 ?></td>
+									<td class="text-center"><?= $this->Html->link('#'.__($order->id), ['action' => 'order_summary', $order->id]) ?></td>
 									<td><?= h($order->firstname) ?></td>
 									<td><?= h($order->lastname) ?></td>
 									<td><?= h($order->email) ?></td>
-									<td><?= number_format($order->order_products[0]['total'], DECIMALS); ?> 원</td>
-									<td><?= h('status') ?></td>
-									<td><?= h($order->created) ?></td>
-									<td class="actions">
-										<?= $this->Html->link(__('View'), ['action' => 'view', $order->id]) ?>
-										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $order->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $order->id], ['confirm' => __('Are you sure you want to delete # {0}?', $order->id)]) ?>
+									<td class="text-center"><?= number_format($order->total, DECIMALS); ?> 원</td>
+									<td class="text-center"><?= $this->Myhtml->OrderStatus($order->status); ?></td>
+									<td class="text-center"><?= h($order->created) ?></td>
+									<td class="actions text-center">
+										<div class="dropdown">
+											<button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+											<div class="dropdown-content">
+												<?= $this->Html->link(__('<i class="fa fa-search-plus" aria-hidden="true"></i> View'), ['action' => 'view', $order->id],['escape' => false]) ?>
+												<?= $this->Html->link(__('<i class="fa fa-pencil" aria-hidden="true"></i> Edit'), ['action' => 'order_summary', $order->id],['escape' => false]) ?>
+												<?= $this->Form->postLink(__('<i class="fa fa-trash" aria-hidden="true"></i>  Delete'), ['action' => 'delete', $order->id], ['escape' => false, 'confirm' => __('Are you sure you want to delete # {0}?', $order->id)]) ?>
+											</div>
+										</div>
 									</td>
 								</tr>
 							<?php endforeach; ?>
@@ -102,3 +97,4 @@
 		</div> <!-- panel-body -->
 	</div><!-- col-lg-12 -->
 </div> <!-- row -->
+

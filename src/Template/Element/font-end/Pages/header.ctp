@@ -26,7 +26,7 @@
                             <a class="language-selected" href="#">
                                 <?php 
                                     if ($this->request->session()->read('Config.language') == NULL) {
-                                        echo $this->Html->image('flags/en.png',['class'=>"position-left"]);
+                                        echo $this->Html->image('flags/kr.png',['class'=>"position-left"]);
                                     } else {
                                         echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
                                     } 
@@ -55,12 +55,12 @@
         </div>
     </div>
 </div>
+
 <!-- End Top Header -->
 <div class="header">
     <div class="container">
         <div class="header-main">
             <div class="row">
-
                 <div class="col-md-2 col-sm-12 col-xs-12">
                     <div class="logo5">
                         <?php echo $this->Html->image('logo.png',['url'=>['controller'=> 'pages','action' => 'index'],'class'=>'img-responsive','width' => '100%']) ?>
@@ -74,7 +74,6 @@
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="wrap-cart-info3_1">
-                           
                             <?php echo $this->element('font-end/cart') ?>
                         </div>
                     </div>

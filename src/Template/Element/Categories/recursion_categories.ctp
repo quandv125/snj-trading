@@ -6,11 +6,12 @@
     <tr class="active-categories-<?= ($category->type == VERTICAL)? VERTICAL:HORIZONTAL ?>">
         <td><?= $this->Number->format($category->id) ?></td>
         <td><?= h($str.$category->name) ?></td>
+         <td><?= h($str.$category->kr_name) ?></td>
         <td><?= ($category->type == VERTICAL)? 'Vertical Menu': 'Horizontal Menu' ?></td>
         <td><?= ($category->actived)? 'True': '' ?></td>
         <td><?= h($category->created) ?></td>
-        <td><?= h($category->modified) ?></td>
-        <td class="actions">
+       
+        <td class="actions ">
            
            <span class="btn btn-success waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalview<?= $category->id?>"> <i class="fa fa-edit"></i> Edit </span>
             <div class="modal fade" id="myModalview<?= $category->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -23,6 +24,7 @@
                         <div class="modal-body">
                         <?= $this->Form->create($category,['url'=>['action'=>'edit'],'enctype'=>'multipart/form-data']) ?>
                         <?= $this->Form->input('name'); ?>
+                        <?php echo $this->Form->input('kr_name',['label' => 'Korea name']); ?>
                         <?= $this->Form->input('parent_id', ['options' => $parentCategories, 'empty' => ' ',"class" =>"selectpicker","data-live-search"=>"true"]);?>
                         <?= $this->Form->input('type', ['options' => [VERTICAL => "Vertical", HORIZONTAL => "Horizontal"], "value" => $category->type,"class" =>"selectpicker"]);?>
                         <?php  echo $this->Form->input('actived',['options'=>[DEACTIVED => "Deactived", ACTIVED => 'Actived'], "value" => $category->actived,'default' => ACTIVED]);?>

@@ -23,11 +23,12 @@
 								<th style="width: 1px;">
 									<input tabindex="10" type="checkbox" class="icheck CheckboxAll" id="input-10">
 								</th>
-								<th class="text-center"><?php echo __('Part no') ?></th>
-								<th class="text-center"><?php echo __('Product Name') ?></th>
-								<th class="text-center" style=" width: 150px;"><?php echo __('Retail Price') ?></th>
-								<th class="text-center" style=" width: 100px;"><?php echo __('Quantity') ?></th>
-								<th class="text-center"><?php echo __('Order') ?></th>
+								<th class="text-center1" style=" width: 130px;"><?php echo __('Product Code') ?></th>
+								<th class="text-center1"><?php echo __('Product Name') ?></th>
+								<th class="text-center1" style=" width: 130px;"><?php echo __('Retail Price') ?></th>
+								<th class="text-center1" style=" width: 100px;"><?php echo __('Created') ?></th>
+								<th class="text-center1"><?php echo __('Status') ?></th>
+								<th class="text-center" style=" width: 50px;">Actions</th>
 							</tr>
 						</thead>
 						<tbody id="products-details">
@@ -36,19 +37,34 @@
 								<td style="width: 1px;">
 									<input tabindex="1" type="checkbox" class="icheck Checkbox" id="input-1">
 								</td>
-								<td class="text-center"><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
-								<td class="text-center"><?= $product->product_name; ?></td>
-								<td class="text-center"><?= number_format($product->retail_price, DECIMALS); ?></td>
-								<td class="text-center"><?= $product->quantity; ?></td>
-								<td class="text-center actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
+								<td class="text-center1 pulse"><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+								<td class="text-center1 pulse"><?= $product->product_name; ?></td>
+								<td class="text-center1 pulse"><?= number_format($product->retail_price, DECIMALS); ?></td>
+								<td class="text-center1 pulse"><?= $product->created; ?></td>
+								<td class="text-center1 pulse actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
+								<td class="text-center pulse">
+									<div class="dropdown">
+											<button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+											<div class="dropdown-content">
+												<?php echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['action' => 'edit',$product->id],['class'=>'','escape'=>false]); ?>
+												
+												<?= $this->Form->postLink(__('<i class="fa fa-trash" aria-hidden="true"></i> Delete'),
+												['action' => 'delete', $product->id],
+												['confirm' => __('Are you sure you want to delete # {0}?', $product->id),'class' => '', 'escape' => false])?>
+											</div>
+										</div>
+									
+									
+
+								</td>
 							</tr>
 							<tr class="row-cz-details hidden">
-								<td id="row-spacy" colspan="6">
+								<td id="row-spacy" colspan="7">
 									<div role="tabpanel">
 										<!-- Nav tabs -->
 										<ul class="nav nav-tabs nav-justified" role="tablist">
 											<li role="presentation" class="active">
-												<a href="#tab1<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Products") ?></a>
+												<a href="#tab1<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("General") ?></a>
 											</li>
 											<li role="presentation">
 												<a href="#tab2<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations"); ?></a>
@@ -91,29 +107,22 @@
 														<div class="table-responsive table-products">
 															<table class="table table-striped">
 																<tr>
-																	<td class="bold"><?php echo __('Sku/ Item Number')?></td>
+																	<td class="bold"><?php echo __('Product Code')?></td>
 																	<td><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
 																</tr>
 																<tr>
-																	<td class="bold"><?php echo  __('Category')?></td>
+																	<td class="bold"><?php echo  'Categories';?></td>
 																	<td><?= $product->category->name?></td>
 																</tr>
 																<tr>
 																	<td class="bold"><?= __("Manufacturer")?>:</td>
-																	<td><?= $product->manufacturer; ?></td>
+																	<td><?= $product->supplier->name; ?></td>
 																</tr>
 																<tr>
-																	<td class="bold"><?php echo __('Status') ?>:</td>
-																	<td><?= $product->status ?></td>
+																	<td class="bold"><?php echo __('Conditions') ?>:</td>
+																	<td><?= $this->Myhtml->Conditions($product->conditions) ?></td>
 																</tr>
-																<tr>
-																	<td class="bold"><?php echo __('Brand')?>:</td>
-																	<td><?= $product->brand ?></td>
-																</tr>
-																<tr>
-																	<td class="bold"><?php echo __('Origin') ?>:</td>
-																	<td><?= $product->origin ?></td>
-																</tr>
+																
 															</table>
 														</div>
 													</div>
@@ -131,15 +140,13 @@
 														<!-- <button class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red" data-toggle="modal" data-target="#ProductEdit<?= $product->id;?>"><i class="fa fa-check-square"></i> Update</button>
 														
 														<?php //echo $this->element('Products/index_edit',['product'=> $product]);?> -->
-														<?php echo $this->Html->link('<i class="fa fa-check-square"></i> Update', ['action' => 'edit',$product->id],['class'=>'btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red','escape'=>false]); ?>
+														
 														<?php if ($product->actived == PRODUCT_DEACTIVE): ?>
 															 <button class="btn btn-info deactive-product btn-addon m-b-sm waves-effect waves-button waves-red" actived="<?= PRODUCT_ACTIVE;?>" id="<?= $product->id?>"><i class="fa fa-unlock" aria-hidden="true"></i> Active</button>
 														<?php else: ?>
 															 <button class="btn btn-primary deactive-product btn-addon m-b-sm waves-effect waves-button waves-red" actived="<?= PRODUCT_DEACTIVE;?>" id="<?= $product->id?>"><i class="fa fa-lock" aria-hidden="true"></i> Deactive</button>
 														<?php endif ?>
-														<?= $this->Form->postLink(__('<i class="fa fa-trash"></i> Delete'),
-															['action' => 'delete', $product->id],
-															['confirm' => __('Are you sure you want to delete # {0}?', $product->id),'class' => 'btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red', 'escape' => false])?>
+														
 															<!-- <button class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red link" id="<?= $product->id;?>"><i class="fa fa-check-square"></i> Popup</button> -->
 
 															<!--  <div id="popup" class="popUpDisplay popUpShow-<?= $product->id;?>">
@@ -227,9 +234,9 @@
 												<?php endif ?>
 											</div>
 											<div role="tabpanel" class="tab-pane fade" id="tab3<?= $product->id?>">
-												<?= $product->description; ?>
+												<!-- <?= $product->description; ?> -->
 											</div>
-											<div role="tabpanel" class="tab-pane fade" id="tab4<?php echo $product->id?>">
+											<div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
 												<?php if (isset($product->images) && !empty($product->images)): ?>
 													<?php foreach ($product->images as $key => $image):?>
 														<div class="show-image show-image-<?= $image->id?>">

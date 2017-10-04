@@ -632,7 +632,7 @@ a:focus {
 	color: #fff;
 	cursor: pointer;
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: normal;
 	height: 40px;
 	line-height: 40px;
 	margin: 0;
@@ -2290,7 +2290,7 @@ font-size: 15px;
 .title-widget-adv {
 	font-size: 14px;
 	color: #fff;
-	font-weight: 700;
+	font-weight: normal;
 	margin: 0;
 	padding: 11px 20px;
 	text-transform: uppercase;
@@ -3222,7 +3222,7 @@ font-size: 15px;
 }
 .title-default {
 	font-size: 18px;
-	font-weight: 700;
+	font-weight: normal;
 	margin: 0 0 12px;
 }
 .upsell-detail {
@@ -7478,7 +7478,8 @@ ol.list-post-comment {
 .form-my-account input[type="text"], .form-my-account input[type="password"], .form-my-account input[type="email"] {
 	border: 1px solid #e5e5e5;
 	color: #999;
-	font-weight: 700;
+	font-weight: normal;
+    font-size: 14px;
 	height: 40px;
 	padding: 0 20px;
 	/*text-transform: uppercase;*/
@@ -7763,7 +7764,8 @@ ol.list-post-comment {
 .form-my-account select {
 	border: 1px solid #e5e5e5;
 	color: #999;
-	font-weight: 700;
+	font-weight: normal;
+	font-size: 14px;
 	height: 50px;
 	padding: 0 20px;
 	text-transform: uppercase;
@@ -8699,7 +8701,7 @@ ol.list-post-comment {
 }
 .popular-cat-title a {
 	display: block;
-	font-weight: 700;
+	font-weight: normal;
 	height: 40px;
 	line-height: 40px;
 	padding: 0 30px;
@@ -8775,7 +8777,7 @@ ol.list-post-comment {
 .product-info5 .info-price > span {
 	color: #fe9c00;
 	font-size: 18px;
-	font-weight: 700;
+	font-weight: normal;
 }
 .popular-cat-slider.slider-home5 .product-info5 {
 	padding: 15px 0 10px;
@@ -8793,6 +8795,7 @@ ol.list-post-comment {
 .popular-cat-slider.slider-home5 {
 	position: relative;
 }
+
 .popular-cat-slider.slider-home5::before {
 	background: #fff none repeat scroll 0 0;
 	content: "";
@@ -8818,7 +8821,7 @@ ol.list-post-comment {
 	color: #fff;
 	display: inline-block;
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: normal;
 	height: 47px;
 	line-height: 47px;
 	margin: 0;
@@ -9023,7 +9026,7 @@ ol.list-post-comment {
 .popcat-list-box h2 span {
 	background: #fff none repeat scroll 0 0;
 	color: #fe9c00;
-	font-weight: 700;
+	font-weight: normal;
 	padding-right: 25px;
 	position: relative;
 	text-transform: uppercase;
@@ -9050,7 +9053,7 @@ ol.list-post-comment {
 }
 .popcat-box h3 {
 	font-size: 14px;
-	font-weight: 700;
+	font-weight: normal;
 	margin: 10px 0 0;
 }
 .footer5 {
@@ -15798,4 +15801,9 @@ div.show-image:hover span.delete-wishlist {
 	border: 0;
 	padding: 0;
 	max-width: none;
+}
+.item-feature-box1{
+	    border: 1px solid #e4e4e4;
+    border-radius: 10px;
+    padding: 10px;
 }

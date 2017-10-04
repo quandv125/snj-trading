@@ -1,9 +1,9 @@
 <?php foreach ($categories as $key => $category): ?>
     <li class="<?php if (isset($category->children) && !empty($category->children)){echo 'has-cat-mega';} ?>">
-        <?php if ($this->request->session()->read('Config.language') == 'kr'): ?>
-            <?php echo $this->Html->link($category->kr_name,[ 'controller' => 'Pages',  'action' => 'categories-parent',$category->id]) ?>
-        <?php else: ?>
+        <?php if ($this->request->session()->read('Config.language') == 'en'): ?>
             <?php echo $this->Html->link($category->name,[ 'controller' => 'Pages',  'action' => 'categories-parent',$category->id]) ?>
+        <?php else: ?>
+            <?php echo $this->Html->link($category->kr_name,[ 'controller' => 'Pages',  'action' => 'categories-parent',$category->id]) ?>
         <?php endif ?>
      
         <?php if (isset($category->children) && !empty($category->children)): ?>
@@ -19,10 +19,10 @@
                             <div class="list-cat-mega-menu">
                                 <h2 class="title-cat-mega-menu">
                                     
-                                    <?php if ($this->request->session()->read('Config.language') == 'kr'): ?>
-                                       <?php echo $this->Html->link($children->kr_name, [ 'controller' => 'Pages',  'action' => 'categories',$category->id ,$children->id]) ?>
-                                    <?php else: ?>
+                                    <?php if ($this->request->session()->read('Config.language') == 'en'): ?>
                                        <?php echo $this->Html->link($children->name, [ 'controller' => 'Pages',  'action' => 'categories',$category->id ,$children->id]) ?>
+                                    <?php else: ?>
+                                       <?php echo $this->Html->link($children->kr_name, [ 'controller' => 'Pages',  'action' => 'categories',$category->id ,$children->id]) ?>
                                     <?php endif ?>
                                 </h2>
                                 <ul>  

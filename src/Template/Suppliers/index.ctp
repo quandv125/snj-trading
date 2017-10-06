@@ -1,6 +1,6 @@
 
 <div class="row">
-	<div class="col-lg-12 col-md-12 panel panel-white">
+	<div class="col-lg-12 col-md-12 panel panel-white" style="    min-height: 700px;">
 		<div class="col-lg-2 col-md-2 col-sm-3">
 		<!-- Searchbox -->
 		<?php echo $this->element('Suppliers/searchbox'); ?>
@@ -21,7 +21,7 @@
 			<!-- panel-heading -->
 			<div class="panel-body">
 				<div class="">
-					<div class="table-responsive">
+					<div class="table-responsive" style="margin-top: 10px;">
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -31,7 +31,7 @@
 									<th class="text-center" scope="col"><?= $this->Paginator->sort('code') ?></th>
 									<th class="text-center" scope="col"><?= $this->Paginator->sort('name') ?></th>
 									<th class="text-center" scope="col"><?= $this->Paginator->sort('Address') ?></th>
-									<th class="text-center" scope="col"><?= $this->Paginator->sort('tel') ?></th>
+									<th class="text-center" scope="col"><?= $this->Paginator->sort('Phone') ?></th>
 									<th class="text-center" scope="col"><?= $this->Paginator->sort('email') ?></th>
 									<th class="text-center" scope="col"><?= $this->Paginator->sort('Action') ?></th>
 								</tr>
@@ -48,8 +48,7 @@
 										<td class="text-center"><?= h($suppliers->tel) ?></td>
 										<td class="text-center"><?= h($suppliers->email) ?></td>
 										<td class="text-center">
-										<button class="btn btn-success waves-effect waves-button waves-red" data-toggle="modal" data-target="#SuppliersEdit<?= $suppliers->id;?>"><i class="fa fa-pencil"></i> </button>
-
+											<button class="btn btn-success waves-effect waves-button waves-red" data-toggle="modal" data-target="#SuppliersEdit<?= $suppliers->id;?>"><i class="fa fa-pencil"></i></button>
 										</td>
 									</tr>
 									<tr class="row-cz-details hidden">
@@ -60,15 +59,7 @@
 													<li role="presentation" class="active">
 														<a href="#tab1<?= $suppliers->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
 													</li>
-													<li role="presentation">
-														<a href="#tab2<?= $suppliers->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("1"); ?></a>
-													</li>
-													<li role="presentation">
-														<a href="#tab3<?= $suppliers->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("2") ?></a>
-													</li>
-													<li role="presentation">
-														<a href="#tab4<?= $suppliers->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("3") ?></a>
-													</li>
+													
 												</ul>
 												<!-- Tab panes -->
 												<div class="tab-content">
@@ -119,22 +110,14 @@
 															</div>
 															<div class="clearfix divider10"> </div>
 															<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-																<!-- <button class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red" data-toggle="modal" data-target="#SuppliersEdit<?= $suppliers->id;?>"><i class="fa fa-check-square"></i> Update</button> -->
+																
 																<!-- Modal -->
-																<!-- <?php //echo $this->element('suppliers/index_edit',['supplier'=> $suppliers]);?> -->
-																<!-- <?php //echo $this->Form->postLink(__('<i class="fa fa-trash"></i> Delete'),['action' => 'delete', $suppliers->id],['confirm' => __('Are you sure you want to delete # {0}?', $suppliers->id),'class' => 'btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red', 'escape' => false])?> -->
+																<?php echo $this->element('suppliers/index_edit',['supplier'=> $suppliers]);?>
+																<?php echo $this->Form->postLink(__('<i class="fa fa-trash"></i> Delete'),['action' => 'delete', $suppliers->id],['confirm' => __('Are you sure you want to delete # {0}?', $suppliers->id),'class' => 'btn btn-danger btn-addon m-b-sm waves-effect waves-button waves-red', 'escape' => false])?>
 															</div>
 														</div>
 													</div>
-													<div role="tabpanel" class="tab-pane fade" id="tab2<?= $suppliers->id?>">
-														comming soon
-													</div>
-													<div role="tabpanel" class="tab-pane fade" id="tab3<?= $suppliers->id?>">
-														comming soon
-													</div>
-													<div role="tabpanel" class="tab-pane fade" id="tab4<?= $suppliers->id?>">
-														comming soon
-													</div>
+												
 												</div>
 											</div>
 										</td>

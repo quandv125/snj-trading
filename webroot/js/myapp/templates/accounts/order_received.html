@@ -86,12 +86,13 @@
 										<tbody>
 											<tr ng-repeat="(k, c) in info.order_products" class="order_item">
 												<td class="product-name">
-													{{c.product_name}}
+													
+													{{c.product_name | cut:true:67:' ...'}}
 													<strong class="product-quantity">× {{c.quantity}}</strong>
 												</td>
 												<td class="product-total product-total width55">
 													<span class="Price-amount amount">
-														{{ c.price | currency : " " : 0 }} 원
+														{{ c.price*c.quantity | currency : " " : 0 }} 원
 													</span>
 												</td>
 											</tr>

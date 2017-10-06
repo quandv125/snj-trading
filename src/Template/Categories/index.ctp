@@ -1,6 +1,6 @@
 
 <div class="row">
-    <div class="col-lg-12 col-md-12 panel panel-white">
+    <div class="col-lg-12 col-md-12 panel panel-white" style="min-height: 500px;">
         <div class="col-lg-2 col-md-2 col-sm-3">
         <!-- Searchbox -->
           <?= $this->element('Categories/search_box'); ?>
@@ -14,14 +14,16 @@
                 <!-- col-lg-8 -->
                 <div class="col-lg-4 col-md-4 col-md-4 col-xs-4">
                     <!-- Add new products -->
-                <nav class="large-3 medium-4 columns float-right" id="actions-sidebar">
-                    <span class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red float-right margin-bottom10" data-toggle="modal" data-target="#myModal2"> <i class="fa fa-plus"></i>Add </span>
-                </nav>
+                    <nav class="large-3 medium-4 columns float-right" id="actions-sidebar">
+                        <span class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red float-right margin-bottom10" data-toggle="modal" data-target="#myModal2"> <i class="fa fa-plus"></i>Add </span>
+                    </nav>
+
                 </div> 
                 <!-- col-lg-4 -->
             </div> 
             <!-- panel-heading -->
             <div class="panel-body">
+                <div class="clearfix divider10"></div>
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -29,11 +31,11 @@
                                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                                 <th scope="col"><?= $this->Paginator->sort('Korea name') ?></th>
-                                <th scope="col"><?= $this->Paginator->sort('type') ?></th>
-                                <th scope="col"><?= $this->Paginator->sort('Actived') ?></th>
-                                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                                <th scope="col" class="text-center"><?= $this->Paginator->sort('type') ?></th>
+                                <th scope="col" class="text-center"><?= $this->Paginator->sort('Actived') ?></th>
+                                <th scope="col" class="text-center"><?= $this->Paginator->sort('created') ?></th>
                                
-                                <th scope="col" class="actions "><?= __('Actions') ?></th>
+                                <th scope="col" class="actions text-center"><?= __('Actions') ?></th>
                             </tr>
                         </thead>
                         <tbody id="categories-result" class="vertical highlight_list1 live-search-list">
@@ -57,13 +59,14 @@
                 <h4 class="modal-title" id="myModalLabel"><?php echo __("Add Category") ?></h4>
             </div>
             <div class="modal-body">
-                <?php echo $this->Form->create('add',['url'=>['action'=>'add'],'enctype'=>'multipart/form-data']);?>
-                <?php echo $this->Form->input('name'); ?>
-                <?php echo $this->Form->input('kr_name',['label' => 'Korea name']); ?>
-                <?php  echo $this->Form->input('parent_id',['options'=>$treeList, 'empty' => ' ',"class" =>"selectpicker","data-live-search"=>"true"]);?>
-                <?= $this->Form->input('type', ['options' => [VERTICAL => "Vertical", HORIZONTAL => "Horizontal"],"class" =>"selectpicker"]);?>
-                <?php  echo $this->Form->input('actived',['options'=>[DEACTIVED => "Deactived", ACTIVED => 'Actived'], 'default' => ACTIVED]);?>
-                <?php  echo $this->Form->input('files.',['type'=> 'file']);?>
+                <br/>
+                <?= $this->Form->create('add',['url'=>['action'=>'add'],'enctype'=>'multipart/form-data','horizontal' => true]);?>
+                <?= $this->Form->input('name'); ?>
+                <?= $this->Form->input('kr_name',['label' => 'Korea Name']); ?>
+                <?= $this->Form->input('parent_id',['options'=>$treeList, 'empty' =>' ',"class" =>"selectpicker","data-live-search"=>"true"]);?>
+                <?= $this->Form->input('type', ['options' => [VERTICAL => "Vertical", HORIZONTAL => "Horizontal"],"class" =>"selectpicker","data-live-search"=>"true"]);?>
+                <?= $this->Form->input('actived',['options'=>[DEACTIVED => "Deactived", ACTIVED => 'Actived'],"class" =>"selectpicker", 'default' => ACTIVED]);?>
+                <?= $this->Form->input('files.',['type'=> 'file']);?>
             </div>
             <div class="modal-footer">
                 <?= $this->Form->button(__('Submit'),['class'=>"btn btn-success float-right"]) ?>

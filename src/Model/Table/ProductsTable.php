@@ -73,6 +73,10 @@ class ProductsTable extends Table
 			 'dependent' => true,
 			'foreignKey' => 'product_id'
 		]);
+		$this->hasMany('ProductOptions', [
+			 'dependent' => true,
+			'foreignKey' => 'product_id'
+		]);
 		$this->hasMany('Tags', [
 			'foreignKey' => 'product_id'
 		]);

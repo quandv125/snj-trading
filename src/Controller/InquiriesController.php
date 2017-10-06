@@ -1592,7 +1592,7 @@ class InquiriesController extends AppController
 	public function OrderInfo()	{
 		if ($this->request->is(['get'])) {
 			$this->autoRender = false;
-			$orders = $this->Inquiries->getorderinfo();
+			$orders = $this->Inquiries->getorderinfo($this->Auth->user('id'));
 			echo json_encode($orders); exit();
 		}
 	}

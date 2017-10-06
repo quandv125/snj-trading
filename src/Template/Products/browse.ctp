@@ -34,7 +34,7 @@
 
 <?php foreach ($att as $key => $pics): ?>
 	
-	<a href= "#" onClick="returnFileUrl('<?php echo SERVER_ADDRESS.'/img/'.$pics->path;?>');">
+	<a href= "#" onClick="returnFileUrl('<?php echo 'http://'.$_SERVER[ 'SERVER_ADDR' ].'/img/'.$pics->path;?>');">
 		<?php echo $this->Html->image($pics->thumbnail) ?>
 	</a>
 	

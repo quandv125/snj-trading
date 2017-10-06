@@ -23,15 +23,22 @@
 			<li class="active"> 
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-home"></span><p>'.__('Home').'</p>',array('controller'=>'pages','action'=>'display','home'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li>
-			<li>
+		<!-- 	<li>
 				<?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+			</li> -->
+			<li class="droplink">
+				<?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+				<ul class="sub-menu">
+					<li>
+						<?= $this->Html->link('<i class="menu-icon fa fa-pie-chart" aria-hidden="true"></i><p>'.__(' Product Options').'</p>',array( 'controller' => 'products','action' => 'options'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+					</li>
+						
+				</ul>
 			</li>
 			<li>
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-list-alt"></span><p>'.__('Orders').'</p>',array('controller'=>'Orders','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li>
-			<!-- 	<li>
-				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('Suppliers').'</p>',array('controller'=>'Suppliers','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-			</li> -->
+		
 			<!--   <li>
 				<?= $this->Html->link('<i class="menu-icon fa fa-newspaper-o"></i><p>'.__('Articles').'</p>',array('controller'=>'Articles','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li> -->
@@ -59,23 +66,29 @@
 						<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-repeat"></span><p>'.__('Stock Returns').'</p>',array('controller'=>'users','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 					</li>
 				</ul>
-			</li>
+			</li> -->
 			<li class="droplink">
 				<a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-globe"></span><p><?= __('Partners') ?></p><span class="arrow"></span></a>
 				<ul class="sub-menu">
 					<li>
 						<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('Customers').'</p>',array('controller'=>'Customers','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 					</li>
-					 <li>
+					<li>
+						<?= $this->Html->link('<i class="menu-icon fa fa-university" aria-hidden="true"></i><p>'.__('Manufacturers').'</p>',array('controller'=>'Suppliers','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+					</li>
+					<!--  <li>
 						<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-cloud"></span><p>'.__('Suppliers').'</p>',array('controller'=>'Suppliers','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-					</li>
-					 <li>
+					</li> -->
+					<!--  <li>
 						<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-plane"></span><p>'.__('Partner Deliverys ').'</p>',array('controller'=>'partner_deliverys','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-					</li>
+					</li> -->
 				</ul>
-			</li> -->
+			</li>
 			<li>
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-tasks"></span><p>'.__('Menu').'</p>',array('controller'=>'categories','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+			</li>
+			<li>
+				<a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-signal"></span><p><?= __('Report') ?></p><span class="arrow"></span></a>
 			</li>
 			<!-- <li>
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-plane"></span><p>'.__('Partner Deliverys ').'</p>',array('controller'=>'partner_deliverys','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
@@ -109,7 +122,10 @@
 					</li>
 				</ul>
 			</li> -->
-			<li class="droplink">
+			<li>
+				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('Users').'</p>',array('controller'=>'users','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
+			</li>
+			<!-- <li class="droplink">
 				<a href="#" class="waves-effect waves-button"><span class="menu-icon glyphicon glyphicon-flash"></span><p><?= __('Permission') ?></p><span class="arrow"></span></a>
 				<ul class="sub-menu">
 					<li>
@@ -119,7 +135,7 @@
 						 <?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-user"></span><p>'.__('User').'</p>',array('controller'=>'users','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 					</li>
 				</ul>
-			</li>
+			</li> -->
 		</ul>
 	</div><!-- Page Sidebar Inner -->
 </div><!-- Page Sidebar -->

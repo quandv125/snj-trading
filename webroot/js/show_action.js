@@ -53,7 +53,7 @@ jQuery(document).ready(function() {
 
 		// End Plugin icheck
 		
-		jQuery('.row-cz-'+str_rand+' td.text-center').click(function(){
+		jQuery('.row-cz-'+str_rand+' td.pulse').click(function(){
 			jQuery(this).parent().next().toggleClass('hidden');
 		});
 

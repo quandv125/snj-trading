@@ -58,9 +58,9 @@
 					<table class="table table-striped" >
 						<thead>
 							<tr>
-								<th class="text-center" scope="col"><?= $this->Paginator->sort('#') ?></th>
-								<th scope="col"><?= $this->Paginator->sort('firstname') ?></th>
-								<th scope="col"><?= $this->Paginator->sort('lastname') ?></th>
+								<th class="text-center" scope="col"><?= $this->Paginator->sort('Order Number') ?></th>
+								<th scope="col"><?= $this->Paginator->sort('Customer') ?></th>
+								
 								<th scope="col"><?= $this->Paginator->sort('email') ?></th>
 								<th class="text-center width10" scope="col"><?= $this->Paginator->sort('Total') ?></th>
 								<th class="text-center" scope="col"><?= $this->Paginator->sort('Status') ?></th>
@@ -72,8 +72,8 @@
 							<?php foreach ($orders as $key => $order): ?>
 								<tr>
 									<td class="text-center"><?= $this->Html->link('#'.__($order->id), ['action' => 'order_summary', $order->id]) ?></td>
-									<td><?= h($order->firstname) ?></td>
-									<td><?= h($order->lastname) ?></td>
+									<td><?= h($order->firstname) ?> <?= h($order->lastname) ?></td>
+									
 									<td><?= h($order->email) ?></td>
 									<td class="text-center"><?= number_format($order->total, DECIMALS); ?> 원</td>
 									<td class="text-center"><?= $this->Myhtml->OrderStatus($order->status); ?></td>

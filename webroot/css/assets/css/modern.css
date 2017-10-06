@@ -295,7 +295,8 @@ h5 {
 }
 
 .alert-success {
-    background: #e5f3df;
+    background: #93dc74;
+    color: #000000;
 }
 
 .alert-info {

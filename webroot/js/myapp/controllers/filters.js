@@ -67,9 +67,9 @@
 			if (angular.isUndefined(data) || angular.isUndefined(key))
 			return 0;
 			var sum = 0;
-
+			console.log(data);
 			angular.forEach(data, function(v, k) {
-				sum = sum + parseFloat(v.price);
+				sum = sum + (parseFloat(v.price)* parseFloat(v.quantity));
 			});
 			return sum;
 		}

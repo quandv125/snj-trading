@@ -26,14 +26,17 @@ class ProductsController extends AppController
 	public function index()
 	{
 		$User = TableRegistry::get('Users');
-		
+		$option  = TableRegistry::get('options');
 		if ($this->Auth->user('group_id') == CUSTOMERS) {
 			return $this->redirect(['action' => 'suppliers']);
 		}
 		$products = $this->Products->getProductsSearch(null, null, null);  
 		$users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
+
+
+		$options = $option->find('threaded')->select(['id','name','parent_id'])->toarray(); 
 		$this->infoPagi(null, 1);
-		$this->set(compact('products','users'));
+		$this->set(compact('products','users','options'));
 		$this->set('_serialize', ['products']);
 	}
 
@@ -73,14 +76,22 @@ class ProductsController extends AppController
 		$Product = TableRegistry::get('Products');
 	
 		if ($this->request->is('post')) {
+			
+			if (!empty($this->request->data['product_options'])) {
+				$product_options = array();
+				foreach (json_decode($this->request->data['product_options']) as $key => $options) {
+					if (!array_key_exists($options->parent_name, $product_options))  {
+						$product_options[$options->parent_name][$options->child_id] = $options->child_name;
+					}
+				}
+				$this->request->data['p_option'] = json_encode($product_options);
+			} 
 			$this->request->data['retail_price'] = str_replace(',', '', $this->request->data['retail_price']);
 			$this->request->data['supply_price'] = str_replace(',', '', $this->request->data['supply_price']);
 			$this->request->data['user_id'] = $this->Auth->user('id');
 			if (empty($this->request->data['sku'])) {
 				$this->request->data['sku'] = $this->Products->MaxSKU();
 			}
-
-			
 			$product = $this->Products->newEntity();
 			$product = $this->Products->patchEntity($product, $this->request->data);
 			if ($Product->save($product)) {
@@ -116,7 +127,7 @@ class ProductsController extends AppController
 		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
 	}
 
-	public function addproducts()	{
+	public function addproducts(){
 		$Categorie  = TableRegistry::get('Categories');
 		$arr = [2,3];
 		$list  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])
@@ -136,10 +147,20 @@ class ProductsController extends AppController
 	 * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
 	 * @throws \Cake\Network\Exception\NotFoundException When record not found.
 	 */
-	public function edit($id = null)
-	{
+	public function edit($id = null) {
+
 		$product = $this->Products->get($id, [ 'contain' => [] ]);
 		if ($this->request->is(['patch', 'post', 'put'])) {
+			if (!empty($this->request->data['product_options'])) {
+				$product_options = array();
+				foreach (json_decode($this->request->data['product_options']) as $key => $options) {
+					if (!array_key_exists($options->parent_id, $product_options))  {
+						$product_options[$options->parent_name][$options->child_id] = $options->child_name;
+					}
+				}
+				$this->request->data['p_option'] = json_encode($product_options);
+			} 
+			
 			$this->request->data['retail_price']    = str_replace(',', '', $this->request->data['retail_price']);
 			$this->request->data['supply_price']    = str_replace(',', '', $this->request->data['supply_price']);
 			$this->request->data['actived'] = true;
@@ -160,7 +181,6 @@ class ProductsController extends AppController
 						}
 					}
 				}
-				
 				$this->Flash->success(__('The product has been saved.'));
 				return $this->redirect(['action' => 'index']);
 			} else {
@@ -168,11 +188,13 @@ class ProductsController extends AppController
 			}
 		}
 		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
+		$option  = TableRegistry::get('options');
+		$options = $option->find('threaded')->select(['id','name','parent_id'])->toarray(); 
+		$this->set(compact('product', 'categories', 'options', 'suppliers'));
 		$this->set('_serialize', ['product']);
 	}
+
 	public function SupplierAddProduct() {
 		$Categorie	= TableRegistry::get('Categories');
 		$Image		= TableRegistry::get('Images');
@@ -878,4 +900,54 @@ class ProductsController extends AppController
 			return $this->redirect(['action' => 'browse']);
 		}
 	}
+
+	public function options(){
+		$Option   = TableRegistry::get('options');
+		if ($this->request->is('post')) {
+			// pr($this->request->data);die();
+			if (!empty($this->request->data['name'])) {
+				if (isset($this->request->data['parent_id']) && !empty($this->request->data['parent_id'])) {
+					## Save Child
+					$name = explode('----', $this->request->data['name']);
+					foreach ($name as $key => $value) {
+						if (!empty($value)) {
+							$data[] = [ 'name' => $value,'parent_id' => $this->request->data['parent_id'] ];
+						}
+					}
+					$entities = $Option->newEntities($data);
+					if ($Option->saveMany($entities)) {
+						$this->Flash->success(__('The Option Product has been saved.'));
+						return $this->redirect(['action' => 'options']);
+					} else {
+						$this->Flash->error(__('The Option Product could not be saved. Please, try again.'));
+					}
+				} else {
+					$options = $Option->newEntity();
+					$options = $Option->patchEntity($options, $this->request->data);
+					if ($Option->save($options)) {
+						$this->Flash->success(__('The Option Product has been saved.'));
+						return $this->redirect(['action' => 'options']);
+					} else {
+						$this->Flash->error(__('The Option Product could not be saved. Please, try again.'));
+					}
+				}
+			}
+		}
+		$options = $Option->find('threaded'); 
+		$this->set(compact('options'));
+	}
+
+	public function deloptions()	{
+		if ($this->request->is('ajax')) {
+			$this->autoRender = false;
+			$Option = TableRegistry::get('options');
+			$option = $Option->get($this->request->data['id']);
+			if ($Option->delete($option)) {
+				echo (__('The option has been deleted.'));
+			} else {
+				echo (__('The option could not be deleted. Please, try again.'));
+			}
+		}
+	}
+	
 }

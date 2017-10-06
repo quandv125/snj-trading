@@ -16,7 +16,7 @@
 			</div> 
 			<!-- panel-heading -->
 			<div class="panel-body">
-				<div class="table-responsive">
+				<div class="table-responsive" style=" margin-top: 10px; ">
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -25,9 +25,9 @@
 								</th>
 								<th class="text-center1" style=" width: 130px;"><?php echo __('Product Code') ?></th>
 								<th class="text-center1"><?php echo __('Product Name') ?></th>
-								<th class="text-center1" style=" width: 130px;"><?php echo __('Retail Price') ?></th>
-								<th class="text-center1" style=" width: 100px;"><?php echo __('Created') ?></th>
-								<th class="text-center1"><?php echo __('Status') ?></th>
+								<th class="text-center" style=" width: 130px;"><?php echo __('Retail Price') ?></th>
+								<th class="text-center" style=" width: 100px;"><?php echo __('Created') ?></th>
+								<th class="text-center"><?php echo __('Status') ?></th>
 								<th class="text-center" style=" width: 50px;">Actions</th>
 							</tr>
 						</thead>
@@ -39,23 +39,21 @@
 								</td>
 								<td class="text-center1 pulse"><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
 								<td class="text-center1 pulse"><?= $product->product_name; ?></td>
-								<td class="text-center1 pulse"><?= number_format($product->retail_price, DECIMALS); ?></td>
-								<td class="text-center1 pulse"><?= $product->created; ?></td>
-								<td class="text-center1 pulse actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
-								<td class="text-center pulse">
+								<td class="text-center pulse"><?= number_format($product->retail_price, DECIMALS); ?></td>
+								<td class="text-center pulse"><?= $product->created; ?></td>
+								<td class="text-center pulse actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
+								<td class="text-center">
 									<div class="dropdown">
-											<button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
-											<div class="dropdown-content">
-												<?php echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['action' => 'edit',$product->id],['class'=>'','escape'=>false]); ?>
-												
-												<?= $this->Form->postLink(__('<i class="fa fa-trash" aria-hidden="true"></i> Delete'),
-												['action' => 'delete', $product->id],
-												['confirm' => __('Are you sure you want to delete # {0}?', $product->id),'class' => '', 'escape' => false])?>
-											</div>
+										<button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+										<div class="dropdown-content">
+											<?php echo $this->Html->link('<i class="fa fa-eye" aria-hidden="true"></i> View', ['controller'=>'pages','action' => 'products',$product->id],['class'=>'','escape'=>false]); ?>
+											<?php echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['action' => 'edit',$product->id],['class'=>'','escape'=>false]); ?>
+											
+											<?= $this->Form->postLink(__('<i class="fa fa-trash" aria-hidden="true"></i> Delete'),
+											['action' => 'delete', $product->id],
+											['confirm' => __('Are you sure you want to delete # {0}?', $product->id),'class' => '', 'escape' => false])?>
 										</div>
-									
-									
-
+									</div>
 								</td>
 							</tr>
 							<tr class="row-cz-details hidden">
@@ -73,9 +71,9 @@
 												<a href="#tab3<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Descriptions"); ?></a>
 											</li>
 										  
-											<li role="presentation">
+											<!-- <li role="presentation">
 												<a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Images") ?></a>
-											</li>
+											</li> -->
 										</ul>
 										<!-- Tab panes -->
 										<div class="tab-content">
@@ -234,19 +232,19 @@
 												<?php endif ?>
 											</div>
 											<div role="tabpanel" class="tab-pane fade" id="tab3<?= $product->id?>">
-												<!-- <?= $product->description; ?> -->
+												<!-- <?php //echo $product->description; ?> -->
 											</div>
-											<div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
-												<?php if (isset($product->images) && !empty($product->images)): ?>
-													<?php foreach ($product->images as $key => $image):?>
+											<!-- <div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
+												<?php// if (isset($product->images) && !empty($product->images)): ?>
+													<?php// foreach ($product->images as $key => $image):?>
 														<div class="show-image show-image-<?= $image->id?>">
-															<?= $this->Html->image($image->thumbnail,['class'=>'image-border','width'=>100, 'height'=> 100]) ?>
+															<?php //echo $this->Html->image($image->thumbnail,['class'=>'image-border','width'=>100, 'height'=> 100]) ?>
 															<span class="btn btn-success star" id="<?= $image->id?>"><i class="fa fa-star" aria-hidden="true"></i> </span>
 															<span class="btn btn-danger delete deletePI" id="<?= $image->id?>"><i class="fa fa-trash-o" aria-hidden="true"></i> </span>
 														</div>
-													<?php endforeach; ?>
-												<?php endif ?>
-											</div>
+													<?php// endforeach; ?>
+												<?php// endif ?>
+											</div> -->
 										</div>
 									</div>
 								</td>

@@ -6,12 +6,12 @@
     <tr class="active-categories-<?= ($category->type == VERTICAL)? VERTICAL:HORIZONTAL ?>">
         <td><?= $this->Number->format($category->id) ?></td>
         <td><?= h($str.$category->name) ?></td>
-         <td><?= h($str.$category->kr_name) ?></td>
-        <td><?= ($category->type == VERTICAL)? 'Vertical Menu': 'Horizontal Menu' ?></td>
-        <td><?= ($category->actived)? 'True': '' ?></td>
-        <td><?= h($category->created) ?></td>
+        <td><?= h($str.$category->kr_name) ?></td>
+        <td class="text-center"><?= ($category->type == VERTICAL)? 'Vertical Menu': 'Horizontal Menu' ?></td>
+        <td class="text-center"><?= ($category->actived)? 'True': '' ?></td>
+        <td class="text-center"><?= h($category->created) ?></td>
        
-        <td class="actions ">
+        <td class="actions text-center">
            
            <span class="btn btn-success waves-effect waves-button waves-red" data-toggle="modal" data-target="#myModalview<?= $category->id?>"> <i class="fa fa-edit"></i> Edit </span>
             <div class="modal fade" id="myModalview<?= $category->id?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
@@ -38,7 +38,7 @@
                 </div>
             </div>  <!-- End -->
 
-            <?= $this->Form->postLink(__('<i class="fa fa-trash"></i>Delete'), ['action' => 'delete', $category->id], ['class'=>'btn btn-success','escape'=>false,'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
+            <?= $this->Form->postLink(__('<i class="fa fa-trash"></i> Delete'), ['action' => 'delete', $category->id], ['class'=>'btn btn-success','escape'=>false,'confirm' => __('Are you sure you want to delete # {0}?', $category->id)]) ?>
         </td>
     </tr>
     <?= $this->element('Categories/recursion_categories',['categories' => $category->children, 'time' => $time+1, 'parent' => null]); ?>

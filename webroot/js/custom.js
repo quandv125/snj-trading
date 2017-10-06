@@ -748,6 +748,10 @@ jQuery( document ).ready(function() {
 		jQuery(this).parent().next().toggleClass('hidden');
 	});
 
+	jQuery('#suppliers-details .row-cz td').click(function(){
+		jQuery(this).parent().next().toggleClass('hidden');
+	});
+
 	//stop jumping to top of page in jQuery
 	jQuery('ul.pagination a').click(function(e){
 		e.preventDefault();
@@ -1001,8 +1005,53 @@ jQuery( document ).ready(function() {
 			success: function(response){
 				jQuery("#loader").fadeOut();
 				jQuery('tbody#products-details').html(response);
-				jQuery.getScript('/js/show_action.js',function(){
-					show_action(str_rand);
+				// Plugin icheck
+				jQuery('input.icheck-'+str_rand).iCheck({
+					checkboxClass: 'icheckbox_square-green',
+					radioClass: 'iradio_square-green',
+					increaseArea: '20%'
+				});
+
+				jQuery('input.CheckboxAll').on('ifChecked', function(event){
+					jQuery('input.Checkbox-'+str_rand).iCheck('check');
+					jQuery('.row-cz-'+str_rand).addClass('bg-table-row');
+				}).on('ifUnchecked', function(event){
+					jQuery('input.Checkbox-'+str_rand).iCheck('uncheck');
+					jQuery('.row-cz-'+str_rand).removeClass('bg-table-row');
+				});
+
+				jQuery('input.Checkbox-'+str_rand).on('ifChecked', function(event){
+					jQuery(this).iCheck('check');
+					jQuery(this).parent().parent().parent().addClass('bg-table-row');
+				}).on('ifUnchecked', function(event){
+					jQuery(this).iCheck('uncheck');
+					jQuery(this).parent().parent().parent().removeClass('bg-table-row');
+				});
+
+				// End Plugin icheck
+				
+				jQuery('.row-cz-'+str_rand+' td.pulse').click(function(){
+					jQuery(this).parent().next().toggleClass('hidden');
+				});
+
+				jQuery('.fancyboxs-'+str_rand).click(function(){
+					var id = jQuery(this).attr('id');
+					jQuery('.fancybox-thumbs-'+id).fancybox({
+						nextClick : true,
+						openEffect : 'elastic',
+						openSpeed  :250,
+						closeEffect : 'elastic',
+						closeSpeed  :250,
+						helpers : {
+							thumbs : {
+								width  : 50,
+								height : 50
+							},
+							overlay: {
+								locked: false
+							}
+						}
+					});
 				});
 			}
 		});
@@ -1148,8 +1197,33 @@ jQuery( document ).ready(function() {
 					jQuery("#loader").fadeOut();
 					// console.log(response);
 					jQuery('tbody#suppliers-details').html(response);
-					jQuery.getScript('/js/show_action.js',function(){
-						show_action(str_rand);
+					// Plugin icheck
+					jQuery('input.icheck-'+str_rand).iCheck({
+						checkboxClass: 'icheckbox_square-green',
+						radioClass: 'iradio_square-green',
+						increaseArea: '20%'
+					});
+
+					jQuery('input.CheckboxAll').on('ifChecked', function(event){
+						jQuery('input.Checkbox-'+str_rand).iCheck('check');
+						jQuery('.row-cz-'+str_rand).addClass('bg-table-row');
+					}).on('ifUnchecked', function(event){
+						jQuery('input.Checkbox-'+str_rand).iCheck('uncheck');
+						jQuery('.row-cz-'+str_rand).removeClass('bg-table-row');
+					});
+
+					jQuery('input.Checkbox-'+str_rand).on('ifChecked', function(event){
+						jQuery(this).iCheck('check');
+						jQuery(this).parent().parent().parent().addClass('bg-table-row');
+					}).on('ifUnchecked', function(event){
+						jQuery(this).iCheck('uncheck');
+						jQuery(this).parent().parent().parent().removeClass('bg-table-row');
+					});
+
+					// End Plugin icheck
+					
+					jQuery('.row-cz-'+str_rand+' td.pulse').click(function(){
+						jQuery(this).parent().next().toggleClass('hidden');
 					});
 				}
 			});
@@ -2878,5 +2952,57 @@ jQuery( document ).ready(function() {
 
 			}
 		}); // ajaxalert(value);
+	});
+
+	jQuery('#btn-att').click(function(){
+		var name = jQuery('#ipt-att').val();
+		if (name != '') {
+			jQuery('.parent-'+$('select#slt-parent-id').val()).append('<div class="attribute"> <span class="col-sm-6 chil-name">'+name+'</span><span class="col-sm-6"><i class="trash-att fa fa-trash"></i></span></div>');
+			jQuery('#ipt-att').val('');
+			jQuery(".trash-att").click(function(){
+				jQuery(this).parent().parent().remove();
+			});
+		};
+	});
+
+	$('select#slt-parent-id').on('change', function() {
+		jQuery('.parent-att').addClass('hidden');
+		jQuery('.parent-'+this.value).removeClass('hidden');
+	})
+
+	jQuery(".trash-att").click(function(){
+		var id = jQuery(this).attr('id');
+		jQuery(this).parent().parent().remove();
+		jQuery.ajax({
+			url: '/products/deloptions',
+			type: 'POST',
+			data: {id: id},
+			dataType: 'html',
+			cache: false,
+			beforeSend: function(){
+				jQuery("#loader").fadeIn();
+			},
+			success: function(response){
+				jQuery("#loader").fadeOut();
+				toastr.success(response);
+			},
+		});
+	});
+
+	jQuery(".btn-options").click(function(){	
+		var txt = $("#slt-options option:selected").text();
+		var id = $("#slt-options option:selected").val();
+		var parent_id = $("#slt-options option:selected").attr('parent_id');
+		var parent_name = $("#slt-options option:selected").attr('parent_name');
+		if (id != 'NULL') {
+			jQuery('#tbody-options').append('<tr><td><input type="checkbox"></td><td><span class="tr_options_1" parant_id="'+parent_id+'" parant_name="'+parent_name+'" chil_name="'+txt+'" chil_id="'+id+'"><b>'+parent_name+'</b>: '+txt+'</span></td><td>None</td><td><span class="trash-option"><i class="fa fa-trash"></i></span></td></tr>')
+		};
+		jQuery('.trash-option').click(function(){
+			jQuery(this).parent().parent().remove();
+		});
+	});
+
+	jQuery('.trash-option').click(function(){
+		jQuery(this).parent().parent().remove();
 	});
 }); // jQuery document

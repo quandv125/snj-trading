@@ -93,20 +93,20 @@
 												<li><a href="#">Pink</a></li>
 											</ul>
 										</div>
-									</div>
-									<div class="attr-product">
-										<label>Size</label>
-										<div class="attr-size">
-											<a href="#" class="toggle-size">Select Size</a>
-											<ul class="list-size" style="display: none;">
-												<li><a href="#">S</a></li>
-												<li><a href="#">M</a></li>
-												<li><a href="#">L</a></li>
-												<li><a href="#">XL</a></li>
-												<li><a href="#">XXL</a></li>
-											</ul>
-										</div>
 									</div> -->
+									<div class="attr-product">
+										<?php if ($product->p_option): ?>
+											<?php foreach (json_decode($product->p_option) as $key => $options): ?>
+												<label><?php echo $key; ?></label>
+												<select id="slt-options" class="form-control">
+												<?php foreach ($options as $key => $value): ?>
+													<option><?php echo $value ?></option>
+												<?php endforeach ?>
+												</select>
+												<br/>
+											<?php endforeach ?>
+										<?php endif ?>
+									</div>
 									<div class="col-md-6">
 										<div class="attr-product attr-product-qty">
 										<label></label>
@@ -121,6 +121,8 @@
 										<span class="addcart-link addcart-link2 cursor-point" price="<?= $product->retail_price;?>" name="<?= $product->product_name; ?>" product_id="<?= $product->id; ?>" picture="<?= $product->images[0]['thumbnail'] ?>">
 										<i class="fa fa-shopping-cart"></i> <?php echo __("Add to Cart") ?>
 									</span>
+									
+
 									<!-- <div class="product-social-extra">
 										<a class="wishlist-link" href="#"><i class="fa fa-heart-o"></i></a>
 										<a class="compare-link" href="#"><i class="fa fa-toggle-on"></i></a>
@@ -325,7 +327,7 @@
 						</div>
 						<div class="product-info">
 							<h3 class="title-product">
-								<?= $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,63,63),[ 'controller' => 'Pages',  'action' => 'products',$product->id]) ?>
+								<?= $this->Html->link($this->Myhtml->_Cutstring($cat->product_name,63,63),[ 'controller' => 'Pages',  'action' => 'products',$cat->id]) ?>
 							</h3>
 							<div class="info-price">
 								<span><strong><?= number_format( $cat->retail_price, DECIMALS);?>원</strong></span>

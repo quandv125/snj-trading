@@ -15,7 +15,7 @@
                             echo $this->Form->input('code',['value'=>$supplier->code]);
                            
                             // echo $this->Form->input('supplier_group',['value'=>$supplier->supplier_group]);
-                            echo $this->Form->input('tel',['value'=>$supplier->tel]);
+                             echo $this->Form->input('tel',['value'=>$supplier->tel,'label' => 'Phone']);
                             echo $this->Form->input('note',['type'=>'textarea','value'=>$supplier->note]);
                         ?>
                     </div>

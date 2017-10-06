@@ -4,15 +4,27 @@
         <td style="width: 1px;">
             <input tabindex="1" type="checkbox" class="icheck-<?= $str_rand ?> Checkbox-<?= $str_rand ?>" id="input-1">
         </td>
-        <td class="text-center"><?= PRODUCT.str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
-        <td class="text-center"><?= $product->product_name; ?></td>
-        <td class="text-center"><?= number_format($product->retail_price, DECIMALS); ?></td>
-        <td class="text-center"><?= $product->quantity; ?></td>
-      
-        <td class="text-center actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
+        <td class="text-center1 pulse"><?= str_pad($product->sku, ZEROFILL, ZERO, STR_PAD_LEFT); ?></td>
+        <td class="text-center1 pulse"><?= $product->product_name; ?></td>
+        <td class="text-center pulse"><?= number_format($product->retail_price, DECIMALS); ?></td>
+        <td class="text-center pulse"><?= $product->created; ?></td>
+        <td class="text-center pulse actived-product-<?= $product->id?>"><?= ($product->actived == PRODUCT_ACTIVE)? '<span class="label label-primary">Active</span>':'<span class="label label-danger">Deactive</span>' ?> </td>
+        <td class="text-center">
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fa fa-bars" aria-hidden="true"></i></button>
+                <div class="dropdown-content">
+                    <?php echo $this->Html->link('<i class="fa fa-eye" aria-hidden="true"></i> View', ['controller'=>'pages','action' => 'products',$product->id],['class'=>'','escape'=>false]); ?>
+                    <?php echo $this->Html->link('<i class="fa fa-pencil" aria-hidden="true"></i> Update', ['action' => 'edit',$product->id],['class'=>'','escape'=>false]); ?>
+                    
+                    <?= $this->Form->postLink(__('<i class="fa fa-trash" aria-hidden="true"></i> Delete'),
+                    ['action' => 'delete', $product->id],
+                    ['confirm' => __('Are you sure you want to delete # {0}?', $product->id),'class' => '', 'escape' => false])?>
+                </div>
+            </div>
+        </td>
     </tr>
     <tr class="row-cz-details hidden">
-        <td colspan="6">
+        <td colspan="7">
             <div role="tabpanel">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -20,13 +32,13 @@
                         <a href="#tab1<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
                     </li>
                     <li role="presentation">
-                        <a href="#tab2<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Descriptions"); ?></a>
+                        <a href="#tab2<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations"); ?></a>
                     </li>
                  <!--    <li role="presentation">
                         <a href="#tab3<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Stock card"); ?></a>
                     </li> -->
                     <li role="presentation">
-                        <a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Invoice") ?></a>
+                        <a href="#tab4<?= $product->id?>" class="bold" role="tab" data-toggle="tab"><?php echo __("Description") ?></a>
                     </li>
                 </ul>
                 <!-- Tab panes -->
@@ -38,38 +50,24 @@
                         <div class="clearfix"></div>
                         <div class="content">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                            <?php if (isset($product->images[0])): ?>
-                                <?php if ($user_info['group_id'] == CUSTOMERS): ?>
-                                    <div class="col-lg-9 text-center">
+                                <?php if (isset($product->images[0])): ?>
+                                    <div class="col-lg-12 text-center">
                                         <a class="fancyboxs-<?= $str_rand ?> fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[0]->path?>">
                                             <?= $this->Html->image($product->images[0]->thumbnail,["align"=>"middle",'class'=>'image-border zoom_05 img-responsive','width'=>200, 'data-zoom-image' => '../img/'.$product->images[0]->path]) ?>
                                         </a><div class="divider5"></div>
                                     </div>
-                                    <div class="col-lg-3 text-center">
-                                        <?php for ($i=1; $i < count($product->images); $i++):?>
-                                            <a class="fancyboxs-<?= $str_rand ?> fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[$i]->path?>">
-                                                <?= $this->Html->image($product->images[$i]->thumbnail,["align"=>"middle",'class'=>'image-border zoom_05 img-responsive','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$product->images[$i]->path]) ?>
+                                    <div class="col-lg-12 text-center">
+                                        <?php foreach ($product->images as $image): ?>
+                                            <a class="fancyboxs-<?= $str_rand ?> fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $image->path?>">
+                                                <?= $this->Html->image($image->thumbnail,['class'=>'image-border zoom_05 img-responsive','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$image->path]) ?>
                                             </a>
-                                        <?php endfor; ?>
+                                        <?php endforeach ?>
                                     </div>
-                                <?php else: ?>
-                                    <div class="col-lg-9 text-center">
-                                    <a class="fancyboxs-<?= $str_rand ?> fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[0]->path?>">
-                                        <?= $this->Html->image($product->images[0]->thumbnail,["align"=>"middle",'class'=>'image-border zoom_05 img-responsive','width'=>200, 'data-zoom-image' => '../img/'.$product->images[0]->path]) ?>
-                                    </a><div class="divider5"></div>
-                                </div>
-                                <div class="col-lg-3 text-center">
-                                    <?php for ($i=1; $i < count($product->images); $i++):?>
-                                        <a class="fancyboxs-<?= $str_rand ?> fancybox-thumbs-<?= $key; ?>" id="<?= $key; ?>" data-fancybox-group="thumb" href="../img/<?= $product->images[$i]->path?>">
-                                            <?= $this->Html->image($product->images[$i]->thumbnail,["align"=>"middle",'class'=>'image-border zoom_05 img-responsive','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$product->images[$i]->path]) ?>
-                                        </a>
-                                    <?php endfor; ?>
-                                </div>
                                 <?php endif ?>
-                                
-                                <?php endif ?>
+                                <div class="clearfix"></div>
                             </div>
-                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+                            
+                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                 <div class="table-responsive table-products">
                                     <table class="table table-striped">
                                         <tr>
@@ -99,11 +97,11 @@
                                     </table>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 proInfo">
+                           <!--  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 proInfo">
                                 <div class="description-products">
                                     <h5><?php echo __('Remark/Descriptions') ?></h5><div class="divider10"></div>
                                     <div class="content-description">
-                                        <?= $product->short_description; ?>
+                                        <?php //echo $product->short_description; ?>
                                     </div>
                                 </div>
                                 <div class="order-note-products">
@@ -112,7 +110,7 @@
                                         <?= $product->ordering_note; ?>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="clearfix divider10"> </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <button class="btn btn-success btn-addon m-b-sm waves-effect waves-button waves-red" data-toggle="modal" data-target="#ProductEdit<?= $product->id;?>"><i class="fa fa-check-square"></i> Update</button>
@@ -132,7 +130,68 @@
                         </div>
                     </div>
                      <div role="tabpanel" class="tab-pane fade" id="tab2<?= $product->id?>">
-                        <?= $product->description; ?>
+                       <div class="col-md-6">
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Release Date')?></td>
+                                                            <td><b><?php echo date("Y-m-d", strtotime($product->release_date)) ?></b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Size')?></td>
+                                                            <td><b><?php echo $product->size ?></b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Status')?></td>
+                                                            <td><b><?php echo $product->status ?></b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Brand')?></td>
+                                                            <td><b><?php echo $product->brand ?></b></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Origin')?></td>
+                                                            <td><b><?php echo $product->origin ?></b></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-striped">
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Weight')?></td>
+                                                            <td><?= $product->weight; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Color')?></td>
+                                                            <td><?= $product->color; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Meterial')?></td>
+                                                            <td><?= $product->meterial; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Manufacturer')?></td>
+                                                            <td><?= $product->manufacturer; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="bold"><?php echo __('Composition')?></td>
+                                                            <td><?= $product->composition; ?></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                
+                                                <div class="clearfix"></div>
+                                                <?php if (isset($product->properties) && !empty($product->properties)): ?>
+                                                    <table class="table table-striped">
+                                                        <?php foreach (json_decode($product->properties) as $key => $propertie): ?>
+                                                            <?php if (!empty($propertie->value)): ?>
+                                                                <tr>
+                                                                    <td class="bold"><?php echo $propertie->label ?> * </td>
+                                                                    <td><?php echo $propertie->value?></td>
+                                                                </tr>
+                                                            <?php endif ?>
+                                                        <?php endforeach ?>
+                                                    </table>
+                                                <?php endif ?>
                     </div>
                    <!--  <div role="tabpanel" class="tab-pane fade" id="tab3<?= $product->id?>">
                         <table class="table table-bordered">
@@ -145,46 +204,46 @@
                                     <th>Total</th>
                                 </tr>
                             </thead>
-                         <?php foreach ($product->stock_products as $key => $stocks): ?>
-                            <?php $stock = $stocks['_matchingData']['Stocks']; ?>
+                         <?php// foreach ($product->stock_products as $key => $stocks): ?>
+                            <?php// $stock = $stocks['_matchingData']['Stocks']; ?>
                             <tr>
-                                <td><span class="stocks-detail cursor-pointer" pid="<?= $product->id?>" id="<?= $stock['id'];?>">
-                                    <?php echo 'SK.'.str_pad($stock['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
+                                <td><span class="stocks-detail cursor-pointer" pid="<?php //echo $product->id?>" id="<?php //echo $stock['id'];?>">
+                                    <?php// echo 'SK.'.str_pad($stock['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
                                 </td>
-                                <td><?= $stock['total_quantity'];?></td>
-                                <td><?= number_format($stock['total_price'], DECIMALS);?></td>
-                                <td><?= $stock['discount_stock'];?></td>
-                                <td><?= number_format($stock['final_price'], DECIMALS);?></td>
+                                <td><?php //echo $stock['total_quantity'];?></td>
+                                <td><?php //echo number_format($stock['total_price'], DECIMALS);?></td>
+                                <td><?php //echo $stock['discount_stock'];?></td>
+                                <td><?php //echo number_format($stock['final_price'], DECIMALS);?></td>
                             </tr>
-                        <?php endforeach ?>
+                        <?php// endforeach ?>
                         </table>
                     </div> -->
                    
                     <div role="tabpanel" class="tab-pane fade" id="tab4<?= $product->id?>">
-                        <table class="table table-bordered">
+                       <!--  <table class="table table-bordered">
                              <thead>
                                 <tr>
-                                    <th><?php echo __("Code")?></th>
-                                    <th><?php echo __("Status")?></th>
+                                    <th><?php// echo __("Code")?></th>
+                                    <th><?php// echo __("Status")?></th>
                                    
-                                    <th><?php echo __("Date")?></th>
-                                    <th><?php echo __("Total")?></th>
+                                    <th><?php// echo __("Date")?></th>
+                                    <th><?php// echo __("Total")?></th>
                                 </tr>
                             </thead>
-                        <?php foreach ($product->invoice_products as $key => $invoices): ?>
-                            <?php $invoice = $invoices['_matchingData']['Invoices']; ?>
+                        <?php// foreach ($product->invoice_products as $key => $invoices): ?>
+                            <?php// $invoice = $invoices['_matchingData']['Invoices']; ?>
                             <tr>
-                                <td><span class="invoices-detail cursor-pointer" pid="<?= $product->id?>" id="<?= $invoice['id'];?>">
-                                    <?php echo INVOICE.str_pad($invoice['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
+                                <td><span class="invoices-detail cursor-pointer" pid="<?php// echo $product->id?>" id="<?php// echo $invoice['id'];?>">
+                                    <?php// echo INVOICE.str_pad($invoice['id'], ZEROFILL, ZERO, STR_PAD_LEFT); ?></span>
                                 </td>
-                                <td><?= $invoice['status'];?></td>
-                                <td><?= $invoice['created'];?></td>
-                                <td><?= number_format($invoice['total'], DECIMALS);?></td>
+                                <td><?php //echo $invoice['status'];?></td>
+                                <td><?php //echo $invoice['created'];?></td>
+                                <td><?php //echo number_format($invoice['total'], DECIMALS);?></td>
                                 
                               
                             </tr>
-                        <?php endforeach ?>
-                        </table>
+                        <?php// endforeach ?>
+                        </table> -->
                          
                     </div>
                 </div>

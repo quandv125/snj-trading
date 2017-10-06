@@ -12,8 +12,9 @@
 						<?= $this->Form->end() ?>
 						
 					</div> -->
-					<?php echo $this->Html->link('<i class="fa fa-upload"></i> Export',array('controller'=>'users','action'=>'exportexcel'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
-					<?php echo $this->Html->link('<i class="fa fa-file-pdf-o"></i> PDF',array('controller'=>'users','action'=>'createpdf'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
+					<!-- <?php echo $this->Html->link('<i class="fa fa-upload"></i> Export',array('controller'=>'users','action'=>'exportexcel'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
+					<?php echo $this->Html->link('<i class="fa fa-file-pdf-o"></i> PDF',array('controller'=>'users','action'=>'createpdf'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?> -->
+					<?php echo $this->Html->link('<i class="fa fa-flash"></i> Permission',array('controller'=>'users','action'=>'permission'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
 					<div style="float:right;">
 					<?php echo $this->Html->tag('button', '<i class="fa fa-plus"></i> Add', array('class' => 'btn btn-success m-b-sm btn-addon waves-effect waves-button waves-red',"data-toggle"=>"modal", "data-target" => "#myModal"));?>
 

@@ -9,8 +9,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Product</h4>
 			</div>
-			<div class="modal-body row">
-				<div class="panel-body">
+			<div class="modal-body1">
+				<div class="panel-body1">
 					<div role="tabpanel">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs nav-justified" role="tablist">
@@ -45,15 +45,14 @@
 									<?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
 									<?= $this->Form->input('conditions',[ 'type' => 'select', 'options' => PRODUCT_CONDITION]); ?>
 									<?= $this->Form->input('categorie_id', ['label'=>'Categories', 
-										'class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true",
-										'id' => 'PCategorie_Id',
+										'class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true", 'id' => 'PCategorie_Id',
 										'append' => [
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
-										]);
-									?>
-									<?= $this->Form->input('supplier_id',['class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true",'label' => __('Manufacturer / Brand'),'id' => 'PSupplier_Id','append' => [
-											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]]); ?>
-									
+									]);	?>
+									<?= $this->Form->input('supplier_id',['class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true",'label' => __('Manufacturer / Brand'),'id' => 'PSupplier_Id',
+											'append' => [
+											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]
+									]); ?>
 									<?= $this->Form->input('actived',['type'=>'checkbox','label' => 'Active']); ?>
 								</div>
 							</div>
@@ -129,7 +128,6 @@
 															</optgroup>
 														<?php endforeach ?>
 													</select>
-													
 												</td>
 												<td colspan="2"><span class="btn btn-info btn-options"><i class="fa fa-plus"></i></span></td>
 											</tr>

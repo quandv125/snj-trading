@@ -6,14 +6,14 @@
 				<div class="col-md-12">
 				<br/>
 				   <!--  <div class="myFile" style="float:left; margin-right: 3px;">
-						<?php echo $this->Form->create(false,array('url'=>array('action'=>'ImportExcel'),'enctype'=>'multipart/form-data'));?>
-						<?php echo $this->Form->file('files',['class' => 'hidden']); ?>
+						<?php// echo $this->Form->create(false,array('url'=>array('action'=>'ImportExcel'),'enctype'=>'multipart/form-data'));?>
+						<?php// echo $this->Form->file('files',['class' => 'hidden']); ?>
 						<span class="btn btn-success btn-addon m-b-sm "><i class="fa fa-download" aria-hidden="true"></i> Import</span>
-						<?= $this->Form->end() ?>
+						<?php //echo $this->Form->end() ?>
 						
 					</div> -->
-					<!-- <?php echo $this->Html->link('<i class="fa fa-upload"></i> Export',array('controller'=>'users','action'=>'exportexcel'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
-					<?php echo $this->Html->link('<i class="fa fa-file-pdf-o"></i> PDF',array('controller'=>'users','action'=>'createpdf'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?> -->
+					<!-- <?php// echo $this->Html->link('<i class="fa fa-upload"></i> Export',array('controller'=>'users','action'=>'exportexcel'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
+					<?php// echo $this->Html->link('<i class="fa fa-file-pdf-o"></i> PDF',array('controller'=>'users','action'=>'createpdf'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?> -->
 					<?php echo $this->Html->link('<i class="fa fa-flash"></i> Permission',array('controller'=>'users','action'=>'permission'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
 					<div style="float:right;">
 					<?php echo $this->Html->tag('button', '<i class="fa fa-plus"></i> Add', array('class' => 'btn btn-success m-b-sm btn-addon waves-effect waves-button waves-red',"data-toggle"=>"modal", "data-target" => "#myModal"));?>
@@ -25,17 +25,17 @@
 											<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 											<h4 class="modal-title" id="myModalLabel">Add User</h4>
 										</div>
-										<div class="modal-body">
+										<div class="modal-body1">
 											<div role="tabpanel">
 												<ul class="nav nav-tabs nav-justified" role="tablist">
 													<li role="presentation" class="active">
-														<a href="#tab1" class="bold" role="tab" data-toggle="tab"><?php echo __("Infomations") ?></a>
+														<a href="#tab1" class="bold" role="tab" data-toggle="tab"><?= __("Infomations") ?></a>
 													</li>
 													<li role="presentation">
-														<a href="#tab2" class="bold" role="tab" data-toggle="tab"><?php echo __("Billing Address"); ?></a>
+														<a href="#tab2" class="bold" role="tab" data-toggle="tab"><?= __("Billing Address"); ?></a>
 													</li>
 													<li role="presentation">
-														<a href="#tab3" class="bold" role="tab" data-toggle="tab"><?php echo __("Shipping Address"); ?></a>
+														<a href="#tab3" class="bold" role="tab" data-toggle="tab"><?= __("Shipping Address"); ?></a>
 													</li>
 													
 												</ul>

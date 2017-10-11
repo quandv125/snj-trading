@@ -300,7 +300,8 @@
 
 	App.controller('PlaceOrderCtrl',function($scope, $http, $location){
 		$scope.order_info = function(){
-			if ($scope.info.$valid) {
+			
+			// if ($scope.info.$valid) {
 				jQuery(".loader3").fadeIn();
 				$http({
 					method: 'POST',
@@ -315,7 +316,7 @@
 				}, function errorCallback(response) {
 					toastr.error("Error");
 				});
-			}
+			// }
 			jQuery(".loader3").fadeOut();
 		}
 	})

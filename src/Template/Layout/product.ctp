@@ -131,11 +131,11 @@
 					<li>
 						<a href="#/products" class="btn-floating purple tooltipped" data-position="left" data-delay="10" data-tooltip="Product">    <i class="fa fa-cubes"></i>
 						</a>
-					<li>
+					<!-- <li>
 						<a href="#/inquiry" class="btn-floating green tooltipped" data-position="left" data-delay="10" data-tooltip="Inquiry"> 
 							<i class="fa fa-file-text-o"></i>
 						</a>
-					</li>
+					</li> -->
 					<li>
 						<a href="#/orders" class="btn-floating blue tooltipped" data-position="left" data-delay="10" data-tooltip="Orders">     <i class="fa fa-heart-o"></i>
 						</a>

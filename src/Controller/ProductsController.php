@@ -840,11 +840,13 @@ class ProductsController extends AppController
 				$User = TableRegistry::get('Users');
 				$users = $User->find()->select(['billing_address'])->where(['id' => $this->Auth->user('id')])->first();
 				$this->request->data = json_decode($users->billing_address,true);
+				$this->request->data['user_id'] = $this->Auth->user('id');
 				if ( !empty($delivery_address)) {
 					$this->request->data['delivery_address'] = $delivery_address;
 				}
+
 			} 
-			
+		
 			$info_order = $Order->newEntity();
 			$info_order = $Order->patchEntity($info_order, $this->request->data);
 			

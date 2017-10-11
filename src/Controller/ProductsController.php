@@ -830,16 +830,24 @@ class ProductsController extends AppController
 	public function PlaceOrder() {
 		if ($this->request->is(['ajax', 'post', 'put','get'])) {
 			$this->autoRender = false;
+			
 			$Order = TableRegistry::get('Orders');
 			$OrderProduct = TableRegistry::get('OrderProducts');
 			if (!empty($this->Auth->user('id'))) {
+				if (!empty($this->request->data['name'])) {
+					$delivery_address = json_encode($this->request->data, true);
+				}
 				$User = TableRegistry::get('Users');
-				$users= $User->find()->select(['billing_address'])->where(['id' => $this->Auth->user('id')])->first();
+				$users = $User->find()->select(['billing_address'])->where(['id' => $this->Auth->user('id')])->first();
 				$this->request->data = json_decode($users->billing_address,true);
-
+				if ( !empty($delivery_address)) {
+					$this->request->data['delivery_address'] = $delivery_address;
+				}
 			} 
+			
 			$info_order = $Order->newEntity();
 			$info_order = $Order->patchEntity($info_order, $this->request->data);
+			
 			if ($Order->save($info_order)) {
 				$order_id = $info_order->id;
 				$mycart		= $this->request->session()->read('Cart');

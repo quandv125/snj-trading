@@ -1,35 +1,93 @@
 
 <div class="content-page woocommerce" ng-controller="PlaceOrderCtrl">
-	<div class="col-md-10 col-sm-12 col-xs-12 col-md-offset-1">
+	<div class="col-md-12 col-sm-12 col-xs-12 ">
 		<h2 class="title-shop-page">checkout</h2>
-			<div class="col-md-6 col-sm-6 col-ms-12" >
-				<div class="check-billing1" >
+			<div class="col-md-6 col-sm-6 col-ms-12 checkout-main" >
+				<div class="checkout-box" >
+					<div class="checkout_heading">
+						<h4 class="checkout_title">Add a new Shipping Address</h4>
+					</div>
+					<br/>
 					
-					<h2 class="title">Your Order</h2>
-					
-					<div class="item-feature-box1 text-left feature-box-style-04">
+					<div class="text-left feature-box-style-04 checkout_content">
 						<div class="feature-box-icon">
 							<a href="#" class="feature-box-link">
 								<span class="lnr lnr-home"></span>
 							</a>
 						</div>
 						<div class="feature-box-info">
-							<h3>{{address.firstname}} {{address.lastname}}</h3>
-							<h3>{{address.email}}</h3>
-							<h3>{{address.phone}}</h3>
-							<h3>{{address.company}}</h3>
-							<h3>{{address.address}}</h3>
-							<h3>{{address.city}}</h3>
-							<h3>{{address.country}}</h3>
-							<h3>{{address.postcode}}</h3>
+							<p>{{address.firstname}} {{address.lastname}}</p>
+							<p>{{address.email}}</p>
+							<p>{{address.phone}}</p>
+							<p>{{address.address}}, {{address.city}}, {{address.country}}</p>
 						</div>
+						<br>
+						<form name="info" class="form-bill-information" ng-submit="order_info()" novalidate>
+							<div class="billing_form_wrapper bill-information billaddress_wrap">
+								<div class="bill-information-heading">
+									<label class="bill-information _toggle-label"><input type="checkbox" name=""> Billing Infomation</label>
+								</div>
+								<div class="bill-information-wrapper hidden">
+									<br/>
+									<div class="row bill-information-content">
+										<div class="col-md-8 col-md-offset-2">
+											
+												<div class="form-group" ng-class="{ 'has-error' : info.name.$invalid && !info.name.$pristine }">
+													<input type="text" name="name" class="form-control" ng-model="user.name" placeholder="Name*" required>
+													<p ng-show="info.name.$invalid && !info.name.$pristine" class="help-block">Your name is required.</p>
+												</div>
+
+												<div class="form-group" ng-class="{ 'has-error' : info.email.$invalid && !info.email.$pristine }">
+													<input type="email" name="email" class="form-control" ng-model="user.email" placeholder="Email*" required>
+													<p ng-show="info.email.$invalid && !info.email.$pristine" class="help-block">Enter a valid email.</p>
+												</div>
+												<div class="form-group" ng-class="{ 'has-error' : info.phone.$invalid && !info.phone.$pristine }">
+													<input type="text" name="phone" class="form-control" ng-model="user.phone" placeholder="Phone Number*" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
+													<p ng-show="info.phone.$error.pattern" class="help-block">Not a valid number!</p>
+													<p ng-show="info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
+													<p ng-show="info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>
+												</div>
+												
+												<div class="form-group" ng-class="{ 'has-error' : info.address.$invalid && !info.address.$pristine }">
+													<input type="text" name="address" class="form-control" ng-model="user.address" placeholder="Address*" required>
+													<p ng-show="info.address.$invalid && !info.address.$pristine" class="help-block">Your address is required.</p>
+												</div>
+												
+												<script src="http://geodata.solutions/includes/countrystatecity.js"></script>
+												<div class="form-group">
+													<select name="country" ng-model="user.country" class="form-control countries" id="countryId">
+														<option value="">Select Country*</option>
+													</select>
+												</div>
+
+												<div class="form-group">
+													<select name="state" ng-model="user.city" class=" form-control states" id="stateId">
+														 <option value="">Select State*</option>
+													</select>
+												</div>
+												<select name="city" class=" form-control cities" id="cityId" style="display: none;">
+													<option value="">Select City</option>
+												</select>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<br>
+							<button class="md-raised float-left md-primary md-button md-default-theme" id="update_cart">CONTINUE</button>
+						</form>
+						<div class="clearfix"></div>
 					</div>
-					<br>
-					<button type="submit" id="sbm-palce-order" class="btn btn-primary ">Submit</button>
+					
+
+					
 				</div>
 			</div>
 			<div class="col-md-6 col-sm-6 col-ms-12">
-				<h2 class="title">Your Order</h2>
+				<div class="orders-box _heading">
+					<div class="orders-box-title">Your Orders</div>
+				</div>
 				<div class="table-responsive">
 				<table class="shop_table woocommerce-checkout-review-order-table">
 					<thead>

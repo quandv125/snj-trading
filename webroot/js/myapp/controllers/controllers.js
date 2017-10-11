@@ -300,7 +300,6 @@
 
 	App.controller('PlaceOrderCtrl',function($scope, $http, $location){
 		$scope.order_info = function(){
-			
 			if ($scope.info.$valid) {
 				jQuery(".loader3").fadeIn();
 				$http({
@@ -327,7 +326,9 @@
 			$scope.address = jQuery.parseJSON(response.data.billing_address.billing_address);
 			
 		});
-		
+		jQuery('.bill-information-heading').click(function(){
+			jQuery('.bill-information-wrapper').toggleClass('hidden');
+		});
 		jQuery('#sbm-palce-order').click(function(){
 			jQuery(".loader3").fadeIn();
 			$http({

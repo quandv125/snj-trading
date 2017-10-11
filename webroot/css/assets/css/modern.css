@@ -3212,7 +3212,7 @@ tr.group:hover {
 }
 
 .dropdown-menu li a:hover {
-    background: #f7f7f7;
+    background: #99cfef;
 }
 
 .navbar-nav > li > .dropdown-menu {
@@ -3286,7 +3286,7 @@ tr.group:hover {
 .dropdown-menu > li.active > a,
 .dropdown-menu > li.active > a:hover,
 .dropdown-menu > li.active > a:focus {
-    background: #F7F7F7;
+    background: #99cfef;
     color: #333;
 } 
 

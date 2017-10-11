@@ -65,7 +65,7 @@
 															<?= $this->Form->input('group_id', [
 																	'id' => 'UserGroupId',
 																	'append' => [
-																		$this->Html->tag('span', '<i class="fa fa-plus"></i>', array('class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'))
+																 		$this->Html->tag('span', '<i class="fa fa-plus"></i>', array('class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'))
 																	]
 																]);
 															?>

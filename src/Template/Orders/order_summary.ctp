@@ -49,21 +49,19 @@
 							<div class="overview-content-address">
 								<p><?= h($order->firstname.' '.$order->lastname) ?></p>
 								<p><?= h($order->company) ?></p>
-								<p><?= h($order->address) ?></p>
-								<p><?= h($order->city) ?></p>
+								<p><?= h($order->email) ?></p>
+								<p><?= h($order->phone) ?></p>
+								<p><?= h($order->address) ?>, <?= h($order->city) ?>, <?= h($order->country) ?></p>
 								<p><?= h($order->postcode_zip) ?></p>
-								<p><?= h($order->country) ?></p>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<legend>Delivery Address</legend>
 							<div class="overview-content-address">
-								<p><?= h($order->firstname.' '.$order->lastname) ?></p>
-								<p><?= h($order->company) ?></p>
-								<p><?= h($order->address) ?></p>
-								<p><?= h($order->city) ?></p>
-								<p><?= h($order->postcode_zip) ?></p>
-								<p><?= h($order->country) ?></p>
+								<p><?= h(json_decode($order->delivery_address)->name) ?></p>
+								<p><?= h(json_decode($order->delivery_address)->email) ?></p>
+								<p><?= h(json_decode($order->delivery_address)->phone) ?></p>
+								<p><?= h(json_decode($order->delivery_address)->address) ?>, <?= h(json_decode($order->delivery_address)->city) ?>, <?= h(json_decode($order->delivery_address)->country) ?></p>
 							</div>
 						</div>
 						<div class="clearfix"></div>

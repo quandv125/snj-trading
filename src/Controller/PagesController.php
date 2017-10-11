@@ -45,11 +45,15 @@ class PagesController extends AppController
 			return $this->redirect(['controller'=>'Pages','action' => 'login']);
 		}
 		$Product 	= TableRegistry::get('Products');
-		$Inquiry	= TableRegistry::get('Inquiries');
+		$Order	= TableRegistry::get('Orders');
 		$User		= TableRegistry::get('Users');
-		$actived	= $Product->find()->where(['Products.actived' => false])->count();
-		$order		= $Inquiry->find()->where(['Inquiries.status' => 1])->count();
+		$products = $Product->find()->select(['id','sku','product_name','status','created'])->order(['created' => 'desc'])->limit(5)->toarray();
+		$count_products	= $Product->find()->where(['Products.actived' => true])->count();
+		$orders		= $Order->find()->toarray();
+		$count_orders	= $Order->find()->count();
+
 		$users		= $User->find()->count();
+
 		$path		= func_get_args();
 		$count		= count($path);
 		if (!$count) {
@@ -62,7 +66,7 @@ class PagesController extends AppController
 		if (!empty($path[1])) {
 			$subpage = $path[1];
 		}
-		$this->set(compact('page', 'order','actived','users'));
+		$this->set(compact('products', 'orders','count_products','count_orders'));
 		try {
 			$this->render(implode('/', $path));
 		} catch (MissingTemplateException $e) {

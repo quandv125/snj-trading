@@ -17,15 +17,20 @@
 									<a href="#" class="vertical-control vertical-next"><i class="fa fa-angle-up"></i></a>
 									<div class="carousel">
 										<ul>
-											<li><a href="#"><?= $this->Html->image($product->images[0]['thumbnail'],['ref'=> '/img/'.$product->images[0]['path']])?></a></li>
-										<?php foreach ($product->images as $key => $image): ?>
-											<?php if ($key >0 && $key <= 8	): ?>
-												<a class="fancybox-thumbs-<?= 123 ?>" style="display: none;" id="<?= 123 ?>" data-fancybox-group="thumb" href="/img/<?= $image['path']?>">
-													<?= $this->Html->image($image['thumbnail'],['class'=>'image-border zoom_05 img-responsive','style'=>'display:none;','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$image['path']]) ?>
-												</a>
-												<li><a href="#"><?= $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?></a></li>
-											<?php endif ?>
-										<?php endforeach ?>
+											<li><a href="#"><?= $this->Html->image($product->images[0]['thumbnail'],['ref'=> '/img/'.$product->images[0]['path']])?></a>
+											</li>
+											<?php foreach ($product->images as $key => $image): ?>
+												<?php if ($key >0 && $key <= 8	): ?>
+													<a class="fancybox-thumbs-<?= 123 ?>" style="display: none;" id="<?= 123 ?>" data-fancybox-group="thumb" href="/img/<?= $image['path']?>">
+														<?= $this->Html->image($image['thumbnail'],['class'=>'image-border zoom_05 img-responsive','style'=>'display:none;','width'=>50,'height'=>50, 'data-zoom-image' => '../img/'.$image['path']]) ?>
+													</a>
+													<li>
+														<a href="#">
+															<?= $this->Html->image($image['thumbnail'],['ref'=> '/img/'.$image['path']])?>
+														</a>
+													</li>
+												<?php endif ?>
+											<?php endforeach ?>
 										</ul>
 									</div>
 									<a href="#" class="vertical-control vertical-prev"><i class="fa fa-angle-down"></i></a>
@@ -234,7 +239,7 @@
 							<div class="content-infomation-second">
 								<p style="text-transform: capitalize;"><?= $product->meterial ?></p>
 							</div>
-						</div>				
+						</div>
 						<div class="table-content-tab-detail">
 							<div class="title-infomation-detail"><span><?= __("Brand"); ?></span></div>
 							<div class="content-infomation-first">

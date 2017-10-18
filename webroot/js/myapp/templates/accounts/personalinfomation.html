@@ -132,7 +132,7 @@
 			<div class="form-group" ng-class="{ 'has-error' : frm_info.phone.$invalid && !frm_info.phone.$pristine }">
 				<label class="col-md-4 control-label">Phone *</label> 
 				<div class="col-md-4 inputGroupContainer">
-					<input type="text" name="phone" class="form-control" ng-model="users.tel" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
+					<input type="text" name="phone" class="form-control" ng-model="users.phone" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
 					<p ng-show="frm_info.phone.$error.pattern" class="help-block">Not a valid number!</p>
 					<p ng-show="frm_info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
 					<p ng-show="frm_info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>

@@ -839,6 +839,7 @@ class ProductsController extends AppController
 				}
 				$User = TableRegistry::get('Users');
 				$users = $User->find()->select(['billing_address'])->where(['id' => $this->Auth->user('id')])->first();
+			
 				$this->request->data = json_decode($users->billing_address,true);
 				$this->request->data['user_id'] = $this->Auth->user('id');
 				if ( !empty($delivery_address)) {
@@ -846,10 +847,10 @@ class ProductsController extends AppController
 				}
 
 			} 
-		
+			// pr($this->request->data);die();
 			$info_order = $Order->newEntity();
 			$info_order = $Order->patchEntity($info_order, $this->request->data);
-			
+		
 			if ($Order->save($info_order)) {
 				$order_id = $info_order->id;
 				$mycart		= $this->request->session()->read('Cart');
@@ -866,7 +867,7 @@ class ProductsController extends AppController
 				$result = $OrderProduct->saveMany($entities);
 				$session = $this->request->session();
 				$session->delete('Cart');$session->delete('my_cart');
-				echo $order_id; exit();
+				echo '/order_received/'.$order_id; exit();
 			}
 		}
 	} // End Function

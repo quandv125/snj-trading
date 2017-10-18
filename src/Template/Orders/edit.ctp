@@ -28,7 +28,7 @@
             echo $this->Form->input('address');
             echo $this->Form->input('city');
             echo $this->Form->input('country');
-            echo $this->Form->input('postcode_zip');
+            echo $this->Form->input('postcode');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

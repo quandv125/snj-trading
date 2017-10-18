@@ -77,7 +77,7 @@ use Cake\Validation\Validator;
         $validator
             ->allowEmpty('country');
         $validator
-            ->allowEmpty('postcode_zip');
+            ->allowEmpty('postcode');
         return $validator;
     }
 

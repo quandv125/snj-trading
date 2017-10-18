@@ -266,10 +266,16 @@ class PagesController extends AppController
 		if ($this->request->is('get')) {
 			$info['cart']    = $this->request->session()->read('Cart');
 			$info['auth'] = false;
+			$info['address'] = false;
 			if (!empty($this->Auth->user('id'))) {
 				$User  = TableRegistry::get('Users');
+				$user = $User->find()->select(['id','billing_address','delivery_address'])->where(['id'=>$this->Auth->user('id')])->first();
 				$info['auth'] = true;
-				$info['billing_address'] = $User->find()->select(['id','billing_address','delivery_address'])->where(['id'=>$this->Auth->user('id')])->first();
+				$info['billing_address'] = $user;
+				if ($user->billing_address) {
+					$info['address'] = true;
+				}
+			
 			} else {
 				$info['billing_address'] = NULL;
 			}

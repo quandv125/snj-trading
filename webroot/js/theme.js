@@ -1101,6 +1101,14 @@ jQuery(document).ready(function(){
 			zoomWindowFadeOut: 750
 		});
 		
+		$(".detail-gallery-fullwidth .carousel a").mouseover(function(){
+			$(".detail-gallery-fullwidth .carousel a").removeClass('active');
+			$(this).addClass('active');
+			$(".detail-gallery-fullwidth .mid img").attr("src", $(this).find('img').attr("ref"));
+			var z_url = $('.detail-gallery-fullwidth .mid img').attr('src');
+			$('.zoomWindow').css('background-image','url("'+z_url+'")');
+		});	
+		
 		$(".detail-gallery-fullwidth .carousel a").on('click',function(event) {
 			event.preventDefault();
 			$(".detail-gallery-fullwidth .carousel a").removeClass('active');
@@ -1110,6 +1118,27 @@ jQuery(document).ready(function(){
 			$('.zoomWindow').css('background-image','url("'+z_url+'")');
 		});
 	}
+	
+	// Plugin Fancybox
+	jQuery('.fancyboxs').click(function(){
+		var id = jQuery(this).attr('id');
+		jQuery('.fancybox-thumbs-'+id).fancybox({
+			nextClick 	: true,
+			openEffect 	: 'elastic',
+			openSpeed  	: 250,
+			closeEffect : 'elastic',
+			closeSpeed  : 250,
+			helpers : {
+				thumbs : {
+					width  : 50,
+					height : 50
+				},
+				overlay: {
+					locked: false
+				}
+			}
+		});
+	});
 	//Sort Pagi Bar
 	$('body').on('click',function(){
 		$('.product-order-list').slideUp();
@@ -1448,6 +1477,22 @@ jQuery(document).ready(function($){
 					emailAddress: {
 						message: 'Please supply a valid email address'
 					}
+				}
+			},
+			phone: {
+				validators: {
+					stringLength: {
+						min: 10,
+						max: 15,
+						message: 'Please enter at least 10 characters and no more than 15'
+					},
+					notEmpty: {
+						message: 'Please supply your phone number'
+					},
+					//phone: {
+						// country: 'US',
+						//message: 'Please supply a vaild phone number with area code'
+				   //}
 				}
 			},
 			tel: {
@@ -1998,24 +2043,5 @@ jQuery(document).ready(function($){
 		});
 	});
 
-	// Plugin Fancybox
-	jQuery('.fancyboxs').click(function(){
-		var id = jQuery(this).attr('id');
-		jQuery('.fancybox-thumbs-'+id).fancybox({
-			nextClick 	: true,
-			openEffect 	: 'elastic',
-			openSpeed  	: 250,
-			closeEffect : 'elastic',
-			closeSpeed  : 250,
-			helpers : {
-				thumbs : {
-					width  : 50,
-					height : 50
-				},
-				overlay: {
-					locked: false
-				}
-			}
-		});
-	});
+	
 }); // End document

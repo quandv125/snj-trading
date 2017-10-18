@@ -30,7 +30,7 @@ class OrdersController extends AppController
 			'type' => 'LEFT',
 			'conditions' => ['OrderProducts.order_id = Orders.id']
 		])
-		->select(['Orders.id','Orders.firstname','Orders.lastname','Orders.email','Orders.status','Orders.created','total' =>'SUM(OrderProducts.price*OrderProducts.quantity)'])
+		->select(['Orders.id','Orders.fullname','Orders.email','Orders.status','Orders.created','total' =>'SUM(OrderProducts.price*OrderProducts.quantity)'])
 		->group(['Orders.id'])
 		->order(['Orders.created' => 'DESC']);
 		// pr($orders->toarray());die();
@@ -67,7 +67,6 @@ class OrdersController extends AppController
 			$order = $this->Orders->patchEntity($order, $this->request->data);
 			if ($this->Orders->save($order)) {
 				$this->Flash->success(__('The order has been saved.'));
-
 				return $this->redirect(['action' => 'index']);
 			} else {
 				$this->Flash->error(__('The order could not be saved. Please, try again.'));
@@ -90,11 +89,8 @@ class OrdersController extends AppController
 		$order = $this->Orders->get($id, [
 			'contain' => []
 		]);
-		
-	
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$order = $this->Orders->patchEntity($order, $this->request->data);
-
 			if ($this->Orders->save($order)) {
 				$this->Flash->success(__('The order has been saved.'));
 			} else {
@@ -128,6 +124,7 @@ class OrdersController extends AppController
 	}
 
 	public function OrderSummary($id) {
+
 		$Extra = TableRegistry::get('extras');
 		$order = $this->Orders->find()->contain(['OrderProducts'])->leftJoin('Users','Users.id=Orders.user_id')->where(['Orders.id'=>$id])->first();
 		
@@ -154,7 +151,6 @@ class OrdersController extends AppController
 	}
 
 	public function AddTax($id)	{
-	
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$Extra = TableRegistry::get('extras');
 			$this->request->data['order_id'] = $id;
@@ -215,5 +211,17 @@ class OrdersController extends AppController
 		}
 		return $this->redirect(['action' => 'OrderSummary', $order->order_id]);
 		
+	}
+
+	public function ChangeDelivery($id){
+		if ($this->request->is(['post'])) {
+			$query = $this->Orders->updateAll(['delivery_address' => json_encode($this->request->data)],['id'=>$id]);
+			if ($query) {
+				$this->Flash->success(__('The order has been saved.'));
+			} else {
+				$this->Flash->error(__('The order could not be save. Please, try again.'));
+			}
+			return $this->redirect(['action' => 'OrderSummary', $id]);
+		}
 	}
 }

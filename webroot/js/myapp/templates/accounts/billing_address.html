@@ -4,19 +4,11 @@
 		
 		<form name="frm_info" class="well form-horizontal" ng-submit="fr_bulling_address()" novalidate>
 		<h4> Default Billing Address </h4>
-			<div class="form-group" ng-class="{ 'has-error' : frm_info.username.$invalid && !frm_info.username.$pristine }">
-				<label class="col-md-4 control-label">Firstname *</label> 
+			<div class="form-group" ng-class="{ 'has-error' : frm_info.fullname.$invalid && !frm_info.fullname.$pristine }">
+				<label class="col-md-4 control-label">Fullname *</label> 
 				<div class="col-md-4 inputGroupContainer">
-				<input type="text" name="firstname" class="form-control" ng-model="formdata.firstname" required>
-				<p ng-show="frm_info.firstname.$invalid && !frm_info.firstname.$pristine" class="help-block">Your firstname is required.</p>
-				</div>
-			</div>
-
-			<div class="form-group" ng-class="{ 'has-error' : frm_info.username.$invalid && !frm_info.username.$pristine }">
-				<label class="col-md-4 control-label">Lastname *</label> 
-				<div class="col-md-4 inputGroupContainer">
-				<input type="text" name="lastname" class="form-control" ng-model="formdata.lastname" required>
-				<p ng-show="frm_info.lastname.$invalid && !frm_info.lastname.$pristine" class="help-block">Your lastname is required.</p>
+				<input type="text" name="fullname" class="form-control" ng-model="formdata.fullname" placeholder="Fullname*" required>
+				<p ng-show="frm_info.fullname.$invalid && !frm_info.fullname.$pristine" class="help-block">Your Fullname is required.</p>
 				</div>
 			</div>
 
@@ -57,7 +49,7 @@
 			<div class="form-group" ng-class="{ 'has-error' : frm_info.address.$invalid && !frm_info.address.$pristine }">
 				<label class="col-md-4 control-label">Town/City *</label> 
 				<div class="col-md-4 inputGroupContainer">
-					<input type="text" name="city" class="form-control" ng-model="formdata.city" placeholder="city*" required>
+					<input type="text" name="city" class="form-control" ng-model="formdata.city" placeholder="City*" required>
 					<p ng-show="frm_info.city.$invalid && !frm_info.city.$pristine" class="help-block">Your city is required.</p>
 				</div>
 			</div>

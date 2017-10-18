@@ -29,7 +29,7 @@
 										<th><?php echo __("Description");?></th>
 										<th class="width20"><?php echo __("Created");?></th>
 										<th class="width1"><?php echo __("&nbsp;");?></th>
-								   </tr>
+									</tr>
 								</thead>
 								<tbody>
 									<?php foreach ($options as $key => $option): ?>
@@ -38,7 +38,7 @@
 											<td><?php echo $option->name; ?></td>
 											<td><?php echo $option->description; ?></td>
 											<td><?php echo $option->created; ?></td>
-											<td><span class="btn btn-info trash-att" id="<?= $option->id;?>"><i class=" fa fa-pencil"></i></span></td>
+											<td><span class="btn btn-info trash-att" id="<?= $option->id;?>"><i class=" fa fa-trash"></i></span></td>
 										</tr>
 									<?php endforeach ?>
 									
@@ -46,7 +46,6 @@
 							</table>
 							
 						</div>
-						
 						
 						<fieldset class="col-sm-9">
 							<legend><?php echo __("Add New Group"); ?></legend>
@@ -64,7 +63,6 @@
 						<div class="clearfix"></div>
 					</div>
 
-
 					<div role="tabpanel" class="tab-pane fade" id="tab2">
 						<div class="panel-heading-order ">
 							<h4 class="order_summary"><?= __('Options Attributes'); ?></h4>
@@ -79,7 +77,6 @@
 							</select>
 							<div class="clearfix"></div>
 						
-							
 						</div>
 							<div class="clearfix divider15"></div>
 						
@@ -99,24 +96,25 @@
 								
 							</div>
 						</fieldset>
+
 						<div class="clearfix divider15"></div>
 						
 						<fieldset class="col-sm-5">
 							<legend><?php echo __("Add New attribute"); ?></legend>
 							<div class="order_status billing-address">
 								<div class="input-group m-b-sm">
-                                    <input type="text" class="form-control" id="ipt-att">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" id="btn-att" type="button"><i class="fa fa-plus"></i></button>
-                                    </span>
-                                </div>
+									<input type="text" class="form-control" id="ipt-att">
+									<span class="input-group-btn">
+										<button class="btn btn-default" id="btn-att" type="button"><i class="fa fa-plus"></i></button>
+									</span>
+								</div>
 							</div>
 						</fieldset>
+
 						<div class="clearfix divider15"></div>
 							<?php echo $this->Form->button('Submit',array('class' => 'btn btn-success'));?>
 							<?php echo $this->Form->end();?>
 						
-					
 					</div>
 				</div>
 			</div>

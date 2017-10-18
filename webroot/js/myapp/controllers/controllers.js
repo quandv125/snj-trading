@@ -35,7 +35,7 @@
 	App.controller('PersonalInfomationCtrl', function($scope, $routeParams, $http){
 		$http.get("/pages/account_info").then(function (response) {
 			$scope.users = response.data;
-			// console.log($scope.users);
+			console.log($scope.users);
 		});
 	});
 
@@ -294,13 +294,13 @@
 			success: function(response) {
 				var data = jQuery.parseJSON(response);
 				$scope.info = data;
+				console.log($scope.info);
 			}
 		});
 	})
 
 	App.controller('PlaceOrderCtrl',function($scope, $http, $location){
 		$scope.order_info = function(){
-			
 			// if ($scope.info.$valid) {
 				jQuery(".loader3").fadeIn();
 				$http({
@@ -309,7 +309,7 @@
 					data: $scope.user
 				}).then(function successCallback(response) {
 					// console.log(response.data);return;
-					$location.path('/order_received/'+response.data);
+					$location.path(response.data);
 					jQuery('.total-mini-cart-item').html("0");
 					jQuery('table #modal-mycart').html('');
 					
@@ -322,10 +322,12 @@
 	})
 
 	App.controller('CheckoutCtrl', function($scope, $http, $location){
+		
 		$http.get("/pages/getcartdata").then(function (response) {
 			$scope.cart_new = response.data.cart;
 			$scope.address = jQuery.parseJSON(response.data.billing_address.billing_address);
-			
+			$scope.log = jQuery.parseJSON(response.data.address);
+			console.log($scope.address);
 		});
 		jQuery('.bill-information-heading').click(function(){
 			jQuery('.bill-information-wrapper').toggleClass('hidden');
@@ -338,7 +340,6 @@
 			}).then(function successCallback(response) {
 				// console.log(response.data);return;
 				window.location.href ='/pages/accounts#/order_received/'+response.data;
-				
 				jQuery('.total-mini-cart-item').html("0");
 				jQuery('table #modal-mycart').html('');
 				jQuery(".loader3").fadeOut();

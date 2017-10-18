@@ -9,8 +9,8 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Product</h4>
 			</div>
-			<div class="modal-body1">
-				<div class="panel-body1">
+			<div class="modal-body">
+				<div class="panel-body">
 					<div role="tabpanel">
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs nav-justified" role="tablist">
@@ -98,10 +98,8 @@
 									<?= $this->Form->textarea('description',['class'=>'ckeditor']);?>
 								</div>
 							</div>
-
 							<div role="tabpanel" class="tab-pane fade" id="tab5">
 								<h4 class="order_summary"><?= __('Products Options'); ?></h4>
-
 								<div class="table-responsive col-lg-12">
 									<table class="table table-striped ">
 										<thead>
@@ -110,7 +108,7 @@
 												<th><?php echo __("Name");?></th>
 												<th class="width20"><?php echo __("Default");?></th>
 												<th class="width1"><?php echo __("&nbsp;");?></th>
-										   </tr>
+											</tr>
 										</thead>
 										<tbody id="tbody-options">
 										</tbody>
@@ -176,7 +174,7 @@
 				array.push({'label':label123,'value':value123});
 			}
 		});
-		jQuery("#result").val(JSON.stringify(array));
+		jQuery("#result").val(JSON.stringify(array)); 
 		return true;
 	}
 </script>

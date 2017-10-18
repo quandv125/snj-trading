@@ -70,9 +70,10 @@
 						</thead>
 						<tbody class="inquiries-details">
 							<?php foreach ($orders as $key => $order): ?>
+								
 								<tr>
 									<td class="text-center"><?= $this->Html->link('#'.__($order->id), ['action' => 'order_summary', $order->id]) ?></td>
-									<td><?= h($order->firstname) ?> <?= h($order->lastname) ?></td>
+									<td><?= h($order->fullname) ?> </td>
 									
 									<td><?= h($order->email) ?></td>
 									<td class="text-center"><?= number_format($order->total, DECIMALS); ?> 원</td>

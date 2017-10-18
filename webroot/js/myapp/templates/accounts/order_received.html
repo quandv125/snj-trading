@@ -5,8 +5,7 @@
 				<div id="post-6" class="post-6 page type-page status-publish hentry">
 					<header class="entry-header">
 						<h1 class="entry-title">Order received</h1>
-					</header>
-					<!-- .entry-header -->
+					</header><!-- .entry-header -->
 					<div class="entry-content">
 						<div class="woocommerce">
 							<div class="woocommerce-order table-responsive">
@@ -26,10 +25,6 @@
 											<td class="width55">Total:</td>
 											<td>{{info.order_products | sumOftotal: "quantity" | currency : " " : 0}} 원</td> 
 										</tr>
-										<tr>
-											<td class="width55">Payment method:</td>
-											<td>Check payments</td>
-										</tr>
 									</tbody>
 								</table>
 								<div class="clearfix"></div>
@@ -37,16 +32,8 @@
 								<table class="table table-striped">
 									<tbody>
 										<tr>
-											<td class="width55">Firstname:</td>
-											<td>{{info.firstname}}</td>
-										</tr>
-										<tr>
-											<td class="width55">Lastname:</td>
-											<td>{{info.lastname}}</td>
-										</tr>
-										<tr>
-											<td class="width55">Company:</td>
-											<td>{{info.company}}</td>
+											<td class="width55">Fullname:</td>
+											<td>{{info.fullname}}</td>
 										</tr>
 										<tr>
 											<td class="width55">Email:</td>
@@ -57,12 +44,16 @@
 											<td>{{info.phone}}</td>
 										</tr>
 										<tr>
+											<td class="width55">Company:</td>
+											<td>{{info.company}}</td>
+										</tr>
+										<tr>
 											<td class="width55">Address:</td>
 											<td>{{info.address}}</td>
 										</tr>
 										<tr>
 											<td class="width55">Postcode/zip:</td>
-											<td>{{info.postcode_zip}}</td>
+											<td>{{info.postcode}}</td>
 										</tr>
 										<tr>
 											<td class="width55">Town/City:</td>
@@ -86,7 +77,6 @@
 										<tbody>
 											<tr ng-repeat="(k, c) in info.order_products" class="order_item">
 												<td class="product-name">
-													
 													{{c.product_name | cut:true:67:' ...'}}
 													<strong class="product-quantity">× {{c.quantity}}</strong>
 												</td>
@@ -123,12 +113,9 @@
 								</section>
 							</div>
 						</div>
-					</div>
-					<!-- .entry-content -->
-				</div>
-				<!-- #post-## -->
-			</main>
-			<!-- #main -->
+					</div> 	<!-- .entry-content -->
+				</div><!-- #post-## -->
+			</main><!-- #main -->
 		</div>
 	</div>
 </div>

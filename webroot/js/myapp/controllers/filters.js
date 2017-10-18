@@ -37,6 +37,15 @@
 		};
 	});
 
+	App.filter('billing_address', function() {
+		return function(value){
+			if (value == false) {
+				var html = 'disabled';
+			}
+			return html;
+		};
+	});
+
 	App.filter('classlabel', function() {
 		return function(value){
 			if (value == true) {

@@ -1,3 +1,4 @@
+
 <div class="panel panel-white" id="order_id" order_id="<?php echo $order->id; ?>">
 	<div class="panel-body">
 		<div role="tabpanel">
@@ -47,21 +48,23 @@
 						<div class="col-sm-4">
 							<legend>Billing Address</legend>
 							<div class="overview-content-address">
-								<p><?= h($order->firstname.' '.$order->lastname) ?></p>
+								<p><?= h($order->fullname) ?></p>
 								<p><?= h($order->company) ?></p>
 								<p><?= h($order->email) ?></p>
 								<p><?= h($order->phone) ?></p>
 								<p><?= h($order->address) ?>, <?= h($order->city) ?>, <?= h($order->country) ?></p>
-								<p><?= h($order->postcode_zip) ?></p>
+								<p><?= h($order->postcode) ?></p>
 							</div>
 						</div>
 						<div class="col-sm-4">
 							<legend>Delivery Address</legend>
 							<div class="overview-content-address">
+								<?php if ($order->delivery_address): ?>
 								<p><?= h(json_decode($order->delivery_address)->name) ?></p>
 								<p><?= h(json_decode($order->delivery_address)->email) ?></p>
 								<p><?= h(json_decode($order->delivery_address)->phone) ?></p>
 								<p><?= h(json_decode($order->delivery_address)->address) ?>, <?= h(json_decode($order->delivery_address)->city) ?>, <?= h(json_decode($order->delivery_address)->country) ?></p>
+								<?php endif ?>
 							</div>
 						</div>
 						<div class="clearfix"></div>
@@ -152,13 +155,12 @@
 						<legend>Billing Address</legend>
 						<div class="order_status billing-address">
 							<?php
-								echo $this->Form->input('firstname');
-								echo $this->Form->input('lastname');
+								echo $this->Form->input('fullname');
 								echo $this->Form->input('company');
 								echo $this->Form->input('address');
 								echo $this->Form->input('city');
 								echo $this->Form->input('country');
-								echo $this->Form->input('postcode_zip');
+								echo $this->Form->input('postcode');
 							?>
 						 </div>
 						 <div class="contact-details">Contact Details</div>
@@ -178,35 +180,47 @@
 					<div class="panel-heading-order ">
 						<h4 class="order_summary"><?= __('Delivery Address'); ?></h4>
 					</div>
-					<!-- <?php //echo $this->Form->create(NULL, ['horizontal' => true]) ; ?> -->
-					<!-- <fieldset class="col-sm-8">
+				
+					<?php echo $this->Form->create(NULL, ['url'=>['controller'=>'orders','action'=>'change_delivery',$order->id],'horizontal' => true]) ; ?>
+					<fieldset class="col-sm-8">
 						<legend>Delivery Address</legend>
 						<div class="order_status delivery-address">
+							<?php if ($order->delivery_address): ?>
 							<?php
-								//echo $this->Form->input('firstname');
-								//echo $this->Form->input('lastname');
-								//echo $this->Form->input('company');
-								//echo $this->Form->input('address');
-								//echo $this->Form->input('city');
-								//echo $this->Form->input('country');
-								//echo $this->Form->input('postcode_zip');
+								echo $this->Form->input('name',['value' => json_decode($order->delivery_address)->name]);
+								echo $this->Form->input('email',['value' => json_decode($order->delivery_address)->email]);
+								echo $this->Form->input('phone',['value' => json_decode($order->delivery_address)->phone]);
+								echo $this->Form->input('address',['value' => json_decode($order->delivery_address)->address]);
+								echo $this->Form->input('city',['value' => json_decode($order->delivery_address)->city]);
+								echo $this->Form->input('country',['value' => json_decode($order->delivery_address)->country]);
 							?>
+							<?php else: ?>
+								<?php
+									echo $this->Form->input('name');
+									echo $this->Form->input('email');
+									echo $this->Form->input('phone');
+									echo $this->Form->input('address');
+									echo $this->Form->input('city');
+									echo $this->Form->input('country');
+								?>
+							<?php endif ?>
 						</div>
-						<div class="contact-details">Shipping Information</div>
+						<!-- <div class="contact-details">Shipping Information</div>
 						<div class="order_status delivery-address">
 							<?php
-								//echo $this->Form->input('dispatch_date',['class'=>'date-picker', 'value' => date('Y-m-d') ]);
-								//echo $this->Form->input('shipping_method');
-								//echo $this->Form->input('shipping_product');
-								//echo $this->Form->input('weight',['label'=>'Weight (Kg)']);
+								// echo $this->Form->input('dispatch_date',['class'=>'date-picker', 'value' => date('Y-m-d') ]);
+								// echo $this->Form->input('shipping_method');
+								// echo $this->Form->input('shipping_product');
+								// echo $this->Form->input('weight',['label'=>'Weight (Kg)']);
 							?>
-						</div>
-					</fieldset> -->
-					<!-- <div class="divider15 clearfix"></div>
-					<?php //echo $this->Form->button('Submit',array('class' => 'btn btn-success margin-left15')); ?>
-					<?php //echo $this->Form->end(); ?> -->
+						</div> -->
+					</fieldset>
+					<div class="divider15 clearfix"></div>
+					<?php echo $this->Form->button('Submit',array('class' => 'btn btn-success margin-left15')); ?>
+					<?php echo $this->Form->end(); ?>
 					<div class="divider5 clearfix"></div>
 				</div>
+
 				<div role="tabpanel" class="tab-pane fade" id="tab4">
 					<div class="panel-heading-order">
 						<button class="btn btn-info float-right" data-toggle='modal' data-target='#Modal'><i class="fa fa-plus"></i></button>
@@ -317,14 +331,14 @@
 					<div class="col-sm-8">
 						<div class="contact-details">Add Note</div>
 						<div class="order_status delivery-address">
-							<?php echo $this->Form->create(NULL, ['horizontal' => true]) ; ?>
+							<?php echo $this->Form->create(NULL,['url'=>['controller'=>'orders','action'=>'edit',$order->id],'horizontal'=>true]);?>
 							<p>Internal Note Content</p>
 							<p>	(These notes are not visible to the customer)</p>
-							<?php echo $this->Form->textarea('note'); ?>
+							<?php echo $this->Form->textarea('note',['value' => $order->note]); ?>
 							<br>
 							<p>Public Note Content</p>
 							<p>	(These notes CAN be viewed by the customer and will be appended to order notifications.)</p>
-							<?php echo $this->Form->textarea('note'); ?>
+							<?php echo $this->Form->textarea('note_public',['value' => $order->note_public]); ?>
 							<br>
 							<?= $this->Form->button('Submit',array('class' => 'btn btn-success margin-left5')); ?>
 							<?php echo $this->Form->end(); ?>

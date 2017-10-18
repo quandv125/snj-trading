@@ -357,10 +357,12 @@ class UsersController extends AppController
 	public function register() {
 		$this->viewBuilder()->layout('product');
 		if ($this->request->is('post')) {
+
 			$captcha = $this->request->session()->read('captcha');
 			if (strtolower($captcha) != strtolower($this->request->data['captcha'])) {
 			   $this->Flash->error1(__('captcha incorrect!'));
 			} else {
+				$this->request->data['billing_address'] = json_encode($this->request->data);
 				$exists = $this->Users->exists(['email' => $this->request->data['email']]);
 				if ($exists == false &&  $this->request->data['password'] ==  $this->request->data['confirm_password']) {
 					$code = substr( md5(time()), 0, 30);

@@ -7,16 +7,11 @@
 
 					<form name="info" class="form-my-account" ng-submit="order_info()" novalidate>
 						<h2 class="title">Billing Details</h2>
-						<div class="form-group" ng-class="{ 'has-error' : info.firstname.$invalid && !info.firstname.$pristine }">
-							<input type="text" name="firstname" class="form-control" ng-model="user.firstname" placeholder="First Name*" required>
-							<p ng-show="info.firstname.$invalid && !info.firstname.$pristine" class="help-block">Your firstname is required.</p>
+						<div class="form-group" ng-class="{ 'has-error' : info.fullname.$invalid && !info.fullname.$pristine }">
+							<input type="text" name="fullname" class="form-control" ng-model="user.fullname" placeholder="Fullname*" required>
+							<p ng-show="info.fullname.$invalid && !info.fullname.$pristine" class="help-block">Your Fullname is required.</p>
 						</div>
-
-						<div class="form-group" ng-class="{ 'has-error' : info.lastname.$invalid && !info.lastname.$pristine }">
-							<input type="text" name="lastname" class="form-control" ng-model="user.lastname" placeholder="Last name *" required>
-							<p ng-show="info.lastname.$invalid && !info.lastname.$pristine" class="help-block">Your lastname is required.</p>
-						</div>
-
+					
 						<div class="form-group" ng-class="{ 'has-error' : info.company.$invalid && !info.company.$pristine }">
 							<input type="text" name="company" class="form-control" ng-model="user.company" placeholder="Company Name*" required>
 							<p ng-show="info.company.$invalid && !info.company.$pristine" class="help-block">Your company is required.</p>
@@ -30,20 +25,20 @@
 						<div class="form-group" ng-class="{ 'has-error' : info.phone.$invalid && !info.phone.$pristine }">
 							<input type="text" name="phone" class="form-control" ng-model="user.phone" placeholder="Phone Number" ng-minlength="10" ng-maxlength="12" ng-pattern="/^\d+$/" required>
 							<p ng-show="info.phone.$error.pattern" class="help-block">Not a valid number!</p>
-							<p ng-show="info.phone.$error.minlength" class="help-block">Phone Number is too short.</p>
-							<p ng-show="info.phone.$error.maxlength" class="help-block">Phone Number is too long.</p>
+							<p ng-show="info.phone.$error.minlength" class="help-block">Phone Number must be at least 10 characters.</p>
+							<p ng-show="info.phone.$error.maxlength" class="help-block">Phone Number must be longer than 12 characers.</p>
 						</div>
 						
 						<div class="form-group" ng-class="{ 'has-error' : info.address.$invalid && !info.address.$pristine }">
 							<input type="text" name="address" class="form-control" ng-model="user.address" placeholder="Address*" required>
 							<p ng-show="info.address.$invalid && !info.address.$pristine" class="help-block">Your address is required.</p>
 						</div>
-						 <div class="form-group" ng-class="{ 'has-error' : info.postcode.$invalid && !info.postcode.$pristine }">
-							<input type="text" name="postcode" class="form-control" ng-model="user.postcode_zip" placeholder="Postcode/Zip*" required>
-							<p ng-show="info.postcode.$invalid && !info.postcode.$pristine" class="help-block">Your Postcode/Zip is required.</p>
+						<div class="form-group" ng-class="{ 'has-error' : info.postcode.$invalid && !info.postcode.$pristine }">
+							<input type="text" name="postcode" class="form-control" ng-model="user.postcode" placeholder="Postcode*" required>
+							<p ng-show="info.postcode.$invalid && !info.postcode.$pristine" class="help-block">Your Postcode is required.</p>
 						</div>
 						
-						<script src="http://geodata.solutions/includes/countrystatecity.js"></script>
+						<script src="../js/libs/countrystatecity.js"></script>
 						<div class="form-group">
 							<select name="country" ng-model="user.country" class="countries" id="countryId">
 								<option value="">Select Country*</option>
@@ -59,7 +54,7 @@
 							<option value="">Select City</option>
 						</select>
 						
-						<button type="submit" class="btn btn-primary" ng-disabled="info.$invalid">Submit</button>
+						<button type="submit" class="btn btn-primary"  ng-disabled="info.$invalid">Submit</button>
 					</form>
 			
 				</div>

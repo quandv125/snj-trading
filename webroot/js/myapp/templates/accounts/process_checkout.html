@@ -33,6 +33,7 @@
 							<input type="text" name="address" class="form-control" ng-model="user.address" placeholder="Address*" required>
 							<p ng-show="info.address.$invalid && !info.address.$pristine" class="help-block">Your address is required.</p>
 						</div>
+
 						<div class="form-group" ng-class="{ 'has-error' : info.postcode.$invalid && !info.postcode.$pristine }">
 							<input type="text" name="postcode" class="form-control" ng-model="user.postcode" placeholder="Postcode*" required>
 							<p ng-show="info.postcode.$invalid && !info.postcode.$pristine" class="help-block">Your Postcode is required.</p>
@@ -50,6 +51,7 @@
 								 <option value="">Select State*</option>
 							</select>
 						</div>
+						
 						<select name="city" class="cities" id="cityId" style="display: none;">
 							<option value="">Select City</option>
 						</select>

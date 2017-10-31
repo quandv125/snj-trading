@@ -1,124 +1,160 @@
 
+<div class="tab-container" ng-controller="EditProductAct">
+	<form method="post" ng-submit="frm_edit_products()" name="projectFormEdit" enctype='multipart/form-data' accept-charset="utf-8" role="form">
 
-<div class="tab-container">
-	<form method="post" name="projectForm" enctype='multipart/form-data' accept-charset="utf-8" id="FrmEditProducts" role="form">
-		<md-tabs md-selected="selectedTab" style=" min-height:790px !important;">
-			<md-tab label="Infomations">
+		<md-tabs md-selected="selectedTab" >
+
+			<md-tab label="General">
 				<div class="tab-content">
-					<input type="text" name="id" class="form-control hidden" value="{{products.id}}" id="id">
-					<div id="info" class="col s12">
-						<div class="col-lg-6 col-md-6">
+					<div class="col-lg-6 col-md-6">
+					
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Code</label>
+							<input md-maxlength="30" name="sku" required id="sku" ng-model="products.sku" />
+							<div ng-messages="projectFormEdit.sku.$error">
+								<div ng-message="required">This is required.</div>
+								<div ng-message="md-maxlength">The name must be less than 30 characters long.</div>
+							</div>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Products Name</label>
+							<input md-maxlength="255" required name="product_name" id="product_name"  ng-model="products.product_name" />
+							<div ng-messages="projectFormEdit.product_name.$error">
+								<div ng-message="required">This is required.</div>
+								<div ng-message="md-maxlength">The name must be less than 255 characters long.</div>
+							</div>
+						</md-input-container>
+							
+						<md-input-container class="md-block">
+							<label>Retail Price (원)</label>
+							<input required type="text" currency-mask step="any" min="1" name="retail_price" id="retail-price" ng-model="products.retail_price"/>
+
+							<div ng-messages="projectFormEdit.retail_price.$error" multiple md-auto-hide="false">
+								<div ng-message="required"> This is required. </div>
+								<div ng-message="min">You should charge at least $1 an hour. This job is a big deal... if you mess up,
+									everyone dies!
+								</div>
+							</div>
+						</md-input-container>
+
+						<md-input-container class="md-block">
+							<label>Supplier's Price (원)</label>
+							<input type="text" currency-mask step="any" min="1" name="supply_price" id="retail-price" ng-model="products.supply_price"/>
+
+							<div ng-messages="projectFormEdit.supply_price.$error" multiple md-auto-hide="false">
+								
+								<div ng-message="min">You should charge at least $1 an hour. This job is a big deal... if you mess up,
+									everyone dies!
+								</div>
+							</div>
+						</md-input-container>
+
+						<md-input-container class="md-block">
+							<label>VAT (10%)</label>
+							<input  type="checkbox" name="vat" ng-model="products.vat"/>
+						</md-input-container>
+
+					</div>
+					<div class="col-lg-6 col-md-6">
 						
-							<md-input-container class="md-block" flex-gt-sm>
-								<label>Part No/ Code</label>
-								<input md-maxlength="30" name="sku" id="sku" ng-model="products.sku" />
-							</md-input-container>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label class="control-label" for="quantity">Quantity</label>
+							<input type="text" name="quantity" id="quantity" ng-model="products.quantity" />
+							
+						</md-input-container>
 
-							<md-input-container class="md-block" flex-gt-sm>
-								<label>Products Name</label>
-								<input required md-maxlength="255" name="product_name" id="product_name" ng-model="products.product_name" />
-								<div ng-messages="projectForm.product_name.$error">
-									<div ng-message="required">This is required.</div>
-									<div ng-message="md-maxlength">The name must be less than 255 characters long.</div>
-								</div>
-							</md-input-container>
+						<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
+						<md-input-container flex="50">
+							<md-select name="type" ng-model="products.conditions" aria-label="Select" required>
 								
-							<md-input-container class="md-block">
-								<label>Price (USD)</label>
-								<input required type="text" currency-mask step="any" min="1" name="retail_price" id="retail-price" ng-model="products.retail_price"/>
-								<div ng-messages="projectForm.retail_price.$error" multiple md-auto-hide="false">
-									<div ng-message="required"> This is required. </div>
-									<div ng-message="min">
-										You should charge at least $1 an hour. This job is a big deal... if you mess up, everyone dies!
-									</div>
-								</div>
-							</md-input-container>
+								<md-option ng-repeat="(k, c) in conditions" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+							</md-select>
+						</md-input-container>
 
-							<!-- <div class="form-group text">
-								<label class="control-label" for="sku">Part No/ Code</label>
-								<input type="text" name="sku" class="form-control sku" value="{{products.sku}}" placeholder="Part No/ Code" id="sku">
-							</div>
-							<div class="form-group text">
-								<label class="control-label" for="product-name">Products Name</label>
-								<input type="text" name="product_name" class="form-control product_name" value="{{products.product_name}}" placeholder="Products Name" id="product-name">
-							</div>
-							<div class="form-group text">
-								<label class="control-label" for="retail-price">Retail Price</label>
-								<input type="text" name="retail_price" class="form-control auto retail_price" value="{{products.retail_price | currency: ''}}" placeholder="USD" id="retail-price">
-							</div> -->
-							<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
-							<md-input-container class="md-block" flex-gt-sm>
-								<md-select name="category_id" ng-model="products.category.id" aria-label="Select" required>
-									<md-option ng-repeat="(k, c) in categories" value="{{c.key}}">{{c.value}}</md-option>
-								</md-select>
-							</md-input-container>
+					
 
-							<!-- <div class="form-group">
-								<label for="exampleInputGroups">Categories</label>
-								<select class="form-control" id="categories" ng-model="products.category.id" ng-options="c.key as c.value for c in categories" required></select>
-							</div> -->
-						</div>
-						<div class="col-lg-6 col-md-6">
-							</md-input-container>
-								<md-input-container class="md-block" flex-gt-sm>
-								<label class="control-label" for="serial-no">Serial No</label>
-								<input md-maxlength="30"  name="serial_no" id="serial-no" ng-model="products.serial_no" />
-							</md-input-container>
-							</md-input-container>
-								<md-input-container class="md-block" flex-gt-sm>
-								<label class="control-label" for="type-model">Type Model</label>
-								<input md-maxlength="30" name="type_model" id="type-model" ng-model="products.type_model" />
+						<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
+						<md-input-container flex="50">
+							<md-select name="type" ng-model="products.categorie_id" aria-label="Select" required>
 								
-							</md-input-container>
-							</md-input-container>
-								<md-input-container class="md-block" flex-gt-sm>
-								<label class="control-label" for="quantity">Quantity</label>
-								<input required name="quantity" id="quantity" ng-model="products.quantity" />
-								<div ng-messages="projectForm.quantity.$error">
-									<div ng-message="required">This is required.</div>
-									
-								</div>
-							</md-input-container>
-							</md-input-container>
-								<md-input-container class="md-block" flex-gt-sm>
-								<label class="control-label" for="origin">Origin</label>
-								<input md-maxlength="30" name="origin" id="origin" ng-model="products.origin" />
-								
-							</md-input-container>
-							</md-input-container>
-								<md-input-container class="md-block" flex-gt-sm>
-								<label class="control-label" for="unit">Unit</label>
-								<input md-maxlength="30" required name="unit" id="unit" ng-model="products.unit" />
-								<div ng-messages="projectForm.unit.$error">
-									<div ng-message="required">This is required.</div>
-									<div ng-message="md-maxlength">The Unit must be less than 30 characters long.</div>
-								</div>
-							</md-input-container>
-							<!-- <div class="form-group text">
-								<label class="control-label" for="serial-no">Serial No</label>
-								<input type="text" name="serial_no" class="form-control serial_no" value="{{products.serial_no}}" placeholder="Serial No" id="serial-no">
-							</div>
-							<div class="form-group text">
-								<label class="control-label" for="type-model">Type Model</label>
-								<input type="text" name="type_model" class="form-control type_model" value="{{products.type_model}}" placeholder="Type Model" id="type-model">
-							</div>  
-							<div class="form-group text">
-								<label class="control-label" for="quantity">Quantity</label>
-								<input type="text" name="quantity" class="form-control auto quantity" value="{{products.quantity}}" placeholder="Quantity" id="quantity">
-							</div>
-							<div class="form-group text">
-								<label class="control-label" for="origin">Origin</label>
-								<input type="text" name="origin" class="form-control origin" value="{{products.origin}}" placeholder="Origin" id="origin">
-							</div>
-							<div class="form-group text">
-								<label class="control-label" for="unit">Unit</label>
-								<input type="text" name="unit" class="form-control unit" value="{{products.unit}}" placeholder="Unit" id="unit">
-							</div> -->
+								<md-option ng-repeat="(k, c) in categories" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+							</md-select>
+						</md-input-container>
+
+						<label for="exampleManufacturer" style="color: #bdbdbd;">Manufacturer</label>
+						<md-input-container flex="50">
+							<md-select name="type" ng-model="products.supplier_id" aria-label="Select" required>
+								<md-option ng-repeat="(k, c) in suppliers" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+							</md-select>
+						</md-input-container>
+					
+					</div>
+					
+					
+				</div>
+			</md-tab>
+			<md-tab label="Infomations">
+				<div class="">
+					<div class="col-lg-4 col-md-4">
+						<div class="form-group text">
+							<label class="control-label" for="release-date">Release Date</label>
+							<input type="text" name="release_date" class="form-control date-picker" placeholder="Release date" ng-model="products.release_date" value="2017-10-19">
 						</div>
-						<div class="col-md-12 col-lg-12">
-							<label class="control-label" for="Short_Description">Remark</label>
-							<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
+
+						<div class="form-group text">
+							<label class="control-label" for="size">Size</label>
+							<input type="text" name="size" class="form-control size" placeholder="Size" ng-model="products.size">
 						</div>
+						<div class="form-group text">
+							<label class="control-label" for="brand">Brand</label>
+							<input type="text" name="brand" class="form-control brand" placeholder="Brand" ng-model="products.brand">
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="form-group text">
+							<label class="control-label" for="weight">Weight</label>
+							<input type="text" name="weight" class="form-control Weight" placeholder="Weight" ng-model="products.weight">
+						</div>
+						<div class="form-group text">
+							<label class="control-label" for="color">Color</label>
+							<input type="text" name="color" class="form-control Color" placeholder="Color" ng-model="products.color">
+						</div>
+						<div class="form-group text">
+							<label class="control-label" for="meterial">Meterial</label>
+							<input type="text" name="meterial" class="form-control Material" placeholder="Material" ng-model="products.meterial">
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-4">
+						<div class="form-group text">
+							<label class="control-label" for="manufacturer">Manufacturer</label>
+							<input type="text" name="manufacturer" class="form-control Manufacturer" placeholder="Manufacturer" ng-model="products.manufacturer">
+						</div>
+						<div class="form-group text">
+							<label class="control-label" for="composition">Composition</label>
+							<input type="text" name="composition" class="form-control Composition" placeholder="Composition" ng-model="products.composition">
+						</div>
+						<div class="form-group text">
+							<label class="control-label" for="origin">Origin</label>
+							<input type="text" name="origin" class="form-control origin" placeholder="Origin" ng-model="products.origin">
+						</div>
+					</div>
+
+					<div class="form-group text">
+						<input type="text" name="properties" class="form-control hidden" id="result">
+					</div>
+					<div class="clearfix divider10"></div>
+					<div class="menthod-product col-lg-8 col-sm-8">
+						<div class="mth-prd">
+							<span class="col-md-5"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>
+							<span class="col-md-6"><input type="text" placeholder="Value" name="" class="value123 form-control"></span>
+							<span class="col-md-1 remove-jtfd"><span class="btn btn-success"><i class="fa fa-trash-o"></i></span></span>
+						</div>
+					</div>
+					<div class="col-lg-2 col-sm-2">
+						<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" ng-click="add_mtd()">
+							<i class="fa fa-plus"></i>
+						</span>
 					</div>
 				</div>
 			</md-tab>
@@ -128,41 +164,62 @@
 						<label class="control-label" for="Description">Descriptions</label>
 						<textarea ckeditor="options" id="description" ng-model="products.description"></textarea>
 						<br/>
+						<label class="control-label" for="Short Description">Short Descriptions</label>
+						<textarea ckeditor="options" id="short_description" ng-model="products.short_description"></textarea>
+					</div>
+				</div>
+			</md-tab>
+			<md-tab label="Options">
+				
+				<h4 class="order_summary">Products Options</h4>
+					<div class="table-responsive col-lg-12">
+						<div class="table-responsive col-lg-12">
+							<table class="table table-striped ">
+								<thead>
+									<tr>
+										<th class="width15">Status</th>
+										<th>Name</th>
+										<th class="width20">Default</th>
+										<th class="width1">&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody id="tbody-options">
+								</tbody>
+									<tfoot>
+										<tr>
+											<td><span>Add New</span></td>
+											<td>
+												<select id="slt-options" class="form-control">
+													<option value="NULL">-- Please Select --</option>
+
+													<optgroup ng-repeat="(k, option) in options" label="{{option.name}}">
+															<option ng-repeat="(k, children) in option.children"  parent_id="{{children.parent_id}}" parent_name="{{option.name}}" value="{{children.id}}">{{children.name}}</option>
+													</optgroup>
+													
+												</select>
+											</td>
+											<td colspan="2"><span class="btn btn-info" ng-click="btn_options()"><i class="fa fa-plus"></i></span></td>
+										</tr>
+									</tfoot>
+							</table>
+							<div class="form-group text">
+								<input type="text" name="product_options" class="form-control hidden" id="ipt_options"></div>
+							</div>
+						
+					</div>
+			</md-tab>
+			<md-tab label="Images">
+				<div class="tab-content">
+					<div class="col-md-12 col-lg-12">
+						
 						<div class="input-group">
-							<input type="file" name='files[]' multiple="multiple" />  
-							
-							<output id="listProductFile" class="float-left" ng-repeat="i in images">
-								<img ng-src="/img/{{i.thumbnail}}" alt="" width="100">		
-							</output>
+							<input type="file" id="product-files" file-input="files" multiple="multiple" />
 						</div>
 					</div>
 				</div>
 			</md-tab>
-			
 		</md-tabs>
-		<button class="btn btn-success" id="sb-add-products" type="submit">Submit</button>
+		<button class="btn btn-success" type="submit">Submit</button>
 	</form>
 </div>
 
-
- <!-- 
-	<div class="tab-container">
-		<form method="post" enctype='multipart/form-data' accept-charset="utf-8" id="FrmEditProducts" role="form">
-			<md-tabs md-selected="selectedTab">
-			
-				<md-tab label="Infomations">
-					<div class="tab-content">
-						Tab One content
-					</div>
-				</md-tab>
-				<md-tab label="Descriptions">
-					<div class="tab-content">
-						Tab Two content
-					</div>
-				</md-tab>
-				
-			</md-tabs>
-			<button class="btn btn-success" id="sb-add-products" type="submit">Submit</button>
-		</form>
-	</div> -->
-<script src="/js/myapp/snj_custom.js"></script>

@@ -644,6 +644,9 @@ i.menu-icon {
 	background-color: #337ab7;
 	outline: 0;
 }
+li.dropdown-toggle{
+	height: 60px;
+}
 .dropdown-toggle{
 	color: #999;
 	display: block;
@@ -848,9 +851,10 @@ h4.order_summary{
     background-color: #E7E7E7;
     border-right: 1px solid #fff;
 }
-.table-responsive tbody {
+/*.table-responsive tbody {
 	border-bottom: 1px solid #e4e4e4;
-}
-.table-striped{
+}*/
+/*.table-striped{
 	font-size: 12px;
 }
+*/

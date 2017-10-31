@@ -25,7 +25,7 @@ function animated(){
 }
 //Document Ready
 jQuery(document).ready(function(){
-
+	
 	if ($("#search").length) {
 		var placeholderText = ["What are you looking for?", "Spare Part, Store ...","Main Air Compressor, Pumps, Deek Store ...", "Eletrical Store, Engine Store ...", "Computer & Phone, Laptop, Electronics ..."];
 		$('#search').placeholderTypewriter({text: placeholderText});

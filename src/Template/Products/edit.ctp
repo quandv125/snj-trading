@@ -27,10 +27,10 @@
 								<legend><?= __('Products'); ?></legend>
 								<div class="divider10"></div>
 								<div class="col-lg-6 col-md-6 ">
-									<?= $this->Form->input('sku',['value' => $product->sku,'placeholder' => 'Product Code','label' => 'Product Code']); ?>
+									<?= $this->Form->input('sku',['value'=>$product->sku,'placeholder'=>'Product Code','label'=>'Product Code']); ?>
 									<?= $this->Form->input('product_name',['value' => $product->product_name,'placeholder' => 'Name']); ?>
-									<?= $this->Form->input('retail_price',['placeholder'=>'USD','value'=>number_format($product->retail_price,0,'.',',')]); ?>
-									<?= $this->Form->input('supply_price',['label' => "Supplier's Price",'placeholder' => 'USD','value '=>number_format($product->supply_price, 2, '.', ',')]); ?>
+									<?= $this->Form->input('retail_price',['placeholder'=>'원','value'=>number_format($product->retail_price,0,'.',',')]); ?>
+									<?= $this->Form->input('supply_price',['label' => "Supplier's Price",'placeholder' => '원','value '=>number_format($product->supply_price, 2, '.', ',')]); ?>
 									<?= $this->Form->input('vat',['label'=>'VAT(10%)','type'=>'checkbox','checked'=>$product->vat?"checked":""])?>
 								</div>
 								<div class="col-lg-6 col-md-6 ">

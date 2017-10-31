@@ -1,4 +1,3 @@
-
 <div id="header">
 	<div class="header3 header5">
 		<div class="container">
@@ -9,12 +8,12 @@
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-12 col-xs-12" style="margin-top: 10px;">
-					<div class="col-md-9 col-sm-12 col-xs-12">
+					<div class="col-md-9 col-sm-8 col-xs-12">
 						<div class="smart-search search-form3 search-form5">
 							<?php echo $this->element('font-end/smart-search',['class' => 'smart-search']) ?>
 						</div>
 					</div>
-					<div class="col-md-3 col-sm-12 col-xs-12">
+					<div class="col-md-3 col-sm-4 col-xs-12">
 						<div class="wrap-cart-info3">
 							<ul class="top-info top-info3">
 								<li class="top-account has-child">
@@ -27,7 +26,7 @@
 												echo $this->Html->image('flags/kr.png',['class'=>"position-left"]);
 											} else {
 												echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
-											} 
+											}
 										?>
 									</a>
 									<ul class="sub-menu-top">
@@ -85,7 +84,6 @@
 	</div>
 	<!-- End Main Nav -->
 </div>
-<br/>
 <!-- SlideShow -->
 <!-- <div class="banner-slider banner-slider21 slider-home3 bg-slider">
 	<div class="wrap-item" data-pagination="true" data-autoplay="true" data-transition="fade" data-navigation="true" data-itemscustom="[[0,1]]">
@@ -130,3 +128,4 @@
 		</div>
 	</div>
 </div> -->
+<br/>

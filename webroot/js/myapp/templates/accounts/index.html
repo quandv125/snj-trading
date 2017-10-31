@@ -1,7 +1,9 @@
 
 <div class="row">
+	<h4 class="margin-left15">Account Dashboard</h4>
 	<div class="col-md-4 col-sm-4 col-xs-12">
-		<div class="wapper-content">
+
+		<div class="wapper-content" style=" min-height: 406px;">
 			<h5> <a ng-href="#/personalinfomation">Personal Information <i class="fa fa-edit float-right"> Edit</i></a></h5>
 			<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
 				<tbody>
@@ -43,55 +45,6 @@
 		</div>
 		
 	</div>
-	<!-- <div class="col-md-4 col-sm-4 col-xs-12">
-		<div class="wapper-content">
-			<h5> <a href="#/delivery_address">Default Delivery Address <i class="fa fa-edit float-right"> Edit</i></a></h5>
-			
-		<br/>
-			<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
-					<tbody>
-						<tr>
-							<td><label class="box-title">Firstname</label> </td>
-							<td>{{delivery_address.firstname}}</td>
-						</tr>
-						
-						<tr>
-							<td><label class="box-title">Lastname</label> </td>
-							<td>{{delivery_address.lastname}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">EMAIL</label> </td>
-							<td>{{delivery_address.email}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">Phone</label> </td>
-							<td>{{delivery_address.phone}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">Company</label> </td>
-							<td>{{delivery_address.company}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">ADDRESS</label> </td>
-							<td>{{delivery_address.address}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">city</label></td>
-							<td>{{delivery_address.city}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">COUNTRY</label> </td>
-							<td>{{delivery_address.country}}</td>
-						</tr>
-						<tr>
-							<td><label class="box-title">POSTCODE</label>  </td>
-							<td>{{delivery_address.postcode}}</td>
-						</tr>
-						
-					</tbody>
-			</table>
-		</div>
-	</div> -->
 	<div class="col-md-4 col-sm-4 col-xs-12">
 		<div class="wapper-content">
 			<h5> <a href="#/billing_address">Default Billing Address <i class="fa fa-edit float-right"> Edit</i></a></h5>
@@ -138,4 +91,80 @@
 				</table>
 		</div>
 	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12">
+		<div class="wapper-content">
+			<h5> <a href="#/delivery_address">Default Shipping Address <i class="fa fa-edit float-right"> Edit</i></a></h5>
+	<!-- 	<table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+				<tbody>
+					<tr>
+						<td><label class="box-title">Firstname</label> </td>
+						<td>{{delivery_address.firstname}}</td>
+					</tr>
+					
+					<tr>
+						<td><label class="box-title">Lastname</label> </td>
+						<td>{{delivery_address.lastname}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">EMAIL</label> </td>
+						<td>{{delivery_address.email}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">Phone</label> </td>
+						<td>{{delivery_address.phone}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">Company</label> </td>
+						<td>{{delivery_address.company}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">ADDRESS</label> </td>
+						<td>{{delivery_address.address}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">city</label></td>
+						<td>{{delivery_address.city}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">COUNTRY</label> </td>
+						<td>{{delivery_address.country}}</td>
+					</tr>
+					<tr>
+						<td><label class="box-title">POSTCODE</label>  </td>
+						<td>{{delivery_address.postcode}}</td>
+					</tr>
+					
+				</tbody>
+		</table> -->
+		</div>
+	</div>
+	<div class="col-md-12">
+		<h4 class="recent-orders__title">Recent Orders</h4>
+
+		<div class="table-responsive">
+		<table class="table table-striped" id="order-builder" >
+			<thead>
+				<tr>
+					<th class="text-center">Order #</th>
+					<th class="text-center">Placed on</th>
+					<th class="text-center">Total</th>
+					<th class="text-center">Status</th>
+					<th class="text-center"></th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr>
+						<td class="text-center">387422767</td>
+						<td class="text-center">04/08/2017</td>
+						<td class="text-center">259.000 VND</td>
+						<td class="text-center">Closed</td>
+						<td class="text-center">
+							<a class="item-button" href="#">Track my shipment</a>
+						</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+
+		
 </div>

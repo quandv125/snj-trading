@@ -117,7 +117,6 @@ class UsersController extends AppController
 				$this->request->data['email'] = $this->request->data['username'];
 				unset($this->request->data['username']);
 			}
-
 			$user = $this->Auth->identify();
 			if ($user && $user['actived'] == true) {
 				$this->Auth->setUser($user);

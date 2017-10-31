@@ -5,17 +5,17 @@
 				<form class="form-horizontal"  ng-submit="submitSearchForm()">
 					<div class="form-group form-group-sm">
 						<div class="col-sm-2">
-							<label class=" control-label" for="sm">Part No</label>
-							<input class="form-control" placeholder="Part No/Code" type="text" ng-model="formdata.sku">
+							<label class=" control-label" for="sm">Code</label>
+							<input class="form-control" placeholder="Code" type="text" ng-model="formdata.sku">
 						</div>
 						<div class="col-sm-3">
 							<label class="control-label" for="sm">Product Name</label>
 							<input class="form-control" placeholder="Product Name" type="text" ng-model="formdata.product_name">
 						</div>
-						<div class="col-sm-3">
+						<!-- <div class="col-sm-3">
 							<label class="control-label" for="sm">Origin</label>
 							<input class="form-control" placeholder="Origin" type="text" ng-model="formdata.origin">
-						</div>
+						</div> -->
 						<div class="col-sm-3">
 							<label class="control-label" for="sm">Actied</label>
 							<select ng-model="formdata.actived" class="form-control">
@@ -25,7 +25,7 @@
 							</select>
 						</div>
 					</div>
-					<label class="" for="sm">Create</label>
+					<label for="sm">Create</label>
 					<div class="form-group form-group-sm">
 						<!-- <div class="col-sm-2">
 							<input type="date" class="form-control" id="firstDay" ng-model="firstDay"/>
@@ -47,40 +47,36 @@
 	</div> 
 	<div class="row">
 		<div class="col-md-12 col-sm-12 col-xs-12">
-			<div class="wapper-content">
+			<div class="wapper-content1">
 				<div class="main-content-shop ">
-					<a ng-href="#/addproducts" class="float-right btn btn-warning"><i class="fa fa-plus" style="color:#fff;"></i></a>
+					<h4 class="margin-left15 float-left">Products</h4>
+					<a ng-href="#/addproducts" class="float-right margin-right10 btn btn-warning"><i class="fa fa-plus" style="color:#fff;"></i></a>
 					<br/><br/>
-					<table id="datatable" class="table display" cellspacing="0" width="100%">
+					<!-- <table id="datatable" class="table display" cellspacing="0" width="100%"> -->
+					<table class="table" id="order-builder" >
 						<thead>
 							<tr>
-								<th class="text-center1">Part No/ Code</th>
-								<th class="text-center1">Product Name</th>
-								<th class="text-center1">Origin</th>
-								<th class="text-center1">Serial No</th>
-								<th class="text-center1">Model</th>
-								<th class="text-center1" style=" width: 80px;">Actived</th>
-								<th class="text-center1" style=" width: 85px;">Created</th>
-								<th></th>
+								<th class="text-center">Code</th>
+								<th class="text-center">Product Name</th>
+								<th class="text-center">Price</th>
+								<th class="text-center" style=" width: 80px;">Actived</th>
+								<th class="text-center" style=" width: 85px;">Created</th>
 								<th></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="(key, product) in products" id="fx_product_{{product.id}}" class="products_{{product.id}}">
-								<td class="text-center1"><a href="#/productdetails/{{product.id}}">{{product.sku}}</a></td>
-								<td class="text-center1">{{product.product_name | cut:true:50:' ...'}}</td>
-								<td class="text-center1">{{product.origin}}</td>
-								<td class="text-center1">{{product.serial_no}}</td>
-								<td class="text-center1">{{product.type_model}}</td>
-								<td class="text-center1">
+								<td class="text-center">{{product.sku}}</td>
+								<td>{{product.product_name | cut:true:50:' ...'}}</td>
+								<td class="text-center">{{product.retail_price}}</td>
+							
+								<td class="text-center">
 									<span class="label label-{{product.actived | classlabel }}">{{product.actived | label }}</span>
-
 								</td>
-								<td class="text-center1">{{ product.created | date : "dd.MM.y" }}</td>
-								<td class="text-center1">
-									<a btn href="#/productdetails/{{product.id}}"><i class="fa fa-pencil"></i></a>  
-								</td>
-								<td>
+								<td class="text-center">{{ product.created | date : "dd.MM.y" }}</td>
+								<td class="text-center" colspan="2">
+									<a class="margin-right10" href="#/productdetails/{{product.id}}"><i class="fa fa-pencil"></i></a>  
+								
 									<span class="md-primary navButton cursor-point" confirmed-click="delete_product(product.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
 								</td>
 							</tr>

@@ -74,9 +74,7 @@ class ProductsController extends AppController
 	{
 		$Image   = TableRegistry::get('Images');
 		$Product = TableRegistry::get('Products');
-	
 		if ($this->request->is('post')) {
-			
 			if (!empty($this->request->data['product_options'])) {
 				$product_options = array();
 				foreach (json_decode($this->request->data['product_options']) as $key => $options) {
@@ -127,16 +125,75 @@ class ProductsController extends AppController
 		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
 	}
 
+	public function customeradd(){
+		if ($this->request->is('post')) {
+			$Product = TableRegistry::get('Products');
+			if (!empty($this->request->data['options'])) {
+				$option = array();
+				foreach ($this->request->data['options'] as $key => $options) {
+					$option[$options['parent_name']][$options['child_id']] = $options['child_name'];
+				}
+				$this->request->data['products']['p_option'] = json_encode($option);
+			} 
+			$this->request->data['products']['properties'] = json_encode($this->request->data['more']);
+			$this->request->data['products']['user_id'] = $this->Auth->user('id');
+			if (empty($this->request->data['products']['sku'])) {
+				$this->request->data['products']['sku'] = $this->Products->MaxSKU();
+			}
+			$this->request->data['products']['actived'] = 1;
+			$product = $this->Products->newEntity();
+			$product = $this->Products->patchEntity($product, $this->request->data['products']);
+			if ($Product->save($product)) {
+				echo json_encode(['status' => true, 'message' => 'The product has been saved.', 'id' => $product->id]);
+			} else {
+				echo json_encode(['status' => false, 'message' => 'The product has been saved.']);
+			}
+			exit();
+		}
+	
+	}
+
+	public function addproductpics(){
+		if ($this->request->is('post')) {
+			$Image   = TableRegistry::get('Images');
+			if (isset($this->request->data['files']) && !empty($this->request->data['files'])) {
+					for($i=0; $i<count($this->request->data['files']); $i++){
+						$path = rand(1,100000).'_'.$this->request->data['files'][$i]['name'];
+						if(move_uploaded_file($this->request->data['files'][$i]['tmp_name'], PRODUCTS.$path)){
+							$thumbnail = $this->Custom->CreateNameThumb($this->request->data['files'][$i]['name']);
+							$this->Custom->generate_thumbnail(PRODUCTS.$path, $thumbnail, SIZE180);
+							$images = $Image->newEntity();
+							$images->product_id	 =  $this->request->data['id'];
+							$images->path		 = 'products/'.$path;
+							$images->thumbnail	 = 'thumbnails/'.$thumbnail;
+							$Image->save($images);
+							if ($i == 0) {
+								$pic = 'products/'.$path;
+								$thumb = 'thumbnails/'.$thumbnail;
+							}
+						}
+					}
+					$Product->updateAll(['picture' => $pic, 'thumbnail' => $thumb], ['id' => $this->request->data['id']]);
+				}
+			exit();
+		}
+	}
+
 	public function addproducts(){
-		$Categorie  = TableRegistry::get('Categories');
-		$arr = [2,3];
-		$list  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])
-		->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ])->toarray();
+		$list  = $this->Products->Categories->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->toarray();
 		$categories = array();
 		foreach ($list as $k => $c) {
 			$categories[] = array('key' => $k, 'value' => $c);
 		}
-		echo json_encode($categories);
+		$conditions = array(['key' => 0, 'value' => 'New'],['key' => 1, 'value' => 'Used'],['key' => 3, 'value' => 'Refurbished']);
+		$supplier  = $this->Products->Suppliers->find('list', ['limit' => 200]);
+		$suppliers = array();
+		foreach ($supplier as $k => $c) {
+			$suppliers[] = array('key' => $k, 'value' => $c);
+		}
+		$option  = TableRegistry::get('options');
+		$options = $option->find('threaded')->select(['id','name','parent_id'])->toarray(); 
+		echo json_encode(['categories' => $categories, 'suppliers' => $suppliers, 'options' => $options,'conditions'=>$conditions]);
 		exit();
 	}
 
@@ -307,18 +364,10 @@ class ProductsController extends AppController
 
 	public function fxEditProducts(){	
 
-		$Categorie  = TableRegistry::get('Categories');
-		$arr = [2,3];
-
-		$list  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])
-		->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ])->toarray();
-		$categories = array();
-		foreach ($list as $k => $c) {
-			$categories[] = array('key' => $k, 'value' => $c);
-		}
+		
 
 		$products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null);  
-		$data = array('categories' => $categories, 'products' => $products);
+		$data = array('products' => $products);
 		echo json_encode($data);
 		
 		exit();
@@ -779,7 +828,7 @@ class ProductsController extends AppController
 			$this->render('/Element/Products/detail_products');
 		} 
 	}
-   	public function FilterPrice()  {
+	public function FilterPrice()  {
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
 			pr($this->request->data);exit();
@@ -794,7 +843,7 @@ class ProductsController extends AppController
 				// $firstDay = $arr[2].'-'.$arr[0].'-'.$arr[1];
 				$firstDay = $this->request->session()->read('firstDay');
 			} else {
-				$firstDay = date('Y-m-01');
+				$firstDay = date('Y-01-01');
 			}
 			
 			$products = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])

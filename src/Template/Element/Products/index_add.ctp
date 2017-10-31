@@ -37,8 +37,8 @@
 								<div class="col-lg-6 col-md-6">
 									<?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Product Code','label' => 'Product Code']); ?>
 									<?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Products Name']); ?>
-									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => 'USD']); ?>
-									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD']); ?>
+									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => '원']); ?>
+									<?= $this->Form->input('supply_price',['class'=>'currency','label'=>"Supplier's Price",'placeholder' => '원']); ?>
 									<?= $this->Form->input('vat',['type'=>'checkbox','label' => 'VAT (10%)']); ?>
 								</div>
 								<div class="col-lg-6 col-md-6">
@@ -159,10 +159,10 @@
 	function myFunctionName() {
 		var options = new Array();
 		jQuery.each(jQuery('.tr_options_1'), function(i, v) {
-			var parent_id = jQuery(this).attr('parant_id');
+			var parent_id 	= jQuery(this).attr('parant_id');
 			var parent_name = jQuery(this).attr('parant_name');
-			var child_id = jQuery(this).attr('chil_id');
-			var child_name = jQuery(this).attr('chil_name');
+			var child_id 	= jQuery(this).attr('chil_id');
+			var child_name 	= jQuery(this).attr('chil_name');
 			options.push({'parent_id':parent_id,'parent_name':parent_name,'child_id':child_id, 'child_name': child_name });
 		});
 		jQuery("#ipt_options").val(JSON.stringify(options));
@@ -195,7 +195,7 @@
 			</div>
 		</div>
 	</div>
-</div>  <!-- End -->
+</div><!-- End -->
 
 <div class="modal fade" id="myModalOutlet" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	<div class="modal-dialog modal-sm modal-center">

@@ -37,7 +37,7 @@
 										'id' => 'PSupplier_Id',
 										'append' => [
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalES'.$product->id])]]); ?>
-									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => 'USD','value'=>number_format($product->retail_price, 2, '.', ',')]); ?>
+									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => '원','value'=>number_format($product->retail_price, 2, '.', ',')]); ?>
 									
 									<?= $this->Form->input('vat',['label'=>'VAT(10%)','type'=>'checkbox','checked'=>$product->vat?"checked":""])?>
 								</div>
@@ -53,7 +53,7 @@
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalEC'.$product->id])]
 										]);
 									?>
-									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => 'USD','value'=>number_format($product->supply_price, 2, '.', ',')]); ?>
+									<?= $this->Form->input('supply_price',['class' => 'currency','label' => "Supplier's Price",'placeholder' => '원','value'=>number_format($product->supply_price, 2, '.', ',')]); ?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tabs2<?= $product->id;?>">

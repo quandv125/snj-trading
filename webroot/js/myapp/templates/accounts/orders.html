@@ -1,33 +1,34 @@
 
 <div class="row">
+	<h4 class="margin-left15">Orders</h4>
 	<div class="col-md-12 col-sm-12 col-xs-12">
-		<div class="wapper-content">
+		<div class="wapper-content1">
 			<div class="main-content-shop ">
-				
-				<table id="datatable2" class="table table-sm"" cellspacing="0" width="100%">
+				<table class="table" id="order-builder" >
+				<!-- <table id="datatable2" class="table table-sm"" cellspacing="0" width="100%"> -->
 					<thead class="table-success">
 						<tr>
-							<th>#</th>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Phone</th>
-							<th>Address</th>
-							<th>Total</th>
-							<th>Created</th>
-							<th></th>
+							<th class="text-center">Order #</th>
+							<th class="text-center">Name</th>
+							<th class="text-center">Email</th>
+							<th class="text-center">Phone</th>
+							<th class="text-center">Status</th>
+							<th class="text-center">Total</th>
+							<th class="text-center">Placed on</th>
+							<th class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="order in orders" id="orders_obj_{{order.id}}">
-							<td><a href="#/order_received/{{order.id}}">#{{order.id}}</a></td>
+							<td class="text-center"><a href="#/order_received/{{order.id}}">#{{order.id}}</a></td>
 							
-							<td>{{order.fullname}}</td>
-							<td>{{order.email}}</td>
-							<td>{{order.phone}}</td>
-							<td>{{order.address}}</td>
-							<td>{{order.Total | currency : "$ " : 2}}</td>
-							<td>{{order.created | date : "dd.MM.y" }}</td>
-							<td>
+							<td class="text-center">{{order.fullname}}</td>
+							<td class="text-center">{{order.email}}</td>
+							<td class="text-center">{{order.phone}}</td>
+							<td class="text-center">{{order.status}}</td>
+							<td class="text-center">{{order.Total | currency : "$ " : 2}}</td>
+							<td class="text-center">{{order.created | date : "dd.MM.y" }}</td>
+							<td class="text-center">
 								<span class="md-primary navButton cursor-point" confirmed-click="delete_order(order.id)" ng-confirm-click="Would you want to delete?"> <i class="fa fa-trash"></i></span>
 							</td>
 						</tr>

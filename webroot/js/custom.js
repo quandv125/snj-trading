@@ -1,10 +1,10 @@
 jQuery( document ).ready(function() {
-	jQuery('.summernote').summernote({
-		height: 100,
-		minHeight: null,
-		maxHeight: null, 
-		focus: true
-	});
+	// jQuery('.summernote').summernote({
+	// 	height: 100,
+	// 	minHeight: null,
+	// 	maxHeight: null, 
+	// 	focus: true
+	// });
 
 	jQuery('.currency').blur(function(){
 			this.value = parseFloat(this.value.replace(/,/g, ""))
@@ -22,7 +22,7 @@ jQuery( document ).ready(function() {
 	//** Plugin Datepicker **//
 	jQuery('.onlydate').datetimepicker({ format: 'yyyy-MM-DD' });
 	jQuery('.onlydate2').datetimepicker({ format: 'YYYY-MM-DD' });
-	jQuery('.datetimepicker').datetimepicker({ format: 'YYYY-MM-DD HH:mm' });
+	jQuery('.datetimepicker').datetimepicker({ format: 'YYYY-MM-DD' });
 	jQuery('.date-picker').datepicker({ orientation: "top auto", autoclose: true, format: 'yyyy-mm-dd', });
 	jQuery(function() {
 		var start = moment().subtract(29, 'days');
@@ -2872,7 +2872,7 @@ jQuery( document ).ready(function() {
 	}
 	jQuery("#add-mtd-prd").click(function(){
 		console.log('ok');
-		jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>	<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span></div><br/>');
+		jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-6"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>	<span class="col-md-5"><input type="text" placeholder="Value" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><i class="fa fa-trash-o margin-top10"></i></span></div><br/><br/>');
 		jQuery('.remove-jtfd').click(function(){
 			jQuery(this).parent().remove();
 		});
@@ -2989,7 +2989,7 @@ jQuery( document ).ready(function() {
 		});
 	});
 
-	jQuery(".btn-options").click(function(){	
+	jQuery(".btn-options").click(function(){
 		var txt = $("#slt-options option:selected").text();
 		var id = $("#slt-options option:selected").val();
 		var parent_id = $("#slt-options option:selected").attr('parent_id');

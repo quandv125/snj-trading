@@ -650,7 +650,7 @@ li.dropdown-toggle{
 .dropdown-toggle{
 	color: #999;
 	display: block;
-	height: 34px;
+	/*height: 34px;*/
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }

@@ -421,8 +421,7 @@ a:focus {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	height: 40px;
-	left: 3px;
-	/*z-index: 1;*/
+	left: 0px;
 	position: absolute;
 	top: 0;
 	width: 125px;
@@ -5525,7 +5524,7 @@ font-size: 15px;
 	display: block;
 }
 .wrap-cart-info3 {
-	float: right;
+	/*float: right;*/
 	margin-top: 4px;
 	margin-left: 5px;
 }
@@ -15428,7 +15427,8 @@ ul.menu-account-info li{
 	min-height: 20px;
 	background-color: #fff;
 	position: absolute;
-	left: 127px;
+	left: 124px;
+	
 	top: 38.5px;
 	border: 1px solid #e4e4e4;
 	z-index: 9;
@@ -15918,4 +15918,7 @@ div.show-image:hover span.delete-wishlist {
 }
 md-tabs:not(.md-no-tab-content):not([md-dynamic-height]) {
     min-height: 100px;
+}
+.top-info3 .top-account{
+	color:#fff;
 }

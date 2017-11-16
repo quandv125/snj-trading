@@ -1,4 +1,4 @@
-
+	
 <div class="tab-container" ng-controller="EditProductAct">
 	<form method="post" ng-submit="frm_edit_products()" name="projectFormEdit" enctype='multipart/form-data' accept-charset="utf-8" role="form">
 
@@ -7,10 +7,11 @@
 			<md-tab label="General">
 				<div class="tab-content">
 					<div class="col-lg-6 col-md-6">
-					
+						
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Code</label>
-							<input md-maxlength="30" name="sku" required id="sku" ng-model="products.sku" />
+							
+							<input type="text" md-maxlength="30" required ng-model="products.sku" name="products.sku" >
 							<div ng-messages="projectFormEdit.sku.$error">
 								<div ng-message="required">This is required.</div>
 								<div ng-message="md-maxlength">The name must be less than 30 characters long.</div>
@@ -19,7 +20,7 @@
 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Products Name</label>
-							<input md-maxlength="255" required name="product_name" id="product_name"  ng-model="products.product_name" />
+							<input md-maxlength="255" type="text" required name="products.product_name" ng-model="products.product_name" />
 							<div ng-messages="projectFormEdit.product_name.$error">
 								<div ng-message="required">This is required.</div>
 								<div ng-message="md-maxlength">The name must be less than 255 characters long.</div>
@@ -28,7 +29,7 @@
 							
 						<md-input-container class="md-block">
 							<label>Retail Price (원)</label>
-							<input required type="text" currency-mask step="any" min="1" name="retail_price" id="retail-price" ng-model="products.retail_price"/>
+							<input required type="text" currency-mask step="any" min="1" name="products.retail_price" ng-model="products.retail_price"/>
 
 							<div ng-messages="projectFormEdit.retail_price.$error" multiple md-auto-hide="false">
 								<div ng-message="required"> This is required. </div>
@@ -40,7 +41,7 @@
 
 						<md-input-container class="md-block">
 							<label>Supplier's Price (원)</label>
-							<input type="text" currency-mask step="any" min="1" name="supply_price" id="retail-price" ng-model="products.supply_price"/>
+							<input type="text" currency-mask step="any" min="1" name="products.supply_price" ng-model="products.supply_price"/>
 
 							<div ng-messages="projectFormEdit.supply_price.$error" multiple md-auto-hide="false">
 								
@@ -52,7 +53,7 @@
 
 						<md-input-container class="md-block">
 							<label>VAT (10%)</label>
-							<input  type="checkbox" name="vat" ng-model="products.vat"/>
+							<input  type="checkbox" name="products.vat" ng-model="products.vat"/>
 						</md-input-container>
 
 					</div>
@@ -60,32 +61,30 @@
 						
 						<md-input-container class="md-block" flex-gt-sm>
 							<label class="control-label" for="quantity">Quantity</label>
-							<input type="text" name="quantity" id="quantity" ng-model="products.quantity" />
+							<input type="text" name="products.quantity" ng-model="products.quantity" />
 							
 						</md-input-container>
-
-						<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
+						
+						<label for="exampleCategories" style="color: #bdbdbd;">Conditions</label>
 						<md-input-container flex="50">
-							<md-select name="type" ng-model="products.conditions" aria-label="Select" required>
+							<md-select name="type" ng-model="products.conditions" aria-label="Select" >
 								
-								<md-option ng-repeat="(k, c) in conditions" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+								<md-option ng-repeat="(k, c) in conditions" value="{{c.key}}" >{{c.value}}</md-option>
 							</md-select>
 						</md-input-container>
 
-					
-
 						<label for="exampleCategories" style="color: #bdbdbd;">Categories</label>
 						<md-input-container flex="50">
-							<md-select name="type" ng-model="products.categorie_id" aria-label="Select" required>
+							<md-select name="type" ng-model="cat_id" aria-label="Select" >
 								
-								<md-option ng-repeat="(k, c) in categories" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+								<md-option ng-repeat="(k, c) in categories" value="{{c.key}}" >{{c.value}}</md-option>
 							</md-select>
 						</md-input-container>
 
 						<label for="exampleManufacturer" style="color: #bdbdbd;">Manufacturer</label>
 						<md-input-container flex="50">
-							<md-select name="type" ng-model="products.supplier_id" aria-label="Select" required>
-								<md-option ng-repeat="(k, c) in suppliers" value="{{c.key}}" ng-selected="k == 0">{{c.value}}</md-option>
+							<md-select name="type" ng-model="products.supplier_id" aria-label="Select" >
+								<md-option ng-repeat="(k, c) in suppliers" value="{{c.key}}" >{{c.value}}</md-option>
 							</md-select>
 						</md-input-container>
 					
@@ -99,44 +98,44 @@
 					<div class="col-lg-4 col-md-4">
 						<div class="form-group text">
 							<label class="control-label" for="release-date">Release Date</label>
-							<input type="text" name="release_date" class="form-control date-picker" placeholder="Release date" ng-model="products.release_date" value="2017-10-19">
+							<input type="text" name="products.release_date" class="form-control date-picker" placeholder="Release date" ng-model="products.release_date" value="2017-10-19">
 						</div>
 
 						<div class="form-group text">
 							<label class="control-label" for="size">Size</label>
-							<input type="text" name="size" class="form-control size" placeholder="Size" ng-model="products.size">
+							<input type="text" name="products.size" class="form-control" placeholder="Size" ng-model="products.size">
 						</div>
 						<div class="form-group text">
 							<label class="control-label" for="brand">Brand</label>
-							<input type="text" name="brand" class="form-control brand" placeholder="Brand" ng-model="products.brand">
+							<input type="text" name="products.brand" class="form-control" placeholder="Brand" ng-model="products.brand">
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4">
 						<div class="form-group text">
 							<label class="control-label" for="weight">Weight</label>
-							<input type="text" name="weight" class="form-control Weight" placeholder="Weight" ng-model="products.weight">
+							<input type="text" name="products.weight" class="form-control" placeholder="Weight" ng-model="products.weight">
 						</div>
 						<div class="form-group text">
 							<label class="control-label" for="color">Color</label>
-							<input type="text" name="color" class="form-control Color" placeholder="Color" ng-model="products.color">
+							<input type="text" name="products.color" class="form-control" placeholder="Color" ng-model="products.color">
 						</div>
 						<div class="form-group text">
 							<label class="control-label" for="meterial">Meterial</label>
-							<input type="text" name="meterial" class="form-control Material" placeholder="Material" ng-model="products.meterial">
+							<input type="text" name="products.meterial" class="form-control" placeholder="Material" ng-model="products.meterial">
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4">
 						<div class="form-group text">
 							<label class="control-label" for="manufacturer">Manufacturer</label>
-							<input type="text" name="manufacturer" class="form-control Manufacturer" placeholder="Manufacturer" ng-model="products.manufacturer">
+							<input type="text" name="products.manufacturer" class="form-control" placeholder="Manufacturer" ng-model="products.manufacturer">
 						</div>
 						<div class="form-group text">
 							<label class="control-label" for="composition">Composition</label>
-							<input type="text" name="composition" class="form-control Composition" placeholder="Composition" ng-model="products.composition">
+							<input type="text" name="products.composition" class="form-control" placeholder="Composition" ng-model="products.composition">
 						</div>
 						<div class="form-group text">
 							<label class="control-label" for="origin">Origin</label>
-							<input type="text" name="origin" class="form-control origin" placeholder="Origin" ng-model="products.origin">
+							<input type="text" name="products.origin" class="form-control" placeholder="Origin" ng-model="products.origin">
 						</div>
 					</div>
 
@@ -145,10 +144,11 @@
 					</div>
 					<div class="clearfix divider10"></div>
 					<div class="menthod-product col-lg-8 col-sm-8">
-						<div class="mth-prd">
-							<span class="col-md-5"><input type="text" placeholder="Label" name="" class="label123 form-control"></span>
-							<span class="col-md-6"><input type="text" placeholder="Value" name="" class="value123 form-control"></span>
-							<span class="col-md-1 remove-jtfd"><span class="btn btn-success"><i class="fa fa-trash-o"></i></span></span>
+						
+						<div class="mth-prd" ng-repeat="(k, propertie) in properties">
+							<span class="col-md-5"><input type="text" placeholder="Label" ng-model="propertie.label" class="label123 form-control"></span>
+							<span class="col-md-6"><input type="text" placeholder="Value" ng-model="propertie.value" class="value123 form-control"></span>
+							<span class="col-md-1 remove-jtfd"><span class="btn"><i class="fa fa-trash-o"></i></span></span>
 						</div>
 					</div>
 					<div class="col-lg-2 col-sm-2">

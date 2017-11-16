@@ -87,10 +87,23 @@ class UsersTable extends Table
             ->allowEmpty('avatars');
 
         $validator
-            ->allowEmpty('thumbnail');
+            ->notEmpty('fullname')
+            ->add('fullname', [
+                'minLength' => [ // name of rule
+                    'rule' => ['minLength', 8], 
+                    'message' => 'notes must be at least 8 characters long.',
+                ],
+                'maxLength' => [ // name of rule
+                    'rule' => ['maxLength', 10], 
+                    'message' => 'notes must be at more 10 characters long.',
+                ]
+        ]);
 
         $validator
-            ->notEmpty('fullname');
+            ->allowEmpty('thumbnail');
+
+        // $validator
+        //     ->notEmpty('fullname');
 
         $validator
             ->email('email')

@@ -35,12 +35,12 @@
 		echo $this->Html->css('libs/query.mCustomScrollbar');
 		echo $this->Html->css('libs/settings');
 		echo $this->Html->css('assets/plugins/bootstrap-datepicker/css/daterangepicker');
-		echo $this->Html->css('assets/plugins/handsometable/handsontable.full.min');
+		// echo $this->Html->css('assets/plugins/handsometable/handsontable.full.min');
 		echo $this->Html->css('theme');
 		// echo $this->Html->css('libs/bootstrap-select');
 		echo $this->Html->css('libs/jquery.dataTables.min');
-		echo $this->Html->css('libs/kendo.default.min');
-		echo $this->Html->css('libs/kendo.common.min');
+		// echo $this->Html->css('libs/kendo.default.min');
+		// echo $this->Html->css('libs/kendo.common.min');
 		echo $this->Html->css('libs/angular-material.min');
 		echo $this->Html->css('responsive');
 	?>
@@ -66,13 +66,13 @@
 		// echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment-with-locales');
 		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/moment.min');
 		echo $this->Html->script('assets/plugins/bootstrap-datepicker/js/daterangepicker');
-		echo $this->Html->script('assets/plugins/handsometable/handsontable.full.min');
-		echo $this->Html->script('assets/plugins/livesearch/vendor/jquery.hideseek.min');
-		echo $this->Html->script('assets/plugins/livesearch/initializers');
+		// echo $this->Html->script('assets/plugins/handsometable/handsontable.full.min');
+		// echo $this->Html->script('assets/plugins/livesearch/vendor/jquery.hideseek.min');
+		// echo $this->Html->script('assets/plugins/livesearch/initializers');
 		// echo $this->Html->script('libs/bootstrap-select');
 		echo $this->Html->script('libs/bootstrapvalidator.min');
 		// echo $this->Html->script('libs/masonry.pkgd.min');
-		echo $this->Html->script('libs/jquery.dataTables');
+		// echo $this->Html->script('libs/jquery.dataTables');
 		echo $this->Html->script('libs/kendo.all.min');
 		if ($this->request->params['action'] != 'categories'){
 			echo $this->Html->script('libs/materialize');

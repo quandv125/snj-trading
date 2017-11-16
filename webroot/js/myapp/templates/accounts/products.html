@@ -12,11 +12,11 @@
 							<label class="control-label" for="sm">Product Name</label>
 							<input class="form-control" placeholder="Product Name" type="text" ng-model="formdata.product_name">
 						</div>
-						<!-- <div class="col-sm-3">
+						<!-- <div class="col-sm-2">
 							<label class="control-label" for="sm">Origin</label>
 							<input class="form-control" placeholder="Origin" type="text" ng-model="formdata.origin">
 						</div> -->
-						<div class="col-sm-3">
+						<div class="col-sm-2">
 							<label class="control-label" for="sm">Actied</label>
 							<select ng-model="formdata.actived" class="form-control">
 								<option selected value="">--Select an option--</option>
@@ -24,23 +24,19 @@
 								<option value="false">Deactived</option>
 							</select>
 						</div>
-					</div>
-					<label for="sm">Create</label>
-					<div class="form-group form-group-sm">
-						<!-- <div class="col-sm-2">
-							<input type="date" class="form-control" id="firstDay" ng-model="firstDay"/>
-						</div>
 						<div class="col-sm-2">
-							<input class="form-control" type="date" id="lastDay" ng-model="lastDay"/>
-						</div> -->
-						<div class="col-sm-3">
+							<label class="control-label" for="sm">From</label>
 							<input type="text" class="form-control" id="firstDay" ng-model="firstDay"> 
 						</div>
-						<div class="col-sm-3">
+						<div class="col-sm-2">
+							<label class="control-label" for="sm">To</label>
 							<input type="text" class="form-control" id="lastDay" ng-model="lastDay">
 						</div>
+						<button type="submit" ngClick="Submit" class="btn md-warning" style="margin-top: 25px;">Search</button>
 					</div>
-					<button type="submit" ngClick="Submit" class="btn md-warning">Search</button>
+					
+					
+					
 				</form>
 			</div>
 		</div>

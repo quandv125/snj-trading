@@ -363,12 +363,12 @@ class ProductsController extends AppController
 	}
 
 	public function fxEditProducts(){	
-
 		
-
-		$products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null);  
-		$data = array('products' => $products);
-		echo json_encode($data);
+		$products = $this->Products->find()->where(['id' => $this->request->data['id']])->first();
+		// $products   = $this->Products->OneProductsSearch(['Products.id'=>$this->request->data['id']], null, null);  
+		
+		// $data = array('products' => $products);
+		echo json_encode($products);
 		
 		exit();
 	}

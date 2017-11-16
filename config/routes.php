@@ -51,11 +51,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/', ['controller' => 'Pages', 'action' => 'index']);
     $routes->connect('/login', ['controller' => 'Users', 'action' => 'login']);
+    $routes->connect('/logout', ['controller' => 'Users', 'action' => 'logout']);
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     // $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+    Router::prefix('admin', function ($routes) {
+        $routes->fallbacks('InflectedRoute');
+    });
     /**
      * Connect catchall routes for all controllers.
      *

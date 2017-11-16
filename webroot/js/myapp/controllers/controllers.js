@@ -56,12 +56,14 @@
 			url: '/products/fx_edit_products',
 			data: {id: id}
 		}).then(function successCallback(response) {
-			
-			$scope.products	  = response.data.products;
-			
+			$scope.products	= response.data;
+			$scope.cat_id = $scope.products.categorie_id;
+			console.log($scope.products);
+			$scope.properties = jQuery.parseJSON($scope.products.properties);
 		}, function errorCallback(response) {
 			toastr.error("Error");
 		});
+	
 		$.post('/products/addproducts',  function(response){
 			$scope.conditions 	= response.conditions;
 			$scope.categories 	= response.categories;
@@ -77,8 +79,8 @@
 
 	// Products
 	App.controller('ProductsCtrl', function($scope, $routeParams, $http){
-		$('#firstDay').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true});
-		$('#lastDay').daterangepicker({ locale: { format: 'YYYY-MM-DD'  }, singleDatePicker: true });
+		$('#firstDay').daterangepicker({ locale: { format: 'YYYY-MM-DD' }, singleDatePicker: true});
+		$('#lastDay').daterangepicker({ locale: { format: 'YYYY-MM-DD' }, singleDatePicker: true });
 		$scope.delete_product = function (id){
 			//Delete Products
 			jQuery("#fx_product_"+id).remove();
@@ -113,10 +115,10 @@
 		jQuery('.remove-jtfd').click(function(){
 			jQuery(this).parent().remove();
 		});
-		$scope.btn_options = function(){
-			var txt = $("#slt-options option:selected").text();
-			var id = $("#slt-options option:selected").val();
-			var parent_id = $("#slt-options option:selected").attr('parent_id');
+		$scope.btn_options 	= function(){
+			var txt 		= $("#slt-options option:selected").text();
+			var id 			= $("#slt-options option:selected").val();
+			var parent_id 	= $("#slt-options option:selected").attr('parent_id');
 			var parent_name = $("#slt-options option:selected").attr('parent_name');
 			if (id != 'NULL') {
 				jQuery('#tbody-options').append('<tr><td><input type="checkbox"></td><td><span class="tr_options_1" parant_id="'+parent_id+'" parant_name="'+parent_name+'" chil_name="'+txt+'" chil_id="'+id+'"><b>'+parent_name+'</b>: '+txt+'</span></td><td>None</td><td><span class="trash-option"><i class="fa fa-trash"></i></span></td></tr>')
@@ -181,6 +183,46 @@
 	});
 
 	App.controller('EditProductAct', function($scope, $http, $location){
+		$scope.add_mtd = function() {
+			jQuery(".menthod-product").append('<div class="mth-prd"><span class="col-md-5"><input type="text" placeholder="Label" name="" class="label123 form-control"></span><span class="col-md-6"><input type="text" placeholder="Value" name="" class="value123 form-control"></span><span class="col-md-1 remove-jtfd"><span class="btn"><i class="fa fa-trash-o"></i></span></span></div>');
+			jQuery('.remove-jtfd').click(function(){
+				jQuery(this).parent().remove();
+			});
+		};
+		jQuery('.remove-jtfd').click(function(){
+			jQuery(this).parent().remove();
+		});
+		$scope.btn_options 	= function(){
+			var txt 		= $("#slt-options option:selected").text();
+			var id 			= $("#slt-options option:selected").val();
+			var parent_id 	= $("#slt-options option:selected").attr('parent_id');
+			var parent_name = $("#slt-options option:selected").attr('parent_name');
+			if (id != 'NULL') {
+				jQuery('#tbody-options').append('<tr><td><input type="checkbox"></td><td><span class="tr_options_1" parant_id="'+parent_id+'" parant_name="'+parent_name+'" chil_name="'+txt+'" chil_id="'+id+'"><b>'+parent_name+'</b>: '+txt+'</span></td><td>None</td><td><span class="trash-option"><i class="fa fa-trash"></i></span></td></tr>')
+			};
+			jQuery('.trash-option').click(function(){
+				jQuery(this).parent().parent().remove();
+			});
+		}
+		$scope.frm_edit_products = function(){
+			var more = new Array();
+			jQuery.each(jQuery('.mth-prd'), function(i, v) {
+				if (jQuery(this).find('.label123').val() != '') {
+					var label123 = jQuery(this).find('.label123').val();
+					var value123 = jQuery(this).find('.value123').val();
+					more.push({'label':label123,'value':value123});
+				}
+			});
+			var options = new Array();
+			jQuery.each(jQuery('.tr_options_1'), function(i, v) {
+				var parent_id 	= jQuery(this).attr('parant_id');
+				var parent_name = jQuery(this).attr('parant_name');
+				var child_id 	= jQuery(this).attr('chil_id');
+				var child_name 	= jQuery(this).attr('chil_name');
+				options.push({'parent_id':parent_id,'parent_name':parent_name,'child_id':child_id, 'child_name': child_name });
+			});
+			console.log(options);
+		}
 	});
 
 	// Search Products 

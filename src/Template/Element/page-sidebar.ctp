@@ -23,9 +23,6 @@
 			<li class="active"> 
 				<?= $this->Html->link('<span class="menu-icon glyphicon glyphicon-home"></span><p>'.__('Home').'</p>',array('controller'=>'pages','action'=>'display','home'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 			</li>
-		<!-- 	<li>
-				<?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
-			</li> -->
 			<li class="droplink">
 				<?= $this->Html->link('<i class="menu-icon fa fa-cubes"></i><p>'.__('Products').'</p>',array('controller'=>'products','action'=>'index'),array('escape' => false,'class'=>'waves-effect waves-button')) ?>
 				<ul class="sub-menu">

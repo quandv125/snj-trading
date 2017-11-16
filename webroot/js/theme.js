@@ -1242,6 +1242,11 @@ jQuery(document).ready(function(){
 	$('.title-category-dropdown').on('click',function(){
 		$(this).next().slideToggle();
 	});
+	// $('.title-category-dropdown').hover(function(event){
+	// 	event.preventDefault();
+	// 	event.stopPropagation();
+	// 	$(this).next().slideToggle();
+	// });
 	//Widget Shop
 	$('.widget.widget-vote a').on('click',function(event){
 		event.preventDefault();

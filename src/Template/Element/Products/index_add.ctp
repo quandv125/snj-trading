@@ -35,48 +35,48 @@
 						<div class="tab-content add-new-products">
 							<div role="tabpanel" class="tab-pane active fade in" id="tab1">
 								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('sku',['class'=>'sku','placeholder' => 'Product Code','label' => 'Product Code']); ?>
-									<?= $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Products Name']); ?>
-									<?= $this->Form->input('retail_price',['class' => 'currency','placeholder' => '원']); ?>
-									<?= $this->Form->input('supply_price',['class'=>'currency','label'=>"Supplier's Price",'placeholder' => '원']); ?>
-									<?= $this->Form->input('vat',['type'=>'checkbox','label' => 'VAT (10%)']); ?>
+									<?php echo $this->Form->input('sku',['class'=>'sku','placeholder' => 'Product Code','label' => 'Product Code']); ?>
+									<?php echo $this->Form->input('product_name',['class' => 'product_name','placeholder' => 'Products Name']); ?>
+									<?php echo $this->Form->input('retail_price',['class' => 'currency','placeholder' => '원']); ?>
+									<?php echo $this->Form->input('supply_price',['class'=>'currency','label'=>"Supplier's Price",'placeholder' => '원']); ?>
+									<?php echo $this->Form->input('vat',['type'=>'checkbox','label' => 'VAT (10%)']); ?>
 								</div>
 								<div class="col-lg-6 col-md-6">
-									<?= $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
-									<?= $this->Form->input('conditions',[ 'type' => 'select', 'options' => PRODUCT_CONDITION]); ?>
-									<?= $this->Form->input('categorie_id', ['label'=>'Categories', 
+									<?php echo $this->Form->input('quantity',['class'=>'auto quantity','placeholder' => 'Quantity']); ?>
+									<?php echo $this->Form->input('conditions',[ 'type' => 'select', 'options' => PRODUCT_CONDITION]); ?>
+									<?php echo $this->Form->input('categorie_id', ['label'=>'Categories', 
 										'class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true", 'id' => 'PCategorie_Id',
 										'append' => [
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModal2'])]
 									]);	?>
-									<?= $this->Form->input('supplier_id',['class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true",'label' => __('Manufacturer / Brand'),'id' => 'PSupplier_Id',
+									<?php echo $this->Form->input('supplier_id',['class' => 'categorie_id js-states selectpicker', "data-live-search"=>"true",'label' => __('Manufacturer / Brand'),'id' => 'PSupplier_Id',
 											'append' => [
 											$this->Html->tag('span', '<i class="fa fa-plus"></i>', ['class' => 'btn btn-success waves-effect waves-button waves-red', 'data-toggle' => 'modal', 'data-target' => '#myModalSupplier'])]
 									]); ?>
-									<?= $this->Form->input('actived',['type'=>'checkbox','label' => 'Active']); ?>
+									<?php echo $this->Form->input('actived',['type'=>'checkbox','label' => 'Active']); ?>
 								</div>
 							</div>
 							
 							<div role="tabpanel" class="tab-pane fade" id="tab2">
 								<div class="col-lg-4 col-md-4">
-									<?= $this->Form->input('release_date',['type'=>'text','placeholder' => 'Release date','class'=>'date-picker','value'=> date("Y-m-d") ]); ?>
-									<?= $this->Form->input('size',['class'=>'size','placeholder' => 'Size']); ?>
+									<?php echo $this->Form->input('release_date',['type'=>'text','placeholder' => 'Release date','class'=>'date-picker','value'=> date("Y-m-d") ]); ?>
+									<?php echo $this->Form->input('size',['class'=>'size','placeholder' => 'Size']); ?>
 									
-									<?= $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand']); ?>
+									<?php echo $this->Form->input('brand',['class'=>'brand','placeholder' => 'Brand']); ?>
 								</div>
 								<div class="col-lg-4 col-md-4">
-									<?= $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight']); ?>
-									<?= $this->Form->input('color',['class' => 'Color','placeholder' => 'Color']); ?>
-									<?= $this->Form->input('meterial',['class' => 'Material','placeholder' => 'Material']); ?>
+									<?php echo $this->Form->input('weight',['class' => 'Weight','placeholder' => 'Weight']); ?>
+									<?php echo $this->Form->input('color',['class' => 'Color','placeholder' => 'Color']); ?>
+									<?php echo $this->Form->input('meterial',['class'=>'Material','placeholder'=>'Material']); ?>
 									
 								</div>
 								<div class="col-lg-4 col-md-4">
-									<?= $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer']); ?>
-									<?= $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition']); ?>
-									<?= $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
+									<?php echo $this->Form->input('manufacturer',['class'=>'Manufacturer','placeholder'=>'Manufacturer']); ?>
+									<?php echo $this->Form->input('composition',['class' => 'Composition','placeholder' => 'Composition']); ?>
+									<?php echo $this->Form->input('origin',['class' => 'origin','placeholder' => 'Origin']); ?>
 								</div>
 								<div class="clearfix"></div>
-								<?= $this->Form->input('properties',['class' => 'hidden','label'=>false,'id'=>"result"]); ?>
+								<?php echo $this->Form->input('properties',['class' => 'hidden','label'=>false,'id'=>"result"]); ?>
 								
 								<span class="btn btn-success btn-trash-image waves-effect waves-button waves-red" id="add-mtd-prd"><i class="fa fa-plus"></i></span><div class="clearfix"></div><br>
 								<div class="menthod-product col-lg-10">
@@ -91,11 +91,11 @@
 							<div role="tabpanel" class="tab-pane fade" id="tab3">
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Short_Description">Short Description</label>
-									<?= $this->Form->textarea('short_description',['class'=>'ckeditor']);?>
+									<?php echo $this->Form->textarea('short_description',['class'=>'ckeditor']);?>
 								</div>
 								<div class="col-lg-12 col-md-6">
 									<label class="control-label" for="Description">Description</label>
-									<?= $this->Form->textarea('description',['class'=>'ckeditor']);?>
+									<?php echo $this->Form->textarea('description',['class'=>'ckeditor']);?>
 								</div>
 							</div>
 							<div role="tabpanel" class="tab-pane fade" id="tab5">
@@ -127,16 +127,18 @@
 														<?php endforeach ?>
 													</select>
 												</td>
-												<td colspan="2"><span class="btn btn-info btn-options"><i class="fa fa-plus"></i></span></td>
+												<td colspan="2">
+													<?php echo $this->Html->link('<i class="fa fa-plus"></i>',['controller' => 'Products', 'action' => 'options'],['escape'=>false,'class'=>'btn btn-info btn-options']) ?>
+												</td>
 											</tr>
 										</tfoot>
 									</table>
-									<?= $this->Form->input('product_options',['class'=>'hidden','label'=>false,'id'=>"ipt_options"]); ?>
+									<?php echo $this->Form->input('product_options',['class'=>'hidden','label'=>false,'id'=>"ipt_options"]); ?>
 								</div>
 							</div>
 							
 							<div role="tabpanel" class="tab-pane fade" id="tab4">
-								<?= $this->Form->input('files.',[ 'type'=>'file', 'id' => 'ProductFile', 'multiple',
+								<?php echo $this->Form->input('files.',[ 'type'=>'file', 'id' => 'ProductFile', 'multiple',
 									'append' => [
 										$this->Html->tag('span', '<i class="fa fa-trash"></i>', array('class' => 'btn btn-success btn-trash-image waves-effect waves-button waves-red'))]]); 
 								?>
@@ -147,8 +149,8 @@
 				</div>
 			</div> <!-- modal-body -->
 			<div class="modal-footer">
-				<?= $this->Form->button('Submit',array('class' => 'btn btn-success')); ?>
-				<!--  <?= $this->Html->tag('span','Reset', array('id' => 'ProductResetForm','class' => 'btn btn-success m-b-sm btn-addon waves-effect waves-button waves-red'));?> -->
+				<?php echo $this->Form->button('Submit',array('class' => 'btn btn-success')); ?>
+				<!--  <?php echo $this->Html->tag('span','Reset', array('id' => 'ProductResetForm','class' => 'btn btn-success m-b-sm btn-addon waves-effect waves-button waves-red'));?> -->
 				<?php echo $this->Form->end(); ?>
 			</div>
 
@@ -186,8 +188,8 @@
 				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Category") ?></h4>
 			</div>
 			<div class="modal-body">
-				<?= $this->Form->input('name',['id' => 'category-name']);?> 
-				<?= $this->Form->input('parent_id',['id' =>'category-parent','options'=>$categories,'empty' => '-- No parent --']);?>
+				<?php echo $this->Form->input('name',['id' => 'category-name']);?> 
+				<?php echo $this->Form->input('parent_id',['id' =>'category-parent','options'=>$categories,'empty' => '-- No parent --']);?>
 			</div>
 			
 			<div class="modal-footer">
@@ -205,9 +207,9 @@
 				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Outlet") ?></h4>
 			</div>
 			<div class="modal-body">
-				<?= $this->Form->input('name*',['id' => 'outlet-name']);?> 
-				<?= $this->Form->input('tel',['id' => 'outlet-tel']);?> 
-				<?= $this->Form->input('address',['id' => 'outlet-address']);?> 
+				<?php echo $this->Form->input('name*',['id' => 'outlet-name']);?> 
+				<?php echo $this->Form->input('tel',['id' => 'outlet-tel']);?> 
+				<?php echo $this->Form->input('address',['id' => 'outlet-address']);?> 
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-success float-right" id="btn-add-outlet">Submit</button>
@@ -224,8 +226,8 @@
 				<h4 class="modal-title" id="myModalLabel"><?php echo __("Add Manufacturer / Brand") ?></h4>
 			</div>
 			<div class="modal-body">
-				<?= $this->Form->input('code',['id' => 'supplier-code']);?> 
-				<?= $this->Form->input('name',['id' => 'supplier-name']);?> 
+				<?php echo $this->Form->input('code',['id' => 'supplier-code']);?> 
+				<?php echo $this->Form->input('name',['id' => 'supplier-name']);?> 
 			</div>
 			<div class="modal-footer">
 				<button class="btn btn-success float-right" id="btn-add-supplier">Submit</button>

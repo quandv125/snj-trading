@@ -8,7 +8,7 @@
         </div>
         <div class="logo-box">
             
-            <?php echo $this->Html->link('<span>S&J</span>',['controller'=>'Pages','action'=>'index'],['escape'=>false, 'class' => 'logo-text']) ?>
+            <?php echo $this->Html->link('<span>S&J</span>',['prefix'=>false,'controller'=>'Pages','action'=>'index'],['escape'=>false, 'class' => 'logo-text']) ?>
         </div><!-- Logo Box -->
         <div class="search-button">
             <a href="javascript:void(0);" class="waves-effect waves-button waves-classic show-search"><i class="fa fa-search"></i></a>

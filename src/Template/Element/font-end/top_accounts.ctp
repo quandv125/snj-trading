@@ -1,18 +1,13 @@
 <?php if (isset($user_info) && !empty($user_info)):?>
-	<?php  echo $this->Html->link('<i class="fa fa-user"></i> '.$this->MyHtml->_Cutstring($user_info['username'], $max = 13, $num = 10), ['controller' => 'pages', 'action' => 'accounts'],['escape' =>false]); ?>
+	<?php echo '<i class="fa fa-user"></i> '.$this->MyHtml->_Cutstring($user_info['username'], $max = 13, $num = 10); ?>
 	<ul class="sub-menu-top">
 		<li> 
 			<?php echo $this->Html->link('<i class="fa fa-user"></i> '.__('Account Info'), ['controller'=>'Pages','action' => 'accounts'],['escape' => false]) ?>
 		</li>
-	<!-- 	<li>
-			<?php //echo $this->Html->link('<i class="fa fa-file-text-o"></i> '.__('Inquiry'),['controller'=>'Inquiries','action'=>'index'],['escape' =>false]) ?>
-		</li>
-		<li>
-			<?php //echo $this->Html->link('<i class="fa fa-heart-o"></i> '.__('Wishlists'),['controller'=>'Pages','action'=>'wishlists'],['escape' =>false]) ?>
-		</li> -->
+	
 		<?php if ($user_info['group_id'] == ADMIN): ?>
 			<li>
-				<?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['controller'=>'Products','action'=>'index'],['escape' =>false]) ?>
+				<?php echo $this->Html->link('<i class="fa fa-home"></i> '.__('Admin'),['prefix'=>'admin','controller'=>'Products','action'=>'index'],['escape' =>false]) ?>
 			</li>
 		<?php endif ?>
 		<li><?php echo $this->Html->link('<i class="fa fa-unlock-alt"></i> '.__('Logout'),['controller'=>'users','action'=>'logout'],['escape' =>false]) ?>

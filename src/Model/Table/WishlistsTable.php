@@ -59,16 +59,19 @@ use Cake\Validation\Validator;
 	public function validationDefault(Validator $validator)
 	{
 		$validator->integer('id')->allowEmpty('id', 'create');
-		// $validator->allowEmpty('note');
-		$validator
-			// ->requirePresence('note') 
-			->notEmpty('note')
-			->add('note', [
-				'length' => [
-				'rule' => ['minLength', 8],
-				'message' => 'notes must be at least 8 characters long.',
-			]
-		]);
+		
+		// $validator
+		// 	->notEmpty('note')
+		// 	->add('note', [
+		// 		'minLength' => [ // name of rule
+		// 			'rule' => ['minLength', 8], 
+		// 			'message' => 'notes must be at least 8 characters long.',
+		// 		],
+		// 		'maxLength' => [ // name of rule
+		// 			'rule' => ['maxLength', 10], 
+		// 			'message' => 'notes must be at more 10 characters long.',
+		// 		]
+		// ]);
 		return $validator;
 	}
 

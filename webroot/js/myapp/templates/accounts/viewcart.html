@@ -8,17 +8,17 @@
 					<div class="cart-content-page">
 						<h2 class="title-shop-page">my cart</h2>
 						
-						<div class="table-responsive">
+						<div class="table-responsive col-lg-10">
 							<table class="table">
 								
 								<tbody style="border-bottom: 1px solid #e4e4e4;">
 									<tr ng-repeat="(k, c) in cart" class="cart_item_new cart_item_{{c.id}}" id="{{c.id}}">
-										<td style="width: 220px;"><img ng-src="/img/{{c.thumbnail}}" width="40%"></td>
+										<td style="width: 15%;"><img ng-src="/img/{{c.thumbnail}}" width="90px"></td>
 										
-										<td class="product-name" style="width: 300px;">
+										<td class="product-name" style="width: 50%;">
 											<a href="/pages/products/{{c.id}}">{{c.product_name}}</a>
 										</td>
-										<td class="price">
+										<td class="price" style="width: 15%;">
 											<b>{{ c.retail_price | currency : " " : 0 }} 원</b>
 										</td>
 										<td class="text-center product-quantity">

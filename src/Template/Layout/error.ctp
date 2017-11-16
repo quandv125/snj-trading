@@ -1,18 +1,31 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>404</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="404 Error" />
+<link href="https://p.w3layouts.com/demos_new/template_demo/28-06-2017/elegant_error_page-demo_Free/1202549426/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+</head>
+<body>
+    <div class="agileits-main"> 
+        <div class="agileinfo-row">
+                
+            <div class="w3layouts-errortext">
+                <h2>4<span>0</span>4</h2>
+                
+                <h1>Sorry! The page you were looking for could not be found </h1>
+                
+                <h1><?= $this->Html->link(__('Back'), 'javascript:history.back()') ?></h1>
+            </div>  
+        </div>  
+    </div>  
+</body>
+</html>
+
+<!-- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,3 +58,4 @@
     </div>
 </body>
 </html>
+ -->

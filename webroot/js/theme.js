@@ -587,7 +587,7 @@ jQuery(document).ready(function(){
 	
 
 	jQuery('.close-flash').click(function(){
-		jQuery(this).parent().parent().fadeOut();
+		jQuery('.item-message-box').fadeOut();
 	});
 	
 

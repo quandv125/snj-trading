@@ -249,7 +249,6 @@ class PagesController extends AppController
 				if ($user->billing_address) {
 					$info['address'] = true;
 				}
-			
 			} else {
 				$info['billing_address'] = NULL;
 			}

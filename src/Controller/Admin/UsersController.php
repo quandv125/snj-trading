@@ -64,15 +64,33 @@ class UsersController extends AppController
 				}
 				return $this->redirect(['action' => 'index']);
 			} else {
-				// pr($this->request);die();
-				
-				$this->Flash->error(__('The user could not be saved or the username already use. Please, try again.'));
-				return $this->redirect(['action' => $this->request->params['action']]);
+				$this->error($user->errors());
+				return $this->redirect(['action' => 'index']);
 			}
 		}
 		$groups = $this->Users->Groups->find('list', ['limit' => 200]);
 		$this->set(compact('user', 'groups'));
 		$this->set('_serialize', ['user']);
+	}
+
+	protected function error($errors)
+	{
+		if( $errors ){
+            $error_msg = [];
+            foreach( $errors as $fields => $error ){
+                if(is_array($error)){
+                    foreach($error as $massage){
+                        $error_msg[] = $fields.' '.$massage;
+                    }
+                }else{
+                    $error_msg[] = $fields.' '.$massage;
+                }
+            }
+            if(!empty($error_msg)){
+                $this->Flash->error( $error_msg );
+            }
+        }
+        return $error_msg;
 	}
 
 	public function edit($id = null) {
@@ -144,6 +162,8 @@ class UsersController extends AppController
 
 	public function permission(){
 		$AroAco = TableRegistry::get('ArosAcos');
+		$Aco = TableRegistry::get('Acos');
+		$Aro = TableRegistry::get('Aros');
 		if($this->request->is('Ajax')) {
 			$this->autoRender = false;
 			$datasourceAroAco = $AroAco->connection();
@@ -182,13 +202,11 @@ class UsersController extends AppController
 				throw $e;
 			}
 			exit();
-		}
-		$Aco = TableRegistry::get('Acos');
-		$Aro = TableRegistry::get('Aros');
-		$this->loadModel('ArosAcos');
+		}		
 		$acos = $Aco->find('threaded')->contain(['Aros'])->select(['id','parent_id','alias'])->where(['actived' => true]);
-		$acos_list = $Aco->find('list',[ 'keyField' => 'id', 'valueField' => 'alias' ])->where(['parent_id' => 1,'actived' => true]);
+		$acos_list = $Aco->find('list',[ 'keyField' => 'id', 'valueField' => 'alias' ])->where(['parent_id' => 654,'actived' => true]);
 		$aros = $Aro->find('list',[ 'keyField' => 'id', 'valueField' => 'alias' ])->where(['model' => 'Groups']);
+		
 		$this->set(compact('aros','acos','acos_list'));
 	}
 

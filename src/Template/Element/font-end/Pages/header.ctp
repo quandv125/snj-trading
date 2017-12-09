@@ -30,11 +30,10 @@
 									} else {
 										echo $this->Html->image('flags/'.$this->request->session()->read('Config.language').'.png',['class'=>"position-left"]);
 									} 
-									// echo ($this->request->session()->read('Config.language') == 'kr') ? ' Korea ':' English ';
 								?>
 							</a> 
 							<ul class="sub-menu-top">
-							   <li>f
+							   <li>
 									<?= $this->Html->link($this->Html->image('flags/kr.png').' Korea', ['action' => 'changeLang', 'kr'], ['escape' => false, 'class' => 'position-left']); ?>
 								</li>
 								<li>

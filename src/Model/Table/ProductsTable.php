@@ -11,7 +11,6 @@ use Cake\Datasource\ConnectionManager;
  * Products Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Categories
- * @property \Cake\ORM\Association\BelongsTo $Outlets
  * @property \Cake\ORM\Association\BelongsTo $Suppliers
  * @property \Cake\ORM\Association\BelongsTo $Users
  * @property \Cake\ORM\Association\HasMany $Images
@@ -52,9 +51,7 @@ class ProductsTable extends Table
 			'foreignKey' => 'categorie_id',
 			'joinType' => 'INNER'
 		]);
-		$this->belongsTo('Outlets', [
-			'foreignKey' => 'outlet_id'
-		]);
+		
 		$this->belongsTo('Suppliers', [
 			'foreignKey' => 'supplier_id'
 		]);
@@ -65,21 +62,12 @@ class ProductsTable extends Table
 			'dependent' => true,
 			'foreignKey' => 'product_id'
 		]);
-		$this->hasMany('InvoiceProducts', [
-			 'dependent' => true,
-			'foreignKey' => 'product_id'
-		]);
-		$this->hasMany('StockProducts', [
-			 'dependent' => true,
-			'foreignKey' => 'product_id'
-		]);
+		
 		$this->hasMany('ProductOptions', [
 			 'dependent' => true,
 			'foreignKey' => 'product_id'
 		]);
-		$this->hasMany('Tags', [
-			'foreignKey' => 'product_id'
-		]);
+		
 	}
 
 	/**
@@ -147,7 +135,6 @@ class ProductsTable extends Table
 	public function buildRules(RulesChecker $rules)
 	{
 		$rules->add($rules->existsIn(['categorie_id'], 'Categories'));
-		$rules->add($rules->existsIn(['outlet_id'], 'Outlets'));
 		$rules->add($rules->existsIn(['supplier_id'], 'Suppliers'));
 		$rules->add($rules->existsIn(['user_id'], 'Users'));
 
@@ -165,15 +152,9 @@ class ProductsTable extends Table
 			'Suppliers' => function ($q) {
 				return $q->autoFields(false)->select(['id','name']);
 			},
-			// 'StockProducts' => function ($q) {
-			// 	return $q->autoFields(false)->select(['StockProducts.id','StockProducts.quantity','StockProducts.discount','StockProducts.stock_id','StockProducts.product_id','Stocks.id','Stocks.code','Stocks.total_quantity','Stocks.total_price','Stocks.discount_stock','Stocks.final_price'])->innerJoinWith('Stocks');
-			// },
 			'Images' => function ($q) {
 				return $q->autoFields(false)->select(['id','product_id','path','thumbnail']);
 			},
-			// 'InvoiceProducts' => function ($q) {
-			// 	return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','Invoices.id','Invoices.status'])->innerJoinWith('Invoices');
-			// }
 		])->where($conditions)->limit($lm)->page($pg)->order(['Products.created' => 'DESC']);
 		return $products;
 	}
@@ -189,9 +170,6 @@ class ProductsTable extends Table
 			'Suppliers' => function ($q) {
 				return $q->autoFields(false)->select(['id','name']);
 			},
-			// 'Outlets' => function ($q) {
-			//     return $q->autoFields(false)->select(['id','name']);
-			// },
 			'Users' => function ($q) {
 				return $q->autoFields(false)->select(['id','username']);
 			},
@@ -229,14 +207,12 @@ class ProductsTable extends Table
 	}
 
 	public function SearchInfo($user_id, $conditions = null){
-		// pr( $user_id.' '.$conditions );die();
 		$conn = ConnectionManager::get('default');
 		$stmt = $conn->execute('
-			SELECT id, sku, user_id, product_name, origin, serial_no, type_model, actived, created 
+			SELECT id, sku, user_id, product_name, retail_price,origin, serial_no, type_model, actived, created 
 			FROM  products  
 			WHERE user_id = '.$user_id.' '.$conditions.' ORDER by created DESC');
 		$results = $stmt ->fetchAll('assoc');
-		// pr($results);die();
 		return $results;
 	}
 }

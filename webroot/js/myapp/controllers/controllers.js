@@ -58,7 +58,9 @@
 		}).then(function successCallback(response) {
 			$scope.products	= response.data;
 			$scope.cat_id = $scope.products.categorie_id;
-			console.log($scope.products);
+			$scope.options_old = jQuery.parseJSON($scope.products.p_option);
+			// console.log($scope.products.p_option);
+			console.log($scope.options_old);
 			$scope.properties = jQuery.parseJSON($scope.products.properties);
 		}, function errorCallback(response) {
 			toastr.error("Error");
@@ -221,7 +223,16 @@
 				var child_name 	= jQuery(this).attr('chil_name');
 				options.push({'parent_id':parent_id,'parent_name':parent_name,'child_id':child_id, 'child_name': child_name });
 			});
-			console.log(options);
+		
+			$http({
+				method: 'POST',
+				url: '/products/customeredit',
+				data: {"products": $scope.products, "product_options": options, "more": more}
+				}).then(function successCallback(response) {
+					// console.log(response.data);
+					$location.path('/products');
+				}, function errorCallback(response) {
+			});
 		}
 	});
 
@@ -259,7 +270,6 @@
 				data: {"data": $scope.formdata, "firstDay": firstDay, "lastDay": lastDay}
 				}).then(function successCallback(response) {
 					$scope.products = response.data;
-					// console.log(response.data);
 				}, function errorCallback(response) {
 
 				});

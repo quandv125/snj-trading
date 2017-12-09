@@ -9,7 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Customers Model
  *
- * @property \Cake\ORM\Association\HasMany $Invoices
  * @property \Cake\ORM\Association\HasMany $Payments
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
@@ -41,9 +40,6 @@ class CustomersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Invoices', [
-            'foreignKey' => 'customer_id'
-        ]);
         $this->hasMany('Payments', [
             'foreignKey' => 'customer_id'
         ]);

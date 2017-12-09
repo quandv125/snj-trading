@@ -3,7 +3,7 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="item-message-box item-message-info">
+<div class="error1 item-message-box item-message-info">
 	<p style="float: left;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  <?= $message ?>.</p>
 	<i class="fa fa-times close-flash" aria-hidden="true" style=" float: right; margin-top: 5px;"></i>
 </div>

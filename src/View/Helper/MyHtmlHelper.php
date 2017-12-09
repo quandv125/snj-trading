@@ -1,8 +1,8 @@
 <?php 
-// src/View/Helper/MyHtmlHelper.php
 namespace App\View\Helper;
 
 use Cake\View\Helper\HtmlHelper;
+use Cake\View\View;
 
 class MyHtmlHelper extends HtmlHelper
 {

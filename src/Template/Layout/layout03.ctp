@@ -22,7 +22,7 @@
 
     <?= $this->Html->script(['loader' ]); ?>
     <!-- CSS -->
-    <!-- <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'> -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet'>
     <?= $this->Html->css([
         'libs/reset',
         'libs/font-awesome.min',

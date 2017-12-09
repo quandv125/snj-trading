@@ -12,10 +12,8 @@ class SuppliersTableTest extends TestCase
 {
 
     /**
-     * Test subject
-     *
-     * @var \App\Model\Table\SuppliersTable
-     */
+     * Test subject     *
+     * @var \App\Model\Table\SuppliersTable     */
     public $Suppliers;
 
     /**
@@ -27,23 +25,15 @@ class SuppliersTableTest extends TestCase
         'app.suppliers',
         'app.products',
         'app.categories',
-        'app.outlets',
-        'app.invoices',
+        'app.articles',
         'app.users',
         'app.aros',
         'app.acos',
         'app.permissions',
         'app.groups',
         'app.images',
-        'app.cashflows',
         'app.logs',
-        'app.stocks',
-        'app.stock_products',
-        'app.customers',
-        'app.payments',
-        'app.coupons',
-        'app.partner_deliverys',
-        'app.invoice_products'
+        'app.product_options'
     ];
 
     /**
@@ -54,9 +44,7 @@ class SuppliersTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Suppliers') ? [] : ['className' => 'App\Model\Table\SuppliersTable'];
-        $this->Suppliers = TableRegistry::get('Suppliers', $config);
-    }
+        $config = TableRegistry::exists('Suppliers') ? [] : ['className' => 'App\Model\Table\SuppliersTable'];        $this->Suppliers = TableRegistry::get('Suppliers', $config);    }
 
     /**
      * tearDown method

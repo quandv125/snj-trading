@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Suppliers Model
  *
  * @property \Cake\ORM\Association\HasMany $Products
- * @property \Cake\ORM\Association\HasMany $Stocks
+ * @property \Cake\ORM\Association\HasMany $SupplierPics
  *
  * @method \App\Model\Entity\Supplier get($primaryKey, $options = [])
  * @method \App\Model\Entity\Supplier newEntity($data = null, array $options = [])
@@ -21,8 +21,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Supplier findOrCreate($search, callable $callback = null)
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
- */
-class SuppliersTable extends Table
+ */class SuppliersTable extends Table
 {
 
     /**
@@ -44,7 +43,7 @@ class SuppliersTable extends Table
         $this->hasMany('Products', [
             'foreignKey' => 'supplier_id'
         ]);
-        $this->hasMany('Stocks', [
+        $this->hasMany('SupplierPics', [
             'foreignKey' => 'supplier_id'
         ]);
     }
@@ -57,43 +56,15 @@ class SuppliersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
-        $validator
-            ->integer('id')
-            ->allowEmpty('id', 'create');
-
-        $validator
-            ->allowEmpty('code');
-
-        $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-
-        $validator
-            ->allowEmpty('tel');
-
-        $validator
-            ->allowEmpty('address');
-
-        $validator
-            ->allowEmpty('location');
-
-        $validator
-            ->allowEmpty('fax');
-
-        $validator
-            ->email('email')
-            ->allowEmpty('email');
-
-        $validator
-            ->boolean('gender')
-            ->allowEmpty('gender');
-
-        $validator
-            ->allowEmpty('tax_registration_number');
-
-        $validator
-            ->allowEmpty('note');
-
+        $validator->integer('id')->allowEmpty('id', 'create');
+        $validator->allowEmpty('code');
+        $validator->requirePresence('name', 'create')->notEmpty('name');
+        $validator->allowEmpty('tel');
+        $validator->allowEmpty('address');
+        $validator->allowEmpty('location');
+        $validator->allowEmpty('fax');
+        $validator->email('email')->allowEmpty('email');
+        $validator->allowEmpty('note');
         return $validator;
     }
 

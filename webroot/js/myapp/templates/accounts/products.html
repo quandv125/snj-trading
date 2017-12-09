@@ -33,9 +33,7 @@
 							<input type="text" class="form-control" id="lastDay" ng-model="lastDay">
 						</div>
 						<button type="submit" ngClick="Submit" class="btn md-warning" style="margin-top: 25px;">Search</button>
-					</div>
-					
-					
+					</div>				
 					
 				</form>
 			</div>
@@ -64,8 +62,8 @@
 							<tr ng-repeat="(key, product) in products" id="fx_product_{{product.id}}" class="products_{{product.id}}">
 								<td class="text-center">{{product.sku}}</td>
 								<td>{{product.product_name | cut:true:50:' ...'}}</td>
-								<td class="text-center">{{product.retail_price}}</td>
-							
+								<td class="text-center">
+									{{ product.retail_price | currency : " " : 0}} 원
 								<td class="text-center">
 									<span class="label label-{{product.actived | classlabel }}">{{product.actived | label }}</span>
 								</td>

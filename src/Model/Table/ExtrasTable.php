@@ -9,7 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Extras Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Inquiries
  * @property \Cake\ORM\Association\BelongsTo $Users
  *
  * @method \App\Model\Entity\Extra get($primaryKey, $options = [])
@@ -39,11 +38,6 @@ use Cake\Validation\Validator;
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
-
-        $this->belongsTo('Inquiries', [
-            'foreignKey' => 'inquiry_id',
-            'joinType' => 'INNER'
-        ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
         ]);
@@ -81,7 +75,6 @@ use Cake\Validation\Validator;
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['inquiry_id'], 'Inquiries'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

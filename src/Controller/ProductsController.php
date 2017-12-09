@@ -59,7 +59,7 @@ class ProductsController extends AppController
 	public function view($id = null)
 	{
 		$product = $this->Products->get($id, [
-			'contain' => ['Categories', 'Outlets', 'Suppliers', 'Images', 'InvoiceProducts', 'StockProducts']
+			'contain' => ['Categories', 'Suppliers', 'Images', 'InvoiceProducts', 'StockProducts']
 		]);
 		$this->set('product', $product);
 		$this->set('_serialize', ['product']);
@@ -120,9 +120,9 @@ class ProductsController extends AppController
 			return $this->redirect(['action' => 'index']);
 		}
 		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
+		$this->set(compact('product', 'categories', 'suppliers'));
 	}
 
 	public function customeradd(){
@@ -152,6 +152,39 @@ class ProductsController extends AppController
 		}
 	
 	}
+
+	public function customeredit(){
+		if ($this->request->is('post')) {
+			$product = $this->Products->get($this->request->data['products']['id'], [ 'contain' => [] ]);
+			if ($this->request->is(['patch', 'post', 'put'])) {
+				if (!empty($this->request->data['product_options'])) {
+					$product_options = array();
+					foreach ($this->request->data['product_options'] as $key => $options) {
+						if (!array_key_exists($options['parent_id'], $product_options))  {
+							$product_options[$options['parent_name']][$options['child_id']] = $options['child_name'];
+						}
+					}
+					$this->request->data['products']['p_option'] = json_encode($product_options);
+				} 
+				if (!empty($this->request->data['more'])) {
+					$this->request->data['products']['properties'] = json_encode($this->request->data['more']);
+				} 
+				$this->request->data['actived'] = true;
+				$product = $this->Products->patchEntity($product, $this->request->data['products']);
+				
+				
+				if ($this->Products->save($product)) {
+					
+					echo json_encode(['status' => true, 'message' => 'The product has been saved.', 'id' => $product->id]);
+				} else {
+					echo json_encode(['status' => false, 'message' => 'The product has been saved.']);
+				}
+				exit();
+			}
+		}
+	
+	}
+
 
 	public function addproductpics(){
 		if ($this->request->is('post')) {
@@ -300,9 +333,9 @@ class ProductsController extends AppController
 		$this->viewBuilder()->layout('product');
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+	
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
+		$this->set(compact('product', 'categorie', 'suppliers'));
 	}
 
 	public function SupplierEditProduct($id = null){
@@ -356,7 +389,7 @@ class ProductsController extends AppController
 		
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-		// $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		// $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
 		$products   = $this->Products->OneProductsSearch(['Products.id'=>$id], null, null);  
 		$this->set(compact('products','categorie'));
@@ -425,21 +458,9 @@ class ProductsController extends AppController
 	}
 
 	public function addsomething() {
-		// Add Outlet or Supplier in Product/index 
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-			if ($this->request->data['key'] == 'outlet') {
-				$Outlets = TableRegistry::get('Outlets');
-				$outlet = $Outlets->newEntity();
-				$outlet = $Outlets->patchEntity($outlet, $this->request->data);
-				if ($Outlets->save($outlet)) {
-					$id = $outlet->id;
-					$message = array('status' => true, 'message' => __('The Outlets has been saved.'),'id' => $id);
-				} else {
-					$message = array('status' => false, 'message' => __('The Outlets could not be saved. Please, try again.'));
-				}
-				echo json_encode($message); exit();
-			} else if($this->request->data['key'] == 'products') {
+			if($this->request->data['key'] == 'products') {
 				$IDrand = substr( md5(time() ), 0, 15);
 				$Products = TableRegistry::get('Products');
 				$this->request->data['sku'] = $this->Products->MaxSKU();
@@ -484,7 +505,6 @@ class ProductsController extends AppController
 
 	public function searchproducts(){
 		if ($this->request->is('post')) {
-			// pr($this->request->data);
 			$conditions = "";
 			if (isset($this->request->data['data']['sku']) && !empty($this->request->data['data']['sku'])) {
 				$conditions .=' AND sku like "%'.$this->request->data['data']['sku'].'%" ';
@@ -509,7 +529,6 @@ class ProductsController extends AppController
 			}
 			// pr($conditions);die();
 			$products = $this->Products->SearchInfo($this->Auth->user('id'),$conditions);
-		 
 			echo json_encode($products); exit();
 		}
 		exit();
@@ -555,9 +574,9 @@ class ProductsController extends AppController
 		if(($total/LIMIT) == $int_row) $num_page = $int_row;
 			else $num_page = $int_row+1;
 		$categories = $this->Products->Categories->find('treeList', [ 'valuePath' => 'name', 'spacer' => ' __ ' ]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('num_page','page','categories', 'outlets', 'suppliers'));
+		$this->set(compact('num_page','page','categories', 'suppliers'));
 	}
 
 	private function getConditions($data){
@@ -846,7 +865,7 @@ class ProductsController extends AppController
 				$firstDay = date('Y-01-01');
 			}
 			
-			$products = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
+			$products = $Product->find()->select(['Products.id','Products.sku','Products.product_name','Products.retail_price','Products.type_model','Products.origin','Products.quantity','Products.serial_no','Products.created','Products.actived'])
 				->where(['Products.user_id' => $this->Auth->user('id'),'Products.created >='=> $firstDay ,'Products.created <'=> date('Y-m-t')])
 				->order(['Products.created' => 'DESC']);
 				// ->limit(LIMIT);

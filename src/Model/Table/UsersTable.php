@@ -49,18 +49,11 @@ class UsersTable extends Table
             'foreignKey' => 'group_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Cashflows', [
-            'foreignKey' => 'user_id'
-        ]);
-        $this->hasMany('Invoices', [
-            'foreignKey' => 'user_id'
-        ]);
+       
         $this->hasMany('Logs', [
             'foreignKey' => 'user_id'
         ]);
-        $this->hasMany('Stocks', [
-            'foreignKey' => 'user_id'
-        ]);
+       
     }
 
     /**
@@ -113,11 +106,8 @@ class UsersTable extends Table
             ->allowEmpty('address');
 
         $validator
-            ->allowEmpty('tel');
+            ->allowEmpty('phone');
 
-        // $validator
-        //     ->date('date_of_birth')
-        //     ->allowEmpty('date_of_birth');
 
         $validator
             ->boolean('actived')
@@ -136,7 +126,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['username']));
-        // $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['group_id'], 'Groups'));
 
         return $rules;

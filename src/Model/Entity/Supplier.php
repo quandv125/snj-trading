@@ -14,15 +14,12 @@ use Cake\ORM\Entity;
  * @property string $location
  * @property string $fax
  * @property string $email
- * @property bool $gender
- * @property string $tax_registration_number
  * @property string $note
  * @property \Cake\I18n\Time $created
  * @property \Cake\I18n\Time $modified
  *
  * @property \App\Model\Entity\Product[] $products
- */
-class Supplier extends Entity
+ */class Supplier extends Entity
 {
 
     /**

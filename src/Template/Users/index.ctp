@@ -4,13 +4,11 @@
 		<div class="panel panel-white">
 			<div class="panel-heading1 clearfix">
 				<div class="col-md-12">
-				<br/>
 				   <!--  <div class="myFile" style="float:left; margin-right: 3px;">
 						<?php// echo $this->Form->create(false,array('url'=>array('action'=>'ImportExcel'),'enctype'=>'multipart/form-data'));?>
 						<?php// echo $this->Form->file('files',['class' => 'hidden']); ?>
 						<span class="btn btn-success btn-addon m-b-sm "><i class="fa fa-download" aria-hidden="true"></i> Import</span>
 						<?php //echo $this->Form->end() ?>
-						
 					</div> -->
 					<!-- <?php// echo $this->Html->link('<i class="fa fa-upload"></i> Export',array('controller'=>'users','action'=>'exportexcel'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?>
 					<?php// echo $this->Html->link('<i class="fa fa-file-pdf-o"></i> PDF',array('controller'=>'users','action'=>'createpdf'),array('escape' => false,'class'=>'btn btn-success btn-addon m-b-sm  waves-effect waves-button waves-red')) ?> -->

@@ -74,24 +74,18 @@ class UsersController extends AppController
 	}
 
 	public function edit($id = null) {
-
-		if (!$this->Inquiries->exists(['id' => $id])) {
-			die('ok');
-		}
-
-
 		$user = $this->Users->get($id, [
 			'contain' => []
-		]);die('11');
+		]);
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$user = $this->Users->patchEntity($user, $this->request->data);
 			if ($this->Users->save($user)) {
 				$this->request->session()->write('Auth.User.fullname', $user->fullname);
 				$this->Flash->success(__('The user has been saved.'));
 				if ($this->Auth->user('group_id') == CUSTOMERS) {
-					return $this->redirect(['controller' => 'Users','action' => 'index']);
+					return $this->redirect(['controller' => 'Pages','action' => 'accounts']);
 				}
-				return $this->redirect(['controller'=>'Users','action' => 'index']);
+				return $this->redirect(['controller'=>'Pages','action' => 'accounts']);
 			} else {
 				$this->Flash->error(__('The user could not be saved. Please, try again.'));
 			}
@@ -127,7 +121,7 @@ class UsersController extends AppController
 			if ($user && $user['actived'] == true) {
 				$this->Auth->setUser($user);
 				$this->request->session()->write('Config.language', 'kr');
-				if ($user['group_id'] == ADMIN) {
+				if (!$user['group_id'] == CUSTOMERS) {
 					return $this->redirect($this->Auth->redirectUrl());
 				} else {
 					return $this->redirect(['controller'=>'Pages','action' => 'index']);
@@ -395,8 +389,8 @@ class UsersController extends AppController
 	}
 
 	public function sendUserEmail($to, $subject, $msg, $temp) {
-		$email = new Email('default');
-		$email->transport('gmail')
+	   $email = new Email('default');
+	   $email->transport('gmail')
 			->template($temp)
 			->from(['snjtrading2017@gmail.com' => 'S&J TRADING'])
 			->to($to)

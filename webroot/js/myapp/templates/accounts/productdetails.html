@@ -1,4 +1,4 @@
-	
+
 <div class="tab-container" ng-controller="EditProductAct">
 	<form method="post" ng-submit="frm_edit_products()" name="projectFormEdit" enctype='multipart/form-data' accept-charset="utf-8" role="form">
 
@@ -183,7 +183,19 @@
 										<th class="width1">&nbsp;</th>
 									</tr>
 								</thead>
-								<tbody id="tbody-options">
+								<tbody id="tbody-options" ng-repeat="(key, option1) in options_old">
+
+									<tr ng-repeat="(k1, o1) in option1">
+										
+										<td><div class="checker"><span><input type="checkbox"></span></div></td>
+										<td >
+											<span class="tr_options_1" parant_id="1" parant_name="Size" chil_name="S" chil_id="16">
+												<b>{{key}}</b>: {{o1}}</span>
+										</td>
+										<td>None</td>
+										<td><span class="trash-option"><i class="fa fa-trash"></i></span></td>
+									
+									</tr>
 								</tbody>
 									<tfoot>
 										<tr>
@@ -193,7 +205,7 @@
 													<option value="NULL">-- Please Select --</option>
 
 													<optgroup ng-repeat="(k, option) in options" label="{{option.name}}">
-															<option ng-repeat="(k, children) in option.children"  parent_id="{{children.parent_id}}" parent_name="{{option.name}}" value="{{children.id}}">{{children.name}}</option>
+														<option ng-repeat="(k, children) in option.children"  parent_id="{{children.parent_id}}" parent_name="{{option.name}}" value="{{children.id}}">{{children.name}}</option>
 													</optgroup>
 													
 												</select>

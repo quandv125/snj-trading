@@ -25,9 +25,6 @@ class PagesTable extends Table
         //     'foreignKey' => 'categorie_id',
         //     'joinType' => 'INNER'
         // ]);
-        // $this->belongsTo('Outlets', [
-        //     'foreignKey' => 'outlet_id'
-        // ]);
         // $this->belongsTo('Suppliers', [
         //     'foreignKey' => 'supplier_id'
         // ]);
@@ -117,7 +114,6 @@ class PagesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         // $rules->add($rules->existsIn(['categorie_id'], 'Categories'));
-        // $rules->add($rules->existsIn(['outlet_id'], 'Outlets'));
         // $rules->add($rules->existsIn(['supplier_id'], 'Suppliers'));
 
         // return $rules;

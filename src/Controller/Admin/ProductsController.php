@@ -59,7 +59,7 @@ class ProductsController extends AppController
 	public function view($id = null)
 	{
 		$product = $this->Products->get($id, [
-			'contain' => ['Categories', 'Outlets', 'Suppliers', 'Images', 'InvoiceProducts', 'StockProducts']
+			'contain' => ['Categories', 'Suppliers', 'Images', 'InvoiceProducts', 'StockProducts']
 		]);
 		$this->set('product', $product);
 		$this->set('_serialize', ['product']);
@@ -120,9 +120,9 @@ class ProductsController extends AppController
 			return $this->redirect(['action' => 'index']);
 		}
 		$categories = $this->Products->Categories->find('list', ['limit' => 200]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categories', 'outlets', 'suppliers'));
+		$this->set(compact('product', 'categories', 'suppliers'));
 	}
 
 	public function customeradd(){
@@ -300,9 +300,9 @@ class ProductsController extends AppController
 		$this->viewBuilder()->layout('product');
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('product', 'categorie', 'outlets', 'suppliers'));
+		$this->set(compact('product', 'categorie', 'suppliers'));
 	}
 
 	public function SupplierEditProduct($id = null){
@@ -356,7 +356,6 @@ class ProductsController extends AppController
 		
 		$arr = [2,3];
 		$categorie  = $Categorie->find('treeList',[ 'valuePath' => 'name', 'spacer' => '____' ])->where(['id IN' => $arr])->orwhere(['parent_id IN' => $arr ]); 
-		// $outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
 		// $suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
 		$products   = $this->Products->OneProductsSearch(['Products.id'=>$id], null, null);  
 		$this->set(compact('products','categorie'));
@@ -425,21 +424,10 @@ class ProductsController extends AppController
 	}
 
 	public function addsomething() {
-		// Add Outlet or Supplier in Product/index 
+		
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
-			if ($this->request->data['key'] == 'outlet') {
-				$Outlets = TableRegistry::get('Outlets');
-				$outlet = $Outlets->newEntity();
-				$outlet = $Outlets->patchEntity($outlet, $this->request->data);
-				if ($Outlets->save($outlet)) {
-					$id = $outlet->id;
-					$message = array('status' => true, 'message' => __('The Outlets has been saved.'),'id' => $id);
-				} else {
-					$message = array('status' => false, 'message' => __('The Outlets could not be saved. Please, try again.'));
-				}
-				echo json_encode($message); exit();
-			} else if($this->request->data['key'] == 'products') {
+			if($this->request->data['key'] == 'products') {
 				$IDrand = substr( md5(time() ), 0, 15);
 				$Products = TableRegistry::get('Products');
 				$this->request->data['sku'] = $this->Products->MaxSKU();
@@ -555,9 +543,9 @@ class ProductsController extends AppController
 		if(($total/LIMIT) == $int_row) $num_page = $int_row;
 			else $num_page = $int_row+1;
 		$categories = $this->Products->Categories->find('treeList', [ 'valuePath' => 'name', 'spacer' => ' __ ' ]);
-		$outlets    = $this->Products->Outlets->find('list', ['limit' => 200]);
+		
 		$suppliers  = $this->Products->Suppliers->find('list', ['limit' => 200]);
-		$this->set(compact('num_page','page','categories', 'outlets', 'suppliers'));
+		$this->set(compact('num_page','page','categories', 'suppliers'));
 	}
 
 	private function getConditions($data){

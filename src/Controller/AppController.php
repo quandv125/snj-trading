@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controller;
-
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 use Cake\I18n\I18n;
@@ -12,7 +10,6 @@ class AppController extends Controller
 	public function initialize()
 	{
 		parent::initialize();
-
 		$this->loadComponent('Custom');
 		$this->loadComponent('RequestHandler');
 		$this->loadComponent('Flash');
@@ -47,20 +44,19 @@ class AppController extends Controller
 			],
 			'authError' => __('You are not authorized to access that location.'),
 			'unauthorizedRedirect' => [
-				// 'controller' => 'Users',
-				'action' => 'index',
-				'prefix' => false
+				'plugin' => false,
+                'controller' => 'Users',
+                'action' => 'login',
+                'prefix' => false
 			],
 			'flash' => [
 				'element' => 'error'
 			]
 		]);
 	}
-
 	public $components = [
 		'Acl' => [ 'className' => 'Acl.Acl' ]
 	];
-
 	public $helpers = [
 		'Html' => [
 			'className' => 'Bootstrap.BootstrapHtml',
@@ -80,13 +76,11 @@ class AppController extends Controller
 			'className' => 'MyHtml'
 		]
 	];
-
 	public function beforeRender(Event $event) {
 		if (!array_key_exists('_serialize', $this->viewVars) && in_array($this->response->type(), ['application/json', 'application/xml'])) {
 			$this->set('_serialize', true);
 		}
 	}
-
 	public function isAuthorized($user) {
 		// Admin can access every action
 		if (isset($user['role']) && $user['role'] === 'admin') {
@@ -94,14 +88,23 @@ class AppController extends Controller
 		}
 		// Default deny
 		return false;
-	}
 
+		// // Any registered user can access public functions
+  //       if (!$this->request->getParam('prefix')) {
+  //           return true;
+  //       }
+  //       // Only admins can access admin functions
+  //       if ($this->request->getParam('prefix') === 'admin') {
+  //           return (bool)($user['role'] === 'admin');
+  //       }
+  //       // Default deny
+  //      return false;
+	}
 	public function beforeFilter(Event $event)  {
 		if (isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin' && $this->Auth->user('group_id') != ADMIN) {
-			$this->Flash->error1(__('You are not authorized to access that location.'));
+			// $this->Flash->error1(__('You are not authorized to access that location.'));
 			return $this->redirect(['prefix' => false,'controller'=>'Pages','action' => 'index']);
 		}
-
 		if ($this->Auth->user('group_id') == ADMIN) {
 			$this->Auth->allow();
 		} else {
@@ -118,7 +121,6 @@ class AppController extends Controller
 		$this->request->session()->write('Config.language', $lang);
 		return $this->redirect($this->request->referer());
 	}
-
 	private function menu() {
 		$Categorie   = TableRegistry::get( 'Categories' );
 		$categories  = $Categorie->find( 'threaded' )
@@ -128,4 +130,6 @@ class AppController extends Controller
 		$categories2 = null;
 		$this->set(compact('categories','categories2'));
 	}
+	
+	
 }

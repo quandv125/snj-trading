@@ -21,7 +21,7 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
-
+// require_once(ROOT .DS. 'vendor' . DS  . 'nexmo' . DS .'smsGateway.php');
 /**
  * Static content controller
  *
@@ -32,6 +32,25 @@ use Cake\Datasource\ConnectionManager;
 class PagesController extends AppController
 {
 
+	public function contacts() {
+		// include ROOT .DS. 'vendor' . DS  . 'nexmo' . DS .'smsGateway.php';
+		// $smsGateway = new SmsGateway('demo@smsgateway.me', 'password');
+		// pr($smsGateway);die();
+		// $basic  = new \Nexmo\Client\Credentials\Basic('ab33fb9b', '36bee534793df0e0');
+		// pr($basic);die();
+		// $client = new \Nexmo\Client($basic);
+		
+		// pr($client);die();
+		$from='+84976459552';
+		$to='+84976459551';
+		// $to='+84975731379';
+		$text='Xin chao cac ban';
+		$this->_nexmoSendMessage($from, $to, $text);
+		die;
+	
+		$this->viewBuilder()->layout('product');
+	}
+
 	/**
 	 * Displays a view
 	 *
@@ -39,8 +58,7 @@ class PagesController extends AppController
 	 * @throws \Cake\Network\Exception\NotFoundException When the view file could not
 	 *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
 	 */
-	public function display()
-	{
+	public function display()	{
 		if (empty($this->Auth->user())) {
 			return $this->redirect(['controller'=>'Pages','action' => 'login']);
 		}
@@ -211,17 +229,55 @@ class PagesController extends AppController
 		$this->set(compact('products'));
 	}
 
-	public function ViewCart() {
-		$cart = $this->request->session()->read('Cart');
-		// $cart[82]['quantity'] = 11;
-		// $cart[85]['quantity'] = 14;
-		// $cart[86]['quantity'] = 1121;
-		pr($cart);die();
-		$this->viewBuilder()->layout('product');
-	}
+	// public function ViewCart() {
+	// 	$cart = $this->request->session()->read('Cart');
+	// 	// $cart[82]['quantity'] = 11;
+	// 	// $cart[85]['quantity'] = 14;
+	// 	// $cart[86]['quantity'] = 1121;
+	// 	pr($cart);die();
+	// 	$this->viewBuilder()->layout('product');
+	// }+84976459551
 
-	public function contacts() {
-		$this->viewBuilder()->layout('product');
+	
+
+
+	protected function _nexmoSendMessage($from = null, $to = null, $text = null)
+	{
+		try {
+			$url = 'https://rest.nexmo.com/sms/json?';
+			$queryParam = array(
+				'api_key' => 'ab33fb9b',
+				'api_secret' => '36bee534793df0e0',
+				'from' => $from,
+				'to' => $to,
+				'text' => $text
+			);
+			$urlQueryString = $url . http_build_query($queryParam);
+			//pr($urlQueryString);	
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $urlQueryString);
+			//pr($ch);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); // Receive server response
+			curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+			$responseData = curl_exec($ch);
+		
+			if (curl_error($ch)) {
+				throw new Exception(curl_error($ch));
+			}
+			curl_close ($ch);
+			$data = json_decode($responseData, true);
+			//pr($data);die();
+			if (!isset($data['messages'])) {
+				throw new Exception('Unknown API Response.');
+			}
+			foreach ($data['messages'] as $message) {
+				if ($message['status'] != 0) {
+					throw new Exception($message['error-text']);
+				}
+			}
+		} catch(Exception $e) {
+			CakeLog::write('nexmo_sms_gateway_error_log', $e->getMessage());
+		}
 	}
 
 	public function wishlists() {
@@ -237,30 +293,30 @@ class PagesController extends AppController
 		$this->set(compact('wishlists'));
 	}
 
-	public function orders() {
-		$this->viewBuilder()->layout('product');
-		$this->check_user();
-		$Invoice  = TableRegistry::get('Invoices');
-		$orders = $Invoice->find()->select([ 'id', 'code', 'status', 'created']) ->where(['user_id' => $this->Auth->user('id')])->order(['created' => 'DESC']);
-		$this->set(compact('orders'));
-	}
+	// public function orders() {
+	// 	$this->viewBuilder()->layout('product');
+	// 	$this->check_user();
+	// 	$Invoice  = TableRegistry::get('Invoices');
+	// 	$orders = $Invoice->find()->select([ 'id', 'code', 'status', 'created']) ->where(['user_id' => $this->Auth->user('id')])->order(['created' => 'DESC']);
+	// 	$this->set(compact('orders'));
+	// }
 
-	public function OrderDetails($id){
-		$this->viewBuilder()->layout('product');
-		$this->check_user();
-		$Invoice  = TableRegistry::get('Invoices');
-		$orders = $Invoice->find()->contain([
-			'InvoiceProducts' => function ($q) {
-				return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.retail_price','products.thumbnail','categories.id','categories.name',])
-				->leftJoin('products', 'products.id = InvoiceProducts.product_id')
-				->leftJoin('categories', 'categories.id = products.categorie_id');
-			},
-			'Unavailables' => function ($q) {
-				return $q->autoFields(false)->select(['Unavailables.id','Unavailables.part_no','Unavailables.product_name','Unavailables.vessel_name','Unavailables.engine_type','Unavailables.engine_maker','Unavailables.model_serial_no','Unavailables.description','Unavailables.remark','Unavailables.quantity','Unavailables.invoice_id']);
-			}
-		])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.vessel','Invoices.imo_no','Invoices.maker_type_ref','Invoices.note'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
-		$this->set(compact('orders'));
-	}
+	// public function OrderDetails($id){
+	// 	$this->viewBuilder()->layout('product');
+	// 	$this->check_user();
+	// 	$Invoice  = TableRegistry::get('Invoices');
+	// 	$orders = $Invoice->find()->contain([
+	// 		'InvoiceProducts' => function ($q) {
+	// 			return $q->autoFields(false)->select(['InvoiceProducts.id','InvoiceProducts.remark','InvoiceProducts.quantity','InvoiceProducts.invoice_id','InvoiceProducts.product_id','products.id','products.quantity','products.serial_no','products.type_model','products.origin','products.product_name','products.retail_price','products.thumbnail','categories.id','categories.name',])
+	// 			->leftJoin('products', 'products.id = InvoiceProducts.product_id')
+	// 			->leftJoin('categories', 'categories.id = products.categorie_id');
+	// 		},
+	// 		'Unavailables' => function ($q) {
+	// 			return $q->autoFields(false)->select(['Unavailables.id','Unavailables.part_no','Unavailables.product_name','Unavailables.vessel_name','Unavailables.engine_type','Unavailables.engine_maker','Unavailables.model_serial_no','Unavailables.description','Unavailables.remark','Unavailables.quantity','Unavailables.invoice_id']);
+	// 		}
+	// 	])->select(['Invoices.id','Invoices.code','Invoices.status','Invoices.created','Invoices.profit','Invoices.delivery_cost','Invoices.packing_cost','Invoices.insurance_cost','Invoices.vessel','Invoices.imo_no','Invoices.maker_type_ref','Invoices.note'])->where(['Invoices.id' => $id])->order(['Invoices.created'=>'DESC'])->first();
+	// 	$this->set(compact('orders'));
+	// }
 
 	public function getcartdata()	{
 		if ($this->request->is('get')) {

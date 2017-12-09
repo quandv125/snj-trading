@@ -272,3 +272,75 @@ Stack Trace:
 #16 {main}
 
 
+2017-11-17 10:08:40 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Aclextras.Aclextras" could not be found.
+Exception Attributes: array (
+  'class' => 'Aclextras.Aclextras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('Aclextras.Aclex...')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2017-11-17 10:09:05 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AclExtras.AclExtras" could not be found.
+Exception Attributes: array (
+  'class' => 'AclExtras.AclExtras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AclExtras.AclEx...')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2017-11-17 10:36:37 Error: [Cake\Console\Exception\MissingShellException] Shell class for "Aclextras" could not be found.
+Exception Attributes: array (
+  'class' => 'Aclextras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('Aclextras')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2017-11-17 10:48:57 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AclExtras.AclExtras" could not be found.
+Exception Attributes: array (
+  'class' => 'AclExtras.AclExtras',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AclExtras.AclEx...')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2017-11-17 10:49:05 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AclGen" could not be found.
+Exception Attributes: array (
+  'class' => 'AclGen',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AclGen')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+
+2017-11-17 10:51:49 Error: [Cake\Console\Exception\MissingShellException] Shell class for "AcoSync" could not be found.
+Exception Attributes: array (
+  'class' => 'AcoSync',
+)
+Stack Trace:
+#0 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(223): Cake\Console\ShellDispatcher->findShell('AcoSync')
+#1 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(182): Cake\Console\ShellDispatcher->_dispatch(Array)
+#2 D:\xampp\htdocs\snj-trading\vendor\cakephp\cakephp\src\Console\ShellDispatcher.php(128): Cake\Console\ShellDispatcher->dispatch(Array)
+#3 D:\xampp\htdocs\snj-trading\bin\cake.php(34): Cake\Console\ShellDispatcher::run(Array)
+#4 {main}
+
+

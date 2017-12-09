@@ -50,7 +50,7 @@
 															<?= $this->Form->input('password',['class' => 'password']); ?>
 														</div>
 														<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-															<?= $this->Form->input('fullname',['class' => 'fullname']); ?>
+															<?= $this->Form->input('fullname',['class' => 'fullname','name' => 'fullname']); ?>
 														</div>
 														<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
 															<?= $this->Form->input('email',['class' => 'email']); ?>
@@ -59,7 +59,7 @@
 															<?= $this->Form->input('address',['class' => 'address']); ?>
 														</div>
 														<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
-															<?= $this->Form->input('tel',['class' => 'tel']); ?>
+															<?= $this->Form->input('phone',['class' => 'phone']); ?>
 														</div>
 														<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 fx-group-id">
 															<?= $this->Form->input('group_id', [
@@ -195,7 +195,7 @@
 																<?= $this->Form->input('address',['class' => 'address','value' => $user->address]); ?>
 															</div>
 															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 ">
-																<?= $this->Form->input('tel',['class' => 'tel','value' => $user->tel]); ?>
+																<?= $this->Form->input('phone',['class' => 'phone','value' => $user->phone]); ?>
 															</div>
 															<div class="col-lg-6 col-md-6 col-xs-12 col-sm-6">
 																<?= $this->Form->input('date_of_birth',['type' => 'text','class' => 'datetimepicker','data-date-format'=>'YYYY-MM-DD','value' => date('Y-m-d', strtotime($user->date_of_birth))]); ?>

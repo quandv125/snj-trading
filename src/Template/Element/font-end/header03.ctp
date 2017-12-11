@@ -45,7 +45,7 @@
 					<div class="clearfix"></div>
 					<div class="col-md-4 col-sm-4 col-xs-4">
 						<span><?php echo $this->Html->image('flags/cal.png') ?></span>
-						<span style="color: #ffffff;"><?php echo __("Delivery all day of the year") ?>  </span>
+						<span style="color: #ffffff;"><?php echo $this->Html->link(__("Delivery all day of the year"),['controller'=>'pages','action'=>'accounts#exchange']) ?>  </span>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4">
 						<span><?php echo $this->Html->image('flags/rocket.png') ?></span>

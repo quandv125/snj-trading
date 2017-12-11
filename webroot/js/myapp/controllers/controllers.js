@@ -820,6 +820,7 @@
 	App.controller("ExchangeCtrl", function($scope){
 		
 		$scope.VNDChange = function(VND) {  
+
 			$scope.TO_VND = function(){
 				return VND;
 			};
@@ -838,7 +839,7 @@
 				return USD;
 			};
 			$scope.TO_KRW = function(){
-				return USD*1092.25;
+				return USD*1092;
 			};
 		}; 
 		$scope.KRWChange = function(KRW) {  
@@ -846,7 +847,7 @@
 				return KRW*21;
 			};
 			$scope.TO_USD = function(){
-				return KRW/1092.25;
+				return KRW/1092;
 			};
 			$scope.TO_KRW = function(){
 				return KRW;

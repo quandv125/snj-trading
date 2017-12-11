@@ -14,6 +14,7 @@
 		<div class="col-md-3"><input type="text" name="VND" class="form-control" ng-change="VNDChange(VND)" ng-model="VND" placeholder="VND"></div>
 		<div class="clearfix"></div><br/>	
 		<ul style="margin-left: 15px;">
+			<li><b>{{TO_VND() | currency : 'VND ': 0}}</b></li><br>
 			<li><b>{{TO_USD() | currency : 'USD '}}</b></li><br>
 			<li><b>{{TO_KRW() | currency : 'KRW ': 0}}</b></li>
 		</ul>
@@ -23,6 +24,7 @@
     	<div class="col-md-3"><input type="text" name="USD" class="form-control" ng-change="USDChange(USD)" ng-model="USD" placeholder="USD"></div>
     	<div class="clearfix"></div><br/>	
     	<ul style="margin-left: 15px;">
+    		<li><b>{{TO_USD() | currency : 'USD '}}</b></li><br>
     		<li><b>{{TO_VND() | currency : 'VND ': 0}}</b></li><br>
     		<li><b>{{TO_KRW() | currency : 'KRW ': 0}}</b></li>
     	</ul>
@@ -32,6 +34,7 @@
     	<div class="col-md-3"><input type="text" name="KRW" class="form-control" ng-change="KRWChange(KRW)" ng-model="KRW" placeholder="KRW"></div>
     	<div class="clearfix"></div><br/>	
     	<ul style="margin-left: 15px;">
+    		<li><b>{{TO_USD() | currency : 'KRW '}}</b></li><br>
     		<li><b>{{TO_USD() | currency : 'USD '}}</b></li><br>
     		<li><b>{{TO_VND() | currency : 'VND ': 0}}</b></li>
     	</ul>

@@ -114,6 +114,10 @@
 			controller: "BillingAddressCtrl",
 			templateUrl: "/js/myapp/templates/accounts/billing_address.html"
 		})
+		.when('/exchange',{
+			controller: "ExchangeCtrl",
+			templateUrl: "/js/myapp/templates/accounts/exchange.html"
+		})
 		.otherwise({
 			templateUrl: "/js/myapp/templates/404/404.html"
 		});

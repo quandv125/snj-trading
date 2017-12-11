@@ -1,0 +1,34 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+				<table class="display table">
+					<tbody>
+					<tr>
+						<td>VND</td>
+						<td>
+							<input type="text" name="VND" class="form-control" ng-change="VNDChange(VND)" ng-model="VND" placeholder="VND">
+						</td>
+					</tr>
+					<tr>
+						<td>USD</td>
+						<td>
+							<input type="text" name="USD" class="form-control" ng-change="USDChange(USD)" ng-model="USD" placeholder="USD">
+						</td>
+					</tr>
+					<tr>
+						<td>KRW</td>
+						<td>
+							<input type="text" name="KRW" class="form-control" ng-change="KRWChange(KRW)" ng-model="KRW" placeholder="KRW">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="col-md-6">
+				<div>{{TO_VND() | currency : 'VND ': 0}}</div>	<br>
+				<div>{{TO_USD() | currency : 'USD '}}</div>	<br>
+				<div>{{TO_KRW() | currency : 'KRW ': 0}}</div>	<br>
+		</div>
+	</div>
+</div>

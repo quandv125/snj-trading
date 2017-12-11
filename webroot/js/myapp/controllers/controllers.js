@@ -817,4 +817,42 @@
 		}
 	});
 
+	App.controller("ExchangeCtrl", function($scope){
+		
+		$scope.VNDChange = function(VND) {  
+			$scope.TO_VND = function(){
+				return VND;
+			};
+			$scope.TO_USD = function(){
+				return VND/22700;
+			};
+			$scope.TO_KRW = function(){
+				return VND/21;
+			};
+		}; 
+		$scope.USDChange = function(USD) {  
+			$scope.TO_VND = function(){
+				return USD*22700;
+			};
+			$scope.TO_USD = function(){
+				return USD;
+			};
+			$scope.TO_KRW = function(){
+				return USD*1092.25;
+			};
+		}; 
+		$scope.KRWChange = function(KRW) {  
+			$scope.TO_VND = function(){
+				return KRW*21;
+			};
+			$scope.TO_USD = function(){
+				return KRW/1092.25;
+			};
+			$scope.TO_KRW = function(){
+				return KRW;
+			};
+		}; 
+	});
+
+	
 }());

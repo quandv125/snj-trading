@@ -206,6 +206,10 @@ class PagesController extends AppController
 		// $this->set(compact('users'));
 	}
 
+	public function exchange()	{
+		$this->viewBuilder()->layout('product');
+	}
+
 	public function AccountInfo()	{
 		$User  = TableRegistry::get('Users');
 		$users = $User->find()->where(['id' => $this->Auth->user('id')])->first();

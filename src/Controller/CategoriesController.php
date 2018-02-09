@@ -33,9 +33,9 @@ class CategoriesController extends AppController
 	public function recursion($data, $time) {
 		foreach ($data as $key => $value) {
 			if ($time == 0) {
-				echo($value->name.'<br/>');
+				echo( $value->name.'<br/>' );
 			} else {
-				echo('____'.$value->name.'<br/>');
+				echo( '____'.$value->name.'<br/>' );
 			}
 			$this->recursion($value->children, $time+1);
 		}
@@ -68,7 +68,6 @@ class CategoriesController extends AppController
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;
 			$category = $this->Categories->patchEntity($category, $this->request->data);
-
 			if (!$this->Categories->exists(['name' => $this->request->data['name']])) {
 				if ($this->Categories->save($category)) {
 					$id = $category->id;
@@ -116,9 +115,7 @@ class CategoriesController extends AppController
 		$category = $this->Categories->get($id, [
 			'contain' => []
 		]);
-
 		if ($this->request->is(['patch', 'post', 'put'])) {
-
 			if (empty($this->request->data['parent_id'])) {
 				$this->request->data['parent_id'] = 0;
 			}
@@ -132,7 +129,6 @@ class CategoriesController extends AppController
 				}
 			}
 			$category = $this->Categories->patchEntity($category, $this->request->data);
-		   
 			if ($this->Categories->save($category)) {
 				$children = $this->Categories->find('children', ['for' => $category->id])->select(['id']);
 				if (!empty($children->toarray())) {
@@ -174,8 +170,7 @@ class CategoriesController extends AppController
 	 * @return \Cake\Network\Response|null Redirects to index.
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
-	public function delete($id = null)
-	{
+	public function delete($id = null){
 		$this->request->allowMethod(['post', 'delete']);
 		$category = $this->Categories->get($id);
 		if ($this->Categories->delete($category)) {

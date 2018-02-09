@@ -96,7 +96,7 @@ class PagesController extends AppController
 	}
 
 	public function index() {
-		$this->viewBuilder()->layout('layout03');
+		$this->viewBuilder()->layout('layout-home');
 		$products = $this->Pages->getInfoProducts();
 		$Categorie  = TableRegistry::get('Categories');
 		$categories  = $Categorie->find()

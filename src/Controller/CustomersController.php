@@ -29,7 +29,7 @@ class CustomersController extends AppController
 			'order' => [ 'code' => 'desc' ]
 		];
 		$customers = $this->paginate($this->Customers);
-		// pr($customers);die();
+
 		$this->set(compact('customers'));
 		$this->set('_serialize', ['customers']);
 	}
@@ -58,7 +58,6 @@ class CustomersController extends AppController
 	 */
 	public function add()
 	{
-
 		$customer = $this->Customers->newEntity();
 		if ($this->request->is('ajax')) {
 			$this->autoRender = false;

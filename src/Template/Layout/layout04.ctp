@@ -55,28 +55,28 @@
 <body>
     <div class="wrap">
         <div id="header">
-            <?php echo $this->element('font-end/header'); ?>
+            <?= $this->element('font-end/header'); ?>
         </div>
         <!-- End Header -->
         <div id="content">
             <div class="container">
                 
-                <?php echo $this->element('font-end/categories',['categories'=>$categories]); ?>
+                <?= $this->element('font-end/categories',['categories'=>$categories]); ?>
                 <div class="clearfix divider25"></div>
-                <?php echo $this->element('font-end/shipping'); ?>
+                <?= $this->element('font-end/shipping'); ?>
 
                 <?= $this->Flash->render() ?>
                 <?= $this->fetch('content') ?>
             </div>
         </div>
         <div id="footer">
-            <span id="back-to-top"><?php echo $this->Html->image('back-to-top.png') ?></span>
-            <?php echo $this->element('font-end/footer') ?>
+            <span id="back-to-top"><?= $this->Html->image('back-to-top.png') ?></span>
+            <?= $this->element('font-end/footer') ?>
         </div>
         <!-- End Footer -->
     </div>
     <div id="menufix">
-        <?php echo $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
+        <?= $this->element('font-end/menu_dropdow',['categories'=>$categories]) ?>
     </div>
 
  <div id="overlay">

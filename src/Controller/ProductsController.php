@@ -32,8 +32,6 @@ class ProductsController extends AppController
 		}
 		$products = $this->Products->getProductsSearch(null, null, null);  
 		$users = $User->find('list',[ 'keyField' => 'id', 'valueField' => 'username' ])->where(['group_id'=> CUSTOMERS]);
-
-
 		$options = $option->find('threaded')->select(['id','name','parent_id'])->toarray(); 
 		$this->infoPagi(null, 1);
 		$this->set(compact('products','users','options'));
@@ -150,7 +148,6 @@ class ProductsController extends AppController
 			}
 			exit();
 		}
-	
 	}
 
 	public function customeredit(){

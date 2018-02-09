@@ -189,12 +189,12 @@ return [
 			'tls' => null,
 			'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
 		],
-	   
+
 		'gmail'=> [
 			'host' => 'ssl://smtp.gmail.com',
 			'port' => 465,
 			'username' => 'snjtrading2017@gmail.com', 
-			'password' => 'snj12345678',       
+			'password' => 'snj12345678',
 			'className' => 'Smtp',
 			'log' => true,
 			'context' => [

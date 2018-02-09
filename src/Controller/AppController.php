@@ -45,9 +45,9 @@ class AppController extends Controller
 			'authError' => __('You are not authorized to access that location.'),
 			'unauthorizedRedirect' => [
 				'plugin' => false,
-                'controller' => 'Users',
-                'action' => 'login',
-                'prefix' => false
+				'controller' => 'Users',
+				'action' => 'login',
+				'prefix' => false
 			],
 			'flash' => [
 				'element' => 'error'
@@ -88,18 +88,18 @@ class AppController extends Controller
 		}
 		// Default deny
 		return false;
-
-		// // Any registered user can access public functions
-  //       if (!$this->request->getParam('prefix')) {
-  //           return true;
-  //       }
-  //       // Only admins can access admin functions
-  //       if ($this->request->getParam('prefix') === 'admin') {
-  //           return (bool)($user['role'] === 'admin');
-  //       }
-  //       // Default deny
-  //      return false;
+	//** Any registered user can access public functions **//
+	//       if (!$this->request->getParam('prefix')) {
+	//           return true;
+	//       }
+	//       // Only admins can access admin functions
+	//       if ($this->request->getParam('prefix') === 'admin') {
+	//           return (bool)($user['role'] === 'admin');
+	//       }
+	//       // Default deny
+	//      return false;
 	}
+
 	public function beforeFilter(Event $event)  {
 		if (isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin' && $this->Auth->user('group_id') != ADMIN) {
 			// $this->Flash->error1(__('You are not authorized to access that location.'));
@@ -121,6 +121,7 @@ class AppController extends Controller
 		$this->request->session()->write('Config.language', $lang);
 		return $this->redirect($this->request->referer());
 	}
+	
 	private function menu() {
 		$Categorie   = TableRegistry::get( 'Categories' );
 		$categories  = $Categorie->find( 'threaded' )
